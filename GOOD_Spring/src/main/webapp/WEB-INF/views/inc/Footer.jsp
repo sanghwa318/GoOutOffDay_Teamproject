@@ -8,7 +8,7 @@
 		<!--  logo start -->
 		<div class="container clearfix">
 			<div class="pull-left" id="logo_box">
-				<a href="<%=request.getContextPath()%>/mainPage/index.jsp"><img src="<%=request.getContextPath()%>/icon_img/logo.png"
+				<a href="<%=request.getContextPath()%>/mainPage/index.jsp"><img src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
 					style="width: 200px;"></a>
 			</div>
 			<!-- 본문 start -->

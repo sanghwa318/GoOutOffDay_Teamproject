@@ -1137,7 +1137,7 @@ h4 {
 	</script>
 	<!-- // 본문 JS 끝 -->
 	<!-- 이젠 팝업 -->
-	<%@ include file="/WEB-INF/views/mainPage/cookie.jsp"%>
+<%-- 	<%@ include file="/WEB-INF/views/mainPage/cookie.jsp"%> --%>
 
 </body>
 </html>

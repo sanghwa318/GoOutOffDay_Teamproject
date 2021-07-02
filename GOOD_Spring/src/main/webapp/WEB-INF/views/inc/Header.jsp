@@ -78,7 +78,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 								<div class="account-info btn-group"
 									style="padding: 0; width: 100%;">
 									<a
-										href="<%=request.getContextPath()%>/myPage/myPage_bookmark.jsp"
+										href="${pageContext.request.contextPath}/myPage/myPage_bookmark.jsp"
 										type="button" id="bookmarkPage" class="btn btn-link"
 										style="border-radius: 0; border: 0; width: 33.3%;"> <i
 										class="fa fa-heart" aria-hidden="true" role="button"
@@ -90,7 +90,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 										class="glyphicon glyphicon-cog"></i>My Page</a>
 									<button type="button" id="logout" class="btn btn-link"
 										style="border-radius: 0; border: 0; width: 33.3%;"
-										onclick="location.href='<%=request.getContextPath()%>/mainPage/logout.jsp'">
+										onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.jsp'">
 										<i class="glyphicon glyphicon-log-out"></i>로그아웃
 									</button>
 								</div>
@@ -110,13 +110,13 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 							<div class="pull-left">
 								<button class="btn btn-link"
 									style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='<%=request.getContextPath()%>/adminPage/admin_index.jsp'">
+									onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.jsp'">
 									<i class="glyphicon glyphicon-log-in"></i> <strong>
 										관리자페이지</strong>
 								</button>
 								<button class="btn btn-link"
 									style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='<%=request.getContextPath()%>/mainPage/logout.jsp'">
+									onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.jsp'">
 									<i class="glyphicon glyphicon-link"></i> <strong> 로그아웃</strong>
 								</button>
 							</div>
@@ -147,7 +147,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 										<div class="panel-title">
 											<button class="accordian-toggle btn btn-link btn-block"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;"
-												onclick="location.href='../bicyclePage/bicycle_index.jsp'">
+												onclick="location.href='${pageContext.request.contextPath}/bicyclePage/bicycle_index.jsp'">
 												<img
 													src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />자전거
@@ -170,20 +170,20 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 									<div id="collapseOne" class="panel-collapse collapse">
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/walkPage/walk_index.jsp">걷기
+												href="${pageContext.request.contextPath}/walkPage/walk_index.jsp">걷기
 												메인</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/walkPage/walk_search.jsp">코스목록</a>
+												href="${pageContext.request.contextPath}/walkPage/walk_search.jsp">코스목록</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/walkPage/walk_log.jsp">걷기로그</a>
+												href="${pageContext.request.contextPath}/walkPage/walk_log.jsp">걷기로그</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/walkPage/walk_hallOfFame.jsp">명예의전당</a>
+												href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.jsp">명예의전당</a>
 										</div>
 									</div>
 								</div>
@@ -203,27 +203,27 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 									<div id="collapseTwo" class="panel-collapse collapse">
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/casPage/cas_index.jsp">문화체육
+												href="${pageContext.request.contextPath}/casPage/cas_index.jsp">문화체육
 												메인</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=exp">문화
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=exp">문화
 												창의 체험</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=showExh">공연
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=showExh">공연
 												전시</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=imp">교육
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=imp">교육
 												자기 계발</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=sportsFac">체육시설</a>
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=sportsFac">체육시설</a>
 										</div>
 									</div>
 								</div>
@@ -243,21 +243,21 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 									<div id="collapseThree" class="panel-collapse collapse">
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/commPage/comm_index.jsp">커뮤니티
+												href="${pageContext.request.contextPath}/commPage/comm_index.jsp">커뮤니티
 												메인</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/commPage/comm_crew.jsp">크루</a>
+												href="${pageContext.request.contextPath}/commPage/comm_crew.jsp">크루</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/commPage/comm_myCourse.jsp?pageNo=1">나만의
+												href="${pageContext.request.contextPath}/commPage/comm_myCourse.jsp?pageNo=1">나만의
 												코스</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="<%=request.getContextPath()%>/commPage/comm_myPost.jsp">내가
+												href="${pageContext.request.contextPath}/commPage/comm_myPost.jsp">내가
 												쓴 글</a>
 										</div>
 									</div>
@@ -267,7 +267,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 							<ul class="nav navbar-nav navbar-left hidden-xs" id="cbp-tm-menu">
 								<!--자전거메뉴-->
 								<li><a
-									href="<%=request.getContextPath()%>/bicyclePage/bicycle_index.jsp"><img
+									href="${pageContext.request.contextPath}/bicyclePage/bicycle_index.jsp"><img
 										src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />자전거</a></li>
 								<!--걷기메뉴-->
@@ -276,46 +276,46 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 										src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />걷기</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
-										<li><a href="../walkPage/walk_search.jsp"
+										<li><a href="${pageContext.request.contextPath}/walkPage/walk_search.jsp"
 											class="cbp-tm-icon-archive">코스목록</a></li>
-										<li><a href="../walkPage/walk_log.jsp"
+										<li><a href="${pageContext.request.contextPath}/walkPage/walk_log.jsp"
 											class="cbp-tm-icon-clock">걷기로그</a></li>
-										<li><a href="../walkPage/walk_hallOfFame.jsp"
+										<li><a href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.jsp"
 											class="cbp-tm-icon-earth">명예의전당</a></li>
 									</ul></li>
 								<!--문화체육 메뉴-->
-								<li onclick="location.href='../casPage/cas_index.jsp'"
+								<li onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.jsp'"
 									style="cursor: pointer;"><a><img
 										src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />문화 체육</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
-											href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=exp"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=exp"
 											class="cbp-tm-icon-pencil">문화 창의 체험</a></li>
 										<li><a
-											href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=showExh"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=showExh"
 											class="cbp-tm-icon-pictures">공연 전시</a></li>
 										<li><a
-											href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=imp"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=imp"
 											class="cbp-tm-icon-contract">교육 자기 계발</a></li>
 										<li><a
-											href="<%=request.getContextPath()%>/casPage/cas_themeList.jsp?cas=sportsFac"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=sportsFac"
 											class="cbp-tm-icon-location">체육시설</a></li>
 									</ul></li>
 								<!--커뮤니티 메뉴-->
-								<li onclick="location.href='../commPage/comm_index.jsp'"
+								<li onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
 									style="cursor: pointer;"><a><img
 										src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
-											href="<%=request.getContextPath()%>/commPage/comm_crew.jsp"
+											href="${pageContext.request.contextPath}/commPage/comm_crew.jsp"
 											class="cbp-tm-icon-users">크루</a></li>
 										<li><a
-											href="<%=request.getContextPath()%>/commPage/comm_myCourse.jsp?pageNo=1"
+											href="${pageContext.request.contextPath}/commPage/comm_myCourse.jsp?pageNo=1"
 											class="cbp-tm-icon-location">나만의 코스</a></li>
 										<li><a
-											href="<%=request.getContextPath()%>/commPage/comm_myPost.jsp"
+											href="${pageContext.request.contextPath}/commPage/comm_myPost.jsp"
 											class="cbp-tm-icon-pencil">내가 쓴 글</a></li>
 									</ul></li>
 							</ul>
@@ -326,7 +326,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 									<input type="text" class="form-control" placeholder="검색">
 									<span class="input-group-btn"> <a class="btn btn-blue"
 										style="outline: 0;"
-										href="<%=request.getContextPath()%>/mainPage/search.jsp">
+										href="${pageContext.request.contextPath}/mainPage/search.jsp">
 											<i class="glyphicon glyphicon-search" style="color: #eeffff"></i>
 									</a>
 									</span>
