@@ -20,7 +20,7 @@
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">1:1 문의</h1>
-			<form class="form-group col-md-10 col-md-offset-1" action="${pageContext.request.contextPath}/myPage/myPage_inquiry.jsp">
+			<form class="form-group col-md-10 col-md-offset-1" action="${pageContext.request.contextPath}/myPage/myPage_inquiry.do">
 				<div class="row">
 					<div class="col-md-6">
 						<label for="inq_title" class="col-md-3">제목:</label>
@@ -52,7 +52,7 @@
 				</div>
 				<br>
 				<div class="pull-left">
-					<a href="${pageContext.request.contextPath}/myPage/myPage_inquiry.jsp" class="btn btn-info">목록</a>
+					<a href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do" class="btn btn-info">목록</a>
 				</div>
 				<div class="pull-right">
 					<button type="submit" class="btn btn-info">작성완료</button>

@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<a type="button" class="pull-left btn btn-default"
-				href="${pageContext.request.contextPath}/myPage/myPage_inquiry.jsp" style="width: 75px; margin-bottom:50px;">목록</a>
+				href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do" style="width: 75px; margin-bottom:50px;">목록</a>
 		</div>
 	</div>
 	<%@ include file="../inc/Footer.jsp"%>

@@ -34,26 +34,26 @@
 							<td class="text-center">1</td>
 							<td class="text-center">답변완료</td>
 							<td class="text-center">걷기</td>
-							<td class="text-center"><a href="${pageContext.request.contextPath}/myPage/myPage_inquiryDetail.jsp">코스등록
+							<td class="text-center"><a href="${pageContext.request.contextPath}/myPage/myPage_inquiryDetail.do">코스등록
 									문의 드립니다.</a></td>
 						</tr>
 						<tr>
 							<td class="text-center">2</td>
 							<td class="text-center">답변중</td>
 							<td class="text-center">문화/체육</td>
-							<td class="text-center"><a href="${pageContext.request.contextPath}/myPage/myPage_inquiryDetail.jsp">행사정보가
+							<td class="text-center"><a href="${pageContext.request.contextPath}/myPage/myPage_inquiryDetail.do">행사정보가
 									잘못되었습니다.</a></td>
 						</tr>
 						<tr>
 							<td class="text-center">3</td>
 							<td class="text-center">답변중</td>
 							<td class="text-center">걷기</td>
-							<td class="text-center"><a href="${pageContext.request.contextPath}/myPage/myPage_inquiryDetail.jsp">코스등록
+							<td class="text-center"><a href="${pageContext.request.contextPath}/myPage/myPage_inquiryDetail.do">코스등록
 									문의 드립니다.</a></td>
 						</tr>
 					</tbody>
 				</table>
-				<a type="button" class="btn btn-primary pull-right" href="${pageContext.request.contextPath}/myPage/myPage_inquiryWrite.jsp">작성하기</a>
+				<a type="button" class="btn btn-primary pull-right" href="${pageContext.request.contextPath}/myPage/myPage_inquiryWrite.do">작성하기</a>
 			</div>
 		</div>
 	</div>

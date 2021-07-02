@@ -77,11 +77,11 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="pull-left">
-						<a href="myPage_inquiry.jsp" class="btn btn-default">1:1 문의</a>
+						<a href="${pageContext.request.contextPath}/myPage_inquiry.do" class="btn btn-default">1:1 문의</a>
 					</div>
 					<div class="pull-right">
-						<a href="myPage_accountEdit.jsp" class="btn btn-default">계정 관리</a>
-						<a href="myPage_accountOut.jsp" class="btn btn-default">회원 탈퇴</a>
+						<a href="${pageContext.request.contextPath}/myPage_accountEdit.do" class="btn btn-default">계정 관리</a>
+						<a href="${pageContext.request.contextPath}/myPage_accountOut.do" class="btn btn-default">회원 탈퇴</a>
 					</div>
 				</div>
 			</div>

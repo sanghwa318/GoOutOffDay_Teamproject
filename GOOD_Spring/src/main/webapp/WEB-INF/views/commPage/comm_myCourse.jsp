@@ -57,7 +57,7 @@ height: 100px;
 		<!-- 대제목 -->
 		<div class="row main_header">
 			<h1 class="page-header page-title" id="cas_header"
-				onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
+				onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 				style="cursor: pointer; color: #343a40;">
 				<span class="test01">커뮤니티<img src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" 	 />
 				</span>
@@ -75,7 +75,7 @@ height: 100px;
 			<%for (int i=0; i<8; i++){ %>
 					<div class="col-xs-6 col-sm-4 col-md-3">
 						<div class="thumbnail item"
-							onclick="location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.jsp'"
+							onclick="location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do'"
 							style="cursor: pointer;">
 							<img alt="테스트이미지 1번"
 								src="${pageContext.request.contextPath}/assets/img/profile_default.png">
@@ -109,7 +109,7 @@ height: 100px;
 				<!-- 게시글 작성 버튼 -->
 				<div class="pull-right postbtn"
 					style="padding-top: 15px; padding-bottom: 15px;">
-					<a href="${pageContext.request.contextPath}/commPage/comm_myCourseWrite.jsp" class="btn btn-info"
+					<a href="${pageContext.request.contextPath}/commPage/comm_myCourseWrite.do" class="btn btn-info"
 						id="postcourse">게시글 작성</a>
 				</div>
 			</div>
@@ -118,20 +118,20 @@ height: 100px;
 			<div class="text-center">
 				<ul class="pagination" id="pagination" style="margin-top: 0;">
 					<li class="page-item"><a <%if (k != 0) {%>
-						href="${pageContext.request.contextPath}/commPage/comm_myCourse.jsp?pageNo=<%=pageNum - 4%>" <%}%>>&laquo;</a></li>
+						href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=<%=pageNum - 4%>" <%}%>>&laquo;</a></li>
 					<%
 					for (int l = 1; l < 6; l++) {
 					%>
 
 					<li class="page-item <%if (j == l + pageNum) {%>active<%}%>"><a
 						class="page-item-a"
-						href="${pageContext.request.contextPath}/commPage/comm_myCourse.jsp?pageNo=<%=pageNum + l%>"><%=pageNum + l%></a></li>
+						href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=<%=pageNum + l%>"><%=pageNum + l%></a></li>
 
 					<%
 					}
 					%>
 					<li class="page-item"><a
-						href="${pageContext.request.contextPath}/commPage/comm_myCourse.jsp?pageNo=<%=pageNum + 6%>">&raquo;</a></li>
+						href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=<%=pageNum + 6%>">&raquo;</a></li>
 				</ul>
 			</div>
 			<span class="sr-only">(current)</span>

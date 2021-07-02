@@ -73,7 +73,7 @@ input#title {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
@@ -83,12 +83,12 @@ input#title {
 			<div class="header">
 				<h1 style="color: #343a40; padding-left:32px">코스 작성</h1>
 			</div>
-			<form action="comm_myCourseDetail.jsp" method="post">
+			<form action="${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do" method="post">
 				<input type="text" id="title" placeholder="코스명을 입력해주세요." />
 				<div id="editable"></div>
 
 				<div class="btn-group pull-right">
-					<a id="btn_cancel" type="button" href="${pageContext.request.contextPath}/commPage/comm_myCourse.jsp" class="btn btn-warning">취소</a>
+					<a id="btn_cancel" type="button" href="${pageContext.request.contextPath}/commPage/comm_myCourse.do" class="btn btn-warning">취소</a>
 					<button type="submit" class="btn btn-primary">작성완료</button>
 				</div>
 			</form>
@@ -120,7 +120,7 @@ input#title {
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('취소', '나만의 코스 작성이 취소되었습니다.', 'success');
 						setTimeout(function() {
-							location.href = '../commPage/comm_myCourse.jsp?pageNo=1';
+							location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.jsp?pageNo=1';
 						}, 1000);
 
 					}

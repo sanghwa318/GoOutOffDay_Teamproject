@@ -6,7 +6,7 @@
 <head>
 <%@ include file="../inc/head.jsp"%>
 <link rel="stylesheet"
-	href="../plugins/bootstrap-4-floating-labels-material-inputs/input-material.css">
+	href="${pageContext.request.contextPath}/assets/plugins/bootstrap-4-floating-labels-material-inputs/input-material.css">
 <style type="text/css">
 .vertical-bar {
 	content: "";
@@ -46,7 +46,7 @@ body>div.container {
 					<img src="${pageContext.request.contextPath}/assets/icon_img/logo.png" height="66px" width="330px">
 				</div>
 			</div>
-			<form id="login-form" method="post" action="login_ok.jsp">
+			<form id="login-form" method="post" action="login_ok.do">
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-group input-material">
 						<input type="text" class="form-control" name="user_id"
@@ -64,9 +64,9 @@ body>div.container {
 			</form>
 			<hr>
 			<div class="text-center">
-				<a href="${pageContext.request.contextPath}/mainPage/login_findID.jsp">아이디 찾기</a> <span class="vertical-bar"></span>
-				<a href="${pageContext.request.contextPath}/mainPage/login_findPW.jsp">비밀번호 찾기</a><span class="vertical-bar"></span>
-				<a href="${pageContext.request.contextPath}/mainPage/join.jsp">회원가입</a>
+				<a href="${pageContext.request.contextPath}/mainPage/login_findID.do">아이디 찾기</a> <span class="vertical-bar"></span>
+				<a href="${pageContext.request.contextPath}/mainPage/login_findPW.do">비밀번호 찾기</a><span class="vertical-bar"></span>
+				<a href="${pageContext.request.contextPath}/mainPage/join.do">회원가입</a>
 			</div>
 
 		</div>

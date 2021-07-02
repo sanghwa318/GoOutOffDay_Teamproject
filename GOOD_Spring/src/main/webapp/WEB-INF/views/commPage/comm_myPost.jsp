@@ -44,7 +44,7 @@
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;"/>
@@ -69,8 +69,8 @@
 					</thead>
 					<tbody id="list">
 						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.jsp' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp' "
+							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
+							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
 							onMouseOut=" window.status = '' ">
 							<td class="text-center">1</td>
 							<td class="text-center">하얗게 피어난 얼음꽃 하나가</td>
@@ -79,8 +79,8 @@
 							<td class="text-center">100</td>
 						</tr>
 						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.jsp' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp' "
+							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
+							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
 							onMouseOut=" window.status = '' ">
 							<td class="text-center">2</td>
 							<td class="text-center">달가운 바람에 얼굴을 내밀어</td>
@@ -90,8 +90,8 @@
 
 						</tr>
 						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.jsp' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp' "
+							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
+							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
 							onMouseOut=" window.status = '' ">
 							<td class="text-center">3</td>
 							<td class="text-center">아무말 못 했던 이름도 몰랐던</td>
@@ -102,8 +102,8 @@
 						</tr>
 
 						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.jsp' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_myCourseDetail.jsp' "
+							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do' "
+							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do' "
 							onMouseOut=" window.status = '' ">
 							<td class="text-center">4</td>
 							<td class="text-center">지나간 날들에 눈물이 흘러</td>

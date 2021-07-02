@@ -220,7 +220,7 @@ label.error {
 					<div class="text-center">
 						<button type='submit' id="next1" class="btn btn-primary">수정하기</button>
 						<button type="reset" class="btn btn-danger"
-							onClick="location.href='${pageContext.request.contextPath}/mainPage/index.jsp'">취소하기</button>
+							onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
 					</div>
 				</div>
 
