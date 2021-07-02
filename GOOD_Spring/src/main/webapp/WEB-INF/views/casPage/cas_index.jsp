@@ -291,7 +291,7 @@ html, body {
 						<h2 class="pull-left">공연 전시</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=showExh">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -304,7 +304,7 @@ html, body {
 									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_161151105_59967.jpg"
 									alt="테스트이미지1"
 									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='${pageContext.request.contextPath}/casPage/cas_detail.jsp'"
+									onclick="location.href='${pageContext.request.contextPath}/casPage/cas_detail.do'"
 									style="cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
@@ -473,7 +473,7 @@ html, body {
 						<h2 class="pull-left">문화 창의 체험</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=exp">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -634,7 +634,7 @@ html, body {
 						<h2 class="pull-left">교육 자기 계발</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=imp">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -795,7 +795,7 @@ html, body {
 						<h2 class="pull-left">체육시설</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.jsp?cas=sportsFac">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
 								보기 &gt;</a>
 						</div>
 					</div>
