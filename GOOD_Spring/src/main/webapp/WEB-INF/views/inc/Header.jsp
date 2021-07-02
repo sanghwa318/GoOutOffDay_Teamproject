@@ -34,13 +34,13 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 							<div class="pull-left">
 								<button class="btn btn-link"
 									style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='<%=request.getContextPath()%>/mainPage/login.jsp'">
+									onclick="location.href='${pageContext.request.contextPath}/mainPage/login.jsp'">
 									<i class="glyphicon glyphicon-log-in"></i> <strong>
 										로그인</strong>
 								</button>
 								<button class="btn btn-link"
 									style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='<%=request.getContextPath()%>/mainPage/join.jsp'">
+									onclick="location.href='${pageContext.request.contextPath}/mainPage/join.jsp'">
 									<i class="glyphicon glyphicon-link"></i> <strong> 회원가입</strong>
 								</button>
 							</div>

@@ -4,7 +4,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style type="text/css">
 /** 공통 영역 **/
 * {
@@ -1137,7 +1137,7 @@ h4 {
 	</script>
 	<!-- // 본문 JS 끝 -->
 	<!-- 이젠 팝업 -->
-	<%@ include file="mainPage/cookie.jsp"%>
+	<%@ include file="/WEB-INF/views/mainPage/cookie.jsp"%>
 
 </body>
 </html>
