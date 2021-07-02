@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -1137,7 +1140,7 @@ h4 {
 	</script>
 	<!-- // 본문 JS 끝 -->
 	<!-- 이젠 팝업 -->
-<%-- 	<%@ include file="/WEB-INF/views/mainPage/cookie.jsp"%> --%>
+	<%@ include file="/WEB-INF/views/mainPage/cookie.jsp"%>
 
 </body>
 </html>
