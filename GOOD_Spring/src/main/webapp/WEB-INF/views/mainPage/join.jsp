@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="../inc/head.jsp"%>
-<link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css" />
-<link rel="stylesheet" href="../inc/index_footer.css">
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.css" />
 <style>
 
 /* 폼 전체 박스 */
@@ -136,7 +135,7 @@ label.error {
    <div class="wrapper">
 
 	<!-- 상단영역 -->
-	<%@ include file="../inc/Header.jsp" %>
+	<%@ include file="/WEB-INF/views/inc/Header.jsp" %>
 
 	<!-- 본문영역 -->
 	<div class="container">
@@ -252,8 +251,8 @@ label.error {
 		<!-- //가입폼 끝 -->
 </div>
 	</div>
-	<%@ include file="../inc/Footer.jsp"%>
-<%@ include file="../inc/plugin.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
