@@ -18,7 +18,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 						id="logo">
 						<a href="<%=request.getContextPath()%>/mainPage/index.jsp"
 							style="position: relative; z-index: 999999;"><img
-							src="<%=request.getContextPath()%>/icon_img/logo.png"
+							src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
 							style="width: 250px; height: 53px;"></a>
 					</div>
 				</div>
@@ -149,7 +149,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;"
 												onclick="location.href='../bicyclePage/bicycle_index.jsp'">
 												<img
-													src="<%=request.getContextPath()%>/icon_img/자전거 아이콘 1.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />자전거
 											</button>
 										</div>
@@ -162,7 +162,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 												data-toggle="collapse" data-parent="#accordion"
 												data-target="#collapseOne"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
-												<img src="<%=request.getContextPath()%>/icon_img/걷기 아이콘.png"
+												<img src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />걷기
 											</button>
 										</div>
@@ -195,7 +195,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 												data-target="#collapseTwo"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
 												<img
-													src="<%=request.getContextPath()%>/icon_img/문화체육 아이콘.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />문화체육
 											</button>
 										</div>
@@ -235,7 +235,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 												data-target="#collapseThree"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
 												<img
-													src="<%=request.getContextPath()%>/icon_img/커뮤니티 아이콘.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티
 											</button>
 										</div>
@@ -268,12 +268,12 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 								<!--자전거메뉴-->
 								<li><a
 									href="<%=request.getContextPath()%>/bicyclePage/bicycle_index.jsp"><img
-										src="<%=request.getContextPath()%>/icon_img/자전거 아이콘 1.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />자전거</a></li>
 								<!--걷기메뉴-->
 								<li onclick="location.href='../walkPage/walk_index.jsp'"
 									style="cursor: pointer;"><a><img
-										src="<%=request.getContextPath()%>/icon_img/걷기 아이콘.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />걷기</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a href="../walkPage/walk_search.jsp"
@@ -286,7 +286,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 								<!--문화체육 메뉴-->
 								<li onclick="location.href='../casPage/cas_index.jsp'"
 									style="cursor: pointer;"><a><img
-										src="<%=request.getContextPath()%>/icon_img/문화체육 아이콘.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />문화 체육</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
@@ -305,7 +305,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 								<!--커뮤니티 메뉴-->
 								<li onclick="location.href='../commPage/comm_index.jsp'"
 									style="cursor: pointer;"><a><img
-										src="../icon_img/커뮤니티 아이콘.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
