@@ -281,7 +281,7 @@ html, body {
 					<h1 class="page-header page-title" id="cas_header"
 						style="color: #343a40;">
 						<span class="test01">문화 체육<img
-							src="../icon_img/문화체육 아이콘.png;" />
+							src="${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png;" />
 						</span>
 					</h1>
 				</div>
@@ -291,7 +291,7 @@ html, body {
 						<h2 class="pull-left">공연 전시</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=showExh">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -473,7 +473,7 @@ html, body {
 						<h2 class="pull-left">문화 창의 체험</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=exp">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -634,7 +634,7 @@ html, body {
 						<h2 class="pull-left">교육 자기 계발</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=imp">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -795,7 +795,7 @@ html, body {
 						<h2 class="pull-left">체육시설</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=sportsFac">더
 								보기 &gt;</a>
 						</div>
 					</div>
