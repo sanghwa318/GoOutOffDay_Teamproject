@@ -23,7 +23,7 @@
         </repository>
     </repositories>
 
-    <dependencies>
+<dependencies>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -42,14 +42,12 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
-
         <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>${org.aspectj-version}</version>
         </dependency>
-
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -92,23 +90,20 @@
             </exclusions>
             <scope>runtime</scope>
         </dependency>
-
         <!-- @Inject -->
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
-
-        <!-- ========== Spring을 구성하기 위한 기본 라이브러리들 추가 ========== -->
+        <!-- ===========Spring을 구성하기 위한 기본 라이브러리들 추가 ================ -->
         <!-- 1) Spring Context Support -->
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>5.3.8</version>
         </dependency>
-
         <!-- 2) Java Servlet API -->
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
@@ -117,7 +112,6 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- 3) JavaServer Pages(TM) API -->
         <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
         <dependency>
@@ -126,7 +120,6 @@
             <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- 4) JavaServer Pages(TM) Standard Tag Library -->
         <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
         <dependency>
@@ -134,7 +127,6 @@
             <artifactId>jstl-api</artifactId>
             <version>1.2</version>
         </dependency>
-
         <!-- 5) Apache Standard Taglib Implementation -->
         <!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
         <dependency>
@@ -142,8 +134,7 @@
             <artifactId>taglibs-standard-impl</artifactId>
             <version>1.2.5</version>
         </dependency>
-
-        <!-- ========== JSP 수업에서 활용한 라이브러리들에 대한 의존성 설정 ========== -->
+        <!-- ================JSP 수업에서 활용한 라이브러리들에 대한 의존성 설정================= -->
         <!-- Lombok -->
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -152,7 +143,6 @@
             <version>1.18.16</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- clojure -->
         <!-- https://mvnrepository.com/artifact/org.clojure/clojure -->
         <dependency>
@@ -160,7 +150,6 @@
             <artifactId>clojure</artifactId>
             <version>1.10.1</version>
         </dependency>
-
         <!-- UserAgent -->
         <!-- https://github.com/russellwhitaker/uap-clj -->
         <dependency>
@@ -168,7 +157,6 @@
             <artifactId>uap-clj</artifactId>
             <version>1.3.3</version>
         </dependency>
-
         <!-- MySQL JDBC (2021년01월13일 기준 최신 버전) -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
@@ -176,7 +164,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
         </dependency>
-
         <!-- Spring JDBC (Spring Framework 버전에 맞춤) -->
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
         <dependency>
@@ -184,7 +171,6 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
-
         <!-- MyBatis (2021년01월13일 기준 최신 버전) -->
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
         <dependency>
@@ -192,7 +178,6 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.6</version>
         </dependency>
-
         <!-- Spring MyBatis (2021년01월13일 기준 최신 버전) -->
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
         <dependency>
@@ -200,7 +185,6 @@
             <artifactId>mybatis-spring</artifactId>
             <version>2.0.6</version>
         </dependency>
-
         <!-- Log4JDBC -->
         <!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
         <dependency>
@@ -208,7 +192,6 @@
             <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
             <version>1.16</version>
         </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
@@ -216,7 +199,6 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -224,7 +206,6 @@
             <version>${org.springframework-version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- OKHttp -->
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
@@ -232,7 +213,6 @@
             <artifactId>okhttp</artifactId>
             <version>4.9.0</version>
         </dependency>
-
         <!-- Logging Interceptor -->
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor -->
         <dependency>
@@ -240,7 +220,6 @@
             <artifactId>logging-interceptor</artifactId>
             <version>4.9.0</version>
         </dependency>
-
         <!-- Retrofit2 -->
         <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit -->
         <dependency>
@@ -248,7 +227,6 @@
             <artifactId>retrofit</artifactId>
             <version>2.9.0</version>
         </dependency>
-
         <!-- Gson -->
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
@@ -256,13 +234,40 @@
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
-
         <!-- Converter: Gson -->
         <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson -->
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-gson</artifactId>
             <version>2.9.0</version>
+        </dependency>
+        <!-- Java Mail -->
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!-- Commons ID -->
+        <!-- https://mvenrepository.com/artifact/commos-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <!-- Commons File Upload -->
+        <!-- https://mvenrepository.com/artifact/commos-fileupload/commons-fileupload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!-- Thumbnailator -->
+        <!-- https://mvenrepository.com/artifact/net.coobird/thumbnailator -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.13</version>
         </dependency>
     </dependencies>
     <build>
