@@ -13,6 +13,6 @@ public class BicyleController {
 	@RequestMapping(value = "/bicyclePage/bicycle_index.do", method = RequestMethod.GET)
 	public String bicyle_index() {
 		
-		return "bicyle_index";
+		return "bicyclePage/bicyle_index";
 	}
 }
