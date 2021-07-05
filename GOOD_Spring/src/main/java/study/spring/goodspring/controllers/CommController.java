@@ -100,4 +100,13 @@ public class CommController {
 		return "commPage/comm_myPost";
 	}
 	
+	/*
+	 * comm_crew_est
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_est.do", method = RequestMethod.GET)
+	public String myCrew_est(Model model) {
+		
+		return "commPage/comm_crew_est";
+	}
+	
 }

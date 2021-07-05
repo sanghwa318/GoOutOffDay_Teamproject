@@ -90,20 +90,20 @@ button span {
 			<h1 class="page-header">크루 개설</h1>
 
 			<div class="row " style="margin-bottom: 30px;">
-				<form role="form" class="form-crew">
+				<form role="form" class="form-crew" action="${pageContext.request.contextPath}/crew/crew_ok.do">
 
 					<div class="form-group col-md-3 col-xs-5">
 						<label for="crew_name" style="font-size: 20px;">Crew Name</label>
 						<input type="text" id="crew_name" class="form-control"
-							placeholder="크루명을 입력하세요."
+							placeholder="크루명을 입력하세요." name="crew_name"
 							style="width: 200px; text-align-last: center; font-size: 20px;">
 					</div>
 
 					<div class="form-group col-md-3 col-xs-5">
-						<label for="crew_location" class="col-md-4 control-label"
+						<label for="crew_location" class="col-md-4 control-label" 
 							style="font-size: 20px;">지역</label>
 						<div>
-							<select class="form-control " id="crew_location"
+							<select class="form-control " id="crew_location" name="crew_area"
 								style="width: 200px; text-align-last: center; font-size: 20px; padding: 0;">
 								<option value="none" hidden>지역</option>
 								<option value="gangnam">강남구</option>
@@ -169,13 +169,13 @@ button span {
 					<h3 class="header text-center ">기본 이미지</h3>
 					<ul style="list-style: none;" class="default-img">
 						<li><a href="#123" onclick="setImage(0); return fasle"><img
-								src="../icon_img/걷기 아이콘.png" /></a></li>
+								src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png" /></a></li>
 						<li><a href="#123" onclick="setImage(1); return fasle"><img
-								src="../icon_img/크루 아이콘.png" /></a></li>
+								src="${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png" /></a></li>
 						<li><a href="#123" onclick="setImage(2); return fasle"><img
-								src="../icon_img/문화체육 아이콘.png" /></a></li>
+								src="${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png" /></a></li>
 						<li><a href="#123" onclick="setImage(3); return fasle;"><img
-								src="../icon_img/체육시설 아이콘.png" /></a></li>
+								src="${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png" /></a></li>
 					</ul>
 				</div>
 			</div>
@@ -287,10 +287,10 @@ button span {
 										// 창이 닫히는 애니메이션의 시간이 있으므로,
 										// 0.1초의 딜레이 적용 후 포커스 이동
 										setTimeout(function() {
-
-										}, 100);
+											$("#crew_name").focus();
+										}, 1);
 									}); // <-- 메시지 표시
-									$("#crew_name").focus(); // <-- 커서를 강제로 넣기
+									
 									return false; // <-- 실행 중단
 								}
 
@@ -307,10 +307,10 @@ button span {
 										// 창이 닫히는 애니메이션의 시간이 있으므로,
 										// 0.1초의 딜레이 적용 후 포커스 이동
 										setTimeout(function() {
-
+											$("#crew_location").focus(); // <-- 커서를 강제로 넣기
 										}, 100);
 									}); // <-- 메시지 표시
-									$("#crew_location").focus(); // <-- 커서를 강제로 넣기
+									
 									return false; // <-- 실행 중단
 								}
 
@@ -325,10 +325,10 @@ button span {
 										// 창이 닫히는 애니메이션의 시간이 있으므로,
 										// 0.1초의 딜레이 적용 후 포커스 이동
 										setTimeout(function() {
-
+											$("#crew_info").focus(); // <-- 커서를 강제로 넣기
 										}, 100);
 									}); // <-- 메시지 표시
-									$("#crew_info").focus(); // <-- 커서를 강제로 넣기
+									
 									return false; // <-- 실행 중단
 								} else {
 									swal({
@@ -362,7 +362,7 @@ button span {
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('삭제', '크루 개설이 취소되었습니다.', 'success');
 						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew.jsp';
+							location.href = '${pageContext.request.contextPath}/commPage/comm_crew.do';
 						}, 1000);
 
 					}

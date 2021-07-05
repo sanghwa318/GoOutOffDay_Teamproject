@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="crewMapper">
+	<!-- Beans클래스의 객체이름(id)과 클래스이름(type)을 명시한다 -->
+	<resultMap type="crewMap"
+		id="study.spring.goodspring.model.Crew">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼을 연결한다 -->
+		<result property="crew_no" column="crew_no" />
+		<result property="user_no" column="crew_leader" /> <!-- Select절에서 조회되는 별칭 -->
+		<result property="crew_name" column="crew_name" />
+		<result property="crew_area" column="crew_area" />
+		<result property="crew_sinto" column="crew_sinto" />
+		<result property="crew_create_datetime"
+			column="crew_create_datetime" />
+		<result property="crew_category" column="crew_category" />
+		<result property="crew_photo" column="crew_photo" />
+		<result property="crew_dinto" column="crew_dinto" />
+		<result property="crew_member" column="crew_member" />
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
+		SELECT crew_no, crew_leader, crew_name, crew_area, crew_sinto,
+		crew_create_datetime, crew_category, crew_photo, crew_dinto, crew_member
+		WHERE crew_no=#{crew_no};
+	</select>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap"></select>
+
+
+
+</mapper>
