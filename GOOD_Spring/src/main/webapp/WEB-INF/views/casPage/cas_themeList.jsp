@@ -199,6 +199,7 @@ html, body {
 				<div class="header">
 					<h1 style="color: #343a40;">${result }</h1>
 				</div>
+				<!-- 문화체육 카테고리별 소분류 태그 -->
 		 		<div class="orderBy_tag"> 
 					<!-- 창의 체험 -->
 					<c:if test="${cas eq 'exp'}">
