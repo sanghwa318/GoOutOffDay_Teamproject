@@ -203,7 +203,7 @@ font-size:20px;
 
 		<div class="pull-right" style="margin-right: 20px;">
 			<div class="wk_log" id="wk_log">
-				<a href="${pageContext.request.contextPath}/walkPage/walk_log.jsp"
+				<a href="${pageContext.request.contextPath}/walkPage/walk_log.do"
 					class="btn btn-info">걷기 Log</a>
 			</div>
 		</div>
