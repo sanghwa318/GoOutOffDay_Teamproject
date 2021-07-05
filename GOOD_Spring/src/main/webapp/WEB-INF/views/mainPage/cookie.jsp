@@ -13,7 +13,7 @@
 		<p style='color: #fff;'>이 사이트는 "빅데이터 8기 5조"에서 제작한 웹 사이트입니다.</p>
 		<p style='color: #fff;'>실제 운영을 위한 사이트가 아님에 착오 없으시기 바랍니다.</p>
 		<p>
-			<a href="../mainPage/introduce.jsp" target="_blank"
+			<a href="${pageContext.request.contextPath}/mainPage/introduce.do" target="_blank"
 				style='color: #fff; display: inline'>GOOD 웹 페이지 이용 방법 안내
 				이동하기☜(클릭)</a>
 		</p>

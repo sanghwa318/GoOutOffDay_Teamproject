@@ -13,7 +13,7 @@ public class CommController {
 	/*
 	 * comm_index
 	 */
-	@RequestMapping(value = "commPage/comm_index.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_index.do", method = RequestMethod.GET)
 	public String commindex(Model model) {
 		
 		return "commPage/comm_index";
@@ -22,7 +22,7 @@ public class CommController {
 	/*
 	 * comm_crew_bbs
 	 */
-	@RequestMapping(value = "commPage/comm_crew_bbs.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew_bbs.do", method = RequestMethod.GET)
 	public String crewbbs(Model model) {
 		
 		return "commPage/comm_crew_bbs";
@@ -30,7 +30,7 @@ public class CommController {
 	/*
 	 * comm_crew_info
 	 */
-	@RequestMapping(value = "commPage/comm_crew_info.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew_info.do", method = RequestMethod.GET)
 	public String crewinfo(Model model) {
 		
 		return "commPage/comm_crew_info";
@@ -38,7 +38,7 @@ public class CommController {
 	/*
 	 * comm_crew_memberJoin
 	 */
-	@RequestMapping(value = "commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
 	public String crewmemberjoin(Model model) {
 		
 		return "commPage/comm_crew_memberJoin";
@@ -46,7 +46,7 @@ public class CommController {
 	/*
 	 * comm_crew_myCrew
 	 */
-	@RequestMapping(value = "commPage/comm_crew_myCrew", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew_myCrew", method = RequestMethod.GET)
 	public String mycrew(Model model) {
 		
 		return "commPage/comm_crew_myCrew";
@@ -54,7 +54,7 @@ public class CommController {
 	/*
 	 * comm_crew
 	 */
-	@RequestMapping(value = "commPage/comm_crew.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew.do", method = RequestMethod.GET)
 	public String crew(Model model) {
 		
 		return "commPage/comm_crew";
@@ -62,7 +62,7 @@ public class CommController {
 	/*
 	 * comm_myCourse
 	 */
-	@RequestMapping(value = "commPage/comm_myCourse.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_myCourse.do", method = RequestMethod.GET)
 	public String mycourse(Model model) {
 		
 		return "commPage/comm_myCourse";
@@ -70,7 +70,7 @@ public class CommController {
 	/*
 	 * comm_myCourseDetail
 	 */
-	@RequestMapping(value = "commPage/comm_myCourseDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_myCourseDetail.do", method = RequestMethod.GET)
 	public String mycourseDetail(Model model) {
 		
 		return "commPage/comm_myCourseDetail";
@@ -78,7 +78,7 @@ public class CommController {
 	/*
 	 * comm_myCourseEdit
 	 */
-	@RequestMapping(value = "commPage/comm_myCourseEdit.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_myCourseEdit.do", method = RequestMethod.GET)
 	public String mycourseEdit(Model model) {
 		
 		return "commPage/comm_myCourseEdit";
@@ -86,7 +86,7 @@ public class CommController {
 	/*
 	 * comm_myCourseWrite
 	 */
-	@RequestMapping(value = "commPage/comm_myCourseWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_myCourseWrite.do", method = RequestMethod.GET)
 	public String mycourseWrite(Model model) {
 		
 		return "commPage/comm_myCourseWrite";
@@ -94,7 +94,7 @@ public class CommController {
 	/*
 	 * comm_myPost
 	 */
-	@RequestMapping(value = "commPage/comm_myPost.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_myPost.do", method = RequestMethod.GET)
 	public String myPost(Model model) {
 		
 		return "commPage/comm_myPost";

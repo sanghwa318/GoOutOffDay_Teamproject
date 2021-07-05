@@ -10,30 +10,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 	
+	/**
+	 * introduce 메인 페이지
+	 * 
+	 * @return String
+	 */
+	@RequestMapping(value = "/mainPage/introduce.do", method = RequestMethod.GET)
+	public String introduce() {
+
+		return "mainPage/introduce";
+	}
 	
-	@RequestMapping(value = "mainPage/join.do", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/mainPage/join.do", method = RequestMethod.GET)
 	public String join(Model model) {
 		
 		return "mainPage/join";
 	}
 	
-	@RequestMapping(value = "mainPage/login.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage/login.do", method = RequestMethod.GET)
 	public String login(Model model) {
 		
 		return "mainPage/login";
 	}
-	@RequestMapping(value = "mainPage/login_ok.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage/login_ok.do", method = RequestMethod.GET)
 	public String login_ok(Model model) {
 		
 		return "mainPage/login_ok";
 	}
-	@RequestMapping(value = "mainPage/login_findID.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage/login_findID.do", method = RequestMethod.GET)
 	public String login_findID(Model model) {
 		
 		return "mainPage/login_findID";
 	}
 	
-	@RequestMapping(value = "mainPage/login_findPW.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage/login_findPW.do", method = RequestMethod.GET)
 	public String login_findPW(Model model) {
 		
 		return "mainPage/login_findPW";
