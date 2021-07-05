@@ -151,28 +151,23 @@ carousel-title2 {
 	height: 10px;
 }
 
-
 /**Modal CSS */
-
-.modal-header{
-text-align:center;
-padding-top:10px;
+.modal-header {
+	text-align: center;
+	padding-top: 10px;
 }
 
-.modal-footer{
-text-align:center;
+.modal-footer {
+	text-align: center;
 }
 
-.input-group-addon >a{
-text-decoration: none;
-
+.input-group-addon>a {
+	text-decoration: none;
 }
 
-.modal-header > p{
-font-size:20px;
+.modal-header>p {
+	font-size: 20px;
 }
-
-
 </style>
 
 
@@ -221,7 +216,7 @@ font-size:20px;
 			</h2>
 			<div class="pull-right">
 				<a
-					href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.jsp"
+					href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.do"
 					style="text-decoration: none;">더 보기 &gt;</a>
 			</div>
 		</div>
@@ -365,8 +360,7 @@ font-size:20px;
 					style="width: 44px; height: 44px; position: relative; bottom: 5px; margin-left: 5px"></img></strong>
 			</h2>
 			<div class="pull-right">
-				<a
-					href="${pageContext.request.contextPath}/walkPage/walk_search.jsp"
+				<a href="${pageContext.request.contextPath}/walkPage/walk_search.do"
 					style="text-decoration: none;">더 보기 &gt;</a>
 			</div>
 
@@ -509,7 +503,7 @@ font-size:20px;
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<!-- content -->
-				<form id="search-form">
+				
 					<div class="modal-header">
 						<h3>
 							<strong>걷기 기록</strong>
@@ -518,13 +512,88 @@ font-size:20px;
 					</div>
 
 					<div class="modal-body">
-						<div class="input-group">
-							<input type="text" class="form-control" id="log-search"
-								placeholder="코스를 입력해주세요." name="log-search"
-								style="height: 50px;"> <span class="input-group-addon"><button
-									type="submit" class="btn ">검색</button></span>
+
+						<div>
+						<h3>
+							<a class="accordian-toggle" data-toggle="collapse"
+								data-parent="#category_acco" href="#category_list"> 카테고리별 검색<i
+								class="glyphicon glyphicon-chevron-down"
+								style="color: #bcbcbc; font-size: 17px; left: 6px;"></i>
+							</a>
+						</h3>
+						<div id="category_list" class="panel-collapse collapse">
+							<div class="panel-body">
+								<!-- 검색 하기 창 -->
+								<div class="form-group input-group">
+									<input type="text" id="course_search" class="form-control"
+										placeholder="검색하기" /> <span class="input-group-btn">
+										<button class="btn btn-blue" type="submit">
+											<span style="color: #0069a6;">검색 </span><i
+												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
+										</button>
+									</span>
+								</div>
+								<!-- //검색 하기 창 -->
+								<!-- 카테고리영역 -->
+								<form class="form-horizontal" role="form">
+									<fieldset>
+										<div class="form-group">
+											<div class="col-xs-3">
+												<select class="form-control">
+													<option value="">유형별</option>
+													<option value="1">한양도성길</option>
+													<option value="2">근교산자락길</option>
+													<option value="3">생태문화길</option>
+													<option value="4">한양/지천길</option>
+													<option value="5">서울둘레길</option>
+												</select>
+											</div>
+											<div class="col-xs-3">
+												<select class="form-control">
+													<option value="">지역</option>
+													<option value="all">전체</option>
+													<option value="gangnam">강남구</option>
+													<option value="gangdong">강동구</option>
+													<option value="gangbug">강북구</option>
+													<option value="gangseo">강서구</option>
+													<option value="gwan-ag">관악구</option>
+													<option value="gwangjin">광진구</option>
+													<option value="gulo">구로구</option>
+													<option value="geumcheon">금천구</option>
+													<option value="nowon">노원구</option>
+													<option value="dobong">도봉구</option>
+													<option value="dongdaemun">동대문구</option>
+													<option value="dongjag">동작구</option>
+													<option value="mapo">마포구</option>
+													<option value="seodaemun">서대문구</option>
+													<option value="seocho">서초구</option>
+													<option value="seongdong">성동구</option>
+													<option value="seongbug">성북구</option>
+													<option value="songpa">송파구</option>
+													<option value="yangcheon">양천구</option>
+													<option value="yeongdeungpo">영등포구</option>
+													<option value="yongsan">용산구</option>
+													<option value="eunpyeong">은평구</option>
+													<option value="jonglo">종로구</option>
+													<option value="jung-gu">중구</option>
+													<option value="junglang">중랑구</option>
+												</select>
+											</div>
+											<div class="col-sm-2 col-xs-3 pull-right">
+												<select class="form-control">
+													<option value="">거리별</option>
+													<option value="time">시간별</option>
+													<option value="level">난이도별</option>
+												</select>
+											</div>
+										</div>
+									</fieldset>
+								</form>
+								<!-- //카테고리영역 -->
+							</div>
 						</div>
-						<div class="modal-body hide"></div>
+					</div>
+
 					</div>
 
 					<div class="modal-footer">
@@ -534,7 +603,7 @@ font-size:20px;
 							style="width: 150px;">시작</button>
 
 					</div>
-				</form>
+				
 
 
 			</div>
