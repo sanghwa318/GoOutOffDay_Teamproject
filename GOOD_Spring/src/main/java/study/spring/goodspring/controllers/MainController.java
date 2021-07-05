@@ -21,9 +21,13 @@ public class MainController {
 		return "mainPage/introduce";
 	}
 	
-	
+	/**
+	 * 회원가입 페이지
+	 * 
+	 * @return String
+	 */
 	@RequestMapping(value = "/mainPage/join.do", method = RequestMethod.GET)
-	public String join(Model model) {
+	public String join() {
 		
 		return "mainPage/join";
 	}
