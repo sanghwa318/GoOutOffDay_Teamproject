@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page import="study.spring.goodspring.model.adminMember"%>
 <%
 adminMember loginInfo = (adminMember) session.getAttribute("login_info");
@@ -24,107 +27,112 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 				</div>
 				<div class="col-md-9">
 					<!--로그인 회원가입 프로필-->
-					<%
-					if (loginInfo == null) {
-					%>
-					<div class="row clearfix"
-						style="padding-top: 30px; padding-bottom: 5px;"
-						id="login_join_box">
-						<div class="pull-right" id="login_join">
-							<div class="pull-left">
-								<button class="btn btn-link"
-									style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
-									<i class="glyphicon glyphicon-log-in"></i> <strong>
-										로그인</strong>
-								</button>
-								<button class="btn btn-link"
-									style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='${pageContext.request.contextPath}/mainPage/join.do'">
-									<i class="glyphicon glyphicon-link"></i> <strong> 회원가입</strong>
-								</button>
-							</div>
-						</div>
-					</div>
-					<%
-					} else if (loginInfo.getUserId() == "user") {
-					%>
-					<div class="row clearfix"
-						style="padding-top: 30px; padding-bottom: 5px;"
-						id="login_join_box">
-						<div class="pull-right" id="login_join">
-							<div class="pull-right" style="padding: 0 10px 0 10px;">
-								<div>
-									<a id="account" href="#" role="button"><img
-										style="border-radius: 20px"
-										onerror="this.src='<%=request.getContextPath()%>/img/profile_default.png'"
-										src="${sessionScope.principal.userProfile}" width="30px"
-										height="30px"></img><span class="hidden">myPage</span></a>
+					<c:choose>
+						<c:when test="${loginInfo == null }">
+							<div class="row clearfix"
+								style="padding-top: 30px; padding-bottom: 5px;"
+								id="login_join_box">
+								<div class="pull-right" id="login_join">
+									<div class="pull-left">
+										<button class="btn btn-link"
+											style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
+											onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
+											<i class="glyphicon glyphicon-log-in"></i> <strong>
+												로그인</strong>
+										</button>
+										<button class="btn btn-link"
+											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
+											onclick="location.href='${pageContext.request.contextPath}/mainPage/join.do'">
+											<i class="glyphicon glyphicon-link"></i> <strong>
+												회원가입</strong>
+										</button>
+									</div>
 								</div>
 							</div>
-							<!-- 계정 정보 모달 -->
-							<div class="account_modal" aria-label="계정 정보" aria-hidden="true"
-								style="overflow: hidden; display: none; position: absolute; top: 0px; right: -127px; width: 300px; z-index: 1000001; margin-top: 67px; background-color: #fff; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0.1px 0.1px 2px rgba(0, 0, 0, 0.5);">
-								<div class="text-center" style="padding: 30px 0;">
-									<img style="border-radius: 60px"
-										onerror="this.src='<%=request.getContextPath()%>/img/profile_default.png'"
-										src="${sessionScope.principal.userProfile}" width="120px"
-										height="120px"></img><span class="hidden">myPage</span>
-								</div>
-								<div class="account-info text-center">이름: <%=loginInfo.getUserName() %></div>
-								<div class="account-info text-center">닉네임: <%=loginInfo.getUserName() %></div>
-								<div class="account-info text-center"
-									style="padding-bottom: 30px;">ID: <%=loginInfo.getUserId() %></div>
-								<div class="account-info btn-group"
-									style="padding: 0; width: 100%;">
-									<a
-										href="${pageContext.request.contextPath}/myPage/myPage_bookmark.do"
-										type="button" id="bookmarkPage" class="btn btn-link"
-										style="border-radius: 0; border: 0; width: 33.3%;"> <i
-										class="fa fa-heart" aria-hidden="true" role="button"
-										style="color: black;"></i> 찜 목록
-									</a> <a
-										href="<%=request.getContextPath()%>/myPage/myPage_index.do"
-										type="button" id="myPage" class="btn btn-link"
-										style="border-radius: 0; width: 33.3%; border: 0;"><i
-										class="glyphicon glyphicon-cog"></i>My Page</a>
-									<button type="button" id="logout" class="btn btn-link"
-										style="border-radius: 0; border: 0; width: 33.3%;"
-										onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.do'">
-										<i class="glyphicon glyphicon-log-out"></i>로그아웃
-									</button>
+						</c:when>
+						<c:when test="${loginInfo.getUserId() == 'user' }">
+							<div class="row clearfix"
+								style="padding-top: 30px; padding-bottom: 5px;"
+								id="login_join_box">
+								<div class="pull-right" id="login_join">
+									<div class="pull-right" style="padding: 0 10px 0 10px;">
+										<div>
+											<a id="account" href="#" role="button"><img
+												style="border-radius: 20px"
+												onerror="this.src='<%=request.getContextPath()%>/img/profile_default.png'"
+												src="${sessionScope.principal.userProfile}" width="30px"
+												height="30px"></img><span class="hidden">myPage</span></a>
+										</div>
+									</div>
+									<!-- 계정 정보 모달 -->
+									<div class="account_modal" aria-label="계정 정보"
+										aria-hidden="true"
+										style="overflow: hidden; display: none; position: absolute; top: 0px; right: -127px; width: 300px; z-index: 1000001; margin-top: 67px; background-color: #fff; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0.1px 0.1px 2px rgba(0, 0, 0, 0.5);">
+										<div class="text-center" style="padding: 30px 0;">
+											<img style="border-radius: 60px"
+												onerror="this.src='<%=request.getContextPath()%>/img/profile_default.png'"
+												src="${sessionScope.principal.userProfile}" width="120px"
+												height="120px"></img><span class="hidden">myPage</span>
+										</div>
+										<div class="account-info text-center">
+											이름:
+											<%=loginInfo.getUserName()%></div>
+										<div class="account-info text-center">
+											닉네임:
+											<%=loginInfo.getUserName()%></div>
+										<div class="account-info text-center"
+											style="padding-bottom: 30px;">
+											ID:
+											<%=loginInfo.getUserId()%></div>
+										<div class="account-info btn-group"
+											style="padding: 0; width: 100%;">
+											<a
+												href="${pageContext.request.contextPath}/myPage/myPage_bookmark.do"
+												type="button" id="bookmarkPage" class="btn btn-link"
+												style="border-radius: 0; border: 0; width: 33.3%;"> <i
+												class="fa fa-heart" aria-hidden="true" role="button"
+												style="color: black;"></i> 찜 목록
+											</a> <a
+												href="<%=request.getContextPath()%>/myPage/myPage_index.do"
+												type="button" id="myPage" class="btn btn-link"
+												style="border-radius: 0; width: 33.3%; border: 0;"><i
+												class="glyphicon glyphicon-cog"></i>My Page</a>
+											<button type="button" id="logout" class="btn btn-link"
+												style="border-radius: 0; border: 0; width: 33.3%;"
+												onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.do'">
+												<i class="glyphicon glyphicon-log-out"></i>로그아웃
+											</button>
+										</div>
+									</div>
+									<!-- 계정정보모달 활성화시 뒷배경 -->
+									<div class="gray_layer"></div>
 								</div>
 							</div>
-							<!-- 계정정보모달 활성화시 뒷배경 -->
-							<div class="gray_layer"></div>
-						</div>
-					</div>
-					<!--//로그인 회원가입 프로필-->
-					<%
-					} else if (loginInfo.getUserId() == "admin") {
-					%>
-					<div class="row clearfix"
-						style="padding-top: 30px; padding-bottom: 5px;"
-						id="login_join_box">
-						<div class="pull-right" id="login_join">
-							<div class="pull-left">
-								<button class="btn btn-link"
-									style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'">
-									<i class="glyphicon glyphicon-log-in"></i> <strong>
-										관리자페이지</strong>
-								</button>
-								<button class="btn btn-link"
-									style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
-									onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.do'">
-									<i class="glyphicon glyphicon-link"></i> <strong> 로그아웃</strong>
-								</button>
+						</c:when>
+						<!--//로그인 회원가입 프로필-->
+						<c:when test="${loginInfo.getUserId() == 'admin' }">
+							<div class="row clearfix"
+								style="padding-top: 30px; padding-bottom: 5px;"
+								id="login_join_box">
+								<div class="pull-right" id="login_join">
+									<div class="pull-left">
+										<button class="btn btn-link"
+											style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
+											onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'">
+											<i class="glyphicon glyphicon-log-in"></i> <strong>
+												관리자페이지</strong>
+										</button>
+										<button class="btn btn-link"
+											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
+											onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.do'">
+											<i class="glyphicon glyphicon-link"></i> <strong>
+												로그아웃</strong>
+										</button>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<%
-					}
-					%>
+						</c:when>
+					</c:choose>
 
 					<!--네비게이션, 검색바-->
 					<div class="row" style="padding-bottom: 0 !important;">
@@ -162,7 +170,8 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 												data-toggle="collapse" data-parent="#accordion"
 												data-target="#collapseOne"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
-												<img src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
+												<img
+													src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />걷기
 											</button>
 										</div>
@@ -271,20 +280,25 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 										src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />자전거</a></li>
 								<!--걷기메뉴-->
-								<li onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
+								<li
+									onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
 									style="cursor: pointer;"><a><img
 										src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />걷기</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
-										<li><a href="${pageContext.request.contextPath}/walkPage/walk_search.do"
+										<li><a
+											href="${pageContext.request.contextPath}/walkPage/walk_search.do"
 											class="cbp-tm-icon-archive">코스목록</a></li>
-										<li><a href="${pageContext.request.contextPath}/walkPage/walk_log.do"
+										<li><a
+											href="${pageContext.request.contextPath}/walkPage/walk_log.do"
 											class="cbp-tm-icon-clock">걷기로그</a></li>
-										<li><a href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.do"
+										<li><a
+											href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.do"
 											class="cbp-tm-icon-earth">명예의전당</a></li>
 									</ul></li>
 								<!--문화체육 메뉴-->
-								<li onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'"
+								<li
+									onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'"
 									style="cursor: pointer;"><a><img
 										src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />문화 체육</a>
@@ -303,7 +317,8 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 											class="cbp-tm-icon-location">체육시설</a></li>
 									</ul></li>
 								<!--커뮤니티 메뉴-->
-								<li onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
+								<li
+									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 									style="cursor: pointer;"><a><img
 										src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티</a>
