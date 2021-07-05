@@ -4,10 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page import="study.spring.goodspring.model.adminMember"%>
-<%
-adminMember loginInfo = (adminMember) session.getAttribute("login_info");
-%>
 
 <header>
 	<div class="navbar navbar-default clearfix" role="navigation"
@@ -26,9 +22,9 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 					</div>
 				</div>
 				<div class="col-md-9">
-					<!--로그인 회원가입 프로필-->
+					<%--로그인 회원가입 프로필--%>
 					<c:choose>
-						<c:when test="${loginInfo == null }">
+						<c:when test="${login_info == null }">
 							<div class="row clearfix"
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">
@@ -50,7 +46,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${loginInfo.getUserId() == 'user' }">
+						<c:when test="${login_info.getUser_id() != null && login_info.isUser_admin()==false}">
 							<div class="row clearfix"
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">
@@ -59,31 +55,31 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 										<div>
 											<a id="account" href="#" role="button"><img
 												style="border-radius: 20px"
-												onerror="this.src='<%=request.getContextPath()%>/img/profile_default.png'"
+												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
 												src="${sessionScope.principal.userProfile}" width="30px"
 												height="30px"></img><span class="hidden">myPage</span></a>
 										</div>
 									</div>
-									<!-- 계정 정보 모달 -->
+									<%-- 계정 정보 모달 --%>
 									<div class="account_modal" aria-label="계정 정보"
 										aria-hidden="true"
 										style="overflow: hidden; display: none; position: absolute; top: 0px; right: -127px; width: 300px; z-index: 1000001; margin-top: 67px; background-color: #fff; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0.1px 0.1px 2px rgba(0, 0, 0, 0.5);">
 										<div class="text-center" style="padding: 30px 0;">
 											<img style="border-radius: 60px"
-												onerror="this.src='<%=request.getContextPath()%>/img/profile_default.png'"
+												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
 												src="${sessionScope.principal.userProfile}" width="120px"
 												height="120px"></img><span class="hidden">myPage</span>
 										</div>
 										<div class="account-info text-center">
 											이름:
-											<%=loginInfo.getUserName()%></div>
+											${login_info.getUser_name()}</div>
 										<div class="account-info text-center">
 											닉네임:
-											<%=loginInfo.getUserName()%></div>
+											${login_info.getUser_nick()}</div>
 										<div class="account-info text-center"
 											style="padding-bottom: 30px;">
 											ID:
-											<%=loginInfo.getUserId()%></div>
+											${login_info.getUser_id()}</div>
 										<div class="account-info btn-group"
 											style="padding: 0; width: 100%;">
 											<a
@@ -93,7 +89,7 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 												class="fa fa-heart" aria-hidden="true" role="button"
 												style="color: black;"></i> 찜 목록
 											</a> <a
-												href="<%=request.getContextPath()%>/myPage/myPage_index.do"
+												href="${pageContext.request.contextPath}/myPage/myPage_index.do"
 												type="button" id="myPage" class="btn btn-link"
 												style="border-radius: 0; width: 33.3%; border: 0;"><i
 												class="glyphicon glyphicon-cog"></i>My Page</a>
@@ -104,13 +100,13 @@ adminMember loginInfo = (adminMember) session.getAttribute("login_info");
 											</button>
 										</div>
 									</div>
-									<!-- 계정정보모달 활성화시 뒷배경 -->
+									<%-- 계정정보모달 활성화시 뒷배경 --%>
 									<div class="gray_layer"></div>
 								</div>
 							</div>
 						</c:when>
-						<!--//로그인 회원가입 프로필-->
-						<c:when test="${loginInfo.getUserId() == 'admin' }">
+						<%--//로그인 회원가입 프로필--%>
+						<c:when test="${login_info.getUser_id() != null && login_info.isUser_admin()==true}">
 							<div class="row clearfix"
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">

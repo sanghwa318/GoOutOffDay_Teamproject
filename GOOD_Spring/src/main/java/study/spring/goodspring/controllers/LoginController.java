@@ -3,7 +3,6 @@ package study.spring.goodspring.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,9 +15,9 @@ import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.MemberService;
+
 @RestController
 public class LoginController {
-	
 
 	@Autowired
 	WebHelper webHelper;
@@ -26,11 +25,10 @@ public class LoginController {
 	MemberService memberService;
 	@Autowired
 	RegexHelper regexHelper;
-	
-	/** RESTFUL 로그인 */
+
+	/** 로그인 */
 	@RequestMapping(value = "/mainPage/login_ok.do", method = RequestMethod.POST)
-	public Map<String, Object> login(
-			@RequestParam(value = "user_id", required = false) String user_id,
+	public Map<String, Object> login(@RequestParam(value = "user_id", required = false) String user_id,
 			@RequestParam(value = "user_pw", required = false) String user_pw) {
 
 		/** 1) 유효성 검증 */
@@ -73,21 +71,23 @@ public class LoginController {
 			}
 		}
 
-	
 		/** 5) 세션 생성 및 결과 표시 */
-		webHelper.setSession("login_info", output);		
-		
+		webHelper.setSession("login_info", output);
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("login_info", output);
 		map.toString();
-	return webHelper.getJsonData(map);
+		return webHelper.getJsonData(map);
 	}
-	
-    /** 로그아웃 
-     * @return */
-    @RequestMapping(value = "/mainPage/logout.do", method = RequestMethod.GET)
-    public  ModelAndView logout() {
-        webHelper.removeSession("login_info");
-        return webHelper.redirect("/goodspring/", "로그아웃 되었습니다.");
-    }
+
+	/**
+	 * 로그아웃
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/mainPage/logout.do", method = RequestMethod.GET)
+	public ModelAndView logout() {
+		webHelper.removeSession("login_info");
+		return webHelper.redirect("/goodspring/", "로그아웃 되었습니다.");
+	}
 }
