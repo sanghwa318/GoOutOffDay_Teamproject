@@ -62,4 +62,18 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public Member login(Member input) throws Exception;
+	
+	 /**
+     * 아이디 중복검사
+     * @param input
+     * @throws Exception
+     */
+  //  public void idUniqueCheck(Members input) throws Exception;
+    
+    /**
+     * 이메일 중복검사
+     * @param input
+     * @throws Exception
+     */
+//    public void emailUniqueCheck(Members input) throws Exception;
 }
