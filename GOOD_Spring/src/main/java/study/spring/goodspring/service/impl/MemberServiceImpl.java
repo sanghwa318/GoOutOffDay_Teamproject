@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
 			result = sqlSession.selectOne("MemberMapper.login", input);
 
 			if (result == null) {
-				throw new NullPointerException("result=null");
+				throw new NullPointerException();
 			}
 
 		} catch (NullPointerException e) {

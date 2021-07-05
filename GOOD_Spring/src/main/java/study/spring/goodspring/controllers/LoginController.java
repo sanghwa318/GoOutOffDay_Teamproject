@@ -48,11 +48,11 @@ public class LoginController {
 
 		/** 3) 로그인 */
 		Member output = null;
-
 		try {
 			output = memberService.login(input);
 		} catch (Exception e) {
 			return webHelper.getJsonError(e.getLocalizedMessage());
+			
 		}
 
 		/** 4) 프로필 사진이 존재하는 경우 썸네일 이미지 생성 */
@@ -73,11 +73,7 @@ public class LoginController {
 
 		/** 5) 세션 생성 및 결과 표시 */
 		webHelper.setSession("login_info", output);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("login_info", output);
-		map.toString();
-		return webHelper.getJsonData(map);
+		return webHelper.getJsonData();
 	}
 
 	/**
