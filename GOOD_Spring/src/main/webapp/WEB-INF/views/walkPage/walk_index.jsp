@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -139,15 +142,36 @@
 	margin-top: 70px;
 }
 
-carousel-title2{
+carousel-title2 {
 	margin-top: 50px;
 }
 
-.wk_log{
-margin-top: 20px;
-height : 10px;
+.wk_log {
+	margin-top: 20px;
+	height: 10px;
+}
+
+
+/**Modal CSS */
+
+.modal-header{
+text-align:center;
+padding-top:10px;
+}
+
+.modal-footer{
+text-align:center;
+}
+
+.input-group-addon >a{
+text-decoration: none;
 
 }
+
+.modal-header > p{
+font-size:20px;
+}
+
 
 </style>
 
@@ -156,28 +180,30 @@ height : 10px;
 
 
 <body>
-<!-- 공용 헤더 -->
-<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
+	<!-- 공용 헤더 -->
+	<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 	<!-- 걷기 메인 페이지 -->
 	<div class="container wk_log_container">
 		<div class="header wk_header text-center">
 			<h1 class="page-header page-title" id="wk_header">
-				걷기<img src="../icon_img/걷기 아이콘.png;"
-					style="width: 3rem; height: 3rem; position:relative; bottom: 3px; left: 5px;"></img>
+				걷기<img
+					src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png;"
+					style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
 			</h1>
 
 		</div>
 
 		<div class="pull-right">
 			<div class="wk_log" id="wk_log">
-				<a href="modal-wk-log.jsp" class="btn btn-success"
-					data-toggle="modal" data-target="#myModal">걷기 기록 하기</a>
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#myModal">걷기 기록 하기</button>
+
 			</div>
 		</div>
 
 		<div class="pull-right" style="margin-right: 20px;">
 			<div class="wk_log" id="wk_log">
-				<a href="<%=request.getContextPath()%>/walkPage/walk_log.jsp"
+				<a href="${pageContext.request.contextPath}/walkPage/walk_log.jsp"
 					class="btn btn-info">걷기 Log</a>
 			</div>
 		</div>
@@ -189,12 +215,14 @@ height : 10px;
 
 		<div class="header text-center carousel-title clearfix">
 			<h2>
-				<strong>명예의 전당 코스<img src="../icon_img/명예의 전당_아이콘.png"
-					style="width: 44px; height: 44px; position:relative; bottom:5px;"></img></strong>
+				<strong>명예의 전당 코스<img
+					src="${pageContext.request.contextPath}/assets/icon_img/명예의 전당_아이콘.png"
+					style="width: 44px; height: 44px; position: relative; bottom: 5px;"></img></strong>
 			</h2>
 			<div class="pull-right">
-				<a href="<%=request.getContextPath()%>/walkPage/walk_hallOfFame.jsp" style="text-decoration: none;">더
-							보기 &gt;</a>
+				<a
+					href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.jsp"
+					style="text-decoration: none;">더 보기 &gt;</a>
 			</div>
 		</div>
 
@@ -332,14 +360,16 @@ height : 10px;
 
 		<div class="header text-center carousel-title2 clearfix">
 			<h2>
-				<strong>코스 목록<img src="../icon_img/코스 목록_아이콘.png;"
-					style="width: 44px; height: 44px; position:relative; bottom:5px; margin-left:5px"></img></strong>
+				<strong>코스 목록<img
+					src="${pageContext.request.contextPath}/assets/icon_img/코스 목록_아이콘.png;"
+					style="width: 44px; height: 44px; position: relative; bottom: 5px; margin-left: 5px"></img></strong>
 			</h2>
 			<div class="pull-right">
-				<a href="<%=request.getContextPath()%>/walkPage/walk_search.jsp" style="text-decoration: none;">더
-							보기 &gt;</a>
+				<a
+					href="${pageContext.request.contextPath}/walkPage/walk_search.jsp"
+					style="text-decoration: none;">더 보기 &gt;</a>
 			</div>
-			
+
 		</div>
 
 		<!-- 캐러셀 영역 -->
@@ -471,18 +501,50 @@ height : 10px;
 		</div>
 		<!-- 케러셀 영역 끝 -->
 
-
 	</div>
-	<!-- 공용 푸터 -->
-	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+
 
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" style="z-index: 10000000;">
+	<div class="modal fade" id="myModal" style="z-index: 100000000;">
 		<div class="modal-dialog modal-md">
-			<div class="modal-content"></div>
+			<div class="modal-content">
+				<!-- content -->
+				<form id="search-form">
+					<div class="modal-header">
+						<h3>
+							<strong>걷기 기록</strong>
+						</h3>
+						<p>기록하고 싶은 해당 코스를 입력해주세요.</p>
+					</div>
+
+					<div class="modal-body">
+						<div class="input-group">
+							<input type="text" class="form-control" id="log-search"
+								placeholder="코스를 입력해주세요." name="log-search"
+								style="height: 50px;"> <span class="input-group-addon"><button
+									type="submit" class="btn ">검색</button></span>
+						</div>
+						<div class="modal-body hide"></div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal"
+							style="width: 150px;">닫기</button>
+						<button type="submit" class="btn btn-primary" data-dismiss="modal"
+							style="width: 150px;">시작</button>
+
+					</div>
+				</form>
+
+
+			</div>
 		</div>
 	</div>
 
+
+
+	<!-- 공용 푸터 -->
+	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 
 
 	<%@ include file="../inc/plugin.jsp"%>
@@ -620,6 +682,8 @@ height : 10px;
 						});
 	</script>
 	<!-- //하트 -->
+
+
 
 </body>
 </html>
