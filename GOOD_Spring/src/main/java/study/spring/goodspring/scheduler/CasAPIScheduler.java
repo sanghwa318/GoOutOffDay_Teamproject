@@ -21,6 +21,6 @@ public class CasAPIScheduler {
 	@ResponseBody
 	@RequestMapping(value = "/cas_api_scheduler", method = RequestMethod.GET)
 	public void collectCasShowExh() {
-		
+		// 아니 왜안되는건데
 	}
 }
