@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.File;
 
@@ -35,6 +36,10 @@ public class WebHelper {
 
 	/** 업로드 된 파일이 식별될 경로 */
 	private String uploadPath;
+	
+	/** JSP의 session 내장 객체 */
+	// --> import javax.servlet.http.HttpSession;
+	private HttpSession session;
 
 	/*
 	 * 싱글톤 객체가 생성될 때 호출되는 메서드로 JSP의 주요 내장객체를 멤버변수에 연결한다.
@@ -390,11 +395,52 @@ public class WebHelper {
 		
 		
 	}
+	
+	/**
+	 * 세션값을 저장한다
+	 * @param key - 세션이름
+	 * @param value - 저장할 데이터
+	 */
+	public void setSession(String key, Object value) {
+		this.session = request.getSession(true);
+			this.session.setAttribute(key, value);
+	}
+	
+	/**
+	 * 세션값을 조회한다
+	 * @param key - 조회할 세션의 이름
+	 * @param defaultValue - 값이 없을 경우 대체할 기본값
+	 * @return Object이므로 명시작 형변환이 필요하다.
+	 */
+	public Object getSession(String key, Object defaultValue) {
+		Object value = this.session.getAttribute(key);
+		
+		if(value == null) {
+			value = defaultValue;
+		}
+		
+		return value;
+	}
+	
+	/**
+	 * 세션값을 조회한다.
+	 * 값이 없을 경우에 대한 기본값을 null로 설정
+	 * @param key - 세션 이름
+	 * @return - Object이므로 명시적 형변환 필요함
+	 */
+	public Object getSession(String key) {
+		return this.getSession(key, null);
+	}
+	
+	/**
+	 * 특정 세션값을 삭제한다.
+	 * @param key - 세션 이름
+	 */
+	public void removeSession(String key) {
+		this.session.removeAttribute(key);
+	}
+
+	public void removeAllSession() {
+this.session.invalidate();		
+	}
 }
-
-
-
-
-
-
-

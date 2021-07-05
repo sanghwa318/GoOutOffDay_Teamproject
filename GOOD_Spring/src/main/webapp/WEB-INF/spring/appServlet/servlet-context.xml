@@ -54,12 +54,12 @@
 
 
 	<!-- 인터셉터 등록 -->
-<!--  	<interceptors>
+  	<interceptors>
 		<interceptor>
 			<mapping path="/**" />
 			<beans:bean id="appInterceptor"
 				class="study.spring.goodspring.interceptor.AppInterceptor" />
 		</interceptor>
-	</interceptors>  -->
+	</interceptors> 
 
 </beans:beans>

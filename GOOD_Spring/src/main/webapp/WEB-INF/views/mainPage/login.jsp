@@ -46,7 +46,7 @@ body>div.container {
 					<img src="${pageContext.request.contextPath}/assets/icon_img/logo.png" height="66px" width="330px">
 				</div>
 			</div>
-			<form id="login-form" method="post" action="login_ok.do">
+			<form id="login-form" method="post" action="${pageContext.request.contextPath}/mainPage/login_ok.do">
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-group input-material">
 						<input type="text" class="form-control" name="user_id"
@@ -83,6 +83,31 @@ body>div.container {
 		$('document').ready(function() {
 			// 입력요소 안에 글자가 있으면, label이 위에 떠있게 함.
 			$('body').materializeInputs();
+		});
+		$(function() {
+		    /** 유효성 검사 플러그인이 ajaxForm보다 먼저 명시되어야 한다. */
+		    $('#login-form').validate({
+		        rules: {
+		            user_id: 'required',
+		            user_pw: 'required'
+		        },
+		        messages: {
+		            user_id: '아이디를 입력하세요.',
+		            user_pw: '비밀번호를 입력하세요.'
+		        },
+		    });
+
+		    $('#login-form').ajaxForm({
+		        // submit 전에 호출된다.
+		        beforeSubmit: function(arr, form, options) {
+		            // validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+		            // 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+		            return $(form).valid();
+		        },
+		        success: function(json) {
+		            window.location = "/goodspring/";
+		        },
+		    }); // end ajaxForm
 		});
 	</script>
 </body>
