@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!doctype html>
 <html>
 <head>
@@ -42,7 +46,7 @@ div#category_acco .accordian-toggle {
 					onclick="location.href='../walkPage/walk_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">걷기<img src="../icon_img/걷기 아이콘.png;"
-						style="width: 3rem; height: 3rem; position:relative; bottom: 3px; left: 5px;"></img>
+						style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
 					</span>
 				</h1>
 			</div>
@@ -143,107 +147,65 @@ div#category_acco .accordian-toggle {
 				<div>
 					<hr />
 					<!-- 미디어 아이템 영역 -->
-					<div class="media">
-						<!-- 이미지 왼쪽 배치 -->
-						<a class="pull-left" href="#"><img class="media-object"
-							src="../img/profile_default.png" height="170" width="170"
-							alt="도심의 야경"></a>
-						<!-- 미디어 내용 영역 -->
-						<div class="media-body" style="padding-left: 20px;">
-							<!-- 내용의 제목 -->
-							<h2 class="media-heading">
-								<a
-									href="<%=request.getContextPath()%>/walkPage/walk_detailCourse.jsp">코스이름</a>
-							</h2>
-							<div style="padding: 5px 20px;">
-								<h4 class="media-heading">
-									<a href="#">지역 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">유형 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">거리 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">시간 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">난이도 : </a>
-								</h4>
-							</div>
-						</div>
-					</div>
-					<hr />
+					<c:choose>
+						<%-- 조회 결과가 없는 경우 --%>
+						<c:when test="${output == null || fn:length(output) == 0 }">
+							<h1>조회결과가 없습니다.</h1>
+						</c:when>
+
+						<%-- 조회 결과가 있는 경우 --%>
+						<c:otherwise>
+							<%-- 조회 결과에 따른 반복 처리 --%>
+							<c:forEach var="item" items="${output }" varStatus="status">
+								<%-- 출력을 위해 준비한 파라미터들 --%>
+								<c:set var="crs_name" value="${item.crs_name }" />
+								<c:set var="area" value="${item.area }" />
+								<c:set var="type" value="${item.type }" />
+								<c:set var="distance" value="${item.distance }" />
+								<c:set var="time" value="${item.time }" />
+								<c:set var="level" value="${item.level }" />
+								<%-- 상세 페이지로 이동하기 위한 URL --%>
+								<c:url value="/walkPage/walk_search.do" var="viewUrl">
+									<c:param name="course_pk" value="${item.course_pk }" />
+								</c:url>
+
+								<div class="media">
+									<!-- 이미지 왼쪽 배치 -->
+									<a class="pull-left" href="#"><img class="media-object"
+										src="../img/profile_default.png" height="170" width="170"
+										alt="도심의 야경"></a>
+									<!-- 미디어 내용 영역 -->
+									<div class="media-body" style="padding-left: 20px;">
+										<!-- 내용의 제목 -->
+										<h2 class="media-heading">
+											<a
+												href="${viewUrl }">${crs_name}</a>
+										</h2>
+										<div style="padding: 5px 20px;">
+											<h4 class="media-heading">
+												<a href="#">지역 : ${area } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">유형 : ${type } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">거리 : ${distance } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">시간 : ${time } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">난이도 : ${level } </a>
+											</h4>
+										</div>
+									</div>
+								</div>
+								<hr />
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					<!-- //미디어 아이템 영역-->
-					<!-- 미디어 아이템 영역 -->
-					<div class="media">
-						<!-- 이미지 왼쪽 배치 -->
-						<a class="pull-left" href="#"><img class="media-object"
-							src="../img/profile_default.png" height="170" width="170"
-							alt="도심의 야경"></a>
-						<!-- 미디어 내용 영역 -->
-						<div class="media-body" style="padding-left: 20px;">
-							<!-- 내용의 제목 -->
-							<h2 class="media-heading">
-								<a
-									href="<%=request.getContextPath()%>/walkPage/walk_detailCourse.jsp">코스이름</a>
-							</h2>
-							<div style="padding: 5px 20px;">
-								<h4 class="media-heading">
-									<a href="#">지역 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">유형 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">거리 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">시간 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">난이도 : </a>
-								</h4>
-							</div>
-						</div>
-					</div>
-					<hr />
-					<!-- //미디어 아이템 영역-->
-					<!-- 미디어 아이템 영역 -->
-					<div class="media">
-						<!-- 이미지 왼쪽 배치 -->
-						<a class="pull-left" href="#"><img class="media-object"
-							src="../img/profile_default.png" height="170" width="170"
-							alt="도심의 야경"></a>
-						<!-- 미디어 내용 영역 -->
-						<div class="media-body" style="padding-left: 20px;">
-							<!-- 내용의 제목 -->
-							<h2 class="media-heading">
-								<a
-									href="<%=request.getContextPath()%>/walkPage/walk_detailCourse.jsp">코스이름</a>
-							</h2>
-							<div style="padding: 5px 20px;">
-								<h4 class="media-heading">
-									<a href="#">지역 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">유형 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">거리 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">시간 : </a>
-								</h4>
-								<h4 class="media-heading">
-									<a href="#">난이도 : </a>
-								</h4>
-							</div>
-						</div>
-					</div>
-					<hr />
-					<!-- //미디어 아이템 영역-->
+
 
 
 
