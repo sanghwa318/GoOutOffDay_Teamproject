@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.CasAPIList;
 import study.spring.goodspring.model.CasAPIList.SJWPerform.row;
-import study.spring.goodspring.service.CasAPIService;
+import study.spring.goodspring.service.CasAPISerchService;
 
 /** Lombok의 Log4j 객체 */
 //import lombok.extern.slf4j.Slf4j;
@@ -45,10 +45,10 @@ public class CasAPITest {
     public void testA() {
         /** 1) API 연동 객체 생성 */
         // Retrofit 객체 생성
-        Retrofit retrofit = retrofitHelper.getRetrofit(CasAPIService.BASE_URL);
+        Retrofit retrofit = retrofitHelper.getRetrofit(CasAPISerchService.BASE_URL);
 
         // Service 객체를 생성한다. 구현체는 Retrofit이 자동으로 생성해 준다.
-        CasAPIService casApiService = retrofit.create(CasAPIService.class);
+        CasAPISerchService casApiService = retrofit.create(CasAPISerchService.class);
 
         /** 2) 검색 파라미터 처리 */
         Call<CasAPIList> call = casApiService.getCasAPIList();
@@ -61,7 +61,7 @@ public class CasAPITest {
 
         /** 3) 조회결과를 반복문을 활용해서 출력한다. */
         if (casAPIList != null) {
-            List<row> list = casAPIList.getJSWPerform().getRow();
+            List<row> list = casAPIList.getSJWPerform().getRow();
             
             for (row item : list ) {
                 log.debug(" >>> " + item.toString());
