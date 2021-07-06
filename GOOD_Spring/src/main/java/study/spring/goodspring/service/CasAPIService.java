@@ -8,9 +8,9 @@ import study.spring.goodspring.model.CasAPIList;
 import study.spring.goodspring.model.CasAPIList.SJWPerform.row;
 
 public interface CasAPIService {
-	public static final String BASE_URL = "http://openAPI.seoul.go.kr:8088/";
+	public static final String BASE_URL = "http://openAPI.seoul.go.kr:8088";
 	
-	@GET("/7153736f52716e7432376445424665/JSON/SJWPerform/1/1000")
+	@GET("/7153736f52716e7432376445424665/JSON/SJWPerform/1/10")
 	Call<CasAPIList> getCasAPIList();
 	
 	/**

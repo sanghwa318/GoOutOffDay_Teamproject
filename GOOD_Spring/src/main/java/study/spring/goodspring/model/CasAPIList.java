@@ -14,26 +14,26 @@ public class CasAPIList {
 	@Data
 	public class SJWPerform {
 		@SerializedName("list_total_count")
-		private String list_total_count;
+		private int list_total_count;
 		@SerializedName("RESULT")
-		private List<RESULT> result;
+		private RESULT RESULT;
 		@SerializedName("row")
 		private List<row> row;
 
 		@Data
 		public class RESULT {
 			@SerializedName("CODE")
-			private String code;
+			private String CODE;
 			@SerializedName("MESSAGE")
-			private String message;
+			private String MESSAGE;
 		}
 
 		/** 실질적으로 사용하는 API 데이터 **/
 		@Data
 		public class row {
-			private String service_tag;
-			private String regDate;
-			private String editDate;
+			/*
+			 * private String service_tag; private String regDate; private String editDate;
+			 */
 			
 			@SerializedName("PERFORM_CODE") private String PERFORM_CODE;
 			@SerializedName("TITLE") private String TITLE;
