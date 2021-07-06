@@ -14,6 +14,6 @@ public class BicyleController {
 	@RequestMapping(value = "/bicyclePage/bicycle_index.do", method = RequestMethod.GET)
 	public String bicyle_index(Model model) {
 		
-		return "bicyclePage/bicyle_index";
+		return "bicyclePage/bicycle_index";
 	}
 }

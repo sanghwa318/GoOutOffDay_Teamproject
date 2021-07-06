@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bicycleMapper">
+<mapper namespace="BicycleMapper">
 	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다 -->
-		<resultMap type="study.spring.goodspring.model.bicycle"
-			id="bicycleMap">
-			<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼을 연결한다. -->
-			<result property="rackTotCnt" column="rackTotCnt" />
-			<result property="stationName" column="stationName" />
-			<result property="parkingBikeTotCnt" column="parkingBikeTotCnt" />
-			<result property="shared" column="shared" />
-			<result property="stationLatitude" column="stationLatitude" />
-			<result property="stationLongitude" column="stationLongitude" />
-			<result property="stationId" column="stationId" />
-		</resultMap>
+	<resultMap type="study.spring.goodspring.model.Bicycle.RentBikeStatus.Row"
+		id="BicycleMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼을 연결한다. -->
+		<result property="stationId" column="stationId" />
+		<result property="rackTotCnt" column="rackTotCnt" />
+		<result property="stationName" column="stationName" />
+		<result property="parkingBikeTotCnt" column="parkingBikeTotCnt" />
+		<result property="shared" column="shared" />
+		<result property="stationLatitude" column="stationLatitude" />
+		<result property="stationLongitude" column="stationLongitude" />
+	</resultMap>
+	<!-- 단일행 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="study.spring.goodspring.model.Bicycle.RentBikeStatus.Row"
+		keyProperty="stationId">
+		INSERT INTO bicycle (stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude) 
+		VALUES (#{stationId}, #{rackTotCnt}, #{stationName}, #{parkingBikeTotCnt}, #{shared},
+		#{stationLatitude}, #{stationLongitude});
+	</insert>
 </mapper>
