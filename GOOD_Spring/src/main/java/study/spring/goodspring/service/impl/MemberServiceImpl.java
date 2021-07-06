@@ -157,7 +157,7 @@ public class MemberServiceImpl implements MemberService {
 
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("아이디나 비밀번호가 잘못되었습니다.");
+			throw new Exception("FAIL");
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
