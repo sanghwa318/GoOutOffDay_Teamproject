@@ -78,8 +78,8 @@ button span {
 <body>
 
 	<div class="wrapper">
-	<!-- 공용 헤더 -->
-	<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
+		<!-- 공용 헤더 -->
+		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 		<!-- //공통 헤더 -->
 
 		<div class="container" style="margin-bottom: 50px;">
@@ -90,26 +90,31 @@ button span {
 			<h1 class="page-header">크루 개설</h1>
 
 			<div class="row " style="margin-bottom: 30px;">
-				<form role="form" class="form-crew" action="${pageContext.request.contextPath}/crew/crew_ok.do">
+				<form role="form" class="form-crew" method="POST">
 
 					<div class="form-group col-md-3 col-xs-6">
-						<label for="crew_name" style="font-size: 20px;">크루 이름</label>
-						<input type="text" id="crew_name" class="form-control crew_input"
-							placeholder="크루명을 입력하세요." name="crew_name"
+						<label for="crew_name" style="font-size: 20px;">크루 이름</label> <input
+							type="text" id="crew_name" class="form-control crew_input"
+							placeholder="크루명을 입력하세요." name="crew_name" value="${crew_name}"
 							style="width: 200px; text-align-last: center; font-size: 20px;">
+							<div id="checkMsg"></div>
+						<button type="submit" id="crewname_check" class="btn btn-default">중복확인</button>
+
 					</div>
+
 
 
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="crew_category" style="font-size: 20px;">크루 종류</label>
-						<input type="text" id="crew_category" class="form-control crew_input"
-							placeholder="크루 종류를 입력하세요." name="crew_category"
+						<input type="text" id="crew_category"
+							class="form-control crew_input" placeholder="크루 종류를 입력하세요."
+							name="crew_category"
 							style="width: 200px; text-align-last: center; font-size: 20px;">
 					</div>
-					
-					
+
+
 					<div class="form-group col-md-3 col-xs-6">
-						<label for="crew_location" class="col-md-4 control-label" 
+						<label for="crew_location" class="col-md-4 control-label"
 							style="font-size: 20px;">지역</label>
 						<div>
 							<select class="form-control " id="crew_location" name="crew_area"
@@ -400,17 +405,29 @@ button span {
 		});
 	</script>
 
-<script type="text/javascript">
-$(".crew_input").on("propertychange change keyup paste input", function(){
+	<script type="text/javascript">
+$(document).ready(function(){
 	
-	var crewId = $(".crew_input").val();
-	var data = {crewId : crewId}
+	$('#crewname_check').on('click',function(){
+		$.ajax({
+			type: 'POST', 
+			url: '/commPage/comm_crew_est.do', 
+			data: { "id" : $('#crew_name').val() }, 
+			success: function(data){ if($.trim(data) == 0){
+				$('#checkMsg').html('<p style="color:blue">사용가능</p>'); 
+			} 
+			else{ $('#checkMsg').html('<p style="color:red">사용불가능</p>');
+			
+			}
+			
+			}
+
+			출처: https://autumnly.tistory.com/61 [어텀로그]
+			
+		}); //ajax
+		
+	}); // end on
 	
-	$.ajax({
-		type : "post",
-		url : "/member/memberIdChk",
-		data : data
-	}); // ajax 종료
 });
 
 </script>

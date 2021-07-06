@@ -41,7 +41,11 @@ public class CrewTest {
 	public void testA() {
 		Crew input = new Crew();
 		input.setCrew_name("뛰자");
-		sqlSession.selectOne("CrewMapper.crewCheck", input);
+		sqlSession.selectOne("CrewMapper.selectCrewItem", input);
 	}
+	
+	//다중행 조회
+	
+	
 
 }
