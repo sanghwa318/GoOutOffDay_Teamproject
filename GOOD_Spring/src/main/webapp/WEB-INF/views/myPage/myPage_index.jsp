@@ -34,7 +34,7 @@
 						<div class="form-group">
 							<img id="img__wrap"
 								onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
-								src="${sessionScope.principal.userProfile}" width="200px"
+								src="${login_info.getUser_photo().getFileUrl()}" width="200px"
 								height="200px" style="border-radius: 100px" />
 						</div>
 						<div class="form-group text-center bg-light">
@@ -49,27 +49,19 @@
 					</form>
 				</div>
 				<div class="col-md-7 col-md-offset-1 profile_info">
-					<h4>ID: 모카</h4>
-					<h4>닉네임: 모카</h4>
+					<h4>ID: ${login_info.getUser_id()}</h4>
+					<h4>닉네임: ${login_info.getUser_nick()}</h4>
 					<h4>
-						휴대폰 번호: 010-1234-6789<%
-
-					%>
+						휴대폰 번호: ${login_info.getTel()}
 					</h4>
 					<h4>
-						주소: 나도 모름<%
-
-					%>
+						주소: ${login_info.getAddress1()}&nbsp;${login_info.getAddress2()}
 					</h4>
 					<h4>
-						이메일: abc@abc.com<%
-
-					%>
+						이메일: ${login_info.getEmail()}
 					</h4>
 					<h4>
-						가입일:2021-06-04<%
-
-					%>
+						가입일:${login_info.getCreate_datetime()}
 					</h4>
 				</div>
 			</div>
@@ -94,7 +86,7 @@
 
 
 	<script type="text/javascript">
-		$('#img__preview').on("change", function(e) {
+		$('#user_photo').on("change", function(e) {
 			console.log(e.target.files);
 
 			console.log(e.target.files[0].type.match("image*"));
@@ -104,13 +96,13 @@
 
 			if (!f.type.match("image*")) {
 				alert("이미지만 첨부할 수 있습니다.");
-				$("#img__preview").val('');
+				$("#user_photo").val('');
 				return;
 			}
 
 			if (f.size > 1024 * 1024 * 2) {
 				alert("이미지는 2MB 이하만 가능합니다.");
-				$('#img__preview').val('');
+				$('#user_photo').val('');
 				return;
 			}
 			var reader = new FileReader();

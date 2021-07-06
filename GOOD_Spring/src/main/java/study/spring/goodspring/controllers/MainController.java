@@ -48,6 +48,11 @@ public class MainController {
 		return "mainPage/login_findID";
 	}
 	
+	@RequestMapping(value = "/myPage/myPage_index.do", method = RequestMethod.GET)
+	public String myPageIndex() {
+		return ("myPage/myPage_index");
+	}
+	
 	@RequestMapping(value = "/mainPage/login_findPW.do", method = RequestMethod.GET)
 	public String login_findPW(Model model) {
 		

@@ -29,39 +29,48 @@
 		resultMap="MemberMap">
 		SELECT user_no, user_id, user_name, user_nick, gender,
 		address1, address2, post, tel,
-		email, user_photo, user_admin, create_datetime,
+		email, user_photo, user_admin,
+		create_datetime,
 		edit_datetime
 		FROM user_info
-		WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw})
+		WHERE user_id=#{user_id}
+		AND user_pw=MD5(#{user_pw})
 	</select>
+
+
 	<!-- 아이디 찾기를 위한 조회 기능 -->
 	<select id="findId"
 		parameterType="study.spring.goodspring.model.Member"
 		resultMap="MemberMap">
 		SELECT user_no, user_id, user_name, user_nick, gender,
 		address1, address2, post, tel,
-		email, user_photo, user_admin, create_datetime,
+		email, user_photo, user_admin,
+		create_datetime,
 		edit_datetime
 		FROM user_info
-		WHERE user_name=#{user_name} AND email=#{email}
+		WHERE
+		user_name=#{user_name} AND email=#{email}
 	</select>
-		<!-- 비밀번호 찾기를 위한 조회 기능 -->
+	<!-- 비밀번호 찾기를 위한 조회 기능 -->
 	<select id="findPw"
 		parameterType="study.spring.goodspring.model.Member"
 		resultMap="MemberMap">
 		SELECT user_no, user_id, user_name, user_nick, gender,
 		address1, address2, post, tel,
-		email, user_photo, user_admin, create_datetime,
+		email, user_photo, user_admin,
+		create_datetime,
 		edit_datetime
 		FROM user_info
-		WHERE user_name=#{user_name} AND email=#{email} AND user_id=#{user_id}
+		WHERE
+		user_name=#{user_name} AND email=#{email} AND user_id=#{user_id}
 	</select>
 	<!-- 단일행 조회를 위한 기능 정의 -->
 	<select id="selectItem"
 		parameterType="study.spring.goodspring.model.Member"
 		resultMap="MemberMap">SELECT user_no, user_id, user_name, user_nick, gender,
 		address1, address2, post, tel,
-		email, user_photo, user_admin, create_datetime,
+		email, user_photo, user_admin,
+		create_datetime,
 		edit_datetime
 		FROM user_info
 		WHERE user_no=#{user_no};
@@ -70,9 +79,11 @@
 	<select id="selectList"
 		parameterType="study.spring.goodspring.model.Member"
 		resultMap="MemberMap">
-		Select user_no, user_id, user_name, user_nick, gender,address1, address2, post,
+		Select user_no, user_id, user_name, user_nick, gender,address1,
+		address2, post,
 		tel,
-		email, user_photo, user_admin, create_datetime, edit_datetime FROM
+		email, user_photo, user_admin, create_datetime,
+		edit_datetime FROM
 		user_info
 		<where>
 			<if test="user_name !=null and user_name !=''">user_name LIKE concat ('%', #{user_name},'%')</if>
@@ -97,10 +108,11 @@
 		#{user_name}, #{user_nick}, #{gender},
 		#{address1}, #{address2},
 		#{post}, #{tel},
-		#{email}, #{photoJson}, #{user_admin},
+		#{email}, #{photoJson},
+		#{user_admin},
 		now(), now());
 	</insert>
-	
+
 	<!-- 단일행 삭제를 위한 기능 정의 -->
 	<delete id="deleteItem"
 		parameterType="study.spring.goodspring.model.Member">
@@ -114,14 +126,23 @@
 		user_pw=MD5(#{user_pw}),
 		user_name=#{user_name},
 		user_nick=#{user_nick}, gender=#{gender},
-		address1=#{address1}, address2=#{address2},
+		address1=#{address1},
+		address2=#{address2},
 		post=#{post}, tel=#{tel},
 		email=#{email},
 		user_photo=#{photoJson},
 		edit_datetime=now()
 		WHERE user_no=#{user_no};
 	</update>
-
+	
+	<!-- 프로필 사진 수정을 위한 갱신 -->
+	<update id="updateProfile"
+		parameterType="study.spring.goodspring.model.Member">
+		UPDATE user_info SET user_photo=#{photoJson},
+		edit_datetime=now()
+		WHERE user_no=#{user_no};
+	</update>
+	
 	<!-- 데이터 수 조회하기 -->
 	<select id="selectCountAll"
 		parameterType="study.spring.goodspring.model.Member" resultType="int">
