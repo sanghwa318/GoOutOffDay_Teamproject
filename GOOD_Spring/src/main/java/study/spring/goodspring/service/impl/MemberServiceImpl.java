@@ -220,6 +220,79 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		return result;
+	}
+	
+	/**
+     * 아이디 중복검사
+     * @param input
+     * @throws Exception
+     */
+	@Override
+	public void idUniqueCheck(Member input) throws Exception {
+		int result = 0;
+
+        try {
+            result = sqlSession.selectOne("MembersMapper.idUniqueCheck", input);
+            if (result > 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이미 사용중인 아이디 입니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("아이디 중복검사에 실패했습니다.");
+        }
+		
+	}
+	
+	/**
+     * 닉네임 중복검사
+     * @param input
+     * @throws Exception
+     */
+	@Override
+	public void nickUniqueCheck(Member input) throws Exception {
+		 int result = 0;
+
+	        try {
+	            result = sqlSession.selectOne("MembersMapper.nickUniqueCheck", input);
+	            if (result > 0) {
+	                throw new NullPointerException("result=" + result);
+	            }
+	        } catch (NullPointerException e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("이미 사용중인 닉네임 입니다.");
+	        } catch (Exception e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("닉네임 중복검사에 실패했습니다.");
+	        }
+		
+	}
+	
+	
+	 /**
+     * 이메일 중복검사
+     * @param input
+     * @throws Exception
+     */
+	@Override
+	public void emailUniqueCheck(Member input) throws Exception {
+		  int result = 0;
+
+	        try {
+	            result = sqlSession.selectOne("MembersMapper.emailUniqueCheck", input);
+	            if (result > 0) {
+	                throw new NullPointerException("result=" + result);
+	            }
+	        } catch (NullPointerException e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("이미 사용중인 이메일 입니다.");
+	        } catch (Exception e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("이메일 중복검사에 실패했습니다.");
+	        }
+		
 	}	
 
 }

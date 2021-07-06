@@ -78,4 +78,26 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public Member findPw(Member input) throws Exception;
+	
+	/**
+
+     * 아이디 중복검사
+     * @param input
+     * @throws Exception
+     */
+    public void idUniqueCheck(Member input) throws Exception;
+    
+    /**
+     * 닉네임 중복검사
+     * @param input
+     * @throws Exception
+     */
+    public void nickUniqueCheck(Member input) throws Exception;
+    
+    /**
+     * 이메일 중복검사
+     * @param input
+     * @throws Exception
+     */
+    public void emailUniqueCheck(Member input) throws Exception;
 }

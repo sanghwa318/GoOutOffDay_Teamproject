@@ -9,7 +9,11 @@
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.all.min.js" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.js" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Joinlayout.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js" />
 </head>
 <body>
    <div class="wrapper">
@@ -25,6 +29,7 @@
                 <h1>회원가입</h1>
         </div>
 		<!-- 가입폼 시작 -->
+		
 		<form class="form-horizontal" name="join_form" id="join_form"
 			role="form">
 			<!-- 입력양식 -->
@@ -62,9 +67,9 @@
                 </div><!-- //비밀번호 -->
                 <!-- 비밀번호 확인 -->
                 <div class="form-group1">
-                    <label for="user_pw_confirm" class="col-sm-2 control-label">비밀번호 확인</label>
+                    <label for="user_pw_re" class="col-sm-2 control-label">비밀번호 확인</label>
                     <div class="col-sm-10">
-                        <input type="password" name="user_pw_confirm" class="form-control" id="user_pw" placeholder="영문,숫자,특수문자 조합 최대 30글자" />
+                        <input type="password" name="user_pw_re" class="form-control" id="user_pw_re" placeholder="영문,숫자,특수문자 조합 최대 30글자" />
                     </div>
                 </div><!-- //비밀번호 확인 -->
               
@@ -90,9 +95,9 @@
                 </div><!-- //이메일 -->
             <!-- 연락처 -->
 			<div class="form-group1">
-                    <label for="phone" class="col-sm-2 control-label">연락처</label>
+                    <label for="tel" class="col-sm-2 control-label">연락처</label>
                     <div class="col-sm-10">
-                        <input type="text" name="phone" class="form-control" id="phone" placeholder="`-`없이 숫자만 입력" />
+                        <input type="text" name="tel" class="form-control" id="tel" placeholder="`-`없이 숫자만 입력" />
                     </div>
                 </div><!-- //연락처 -->
                 
@@ -130,20 +135,20 @@
 			
 			<!-- 생년월일 -->
 			<div class="form-group1">
-                    <label for="birthday" class="col-sm-2 control-label">생년월일</label>
+                    <label for="birthdate" class="col-sm-2 control-label">생년월일</label>
                     <div class="col-sm-10">
-                        <input type="date" name="birthday" class="form-control" id="birthday" />
+                        <input type="date" name="birthdate" class="form-control" id="birthdate" />
                     </div>
                 </div><!-- //생년월일 -->
           <!-- 성별 -->
           <div class="form-group1">
-                    <label for="gender1" class="col-sm-2 control-label">성별</label>
+                    <label for="gender" class="col-sm-2 control-label">성별</label>
                     <div class="col-sm-10">
                         <label class="radio-inline">
-                            <input type="radio" name="gender" id="gender1" value="M" checked> 남자
+                            <input type="radio" name="gender" id="gender" value="M"> 남자
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="gender" id="gender1" value="F"> 여자
+                            <input type="radio" name="gender" id="gender" value="F"> 여자
                         </label>
                     </div>
                 </div><!-- //성별 -->
@@ -168,6 +173,7 @@
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script	src="${pageContext.request.contextPath}/assets/js/post-join.js"></script>
 <script	src="${pageContext.request.contextPath}/assets/js/uniquecheck-join.js"></script>
+
 
 	
 </body>
