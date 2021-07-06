@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
 			result = sqlSession.selectOne("MemberMapper.login", input);
 
 			if (result == null) {
-				throw new NullPointerException();
+				throw new NullPointerException("result=null");
 			}
 
 		} catch (NullPointerException e) {
@@ -165,5 +165,61 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
+
+	/**
+	 * 아이디 찾기
+	 * 
+	 * @param input
+	 * @throws Exception
+	 */
+	@Override
+	public Member findId(Member input) throws Exception {
+		Member result = null;
+
+		try {
+			result = sqlSession.selectOne("MemberMapper.findId", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("이름 또는 이메일이 잘못되었습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+	
+	/**
+	 * 비밀번호 찾기
+	 * 
+	 * @param input
+	 * @throws Exception
+	 */
+	@Override
+	public Member findPw(Member input) throws Exception {
+		Member result = null;
+
+		try {
+			result = sqlSession.selectOne("MemberMapper.findPw", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("입력하신 정보가 잘못되었습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}	
 
 }

@@ -63,17 +63,19 @@ public interface MemberService {
 	 */
 	public Member login(Member input) throws Exception;
 	
-	 /**
-     * 아이디 중복검사
-     * @param input
-     * @throws Exception
-     */
-  //  public void idUniqueCheck(Members input) throws Exception;
-    
-    /**
-     * 이메일 중복검사
-     * @param input
-     * @throws Exception
-     */
-//    public void emailUniqueCheck(Members input) throws Exception;
+	/**
+	 * 아이디 찾기를 위한 데이터 조회 메서드
+	 * @param Member 조회할 정보를 담고 있는 Beans
+	 * @return
+	 * @throws Exception
+	 */
+	public Member findId(Member input) throws Exception;
+	
+	/**
+	 * 비밀번호 찾기를 위한 데이터 조회 메서드
+	 * @param Member 조회할 정보를 담고 있는 Beans
+	 * @return
+	 * @throws Exception
+	 */
+	public Member findPw(Member input) throws Exception;
 }
