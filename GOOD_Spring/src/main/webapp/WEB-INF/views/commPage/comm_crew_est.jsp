@@ -92,14 +92,23 @@ button span {
 			<div class="row " style="margin-bottom: 30px;">
 				<form role="form" class="form-crew" action="${pageContext.request.contextPath}/crew/crew_ok.do">
 
-					<div class="form-group col-md-3 col-xs-5">
-						<label for="crew_name" style="font-size: 20px;">Crew Name</label>
-						<input type="text" id="crew_name" class="form-control"
+					<div class="form-group col-md-3 col-xs-6">
+						<label for="crew_name" style="font-size: 20px;">크루 이름</label>
+						<input type="text" id="crew_name" class="form-control crew_input"
 							placeholder="크루명을 입력하세요." name="crew_name"
 							style="width: 200px; text-align-last: center; font-size: 20px;">
 					</div>
 
-					<div class="form-group col-md-3 col-xs-5">
+
+					<div class="form-group col-md-3 col-xs-6">
+						<label for="crew_category" style="font-size: 20px;">크루 종류</label>
+						<input type="text" id="crew_category" class="form-control crew_input"
+							placeholder="크루 종류를 입력하세요." name="crew_category"
+							style="width: 200px; text-align-last: center; font-size: 20px;">
+					</div>
+					
+					
+					<div class="form-group col-md-3 col-xs-6">
 						<label for="crew_location" class="col-md-4 control-label" 
 							style="font-size: 20px;">지역</label>
 						<div>
@@ -292,6 +301,24 @@ button span {
 									}); // <-- 메시지 표시
 									
 									return false; // <-- 실행 중단
+								} 
+								
+								var crew_category_val = $("#crew_category").val();
+
+								if (!crew_category_val) { // 입력되지 않았다면?
+									swal({
+										title : "에러",
+										text : "크루종류를 입력해 주세요.",
+										type : "error"
+									}).then(function(result) {
+										// 창이 닫히는 애니메이션의 시간이 있으므로,
+										// 0.1초의 딜레이 적용 후 포커스 이동
+										setTimeout(function() {
+											$("#crew_category").focus();
+										}, 1);
+									}); // <-- 메시지 표시
+									
+									return false; // <-- 실행 중단
 								}
 
 								var crew_location_val = $(
@@ -372,6 +399,21 @@ button span {
 
 		});
 	</script>
+
+<script type="text/javascript">
+$(".crew_input").on("propertychange change keyup paste input", function(){
+	
+	var crewId = $(".crew_input").val();
+	var data = {crewId : crewId}
+	
+	$.ajax({
+		type : "post",
+		url : "/member/memberIdChk",
+		data : data
+	}); // ajax 종료
+});
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CrewMapper">
+
+<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+<resultMap type="study.spring.goodspring.model.Crew" id="crewMap">
+<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+<result property="crew_no" column="crew_no"/>
+<result property="crew_name" column="crew_name"/>
+<result property="crew_area" column="crew_area"/>
+<result property="crew_sinto" column="crew_sinto"/>
+<result property="crew_createtime" column="crew_createtime"/>
+<result property="crew_category" column="crew_category"/>
+<result property="crew_photo" column="crew_photo"/>
+<result property="crew_dinto" column="crew_dinto"/>
+<result property="crew_member" column="crew_member"/>
+<result property="user_info_user_no" column="user_info_user_no"/>
+
+
+</resultMap>
+
+<!-- 크루명 중복 체크 -->
+<select id="crewNameCheck" resultType="int">
+SELECT COUNT(*) FROM crew WHERE crew_name = #{crew_name}
+
+</select>
+
+
+<!-- 단일행 조회 -->
+<select id="crewCheck" resultMap="crewMap" parameterType="study.spring.goodspring.model.Crew" >
+SELECT crew_no, crew_name, crew_area, crew_sinto, crew_createtime, crew_category, crew_photo, crew_dinto, crew_dinto, crew_member, user_info_user_no FROM crew WHERE crew_name = #{crew_name};
+</select>
+
+
+<!-- 단일행 조회 -->
+
+<!--다중행 조회  -->
+
+<!-- 데이터 저장 기능 -->
+
+<!-- 데이터 삭제 기능 -->
+
+<!-- 데이터 갱신 기능 -->
+
+
+</mapper>

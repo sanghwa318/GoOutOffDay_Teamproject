@@ -8,22 +8,30 @@ import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.service.CrewService;
 
-@Service
 @Slf4j
+@Service
 public class CrewServiceImpl implements CrewService{
 	
-	/**
-	 * MyBatis
-	 */
+	
+	//MyBatis 세션 객체 주입
 	@Autowired
 	SqlSession sqlSession;
 	
-	@Override
-	public Crew getCrewItem(Crew input) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@Autowired
+	CrewService crewService;
 
+	/**
+	 * 크루명 중복 검사
+	 */
+	
+	@Override
+	public int getCrewNameCheck(Crew input) throws Exception {
+		int result = (int) crewService.getCrewNameCheck(input);
+		return result;
+	}
 	
 	
+	
+
+
 }
