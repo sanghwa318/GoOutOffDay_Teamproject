@@ -1,5 +1,6 @@
 package study.spring.goodspring.retrofit;
 
+import org.apache.ibatis.session.SqlSession;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,7 @@ public class bicycleAPITest {
 	// RetrofitHelper 객체 주입 설정
 	@Autowired
 	RetrofitHelper retrofitHelper;
+	
 
 	@Test
 	public void TestA() {
@@ -61,8 +63,11 @@ public class bicycleAPITest {
 		log.debug(bicycle.toString());
 
 	}
-	
+
 	/** API 데이터 저장 테스트 */
-	
+	@Test
+	public void testB() {
+		Bicycle input = new Bicycle();
+	}
 
 }
