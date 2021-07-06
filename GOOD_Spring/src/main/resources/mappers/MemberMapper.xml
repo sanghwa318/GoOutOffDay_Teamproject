@@ -32,7 +32,7 @@
 		email, user_photo, user_admin, create_datetime,
 		edit_datetime
 		FROM user_info
-		WHERE user_id=#{user_id} AND user_pw=#{user_pw}
+		WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw})
 	</select>
 	<!-- 아이디 찾기를 위한 조회 기능 -->
 	<select id="findId"
