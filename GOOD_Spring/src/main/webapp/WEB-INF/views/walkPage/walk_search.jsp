@@ -43,9 +43,9 @@ div#category_acco .accordian-toggle {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../walkPage/walk_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
-					<span class="test01">걷기<img src="../icon_img/걷기 아이콘.png;"
+					<span class="test01">걷기<img src="<%=request.getContextPath() %>/assets/icon_img/걷기 아이콘.png;"
 						style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
 					</span>
 				</h1>

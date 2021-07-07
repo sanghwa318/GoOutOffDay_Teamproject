@@ -1,4 +1,4 @@
-package study.spring.goodspring.retrofit;
+package study.spring.goodspring.dao;
 
 import java.util.List;
 

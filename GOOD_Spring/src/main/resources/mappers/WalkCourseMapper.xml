@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="WalkCourseMapper">
 
 	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
@@ -20,7 +20,7 @@
 	SELECT course_pk, crs_name, area, type, distance, time, level FROM walkcourse
 	
 	<where>
-	<if test="area != null and area != ''">
+	<if test="crs_name != null and crs_name != ''">
 	crs_name LIKE concat('%', #{crs_name}, '%')
 	</if>
 	<if test="area != null and area != ''">
