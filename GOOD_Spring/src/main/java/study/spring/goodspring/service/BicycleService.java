@@ -10,4 +10,5 @@ public interface BicycleService {
 	@GET("/5178704a4e72686b343364677a4478/json/bikeList/1/10")		// GET 방식으로 API의 주소를 요청
 	Call<Bicycle> getRow();
 
+	
 }

@@ -1,5 +1,7 @@
 package study.spring.goodspring.retrofit;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.Bicycle;
+import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
 import study.spring.goodspring.service.BicycleService;
 
 /** Lombok의 Log4j 객체 */
@@ -38,7 +41,8 @@ public class bicycleAPITest {
 	// RetrofitHelper 객체 주입 설정
 	@Autowired
 	RetrofitHelper retrofitHelper;
-	
+	@Autowired
+	SqlSession sqlSession;
 
 	@Test
 	public void TestA() {
@@ -60,14 +64,14 @@ public class bicycleAPITest {
 			e.printStackTrace();
 		}
 
-		log.debug(bicycle.toString());
+		/** 조회결과를 반복문을 활용해서 출력한다. */
+		if (bicycle != null) {
+			List<Row> list = bicycle.getRentBikeStatus().getRow();
 
-	}
-
-	/** API 데이터 저장 테스트 */
-	@Test
-	public void testB() {
-		Bicycle input = new Bicycle();
+			for (Row item : list) {
+				log.debug(" >>> " + item.toString());
+			}
+		}
 	}
 
 }
