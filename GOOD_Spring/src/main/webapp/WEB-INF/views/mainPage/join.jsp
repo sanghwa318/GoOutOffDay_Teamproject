@@ -119,12 +119,7 @@
                         <input type="text" class="form-control" id="roadAddress" readonly />
                     </div><!-- //주소 도로명 -->
                  </div>
-                 <!-- 주소 지번 -->
-                  <div class="form-group1">
-                    <div class="col-sm-10 col-sm-offset-2">
-                        <input type="text" class="form-control" id="jibunAddress" readonly /> 
-                    </div>
-                 </div><!-- //주소 지번 -->
+     
                  <!-- 주소 나머지 -->
                 <div class="form-group1">
                     <div class="col-sm-10 col-sm-offset-2">
@@ -172,7 +167,8 @@
 <%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script	src="${pageContext.request.contextPath}/assets/js/post-join.js"></script>
-<script	src="${pageContext.request.contextPath}/assets/js/uniquecheck-join.js"></script>
+<script	src="${pageContext.request.contextPath}/assets/js/regex-join.js"></script>
+<script	src="${pageContext.request.contextPath}/assets/js/unique-join.js"></script>
 
 
 	
