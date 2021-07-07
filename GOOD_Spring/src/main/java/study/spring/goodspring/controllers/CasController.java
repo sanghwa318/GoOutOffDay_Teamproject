@@ -1,13 +1,25 @@
 package study.spring.goodspring.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import study.spring.goodspring.helper.RegexHelper;
+import study.spring.goodspring.helper.WebHelper;
+
 @Controller
 public class CasController {
+	@Autowired
+	WebHelper WebHelper;
+	@Autowired
+	RegexHelper RegexHelper;
+	@Value("#{servletContext.contextPath}")
+	String contextPath;
+	
 	/** 문화체육 메인페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_index.do", method = RequestMethod.GET)
 	public String cas_index() {
@@ -20,7 +32,9 @@ public class CasController {
 	public String cas_ThemeList(Model model,
 			// GET 파라미터 받기
 			@RequestParam(value = "cas", defaultValue = "") String cas,
-			@RequestParam(value = "order", defaultValue = "") String order){
+			@RequestParam(value = "order", defaultValue = "") String order) {
+		
+		
 		String result = null;
 		String iconurl = null;
 

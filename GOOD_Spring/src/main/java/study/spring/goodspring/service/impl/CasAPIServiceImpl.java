@@ -24,8 +24,8 @@ public class CasAPIServiceImpl implements CasAPIUploadService {
 			// 수집결과를 반복수행하면서 데이터를 저장
 			for (row item : list) {
 				// 시작일자와 고유ID가 일치하는 데이터에대한 UPDATE를 시도
-				if(sqlSession.update("CasShowExhMapper.updateItem", item) == 0) {
-					sqlSession.insert("CasShowExhMapper.insertItem", item);
+				if(sqlSession.update("CasUploadMapper.updateItem", item) == 0) {
+					sqlSession.insert("CasUPloadMapper.insertItem", item);
 				}
 			}
 		} catch (Exception e) {

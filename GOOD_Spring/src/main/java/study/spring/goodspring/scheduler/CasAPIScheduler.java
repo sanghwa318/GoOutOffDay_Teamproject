@@ -23,10 +23,10 @@ public class CasAPIScheduler {
 	/** 통신처리에 필요한 객체 주입 **/
 	@Autowired
 	RetrofitHelper retrofitHelper;
-	
+
 	/** 데이터베이스 연동에 필요한 서비스 객체 주입 **/
 	@Autowired
-	CasAPIUploadService CasAPIdbUpload;
+	CasAPIUploadService CasAPIUploadService;
 
 	/**
 	 * 공연전시 API를 수집하여 DB에 저장하기 위한 메서드
@@ -58,10 +58,24 @@ public class CasAPIScheduler {
 			log.debug("조회결과 없음");
 			return;
 		}
-		
-		/** 4) 수집결과 저장하기 **/
+
+		/** 4) INFO컬럼값 클리닝 **/
+		for (row item : list) {
+			String info = item.getINFO();
+
+			if (info != "" && info.length() > 0 && info.contains("http")) {
+				int a = info.indexOf("http");
+				info = info.substring(a);
+				int b = info.indexOf("\"");
+				info = info.substring(0, b);
+
+				item.setINFO(info);
+			}
+		}
+
+		/** 5) 수집결과 저장하기 **/
 		try {
-			CasAPIdbUpload.collectCasShowExh(list);
+			CasAPIUploadService.collectCasShowExh(list);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();

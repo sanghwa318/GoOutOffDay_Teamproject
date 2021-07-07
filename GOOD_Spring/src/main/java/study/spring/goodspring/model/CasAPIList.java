@@ -78,6 +78,7 @@ public class CasAPIList {
 			private String DETAIL;
 			@SerializedName("CAST_INFO")
 			private String CAST_INFO;
+			
 		}
 	}
 }
