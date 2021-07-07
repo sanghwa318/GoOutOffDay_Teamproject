@@ -50,11 +50,11 @@ body>div.container {
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-group input-material">
 						<input type="text" class="form-control" name="user_id"
-							id="user_id" > <label for="user_id">아이디</label>
+							id="user_id" required> <label for="user_id">아이디</label>
 					</div>
 					<div class="col-sm-6 col-sm-offset-3 form-group input-material">
 						<input type="password" class="form-control" name="user_pw"
-							id="user_pw" > <label for="user_pw">비밀번호</label>
+							id="user_pw" required> <label for="user_pw">비밀번호</label>
 					</div>
 				</div>
 				<div class="text-center">
@@ -85,23 +85,28 @@ body>div.container {
 			$('body').materializeInputs();
 		});
 		$(function() {
-		    /** 유효성 검사 플러그인이 ajaxForm보다 먼저 명시되어야 한다. */
 
-		     $('#login-form').ajaxForm({
-		        // submit 전에 호출된다.
-		        beforeSubmit: function(arr, form, options) {
-		            // validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
-		            // 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
-		            return $(form).valid();
-		        },
+
+		    $('#login-form').ajaxForm({
+		        
 		        error: function(error){
 		        	var error_msg ='';
 		        	var code = parseInt(error.status / 100);
 		        	if (code == 5) 	{
 		                error_msg = "아이디나 비밀번호를 확인하세요.\n";
 		            }
-		        	alert(error_msg);
-		        	return false;
+		        	swal({
+						title : "에러",
+						text :error_msg,
+						type : "error"
+					}).then(function(result) {
+						// 창이 닫히는 애니메이션의 시간이 있으므로,
+						// 0.1초의 딜레이 적용 후 포커스 이동
+						setTimeout(function() {
+
+						}, 100);
+					}); // <-- 메시지 표시
+					return false; // <-- 실행 중단
 		        },
 		        success: function(json) {
 		            window.location = "/goodspring/";

@@ -46,7 +46,8 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${login_info.getUser_id() != null && login_info.isUser_admin()==false}">
+						<c:when
+							test="${login_info.getUser_id() != null && login_info.isUser_admin()==false}">
 							<div class="row clearfix"
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">
@@ -56,8 +57,8 @@
 											<a id="account" href="#" role="button"><img
 												style="border-radius: 20px"
 												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
-												src="${login_info.getUser_photo().getFileUrl()}" width="30px"
-												height="30px"></img><span class="hidden">myPage</span></a>
+												src="${login_info.getUser_photo().getFileUrl()}"
+												width="30px" height="30px"></img><span class="hidden">myPage</span></a>
 										</div>
 									</div>
 									<%-- 계정 정보 모달 --%>
@@ -67,18 +68,15 @@
 										<div class="text-center" style="padding: 30px 0;">
 											<img style="border-radius: 60px"
 												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
-												src="${login_info.getUser_photo().getFileUrl()}" width="120px"
-												height="120px"></img><span class="hidden">myPage</span>
+												src="${login_info.getUser_photo().getFileUrl()}"
+												width="120px" height="120px"></img><span class="hidden">myPage</span>
 										</div>
-										<div class="account-info text-center">
-											이름:
+										<div class="account-info text-center">이름:
 											${login_info.getUser_name()}</div>
-										<div class="account-info text-center">
-											닉네임:
+										<div class="account-info text-center">닉네임:
 											${login_info.getUser_nick()}</div>
 										<div class="account-info text-center"
-											style="padding-bottom: 30px;">
-											ID:
+											style="padding-bottom: 30px;">ID:
 											${login_info.getUser_id()}</div>
 										<div class="account-info btn-group"
 											style="padding: 0; width: 100%;">
@@ -93,9 +91,8 @@
 												type="button" id="myPage" class="btn btn-link"
 												style="border-radius: 0; width: 33.3%; border: 0;"><i
 												class="glyphicon glyphicon-cog"></i>My Page</a>
-											<button type="button" id="logout" class="btn btn-link"
-												style="border-radius: 0; border: 0; width: 33.3%;"
-												onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.do'">
+											<button type="button" class="btn btn-link logout-btn"
+												style="border-radius: 0; border: 0; width: 33.3%;">
 												<i class="glyphicon glyphicon-log-out"></i>로그아웃
 											</button>
 										</div>
@@ -106,7 +103,8 @@
 							</div>
 						</c:when>
 						<%--//로그인 회원가입 프로필--%>
-						<c:when test="${login_info.getUser_id() != null && login_info.isUser_admin()==true}">
+						<c:when
+							test="${login_info.getUser_id() != null && login_info.isUser_admin()==true}">
 							<div class="row clearfix"
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">
@@ -118,9 +116,8 @@
 											<i class="glyphicon glyphicon-log-in"></i> <strong>
 												관리자페이지</strong>
 										</button>
-										<button class="btn btn-link"
-											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
-											onclick="location.href='${pageContext.request.contextPath}/mainPage/logout.do'">
+										<button class="btn btn-link logout-btn"
+											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;">
 											<i class="glyphicon glyphicon-link"></i> <strong>
 												로그아웃</strong>
 										</button>
@@ -354,6 +351,14 @@
 	</div>
 </header>
 <script type="text/javascript">
+	//절대경로 구하기
+	function getContextPath() {
+		var hostIndex = location.href.indexOf(location.host)
+				+ location.host.length;
+		var contextPath = location.href.substring(hostIndex, location.href
+				.indexOf('/', hostIndex + 1));
+		return contextPath;
+	}
 	$(function() {
 		//계정정보버튼 누르면-->모달 on,off  모바일 환경에서 회색창 생김.
 		$("#account").click(function() {
@@ -388,5 +393,21 @@
 						$('.gray_layer').fadeIn(300);
 					}
 				});
+
+		//로그아웃 ajax
+		$('.logout-btn').click(function(e) {
+			$.ajax({
+				//결과를 읽어올 url
+				url : getContextPath() + '/mainPage/logout.do',
+				method : 'get',
+				data : {},
+				dataType : 'html',
+				success : function(req) {
+					//페이지 새로고침
+					window.location.reload()
+				}
+
+			})
+		});
 	});
 </script>

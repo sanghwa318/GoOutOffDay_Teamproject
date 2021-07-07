@@ -64,7 +64,7 @@
 		<div class="container">
 			<form class="form-horizontal" role="form"
 				action="${pageContext.request.contextPath}/mainPage/login_findID_ok.do"
-				method="post">
+				method="post" id="search_id_form">
 				<fieldset>
 					<h1 class="page-header">ID 찾기</h1>
 					<div class="col-xs-12 text-center" id="logo">
@@ -90,7 +90,7 @@
 								class="form-control id_pw_search" placeholder="이메일을 입력하세요." />
 						</div>
 					</div>
-					<div class="form-group  " id="tag_input">
+					<div class="form-group" id="tag_input">
 						<div class="text-center">
 							<button type="submit" class="btn btn-primary search_id"
 								id="search_id"
@@ -99,66 +99,65 @@
 					</div>
 					<hr>
 					<div class="text-center" id="tag_btn">
-						<a
-							href="${pageContext.request.contextPath}/mainPage/login_findID.do">아이디
-							찾기</a> <span class="vertical-bar"></span> <a
-							href="${pageContext.request.contextPath}/mainPage/login_findPW.do">비밀번호
-							찾기</a><span class="vertical-bar"></span> <a
-							href="${pageContext.request.contextPath}/mainPage/join.do">회원가입</a>
+						<a href="${pageContext.request.contextPath}/mainPage/login_findID.do">아이디 찾기</a> <span class="vertical-bar"></span>
+				<a href="${pageContext.request.contextPath}/mainPage/login_findPW.do">비밀번호 찾기</a><span class="vertical-bar"></span>
+				<a href="${pageContext.request.contextPath}/mainPage/join.do">회원가입</a>
 					</div>
 				</fieldset>
 			</form>
 		</div>
 	</div>
-
+	<div></div>
 	<%@ include file="../inc/Footer.jsp"%>
 
 
 
 	<%@ include file="../inc/plugin.jsp"%>
+	<script
+		src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
+
 	<script>
 		$(function() {
-			$('#search_id').click(function(e) {
+			
+			 $('#search_id_form').ajaxForm({
+			     
+			        error: function(error){
+			        	var error_msg ='';
+			        	var code = parseInt(error.status / 100);
+			        	if (code != null) 	{
+			                error_msg = "이름과 이메일을 확인하세요.\n";
+			            }
+			        	swal({
+							title : "에러",
+							text :error_msg,
+							type : "error"
+						}).then(function(result) {
+							// 창이 닫히는 애니메이션의 시간이 있으므로,
+							// 0.1초의 딜레이 적용 후 포커스 이동
+							setTimeout(function() {
 
-				var name_search_val = $("#name_search").val();
+							}, 100);
+						}); // <-- 메시지 표시
+						return false; // <-- 실행 중단
+			        },
+			        success: function(json) {
+			        	swal({
+							title : "성공",
+							text : json.output.user_name+"님의 아이디는 "+ json.output.user_id+"입니다.",
+							type : "success"
+						}).then(function(result) {
+							// 창이 닫히는 애니메이션의 시간이 있으므로,
+							// 0.1초의 딜레이 적용 후 포커스 이동
+							setTimeout(function() {
 
-				if (!name_search_val) { // 입력되지 않았다면?
-					swal({
-						title : "에러",
-						text : "이름을 입력해주세요.",
-						type : "error"
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
-
-						}, 100);
-					}); // <-- 메시지 표시
-					$("#name_search").focus(); // <-- 커서를 강제로 넣기
-					return false; // <-- 실행 중단
-				}
-
-				var email_search_val = $("#email_search").val();
-
-				if (!email_search_val) { // 입력되지 않았다면?
-					swal({
-						title : "에러",
-						text : "이메일을 입력해주세요",
-						type : "error"
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
-
-						}, 100);
-					}); // <-- 메시지 표시
-					$("#email_search").focus(); // <-- 커서를 강제로 넣기
-					return false; // <-- 실행 중단
-				}
-
-			});
+							}, 100);
+			       		 })
+					}
+			    }); // end ajaxForm
+			
 
 		});
+		
 	</script>
 
 
