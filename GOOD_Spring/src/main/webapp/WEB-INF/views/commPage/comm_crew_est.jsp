@@ -9,7 +9,7 @@
 <head>
 
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
-<link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css" />
+
 <style>
 //
 상단 //
@@ -89,17 +89,16 @@ button span {
 
 			<h1 class="page-header">크루 개설</h1>
 
-			<div class="row " style="margin-bottom: 30px;">
-				<form role="form" class="form-crew" method="POST">
-
+			
+				<form role="form" class="form-crew" method="POST" 
+				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
+<div class="row " style="margin-bottom: 30px;"> 
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> <input
 							type="text" id="crew_name" class="form-control crew_input"
 							placeholder="크루명을 입력하세요." name="crew_name" value="${crew_name}"
 							style="width: 200px; text-align-last: center; font-size: 20px;">
-							<div id="checkMsg"></div>
 						<button type="submit" id="crewname_check" class="btn btn-default">중복확인</button>
-
 					</div>
 
 
@@ -119,36 +118,36 @@ button span {
 						<div>
 							<select class="form-control " id="crew_location" name="crew_area"
 								style="width: 200px; text-align-last: center; font-size: 20px; padding: 0;">
-								<option value="none" hidden>지역</option>
-								<option value="gangnam">강남구</option>
-								<option value="gangdong">강동구</option>
-								<option value="gangbug">강북구</option>
-								<option value="gangseo">강서구</option>
-								<option value="gwan-ag">관악구</option>
-								<option value="gwangjin">광진구</option>
-								<option value="gulo">구로구</option>
-								<option value="geumcheon">금천구</option>
-								<option value="nowon">노원구</option>
-								<option value="dobong">도봉구</option>
-								<option value="dongdaemun">동대문구</option>
-								<option value="dongjag">동작구</option>
-								<option value="mapo">마포구</option>
-								<option value="seodaemun">서대문구</option>
-								<option value="seocho">서초구</option>
-								<option value="seongdong">성동구</option>
-								<option value="seongbug">성북구</option>
-								<option value="songpa">송파구</option>
-								<option value="yangcheon">양천구</option>
-								<option value="yeongdeungpo">영등포구</option>
-								<option value="yongsan">용산구</option>
-								<option value="eunpyeong">은평구</option>
-								<option value="jonglo">종로구</option>
-								<option value="jung-gu">중구</option>
-								<option value="junglang">중랑구</option>
+								<option value="none" hidden >지역</option>
+								<option value="강남구">강남구</option>
+								<option value="강동구">강동구</option>
+								<option value="강북구">강북구</option>
+								<option value="">강서구</option>
+								<option value="">관악구</option>
+								<option value="광진구">광진구</option>
+								<option value="구로구">구로구</option>
+								<option value="금천구">금천구</option>
+								<option value="노원구">노원구</option>
+								<option value="도봉구">도봉구</option>
+								<option value="동대문구">동대문구</option>
+								<option value="동작구">동작구</option>
+								<option value="마포구">마포구</option>
+								<option value="서대문구">서대문구</option>
+								<option value="서초구">서초구</option>
+								<option value="성동구">성동구</option>
+								<option value="성북구">성북구</option>
+								<option value="송파구">송파구</option>
+								<option value="양천구">양천구</option>
+								<option value="영등포구">영등포구</option>
+								<option value="용산구">용산구</option>
+								<option value="은평구">은평구</option>
+								<option value="종로구">종로구</option>
+								<option value="중구">중구</option>
+								<option value="중랑구">중랑구</option>
 							</select>
 						</div>
 					</div>
-				</form>
+				
 			</div>
 
 			<!-- //상단 -->
@@ -158,20 +157,19 @@ button span {
 			<!-- 파일 드래그 앤 드롭 -->
 
 			<div class="row view text-center col-md-3 col-xs-12">
-				<form>
+				
 					<div class="form-group ">
-						<img id="img__wrap"
+						<img id="img__wrap" 
 							onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
 							src="${sessionScope.principal.userProfile}" width="200px"
 							height="200px" style="border-radius: 100px" />
 					</div>
-				</form>
+				
 
 				<div class="form-group text-center bg-light">
 					<label for="img__preview" class=" btn btn-default"
-						style="font-size: 20px;">크루 사진 변경</label> <input type="file"
-						name="userProfile" id="img__preview" class="hidden" /> <input
-						type="hidden" name="id" value="${sessionScope.principal.id}" />
+						style="font-size: 20px;">크루 사진 변경</label> <input type="file" name="crew_photo"
+						 id="img__preview" class="hidden" /> 
 				</div>
 
 			</div>
@@ -197,18 +195,20 @@ button span {
 			<div class="row">
 				<div class="container col-md-3 " style="margin-left: 25px">
 					<h3 class="header" style="padding-left: 40px;">크루 간단 소개</h3>
-					<textarea class="form-control" rows="5" id="crew_info"
+					<textarea class="form-control" rows="5" id="crew_info" name="crew_sinto"
 						style="width: 200px; font-size: 15px; resize: none"
 						placeholder="크루를  간단히 소개해주세요."></textarea>
 				</div>
 
 				<div class="container col-md-4" style="margin-left: 25px">
 					<h3 class="header">크루 소개</h3>
-					<textarea class="form-control" rows="5" id="crew_info"
+					<textarea class="form-control" rows="5" id="crew_info" name="crew_dinto"
 						style="width: 550px; font-size: 20px; resize: none"
 						placeholder="크루 소개글을 작성해주세요."></textarea>
 				</div>
 			</div>
+
+
 
 			<div class="row col-md-offset-5 col-xs-offset-4">
 				<div class="text-center btn_container" style="float: left;">
@@ -219,7 +219,7 @@ button span {
 
 
 				<div class="text-center btn_container " style="float: left;">
-					<button type="submit" class="btn btn-danger" id="btn_cancel">
+					<button type="reset" class="btn btn-danger" id="btn_cancel">
 						<span>취소</span>
 					</button>
 
@@ -228,10 +228,14 @@ button span {
 
 			</div>
 
-
+</form>
 
 		</div>
+		
 	</div>
+	
+	
+	
 	<!-- 공용 푸터 -->
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 	<!-- //공통 푸터 -->
@@ -284,153 +288,9 @@ button span {
 		}
 	</script>
 
-	<script>
-		$(function() {
-			$('#btn_ok')
-					.click(
-							function(e) {
 
-								var crew_name_val = $("#crew_name").val();
 
-								if (!crew_name_val) { // 입력되지 않았다면?
-									swal({
-										title : "에러",
-										text : "크루명을 입력해 주세요.",
-										type : "error"
-									}).then(function(result) {
-										// 창이 닫히는 애니메이션의 시간이 있으므로,
-										// 0.1초의 딜레이 적용 후 포커스 이동
-										setTimeout(function() {
-											$("#crew_name").focus();
-										}, 1);
-									}); // <-- 메시지 표시
-									
-									return false; // <-- 실행 중단
-								} 
-								
-								var crew_category_val = $("#crew_category").val();
 
-								if (!crew_category_val) { // 입력되지 않았다면?
-									swal({
-										title : "에러",
-										text : "크루종류를 입력해 주세요.",
-										type : "error"
-									}).then(function(result) {
-										// 창이 닫히는 애니메이션의 시간이 있으므로,
-										// 0.1초의 딜레이 적용 후 포커스 이동
-										setTimeout(function() {
-											$("#crew_category").focus();
-										}, 1);
-									}); // <-- 메시지 표시
-									
-									return false; // <-- 실행 중단
-								}
-
-								var crew_location_val = $(
-										"#crew_location option").index(
-										$("#crew_location option:selected"));
-
-								if (!crew_location_val) { // 입력되지 않았다면?
-									swal({
-										title : "에러",
-										text : "지역을 선택해 주세요.",
-										type : "error"
-									}).then(function(result) {
-										// 창이 닫히는 애니메이션의 시간이 있으므로,
-										// 0.1초의 딜레이 적용 후 포커스 이동
-										setTimeout(function() {
-											$("#crew_location").focus(); // <-- 커서를 강제로 넣기
-										}, 100);
-									}); // <-- 메시지 표시
-									
-									return false; // <-- 실행 중단
-								}
-
-								var crew_info_val = $("#crew_info").val();
-
-								if (!crew_info_val) { // 입력되지 않았다면?
-									swal({
-										title : "에러",
-										text : "크루 소개를 입력해 주세요.",
-										type : "error"
-									}).then(function(result) {
-										// 창이 닫히는 애니메이션의 시간이 있으므로,
-										// 0.1초의 딜레이 적용 후 포커스 이동
-										setTimeout(function() {
-											$("#crew_info").focus(); // <-- 커서를 강제로 넣기
-										}, 100);
-									}); // <-- 메시지 표시
-									
-									return false; // <-- 실행 중단
-								} else {
-									swal({
-										title : '확인', // 제목
-										text : "개설을 축하합니다!", // 내용
-										type : 'success', // 종류
-									})
-											.then(
-													function(result) {
-														// 창이 닫히는 애니메이션의 시간이 있으므로,
-														// 0.1초의 딜레이 적용 후 포커스 이동
-														setTimeout(
-																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_info.jsp';
-																}, 100);
-													})
-								}
-
-							});
-
-			$("#btn_cancel").click(function() {
-				// 확인, 취소버튼에 따른 후속 처리 구현
-				swal({
-					title : '확인', // 제목
-					text : "정말 취소를 하시겠습니까?", // 내용
-					type : 'warning', // 종류
-					confirmButtonText : '네', // 확인버튼 표시 문구
-					showCancelButton : true, // 취소버튼 표시 여부
-					cancelButtonText : '아니오', // 취소버튼 표시 문구
-				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('삭제', '크루 개설이 취소되었습니다.', 'success');
-						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew.do';
-						}, 1000);
-
-					}
-
-				});
-			});
-
-		});
-	</script>
-
-	<script type="text/javascript">
-$(document).ready(function(){
-	
-	$('#crewname_check').on('click',function(){
-		$.ajax({
-			type: 'POST', 
-			url: '/commPage/comm_crew_est.do', 
-			data: { "id" : $('#crew_name').val() }, 
-			success: function(data){ if($.trim(data) == 0){
-				$('#checkMsg').html('<p style="color:blue">사용가능</p>'); 
-			} 
-			else{ $('#checkMsg').html('<p style="color:red">사용불가능</p>');
-			
-			}
-			
-			}
-
-			출처: https://autumnly.tistory.com/61 [어텀로그]
-			
-		}); //ajax
-		
-	}); // end on
-	
-});
-
-</script>
 
 </body>
 </html>
