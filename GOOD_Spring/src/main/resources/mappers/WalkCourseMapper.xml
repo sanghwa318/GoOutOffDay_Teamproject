@@ -40,7 +40,7 @@
 	</select>
 
 	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->
-	<select id="selectCountAll" parameterType="study.jsp.model1.model.WalkCourse" resultType="int">
+	<select id="selectCountAll" parameterType="study.spring.goodspring.model.WalkCourse" resultType="int">
 		SELECT COUNT(*) FROM walkcourse
 		<where>
 			<if test="crs_name != null and crs_name != ''">

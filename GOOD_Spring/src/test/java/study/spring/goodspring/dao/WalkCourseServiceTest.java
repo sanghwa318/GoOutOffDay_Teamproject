@@ -2,7 +2,6 @@ package study.spring.goodspring.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +25,6 @@ public class WalkCourseServiceTest {
 	/** Service 객체 주입 설정 */
 	@Autowired
 	private WalkCourseService walkCourseService;
-	
-	/** MyBatis의 SQL세션 주입 설정 */
-	@Autowired
-	private SqlSession sqlSession;
 	
 	/* 다중행 조회 테스트 */
 	@Test
@@ -55,18 +50,32 @@ public class WalkCourseServiceTest {
 	/** 전체 데이터 수 조회 */
 	@Test
 	public void testB() {
-		int count = sqlSession.selectOne("WalkCourseMapper.selectCountAll", null);
-		log.debug("전체 데이터 수:" + count);
+		int count = 0;
+		
+		try {
+			count = walkCourseService.getWalkCourseCount(null);
+			log.debug("전체 데이터 수:" + count);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	/** 조건에 따른 데이터 수 조회 */
 	@Test
 	public void testC() {
+		int count = 0;
+		
 		WalkCourse input = new WalkCourse();
 		input.setArea("채원");
 		
-		int count = sqlSession.selectOne("WalkCourseMapper.selectCountAll", input);
-		log.debug("채원을 포함하는 데이터 수:" + count);
+		try {
+			count = walkCourseService.getWalkCourseCount(input);
+			log.debug("채원을 포함하는 데이터 수:" + count);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -6,13 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.util.concurrent.ExecutionError;
-
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.service.WalkCourseService;
-
-
 
 /** 코스목록 데이터 관리 기능을 제공하기 위한 Service계층에 대한 구현체 */
 @Slf4j
@@ -22,9 +18,10 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 	/** MyBatis 세션 객체 주입 설정 */
 	@Autowired
 	SqlSession sqlSession;
-	
+
 	/**
 	 * 코스 데이터 목록 조회
+	 * 
 	 * @return 조회 결과에 대한 컬렉션
 	 * @throws Exception
 	 */
@@ -45,27 +42,27 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
-		
+
 		return result;
 	}
 
 	/**
-	 * [페이지네이션에 필요]
-	 * 데이터가 저장되어있는 갯수 조회
+	 * [페이지네이션에 필요] 데이터가 저장되어있는 갯수 조회
+	 * 
 	 * @return int
 	 * @throws Exception
 	 */
 	@Override
 	public int getWalkCourseCount(WalkCourse input) throws Exception {
 		int result = 0;
-		
+
 		try {
-			result = sqlSession.selectOne("DepartmentMapper.selectCountAll", input);
+			result = sqlSession.selectOne("WalkCourseMapper.selectCountAll", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
-		
+
 		return result;
 	}
 

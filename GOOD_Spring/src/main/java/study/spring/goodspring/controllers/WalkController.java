@@ -75,7 +75,8 @@ public class WalkController {
        
 		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-			totalCount = walkCourseService.getWalkCourseCount(null);
+			totalCount = walkCourseService.getWalkCourseCount(input);
+			// [페이지네이션] 페이지 번호 계산
 			// 데이터 조회하기
 			output = walkCourseService.getWalkCourseList(input);
 		} catch (Exception e) {e.printStackTrace();}
