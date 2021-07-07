@@ -168,3 +168,4 @@ $(function() {
 										$("#user_nickname").focus();
 									}
 								}); 
+								})});

@@ -1,3 +1,11 @@
+ function getContextPath() {
+      var hostIndex = location.href.indexOf(location.host)
+            + location.host.length;
+      var contextPath = location.href.substring(hostIndex, location.href
+            .indexOf('/', hostIndex + 1));
+      return contextPath;
+   }
+
 $(function(){
 	/**플러그인의 기본 설정 옵션 추가 */
 	jQuery.validator.setDefaults({
@@ -47,41 +55,48 @@ $(function(){
 			/**입력검사 규칙 */
 			rules: {
 				//[아이디] 필수 + 알파벳, 숫자 조합만 허용
-				user_id: {required: true, alphanumeric: true, minlength: 4, maxlength: 30
-				/*remote : {
-                    url : ROOT_URL + '/rest/account/id_unique_check_jquery',
+				user_id: {required: true, alphanumeric: true, minlength: 4, maxlength: 30,
+                remote : {
+                    url : getContextPath() + '/mainPage/join/id_unique_check_jquery',
                     type : 'post',
                     data : {
                         user_id : function() {
                             return $("#user_id").val();
-                        }}}*/
-				},
-				//[닉네임] 필수 + 한글, 알파벳, 숫자 조합
-				user_nickname: {required: true, nick: true, minlength:4, maxlength: 30
-				/*remote : {
-                    url : ROOT_URL + '/assets/api/nicknameUniqueCheck',
+                        }
+                    }
+                }
+            },
+				//[닉네임] 필수 + 알파벳, 숫자 조합
+				user_nickname: {required: true, alphanumeric: true, minlength: 4, maxlength: 30,
+                remote : {
+                    url : getContextPath() + '/mainPage/join/nickname_unique_check_jquery',
                     type : 'post',
                     data : {
                         user_id : function() {
-                            return $("#user_id").val();
-                        }}}*/
-				 },
+                            return $("#user_nickname").val();
+                        }
+                    }
+                }
+            },
 				//[비밀번호] 필수 + 글자수 길이 제한
 				user_pw: {required: true, minlength: 4, maxlength: 30},
-				//[비밀번호 확인] 필수 + 특정 항목과 일치 (pw로 연결)
+				//[비밀번호 확인] 필수 + 특정 항목과 일치 (id로 연결)
 				user_pw_re: {required: true, equalTo: "#user_pw"},
 				//[이름] 필수
 				user_name:{required: true, kor: true, maxlength: 30},
 				//[이메일] 필수 + 이메일 형식 일치 필요
-				email: {required: true, email: true, maxlength: 255
-               /* remote : {
-                    url : ROOT_URL + '/assets/api/emailUniqueCheck',
+				email: {
+                required: true, email: true, maxlength: 255,
+                remote : {
+                    url : getContextPath() + '/mainPage/join/email_unique_check_jquery',
                     type : 'post',
                     data : {
                         email : function() {
                             return $("#email").val();
-                        }}}*/
-                    },
+                        }
+                    }
+                }
+            },
 				//[연락처] 필수
 				tel: {required: true, minlength: 9, maxlength: 11},
 				//[우편번호] 필수
@@ -92,8 +107,6 @@ $(function(){
            		jibunAddress: 'required',
 				//[나머지주소] 필수 + 한글, 숫자, 특수문자 조합만 허용
 				detailAddress: {required: true, address: true },
-				//[생년월일] 필수 + 날짜 형식 일치 필요
-				birthdate: {required: true, date:true},
 				//[성별] 필수
 				gender: "required"
 			},
@@ -147,14 +160,69 @@ $(function(){
 					required: '나머지 주소를 입력하세요.',
 					address: '나머지 주소는 한글, 숫자, "-" 만 가능합니다.'
 				},
-				birthdate: {
-					required: '생년월일을 입력하세요.',
-					date: '생년월일의 형식이 잘못되었습니다.'	
-				},
 				gender: {
 					required: '성별을 선택하세요.'
 				}
 			}
 		});// end validate()
+		
+		$('#join_form').ajaxForm({
+        // submit 전에 호출된다.
+        beforeSubmit: function(arr, form, options) {
+            // validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+            // 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+            return $(form).valid();
+        },
+        success: function(json) {
+            swal('알림', '회원가입이 완료되었습니다. 로그인 해 주세요.', 'success').then(function(result) {
+                window.location = ROOT_URL + '/mainPage/login';
+            });
+        },
+    }); // end ajaxForm
+
+    $("#id_unique_check").click(function(e) {
+        const userId = $("#user_id").val();
+
+        if (!userId) {
+            swal('알림', '아이디를 입력하세요.', 'warning');
+            return;
+        }
+
+        $.post(getContextPath() + '/mainPage/join/id_unique_check_jquery', {
+            user_id: userId
+        }, function(json) {
+            swal('확인', '사용가능한 아이디 입니다.', 'success');
+        });
+    });
+
+	$("#nickname_unique_check").click(function(e) {
+        const userNickname = $("#user_nickname").val();
+
+        if (!userNickname) {
+            swal('알림', '닉네임을 입력하세요.', 'warning');
+            return;
+        }
+
+        $.post(getContextPath() + '/mainPage/join/nickname_unique_check_jquery', {
+            user_nick: userNickname
+        }, function(json) {
+            swal('확인', '사용가능한 닉네임 입니다.', 'success');
+        });
+    });
+
+    $("#email_unique_check").click(function(e) {
+        const email = $("#email").val();
+
+        if (!email) {
+            swal('알림', '이메일을 입력하세요.', 'warning');
+            return;
+        }
+
+        $.post(getContextPath() + '/mainPage/join/email_unique_check_jquery', {
+            email: email
+        }, function(json) {
+            swal('확인', '사용가능한 이메일 입니다.', 'success');
+        });
+    });
 });
 

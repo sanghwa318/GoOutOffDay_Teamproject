@@ -8,6 +8,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.all.min.js" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.js" />
@@ -29,9 +30,8 @@
                 <h1>회원가입</h1>
         </div>
 		<!-- 가입폼 시작 -->
+		 <form id="join_form" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/mainPage/join">
 		
-		<form class="form-horizontal" name="join_form" id="join_form"
-			role="form">
 			<!-- 입력양식 -->
 			<!-- 아이디 -->
 			<div class="form-group1">
@@ -40,7 +40,7 @@
                         <div class="input-group">
                             <input type="text" name="user_id" class="form-control" id="user_id" placeholder="영문,숫자조합 최대 30글자">
                             <span class="input-group-btn">
-                                <button type="button" id="id-unique-check" class="btn btn-success">중복검사</button>
+                                <button type="button" id="id_unique_check" class="btn btn-success">중복검사</button>
                             </span>
                         </div>
 			</div>
@@ -52,7 +52,7 @@
                         <div class="input-group">
                             <input type="text" name="user_nickname" class="form-control" id="user_nickname" placeholder="한굴,영문,숫자조합 최대 30글자">
                             <span class="input-group-btn">
-                                <button type="button" id="nickname-unique-check" class="btn btn-success">중복검사</button>
+                                <button type="button" id="nickname_unique_check" class="btn btn-success">중복검사</button>
                             </span>
                         </div>
 			</div>
@@ -88,7 +88,7 @@
                         <div class="input-group">
                             <input type="text" name="email" class="form-control" id="email" placeholder="예시 : example@example.com" />
                             <span class="input-group-btn">
-                                <button type="button" id="email-unique-check" class="btn btn-success">중복검사</button>
+                                <button type="button" id="email_unique_check" class="btn btn-success">중복검사</button>
                             </span>
                         </div>
                     </div>
@@ -127,14 +127,6 @@
                     </div>
                 </div><!-- 주소 나머지 -->
 				
-			
-			<!-- 생년월일 -->
-			<div class="form-group1">
-                    <label for="birthdate" class="col-sm-2 control-label">생년월일</label>
-                    <div class="col-sm-10">
-                        <input type="date" name="birthdate" class="form-control" id="birthdate" />
-                    </div>
-                </div><!-- //생년월일 -->
           <!-- 성별 -->
           <div class="form-group1">
                     <label for="gender" class="col-sm-2 control-label">성별</label>
@@ -151,7 +143,7 @@
 			<!-- 버튼 -->	
 			<div class="form-group1">
 				<div class="col-sm-10 col-sm-offset-2 text-center">
-					<button type='submit' id="next1" class="btn btn-primary">가입하기</button>
+					<button type='submit'class="btn btn-primary">가입하기</button>
 					<button type="reset" class="btn btn-danger"
 						onClick="location.href='${pageContext.request.contextPath}/'">취소하기</button>
 				</div>
@@ -168,7 +160,7 @@
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script	src="${pageContext.request.contextPath}/assets/js/post-join.js"></script>
 <script	src="${pageContext.request.contextPath}/assets/js/regex-join.js"></script>
-<script	src="${pageContext.request.contextPath}/assets/js/unique-join.js"></script>
+<script src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
 
 
 	
