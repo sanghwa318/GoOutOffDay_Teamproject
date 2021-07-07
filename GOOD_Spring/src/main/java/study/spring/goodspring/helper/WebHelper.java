@@ -147,6 +147,7 @@ public class WebHelper {
 		return this.virtualView(html);
 
 	}
+	
 
 	/**
 	 * 파라미터로 받은 내용을 가상의 View로 생성후 리턴한다. 브라우저에게 전달할 HTML, CSS, JS 조합을 출력하기 위해 사용한다.

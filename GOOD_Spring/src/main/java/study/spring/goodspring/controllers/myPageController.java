@@ -36,7 +36,7 @@ public class myPageController {
 	public ModelAndView myPageIndexImageOk(
 			HttpServletRequest request,
 			@RequestParam(value="user_photo", required = false) MultipartFile photo) {
-		 /** 2) 업로드 처리 */
+		 /** 1) 업로드 처리 */
         UploadItem item = null;
         try {
             item = webHelper.saveMultipartFile(photo);
@@ -48,7 +48,7 @@ public class myPageController {
             e.printStackTrace();
             return webHelper.redirect(null,"업로드에 실패했습니다.");
         }
-        /** 3) 데이터 저장 */
+        /** 2) 데이터 저장 */
         Member loginInfo =(Member) request.getSession().getAttribute("login_info");
         
         loginInfo.setUser_photo(item);
@@ -59,7 +59,7 @@ public class myPageController {
             return webHelper.redirect(null,e.getLocalizedMessage());
         }
 
-        /** 4) 결과 표시 */
-        return webHelper.redirect(null,"업로드 성공");
+        /** 3) 결과 표시 */
+        return webHelper.redirect("/goodspring/myPage/myPage_index.do","프로필 사진을 변경했습니다.");
     }
 }

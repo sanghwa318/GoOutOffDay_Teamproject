@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="col-md-3 col-md-offset-1 profileimage"
 					style="width: 230px">
-					<form>
+					<form action="${pageContext.request.contextPath }/myPage/myPage_index_imageOk.do" method="post" encType="multipart/form-data" >
 						<div class="form-group">
 							<img id="img__wrap"
 								onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
@@ -38,10 +38,10 @@
 								height="200px" style="border-radius: 100px" />
 						</div>
 						<div class="form-group text-center bg-light">
-							<label for="img__preview" class=" btn btn-default">프로필 사진
-								변경</label> <input type="file" name="userProfile" id="img__preview"
+							<label for="user_photo" class=" btn btn-default">프로필 사진
+								변경</label> <input type="file" name="user_photo" id="user_photo"
 								class="hidden" /> 
-								<button type="button"
+								<button type="submit"
 								name="userProfile_apply" id="userProfile_apply" class="btn btn-default" >적용</button>
 						</div>
 						<input type="hidden" name="id"
@@ -112,6 +112,8 @@
 			};
 			reader.readAsDataURL(f);
 		});
+		
+		
 	</script>
 </body>
 </html>
