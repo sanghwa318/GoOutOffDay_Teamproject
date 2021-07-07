@@ -87,7 +87,7 @@ public class LoginController {
 	@RequestMapping(value = "/mainPage/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout() {
 		webHelper.removeSession("login_info");
-		return webHelper.redirect("/goodspring/", "로그아웃 되었습니다.");
+		return webHelper.redirect("/goodspring/", null);
 	}
 	
 	

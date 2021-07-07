@@ -78,4 +78,34 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public Member findPw(Member input) throws Exception;
+	
+	/**
+
+     * 아이디 중복검사
+     * @param input
+     * @throws Exception
+     */
+    public void idUniqueCheck(Member input) throws Exception;
+    
+    /**
+     * 닉네임 중복검사
+     * @param input
+     * @throws Exception
+     */
+    public void nickUniqueCheck(Member input) throws Exception;
+    
+    /**
+     * 이메일 중복검사
+     * @param input
+     * @throws Exception
+     */
+    public void emailUniqueCheck(Member input) throws Exception;
+    
+	/**
+	 * 유저 프로필사진 변경을 위한 데이터 갱신 메서드
+	 * @param Member 수정할 정보를 담고 있는 Beans
+	 * @return
+	 * @throws Exception
+	 */
+	public int editPhoto(Member input) throws Exception;
 }

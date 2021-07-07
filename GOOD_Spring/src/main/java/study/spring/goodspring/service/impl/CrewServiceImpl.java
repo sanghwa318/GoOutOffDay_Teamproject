@@ -1,5 +1,7 @@
 package study.spring.goodspring.service.impl;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,22 +15,39 @@ import study.spring.goodspring.service.CrewService;
 public class CrewServiceImpl implements CrewService{
 	
 	
-	//MyBatis 세션 객체 주입
-	@Autowired
-	SqlSession sqlSession;
 	
+
 	@Autowired
 	CrewService crewService;
 
 	/**
 	 * 크루명 중복 검사
 	 */
-	
 	@Override
-	public int getCrewNameCheck(Crew input) throws Exception {
-		int result = (int) crewService.getCrewNameCheck(input);
-		return result;
+	public boolean getCrewNameCheck(HttpServletRequest request) {
+		return false;
+//		boolean result = false;
+//		
+//		//매개변수가 request이면 파라미터를 먼저 읽어야함
+//		String e = request.getParameter("crew_name");
+//		String name = e;
+//		
+//		//Dao 메소드 호출
+//		String r = crewDao.CrewNameCheck(name);
+//		
+//		
+//		//중복검사 결과가 존재하지 않으면
+//		if(r==null) {
+//			//중복검사 통과
+//			result = true;
+//			
+//		}
+//		return result;
 	}
+
+
+	
+
 	
 	
 	

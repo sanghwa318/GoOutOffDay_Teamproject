@@ -56,7 +56,7 @@
 											<a id="account" href="#" role="button"><img
 												style="border-radius: 20px"
 												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
-												src="${sessionScope.principal.userProfile}" width="30px"
+												src="${login_info.getUser_photo().getFileUrl()}" width="30px"
 												height="30px"></img><span class="hidden">myPage</span></a>
 										</div>
 									</div>
@@ -67,7 +67,7 @@
 										<div class="text-center" style="padding: 30px 0;">
 											<img style="border-radius: 60px"
 												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
-												src="${sessionScope.principal.userProfile}" width="120px"
+												src="${login_info.getUser_photo().getFileUrl()}" width="120px"
 												height="120px"></img><span class="hidden">myPage</span>
 										</div>
 										<div class="account-info text-center">

@@ -1,12 +1,12 @@
 $(function() {
     /** 유효성 검사 플러그인이 ajaxForm보다 먼저 명시되어야 한다. */
-    $('#join-form').validate({
+    $('join_form').validate({
         rules: {
             // [아이디] 필수 + 알파벳,숫자 조합만 허용
             user_id: {
                 required: true, alphanumeric: true, minlength: 4, maxlength: 30,
                 remote : {
-                    url : ROOT_URL + '/rest/account/id_unique_check_jquery',
+                    url : ROOT_URL + '/assets/api/idUniqueCheck',
                     type : 'post',
                     data : {
                         user_id : function() {
@@ -25,7 +25,7 @@ $(function() {
             email: {
                 required: true, email: true, maxlength: 255,
                 remote : {
-                    url : ROOT_URL + '/rest/account/email_unique_check_jquery',
+                    url : ROOT_URL + '/assets/api/idUniqueCheck',
                     type : 'post',
                     data : {
                         email : function() {
@@ -98,7 +98,7 @@ $(function() {
         },
     });
 
-    $('#join-form').ajaxForm({
+    $('#join_form').ajaxForm({
         // submit 전에 호출된다.
         beforeSubmit: function(arr, form, options) {
             // validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
@@ -107,7 +107,7 @@ $(function() {
         },
         success: function(json) {
             swal('알림', '회원가입이 완료되었습니다. 로그인 해 주세요.', 'success').then(function(result) {
-                window.location = ROOT_URL + '/account/login';
+                window.location = ROOT_URL + '/mainPage/login';
             });
         },
     }); // end ajaxForm

@@ -19,7 +19,34 @@
 		#{INQUIRY_EMAIL}, #{TICKET_INFO}, #{DISCOUNT_INFO},
 		#{DISCOUNT_CHARGED}, #{GENRE_NAME}, #{ISOPEN}, #{FILE_URL_MI},
 		#{FILE_URL_TI}, #{INFO},
-		#{DETAIL}, #{CAST_INFO}, showExh, now(), now()
+		#{DETAIL}, #{CAST_INFO}, 'ShowExh', now(),
+		now()
 		);
 	</insert>
+	<update id="updateItem"
+		parameterType="study.spring.goodspring.model.CasAPIList$SJWPerform$row">
+		UPDATE cas_showexh SET
+		PERFORM_CODE = #{PERFORM_CODE},
+		TITLE = #{TITLE},
+		START_DATE = #{START_DATE},
+		END_DATE = #{END_DATE},
+		PLACE_NAME = #{PLACE_NAME},
+		PLAY_TIME = #{PLAY_TIME},
+		AGE = #{AGE},
+		PLAN_COMPANY = #{PLAN_COMPANY},
+		INQUIRY_PHONE = #{INQUIRY_PHONE},
+		INQUIRY_EMAIL = #{INQUIRY_EMAIL},
+		TICKET_INFO = #{TICKET_INFO},
+		DISCOUNT_INFO = #{DISCOUNT_INFO},
+		DISCOUNT_CHARGED = #{DISCOUNT_CHARGED},
+		GENRE_NAME = #{GENRE_NAME},
+		ISOPEN = #{ISOPEN},
+		FILE_URL_MI = #{FILE_URL_MI},
+		FILE_URL_TI = #{FILE_URL_TI},
+		INFO = #{INFO},
+		DETAIL = #{DETAIL},
+		CAST_INFO = #{CAST_INFO},
+		editDate = now()
+		WHERE PERFORM_CODE=#{PERFORM_CODE} AND START_DATE=#{START_DATE};
+	</update>
 </mapper>

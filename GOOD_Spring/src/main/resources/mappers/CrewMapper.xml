@@ -21,21 +21,20 @@
 </resultMap>
 
 <!-- 크루명 중복 체크 -->
-<select id="crewNameCheck" resultType="int">
+<select id="crewNameCheck" resultMap="crewMap" parameterType="java.lang.String">
 SELECT COUNT(*) FROM crew WHERE crew_name = #{crew_name}
 
 </select>
 
 
 <!-- 단일행 조회 -->
-<select id="crewCheck" resultMap="crewMap" parameterType="study.spring.goodspring.model.Crew" >
+<select id="selectCrewItem" resultMap="crewMap" parameterType="study.spring.goodspring.model.Crew" >
 SELECT crew_no, crew_name, crew_area, crew_sinto, crew_createtime, crew_category, crew_photo, crew_dinto, crew_dinto, crew_member, user_info_user_no FROM crew WHERE crew_name = #{crew_name};
 </select>
 
 
-<!-- 단일행 조회 -->
-
 <!--다중행 조회  -->
+<select id=""></select>
 
 <!-- 데이터 저장 기능 -->
 
