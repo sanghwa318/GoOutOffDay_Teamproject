@@ -12,7 +12,27 @@ public class WalkCourse {
 	private String area; // 지역
 	private String type; // 유형
 	private String distance; // 거리
-	private int time; // 시간
+	private int time; // 소요시간(분)
 	private String level; // 난이도
+	
+	/** [페이지 네이션] (static) */
+	private static int offset;
+	private static int listCount;
+	
+	public static int getOffset() {
+		return offset;
+	}
+	public static void setOffset(int offset) {
+		WalkCourse.offset = offset;
+	}
+	public static int getListCount() {
+		return listCount;
+	}
+	public static void setListCount(int listCount) {
+		WalkCourse.listCount = listCount;
+	}
+	// [페이지 네이션] 종료
+	
+	
 
 }
