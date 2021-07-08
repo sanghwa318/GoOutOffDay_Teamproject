@@ -37,24 +37,20 @@
 			<div class="form-group1">
 				<label for='user_id' class="col-sm-2 control-label">아이디</label>
 				<div class="col-sm-10">
-                        <div class="input-group">
+                    
                             <input type="text" name="user_id" class="form-control" id="user_id" placeholder="영문,숫자조합 최대 30글자">
-                            <span class="input-group-btn">
-                                <button type="button" id="id_unique_check" class="btn btn-success">중복검사</button>
-                            </span>
-                        </div>
+                            
+                    
 			</div>
 			</div><!-- //아이디 -->
 			<!-- 닉네임 -->
 			<div class="form-group1">
-				<label for='user_nickname' class="col-sm-2 control-label">닉네임</label>
+				<label for='user_nick' class="col-sm-2 control-label">닉네임</label>
 				<div class="col-sm-10">
-                        <div class="input-group">
-                            <input type="text" name="user_nickname" class="form-control" id="user_nickname" placeholder="한굴,영문,숫자조합 최대 30글자">
-                            <span class="input-group-btn">
-                                <button type="button" id="nickname_unique_check" class="btn btn-success">중복검사</button>
-                            </span>
-                        </div>
+                        
+                            <input type="text" name="user_nick" class="form-control" id="user_nick" placeholder="영문,숫자조합 최대 30글자">
+                           
+                      
 			</div>
 			</div><!-- //닉네임 -->
 			
@@ -85,47 +81,54 @@
 			<div class="form-group1">
                     <label for="email" class="col-sm-2 control-label">이메일</label>
                     <div class="col-sm-10">
-                        <div class="input-group">
-                            <input type="text" name="email" class="form-control" id="email" placeholder="예시 : example@example.com" />
-                            <span class="input-group-btn">
-                                <button type="button" id="email_unique_check" class="btn btn-success">중복검사</button>
-                            </span>
-                        </div>
+                
+                            <input type="email" name="email" class="form-control" id="email" placeholder="예시 : example@example.com" />
+                  
                     </div>
                 </div><!-- //이메일 -->
             <!-- 연락처 -->
 			<div class="form-group1">
                     <label for="tel" class="col-sm-2 control-label">연락처</label>
                     <div class="col-sm-10">
-                        <input type="text" name="tel" class="form-control" id="tel" placeholder="`-`없이 숫자만 입력" />
+                        <input type="tel" name="tel" class="form-control" id="tel" placeholder="`-`없이 숫자만 입력" />
                     </div>
                 </div><!-- //연락처 -->
                 
-             <!-- 주소 우편번호 -->
-			<div class="form-group1">
-			<label for="user_id" class="col-sm-2 control-label">주소</label>
-				<div class="col-sm-4">
+             <div class="form-group1">
+                    <label for="user_id" class="col-sm-2 control-label">주소</label>
+                    <div class="col-sm-4">
                         <div class="input-group">
-                        <input type="text" name="postcode" class="form-control" id="postcode" maxlength="5" readonly>
+                            <input type="text" name="postcode" class="form-control" id="postcode" maxlength="5" readonly>
                             <span class="input-group-btn">
-                            <button type="button" onclick="execDaumPostcode()" class="btn btn-info postcode-finder" data-postcode="#postcode" data-addr1="#addr1" data-addr2="#addr2" data-frame="#postcode-frame">우편번호검색</button>
-                        	</span>
+                                <button type="button" onclick="execDaumPostcode()" class="btn btn-info postcode-finder" data-postcode="#postcode" data-addr1="#addr1" data-addr2="#addr2" data-frame="#postcode-frame">우편번호검색</button>
+                            </span>
+                            
                         </div>
                     </div>
-                    </div><!-- //주소 우편번호 -->
-                  <!-- 주소 도로명 -->  
-                 <div class="form-group1">
-                    <div class="col-sm-10 col-sm-offset-2">
-                        <input type="text" class="form-control" id="roadAddress" readonly />
-                    </div><!-- //주소 도로명 -->
-                 </div>
-     
-                 <!-- 주소 나머지 -->
+                    <label for="postcode" id="error2" class="error">우편번호를 검색하세요.</label>
+                </div>
                 <div class="form-group1">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input type="text" name="detailAddress" class="form-control" id="detailAddress" placeholder="나머지 주소" />
+                        <input type="text" name="addr1" class="form-control" id="addr1" readonly />
                     </div>
-                </div><!-- 주소 나머지 -->
+                </div>
+                <div class="form-group1">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="text" name="addr1-1" class="form-control" id="addr1-1" readonly />
+                    </div>
+                </div>
+                <div class="form-group1">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="text" name="addr2" class="form-control" id="addr2" placeholder="나머지 주소" />
+                    </div>
+                </div>
+                <div class="form-group1" style="margin-bottom: 0">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <div id="postcode-frame" style="display: none; border: 1px solid; width: 100%; height: 300px; margin: 5px 0; position: relative">
+                            <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1" onclick="foldPostcode(this)" alt="접기 버튼">
+                        </div>
+                    </div>
+                </div>
 				
           <!-- 성별 -->
           <div class="form-group1">
@@ -137,8 +140,11 @@
                         <label class="radio-inline">
                             <input type="radio" name="gender" id="gender" value="F"> 여자
                         </label>
+     
                     </div>
-                </div><!-- //성별 -->
+                    
+                </div>
+                <label for="gender" id="error1" class="error">성별을 선택해주세요.</label><!-- //성별 -->
          
 			<!-- 버튼 -->	
 			<div class="form-group1">
@@ -154,6 +160,7 @@
 		</div>
 </div>
 </div>
+
 	</div>
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 <%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
