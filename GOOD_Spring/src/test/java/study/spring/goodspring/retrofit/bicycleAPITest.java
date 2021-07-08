@@ -15,10 +15,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import study.spring.goodspring.APIservice.BicycleService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.Bicycle;
 import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
-import study.spring.goodspring.service.BicycleService;
 
 /** Lombok의 Log4j 객체 */
 //import lombok.extern.slf4j.Slf4j;

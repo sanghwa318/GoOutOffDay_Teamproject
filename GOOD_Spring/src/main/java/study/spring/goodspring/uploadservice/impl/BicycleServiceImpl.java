@@ -1,4 +1,4 @@
-package study.spring.goodspring.service.impl;
+package study.spring.goodspring.uploadservice.impl;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.Bicycle;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
-import study.spring.goodspring.service.BicycleUpload;
+import study.spring.goodspring.uploadservice.BicycleUpload;
 
 @Slf4j
 @Service

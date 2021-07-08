@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import study.spring.goodspring.APIservice.BicycleService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.Bicycle;
 import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
-import study.spring.goodspring.service.BicycleService;
-import study.spring.goodspring.service.BicycleUpload;
+import study.spring.goodspring.uploadservice.BicycleUpload;
 
 @Slf4j
 @Controller

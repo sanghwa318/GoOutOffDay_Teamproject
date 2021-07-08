@@ -83,14 +83,14 @@ public class AccountRestController {
     @RequestMapping(value = "/mainPage/join/nickname_unique_check", method = RequestMethod.POST)
     public Map<String, Object> nickUniqueCheck(
             // 닉네임
-            @RequestParam(value = "user_nickname", required = false) String userNickname) {
+            @RequestParam(value = "user_nick", required = false) String userNick) {
 
-        if (!regexHelper.isValue(userNickname)) {
+        if (!regexHelper.isValue(userNick)) {
             return webHelper.getJsonWarning("닉네임을 입력하세요.");
         }
         
         Member input = new Member();
-        input.setUser_nick(userNickname);
+        input.setUser_nick(userNick);
         
         try {
             memberService.nickUniqueCheck(input);
@@ -107,10 +107,10 @@ public class AccountRestController {
     @RequestMapping(value = "/mainPage/join/nickname_unique_check_jquery", method = RequestMethod.POST)
     public void nickUniqueCheckjQuery(HttpServletResponse response,
             // 닉네임
-            @RequestParam(value = "user_nickname", required = false) String userNickname) {
+            @RequestParam(value = "user_nick", required = false) String userNick) {
         
         Member input = new Member();
-        input.setUser_nick(userNickname);
+        input.setUser_nick(userNick);
         String result = "true";
         
         try {
@@ -176,17 +176,18 @@ public class AccountRestController {
     }
 
     /** 회원가입 */
-    @RequestMapping(value = "/mainPage/join.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/mainPage/join", method = RequestMethod.POST)
     public Map<String, Object> join(
             @RequestParam(value = "user_id",        required = false) String userId,
-            @RequestParam(value = "user_nickname",  required = false) String userNickname,
+            @RequestParam(value = "user_nick",  required = false) String userNick,
             @RequestParam(value = "user_pw",        required = false) String userPw,
             @RequestParam(value = "user_pw_re",		required = false) String userPwRe,
             @RequestParam(value = "user_name",      required = false) String userName,
             @RequestParam(value = "email",          required = false) String email,
             @RequestParam(value = "tel",            required = false) String tel,
             @RequestParam(value = "postcode",       required = false) String postcode,
-            @RequestParam(value = "detailAddress",  required = false) String detailAddress,
+            @RequestParam(value = "addr1",      	required = false) String addr1,
+            @RequestParam(value = "addr2", 			required = false) String addr2,
             @RequestParam(value = "gender",         required = false) String gender) {
 
         /** 1) 유효성 검증 */
@@ -196,9 +197,9 @@ public class AccountRestController {
         if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
         if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
         
-        if (!regexHelper.isValue(userNickname)) { return webHelper.getJsonWarning("닉네임을 입력하세요."); }
-        if (!regexHelper.isEngNum(userNickname)) { return webHelper.getJsonWarning("닉네임은 영어,숫자만 입력 가능합니다."); }
-        if (userNickname.length() < 4 || userNickname.length() > 30) { return webHelper.getJsonWarning("닉네임은 4~30글자로 입력 가능합니다."); }
+        if (!regexHelper.isValue(userNick)) { return webHelper.getJsonWarning("닉네임을 입력하세요."); }
+        if (!regexHelper.isEngNum(userNick)) { return webHelper.getJsonWarning("닉네임은 영어,숫자만 입력 가능합니다."); }
+        if (userNick.length() < 4 || userNick.length() > 30) { return webHelper.getJsonWarning("닉네임은 4~30글자로 입력 가능합니다."); }
         
         if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
         if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
@@ -211,20 +212,22 @@ public class AccountRestController {
         if (!regexHelper.isEmail(email)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
         if (!regexHelper.isCellPhone(tel) && !regexHelper.isTel(tel)) { return webHelper.getJsonWarning("연락처가 잘못되었습니다."); }
         if (!regexHelper.isValue(postcode)) { return webHelper.getJsonWarning("우편번호를 입력하세요."); }
-        if (!regexHelper.isValue(detailAddress)) { return webHelper.getJsonWarning("나머지주소를 입력하세요."); }
+        if (!regexHelper.isValue(addr1)) { return webHelper.getJsonWarning("도로명주소를 입력하세요."); }
+        if (!regexHelper.isValue(addr2)) { return webHelper.getJsonWarning("나머지주소를 입력하세요."); }
         if (!regexHelper.isValue(gender)) { return webHelper.getJsonWarning("성별을 선택하세요."); }
         
        
         /** 2) 데이터 저장 */
         Member input = new Member();
         input.setUser_id(userId);
-        input.setUser_nick(userNickname);
+        input.setUser_nick(userNick);
         input.setUser_pw(userPw);
         input.setUser_name(userName);
         input.setEmail(email);
         input.setTel(tel);
         input.setPost(postcode);
-        input.setAddress2(detailAddress);
+        input.setAddress1(addr1);
+        input.setAddress2(addr2);
         input.setGender(gender);
 
         

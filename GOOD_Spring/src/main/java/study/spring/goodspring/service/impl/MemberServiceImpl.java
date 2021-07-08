@@ -232,7 +232,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = 0;
 
         try {
-            result = sqlSession.selectOne("MembersMapper.idUniqueCheck", input);
+            result = sqlSession.selectOne("MemberMapper.idUniqueCheck", input);
             if (result > 0) {
                 throw new NullPointerException("result=" + result);
             }
@@ -256,7 +256,7 @@ public class MemberServiceImpl implements MemberService {
 		 int result = 0;
 
 	        try {
-	            result = sqlSession.selectOne("MembersMapper.nickUniqueCheck", input);
+	            result = sqlSession.selectOne("MemberMapper.nickUniqueCheck", input);
 	            if (result > 0) {
 	                throw new NullPointerException("result=" + result);
 	            }
@@ -281,7 +281,7 @@ public class MemberServiceImpl implements MemberService {
 		  int result = 0;
 
 	        try {
-	            result = sqlSession.selectOne("MembersMapper.emailUniqueCheck", input);
+	            result = sqlSession.selectOne("MemberMapper.emailUniqueCheck", input);
 	            if (result > 0) {
 	                throw new NullPointerException("result=" + result);
 	            }

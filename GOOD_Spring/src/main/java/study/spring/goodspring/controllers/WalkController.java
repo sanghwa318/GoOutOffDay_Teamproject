@@ -56,12 +56,13 @@ public class WalkController {
 			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value="page", defaultValue="1") int nowPage) {
 		
-		// [페이지네이션] 변수 객체 추가
-		int totalCount = 0;
-		int listCount = 10;
-		int pageCount = 5;
+		// [페이지네이션] 변수 추가
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 4; // 한페이지단 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		// [페이지네이션] 객체 추가
 		PageData pageData = null;
-		// [페이지네이션] 변수 객체 추가 (종료)
+		// [페이지네이션] 변수 추가 (종료)
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
@@ -77,6 +78,12 @@ public class WalkController {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
 			totalCount = walkCourseService.getWalkCourseCount(input);
 			// [페이지네이션] 페이지 번호 계산
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+			
+			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장 
+			WalkCourse.setOffset(pageData.getOffset());
+			WalkCourse.setListCount(pageData.getListCount());
+			
 			// 데이터 조회하기
 			output = walkCourseService.getWalkCourseList(input);
 		} catch (Exception e) {e.printStackTrace();}
@@ -84,6 +91,8 @@ public class WalkController {
 		// View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("keyword", keyword);
+		// [페이지네이션]
+		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정
 		return "walkPage/walk_search";
 	}

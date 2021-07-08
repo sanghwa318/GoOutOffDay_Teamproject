@@ -32,6 +32,17 @@ public class MainController {
 		return "mainPage/join";
 	}
 	
+	/**
+	 * 회원가입 성공 
+	 * 
+	 * @return String
+	 */
+	@RequestMapping(value = "/mainPage/join_ok.do", method = RequestMethod.POST)
+	public String join_ok() {
+		
+		return "mainPage/join";
+	}
+	
 	@RequestMapping(value = "/mainPage/login.do", method = RequestMethod.GET)
 	public String login(Model model) {
 		

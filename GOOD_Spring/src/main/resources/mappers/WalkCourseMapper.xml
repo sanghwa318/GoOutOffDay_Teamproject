@@ -36,7 +36,12 @@
 	OR level LIKE concat('%', #{level}, '%')
 	</if>
 		</where>
-		ORDER BY course_pk DESC;
+		ORDER BY course_pk DESC
+		
+		<!-- 페이지네이션에 필요 -->
+		<if test="listCount > 0">
+		LIMIT #{offset}, #{listCount};
+		</if>
 	</select>
 
 	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->
