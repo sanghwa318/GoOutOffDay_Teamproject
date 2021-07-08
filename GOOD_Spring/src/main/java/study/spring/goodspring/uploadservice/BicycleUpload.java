@@ -10,5 +10,5 @@ public interface BicycleUpload {
 	public void collectBicycle(List<Row> row) throws Exception;
 	
 	/** API DB 조회 */
-	public List<Bicycle> getBicycle(Bicycle input) throws Exception;
+	public List<Row> getBicycle(Row input) throws Exception;
 }

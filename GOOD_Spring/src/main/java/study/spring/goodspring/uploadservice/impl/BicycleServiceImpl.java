@@ -40,9 +40,9 @@ public class BicycleServiceImpl implements BicycleUpload {
 	
 	// DB 데이터를 불러오는 기능
 	@Override
-	public List<Bicycle> getBicycle(Bicycle input) throws Exception {
+	public List<Row> getBicycle(Row input) throws Exception {
 		
-		List<Bicycle> result = null;
+		List<Row> result = null;
 
 		try {
 			result = sqlSession.selectList("BicycleMapper.selectList", input);
