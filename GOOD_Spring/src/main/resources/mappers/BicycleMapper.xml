@@ -37,4 +37,16 @@
 		editDate = now()
 		WHERE stationId=#{stationId};
 	</update>
+	
+	<!-- 데이터 조회를 위한 기능 추가 -->
+	<select id="selectList"
+		parameterType="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row"
+		resultMap="BicycleMap">
+		Select stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude
+		FROM
+		<where>
+			<if test="stationName !=null and stationName !=''">stationName LIKE concat ('%', #{stationName},'%')</if>
+		</where>
+		ORDER BY stationName DESC
+	</select>
 </mapper>

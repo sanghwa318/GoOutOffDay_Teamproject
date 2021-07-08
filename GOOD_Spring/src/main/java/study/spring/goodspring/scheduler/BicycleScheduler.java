@@ -27,7 +27,7 @@ public class BicycleScheduler {
 	
 	@Autowired
 	BicycleUpload bicycleUpload;
-
+	
 	/**
 	 * 실시간 자전거 대여현황 API를 수집하여 DB에 저장하기 위한 메서드
 	 */
