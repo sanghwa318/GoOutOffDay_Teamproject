@@ -10,18 +10,18 @@ import lombok.Data;
  */
 @Data
 public class Bicycle {
-
+	
 	@SerializedName("rentBikeStatus")
 	private RentBikeStatus rentBikeStatus; // 실시간 자전거 대여정보
-
+	
 	@Data
 	public class RentBikeStatus {
-
+		
 		@SerializedName("list_total_count")
 		private int list_total_count; // 총 데이터 건수
 		@SerializedName("RESULT")
 		private RESULT RESULT; // 요청결과
-
+		
 		@Data
 		public class RESULT {
 			@SerializedName("CODE")
@@ -29,10 +29,10 @@ public class Bicycle {
 			@SerializedName("MESSAGE")
 			private String MESSAGE; // 요청결과 메시지
 		}
-
+		
 		@SerializedName("row")
 		private List<Row> row;
-
+		
 		@Data
 		public class Row {
 			@SerializedName("rackTotCnt")
