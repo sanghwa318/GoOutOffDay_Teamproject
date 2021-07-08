@@ -37,6 +37,8 @@
 	<context:component-scan
 		base-package="study.spring.goodspring.service.impl" />
 	<context:component-scan
+		base-package="study.spring.goodspring.uploadservice.impl" />
+	<context:component-scan
 		base-package="study.spring.goodspring.scheduler" />
 	<task:annotation-driven />
 
