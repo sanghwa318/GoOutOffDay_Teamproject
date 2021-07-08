@@ -32,7 +32,8 @@
 	<!-- 단일행 조회 -->
 	<select id="selectCrewItem" resultMap="crewMap"
 		parameterType="study.spring.goodspring.model.Crew">
-		SELECT crew_no, crew_name, crew_area, crew_sinto, crew_createtime,
+		SELECT crew_no, crew_name, crew_area, crew_sinto,
+		crew_createtime,
 		crew_category, crew_photo, crew_dinto, crew_member,
 		user_info_user_no FROM crew WHERE crew_name = #{crew_name};
 	</select>
@@ -43,49 +44,67 @@
 		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
 		SELECT crew_no, crew_name, crew_area, crew_sinto, crew_createtime,
 		crew_category, crew_photo, crew_dinto, crew_member,
-		user_info_user_no 
-		FROM crew 
+		user_info_user_no
+		FROM crew
 		<where>
-		<if test="crew_name != null and crew_name != '' ">
-		crew_name LIKE CONCAT('%', #{crew_name}, '%')
-		</if>
-		
-		<if test="crew_category != null and crew_category != '' ">
-		crew_category LIKE CONCAT('%', #{crew_category}, '%')
-		</if>
-	
-		<if test="crew_sinto != null and crew_sinto != '' ">
-		crew_name LIKE CONCAT('%', #{crew_sinto}, '%')
-		</if>
+			<if test="crew_name != null and crew_name != '' ">
+				crew_name LIKE CONCAT('%', #{crew_name}, '%')
+			</if>
+
+			<if test="crew_category != null and crew_category != '' ">
+				crew_category LIKE CONCAT('%', #{crew_category}, '%')
+			</if>
+
+			<if test="crew_sinto != null and crew_sinto != '' ">
+				crew_name LIKE CONCAT('%', #{crew_sinto}, '%')
+			</if>
 		</where>
 
 		ORDER BY crew_createtime ASC
 		
+		<if test="listCount > 0">
+		LIMIT #{offset}, #{listCount}
+		</if>
+
 	</select>
 
 	<!-- 데이터 저장 기능 -->
-	
-	<insert id="insertCrew" parameterType="study.spring.goodspring.model.Crew"
-	useGeneratedKeys="true" keyProperty="crew_no">
-	INSERT INTO crew (crew_name, crew_area, crew_sinto, crew_createtime,
-	crew_category, crew_photo, crew_dinto, user_info_user_no)
-	VALUES (#{crew_name}, #{crew_area}, #{crew_sinto}, now(), #{crew_category},
-	#{crew_photo}, #{crew_dinto}, #{user_info_user_no});
+
+	<insert id="insertCrew"
+		parameterType="study.spring.goodspring.model.Crew"
+		useGeneratedKeys="true" keyProperty="crew_no">
+		INSERT INTO crew (crew_name, crew_area, crew_sinto, crew_createtime,
+		crew_category, crew_photo, crew_dinto, user_info_user_no)
+		VALUES (#{crew_name}, #{crew_area}, #{crew_sinto}, now(), #{crew_category},
+		#{crew_photo}, #{crew_dinto}, #{user_info_user_no});
 	</insert>
-	
+
 	<!-- 데이터 삭제 기능 -->
-	<delete id="deleteCrew" parameterType="study.spring.goodspring.model.Crew">
-	DELETE FROM crew WHERE crew_no = #{crew_no};
+	<delete id="deleteCrew"
+		parameterType="study.spring.goodspring.model.Crew">
+		DELETE FROM crew WHERE crew_no = #{crew_no};
 	</delete>
 
 
 	<!-- 데이터 수정 기능 -->
-<update id="updateCrew" parameterType="study.spring.goodspring.model.Crew">
-UPDATE crew SET crew_sinto=#{crew_sinto}, crew_dinto=#{crew_dinto}
-WHERE crew_no = #{crew_no};
-</update>
+	<update id="updateCrew"
+		parameterType="study.spring.goodspring.model.Crew">
+		UPDATE crew SET crew_sinto=#{crew_sinto}, crew_dinto=#{crew_dinto}
+		WHERE crew_no = #{crew_no};
+	</update>
 
-
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	
+	<select id="selectCountAll" parameterType="study.spring.goodspring.model.Crew"
+	resultType="int">
+	SELECT COUNT(*) FROM crew
+	
+	<where>
+		<if test="crew_name != null and crew_name != '' ">
+		crew_name LIKE concat('%', #{crew_name},'%')
+		</if>
+	</where>
+	</select>
 
 
 

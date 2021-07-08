@@ -377,7 +377,7 @@ button span {
                                           // 0.1초의 딜레이 적용 후 포커스 이동
                                           setTimeout(
                                                 function() {
-                                                   
+                                    location.href = '${pageContext.request.contextPath}/commPage/comm_crew_info.do';
                                                 }, 100);
                                        })
                         }

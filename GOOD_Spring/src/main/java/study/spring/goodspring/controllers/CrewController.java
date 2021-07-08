@@ -93,7 +93,9 @@ public class CrewController {
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
-			String redirectUrl = contextPath + "/commPage/comm_crew_est.do?crew_no=" + input.getCrew_no();
+		
+		// 3( 결과를 확인하기 위한 페이지 이동
+		String redirectUrl = contextPath + "/commPage/comm_crew_info.do?crew_no=" + input.getCrew_no();
 		
 		
 		try {
@@ -103,11 +105,7 @@ public class CrewController {
 		}
 		
 		
-		//3) 결과를 확인하기 위한 페이지 이동
-		//저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야한다.
-		
-		
-	
+
 	
 }
 }

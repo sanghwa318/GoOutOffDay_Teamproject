@@ -178,6 +178,28 @@ public class CrewServiceImpl implements CrewService{
 	}
 
 
+	/*
+	 * 크루 데이터 저장되어 있는 갯수 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int getCrewCount(Crew input) throws Exception {
+		
+		int result= 0;
+		
+		try {
+			result = sqlSession.selectOne("CrewMapper.selectCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습닏.");
+		}
+		
+		return result;
+	}
+
+
 
 
 

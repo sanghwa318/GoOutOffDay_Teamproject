@@ -19,7 +19,7 @@ public interface CrewService {
 	
 	
 	/**
-	 * 크루 데이터 상세 조회
+	 * 크루 데이터 목록 조회
 	 * @param Crew 조회할 크루의 일련번호를 담고 있는 Beans
 	 * @return 조회된 데이터가 저장된 Beans
 	 * @throws Exception
@@ -51,5 +51,13 @@ public interface CrewService {
 	 * @throws Exception
 	 */
 	public int deleteCrew(Crew input) throws Exception;
+	
+	/*
+	 * 크루 데이터 저장되어 있는 갯수 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getCrewCount(Crew input) throws Exception;
 	
 }

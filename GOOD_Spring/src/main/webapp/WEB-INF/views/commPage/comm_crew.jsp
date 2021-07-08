@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!doctype html>
 <html>
 <head>
 
-<%@ include file="../inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style>
 /* 폼 전체 박스 */
 .form-horizontal {
@@ -77,11 +81,11 @@
 			<!-- 크루 본문영역 상단 -->
 
 			<form class="form-horizontal" name="crew_header" id="crew_header"
-				role="form">
+				role="form" method="get" action="${pageContext.request.contextPath}/commPage/comm_crew.do">
 				<div class="form-group">
 					<div class="col-md-3 pull-right">
 						<button type='reset' class="btn btn-primary" id="btn"
-							onClick="location.href='../commPage/comm_crew_est.jsp'">크루개설</button>
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
 						<button type="reset" class="btn btn-primary" id="btn"
 							onClick="location.href='../commPage/comm_crew_myCrew.jsp'">마이크루</button>
 					</div>
@@ -91,7 +95,7 @@
 								<button class="btn btn-blue" type="submit">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
-							</span><input type="text" class="form-control" placeholder="크루, 게시글 검색">
+							</span><input type="text" class="form-control" placeholder="크루, 게시글 검색" id="keyword" name="keyword" value="${keyword}">
 						</div>
 					</div>
 					<div class="col-md-2 pull-right">
@@ -140,118 +144,114 @@
 
 			<!-- 크루 본문영역 중단 -->
 			<div class="row cas_item">
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='../commPage/comm_crew_info.jsp'"
-						style="cursor: pointer;">
-						<img alt="테스트이미지 1번" src="../img/profile_default.png">
-						<div class="caption clearfix">
-							<p>ezen 크루</p>
-							<h4>오후 8시 ~ 10시 함께 산책 하실 분~ ^^</h4>
-							<p class="pull-left">지역: 강남구</p>
-							<p class="pull-right">크루장 : 이젠</p>
-						</div>
-
-					</div>
-				</div>
+			
+			<table border="1">
+			<thead>
+				<tr>
+					<th width="80" align="center">크루번호: </th>
+					<th width="80" align="center">크루이름: </th>
+				</tr>
+			</thead>
+			
+			
+			<tbody>
+			<c:choose>
+			<%--조회결과가 없는 경우 --%>
+			<c:when test="${output==null || fn:length(output) == 0} ">
+			
+			<tr>
+				<td colspan="9" align="center">조회결과가 없습니다.</td>
+			</tr>
+			</c:when>
+			<%--조회결과가 있는 경우  --%>
+			<c:otherwise>
+				<%-- 조회 결과에 따른 반복 처리 --%>
+				<c:forEach var="item" items="${output}" varStatus="status">
+					<%-- 출력을 위해 준비한 크루이름 변수  --%>
+					<c:set var="crew_name" value="${item.crew_name}"/>
+					
+					<%-- 검색어가 있다면? --%>
+					<c:if test="${keyword != '' }">
+						<%-- 검색어에 <mark> 적용 --%>
+						<c:set var="mark" value="<mark>${keyword}</mark>" />
+						<%--출력을 위해 크루 이름에서 검색어와 일치하는 단어를 형광펜 효과 --%>
+						<c:set var="crew_name" value="${fn:replace(crew_name,keyword,mark)}"/>
+						
+					</c:if>
+					
+					<%-- 상세페이지로 이동하기위한 URL --%>
+					<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
+						<c:param name="crew_no" value="${item.crew_no}"/>
+					</c:url>
+				
+				<tr>
+					<td align="center"><img src="/getCrewList/" width="50" /></td>
+					<td align="center"><a href="${infoUrl}">${crew_name}</a></td>
+					
+				</tr>
+				</c:forEach>
+			</c:otherwise>
+				</c:choose>
+				
+				
+				<%-- 페이지 번호 구현 --%>
+				<%-- 이전 그룹에 대한 링크 --%>
+				<c:choose>
+					<%--이전 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.prevPage > 0}">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="/commPage/comm_crew.do" var="prevPageUrl">
+							<c:param name="page" value="${pageData.prevPage}"/>
+							<c:param name="keyword" value="${keyword}"/>
+						</c:url>
+						<a href="${prevPageUrl}">[이전]</a>
+					
+					</c:when>
+					<c:otherwise>[이전]</c:otherwise>
+					
+				</c:choose>
+				
+				<%--페이지 번호  --%>
+				<c:forEach var="i" begin="${pageData.startPage}" end="${pageData.endPage}" varStatus="status">
+				<%--이동할 URL 생성 --%> 
+				 <c:url value="/commPage/comm_crew.do" var="pageUrl">
+				 <c:param name="page" value="${i}"/>
+				 <c:param name="keyword" value="${keyword}"/>
+				 </c:url>
+				 
+				 
+				 <%--페이지 번호 출력 --%>
+				 <c:choose>
+				 	<%--현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+				 	<c:when test="${pageData.nowPage} == i">
+				 		<strong>[${i}]</strong>
+				 	</c:when>
+				 	<%--나머지 페이지의 경우 링크 적용함 --%>
+				 	<c:otherwise>
+				 	<a href="${pageUrl}">[${i}]</a>
+				 	</c:otherwise>
+				 </c:choose>
+				 
+				</c:forEach>
+				
+				<%-- 다음 그룹에 대한 링크 --%>
+				<c:choose>
+					<%--다음 그룹으로 이동 가능하다면? --%>
+					<c:when test="${pageData.nextPage} 0">
+					<%--이동할 URL생성 --%>
+					<c:url value="/commPage/comm_crew.do" var="nextPageUrl">
+						<c:param name="page" value="${pageData.nextPage}"/>
+						<c:param name="keyword" value="${keyword}"/>
+					</c:url>
+					<a href="${nextPageUrl}">[다음]</a>
+					</c:when>
+					<c:otherwise>[다음]</c:otherwise>
+					
+					
+				</c:choose>
+				
+				 </tbody>
+				</table>
 			</div>
 		</div>
 
@@ -273,8 +273,8 @@
 	</div>
 	</div>
 	<!-- 하단 영역 -->
-	<%@ include file="../inc/Footer.jsp"%>
-	<%@ include file="../inc/plugin.jsp"%>
+		<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 
 </body>
 </html>
