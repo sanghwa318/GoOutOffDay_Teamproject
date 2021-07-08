@@ -33,6 +33,9 @@ div#category_acco .accordian-toggle {
 </head>
 
 <body>
+<!-- [페이지네이션] -->
+<c:set var="URL" value="/walkPage/walk_search.do"/>
+<!-- //[페이지네이션] -->
 	<!-- 푸터빼고 감싸주세요 -->
 	<div class="wrapper">
 		<!-- 공통 헤더 -->
@@ -65,18 +68,18 @@ div#category_acco .accordian-toggle {
 								style="color: #bcbcbc; font-size: 17px; left: 6px;"></i>
 							</a>
 						</h3>
-						<div id="category_list" class="panel-collapse collapse">
+						<div id="category_list" class="panel-collapse collapse in">
 							<div class="panel-body">
 								<!-- 검색 하기 창 -->
-								<div class="form-group input-group">
-									<input type="text" id="course_search" class="form-control"
-										placeholder="검색하기" /> <span class="input-group-btn">
+								<form method="get" action="${pageContext.request.contextPath }/walkPage/walk_search.do" class="form-group input-group">
+									<input type="search" name="keyword" id="course_search" class="form-control"
+										placeholder="검색하기" value="${keyword }" /> <span class="input-group-btn">
 										<button class="btn btn-blue" type="submit">
 											<span style="color: #0069a6;">검색 </span><i
 												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
 										</button>
 									</span>
-								</div>
+								</form>
 								<!-- //검색 하기 창 -->
 								<!-- 카테고리영역 -->
 								<form class="form-horizontal" role="form">
@@ -164,6 +167,7 @@ div#category_acco .accordian-toggle {
 								<c:set var="distance" value="${item.distance }" />
 								<c:set var="time" value="${item.time }" />
 								<c:set var="level" value="${item.level }" />
+								
 								<%-- 상세 페이지로 이동하기 위한 URL --%>
 								<c:url value="/walkPage/walk_search.do" var="viewUrl">
 									<c:param name="course_pk" value="${item.course_pk }" />
@@ -212,18 +216,20 @@ div#category_acco .accordian-toggle {
 				</div>
 				<!-- //코스 검색 리스트 -->
 				<!-- 페이지네이션 -->
-				<div class="text-center">
-					<ul class="pagination">
-						<li class="page-item disabled"><a href="#">&laquo;</a></li>
-						<li class="page-item active"><span>1<span
-								class="sr-only">(current)</span></span></li>
-						<li class="page-item"><a href="#">2</a></li>
-						<li class="page-item"><a href="#">3</a></li>
-						<li class="page-item"><a href="#">4</a></li>
-						<li class="page-item"><a href="#">5</a></li>
-						<li class="page-item"><a href="#">&raquo;</a></li>
-					</ul>
-				</div>
+	<%@ include file="../inc/pagenation.jsp"%>
+				
+<!-- 				<div class="text-center"> -->
+<!-- 					<ul class="pagination"> -->
+<!-- 						<li class="page-item disabled"><a href="#">&laquo;</a></li> -->
+<!-- 						<li class="page-item active"><span>1<span -->
+<!-- 								class="sr-only">(current)</span></span></li> -->
+<!-- 						<li class="page-item"><a href="#">2</a></li> -->
+<!-- 						<li class="page-item"><a href="#">3</a></li> -->
+<!-- 						<li class="page-item"><a href="#">4</a></li> -->
+<!-- 						<li class="page-item"><a href="#">5</a></li> -->
+<!-- 						<li class="page-item"><a href="#">&raquo;</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
 				<!-- //페이지네이션 -->
 			</div>
 			<!-- //코스검색 목록 영역 -->
