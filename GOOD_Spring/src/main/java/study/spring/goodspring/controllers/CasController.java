@@ -1,5 +1,7 @@
 package study.spring.goodspring.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -7,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.CasShowExh;
+import study.spring.goodspring.service.CasService;
 
 @Controller
 public class CasController {
@@ -19,22 +24,37 @@ public class CasController {
 	RegexHelper RegexHelper;
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
-	
+
+	@Autowired
+	CasService CasService;
+
 	/** 문화체육 메인페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_index.do", method = RequestMethod.GET)
-	public String cas_index() {
-		// casPage/cas_index.jsp파일을 View로 지정 
-		return "casPage/cas_index";
+	public ModelAndView cas_index(Model model,
+			@RequestParam(value = "keyword", defaultValue = "ShowExh") String keyword) {
+
+		CasShowExh input = new CasShowExh();
+		input.setService_tag(keyword);
+
+		List<CasShowExh> output = null;
+		try {
+			output = CasService.getShowExhList(input);
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("output", output);
+		return new ModelAndView("casPage/cas_index");
 	}
-	
+
 	/** 문화체육 카테고리 리스트페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_themeList.do", method = RequestMethod.GET)
 	public String cas_ThemeList(Model model,
 			// GET 파라미터 받기
 			@RequestParam(value = "cas", defaultValue = "") String cas,
 			@RequestParam(value = "order", defaultValue = "") String order) {
-		
-		
+
 		String result = null;
 		String iconurl = null;
 
@@ -55,7 +75,7 @@ public class CasController {
 			result = "체육시설";
 			iconurl = "'../assets/icon_img/체육시설 아이콘.png'";
 		}
-		
+
 		// 파라미터 값을 View에게 전달
 		model.addAttribute("cas", cas);
 		model.addAttribute("result", result);

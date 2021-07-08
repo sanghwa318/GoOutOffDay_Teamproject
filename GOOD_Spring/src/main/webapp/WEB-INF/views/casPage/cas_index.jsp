@@ -81,7 +81,8 @@ html, body {
 
 .show_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/공연전시문화 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/공연전시문화 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -93,7 +94,8 @@ html, body {
 
 .exp_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/창의 체험 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/창의 체험 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -105,7 +107,8 @@ html, body {
 
 .adu_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/자기계발 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/자기계발 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -117,7 +120,8 @@ html, body {
 
 .sport_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -299,167 +303,21 @@ html, body {
 					<div class="row show_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_161151105_59967.jpg"
-									alt="테스트이미지1"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='${pageContext.request.contextPath}/casPage/cas_detail.do'"
-									style="cursor: pointer;">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
+							<c:forEach var="item" items="${output }" varStatus="status">
+								<div class="thumbnail item">
+									<img src="${item.INFO }" alt="테스트이미지1"
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											${item.GENRE_NAME }<span class="heart pull-right"><i
+												class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
+										</p>
+										<h4 class="explan">${item.TITLE }</h4>
+										<p class="pull-left">${item.PLACE_NAME}</p>
+										<p class="pull-right">${item.AGE }</p>
+									</div>
 								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_190830229_88745.jpg"
-									alt="테스트이미지2"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210204_191019603_17345.jpg"
-									alt="테스트이미지3"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/05/20210503_094942341_68547.jpg"
-									alt="테스트이미지4"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210204_191227964_86696.jpg"
-									alt="테스트이미지5"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210219_174316723_91836.jpg"
-									alt="테스트이미지6"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210219_174023311_02011.jpg"
-									alt="테스트이미지7"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_184348104_40311.jpg"
-									alt="테스트이미지8"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_184900257_91629.jpg"
-									alt="테스트이미지9"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img
-									src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_104724741_63190.jpg"
-									alt="테스트이미지10"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										공연 전시 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">공연 전시 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

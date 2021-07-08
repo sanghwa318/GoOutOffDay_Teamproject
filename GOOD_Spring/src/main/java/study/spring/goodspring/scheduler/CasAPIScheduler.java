@@ -63,13 +63,15 @@ public class CasAPIScheduler {
 		for (row item : list) {
 			String info = item.getINFO();
 
-			if (info != "" && info.length() > 0 && info.contains("http")) {
-				int a = info.indexOf("http");
-				info = info.substring(a);
-				int b = info.indexOf("\"");
-				info = info.substring(0, b);
+			if (info != "" && info.length() > 0) {
+				if (info.contains("img")) {
+					int a = info.indexOf("http");
+					info = info.substring(a);
+					int b = info.indexOf("\"");
+					info = info.substring(0, b);
 
-				item.setINFO(info);
+					item.setINFO(info);
+				}
 			}
 		}
 
