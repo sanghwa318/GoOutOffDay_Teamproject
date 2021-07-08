@@ -32,7 +32,7 @@ public class BicycleScheduler {
 	 * 실시간 자전거 대여현황 API를 수집하여 DB에 저장하기 위한 메서드
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/bicycle_schduler", method = RequestMethod.GET)
+	@RequestMapping(value = "/bicycle_scheduler", method = RequestMethod.GET)
 	public void collectBicycle() {
 		/** 1_ API 연동 객체 생성 */
 		Retrofit retrofit = retrofitHelper.getRetrofit(BicycleService.BASE_URL);
@@ -53,11 +53,11 @@ public class BicycleScheduler {
 			e.printStackTrace();
 		}
 		
+		/** 3) 조회결과 반복문으로 저장 */
 		List<Row> list = null;
-		
-		/** 3) Open API 데이터 받아오기 */
 		if (bicycle != null) {
             list = bicycle.getRentBikeStatus().getRow();
+            log.debug(" >>> " + list.toString());
         } else {
         	log.debug("조회결과 없음");
         	return;
@@ -71,4 +71,5 @@ public class BicycleScheduler {
 			e.printStackTrace();
 		}
 	}
+	
 }

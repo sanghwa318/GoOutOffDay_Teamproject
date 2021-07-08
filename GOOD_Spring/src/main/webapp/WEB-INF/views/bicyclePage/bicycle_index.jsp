@@ -173,18 +173,21 @@ p {
 				<div class="main_header">
 					<h1 class="page-header page-title">
 						<span>공공자전거<img alt="따릉이 실시간 이용현황"
-							src="../icon_img/자전거 아이콘 2.png" />
+							src="../assets/icon_img/자전거 아이콘 2.png" />
 						</span>
 					</h1>
 				</div>
 				<!-- 본문 상단 메뉴 부분 -->
 				<div class="body_header clearfix">
 					<div class="map_menu ">
-						<div id="map1" style="height: 528px; margin: auto"></div>
+					<!-- 자전거 실시간 현황 지도 -->
+						<div id="map1" style="height: 528px; margin: auto">
+						</div>
 						<div id="m_menu">
 							<div class="menu_header">
 								<h4>지역별 이용 가능 현황</h4>
 							</div>
+							<!-- 지역별 자전거 이용 현황 -->
 							<div class="menu_content"
 								style="height: 70px; overflow-y: scroll;">
 								<div class="menu_detail">
@@ -428,11 +431,11 @@ p {
 									<th scope="row" rowspan="2" style="width: 100px;">LCD형 <br>단말기
 									</th>
 									<td class="manual_img"><img
-										src="../img/bikeseoul_lcd1.png" alt="LCD형 단말기 시작" /></td>
+										src="../assets/img/bikeseoul_lcd1.png" alt="LCD형 단말기 시작" /></td>
 									<td class="manual_img"><img
-										src="../img/bikeseoul_lcd2.png" alt="LCD형 단말기 대여" /></td>
+										src="../assets/img/bikeseoul_lcd2.png" alt="LCD형 단말기 대여" /></td>
 									<td class="manual_img"><img
-										src="../img/bikeseoul_lcd3.png" alt="LCD형 단말기 반납" /></td>
+										src="../assets/img/bikeseoul_lcd3.png" alt="LCD형 단말기 반납" /></td>
 								</tr>
 								<tr>
 									<td class="left"><li class="sssblet">구글플레이스토어 또는
@@ -451,11 +454,11 @@ p {
 								<tr>
 									<th scope="row" rowspan="2">QR형<br>단말기
 									</th>
-									<td class="manual_img"><img src="../img/bikeseoul_qr1.png"
+									<td class="manual_img"><img src="../assets/img/bikeseoul_qr1.png"
 										alt="QR형 단말기 시작" /></td>
-									<td class="manual_img"><img src="../img/bikeseoul_qr2.png"
+									<td class="manual_img"><img src="../assets/img/bikeseoul_qr2.png"
 										alt="QR형 단말기 대여" /></td>
-									<td class="manual_img"><img src="../img/bikeseoul_qr3.png"
+									<td class="manual_img"><img src="../assets/img/bikeseoul_qr3.png"
 										alt="QR형 단말기 반납" /></td>
 								</tr>
 								<tr>
@@ -519,10 +522,10 @@ p {
 			<div class="app">
 				<a
 					href="https://apps.apple.com/kr/app/%EC%84%9C%EC%9A%B8%EC%9E%90%EC%A0%84%EA%B1%B0-%EB%94%B0%EB%A6%89%EC%9D%B4/id1037272004">
-					<img src="../img/app_ios.png" alt="앱 스토어 다운로드">
+					<img src="../assets/img/app_ios.png" alt="앱 스토어 다운로드">
 				</a> <a
 					href="https://play.google.com/store/apps/details?id=com.dki.spb_android&hl=ko&gl=US">
-					<img src="../img/app_and.png" alt="구글 스토어 다운로드">
+					<img src="../assets/img/app_and.png" alt="구글 스토어 다운로드">
 				</a>
 			</div>
 		</div>

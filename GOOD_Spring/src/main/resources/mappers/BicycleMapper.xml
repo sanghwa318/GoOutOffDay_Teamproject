@@ -17,8 +17,24 @@
 	<!-- 단일행 저장을 위한 기능 정의 -->
 	<insert id="insertItem"
 		parameterType="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row">
-		INSERT INTO bicycle (stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude) 
+		INSERT INTO bicycle (stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude,
+		regDate, editDate) 
 		VALUES ( #{stationId}, #{rackTotCnt}, #{stationName}, #{parkingBikeTotCnt}, #{shared},
-		#{stationLatitude}, #{stationLongitude} );
+		#{stationLatitude}, #{stationLongitude}, now(), now() );
 	</insert>
+	
+	<!-- 데이터 수정을 위한 기능 추가 -->
+	<update id="updateItem"
+	parameterType="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row">
+		UPDATE bicycle SET
+		stationId = #{stationId},
+		rackTotCnt = #{rackTotCnt},
+		stationName = #{stationName},
+		parkingBikeTotCnt = #{parkingBikeTotCnt},
+		shared = #{shared},
+		stationLatitude	= #{stationLatitude},
+		stationLongitude = #{stationLongitude},
+		editDate = now()
+		WHERE stationId=#{stationId};
+	</update>
 </mapper>

@@ -109,7 +109,7 @@
 		#{address1}, #{address2},
 		#{post}, #{tel},
 		#{email}, #{photoJson},
-		#{user_admin},
+		"N",
 		now(), now());
 	</insert>
 
@@ -159,17 +159,17 @@
 	
 	<!-- 아이디 중복검사 -->
     <select id="idUniqueCheck" parameterType="study.spring.goodspring.model.Member" resultType="int">
-        SELECT COUNT(*) FROM member WHERE user_id=#{user_id}
+        SELECT COUNT(*) FROM user_info WHERE user_id=#{user_id}
     </select>
     
     <!-- 닉네임 중복검사 -->
      <select id="nickUniqueCheck" parameterType="study.spring.goodspring.model.Member" resultType="int">
-        SELECT COUNT(*) FROM member WHERE user_nick=#{user_nick}
+        SELECT COUNT(*) FROM user_info WHERE user_nick=#{user_nick}
     </select>
     
     <!-- 이메일 중복검사 -->
     <select id="emailUniqueCheck" parameterType="study.spring.goodspring.model.Member" resultType="int">
-        SELECT COUNT(*) FROM member WHERE email=#{email}
+        SELECT COUNT(*) FROM user_info WHERE email=#{email}
     </select>
 	
 </mapper>

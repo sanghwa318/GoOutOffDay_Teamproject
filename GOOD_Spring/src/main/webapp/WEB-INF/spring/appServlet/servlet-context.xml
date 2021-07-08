@@ -48,7 +48,16 @@
 		* * * * ?" /> -->
 	<!-- <task:scheduled ref="scheduleJob" method="collectMovieRank" cron="0 
 		10 0 * * ?" /> </task:scheduled-tasks> -->
-
+		
+	<!-- 실시간 자전거 API 스케쥴러로 동작할 객체 생성 -->
+	<beans:bean id="bicycleScheduleJob" class="study.spring.goodspring.scheduler.BicycleScheduler" />
+	<!--  생성한 스케쥴러 객체애 대한 작업 스케쥴 지정 -->
+	<task:scheduled-tasks>
+		<!-- (테스트)매일 오전 12시 10분에 실행되는 작업 -->
+		<task:scheduled ref="bicycleScheduleJob" method="collectBicycle" cron="0 10 0 * * ?"/>
+		<!-- (테스트용) 30초마다 한 번씩 실행되는 작업-->
+		<task:scheduled ref="bicycleScheduleJob" method="collectBicycle" cron="0/30 * * * * ?"/>
+	</task:scheduled-tasks>
 
 	<!-- 인터셉터 등록 -->
 	<interceptors>

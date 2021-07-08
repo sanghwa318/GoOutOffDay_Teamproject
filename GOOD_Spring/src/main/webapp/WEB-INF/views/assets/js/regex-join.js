@@ -7,29 +7,8 @@
    }
 
 $(function(){
-	/**플러그인의 기본 설정 옵션 추가 */
-	jQuery.validator.setDefaults({
-		onkeyup:false,		//키보드 입력시 검사 안함
-		onclick:false, 		//<input>태그 클릭시 검사 안함
-		onfocusout:false,	//포커스가 빠져나올 때 검사 안함
-		showErrors:function(errorMap, errorList){	//에러 발생시 호출되는 함수 재정의
-			//에러가 있을 때만
-			if(this.numberOfInvalids()){
-				
-				swal({
-					title: "에러",
-					text: errorList[0].message,
-					type: "error"
-				}).then (function(result){
-					
-				});
-			}
-		}
-	});
-});
-
-$(function(){
-	/**유효성 검사 추가 함수 */
+	
+		/**유효성 검사 추가 함수 */
 	$.validator.addMethod("kor", function(value, element){
 		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
 	});
@@ -46,11 +25,8 @@ $(function(){
 		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) ||
 		/^[a-zA-Z]*$/i.test(value) || /^[0-9]*$/i.test(value) ;
 	});
-});
-
-
-$(function(){
-		/** form태그에 부여한 id속성에 대한 유효성 검사 함수 호출 */
+	
+	/** form태그에 부여한 id속성에 대한 유효성 검사 함수 호출 */
 		$("#join_form").validate({
 			/**입력검사 규칙 */
 			rules: {
@@ -67,13 +43,13 @@ $(function(){
                 }
             },
 				//[닉네임] 필수 + 알파벳, 숫자 조합
-				user_nickname: {required: true, alphanumeric: true, minlength: 4, maxlength: 30,
+				user_nick: {required: true, alphanumeric: true, minlength: 4, maxlength: 30,
                 remote : {
                     url : getContextPath() + '/mainPage/join/nickname_unique_check_jquery',
                     type : 'post',
                     data : {
-                        user_id : function() {
-                            return $("#user_nickname").val();
+                        user_nick : function() {
+                            return $("#user_nick").val();
                         }
                     }
                 }
@@ -102,11 +78,9 @@ $(function(){
 				//[우편번호] 필수
 				postcode: {required: true},
 				// [도로명주소] 우편번호가 입력된 경우만 필수
-     		    roadAddress: 'required',
-      	        // [주소2] 우편번호가 입력된 경우만 필수
-           		jibunAddress: 'required',
+     		    addr1: 'required',           		
 				//[나머지주소] 필수 + 한글, 숫자, 특수문자 조합만 허용
-				detailAddress: {required: true, address: true },
+				addr2: {required: true, address: true },
 				//[성별] 필수
 				gender: "required"
 			},
@@ -119,9 +93,9 @@ $(function(){
                     maxlength: '아이디는 최대 {0}글자까지 가능합니다.',
                     remote: '이미 사용중인 아이디 입니다.'
 				},
-				user_nickname: {
+				user_nick: {
 					required: "닉네임을 입력하세요.",
-					nick: "닉네임은 한글, 영어, 숫자만 입력 가능합니다.",
+					alphanumeric: "닉네임은 영어, 숫자만 입력 가능합니다.",
 					minlength: "닉네임은 최소 {0}글자 이상 입력하셔야 합니다.",
                     maxlength: '닉네임은 최대 {0}글자까지 가능합니다.',
                     remote: '이미 사용중인 닉네임 입니다.'
@@ -156,7 +130,11 @@ $(function(){
 				postcode: {
 					required: '우편번호를 검색하세요.'
 				},
-				detailAddress:{
+				addr1: {
+					required: '도로명 주소를 입력하세요.'
+				},
+				
+				addr2:{
 					required: '나머지 주소를 입력하세요.',
 					address: '나머지 주소는 한글, 숫자, "-" 만 가능합니다.'
 				},
@@ -173,11 +151,12 @@ $(function(){
             // 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
             return $(form).valid();
         },
-        success: function(json) {
+		success: function(json) {
             swal('알림', '회원가입이 완료되었습니다. 로그인 해 주세요.', 'success').then(function(result) {
-                window.location = ROOT_URL + '/mainPage/login';
+                window.location = getContextPath() + '/mainPage/login.do';
             });
-        },
+        }
+       
     }); // end ajaxForm
 
     $("#id_unique_check").click(function(e) {
@@ -191,20 +170,22 @@ $(function(){
         $.post(getContextPath() + '/mainPage/join/id_unique_check_jquery', {
             user_id: userId
         }, function(json) {
+			
             swal('확인', '사용가능한 아이디 입니다.', 'success');
+		
         });
     });
 
 	$("#nickname_unique_check").click(function(e) {
-        const userNickname = $("#user_nickname").val();
+        const userNick = $("#user_nick").val();
 
-        if (!userNickname) {
+        if (!userNick) {
             swal('알림', '닉네임을 입력하세요.', 'warning');
             return;
         }
 
         $.post(getContextPath() + '/mainPage/join/nickname_unique_check_jquery', {
-            user_nick: userNickname
+            user_nick: userNick
         }, function(json) {
             swal('확인', '사용가능한 닉네임 입니다.', 'success');
         });
@@ -225,4 +206,7 @@ $(function(){
         });
     });
 });
+
+
+
 

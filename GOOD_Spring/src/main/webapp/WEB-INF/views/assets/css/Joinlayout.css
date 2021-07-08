@@ -73,6 +73,7 @@
 /* 에러 메시지에 대한 글자 색상 */
 .error {
 	color: red;
+	
 }
 
 /* 에러가 발생한 <input>태그 */
@@ -86,6 +87,11 @@ label.error {
 	display: inline-block;
 	padding: 5px 10px;
 	margin: 0;
+	display: none;
+}
+
+label#error1{
+	margin-left: 130px;
 }
 
 #id_uniq_check, #nikname_uniq_check {
