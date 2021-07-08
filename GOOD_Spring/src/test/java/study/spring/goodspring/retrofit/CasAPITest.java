@@ -14,10 +14,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import study.spring.goodspring.APIservice.CasAPISerchService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.CasAPIList;
 import study.spring.goodspring.model.CasAPIList.SJWPerform.row;
-import study.spring.goodspring.service.CasAPISerchService;
 
 /** Lombok의 Log4j 객체 */
 //import lombok.extern.slf4j.Slf4j;

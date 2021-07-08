@@ -1,4 +1,4 @@
-package study.spring.goodspring.service.impl;
+package study.spring.goodspring.uploadservice.impl;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.CasAPIList.SJWPerform.row;
-import study.spring.goodspring.service.CasAPIUploadService;
+import study.spring.goodspring.uploadservice.CasAPIUploadService;
 
 @Slf4j
 @Service

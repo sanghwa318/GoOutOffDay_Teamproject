@@ -1,4 +1,4 @@
-package study.spring.goodspring.service;
+package study.spring.goodspring.uploadservice;
 
 import java.util.List;
 

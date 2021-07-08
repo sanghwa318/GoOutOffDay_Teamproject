@@ -1,4 +1,4 @@
-package study.spring.goodspring.service;
+package study.spring.goodspring.APIservice;
 
 
 import retrofit2.Call;
