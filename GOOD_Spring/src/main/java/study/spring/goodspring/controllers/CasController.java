@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.CasOther;
 import study.spring.goodspring.model.CasShowExh;
 import study.spring.goodspring.service.CasService;
 
@@ -31,7 +32,8 @@ public class CasController {
 	/** 문화체육 메인페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_index.do", method = RequestMethod.GET)
 	public ModelAndView cas_index(Model model,
-			@RequestParam(value = "keyword", defaultValue = "ShowExh") String keyword) {
+			@RequestParam(value = "keyword", required = false, defaultValue = "ShowExh") String keyword,
+			@RequestParam(value = "keyword2", required = false, defaultValue = "문화") String keyword2) {
 
 		CasShowExh input = new CasShowExh();
 		input.setService_tag(keyword);
@@ -42,9 +44,23 @@ public class CasController {
 		} catch (Exception e) {
 			return WebHelper.redirect(null, e.getLocalizedMessage());
 		}
+		
+		
+		CasOther input2 = new CasOther();
+		
+		input2.setDIV_COL(keyword2);
+
+		List<CasOther> output2 = null;
+		try {
+			output2 = CasService.getOtherList(input2);
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
 
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("keyword2", keyword2);
 		model.addAttribute("output", output);
+		model.addAttribute("output2", output2);
 		return new ModelAndView("casPage/cas_index");
 	}
 

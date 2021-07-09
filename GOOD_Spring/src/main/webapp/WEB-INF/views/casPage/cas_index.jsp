@@ -303,7 +303,7 @@ html, body {
 					<div class="row show_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<c:forEach var="item" items="${output }" varStatus="status">
+							<c:forEach var="item" items="${output }">
 								<div class="thumbnail item">
 									<img src="${item.INFO }" alt="테스트이미지1"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
@@ -314,7 +314,7 @@ html, body {
 										</p>
 										<h4 class="explan">${item.TITLE }</h4>
 										<p class="pull-left">${item.PLACE_NAME}</p>
-										<p class="pull-right">${item.AGE }</p>
+										<p class="pull-right">${item.AGE}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -339,146 +339,21 @@ html, body {
 					<div class="row exp_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지1"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
+							<c:forEach var="item2" items="${output2 }">
+								<div class="thumbnail item">
+									<img src="${item2.IMGURL }" alt="테스트이미지1"
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											${item2.MAXCLASSNM } &middot; ${item2.MINCLASSNM}<span class="heart pull-right"><i
+												class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
+										</p>
+										<h4 class="explan">${item2.SVCNM }</h4>
+										<p class="pull-left">${item2.PLACENM}</p>
+										<p class="pull-right">${item2.SVCSTATNM}</p>
+									</div>
 								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지2"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지3"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지4"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지5"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지6"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지7"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지8"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지9"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지10"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										문화 창의 체험 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">문화 창의 체험 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

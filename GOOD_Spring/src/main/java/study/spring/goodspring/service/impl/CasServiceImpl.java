@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import study.spring.goodspring.model.CasOther;
 import study.spring.goodspring.model.CasShowExh;
 import study.spring.goodspring.service.CasService;
 
@@ -84,6 +85,76 @@ public class CasServiceImpl implements CasService {
 
 		try {
 			result = SqlSession.selectOne("CasDBMapper.show_selectCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	//////////////////////////////////////////
+	
+	/** 문화체육Other 데이터 상세 조회
+	 * @param 조회할 데이터의 일련번호 PERFORM_CODE
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	@Override
+	public CasOther getOtherItem(CasOther input) throws Exception {
+		CasOther result = null;
+
+		try {
+			result = SqlSession.selectOne("CasDBMapper.Other_selectItem", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+	
+	
+	/** 문화체육Other 데이터 다중 조회
+	 * @param 조회할 데이터의 카데고리 이름 GENRE_NAME
+	 * @throws Exception
+	 */
+	@Override
+	public List<CasOther> getOtherList(CasOther input) throws Exception {
+		List<CasOther> result = null;
+
+		try {
+			result = SqlSession.selectList("CasDBMapper.Other_selectMainList", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+	
+	/** 문화체육Other 총 데이터 갯수 조회 
+	 * @return int 
+	 * @throws Exception
+	 */
+	@Override
+	public int getOtherCount(CasOther input) throws Exception {
+		int result = 0;
+
+		try {
+			result = SqlSession.selectOne("CasDBMapper.Other_selectCountAll", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

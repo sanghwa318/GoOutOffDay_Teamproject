@@ -52,7 +52,8 @@
 		resultMap="showExhMap">
 		SELECT PERFORM_CODE, TITLE, PLACE_NAME, GENRE_NAME,
 		INFO,
-		service_tag
+		service_tag,
+		AGE
 		FROM cas_showexh
 		WHERE INFO is not null
 		AND
@@ -74,13 +75,76 @@
 			LIMIT #{offset}, #{listCount};
 		</if>
 	</select>
-	
+
 	<!-- 공연전시 항목 -->
 	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
-	
+	<resultMap type="study.spring.goodspring.model.CasOther"
+		id="CasOtherMap">
+		<!-- Beans의 멤버변수와 대상테이블의 컬럼을 연결 -->
+		<result property="DIV_COL" column="DIV_COL" />
+		<result property="SERVICE" column="SERVICE" />
+		<result property="GUBUN" column="GUBUN" />
+		<result property="SVCID" column="SVCID" />
+		<result property="MAXCLASSNM" column="MAXCLASSNM" />
+		<result property="MINCLASSNM" column="MINCLASSNM" />
+		<result property="SVCSTATNM" column="SVCSTATNM" />
+		<result property="SVCNM" column="SVCNM" />
+		<result property="PAYATNM" column="PAYATNM" />
+		<result property="PLACENM" column="PLACENM" />
+		<result property="USETGTINFO" column="USETGTINFO" />
+		<result property="SVCURL" column="SVCURL" />
+		<result property="X" column="X" />
+		<result property="Y" column="Y" />
+		<result property="SVCOPNBGNDT" column="SVCOPNBGNDT" />
+		<result property="SVCOPNENDDT" column="SVCOPNENDDT" />
+		<result property="RCPTBGNDT" column="RCPTBGNDT" />
+		<result property="RCPTENDDT" column="RCPTENDDT" />
+		<result property="AREANM" column="AREANM" />
+		<result property="IMGURL" column="IMGURL" />
+		<result property="DTLCONT" column="DTLCONT" />
+		<result property="TELNO" column="TELNO" />
+		<result property="V_MAX" column="V_MAX" />
+		<result property="V_MIN" column="V_MIN" />
+		<result property="REVSTDDAY" column="REVSTDDAY" />
+		<result property="REVSTDDAYNM" column="REVSTDDAYNM" />
+		<result property="regDate" column="regDate" />
+		<result property="editDate" column="editDate" />
+	</resultMap>
 	<!-- 단일행 조회를 위한 기능정의 -->
+	<select id="Other_selectItem"
+		parameterType="study.spring.goodspring.model.CasOther"
+		resultMap="CasOtherMap">
+		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
+		SVCNM, PAYATNM, PLACENM
+		SVCURL, AREANM, IMGURL, DTLCONT, TELNO, V_MAX,
+		V_MIN
+		FROM cas_other
+		WHERE SVCID=#{SVCID}
+		AND SVCSTATNM LIKE '%접수중%';
+	</select>
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="Other_selectMainList"
+		parameterType="study.spring.goodspring.model.CasOther"
+		resultMap="CasOtherMap">
+		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
+		SVCNM, PAYATNM, PLACENM,
+		SVCURL, AREANM, IMGURL, TELNO, V_MAX,
+		V_MIN
+		FROM cas_other
+		WHERE SVCSTATNM LIKE '%접수중%'
+		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
+		LIMIT 15;
+	</select>
 
 	<!-- 데이터 수 조회하기 -->
+	<select id="Other_selectCountAll"
+		parameterType="study.spring.goodspring.model.CasOther"
+		resultType="int">
+		SELECT COUNT(*) FROM cas_other
+		WHERE SVCSTATNM LIKE '%접수중%'
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount};
+		</if>
+	</select>
 </mapper>
