@@ -62,4 +62,26 @@ public class myPageController {
         /** 3) 결과 표시 */
         return webHelper.redirect("/goodspring/myPage/myPage_index.do","프로필 사진을 변경했습니다.");
     }
+	
+	/**
+	 * 계정 관리 페이지
+	 * 
+	 * @return String
+	 */
+	@RequestMapping(value = "/myPage/myPage_accountEdit.do", method = RequestMethod.GET)
+	public String accountEdit() {
+
+		return "myPage/myPage_accountEdit";
+	}
+	
+	/**
+	 * 회원 탈퇴 페이지
+	 * 
+	 * @return String
+	 */
+	@RequestMapping(value = "/myPage/myPage_accountOut.do", method = RequestMethod.GET)
+	public String introduce() {
+
+		return "myPage/myPage_accountOut";
+	}
 }

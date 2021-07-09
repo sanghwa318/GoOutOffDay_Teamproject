@@ -4,7 +4,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="../inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <link
 	href="${pageContext.request.contextPath}/assets/plugins/drag-drop-image-uploader/dist/image-uploader.min.css"
 	rel="stylesheet">
@@ -23,7 +23,7 @@
 	<!-- 푸터빼고 감싸주세요 -->
 	<div class="wrapper">
 		<!-- 상단영역 -->
-		<%@ include file="../inc/Header.jsp"%>
+		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">마이페이지</h1>
@@ -79,10 +79,10 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="../inc/Footer.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 
 
-	<%@ include file="../inc/plugin.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 
 
 	<script type="text/javascript">
