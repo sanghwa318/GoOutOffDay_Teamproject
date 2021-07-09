@@ -69,13 +69,13 @@ public class WalkCourse {
 			@SerializedName("DETAIL_COURSE")
 			private String DETAIL_COURSE; // 세부코스
 			@SerializedName("CPI_IDX")
-			private String CPI_IDX; // 포인트순번 (기본키)
+			private int CPI_IDX; // 포인트순번 (기본키)
 			@SerializedName("CPI_NAME")
 			private String CPI_NAME; // 포인트명칭
 			@SerializedName("X")
-			private float X; // X좌표
+			private String X; // X좌표
 			@SerializedName("Y")
-			private float Y; // Y좌표
+			private String Y; // Y좌표
 			
 			@SerializedName("CPI_CONTENT")
 			private String CPI_CONTENT; // 포인트설명
