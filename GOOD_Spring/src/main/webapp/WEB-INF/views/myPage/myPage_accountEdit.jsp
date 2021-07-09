@@ -46,23 +46,23 @@
 			<div class="form-group1">
 				<label for='user_nick' class="col-sm-2 control-label">닉네임</label>
 				<div class="col-sm-10">
-                        
-                            <input type="text" name="user_nick" class="form-control" id="user_nick" value="${login_info.getUser_nick()}">
-                           
-                      
+                         
+                            <input type="text" name="user_nick" class="form-control" id="user_nick" value="${login_info.getUser_nick()}" readonly />
+                            
+ 
 			</div>
 			</div><!-- //닉네임 -->
 			
 			<!-- 비밀번호 -->
 			<div class="form-group1">
-                    <label for="user_pw" class="col-sm-2 control-label">비밀번호</label>
+                    <label for="user_pw" class="col-sm-2 control-label">비밀번호 변경</label>
                     <div class="col-sm-10">
-                        <input type="password" name="user_pw" class="form-control" id="user_pw" placeholder="영문,숫자,특수문자 조합 최대 30글자" />
+                        <input type="password" name="user_pw" class="form-control" id="user_pw" placeholder="영문,숫자,특수문자 조합 최대 30글자, 변경하고 싶지 않으면 기존비밀번호 입력." />
                     </div>
                 </div><!-- //비밀번호 -->
                 <!-- 비밀번호 확인 -->
                 <div class="form-group1">
-                    <label for="user_pw_re" class="col-sm-2 control-label">수정된 비밀번호 확인</label>
+                    <label for="user_pw_re" class="col-sm-2 control-label">변경된 비밀번호 확인</label>
                     <div class="col-sm-10">
                         <input type="password" name="user_pw_re" class="form-control" id="user_pw_re" placeholder="영문,숫자,특수문자 조합 최대 30글자" />
                     </div>
@@ -72,7 +72,7 @@
 			 <div class="form-group1">
                     <label for="user_name" class="col-sm-2 control-label">이름</label>
                     <div class="col-sm-10">
-                        <input type="text" name="user_name" class="form-control" id="user_name" value="${login_info.getUser_name()}"/>
+                        <input type="text" name="user_name" class="form-control" id="user_name" value="${login_info.getUser_name()}" />
                     </div>
                 </div><!-- //이름 -->
 			
@@ -81,7 +81,7 @@
                     <label for="email" class="col-sm-2 control-label">이메일</label>
                     <div class="col-sm-10">
                 
-                            <input type="email" name="email" class="form-control" id="email" value="${login_info.getEmail()}" />
+                            <input type="email" name="email" class="form-control" id="email" value="${login_info.getEmail()}" readonly />
                   
                     </div>
                 </div><!-- //이메일 -->

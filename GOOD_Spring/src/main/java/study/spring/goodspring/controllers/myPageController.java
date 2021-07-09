@@ -223,7 +223,34 @@ public class myPageController {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
 
+        /**3) 수정된 정보 세션 업데이트 */
+        Member output = null;
+
+		try {
+			output = memberService.login(input);
+
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+
+		/** 4) 프로필 사진이 존재하는 경우 썸네일 이미지 생성 */
+		UploadItem photo = output.getUser_photo();
+
+		if (photo != null) {
+			try {
+				String thumbPath = webHelper.createThumbnail(photo.getFilePath(), 150, 150, true);
+
+				// 웹 상에서 접근할 수 있는 URL정보 등록
+				photo.setFileUrl(webHelper.getUploadUrl(photo.getFilePath()));
+				photo.setThumbnailUrl(webHelper.getUploadUrl(thumbPath));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
         /** 4) 결과 표시 */
+		webHelper.setSession("login_info", output);
         return webHelper.getJsonData();
     }
 }
