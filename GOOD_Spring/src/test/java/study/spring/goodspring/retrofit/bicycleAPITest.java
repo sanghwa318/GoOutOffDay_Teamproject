@@ -18,7 +18,7 @@ import retrofit2.Retrofit;
 import study.spring.goodspring.APIservice.BicycleService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.Bicycle;
-import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
+import study.spring.goodspring.model.Bicycle.rentBikeStatus.row;
 
 /** Lombok의 Log4j 객체 */
 //import lombok.extern.slf4j.Slf4j;
@@ -66,9 +66,9 @@ public class bicycleAPITest {
 
 		/** 조회결과를 반복문을 활용해서 출력한다. */
 		if (bicycle != null) {
-			List<Row> list = bicycle.getRentBikeStatus().getRow();
+			List<row> list = bicycle.getRentBikeStatus().getRow_list();
 
-			for (Row item : list) {
+			for (row item : list) {
 				log.debug(" >>> " + item.toString());
 			}
 		}

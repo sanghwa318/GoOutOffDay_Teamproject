@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import study.spring.goodspring.helper.WebHelper;
-import study.spring.goodspring.model.Bicycle;
 import study.spring.goodspring.model.Bicycle.rentBikeStatus.row;
 import study.spring.goodspring.model.Bicycle.rentBikeStatus;
 import study.spring.goodspring.uploadservice.BicycleUpload;
@@ -32,8 +34,19 @@ public class BicyleController {
 	BicycleUpload bicycleUpload;
 
 	@RequestMapping(value = "/bicyclePage/bicycle_index.do", method = RequestMethod.GET)
-	public ModelAndView bicycle_index(Model model) {
-
+	public ModelAndView bicycle_index(Model model, HttpServletResponse response) {
+		
+		List<row> output = null;
+		
+		try {
+			// 데이터 조회하기
+			output = bicycleUpload.getBicycle(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// View 처리
+		model.addAttribute("output", output);
 		return new ModelAndView("/bicyclePage/bicycle_index");
 
 	}
@@ -42,12 +55,11 @@ public class BicyleController {
 	public Map<String, Object> bicycle_index_search(Model model,
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
 
-		Bicycle bicycle = new Bicycle();
 //		Bicycle.rentBikeStatus rentBikeStatus = bicycle.new rentBikeStatus();
 //		rentBikeStatus.row input = rentBikeStatus.new row();
 		row input = new row();
 		input.setStationName(keyword);
-
+		
 		List<row> output = null;
 
 		try {

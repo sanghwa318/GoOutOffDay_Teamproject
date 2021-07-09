@@ -160,6 +160,7 @@ p {
 	left: 5px;
 	bottom: 5px;
 }
+
 </style>
 
 </head>
@@ -185,8 +186,7 @@ p {
 							<div class="menu_header">
 								<form id="mapSearch"
 									action="${pageContext.request.contextPath }/bicyclePage/bicycle_index_search.do">
-									<label for="keyword">정류장 : </label> <input type="search"
-										name="keyword" id="keyword" />
+									<label for="keyword">대여소 : </label> <input type="search" name="keyword" id="keyword"/>
 									<button type="submit" class="btn btn-default"
 										id="mapSearch-btn">검색하기</button>
 								</form>
@@ -403,8 +403,9 @@ p {
 		                    	 for (var i=0; i<result.item.length; i++){
 		 	                        str+= "<div class='menu_detail'>";
 		 							str+="<button id='map_btn' class='btn btn-info pull-right' type='submit'>지도 보기 </button>";
-		 							str+="<p class='detail_content1'>정류장 : "+ result.item[i].stationName+" </p>";
-		 							str+="<p class='detail_content2'>현재 이용 가능 대수: "+result.item[i].parkingBikeTotCnt+"</p></div>";
+		 							str+="<p class='detail_content1'>대여소 : "+ result.item[i].stationName+" </p>";
+		 							str+="<p class='detail_content2'>현재 이용 가능 대수: "+ result.item[i].parkingBikeTotCnt+" </p>";
+		 							str+="<p class='detail_content3'>거치율: "+ result.item[i].shared+"</p></div>";
 		 	                    }
 		                    $("#select_result").html(str);
 		                } else{ $("#select_result").html("<h3>검색결과가 없어요.</h3> <br><h3>검색어를 확인해주세요.</h3>"); }
