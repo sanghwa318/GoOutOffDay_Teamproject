@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 import study.spring.goodspring.APIservice.CasAPISerchService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.CasAPIList;
-import study.spring.goodspring.model.CasAPIList.SJWPerform.row;
+import study.spring.goodspring.model.CasAPIList.tvYeyakCOllect.Row;
 
 /** Lombok의 Log4j 객체 */
 //import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,7 @@ public class CasAPITest {
 		CasAPISerchService casApiService = retrofit.create(CasAPISerchService.class);
 
 		/** 2) 검색 파라미터 처리 */
-		Call<CasAPIList> call = casApiService.getCasAPIList();
+		Call<CasAPIList> call = casApiService.getCasOtherAPIList();
 		CasAPIList casAPIList = null;
 		try {
 			casAPIList = call.execute().body();
@@ -62,30 +62,24 @@ public class CasAPITest {
 		/** 3) 조회결과를 반복문을 활용해서 출력한다. */
 
 		if (casAPIList != null) {
-			List<row> list = casAPIList.getSJWPerform().getRow();
+			/* List<row> list = casAPIList.getSJWPerform().getRow(); */
+			List<Row> list = casAPIList.getTvYeyakCOllect().getRow();
 
 			/** INFO컬럼값 클리닝 **/
-			int i = 0;
-			for (row item : list) {
-				i++;
-				String info = item.getINFO();
-				if (info != "" && info.length() > 0 && info.contains("http")) {
-					int a = info.indexOf("http");
-					info = info.substring(a);
-					int b = info.indexOf("\"");
-					info = info.substring(0, b);
-
-					item.setINFO(info);
-
-					log.debug(i + info);
-				} else {
-					info = "";
-				}
-			}
-
 			/*
-			 * for (row item : list) { log.debug(" >>> " + item.toString()); }
+			 * int i = 0; for (row item : list) { i++; String info = item.getINFO(); if
+			 * (info != "" && info.length() > 0 && info.contains("http")) { int a =
+			 * info.indexOf("http"); info = info.substring(a); int b = info.indexOf("\"");
+			 * info = info.substring(0, b);
+			 * 
+			 * item.setINFO(info);
+			 * 
+			 * log.debug(i + info); } else { info = ""; } }
 			 */
+
+			for (Row item : list) {
+				log.debug(" >>> " + item.toString());
+			}
 
 		}
 	}

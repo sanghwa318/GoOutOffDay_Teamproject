@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CasDBMapper">
-
 	<!-- 공연전시 항목 -->
 	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
 	<resultMap type="study.spring.goodspring.model.CasShowExh"
@@ -51,20 +50,17 @@
 	<select id="show_selectMainList"
 		parameterType="study.spring.goodspring.model.CasShowExh"
 		resultMap="showExhMap">
-		SELECT PERFORM_CODE, TITLE, START_DATE, END_DATE,
-		PLACE_NAME, PLAY_TIME, AGE, PLAN_COMPANY, INQUIRY_PHONE,
-		INQUIRY_EMAIL, TICKET_INFO,
-		GENRE_NAME, ISOPEN, FILE_URL_MI,
-		FILE_URL_TI, INFO,
-		service_tag,
-		regDate, editDate
+		SELECT PERFORM_CODE, TITLE, PLACE_NAME, GENRE_NAME,
+		INFO,
+		service_tag
 		FROM cas_showexh
-		WHERE
-		INFO is not null
-		AND service_tag=#{service_tag}
+		WHERE INFO is not null
+		AND
+		service_tag=#{service_tag}
+		AND TITLE NOT LIKE '%취소%'
 		AND TITLE NOT LIKE
-		'%취소%'
-		AND TITLE NOT LIKE '%cancel%'
+		'%cancel%'
+		ORDER BY regDate DESC
 		LIMIT 15;
 	</select>
 
@@ -78,4 +74,13 @@
 			LIMIT #{offset}, #{listCount};
 		</if>
 	</select>
+	
+	<!-- 공연전시 항목 -->
+	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+	
+	<!-- 단일행 조회를 위한 기능정의 -->
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+
+	<!-- 데이터 수 조회하기 -->
 </mapper>

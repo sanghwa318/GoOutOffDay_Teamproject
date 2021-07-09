@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CasUploadMapper">
-	<insert id="insertItem"
+	<!-- 공연전시 최초 업로드 -->
+	<insert id="insertItemShowExh"
 		parameterType="study.spring.goodspring.model.CasAPIList$SJWPerform$row">
 		INSERT INTO cas_showexh (
 		PERFORM_CODE, TITLE,
@@ -27,7 +28,8 @@
 		now()
 		);
 	</insert>
-	<update id="updateItem"
+	<!-- 공연전시 동일값이면 수정날짜만 업데이트 -->
+	<update id="updateItemShowExh"
 		parameterType="study.spring.goodspring.model.CasAPIList$SJWPerform$row">
 		UPDATE cas_showexh SET
 		PERFORM_CODE = #{PERFORM_CODE},
@@ -51,5 +53,104 @@
 		now()
 		WHERE PERFORM_CODE=#{PERFORM_CODE} AND
 		START_DATE=#{START_DATE};
+	</update>
+
+	<!-- 공공서비스 최초 업로드 -->
+	<insert id="insertItemOther"
+		parameterType="study.spring.goodspring.model.CasAPIList$tvYeyakCOllect$Row">
+		INSERT INTO cas_other (
+		DIV_COL,
+		SERVICE,
+		GUBUN,
+		SVCID,
+		MAXCLASSNM,
+		MINCLASSNM,
+		SVCSTATNM,
+		SVCNM,
+		PAYATNM,
+		PLACENM,
+		USETGTINFO,
+		SVCURL,
+		X,
+		Y,
+		SVCOPNBGNDT,
+		SVCOPNENDDT,
+		RCPTBGNDT,
+		RCPTENDDT,
+		AREANM,
+		IMGURL,
+		DTLCONT,
+		TELNO,
+		V_MAX,
+		V_MIN,
+		REVSTDDAY,
+		REVSTDDAYNM,
+		regDate, 
+		editDate
+		) VALUES
+		(
+		#{DIV},
+		#{SERVICE},
+		#{GUBUN},
+		#{SVCID},
+		#{MAXCLASSNM},
+		#{MINCLASSNM},
+		#{SVCSTATNM},
+		#{SVCNM},
+		#{PAYATNM},
+		#{PLACENM},
+		#{USETGTINFO},
+		#{SVCURL},
+		#{X},
+		#{Y},
+		#{SVCOPNBGNDT},
+		#{SVCOPNENDDT},
+		#{RCPTBGNDT},
+		#{RCPTENDDT},
+		#{AREANM},
+		#{IMGURL},
+		#{DTLCONT},
+		#{TELNO},
+		#{V_MAX},
+		#{V_MIN},
+		#{REVSTDDAY},
+		#{REVSTDDAYNM},
+		now(),
+		now()
+		);
+	</insert>
+	<!-- 공공서비스 동일값이면 수정날짜만 업데이트 -->
+	<update id="updateItemOther"
+		parameterType="study.spring.goodspring.model.CasAPIList$tvYeyakCOllect$Row">
+		UPDATE cas_other SET
+		DIV_COL=#{DIV},
+		SERVICE=#{SERVICE},
+		GUBUN=#{GUBUN},
+		SVCID=#{SVCID},
+		MAXCLASSNM=#{MAXCLASSNM},
+		MINCLASSNM=#{MINCLASSNM},
+		SVCSTATNM=#{SVCSTATNM},
+		SVCNM=#{SVCNM},
+		PAYATNM=#{PAYATNM},
+		PLACENM=#{PLACENM},
+		USETGTINFO=#{USETGTINFO},
+		SVCURL=#{SVCURL},
+		X=#{X},
+		Y=#{Y},
+		SVCOPNBGNDT=#{SVCOPNBGNDT},
+		SVCOPNENDDT=#{SVCOPNENDDT},
+		RCPTBGNDT=#{RCPTBGNDT},
+		RCPTENDDT=#{RCPTENDDT},
+		AREANM=#{AREANM},
+		IMGURL=#{IMGURL},
+		DTLCONT=#{DTLCONT},
+		TELNO=#{TELNO},
+		V_MAX=#{V_MAX},
+		V_MIN=#{V_MIN},
+		REVSTDDAY=#{REVSTDDAY},
+		REVSTDDAYNM=#{REVSTDDAYNM},
+		editDate = now()
+		WHERE SERVICE=#{SERVICE} 
+		AND SVCID=#{SVCID};
 	</update>
 </mapper>

@@ -15,6 +15,7 @@ import study.spring.goodspring.APIservice.CasAPISerchService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.CasAPIList;
 import study.spring.goodspring.model.CasAPIList.SJWPerform.row;
+import study.spring.goodspring.model.CasAPIList.tvYeyakCOllect.Row;
 import study.spring.goodspring.uploadservice.CasAPIUploadService;
 
 @Slf4j
@@ -42,7 +43,7 @@ public class CasAPIScheduler {
 		CasAPISerchService casApiService = retrofit.create(CasAPISerchService.class);
 
 		/** 2) 검색 파라미터 처리 */
-		Call<CasAPIList> call = casApiService.getCasAPIList();
+		Call<CasAPIList> call = casApiService.getCasShowAPIList();
 		CasAPIList casAPIList = null;
 		try {
 			casAPIList = call.execute().body();
@@ -78,6 +79,46 @@ public class CasAPIScheduler {
 		/** 5) 수집결과 저장하기 **/
 		try {
 			CasAPIUploadService.collectCasShowExh(list);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 공연전시 API를 수집하여 DB에 저장하기 위한 메서드
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/cas_totalapi_scheduler", method = RequestMethod.GET)
+	public void collectCasOther() {
+		/** 1) API 연동 객체 생성 */
+		// Retrofit 객체 생성
+		Retrofit retrofit = retrofitHelper.getRetrofit(CasAPISerchService.BASE_URL);
+
+		// Service 객체를 생성한다. 구현체는 Retrofit이 자동으로 생성해 준다.
+		CasAPISerchService casApiService = retrofit.create(CasAPISerchService.class);
+
+		/** 2) 검색 파라미터 처리 */
+		Call<CasAPIList> call = casApiService.getCasOtherAPIList();
+		CasAPIList casAPIList = null;
+		try {
+			casAPIList = call.execute().body();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		/** 3) 조회결과를 반복문을 활용해서 출력 저장. */
+		List<Row> list = null;
+		if (casAPIList != null) {
+			list = casAPIList.getTvYeyakCOllect().getRow();
+		} else {
+			log.debug("조회결과 없음");
+			return;
+		}
+
+		/** 5) 수집결과 저장하기 **/
+		try {
+			CasAPIUploadService.collectCasOther(list);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
