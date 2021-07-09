@@ -1,5 +1,6 @@
 package study.spring.goodspring.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.RegexHelper;
+import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.Member;
@@ -57,7 +60,7 @@ public class CrewController {
 			@RequestParam(value = "crew_name", defaultValue="") String crew_name,
 			@RequestParam(value = "crew_category", defaultValue="") String crew_category,
 			@RequestParam(value = "crew_area", defaultValue="") String crew_area,
-			@RequestParam(value = "crew_photo", defaultValue="profile_default.png") String crew_photo,
+			@RequestParam(value="crew_photo", required=false) MultipartFile crew_photo,
 			@RequestParam(value = "crew_sinto", defaultValue="") String crew_sinto,
 			@RequestParam(value = "crew_dinto", defaultValue="") String crew_dinto) {
 			
@@ -75,15 +78,36 @@ public class CrewController {
 //		if(!regexHelper.isValue(crew_sinto)) { return webHelper.redirect(null, "크루 소개글을 입력하세요"); }
 //		if(!regexHelper.isValue(crew_dinto)) { return webHelper.redirect(null, "크루 소개글을 입력하세요"); }
 //		
+		
+		
+		//6) 업로드 결과를 Beans에 저장
+		UploadItem item = null;
+		//item.setContentType(crew_photo.getContentType());
+		//item.setFieldName(crew_photo.getName());
+		//item.setFileSize(crew_photo.getSize());
+		//item.setOriginName(crew_photo.getOriginalFilename());
+		//item.setFilePath(filePath);
+		
+		try {
+			item = webHelper.saveMultipartFile(crew_photo);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			crew_photo = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		//2) 데이터 저장하기
 		Crew input = new Crew();
 		input.setCrew_name(crew_name);
 		input.setCrew_category(crew_category);
 		input.setCrew_area(crew_area);
-		input.setCrew_photo(crew_photo);
+		input.setCrew_photo(item);
 		input.setCrew_sinto(crew_sinto);
 		input.setCrew_dinto(crew_dinto);
 		input.setUser_info_user_no(userNo);
+		
 		
 		
 		try {
@@ -94,7 +118,7 @@ public class CrewController {
 			e.getLocalizedMessage();
 		}
 		
-		// 3( 결과를 확인하기 위한 페이지 이동
+		// 3) 결과를 확인하기 위한 페이지 이동
 		String redirectUrl = contextPath + "/commPage/comm_crew_info.do?crew_no=" + input.getCrew_no();
 		
 		
@@ -104,8 +128,11 @@ public class CrewController {
 			e.printStackTrace();
 		}
 		
-		
 
-	
+		//7) View 처리
+		//업로드 정보를 View로 전달
+		model.addAttribute("item",item);
+
+
 }
 }

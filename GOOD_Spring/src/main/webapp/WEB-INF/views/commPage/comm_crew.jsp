@@ -185,9 +185,8 @@
 					</c:url>
 				
 				<tr>
-					<td align="center"><img src="/getCrewList/" width="50" /></td>
-					<td align="center"><a href="${infoUrl}">${crew_name}</a></td>
-					
+					<td align="center"><img src="${item.crew_photo.fileUrl}" width="100" /></td>
+					<td align="center"><a href="${infoUrl}">${item.crew_name}</a></td>
 				</tr>
 				</c:forEach>
 			</c:otherwise>

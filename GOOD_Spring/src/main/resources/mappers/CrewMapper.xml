@@ -13,10 +13,11 @@
 		<result property="crew_sinto" column="crew_sinto" />
 		<result property="crew_createtime" column="crew_createtime" />
 		<result property="crew_category" column="crew_category" />
-		<result property="crew_photo" column="crew_photo" />
+		<result property="photoJson" column="crew_photo" />
 		<result property="crew_dinto" column="crew_dinto" />
 		<result property="crew_member" column="crew_member" />
 		<result property="user_info_user_no" column="user_info_user_no" />
+		
 
 
 	</resultMap>
@@ -76,7 +77,7 @@
 		INSERT INTO crew (crew_name, crew_area, crew_sinto, crew_createtime,
 		crew_category, crew_photo, crew_dinto, user_info_user_no)
 		VALUES (#{crew_name}, #{crew_area}, #{crew_sinto}, now(), #{crew_category},
-		#{crew_photo}, #{crew_dinto}, #{user_info_user_no});
+		#{photoJson}, #{crew_dinto}, #{user_info_user_no});
 	</insert>
 
 	<!-- 데이터 삭제 기능 -->

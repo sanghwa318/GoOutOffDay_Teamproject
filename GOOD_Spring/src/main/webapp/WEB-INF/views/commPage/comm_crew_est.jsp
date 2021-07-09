@@ -90,7 +90,7 @@ button span {
 			<h1 class="page-header">크루 개설</h1>
 
 			
-				<form role="form" class="form-crew" method="POST" 
+				<form role="form" class="form-crew" method="POST" enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
 <div class="row " style="margin-bottom: 30px;"> 
 					<div class="form-group col-md-3 col-xs-6">
