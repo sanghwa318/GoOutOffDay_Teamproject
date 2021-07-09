@@ -37,7 +37,7 @@
 				<label for='user_id' class="col-sm-2 control-label">아이디</label>
 				<div class="col-sm-10">
                         
-                            <input type="text" name="user_id" class="form-control" id="user_id" value="${login_info.getUser_id()}" disabled/>
+                            <input type="text" name="user_id" class="form-control" id="user_id" value="${login_info.getUser_id()}" readonly/>
                            
                       
 			</div>

@@ -122,7 +122,7 @@
 	<!-- 회원정보 수정-->
 	<update id="updateItem"
 		parameterType="study.spring.goodspring.model.Member">
-		UPDATE user_info SET user_id=#{user_id},
+		UPDATE user_info SET 
 		user_pw=MD5(#{user_pw}),
 		user_name=#{user_name},
 		user_nick=#{user_nick}, 
@@ -131,7 +131,7 @@
 		post=#{post}, tel=#{tel},
 		email=#{email},
 		edit_datetime=now()
-		WHERE user_no=#{user_no};
+		WHERE user_id=#{user_id};
 	</update>
 	
 	<!-- 프로필 사진 수정을 위한 갱신 -->

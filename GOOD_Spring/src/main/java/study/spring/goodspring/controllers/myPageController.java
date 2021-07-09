@@ -218,7 +218,7 @@ public class myPageController {
 
         
         try {
-            memberService.addMember(input);
+            memberService.editMember(input);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
