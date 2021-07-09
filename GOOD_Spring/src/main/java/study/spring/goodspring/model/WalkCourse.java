@@ -10,8 +10,8 @@ import lombok.Data;
 /** 테이블 구조를 명시한 POJO클래스 (코스목록) */
 public class WalkCourse {
 
-	@SerializedName("seoulGilWalkCourse")
-	private SeoulGilWalkCourse seoulGilWalkCourse; 
+	@SerializedName("SeoulGilWalkCourse")
+	private SeoulGilWalkCourse SeoulGilWalkCourse; 
 
 	@Data
 	public class SeoulGilWalkCourse {
