@@ -38,7 +38,7 @@ public class WalkCourse {
 			@SerializedName("COURSE_CATEGORY_NM")
 			private String COURSE_CATEGORY_NM; // 코스카테고리명
 			@SerializedName("SOUTH_NORTH_DIV")
-			private int SOUTH_NORTH_DIV; // 강북강남구분코드
+			private String SOUTH_NORTH_DIV; // 강북강남구분코드
 			@SerializedName("SOUTH_NORTH_DIV_NM") 
 			private String SOUTH_NORTH_DIV_NM; // 강북강남구분
 			@SerializedName("AREA_GU")
@@ -49,7 +49,7 @@ public class WalkCourse {
 			@SerializedName("LEAD_TIME")
 			private String LEAD_TIME; // 소요시간
 			@SerializedName("COURSE_LEVEL")
-			private int COURSE_LEVEL; // 코스레벨
+			private String COURSE_LEVEL; // 코스레벨
 			@SerializedName("VOTE_CNT")
 			private int VOTE_CNT; // 추천수
 			@SerializedName("RELATE_SUBWAY")
