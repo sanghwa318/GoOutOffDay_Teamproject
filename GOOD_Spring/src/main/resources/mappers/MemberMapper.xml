@@ -119,18 +119,17 @@
 		DELETE FROM user_info WHERE user_no=#{user_no};
 	</delete>
 
-	<!-- 단일행 갱신을 위한 기능 정의 -->
+	<!-- 회원정보 수정-->
 	<update id="updateItem"
 		parameterType="study.spring.goodspring.model.Member">
 		UPDATE user_info SET user_id=#{user_id},
 		user_pw=MD5(#{user_pw}),
 		user_name=#{user_name},
-		user_nick=#{user_nick}, gender=#{gender},
+		user_nick=#{user_nick}, 
 		address1=#{address1},
 		address2=#{address2},
 		post=#{post}, tel=#{tel},
 		email=#{email},
-		user_photo=#{photoJson},
 		edit_datetime=now()
 		WHERE user_no=#{user_no};
 	</update>

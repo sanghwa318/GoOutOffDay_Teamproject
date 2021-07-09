@@ -4,7 +4,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="/WEB-INF/views/inc/head.jsp"%>
+<%@ include file="../inc/head.jsp"%>
 <link
 	href="${pageContext.request.contextPath}/assets/plugins/drag-drop-image-uploader/dist/image-uploader.min.css"
 	rel="stylesheet">
@@ -23,7 +23,7 @@
 	<!-- 푸터빼고 감싸주세요 -->
 	<div class="wrapper">
 		<!-- 상단영역 -->
-		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
+		<%@ include file="../inc/Header.jsp"%>
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">마이페이지</h1>
@@ -69,20 +69,20 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="pull-left">
-						<a href="${pageContext.request.contextPath}/myPage_inquiry.do" class="btn btn-default">1:1 문의</a>
+						<a href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do" class="btn btn-default">1:1 문의</a>
 					</div>
 					<div class="pull-right">
-						<a href="${pageContext.request.contextPath}/myPage_accountEdit.do" class="btn btn-default">계정 관리</a>
-						<a href="${pageContext.request.contextPath}/myPage_accountOut.do" class="btn btn-default">회원 탈퇴</a>
+						<a href="${pageContext.request.contextPath}/myPage/myPage_accountEdit.do" class="btn btn-default">계정 관리</a>
+						<a href="${pageContext.request.contextPath}/myPage/myPage_accountOut.do" class="btn btn-default">회원 탈퇴</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+	<%@ include file="../inc/Footer.jsp"%>
 
 
-	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
+	<%@ include file="../inc/plugin.jsp"%>
 
 
 	<script type="text/javascript">

@@ -112,11 +112,7 @@
                         <input type="text" name="addr1" class="form-control" id="addr1" readonly />
                     </div>
                 </div>
-                <div class="form-group1">
-                    <div class="col-sm-10 col-sm-offset-2">
-                        <input type="text" name="addr1-1" class="form-control" id="addr1-1" readonly />
-                    </div>
-                </div>
+             
                 <div class="form-group1">
                     <div class="col-sm-10 col-sm-offset-2">
                         <input type="text" name="addr2" class="form-control" id="addr2" placeholder="나머지 주소" />

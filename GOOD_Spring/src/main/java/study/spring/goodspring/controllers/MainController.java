@@ -70,4 +70,26 @@ public class MainController {
 		return "mainPage/login_findPW";
 	}
 	
+	/**
+	 * 마이 페이지 회원 수정 페이지
+	 * 
+	 * @return String
+	 */
+	@RequestMapping(value = "/myPage/myPage_accountEdit.do", method = RequestMethod.GET)
+	public String myPage_accountEdit() {
+		
+		return "myPage/myPage_accountEdit";
+	}
+	
+	/**
+	 * 마이 페이지 회원탈퇴
+	 * 
+	 * @return String
+	 */
+	@RequestMapping(value = "/myPage/myPage_accountOut.do", method = RequestMethod.GET)
+	public String myPage_accountOut() {
+		
+		return "myPage/myPage_accountOut";
+	}
+	
 }

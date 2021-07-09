@@ -1,550 +1,156 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
-<%@ include file="../inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/inc/index_footer.css">
-<style>
-* {
-	font-family: "야놀자 야체";
-}
-/* 폼 전체 박스 */
-.form-horizontal {
-	border: 1px solid #87ceed;
-	width: auto;
-	margin: auto;
-	padding: 30px 10px;
-}
-
-/* 입력요소 단위 박스 */
-.form-group {
-	padding-top: 15px;
-}
-
-/* 마지막 입력 단위의 border 제거 */
-/* .form-group:last-child {
-	border-bottom: 0;
-} */
-
-/* Float 마감제 */
-.form-group:after {
-	content: '';
-	display: block;
-	clear: both;
-	float: none;
-}
-
-/* <label>에 대한 박스 처리 */
-.col-md-2 {
-	width: 25%;
-	display: block;
-	float: left;
-	font-size: 20px;
-	padding-top: 7px;
-	text-indent: 5px;
-	text-align: right;
-}
-
-/* <input>태그가 배치되는 박스의 처리 */
-.col-md-10 {
-	width: 50%;
-	display: block;
-	float: left;
-}
-
-.col-md-10 #gender1, .col-md-10 #gender2 {
-	margin-left: 30px;
-	margin-top: 10px;
-}
-
-.gender {
-	font-size: 20px;
-}
-
-.col-md-10 #user_id, .col-md-10 #user_nikname, .col-md-10 #sample4_postcode
-	{
-	width: 200px;
-	display: block;
-	float: left;
-}
-
-/* <input>태그 */
-.form-control {
-	width: 100%;
-	padding: 5px 0;
-	font-size: 14px;
-	border: 1px solid #eee;
-}
-
-/* 글자 중앙 정렬 */
-.text-center {
-	text-align: center;
-}
-
-/* 필수항목 표시를 위한 `*` */
-.identify {
-	font-size: 14px;
-	color: #f00;
-}
-
-/* 에러 메시지에 대한 글자 색상 */
-.error {
-	color: red;
-}
-
-/* 에러가 발생한 <input>태그 */
-input.error {
-	background-color: #ffff00;
-}
-
-/* 에러메시지가 표시중인 <label>태그 */
-label.error {
-	font-size: 10px;
-	display: inline-block;
-	padding: 5px 10px;
-	margin: 0;
-}
-
-#id_uniq_check, #nikname_uniq_check {
-	margin-left: 20px;
-}
-/* 인풋요소 ui*/
-.form-control {
-	border: none;
-	border-bottom: 2px solid #ced4da;
-	border-radius: 0px;
-	background-color: transparent;
-	padding-left: 5px;
-	box-shadow: none;
-	/* required fields */
-	/* active state */
-	/* invalid state */
-}
-
-.form-control:focus {
-	border-bottom-color: #007bff;
-	color: #000;
-	box-shadow: none;
-}
-
-.form-control:focus.invalid {
-	border-bottom-color: #dc3545;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.all.min.js" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.js" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Joinlayout.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js" />
 </head>
 <body>
-	<!-- 푸터빼고 감싸주세요 -->
-	<div class="wrapper">
-		<!-- 상단영역 -->
-		<%@ include file="../inc/Header.jsp"%>
+   <div class="wrapper">
 
-		<!-- 본문영역 -->
-		<div class="container">
-			<h1 class="page-header">계정관리</h1>
-			<!-- 가입폼 시작 -->
-			<form class="form-horizontal" name="join_form" id="join_form"
-				role="form">
-				<!-- 입력양식 -->
+	<!-- 상단영역 -->
+	<%@ include file="/WEB-INF/views/inc/Header.jsp" %>
 
-				<div class="form-group">
-					<label for='user_id' class="col-md-2">아이디 </label>
-					<div class="col-md-10">
-						<input type="text" name="user_id" id="user_id"
-							class="form-control" value="아이디" disabled /> <input type="hidden"
-							name="id_uniq_check" value="">
-					</div>
+	<!-- 본문영역 -->
+	<div class="container">
+	<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="page-header">
+                <h1>내 정보 수정</h1>
+        </div>
+		<!-- 수정폼 시작 -->
+		 <form id="edit_form" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/myPage/myPage_accountEdit_ok">
+		
+			<!-- 입력양식 -->
+			<div class="form-group1">
+				<label for='user_id' class="col-sm-2 control-label">아이디</label>
+				<div class="col-sm-10">
+                        
+                            <input type="text" name="user_id" class="form-control" id="user_id" value="${login_info.getUser_id()}" disabled/>
+                           
+                      
+			</div>
+			</div>
+			<!-- 닉네임 -->
+			<div class="form-group1">
+				<label for='user_nick' class="col-sm-2 control-label">닉네임</label>
+				<div class="col-sm-10">
+                        
+                            <input type="text" name="user_nick" class="form-control" id="user_nick" value="${login_info.getUser_nick()}">
+                           
+                      
+			</div>
+			</div><!-- //닉네임 -->
+			
+			<!-- 비밀번호 -->
+			<div class="form-group1">
+                    <label for="user_pw" class="col-sm-2 control-label">비밀번호</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="user_pw" class="form-control" id="user_pw" placeholder="영문,숫자,특수문자 조합 최대 30글자" />
+                    </div>
+                </div><!-- //비밀번호 -->
+                <!-- 비밀번호 확인 -->
+                <div class="form-group1">
+                    <label for="user_pw_re" class="col-sm-2 control-label">수정된 비밀번호 확인</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="user_pw_re" class="form-control" id="user_pw_re" placeholder="영문,숫자,특수문자 조합 최대 30글자" />
+                    </div>
+                </div><!-- //비밀번호 확인 -->
+              
+              <!-- 이름 -->
+			 <div class="form-group1">
+                    <label for="user_name" class="col-sm-2 control-label">이름</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="user_name" class="form-control" id="user_name" value="${login_info.getUser_name()}"/>
+                    </div>
+                </div><!-- //이름 -->
+			
+			<!-- 이메일 -->
+			<div class="form-group1">
+                    <label for="email" class="col-sm-2 control-label">이메일</label>
+                    <div class="col-sm-10">
+                
+                            <input type="email" name="email" class="form-control" id="email" value="${login_info.getEmail()}" />
+                  
+                    </div>
+                </div><!-- //이메일 -->
+            <!-- 연락처 -->
+			<div class="form-group1">
+                    <label for="tel" class="col-sm-2 control-label">연락처</label>
+                    <div class="col-sm-10">
+                        <input type="tel" name="tel" class="form-control" id="tel" value="${login_info.getTel()}" />
+                    </div>
+                </div><!-- //연락처 -->
+                
+             <div class="form-group1">
+                    <label for="user_id" class="col-sm-2 control-label">주소</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input type="text" name="postcode" class="form-control" id="postcode" maxlength="5" value="${login_info.getPost()}"readonly>
+                            <span class="input-group-btn">
+                                <button type="button" onclick="execDaumPostcode()" class="btn btn-info postcode-finder" data-postcode="#postcode" data-addr1="#addr1" data-addr2="#addr2" data-frame="#postcode-frame">우편번호검색</button>
+                            </span>
+                            
+                        </div>
+                    </div>
+                    <label for="postcode" id="error2" class="error">우편번호를 검색하세요.</label>
+                </div>
+                <div class="form-group1">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="text" name="addr1" class="form-control" id="addr1" value="${login_info.getAddress1()}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group1">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="text" name="addr2" class="form-control" id="addr2" value="${login_info.getAddress2()}" placeholder="나머지 주소" />
+                    </div>
+                </div>
+                <div class="form-group1" style="margin-bottom: 0">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <div id="postcode-frame" style="display: none; border: 1px solid; width: 100%; height: 300px; margin: 5px 0; position: relative">
+                            <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1" onclick="foldPostcode(this)" alt="접기 버튼">
+                        </div>
+                    </div>
+                </div>
+				
+
+         
+			<!-- 버튼 -->	
+			<div class="form-group1">
+				<div class="col-sm-10 col-sm-offset-2 text-center">
+					<button type='submit'class="btn btn-primary">수정하기</button>
+					<button type="reset" class="btn btn-danger"
+						onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
 				</div>
+			</div><!-- //버튼 끝 -->
 
-
-				<div class="form-group">
-					<label for='user_nikname' class="col-md-2">닉네임 <span
-						class='identify'></span></label>
-					<div class="col-md-10">
-						<input type="text" name="user_nikname" id="user_nikname"
-							class="form-control" /> <input type="hidden"
-							name="nikname_uniq_check" value="">
-						<button class="btn btn-primary" type="button"
-							id="nikname_uniq_check">중복확인</button>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for='user_pw' class="col-md-2">비밀번호 </label>
-					<div class="col-md-10">
-						<input type="password" name="user_pw" id="user_pw"
-							class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for='user_pw' class="col-md-2">비밀번호 확인 </label>
-					<div class="col-md-10">
-						<input type="password" name="user_pw_re" id="user_pw_re"
-							class="form-control" />
-					</div>
-				</div>
-
-
-				<div class="form-group">
-					<label for='email' class="col-md-2">이메일 </label>
-					<div class="col-md-10">
-						<input type="email" name="email" id="email" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for='tel' class="col-md-2">연락처</label>
-					<div class="col-md-10">
-						<input type="tel" name="tel" id="tel" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for='Address1' class="col-md-2">주소 </label>
-					<div class="col-md-10">
-						<input type="text" id="sample4_postcode" name="sample4_postcode"
-							class="form-control" placeholder="우편번호"> <input
-							type="button" onclick="sample4_execDaumPostcode()"
-							value="우편번호 찾기"><br> <input type="text"
-							id="sample4_roadAddress" class="form-control" placeholder="도로명주소">
-						<input type="text" id="sample4_jibunAddress" class="form-control"
-							placeholder="지번주소"> <span id="guide"
-							style="color: #999; display: none"></span> <input type="text"
-							id="sample4_detailAddress" name="sample4_detailAddress"
-							class="form-control" placeholder="상세주소">
-
-					</div>
-				</div>
-
-
-				<div class="form-group">
-					<div class="text-center">
-						<button type='submit' id="next1" class="btn btn-primary">수정하기</button>
-						<button type="reset" class="btn btn-danger"
-							onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
-					</div>
-				</div>
-
-			</form>
-			<!-- //가입폼 끝 -->
+		</form>
+		<!-- //가입폼 끝 -->
 		</div>
+</div>
+</div>
+
 	</div>
-	<%@ include file="../inc/Footer.jsp"%>
-
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-		function sample4_execDaumPostcode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var roadAddr = data.roadAddress; // 도로명 주소 변수
-							var extraRoadAddr = ''; // 참고 항목 변수
-
-							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-							if (data.bname !== ''
-									&& /[동|로|가]$/g.test(data.bname)) {
-								extraRoadAddr += data.bname;
-							}
-							// 건물명이 있고, 공동주택일 경우 추가한다.
-							if (data.buildingName !== ''
-									&& data.apartment === 'Y') {
-								extraRoadAddr += (extraRoadAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
-							// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-							if (extraRoadAddr !== '') {
-								extraRoadAddr = ' (' + extraRoadAddr + ')';
-							}
-
-							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById('sample4_postcode').value = data.zonecode;
-							document.getElementById("sample4_roadAddress").value = roadAddr;
-							document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-
-							// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-							if (roadAddr !== '') {
-								document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-							} else {
-								document.getElementById("sample4_extraAddress").value = '';
-							}
-
-							var guideTextBox = document.getElementById("guide");
-							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-							if (data.autoRoadAddress) {
-								var expRoadAddr = data.autoRoadAddress
-										+ extraRoadAddr;
-								guideTextBox.innerHTML = '(예상 도로명 주소 : '
-										+ expRoadAddr + ')';
-								guideTextBox.style.display = 'block';
-
-							} else if (data.autoJibunAddress) {
-								var expJibunAddr = data.autoJibunAddress;
-								guideTextBox.innerHTML = '(예상 지번 주소 : '
-										+ expJibunAddr + ')';
-								guideTextBox.style.display = 'block';
-							} else {
-								guideTextBox.innerHTML = '';
-								guideTextBox.style.display = 'none';
-							}
-						}
-					}).open();
-		}
-	</script>
+	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
+<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script	src="${pageContext.request.contextPath}/assets/js/post-join.js"></script>
+<script	src="${pageContext.request.contextPath}/assets/js/regex-edit.js"></script>
+<script src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
 
 
-	<script src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js"></script>
-	<!-- validate 플러그인 참조 -->
-	<script src="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js"></script>
-	<!-- sweetalert 플러그인 참조 -->
-	<script src="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-
-			$("#next1").click(function() {
-				// 닉네임 중복체크
-				// 입력값을 취득하고, 내용의 존재여부를 검사한다.
-				var user_nikname_val = $("#user_nikname").val();
-
-				if (!user_nikname_val) { // 입력되지 않았다면?
-					swal({
-						title : "에러",
-						text : "닉네임을 입력해 주세요.",
-						type : "error"
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
-
-						}, 100);
-					}); // <-- 메시지 표시
-					$("#user_nikname").focus(); // <-- 커서를 강제로 넣기
-					return false; // <-- 실행 중단
-				}
-
-				if ($("input[name='nikname_uniq_check']").val() == '') {
-					swal({
-						title : "경고",
-						text : "닉네임 중복확인을 해주세요.",
-						type : "warning"
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
-
-						}, 100);
-					});
-					$("input[name='nikname_uniq_check']").eq(0).focus();
-					return false;
-				}
-			});
-
-			//닉네임 중복확인 버튼 시작
-			$("#nikname_uniq_check")
-					.click(
-							function() {
-
-								// 입력값을 취득하고, 내용의 존재여부를 검사한다.
-								var user_nikname_val2 = $("#user_nikname")
-										.val();
-
-								$.post("../api/id_unique_check.do", {
-									user_id : user_nikname_val2
-								//나중에 닉네임으로 바꾸기
-								}, function(req) {
-									// 사용 가능한 아이디인 경우 --> req = { result: "OK" }
-									// 사용 불가능한 아이디인 경우 --> req = { result: "FAIL" }
-									if (req.result == 'OK') {
-										swal({
-											title : "성공",
-											text : "사용가능한 닉네임 입니다.",
-											type : "success"
-										}).then(function(result) {
-											// 창이 닫히는 애니메이션의 시간이 있으므로,
-											// 0.1초의 딜레이 적용 후 포커스 이동
-											setTimeout(function() {
-
-											}, 100);
-										});
-										$("input[name=nikname_uniq_check]")
-												.val('y');
-										$("#user_nikname").prop("disabled",
-												true);
-
-									} else {
-										swal({
-											title : "에러",
-											text : "사용할 수 없는 닉네임 입니다.",
-											type : "error"
-										})
-										$("#user_nikname").val("");
-										$("#user_nikname").focus();
-									}
-								}); // end $.get
-
-								/** 플러그인의 기본 설정 옵션 추가 */
-								jQuery.validator
-										.setDefaults({
-											onkeyup : false, // 키보드입력시 검사 안함
-											onclick : false, // <input>태그 클릭시 검사 안함
-											onfocusout : false, // 포커스가 빠져나올 때 검사 안함
-											showErrors : function(errorMap,
-													errorList) { // 에러 발생시 호출되는 함수 재정의
-												// 에러가 있을 때만..
-												if (this.numberOfInvalids()) {
-													// 0번째 에러 메시지에 대한 javascript 기본 alert 함수 사용
-													//alert(errorList[0].message);
-													// 0번째 에러 발생 항목에 포커스 지정
-													//$(errorList[0].element).focus();
-
-													swal(
-															{
-																title : "에러",
-																text : errorList[0].message,
-																type : "error"
-															})
-															.then(
-																	function(
-																			result) {
-																		// 창이 닫히는 애니메이션의 시간이 있으므로,
-																		// 0.1초의 딜레이 적용 후 포커스 이동
-																		setTimeout(
-																				function() {
-																					$(
-																							errorList[0].element)
-																							.val(
-																									'');
-																					$(
-																							errorList[0].element)
-																							.focus();
-																				},
-																				100);
-																	});
-												}
-											}
-										});
-
-								/** 유효성 검사 추가 함수 */
-								$.validator.addMethod("kor", function(value,
-										element) {
-									return this.optional(element)
-											|| /^[ㄱ-ㅎ가-힣]*$/i.test(value);
-								});
-
-								$.validator
-										.addMethod(
-												"phone",
-												function(value, element) {
-													return this
-															.optional(element)
-															|| /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/i
-																	.test(value)
-															|| /^\d{2,3}\d{3,4}\d{4}$/i
-																	.test(value);
-												});
-								$.validator.addMethod("address", function(
-										value, element) {
-									return this.optional(element)
-											|| /^[ㄱ-ㅎ가-힣0-9]*$/i.test(value);
-								});
-
-								/** form태그에 부여한 id속성에 대한 유효성 검사 함수 호출 */
-								$("#join_form")
-										.validate(
-												{
-													/** 입력검사 규칙 */
-													rules : {
-
-														// [비밀번호] 필수 + 글자수 길이 제한
-														user_pw : {
-															required : true,
-															minlength : 4,
-															maxlength : 20
-														},
-														// [비밀번호 확인] 필수 + 특정 항목과 일치 (id로 연결)
-														user_pw_re : {
-															required : true,
-															equalTo : "#user_pw"
-														},
-
-														// [닉네임] 필수 알파벳,숫자 조합만 허용
-														user_nikname : {
-															required : true,
-															alphanumeric : true
-														},
-														// [이메일] 필수 + 이메일 형식 일치 필요
-														email : {
-															required : true,
-															email : true
-														},
-														// [연락처] 필수
-														tel : {
-															required : true,
-															phone : true
-														},
-														// [우편번호찾기] 필수
-														sample4_postcode : {
-															required : true,
-															number : true
-														},
-														// [상세주소] 필수
-														sample4_detailAddress : {
-															required : true,
-															address : true
-														}
-													},
-													/** 규칙이 맞지 않을 경우의 메시지 */
-													messages : {
-
-														user_pw : {
-															required : "비밀번호를 입력하세요.",
-															minlength : "비밀번호는 4글자 이상 입력하셔야 합니다.",
-															maxlength : "비밀번호는 최대 20자까지 가능합니다."
-														},
-														user_pw_re : {
-															required : "비밀번호 확인값을 입력하세요.",
-															equalTo : "비밀번호 확인이 잘못되었습니다."
-														},
-
-														user_nikname : {
-															required : "닉네임을 입력하세요.",
-															alphanumeric : "닉네임은 영어,숫자만 입력 가능합니다."
-														},
-														email : {
-															required : "이메일을 입력하세요.",
-															email : "이메일 형식이 잘못되었습니다."
-														},
-														tel : {
-															required : "연락처를 입력하세요.",
-															phone : "연락처 형식이 잘못되었습니다."
-														},
-														roadAddress : {
-															required : "도로명주소를 입력하세요.",
-															address : "도로명주소는 한글,숫자만 입력 가능합니다."
-														},
-														sample4_postcode : {
-															required : "우편번호 찾기를 해주세요.",
-															number : "우편번호는 숫자만 가능합니다."
-
-														},
-														sample4_detailAddress : {
-															required : "상세주소를 입력하세요.",
-															address : "상세주소는 한글과 숫자만 가능합니다."
-														}
-
-													}
-
-												}); // end validate()
-
-							}); // end
-		});//옮긴거.
-	</script>
-
+	
 </body>
 </html>

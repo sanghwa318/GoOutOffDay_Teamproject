@@ -29,7 +29,7 @@
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('postcode').value = data.zonecode;
 							document.getElementById("addr1").value = roadAddr;
-							document.getElementById("addr1-1").value = data.jibunAddress;
+
 
 							
 
