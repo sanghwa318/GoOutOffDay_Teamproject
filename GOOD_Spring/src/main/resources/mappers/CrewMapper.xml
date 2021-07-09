@@ -17,7 +17,7 @@
 		<result property="crew_dinto" column="crew_dinto" />
 		<result property="crew_member" column="crew_member" />
 		<result property="user_info_user_no" column="user_info_user_no" />
-		
+
 
 
 	</resultMap>
@@ -37,6 +37,9 @@
 		crew_createtime,
 		crew_category, crew_photo, crew_dinto, crew_member,
 		user_info_user_no FROM crew WHERE crew_name = #{crew_name};
+		
+		ORDER BY crew_no DESC
+		
 	</select>
 
 
@@ -61,10 +64,10 @@
 			</if>
 		</where>
 
-		ORDER BY crew_createtime ASC
-		
+		ORDER BY crew_no DESC
+
 		<if test="listCount > 0">
-		LIMIT #{offset}, #{listCount}
+			LIMIT #{offset}, #{listCount}
 		</if>
 
 	</select>
@@ -74,10 +77,14 @@
 	<insert id="insertCrew"
 		parameterType="study.spring.goodspring.model.Crew"
 		useGeneratedKeys="true" keyProperty="crew_no">
-		INSERT INTO crew (crew_name, crew_area, crew_sinto, crew_createtime,
-		crew_category, crew_photo, crew_dinto, user_info_user_no)
-		VALUES (#{crew_name}, #{crew_area}, #{crew_sinto}, now(), #{crew_category},
-		#{photoJson}, #{crew_dinto}, #{user_info_user_no});
+		INSERT INTO crew (crew_name,
+		crew_area, crew_sinto, crew_createtime,
+		crew_category, crew_photo,
+		crew_dinto, user_info_user_no)
+		VALUES (#{crew_name}, #{crew_area},
+		#{crew_sinto}, now(), #{crew_category},
+		#{photoJson}, #{crew_dinto},
+		#{user_info_user_no});
 	</insert>
 
 	<!-- 데이터 삭제 기능 -->
@@ -90,22 +97,25 @@
 	<!-- 데이터 수정 기능 -->
 	<update id="updateCrew"
 		parameterType="study.spring.goodspring.model.Crew">
-		UPDATE crew SET crew_sinto=#{crew_sinto}, crew_dinto=#{crew_dinto}
+		UPDATE crew SET crew_sinto=#{crew_sinto},
+		crew_dinto=#{crew_dinto}
 		WHERE crew_no = #{crew_no};
 	</update>
 
 	<!-- 데이터 수 조회를 위한 기능 정의 -->
-	
-	<select id="selectCountAll" parameterType="study.spring.goodspring.model.Crew"
-	resultType="int">
-	SELECT COUNT(*) FROM crew
-	
-	<where>
-		<if test="crew_name != null and crew_name != '' ">
-		crew_name LIKE concat('%', #{crew_name},'%')
-		</if>
-	</where>
+
+	<select id="selectCountAll"
+		parameterType="study.spring.goodspring.model.Crew" resultType="int">
+		SELECT COUNT(*) FROM crew
+
+		<where>
+			<if test="crew_name != null and crew_name != '' ">
+				crew_name LIKE concat('%', #{crew_name},'%')
+			</if>
+		</where>
+					
 	</select>
+
 
 
 

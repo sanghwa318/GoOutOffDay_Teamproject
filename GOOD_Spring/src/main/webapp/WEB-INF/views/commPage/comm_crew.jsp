@@ -55,6 +55,14 @@
 	left: 5px;
 	bottom: 0px;
 }
+
+.thumbnail img{
+max-hieght:100%;
+min-width:100%; 
+height:180px;
+}
+
+
 </style>
 </head>
 <body>
@@ -145,23 +153,16 @@
 			<!-- 크루 본문영역 중단 -->
 			<div class="row cas_item">
 			
-			<table border="1">
-			<thead>
-				<tr>
-					<th width="80" align="center">크루번호: </th>
-					<th width="80" align="center">크루이름: </th>
-				</tr>
-			</thead>
 			
 			
-			<tbody>
+
 			<c:choose>
 			<%--조회결과가 없는 경우 --%>
 			<c:when test="${output==null || fn:length(output) == 0} ">
 			
-			<tr>
-				<td colspan="9" align="center">조회결과가 없습니다.</td>
-			</tr>
+			<div class="null">
+				<div align="center">조회결과가 없습니다.</div>
+			</div>
 			</c:when>
 			<%--조회결과가 있는 경우  --%>
 			<c:otherwise>
@@ -183,11 +184,21 @@
 					<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
 						<c:param name="crew_no" value="${item.crew_no}"/>
 					</c:url>
+
 				
-				<tr>
-					<td align="center"><img src="${item.crew_photo.fileUrl}" width="100" /></td>
-					<td align="center"><a href="${infoUrl}">${item.crew_name}</a></td>
-				</tr>
+				<div class="col-xs-6 col-sm-4 col-md-3">
+					<div class="thumbnail item"
+						onclick="location.href='${infoUrl}'"
+						style="cursor: pointer;">
+						<img alt="크루 이미지" src="${item.crew_photo.fileUrl}" >
+						<div class="caption clearfix">
+							<p><a href="${infoUrl}">크루 이름: ${item.crew_name}</a></p>
+							<h4>크루 소개: ${item.crew_sinto}</h4>
+							<p class="pull-left">지역: ${item.crew_area}</p>
+						</div>
+
+					</div>
+				</div>
 				</c:forEach>
 			</c:otherwise>
 				</c:choose>
@@ -249,8 +260,7 @@
 					
 				</c:choose>
 				
-				 </tbody>
-				</table>
+
 			</div>
 		</div>
 

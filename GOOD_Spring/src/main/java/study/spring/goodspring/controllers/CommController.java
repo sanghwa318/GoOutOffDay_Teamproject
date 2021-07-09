@@ -97,7 +97,7 @@ public class CommController {
 		
 		//1) 페이지 구현에 필요한 변수값 생성
 		int totalCount = 0;  // 전체 게시글 수
-		int listCount = 5;   // 한 페이지당 표시할 항목 수
+		int listCount = 12;   // 한 페이지당 표시할 항목 수
 		int pageCount = 5;   // 한 그룹당 표시할 페이지 번호 수
 		
 		
