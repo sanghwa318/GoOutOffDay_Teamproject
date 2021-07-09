@@ -1,5 +1,6 @@
 package study.spring.goodspring.model;
 
+
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -12,10 +13,10 @@ import lombok.Data;
 public class Bicycle {
 	
 	@SerializedName("rentBikeStatus")
-	private RentBikeStatus rentBikeStatus; // 실시간 자전거 대여정보
+	private rentBikeStatus rentBikeStatus; // 실시간 자전거 대여정보
 	
 	@Data
-	public class RentBikeStatus {
+	public static class rentBikeStatus {
 		
 		@SerializedName("list_total_count")
 		private int list_total_count; // 총 데이터 건수
@@ -31,10 +32,11 @@ public class Bicycle {
 		}
 		
 		@SerializedName("row")
-		private List<Row> row;
+		private row row;
 		
+		private List<row> row_list;
 		@Data
-		public class Row {
+		public static class row {
 			@SerializedName("rackTotCnt")
 			private int rackTotCnt; // 거치대 개수
 			@SerializedName("stationName")
@@ -49,7 +51,8 @@ public class Bicycle {
 			private float stationLongitude; // 경도
 			@SerializedName("stationId")
 			private String stationId; // 대여소 ID
+			private String regDate;
+			private String editDate;
 		}
 	}
-
 }

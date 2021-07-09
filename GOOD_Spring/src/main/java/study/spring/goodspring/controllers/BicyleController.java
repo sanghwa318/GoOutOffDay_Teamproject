@@ -6,12 +6,18 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import study.spring.goodspring.helper.WebHelper;
-import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
+import study.spring.goodspring.model.Bicycle;
+import study.spring.goodspring.model.Bicycle.rentBikeStatus.row;
+import study.spring.goodspring.model.Bicycle.rentBikeStatus;
 import study.spring.goodspring.uploadservice.BicycleUpload;
 
 @Controller
@@ -24,28 +30,36 @@ public class BicyleController {
 	WebHelper webHelper;
 	@Autowired
 	BicycleUpload bicycleUpload;
-	
+
 	@RequestMapping(value = "/bicyclePage/bicycle_index.do", method = RequestMethod.GET)
-	public String bicycle_index() {
-		
-		return "/bicyclePage/bicycle_index";
+	public ModelAndView bicycle_index(Model model) {
+
+		return new ModelAndView("/bicyclePage/bicycle_index");
+
 	}
-	
-	@RequestMapping(value = "/bicyclePage/bicycle_index_search.do", method = RequestMethod.POST)
-	public Map<String, Object> bicycle_index_search(
-			@RequestParam(required = false, defaultValue = "") String keyword) {
-			Row input = new Row();
-			input.setStationName(keyword);
-			
-			List<Row> output = null;
-			
-			try {
-				output = bicycleUpload.getBicycle(input);
-			} catch (Exception e) {
-				return webHelper.getJsonError(e.getLocalizedMessage());
-			}
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("item", data);
+@ResponseBody
+	@RequestMapping(value = "/bicyclePage/bicycle_index_search.do", method = RequestMethod.GET)
+	public Map<String, Object> bicycle_index_search(Model model,
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+
+		Bicycle bicycle = new Bicycle();
+//		Bicycle.rentBikeStatus rentBikeStatus = bicycle.new rentBikeStatus();
+//		rentBikeStatus.row input = rentBikeStatus.new row();
+		row input = new row();
+		input.setStationName(keyword);
+
+		List<row> output = null;
+
+		try {
+			output = bicycleUpload.getBicycle(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("keyword", keyword);
+		data.put("item", output);
 		return webHelper.getJsonData(data);
+
 	}
 }

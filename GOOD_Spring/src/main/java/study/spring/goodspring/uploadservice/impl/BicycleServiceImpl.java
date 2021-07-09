@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import study.spring.goodspring.model.Bicycle;
-import study.spring.goodspring.model.Member;
-import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
+import study.spring.goodspring.model.Bicycle.rentBikeStatus.row;
 import study.spring.goodspring.uploadservice.BicycleUpload;
 
 @Slf4j
@@ -22,10 +20,10 @@ public class BicycleServiceImpl implements BicycleUpload {
 	SqlSession sqlSession;
 	
 	@Override
-	public void collectBicycle(List<Row> row) throws Exception {
+	public void collectBicycle(List<row> row) throws Exception {
 		try {
 			// 수집 결과 수 만큼 반복을 수행하면서 데이터를 저장한다.
-			for(Row item : row) {
+			for(row item : row) {
 				// 대여소ID가 일치하는 데이터에 대한 UPDATE를 시도한다.
 				if(sqlSession.update("BicycleMapper.updateItem", item) == 0) {
 					// 갱신된 결과가 0이면 조건이 일치하는 데이터가 없다는 의미이므로 INSERT 수행
@@ -40,9 +38,9 @@ public class BicycleServiceImpl implements BicycleUpload {
 	
 	// DB 데이터를 불러오는 기능
 	@Override
-	public List<Row> getBicycle(Row input) throws Exception {
+	public List<row> getBicycle(row input) throws Exception {
 		
-		List<Row> result = null;
+		List<row> result = null;
 
 		try {
 			result = sqlSession.selectList("BicycleMapper.selectList", input);

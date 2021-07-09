@@ -183,17 +183,18 @@ p {
 						<div id="map1" style="height: 528px; margin: auto"></div>
 						<div id="m_menu">
 							<div class="menu_header">
-								<form
-									action="${pageContext.request.contextPath}/bicyclePage/bicycle_index_search.do"
-									method="post" id="mapSearch">
+								<form id="mapSearch"
+									action="${pageContext.request.contextPath }/bicyclePage/bicycle_index_search.do">
 									<label for="keyword">정류장 : </label> <input type="search"
 										name="keyword" id="keyword" />
-									<button type="submit" class="btn btn-default">검색하기</button>
+									<button type="submit" class="btn btn-default"
+										id="mapSearch-btn">검색하기</button>
 								</form>
 							</div>
 							<!-- 지역별 자전거 이용 현황 -->
 							<div class="menu_content"
 								style="height: 70px; overflow-y: scroll;">
+								<div id="select_result"></div>
 								<!-- <div class="menu_detail">
 									<button id="m_btn" class="btn btn-info pull-right"
 										type="submit">지도 보기</button>
@@ -380,36 +381,66 @@ p {
 	src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
 
 <script>
+	function getContextPath() {
+		var hostIndex = location.href.indexOf(location.host)
+				+ location.host.length;
+		var contextPath = location.href.substring(hostIndex, location.href
+				.indexOf('/', hostIndex + 1));
+		return contextPath;
+	}
 	$(function() {
-
-		$("#mapSearch").submit(function(){
-	        var words = $("#keyword").val();
-	        if( words != ''){
-	            $.ajax({
-	                type: 'POST',
-	                url: '/bicyclePage/bicycle_index_search.do',
-	                data: {keyword : keyword},
-	                dataType: 'json',
-	                success: function(result){
-	                    if ( result.length > 0){
-	                        var str = ''
-	                        for (var i=0; i<result.length; i++){
-	                            str += '<div class="menu_detail">
-									<button id="map_btn" class="btn btn-info pull-right"
-										type="submit">지도 보기</button>
-									<p class="detail_content1">정류장 : result.)</p>
-									<p class="detail_content2">현재 이용 가능 대수: </p>
-								</div>';
-	                        }
-	                        $("#results").html(str);
-	                    } else{ $("#results").html(""); }
-	                },
-	                error: function(e) {console.log('error:' + e.status);}
-	            });
-	        } else{ $("#results").html(""); }
-	    });
-		
+		$("#mapSearch").submit(function(e) {
+			e.preventDefault();
+			var words = $("#keyword").val();
+			 $.ajax({
+		            method: 'GET',
+		            url: getContextPath()+'/bicyclePage/bicycle_index_search.do',
+		            data: {keyword : words},
+		            dataType: 'json',
+		            success: function(result){
+		            	if ( result.item.length > 0){
+		                    var str = ''
+		                    	 for (var i=0; i<result.item.length; i++){
+		 	                        str+= "<div class='menu_detail'>";
+		 							str+="<button id='map_btn' class='btn btn-info pull-right' type='submit'>지도 보기 </button>";
+		 							str+="<p class='detail_content1'>정류장 : "+ result.item[i].stationName+" </p>";
+		 							str+="<p class='detail_content2'>현재 이용 가능 대수: "+result.item[i].parkingBikeTotCnt+"</p></div>";
+		 	                    }
+		                    $("#select_result").html(str);
+		                } else{ $("#select_result").html("<h3>검색결과가 없어요.</h3> <br><h3>검색어를 확인해주세요.</h3>"); }
+		            },
+		            error: function(e) {console.log('error:' + e.status);}
+		        });
+		})
 	});
+
+	/* $("#mapSearch").submit(function(){
+	    var words = $("#keyword").val();
+	    if( words != ''){
+	        $.ajax({
+	            method: 'GET',
+	            url: getContextPath()+'/bicyclePage/bicycle_index_search.do',
+	            data: {keyword : words},
+	            dataType: 'json',
+	            success: function(result){
+	            	alert("검색성공")
+	                if ( result.length > 0){
+	                    var str = ''
+	                    	 for (var i=0; i<result.length; i++){
+	 	                        str+= "<div class='menu_detail'>";
+	 							str+="<button id='map_btn' class='btn btn-info pull-right' type='submit'>지도 보기 </button>";
+	 							str+="<p class='detail_content1'>정류장 : "+ result[i].stationName+" </p>";
+	 							str+="<p class='detail_content2'>현재 이용 가능 대수: "+result[i].parkingBikeTotCnt+"</p></div>";
+	 	                    }
+	                    $("#select_result").html(str);
+	                } else{ $("#select_result").html(""); }
+
+	            	window.location.href=getContextPath()+'/bicyclePage/bicycle_index.do'
+	            },
+	            error: function(e) {console.log('error:' + e.status);}
+	        });
+	    } else{ $("#select_result").html(""); }
+	}); */
 </script>
 
 <script>

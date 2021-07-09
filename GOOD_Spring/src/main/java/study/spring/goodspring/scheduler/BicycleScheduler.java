@@ -14,7 +14,8 @@ import retrofit2.Retrofit;
 import study.spring.goodspring.APIservice.BicycleService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.Bicycle;
-import study.spring.goodspring.model.Bicycle.RentBikeStatus.Row;
+import study.spring.goodspring.model.Bicycle.rentBikeStatus;
+import study.spring.goodspring.model.Bicycle.rentBikeStatus.row;
 import study.spring.goodspring.uploadservice.BicycleUpload;
 
 @Slf4j
@@ -54,9 +55,9 @@ public class BicycleScheduler {
 		}
 		
 		/** 3) 조회결과 반복문으로 저장 */
-		List<Row> list = null;
+		List<row> list = null;
 		if (bicycle != null) {
-            list = bicycle.getRentBikeStatus().getRow();
+            list = bicycle.getRentBikeStatus().getRow_list();
             log.debug(" >>> " + list.toString());
         } else {
         	log.debug("조회결과 없음");

@@ -3,7 +3,7 @@
 <mapper namespace="BicycleMapper">
 
 	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다 -->
-	<resultMap type="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row" id="BicycleMap">
+	<resultMap type="study.spring.goodspring.model.Bicycle$rentBikeStatus$row" id="BicycleMap">
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼을 연결한다. -->
 		<result property="stationId" column="stationId" />
 		<result property="rackTotCnt" column="rackTotCnt" />
@@ -12,11 +12,13 @@
 		<result property="shared" column="shared" />
 		<result property="stationLatitude" column="stationLatitude" />
 		<result property="stationLongitude" column="stationLongitude" />
+		<result property="regDate" column="regDate" />
+		<result property="editDate" column="editDate" />
 	</resultMap>
 	
 	<!-- 단일행 저장을 위한 기능 정의 -->
 	<insert id="insertItem"
-		parameterType="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row">
+		parameterType="study.spring.goodspring.model.Bicycle$rentBikeStatus$row">
 		INSERT INTO bicycle (stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude,
 		regDate, editDate) 
 		VALUES ( #{stationId}, #{rackTotCnt}, #{stationName}, #{parkingBikeTotCnt}, #{shared},
@@ -25,7 +27,7 @@
 	
 	<!-- 데이터 수정을 위한 기능 추가 -->
 	<update id="updateItem"
-	parameterType="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row">
+	parameterType="study.spring.goodspring.model.Bicycle$rentBikeStatus$row">
 		UPDATE bicycle SET
 		stationId = #{stationId},
 		rackTotCnt = #{rackTotCnt},
@@ -40,10 +42,10 @@
 	
 	<!-- 데이터 조회를 위한 기능 추가 -->
 	<select id="selectList"
-		parameterType="study.spring.goodspring.model.Bicycle$RentBikeStatus$Row"
+		parameterType="study.spring.goodspring.model.Bicycle$rentBikeStatus$row"
 		resultMap="BicycleMap">
-		Select stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude
-		FROM
+		Select stationId, rackTotCnt, stationName, parkingBikeTotCnt, shared, stationLatitude, stationLongitude, regDate, editDate
+		FROM bicycle
 		<where>
 			<if test="stationName !=null and stationName !=''">stationName LIKE concat ('%', #{stationName},'%')</if>
 		</where>
