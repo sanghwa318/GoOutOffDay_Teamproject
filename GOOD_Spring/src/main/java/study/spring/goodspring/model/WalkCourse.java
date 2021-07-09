@@ -11,16 +11,16 @@ import lombok.Data;
 public class WalkCourse {
 
 	@SerializedName("seoulGilWalkCourse")
-	private SeoulGilWalkCourse seoulGilWalkCourse; // 실시간 자전거 대여정보
+	private SeoulGilWalkCourse seoulGilWalkCourse; 
 
 	@Data
 	public class SeoulGilWalkCourse {
 
 		@SerializedName("list_total_count")
 		private int list_total_count; // 총 데이터 건수
+		
 		@SerializedName("RESULT")
 		private RESULT RESULT; // 요청결과
-
 		@Data
 		public class RESULT {
 			@SerializedName("CODE")
@@ -31,7 +31,6 @@ public class WalkCourse {
 
 		@SerializedName("row")
 		private List<Row> row;
-
 		@Data
 		public class Row {
 			@SerializedName("COURSE_CATEGORY")
@@ -44,6 +43,7 @@ public class WalkCourse {
 			private String SOUTH_NORTH_DIV_NM; // 강북강남구분
 			@SerializedName("AREA_GU")
 			private String AREA_GU; // 자치구
+			
 			@SerializedName("DISTANCE")
 			private String DISTANCE; // 거리
 			@SerializedName("LEAD_TIME")
@@ -54,6 +54,7 @@ public class WalkCourse {
 			private int VOTE_CNT; // 추천수
 			@SerializedName("RELATE_SUBWAY")
 			private String RELATE_SUBWAY; // 연계지하철
+			
 			@SerializedName("TRAFFIC_INFO")
 			private String TRAFFIC_INFO; // 교통편
 			@SerializedName("CONTENT")
@@ -64,16 +65,18 @@ public class WalkCourse {
 			private String COURSE_NAME; // 코스명
 			@SerializedName("REG_DATE")
 			private String REG_DATE; // 작성시간
+			
 			@SerializedName("DETAIL_COURSE")
 			private String DETAIL_COURSE; // 세부코스
 			@SerializedName("CPI_IDX")
-			private String CPI_IDX; // 포인트순번
+			private String CPI_IDX; // 포인트순번 (기본키)
 			@SerializedName("CPI_NAME")
 			private String CPI_NAME; // 포인트명칭
 			@SerializedName("X")
 			private float X; // X좌표
 			@SerializedName("Y")
 			private float Y; // Y좌표
+			
 			@SerializedName("CPI_CONTENT")
 			private String CPI_CONTENT; // 포인트설명
 		}

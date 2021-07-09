@@ -30,7 +30,7 @@ public class WalkCourseServiceTest {
 	@Test
 	public void testA() {
 		WalkCourse input = new WalkCourse();
-		input.setArea("채원");
+		input.setCOURSE_CATEGORY_NM("근교산자락길");
 		
 		List<WalkCourse> output = null;
 		
