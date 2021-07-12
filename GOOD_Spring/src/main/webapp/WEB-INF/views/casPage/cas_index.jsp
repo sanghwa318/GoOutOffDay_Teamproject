@@ -31,6 +31,7 @@ html, body {
 }
 
 .body p {
+	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -292,7 +293,7 @@ html, body {
 				<!-- 본문 공연 전시 영역 -->
 				<div class="row show_list">
 					<div class="header clearfix">
-						<h2 class="pull-left">공연 전시</h2>
+						<h2 class="pull-left">공연 전시(시설대관으로 바꿀예정 위치도 변경예정)</h2>
 						<div class="pull-right">
 							<a
 								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=showExh">더
@@ -303,18 +304,19 @@ html, body {
 					<div class="row show_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<c:forEach var="item" items="${output }">
+							<c:forEach var="item_borrow" items="${output_borrow }">
 								<div class="thumbnail item">
-									<img src="${item.INFO }" alt="테스트이미지1"
+									<img src="${item_borrow.IMGURL }" alt="테스트이미지1"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item.GENRE_NAME }<span class="heart pull-right"><i
-												class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
+											${item_borrow.MAXCLASSNM } &middot; ${item_borrow.MINCLASSNM}<span
+												class="heart pull-right"><i class="fa fa-heart-o"
+												aria-hidden="true" role="button"></i></span>
 										</p>
-										<h4 class="explan">${item.TITLE }</h4>
-										<p class="pull-left">${item.PLACE_NAME}</p>
-										<p class="pull-right">${item.AGE}</p>
+										<h4 class="explan">${item_borrow.SVCNM }</h4>
+										<p class="pull-left">${item_borrow.PLACENM}</p>
+										<p class="pull-right">${item_borrow.SVCSTATNM}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -339,18 +341,19 @@ html, body {
 					<div class="row exp_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<c:forEach var="item2" items="${output2 }">
+							<c:forEach var="item_exp" items="${output_exp }">
 								<div class="thumbnail item">
-									<img src="${item2.IMGURL }" alt="테스트이미지1"
+									<img src="${item_exp.IMGURL }" alt="테스트이미지1"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item2.MAXCLASSNM } &middot; ${item2.MINCLASSNM}<span class="heart pull-right"><i
-												class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
+											${item_exp.MAXCLASSNM } &middot; ${item_exp.MINCLASSNM}<span
+												class="heart pull-right"><i class="fa fa-heart-o"
+												aria-hidden="true" role="button"></i></span>
 										</p>
-										<h4 class="explan">${item2.SVCNM }</h4>
-										<p class="pull-left">${item2.PLACENM}</p>
-										<p class="pull-right">${item2.SVCSTATNM}</p>
+										<h4 class="explan">${item_exp.SVCNM }</h4>
+										<p class="pull-left" style="max-width: 110px;">${item_exp.PLACENM}</p>
+										<p class="pull-right">${item_exp.SVCSTATNM}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -375,146 +378,22 @@ html, body {
 					<div class="row adu_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지1"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
+							<c:forEach var="item_imp" items="${output_imp }">
+								<div class="thumbnail item">
+									<img src="${item_imp.IMGURL }" alt="테스트이미지1"
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											${item_imp.MAXCLASSNM } &middot; ${item_imp.MINCLASSNM}<span
+												class="heart pull-right"><i class="fa fa-heart-o"
+												aria-hidden="true" role="button"></i></span>
+										</p>
+										<h4 class="explan">${item_imp.SVCNM }</h4>
+										<p class="pull-left" style="max-width: 110px;">${item_imp.PLACENM}</p>
+										<p class="pull-right">${item_imp.SVCSTATNM}</p>
+									</div>
 								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지2"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지3"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지4"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지5"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지6"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지7"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지8"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지9"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지10"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										교육 자기계발 태그<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">교육 자기계발 제목 OR 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -536,146 +415,22 @@ html, body {
 					<div class="row sport_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지1"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
+							<c:forEach var="item_sprot" items="${output_sprot }">
+								<div class="thumbnail item">
+									<img src="${item_sprot.IMGURL }" alt="테스트이미지1"
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											${item_sprot.MAXCLASSNM } &middot; ${item_sprot.MINCLASSNM}<span
+												class="heart pull-right"><i class="fa fa-heart-o"
+												aria-hidden="true" role="button"></i></span>
+										</p>
+										<h4 class="explan">${item_sprot.SVCNM }</h4>
+										<p class="pull-left" style="max-width: 110px;">${item_sprot.PLACENM}</p>
+										<p class="pull-right">${item_sprot.SVCSTATNM}</p>
+									</div>
 								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지2"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지3"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지4"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지5"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지6"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지7"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지8"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지9"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
-							<div class="thumbnail item">
-								<img src="#" alt="테스트이미지10"
-									style="max-height: 100%; max-width: 100%; cursor: pointer;"
-									onclick="location.href='#'">
-								<div class="caption clearfix">
-									<p>
-										시설명<span class="heart pull-right"><i
-											class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-									</p>
-									<h4 class="explan">서비스명 &amp; 간단설명</h4>
-									<p class="pull-left">장소</p>
-									<p class="pull-right">서비스 상태</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

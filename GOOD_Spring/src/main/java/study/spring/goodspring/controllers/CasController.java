@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CasOther;
-import study.spring.goodspring.model.CasShowExh;
 import study.spring.goodspring.service.CasService;
 
 @Controller
@@ -32,35 +31,70 @@ public class CasController {
 	/** 문화체육 메인페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_index.do", method = RequestMethod.GET)
 	public ModelAndView cas_index(Model model,
-			@RequestParam(value = "keyword", required = false, defaultValue = "ShowExh") String keyword,
-			@RequestParam(value = "keyword2", required = false, defaultValue = "문화") String keyword2) {
+			@RequestParam(value = "keyword_exp", required = false, defaultValue = "문화") String keyword_exp,
+			@RequestParam(value = "keyword_imp", required = false, defaultValue = "교육") String keyword_imp,
+			@RequestParam(value = "keyword_sport", required = false, defaultValue = "체육") String keyword_sport,
+			@RequestParam(value = "keyword_borrow", required = false, defaultValue = "대관") String keyword_borrow) {
+		
+		// 문화 창의 체험 시작
+		CasOther input_exp = new CasOther();
 
-		CasShowExh input = new CasShowExh();
-		input.setService_tag(keyword);
+		input_exp.setDIV_COL(keyword_exp);
 
-		List<CasShowExh> output = null;
+		List<CasOther> output_exp = null;
 		try {
-			output = CasService.getShowExhList(input);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
-		}
-		
-		
-		CasOther input2 = new CasOther();
-		
-		input2.setDIV_COL(keyword2);
-
-		List<CasOther> output2 = null;
-		try {
-			output2 = CasService.getOtherList(input2);
+			output_exp = CasService.getOtherList(input_exp);
 		} catch (Exception e) {
 			return WebHelper.redirect(null, e.getLocalizedMessage());
 		}
 
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("keyword2", keyword2);
-		model.addAttribute("output", output);
-		model.addAttribute("output2", output2);
+		// 문화 창의 체험 끝
+		
+		// 교육 자기계발 시작
+		CasOther input_imp = new CasOther();
+		input_imp.setDIV_COL(keyword_imp);
+
+		List<CasOther> output_imp = null;
+		try {
+			output_imp = CasService.getOtherList(input_imp);
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 교육 자기계발 끝
+		
+		// 체육시설 시작
+		CasOther input_sport = new CasOther();
+		input_sport.setDIV_COL(keyword_sport);
+
+		List<CasOther> output_sprot = null;
+		try {
+			output_sprot = CasService.getOtherList(input_sport);
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 체육시설 끝
+		
+		// 시설대관 시작
+		CasOther input_borrow = new CasOther();
+		input_borrow.setDIV_COL(keyword_borrow);
+
+		List<CasOther> output_borrow = null;
+		try {
+			output_borrow = CasService.getOtherList(input_borrow);
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 시설대관 끝
+		
+		model.addAttribute("keyword_exp", keyword_exp);
+		model.addAttribute("keyword_imp", keyword_imp);
+		model.addAttribute("keyword_sport", keyword_sport);
+		model.addAttribute("keyword_borrow", keyword_borrow);
+		
+		model.addAttribute("output_exp", output_exp);
+		model.addAttribute("output_imp", output_imp);
+		model.addAttribute("output_sprot", output_sprot);
+		model.addAttribute("output_borrow", output_borrow);
 		return new ModelAndView("casPage/cas_index");
 	}
 
