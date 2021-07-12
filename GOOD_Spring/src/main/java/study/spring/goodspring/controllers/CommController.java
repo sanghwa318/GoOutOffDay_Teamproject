@@ -144,8 +144,6 @@ public class CommController {
 	}
 	
 	
-	
-	
 	/*
 	 * comm_myCourse
 	 */
@@ -187,7 +185,30 @@ public class CommController {
 		return "commPage/comm_myPost";
 	}
 	
+	/*
+	 * comm_crew_post
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_post.do", method = RequestMethod.GET)
+	public String crewPost(Model model) {
+		
+		return "commPage/comm_crew_post";
+	}
 
-	
+	/*
+	 * comm_crew_postEdit
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_postEdit.do", method = RequestMethod.GET)
+	public String crewPostEdit(Model model) {
+		
+		return "commPage/comm_crew_postEdit";
+	}
+	/*
+	 * comm_crew_postWrite
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_postWrite.do", method = RequestMethod.GET)
+	public String crewPostWrite(Model model) {
+		
+		return "commPage/comm_crew_postWrite";
+	}
 	
 }

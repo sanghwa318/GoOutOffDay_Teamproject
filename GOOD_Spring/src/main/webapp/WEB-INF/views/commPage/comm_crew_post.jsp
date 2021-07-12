@@ -83,10 +83,10 @@ form {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="../icon_img/커뮤니티 아이콘.png;" />
+						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
 					</span>
 				</h1>
 			</div>
@@ -96,7 +96,7 @@ form {
 			<div class="sidebar">
 				<div class="form-group">
 					<span class="title-img"><img
-						src="../img/profile_default.png"> <span class='sr-only'>이미지</span>
+						src="${pageContext.request.contextPath}/assets/img/profile_default.png"> <span class='sr-only'>이미지</span>
 					</span>
 					<h4>가입된 회원 수 : 6명</h4>
 					<h3 class="title-name">ezen 크루</h3>
@@ -111,7 +111,7 @@ form {
 			<div class="row row_a">
 				<div class="pull-left writer_profile">
 					<a href="#"><img style="border-radius: 25px"
-						onerror="this.src='../img/profile_default.png'"
+						onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
 						src="${sessionScope.principal.userProfile}" width="50px"
 						height="50px"></img></a>
 				</div>
@@ -152,7 +152,7 @@ form {
 			<div class="row row_a">
 				<div class="pull-left writer_profile">
 					<a href="#"><img style="border-radius: 25px"
-						onerror="this.src='../img/profile_default.png'"
+						onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
 						src="${sessionScope.principal.userProfile}" width="50px"
 						height="50px"></img></a>
 				</div>
@@ -187,7 +187,7 @@ form {
 			</form>
 			<hr>
 			<a class="btn btn-default pull-left"
-				href="<%=request.getContextPath()%>/commPage/comm_crew_bbs.jsp">목록</a>
+				href="${pageContext.request.contextPath}/commPage/comm_crew_bbs.jsp">목록</a>
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-warning wr_delete"
 					id="wr_delete">삭제</button>
@@ -245,7 +245,7 @@ form {
 													if (result.value) { // 확인 버튼이 눌러진 경우
 														setTimeout(
 																function() {
-																	location.href = '../commPage/comm_crew_postEdit.jsp';
+																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_postEdit.jsp';
 																}, 1000);
 
 													}
@@ -268,7 +268,7 @@ form {
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('삭제', '게시글이 삭제되었습니다..', 'success');
 						setTimeout(function() {
-							location.href = '../commPage/comm_crew_bbs.jsp';
+							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_bbs.jsp';
 						}, 1000);
 
 					}
@@ -290,7 +290,7 @@ form {
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('삭제', '댓글이 삭제되었습니다.', 'success');
 						setTimeout(function() {
-							location.href = '../commPage/comm_crew_post.jsp';
+							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp';
 						}, 1000);
 
 					}
