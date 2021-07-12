@@ -36,9 +36,31 @@
 		SELECT crew_no, crew_name, crew_area, crew_sinto,
 		crew_createtime,
 		crew_category, crew_photo, crew_dinto, crew_member,
-		user_info_user_no FROM crew WHERE crew_name = #{crew_name};
+		user_info_user_no FROM crew 
+		
+				<where>
+			<if test="crew_name != null and crew_name != '' ">
+				crew_name LIKE CONCAT('%', #{crew_name}, '%')
+			</if>
+
+			<if test="crew_category != null and crew_category != '' ">
+				crew_category LIKE CONCAT('%', #{crew_category}, '%')
+			</if>
+
+			<if test="crew_sinto != null and crew_sinto != '' ">
+				crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+			</if>
+			<if test="crew_area != null and crew_area != '' ">
+			crew_area = #{crew_area}
+				crew_area LIKE CONCAT('%', #{crew_area}, '%')
+			</if>
+		</where>
+		
+		
 		
 		ORDER BY crew_no DESC
+		
+		
 		
 	</select>
 
@@ -60,7 +82,10 @@
 			</if>
 
 			<if test="crew_sinto != null and crew_sinto != '' ">
-				crew_name LIKE CONCAT('%', #{crew_sinto}, '%')
+				crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+			</if>
+			<if test="crew_area != null and crew_area != '' ">
+				crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
 		</where>
 
@@ -107,17 +132,25 @@
 	<select id="selectCountAll"
 		parameterType="study.spring.goodspring.model.Crew" resultType="int">
 		SELECT COUNT(*) FROM crew
-
+		
 		<where>
 			<if test="crew_name != null and crew_name != '' ">
-				crew_name LIKE concat('%', #{crew_name},'%')
+				crew_name LIKE CONCAT('%', #{crew_name}, '%')
+			</if>
+
+			<if test="crew_category != null and crew_category != '' ">
+				crew_category LIKE CONCAT('%', #{crew_category}, '%')
+			</if>
+
+			<if test="crew_sinto != null and crew_sinto != '' ">
+				crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+			</if>
+			<if test="crew_area != null and crew_area != '' ">
+				crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
 		</where>
 					
 	</select>
-
-
-
 
 
 

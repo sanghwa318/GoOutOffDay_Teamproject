@@ -193,7 +193,7 @@ public class CrewServiceImpl implements CrewService{
 			result = sqlSession.selectOne("CrewMapper.selectCountAll", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습닏.");
+			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		
 		return result;

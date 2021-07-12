@@ -56,16 +56,24 @@
 	bottom: 0px;
 }
 
-.thumbnail img{
-max-hieght:100%;
-min-width:100%; 
-height:180px;
+.thumbnail img {
+	max-hieght: 100%;
+	min-width: 100%;
+	height: 180px;
 }
+.pagination{
+position:relative;
+
+}
+
 
 
 </style>
 </head>
 <body>
+<!-- [페이지네이션] -->
+	<c:set var="URL" value="/commPage/comm_crew.do" />
+	<!-- //[페이지네이션] -->
 	<div class="wrapper">
 
 		<!-- 상단 영역 -->
@@ -78,24 +86,27 @@ height:180px;
 					onclick="location.href='../commPage/comm_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="../icon_img/커뮤니티 아이콘.png;" />
+						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
 					</span>
 				</h1>
 			</div>
 			<h1 class="page-header">
-				크루<img src="../icon_img/크루 아이콘.png" alt="크루 아이콘">
+				크루<img
+					src="${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png"
+					alt="크루 아이콘">
 			</h1>
 
 			<!-- 크루 본문영역 상단 -->
 
 			<form class="form-horizontal" name="crew_header" id="crew_header"
-				role="form" method="get" action="${pageContext.request.contextPath}/commPage/comm_crew.do">
+				role="form" method="get"
+				action="${pageContext.request.contextPath}/commPage/comm_crew.do">
 				<div class="form-group">
 					<div class="col-md-3 pull-right">
 						<button type='reset' class="btn btn-primary" id="btn"
 							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
 						<button type="reset" class="btn btn-primary" id="btn"
-							onClick="location.href='../commPage/comm_crew_myCrew.jsp'">마이크루</button>
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.jsp'">마이크루</button>
 					</div>
 					<div class="col-md-4" role="search">
 						<div class="form-group input-group">
@@ -103,14 +114,15 @@ height:180px;
 								<button class="btn btn-blue" type="submit">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
-							</span><input type="text" class="form-control" placeholder="크루, 게시글 검색" id="keyword" name="keyword" value="${keyword}">
+							</span><input type="text" class="form-control" placeholder="크루, 게시글 검색"
+								id="keyword" name="keyword" value="${keyword}">
 						</div>
 					</div>
 					<div class="col-md-2 pull-right">
-						<select class="form-control" id="crew_region" name="crew_region">
+						<select class="form-control" id="crew_area" name="crew_area">
 							<option value="">지역</option>
 							<option value="all">전체</option>
-							<option value="gangnam">강남구</option>
+							<option value="강남구">강남구</option>
 							<option value="gangdong">강동구</option>
 							<option value="gangbug">강북구</option>
 							<option value="gangseo">강서구</option>
@@ -151,138 +163,65 @@ height:180px;
 			<!-- 본문상단 끝 -->
 
 			<!-- 크루 본문영역 중단 -->
-			<div class="row cas_item">
-			
-			
-			
 
-			<c:choose>
-			<%--조회결과가 없는 경우 --%>
-			<c:when test="${output==null || fn:length(output) == 0} ">
-			
-			<div class="null">
-				<div align="center">조회결과가 없습니다.</div>
-			</div>
-			</c:when>
-			<%--조회결과가 있는 경우  --%>
-			<c:otherwise>
-				<%-- 조회 결과에 따른 반복 처리 --%>
-				<c:forEach var="item" items="${output}" varStatus="status">
-					<%-- 출력을 위해 준비한 크루이름 변수  --%>
-					<c:set var="crew_name" value="${item.crew_name}"/>
-					
-					<%-- 검색어가 있다면? --%>
-					<c:if test="${keyword != '' }">
-						<%-- 검색어에 <mark> 적용 --%>
-						<c:set var="mark" value="<mark>${keyword}</mark>" />
-						<%--출력을 위해 크루 이름에서 검색어와 일치하는 단어를 형광펜 효과 --%>
-						<c:set var="crew_name" value="${fn:replace(crew_name,keyword,mark)}"/>
-						
-					</c:if>
-					
-					<%-- 상세페이지로 이동하기위한 URL --%>
-					<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
-						<c:param name="crew_no" value="${item.crew_no}"/>
-					</c:url>
-
-				
-				<div class="col-xs-6 col-sm-4 col-md-3">
-					<div class="thumbnail item"
-						onclick="location.href='${infoUrl}'"
-						style="cursor: pointer;">
-						<img alt="크루 이미지" src="${item.crew_photo.fileUrl}" >
-						<div class="caption clearfix">
-							<p><a href="${infoUrl}">크루 이름: ${item.crew_name}</a></p>
-							<h4>크루 소개: ${item.crew_sinto}</h4>
-							<p class="pull-left">지역: ${item.crew_area}</p>
+				<c:choose>
+					<%--조회결과가 없는 경우 --%>
+					<c:when test="${output==null || fn:length(output) == 0} ">
+						<div class="null">
+							<div align="center">조회결과가 없습니다.</div>
 						</div>
+					</c:when>
+					<%--조회결과가 있는 경우  --%>
+					<c:otherwise>
+						<%-- 조회 결과에 따른 반복 처리 --%>
+						<c:forEach var="item" items="${output}" varStatus="status">
+							<%-- 출력을 위해 준비한 크루이름 변수  --%>
+							<c:set var="crew_name" value="${item.crew_name}" />
 
-					</div>
+							<%-- 검색어가 있다면? --%>
+							<c:if test="${keyword != '' }">
+								<%-- 검색어에 <mark> 적용 --%>
+								<c:set var="mark" value="<mark>${keyword}</mark>" />
+								<%--출력을 위해 크루 이름에서 검색어와 일치하는 단어를 형광펜 효과 --%>
+								<c:set var="crew_name"
+									value="${fn:replace(crew_name,keyword,mark)}" />
+
+							</c:if>
+
+							<%-- 상세페이지로 이동하기위한 URL --%>
+							<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
+								<c:param name="crew_no" value="${item.crew_no}" />
+							</c:url>
+
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								<div class="thumbnail item" onclick="location.href='${infoUrl}'"
+									style="cursor: pointer;">
+									<img alt="크루 이미지" src="${item.crew_photo.fileUrl}">
+									<div class="caption clearfix">
+										<p>
+											<a href="${infoUrl}">크루 이름: ${item.crew_name}</a>
+										</p>
+										<h4>크루 소개: ${item.crew_sinto}</h4>
+										<p class="pull-left">지역: ${item.crew_area}</p>
+									</div>
+
+								</div>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+
+
+				<!-- 페이지네이션 -->
+				<%@ include file="../inc/pagenation.jsp"%>
+<!-- //페이지네이션 -->
 				</div>
-				</c:forEach>
-			</c:otherwise>
-				</c:choose>
-				
-				
-				<%-- 페이지 번호 구현 --%>
-				<%-- 이전 그룹에 대한 링크 --%>
-				<c:choose>
-					<%--이전 그룹으로 이동 가능하다면? --%>
-					<c:when test="${pageData.prevPage > 0}">
-						<%-- 이동할 URL 생성 --%>
-						<c:url value="/commPage/comm_crew.do" var="prevPageUrl">
-							<c:param name="page" value="${pageData.prevPage}"/>
-							<c:param name="keyword" value="${keyword}"/>
-						</c:url>
-						<a href="${prevPageUrl}">[이전]</a>
-					
-					</c:when>
-					<c:otherwise>[이전]</c:otherwise>
-					
-				</c:choose>
-				
-				<%--페이지 번호  --%>
-				<c:forEach var="i" begin="${pageData.startPage}" end="${pageData.endPage}" varStatus="status">
-				<%--이동할 URL 생성 --%> 
-				 <c:url value="/commPage/comm_crew.do" var="pageUrl">
-				 <c:param name="page" value="${i}"/>
-				 <c:param name="keyword" value="${keyword}"/>
-				 </c:url>
-				 
-				 
-				 <%--페이지 번호 출력 --%>
-				 <c:choose>
-				 	<%--현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
-				 	<c:when test="${pageData.nowPage} == i">
-				 		<strong>[${i}]</strong>
-				 	</c:when>
-				 	<%--나머지 페이지의 경우 링크 적용함 --%>
-				 	<c:otherwise>
-				 	<a href="${pageUrl}">[${i}]</a>
-				 	</c:otherwise>
-				 </c:choose>
-				 
-				</c:forEach>
-				
-				<%-- 다음 그룹에 대한 링크 --%>
-				<c:choose>
-					<%--다음 그룹으로 이동 가능하다면? --%>
-					<c:when test="${pageData.nextPage} 0">
-					<%--이동할 URL생성 --%>
-					<c:url value="/commPage/comm_crew.do" var="nextPageUrl">
-						<c:param name="page" value="${pageData.nextPage}"/>
-						<c:param name="keyword" value="${keyword}"/>
-					</c:url>
-					<a href="${nextPageUrl}">[다음]</a>
-					</c:when>
-					<c:otherwise>[다음]</c:otherwise>
-					
-					
-				</c:choose>
-				
-
 			</div>
-		</div>
 
-		<!-- 크루 본문영역 하단 -->
+			<!-- 본문하단 끝 -->
 
-		<div class="text-center" id="paging">
-			<ul class="pagination">
-				<li class="page-item disabled"><a href="#">&laquo;</a></li>
-				<li class="page-item active"><span>1<span
-						class="sr-only">(current)</span></span></li>
-				<li class="page-item"><a href="#">2</a></li>
-				<li class="page-item"><a href="#">3</a></li>
-				<li class="page-item"><a href="#">4</a></li>
-				<li class="page-item"><a href="#">5</a></li>
-				<li class="page-item"><a href="#">&raquo;</a></li>
-			</ul>
-		</div>
-		<!-- 본문하단 끝 -->
-	</div>
-	</div>
 	<!-- 하단 영역 -->
-		<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 
 </body>
