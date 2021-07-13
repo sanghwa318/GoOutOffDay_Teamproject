@@ -81,15 +81,5 @@ public class MainController {
 		return "myPage/myPage_accountEdit";
 	}
 	
-	/**
-	 * 마이 페이지 회원탈퇴
-	 * 
-	 * @return String
-	 */
-	@RequestMapping(value = "/myPage/myPage_accountOut.do", method = RequestMethod.GET)
-	public String myPage_accountOut() {
-		
-		return "myPage/myPage_accountOut";
-	}
-	
+
 }

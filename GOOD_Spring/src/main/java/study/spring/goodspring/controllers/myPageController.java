@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,9 @@ public class myPageController {
 	RegexHelper regexHelper;
 	@Autowired
 	MailHelper mailHelper;
+	//프로젝트이름에 해당하는 ContextPath 변수 주입
+	@Value("#{servletContext.contextPath}")
+	String contextPath;
 	
 
 	
@@ -233,7 +237,6 @@ public class myPageController {
 			return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
-		/** 4) 프로필 사진이 존재하는 경우 썸네일 이미지 생성 */
 		UploadItem photo = output.getUser_photo();
 
 		if (photo != null) {
@@ -252,5 +255,35 @@ public class myPageController {
         /** 4) 결과 표시 */
 		webHelper.setSession("login_info", output);
         return webHelper.getJsonData();
+    }
+    
+    /**회원탈퇴 페이지에서 보여줄 회원 정보상세페이지 */
+    @RequestMapping(value = "/myPage/myPage_accountOut.do", method = RequestMethod.GET)
+    public ModelAndView view() {
+   
+    	return new ModelAndView("myPage/myPage_accountOut");
+    }
+    
+    /**삭제처리 */
+    @RequestMapping(value = "/myPage/myPage_accountOut_delete_ok.do", method = RequestMethod.GET)
+    public ModelAndView delete_ok() {
+    	
+    	
+    
+    	/** 2) 데이터 삭제하기 */
+    	Member input = (Member)webHelper.getSession("login_info");
+    	input.setUser_id(input.getUser_id());
+    	
+    	try {
+			memberService.deleteMember(input);  //데이터 삭제
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+    	
+    	/** 3) 페이지 이동 */
+    	//확인할 대상이 삭제된 상태이므로 메인 페이지로 이동
+    	webHelper.removeAllSession();
+    	return webHelper.redirect(contextPath + "/", "탈퇴되었습니다.");
+    	
     }
 }
