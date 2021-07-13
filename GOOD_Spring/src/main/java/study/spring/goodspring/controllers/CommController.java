@@ -92,6 +92,8 @@ public class CommController {
 	public ModelAndView crew(Model model,
 			//검색어
 			@RequestParam(value="keyword", required=false) String keyword,
+			//지역 버튼
+			@RequestParam(value ="crew_regeion", required=false) String region,
 			//페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value="page", defaultValue="1") int nowPage) {
 		
@@ -108,7 +110,8 @@ public class CommController {
 		
 		input.setCrew_name(keyword);
 		input.setCrew_sinto(keyword);
-		input.setCrew_area(keyword);
+		input.setCrew_area(region);
+		
 		
 		List<Crew> output = null; //조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
@@ -137,6 +140,7 @@ public class CommController {
 		
 		//3) View 처리
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("region",region);
 		model.addAttribute("output",output);
 		model.addAttribute("pageData", pageData);
 		

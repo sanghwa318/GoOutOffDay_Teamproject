@@ -44,15 +44,14 @@
 			</if>
 
 			<if test="crew_category != null and crew_category != '' ">
-				crew_category LIKE CONCAT('%', #{crew_category}, '%')
+				OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
 			</if>
 
 			<if test="crew_sinto != null and crew_sinto != '' ">
-				crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
 			</if>
 			<if test="crew_area != null and crew_area != '' ">
-			crew_area = #{crew_area}
-				crew_area LIKE CONCAT('%', #{crew_area}, '%')
+				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
 		</where>
 		
@@ -78,14 +77,14 @@
 			</if>
 
 			<if test="crew_category != null and crew_category != '' ">
-				crew_category LIKE CONCAT('%', #{crew_category}, '%')
+				OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
 			</if>
 
 			<if test="crew_sinto != null and crew_sinto != '' ">
-				crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
 			</if>
 			<if test="crew_area != null and crew_area != '' ">
-				crew_area LIKE CONCAT('%', #{crew_area}, '%')
+				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
 		</where>
 
@@ -135,18 +134,18 @@
 		
 		<where>
 			<if test="crew_name != null and crew_name != '' ">
-				crew_name LIKE CONCAT('%', #{crew_name}, '%')
+				OR crew_name LIKE CONCAT('%', #{crew_name}, '%')
 			</if>
 
 			<if test="crew_category != null and crew_category != '' ">
-				crew_category LIKE CONCAT('%', #{crew_category}, '%')
+				OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
 			</if>
 
 			<if test="crew_sinto != null and crew_sinto != '' ">
-				crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
 			</if>
 			<if test="crew_area != null and crew_area != '' ">
-				crew_area LIKE CONCAT('%', #{crew_area}, '%')
+				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
 		</where>
 					

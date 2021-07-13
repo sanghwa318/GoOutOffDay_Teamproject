@@ -61,17 +61,18 @@
 	min-width: 100%;
 	height: 180px;
 }
-.pagination{
-position:relative;
 
+.pagination {
+	position: relative;
 }
 
+.row_paging{
 
-
+}
 </style>
 </head>
 <body>
-<!-- [페이지네이션] -->
+	<!-- [페이지네이션] -->
 	<c:set var="URL" value="/commPage/comm_crew.do" />
 	<!-- //[페이지네이션] -->
 	<div class="wrapper">
@@ -83,7 +84,7 @@ position:relative;
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
@@ -119,34 +120,34 @@ position:relative;
 						</div>
 					</div>
 					<div class="col-md-2 pull-right">
-						<select class="form-control" id="crew_area" name="crew_area">
+						<select class="form-control" id="crew_regeion" name="crew_regeion" >
 							<option value="">지역</option>
 							<option value="all">전체</option>
 							<option value="강남구">강남구</option>
-							<option value="gangdong">강동구</option>
-							<option value="gangbug">강북구</option>
-							<option value="gangseo">강서구</option>
-							<option value="gwan-ag">관악구</option>
-							<option value="gwangjin">광진구</option>
-							<option value="gulo">구로구</option>
-							<option value="geumcheon">금천구</option>
-							<option value="nowon">노원구</option>
-							<option value="dobong">도봉구</option>
-							<option value="dongdaemun">동대문구</option>
-							<option value="dongjag">동작구</option>
-							<option value="mapo">마포구</option>
-							<option value="seodaemun">서대문구</option>
-							<option value="seocho">서초구</option>
-							<option value="seongdong">성동구</option>
-							<option value="seongbug">성북구</option>
-							<option value="songpa">송파구</option>
-							<option value="yangcheon">양천구</option>
-							<option value="yeongdeungpo">영등포구</option>
-							<option value="yongsan">용산구</option>
-							<option value="eunpyeong">은평구</option>
-							<option value="jonglo">종로구</option>
-							<option value="jung-gu">중구</option>
-							<option value="junglang">중랑구</option>
+							<option value="강동구">강동구</option>
+							<option value="강북구">강북구</option>
+							<option value="강서구">강서구</option>
+							<option value="관악구">관악구</option>
+							<option value="광진구">광진구</option>
+							<option value="구로구">구로구</option>
+							<option value="금천구">금천구</option>
+							<option value="노원구">노원구</option>
+							<option value="도봉구">도봉구</option>
+							<option value="동대문구">동대문구</option>
+							<option value="동작구">동작구</option>
+							<option value="마포구">마포구</option>
+							<option value="서대문구">서대문구</option>
+							<option value="서초구">서초구</option>
+							<option value="성동구">성동구</option>
+							<option value="성북구">성북구</option>
+							<option value="송파구">송파구</option>
+							<option value="양천구">양천구</option>
+							<option value="영등포구">영등포구</option>
+							<option value="용산구">용산구</option>
+							<option value="은평구">은평구</option>
+							<option value="종로구">종로구</option>
+							<option value="중구">중구</option>
+							<option value="중랑구">중랑구</option>
 						</select>
 					</div>
 					<div class="col-md-2  pull-right">
@@ -163,62 +164,64 @@ position:relative;
 			<!-- 본문상단 끝 -->
 
 			<!-- 크루 본문영역 중단 -->
+			<c:choose>
+				<%--조회결과가 없는 경우 --%>
+				<c:when test="${output==null || fn:length(output) == 0} ">
+					<div class="null">
+						<div align="center">조회결과가 없습니다.</div>
+					</div>
+				</c:when>
+				<%--조회결과가 있는 경우  --%>
+				<c:otherwise>
+					<%-- 조회 결과에 따른 반복 처리 --%>
+					<c:forEach var="item" items="${output}" varStatus="status">
+						<%-- 출력을 위해 준비한 크루이름 변수  --%>
+						<c:set var="crew_name" value="${item.crew_name}" />
 
-				<c:choose>
-					<%--조회결과가 없는 경우 --%>
-					<c:when test="${output==null || fn:length(output) == 0} ">
-						<div class="null">
-							<div align="center">조회결과가 없습니다.</div>
-						</div>
-					</c:when>
-					<%--조회결과가 있는 경우  --%>
-					<c:otherwise>
-						<%-- 조회 결과에 따른 반복 처리 --%>
-						<c:forEach var="item" items="${output}" varStatus="status">
-							<%-- 출력을 위해 준비한 크루이름 변수  --%>
-							<c:set var="crew_name" value="${item.crew_name}" />
+						<%-- 검색어가 있다면? --%>
+						<c:if test="${keyword != '' }">
+							<%-- 검색어에 <mark> 적용 --%>
+							<c:set var="mark" value="<mark>${keyword}</mark>" />
+							<%--출력을 위해 크루 이름에서 검색어와 일치하는 단어를 형광펜 효과 --%>
+							<c:set var="crew_name"
+								value="${fn:replace(crew_name,keyword,mark)}" />
 
-							<%-- 검색어가 있다면? --%>
-							<c:if test="${keyword != '' }">
-								<%-- 검색어에 <mark> 적용 --%>
-								<c:set var="mark" value="<mark>${keyword}</mark>" />
-								<%--출력을 위해 크루 이름에서 검색어와 일치하는 단어를 형광펜 효과 --%>
-								<c:set var="crew_name"
-									value="${fn:replace(crew_name,keyword,mark)}" />
+						</c:if>
 
-							</c:if>
+						<%-- 상세페이지로 이동하기위한 URL --%>
+						<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
+							<c:param name="crew_no" value="${item.crew_no}" />
+						</c:url>
 
-							<%-- 상세페이지로 이동하기위한 URL --%>
-							<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
-								<c:param name="crew_no" value="${item.crew_no}" />
-							</c:url>
-
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								<div class="thumbnail item" onclick="location.href='${infoUrl}'"
-									style="cursor: pointer;">
-									<img alt="크루 이미지" src="${item.crew_photo.fileUrl}">
-									<div class="caption clearfix">
-										<p>
-											<a href="${infoUrl}">크루 이름: ${item.crew_name}</a>
-										</p>
-										<h4>크루 소개: ${item.crew_sinto}</h4>
-										<p class="pull-left">지역: ${item.crew_area}</p>
-									</div>
-
+						<div class="col-xs-6 col-sm-4 col-md-3">
+							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
+								style="cursor: pointer;">
+								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}">
+								<div class="caption clearfix">
+									<p>
+										<a href="${infoUrl}">크루 이름: ${item.crew_name}</a>
+									</p>
+									<h4>크루 소개: ${item.crew_sinto}</h4>
+									<p class="pull-left">지역: ${item.crew_area}</p>
 								</div>
+
 							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 
 
-				<!-- 페이지네이션 -->
+
+			<!-- 페이지네이션 -->
+			<div class="row_paging">
 				<%@ include file="../inc/pagenation.jsp"%>
-<!-- //페이지네이션 -->
-				</div>
+				<!-- //페이지네이션 -->
 			</div>
+		</div>
+	</div>
 
-			<!-- 본문하단 끝 -->
+	<!-- 본문하단 끝 -->
 
 	<!-- 하단 영역 -->
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
