@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import study.spring.goodspring.model.WalkCourse.SeoulGilWalkCourse.Row;
+import study.spring.goodspring.model.WalkCourseAPI.SeoulGilWalkCourse.Row;
 import study.spring.goodspring.uploadservice.WalkCourseUploadService;
 
 @Slf4j

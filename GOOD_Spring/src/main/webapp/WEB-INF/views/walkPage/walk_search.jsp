@@ -165,16 +165,21 @@ div#category_acco .accordian-toggle {
 							<%-- 조회 결과에 따른 반복 처리 --%>
 							<c:forEach var="item" items="${output }" varStatus="status">
 								<%-- 출력을 위해 준비한 파라미터들 --%>
-								<c:set var="crs_name" value="${item.crs_name }" />
-								<c:set var="area" value="${item.area }" />
-								<c:set var="type" value="${item.type }" />
-								<c:set var="distance" value="${item.distance }" />
-								<c:set var="time" value="${item.time }" />
-								<c:set var="level" value="${item.level }" />
+								<c:set var="COURSE_CATEGORY_NM" value="${item.COURSE_CATEGORY_NM }" />
+								<c:set var="SOUTH_NORTH_DIV_NM" value="${item.SOUTH_NORTH_DIV_NM }" />
+								<c:set var="AREA_GU" value="${item.AREA_GU }" />
+								<c:set var="DISTANCE" value="${item.DISTANCE }" />
+								<c:set var="LEAD_TIME" value="${item.LEAD_TIME }" />
+								
+								<c:set var="COURSE_LEVEL" value="${item.COURSE_LEVEL }" />
+								<c:set var="VOTE_CNT" value="${item.VOTE_CNT }" />
+								<c:set var="RELATE_SUBWAY" value="${item.RELATE_SUBWAY }" />
+								<c:set var="TRAFFIC_INFO" value="${item.TRAFFIC_INFO }" />
+								<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
 
 								<%-- 상세 페이지로 이동하기 위한 URL --%>
 								<c:url value="/walkPage/walk_search.do" var="viewUrl">
-									<c:param name="course_pk" value="${item.course_pk }" />
+									<c:param name="course_pk" value="${item.CPI_IDX }" />
 								</c:url>
 
 								<div class="media">
@@ -186,41 +191,49 @@ div#category_acco .accordian-toggle {
 									<div class="media-body" style="padding-left: 20px;">
 										<!-- 내용의 제목 -->
 										<h2 class="media-heading">
-											<a href="${viewUrl }">${crs_name}</a>
+											<a href="${viewUrl }">${COURSE_NAME}</a>
 										</h2>
 										<div style="padding: 5px 20px;">
 											<h4 class="media-heading">
-												<a href="#">지역 : ${area } </a>
+												<a href="#">카테고리 : ${COURSE_CATEGORY_NM } </a>
 											</h4>
 											<h4 class="media-heading">
-												<a href="#">유형 : ${type } </a>
+												<a href="#">강남/강북 : ${SOUTH_NORTH_DIV_NM } </a>
 											</h4>
 											<h4 class="media-heading">
-												<a href="#">거리 : ${distance } </a>
+												<a href="#">지역구 : ${AREA_GU } </a>
 											</h4>
 											<h4 class="media-heading">
-												<a href="#">시간 : ${time } </a>
+												<a href="#">거리 : ${DISTANCE } </a>
 											</h4>
 											<h4 class="media-heading">
-												<a href="#">난이도 : ${level } </a>
+												<a href="#">소요시간 : ${LEAD_TIME } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">코스레벨 : ${COURSE_LEVEL } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">관련지하철 : ${RELATE_SUBWAY } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">교통정보 : ${TRAFFIC_INFO } </a>
+											</h4>
+											<h4 class="media-heading">
+												<a href="#">추천수 : ${VOTE_CNT } </a>
 											</h4>
 										</div>
 									</div>
 								</div>
 								<hr />
 							</c:forEach>
+							<!-- 페이지네이션 -->
+							<%@ include file="../inc/pagenation.jsp"%>
+							<!-- //페이지네이션 -->
 						</c:otherwise>
 					</c:choose>
 					<!-- //미디어 아이템 영역-->
-
-
-
-
 				</div>
 				<!-- //코스 검색 리스트 -->
-				<!-- 페이지네이션 -->
-				<%@ include file="../inc/pagenation.jsp"%>
-				<!-- //페이지네이션 -->
 			</div>
 			<!-- //코스검색 목록 영역 -->
 		</div>

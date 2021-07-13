@@ -2,7 +2,7 @@ package study.spring.goodspring.uploadservice;
 
 import java.util.List;
 
-import study.spring.goodspring.model.WalkCourse.SeoulGilWalkCourse.Row;
+import study.spring.goodspring.model.WalkCourseAPI.SeoulGilWalkCourse.Row;
 
 
 public interface WalkCourseUploadService {

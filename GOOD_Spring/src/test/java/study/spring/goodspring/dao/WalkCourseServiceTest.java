@@ -67,11 +67,11 @@ public class WalkCourseServiceTest {
 		int count = 0;
 		
 		WalkCourse input = new WalkCourse();
-		input.setArea("채원");
+		input.setCOURSE_CATEGORY_NM("근교산자락길");
 		
 		try {
 			count = walkCourseService.getWalkCourseCount(input);
-			log.debug("채원을 포함하는 데이터 수:" + count);
+			log.debug("근교산자락길을 포함하는 데이터 수:" + count);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();

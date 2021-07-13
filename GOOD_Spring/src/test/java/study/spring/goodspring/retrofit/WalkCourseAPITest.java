@@ -17,8 +17,8 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import study.spring.goodspring.APIservice.WalkCourseAPIService;
 import study.spring.goodspring.helper.RetrofitHelper;
-import study.spring.goodspring.model.WalkCourse;
-import study.spring.goodspring.model.WalkCourse.SeoulGilWalkCourse.Row;
+import study.spring.goodspring.model.WalkCourseAPI;
+import study.spring.goodspring.model.WalkCourseAPI.SeoulGilWalkCourse.Row;
 
 
 /** Lombok의 Log4j 객체 */
@@ -53,10 +53,10 @@ public class WalkCourseAPITest {
 		WalkCourseAPIService walkCourseAPIService = retrofit.create(WalkCourseAPIService.class);
 
 		// 메서드를 호출해서 call 객체를 리턴받는다.
-		Call<WalkCourse> call = walkCourseAPIService.getWalkCourseAPIList();
+		Call<WalkCourseAPI> call = walkCourseAPIService.getWalkCourseAPIList();
 
 		// call 객체를 통해 JSON 파싱이 완료된 Beans 객체를 리턴받는다.
-		WalkCourse walkCourse = null;
+		WalkCourseAPI walkCourse = null;
 
 		try {
 			walkCourse = call.execute().body(); // 통신으로 가져온 원격지 JSON 데이터를 POJO 클래스에 자동으로 맵핑

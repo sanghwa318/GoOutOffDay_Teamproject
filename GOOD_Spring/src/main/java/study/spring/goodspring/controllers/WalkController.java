@@ -66,11 +66,15 @@ public class WalkController {
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
-		input.setCrs_name(keyword);
-		input.setArea(keyword);
-		input.setType(keyword);
-		input.setDistance(keyword);
-		input.setLevel(keyword);
+		input.setCOURSE_CATEGORY_NM(keyword);
+		input.setSOUTH_NORTH_DIV_NM(keyword);
+		input.setAREA_GU(keyword);
+		input.setDISTANCE(keyword);
+		input.setLEAD_TIME(keyword);
+		input.setCOURSE_LEVEL(keyword);
+		input.setRELATE_SUBWAY(keyword);
+		input.setTRAFFIC_INFO(keyword);
+		input.setCOURSE_NAME(keyword);
 		
 		List<WalkCourse> output = null; //조회 결과가 저장될 객체
        

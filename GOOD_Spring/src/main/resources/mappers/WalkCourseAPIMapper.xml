@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WalkCourseAPIMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
+	<resultMap id="WalkCourseAPIMap"
+		type="study.spring.goodspring.model.WalkCourseAPI$SeoulGilWalkCourse$Row">
+		<result property="COURSE_CATEGORY" column="COURSE_CATEGORY" />
+		<result property="COURSE_CATEGORY_NM"
+			column="COURSE_CATEGORY_NM" />
+		<result property="SOUTH_NORTH_DIV" column="SOUTH_NORTH_DIV" />
+		<result property="SOUTH_NORTH_DIV_NM"
+			column="SOUTH_NORTH_DIV_NM" />
+		<result property="AREA_GU" column="AREA_GU" />
+
+		<result property="DISTANCE" column="DISTANCE" />
+		<result property="LEAD_TIME" column="LEAD_TIME" />
+		<result property="COURSE_LEVEL" column="COURSE_LEVEL" />
+		<result property="VOTE_CNT" column="VOTE_CNT" />
+		<result property="RELATE_SUBWAY" column="RELATE_SUBWAY" />
+
+		<result property="TRAFFIC_INFO" column="TRAFFIC_INFO" />
+		<result property="CONTENT" column="CONTENT" />
+		<result property="PDF_FILE_PATH" column="PDF_FILE_PATH" />
+		<result property="COURSE_NAME" column="COURSE_NAME" />
+		<result property="REG_DATE" column="REG_DATE" />
+
+		<result property="DETAIL_COURSE" column="DETAIL_COURSE" />
+		<result property="CPI_IDX" column="CPI_IDX" />
+		<result property="CPI_NAME" column="CPI_NAME" />
+		<result property="X" column="X" />
+		<result property="Y" column="Y" />
+
+		<result property="CPI_CONTENT" column="CPI_CONTENT" />
+	</resultMap>
+
+	<!-- [API DB에 밀어넣기 위한 기능] -->
+	<!-- 단일행 저장을 위한 기능 정의 -->
+	<insert id="insertItem"
+		parameterType="study.spring.goodspring.model.WalkCourseAPI$SeoulGilWalkCourse$Row">
+		INSERT INTO seoulgil_walk_course (
+		CPI_IDX,
+		COURSE_CATEGORY, COURSE_CATEGORY_NM, SOUTH_NORTH_DIV,
+		SOUTH_NORTH_DIV_NM, AREA_GU,
+		DISTANCE, LEAD_TIME, COURSE_LEVEL, VOTE_CNT, RELATE_SUBWAY,
+		TRAFFIC_INFO, CONTENT, PDF_FILE_PATH, COURSE_NAME, REG_DATE,
+		DETAIL_COURSE, CPI_NAME, X, Y,
+		CPI_CONTENT)
+		VALUES (
+		#{CPI_IDX}, #{COURSE_CATEGORY}, #{COURSE_CATEGORY_NM}, #{SOUTH_NORTH_DIV},
+		#{SOUTH_NORTH_DIV_NM}, #{AREA_GU},
+		#{DISTANCE}, #{LEAD_TIME}, #{COURSE_LEVEL}, #{VOTE_CNT}, #{RELATE_SUBWAY},
+		#{TRAFFIC_INFO}, #{CONTENT}, #{PDF_FILE_PATH}, #{COURSE_NAME},
+		#{REG_DATE},
+		#{DETAIL_COURSE}, #{CPI_NAME}, #{X}, #{Y},
+		#{CPI_CONTENT});
+	</insert>
+
+	<!-- 데이터 수정을 위한 기능 추가 -->
+	<update id="updateItem"
+		parameterType="study.spring.goodspring.model.WalkCourseAPI$SeoulGilWalkCourse$Row">
+		UPDATE seoulgil_walk_course SET
+		COURSE_CATEGORY = #{COURSE_CATEGORY},
+		COURSE_CATEGORY_NM = #{COURSE_CATEGORY_NM},
+		SOUTH_NORTH_DIV = #{SOUTH_NORTH_DIV},
+		SOUTH_NORTH_DIV_NM =
+		#{SOUTH_NORTH_DIV_NM},
+		AREA_GU = #{AREA_GU},
+
+		DISTANCE = #{DISTANCE},
+		LEAD_TIME = #{LEAD_TIME},
+		COURSE_LEVEL =
+		#{COURSE_LEVEL},
+		VOTE_CNT = #{VOTE_CNT},
+		RELATE_SUBWAY =
+		#{RELATE_SUBWAY},
+
+		TRAFFIC_INFO = #{TRAFFIC_INFO},
+		CONTENT = #{CONTENT},
+		PDF_FILE_PATH =
+		#{PDF_FILE_PATH},
+		COURSE_NAME = #{COURSE_NAME},
+		REG_DATE = #{REG_DATE},
+
+		DETAIL_COURSE = #{DETAIL_COURSE},
+		CPI_NAME = #{CPI_NAME},
+		X = #{X},
+		Y =
+		#{Y},
+
+		CPI_CONTENT = #{CPI_CONTENT}
+		WHERE CPI_IDX=#{CPI_IDX};
+	</update>
+	<!-- //[API DB에 밀어넣기 위한 기능] -->
+
+</mapper>
