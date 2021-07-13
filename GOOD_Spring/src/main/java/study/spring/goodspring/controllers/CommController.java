@@ -112,6 +112,7 @@ public class CommController {
 		input.setCrew_name(keyword);
 		input.setCrew_sinto(keyword);
 		input.setCrew_area(region);
+		input.setCrew_area(keyword);
 		
 		List<Crew> output = null; //조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체

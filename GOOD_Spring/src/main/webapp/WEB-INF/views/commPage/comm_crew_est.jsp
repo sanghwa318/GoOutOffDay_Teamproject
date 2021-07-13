@@ -195,14 +195,14 @@ button span {
 			<div class="row">
 				<div class="container col-md-3 " style="margin-left: 25px">
 					<h3 class="header" style="padding-left: 40px;">크루 간단 소개</h3>
-					<textarea class="form-control" rows="5" id="crew_info" name="crew_sinto"
+					<textarea class="form-control" rows="5" id="crew_sinto" name="crew_sinto"
 						style="width: 200px; font-size: 15px; resize: none"
 						placeholder="크루를  간단히 소개해주세요."></textarea>
 				</div>
 
 				<div class="container col-md-4" style="margin-left: 25px">
 					<h3 class="header">크루 소개</h3>
-					<textarea class="form-control" rows="5" id="crew_info" name="crew_dinto"
+					<textarea class="form-control" rows="5" id="crew_dinto" name="crew_dinto"
 						style="width: 550px; font-size: 20px; resize: none"
 						placeholder="크루 소개글을 작성해주세요."></textarea>
 				</div>
@@ -343,15 +343,34 @@ button span {
                               // 0.1초의 딜레이 적용 후 포커스 이동
                               setTimeout(function() {
                                  $("#crew_location").focus(); // <-- 커서를 강제로 넣기
-                              }, 100);
+                              }, 1);
                            }); // <-- 메시지 표시
                            
                            return false; // <-- 실행 중단
                         }
 
-                        var crew_info_val = $("#crew_info").val();
+                        var crew_sinto_val = $("#crew_sinto").val();
 
-                        if (!crew_info_val) { // 입력되지 않았다면?
+                        if (!crew_sinto_val) { // 입력되지 않았다면?
+                           swal({
+                              title : "에러",
+                              text : "크루 간단소개를 입력해 주세요.",
+                              type : "error"
+                           }).then(function(result) {
+                              // 창이 닫히는 애니메이션의 시간이 있으므로,
+                              // 0.1초의 딜레이 적용 후 포커스 이동
+                              
+                              setTimeout(function() {
+                            	  $("#crew_sinto").focus(); // <-- 커서를 강제로 넣기
+                              }, 1);
+                           }); // <-- 메시지 표시
+                           
+                           return false; // <-- 실행 중단
+                        } 
+                        
+                        var crew_dinto_val = $("#crew_dinto").val();
+
+                        if (!crew_dinto_val) { // 입력되지 않았다면?
                            swal({
                               title : "에러",
                               text : "크루 소개를 입력해 주세요.",
@@ -359,13 +378,15 @@ button span {
                            }).then(function(result) {
                               // 창이 닫히는 애니메이션의 시간이 있으므로,
                               // 0.1초의 딜레이 적용 후 포커스 이동
+                              
                               setTimeout(function() {
-                                 $("#crew_info").focus(); // <-- 커서를 강제로 넣기
-                              }, 100);
+                            	  $("#crew_dinto").focus(); // <-- 커서를 강제로 넣기
+                              }, 1);
                            }); // <-- 메시지 표시
                            
                            return false; // <-- 실행 중단
-                        } else {
+                           
+                        }  else {
                            swal({
                               title : '확인', // 제목
                               text : "개설을 축하합니다!", // 내용
