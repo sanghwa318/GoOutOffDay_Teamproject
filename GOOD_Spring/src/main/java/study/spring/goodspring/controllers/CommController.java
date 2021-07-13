@@ -148,48 +148,7 @@ public class CommController {
 		
 		return new ModelAndView("commPage/comm_crew");
 	}
-	
-	
-	/*
-	 * comm_myCourse
-	 */
-	@RequestMapping(value = "/commPage/comm_myCourse.do", method = RequestMethod.GET)
-	public String mycourse(Model model) {
-		
-		return "commPage/comm_myCourse";
-	}
-	/*
-	 * comm_myCourseDetail 
-	 */
-	@RequestMapping(value = "/commPage/comm_myCourseDetail.do", method = RequestMethod.GET)
-	public String mycourseDetail(Model model) {
-		
-		return "commPage/comm_myCourseDetail";
-	}
-	/*
-	 * comm_myCourseEdit
-	 */
-	@RequestMapping(value = "/commPage/comm_myCourseEdit.do", method = RequestMethod.GET)
-	public String mycourseEdit(Model model) {
-		
-		return "commPage/comm_myCourseEdit";
-	}
-	/*
-	 * comm_myCourseWrite
-	 */
-	@RequestMapping(value = "/commPage/comm_myCourseWrite.do", method = RequestMethod.GET)
-	public String mycourseWrite(Model model) {
-		
-		return "commPage/comm_myCourseWrite";
-	}
-	/*
-	 * comm_myPost
-	 */
-	@RequestMapping(value = "/commPage/comm_myPost.do", method = RequestMethod.GET)
-	public String myPost(Model model) {
-		
-		return "commPage/comm_myPost";
-	}
+
 	
 	/*
 	 * comm_crew_post

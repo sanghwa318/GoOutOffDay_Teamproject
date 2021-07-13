@@ -1,60 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CasUploadMapper">
-	<!-- 공연전시 최초 업로드 -->
-	<insert id="insertItemShowExh"
-		parameterType="study.spring.goodspring.model.CasAPIList$SJWPerform$row">
-		INSERT INTO cas_showexh (
-		PERFORM_CODE, TITLE,
-		START_DATE, END_DATE, PLACE_NAME, PLAY_TIME, AGE,
-		PLAN_COMPANY,
-		INQUIRY_PHONE, INQUIRY_EMAIL, TICKET_INFO,
-		GENRE_NAME, ISOPEN,
-		FILE_URL_MI, FILE_URL_TI, INFO,
-		service_tag, regDate, editDate
-		) VALUES
-		(
-		#{PERFORM_CODE}, #{TITLE},
-		#{START_DATE}, #{END_DATE},
-		#{PLACE_NAME},
-		#{PLAY_TIME}, #{AGE},
-		#{PLAN_COMPANY},
-		#{INQUIRY_PHONE},
-		#{INQUIRY_EMAIL}, #{TICKET_INFO},
-		#{GENRE_NAME}, #{ISOPEN},
-		#{FILE_URL_MI},
-		#{FILE_URL_TI}, #{INFO},
-		'ShowExh', now(),
-		now()
-		);
-	</insert>
-	<!-- 공연전시 동일값이면 수정날짜만 업데이트 -->
-	<update id="updateItemShowExh"
-		parameterType="study.spring.goodspring.model.CasAPIList$SJWPerform$row">
-		UPDATE cas_showexh SET
-		PERFORM_CODE = #{PERFORM_CODE},
-		TITLE = #{TITLE},
-		START_DATE = #{START_DATE},
-		END_DATE = #{END_DATE},
-		PLACE_NAME = #{PLACE_NAME},
-		PLAY_TIME = #{PLAY_TIME},
-		AGE = #{AGE},
-		PLAN_COMPANY = #{PLAN_COMPANY},
-		INQUIRY_PHONE = #{INQUIRY_PHONE},
-		INQUIRY_EMAIL = #{INQUIRY_EMAIL},
-		TICKET_INFO = #{TICKET_INFO},
-		GENRE_NAME = #{GENRE_NAME},
-		ISOPEN = #{ISOPEN},
-		FILE_URL_MI =
-		#{FILE_URL_MI},
-		FILE_URL_TI = #{FILE_URL_TI},
-		INFO = #{INFO},
-		editDate =
-		now()
-		WHERE PERFORM_CODE=#{PERFORM_CODE} AND
-		START_DATE=#{START_DATE};
-	</update>
-
 	<!-- 공공서비스 최초 업로드 -->
 	<insert id="insertItemOther"
 		parameterType="study.spring.goodspring.model.CasAPIList$tvYeyakCOllect$Row">

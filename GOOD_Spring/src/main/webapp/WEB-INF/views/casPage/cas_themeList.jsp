@@ -165,7 +165,6 @@ html, body {
 	cursor: pointer;
 }
 
-
 /** 색상설정 **/
 .body .cas_item .caption p {
 	color: #848c94;
@@ -174,9 +173,24 @@ html, body {
 .body .cas_item .caption h4 {
 	color: #495056;
 }
+
+/** 대분류 소분류 사이의 중간점 **/
+.middel_dot {
+	content: "";
+	display: inline-block;
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	background-color: #848c94;
+	vertical-align: middle;
+	margin: 0 5px;
+}
 </style>
 </head>
 <body>
+	<!-- [페이지네이션] -->
+	<c:set var="URL" value="/casPage/cas_themeList.do" />
+	<!-- //[페이지네이션] --
 	<!-- 상단영역 시작 -->
 	<%@ include file="../inc/Header.jsp"%>
 	<!-- // 상단영역 끝 -->
@@ -200,315 +214,195 @@ html, body {
 					<h1 style="color: #343a40;">${result }</h1>
 				</div>
 				<!-- 문화체육 카테고리별 소분류 태그 -->
-		 		<div class="orderBy_tag"> 
+				<div class="orderBy_tag">
 					<!-- 창의 체험 -->
-					<c:if test="${cas eq 'exp'}">
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
-						class="cas_category <c:if test="${order eq ''}">active</c:if>" data-filter="전체">전체</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=교육체험"
-						class="cas_category <c:if test="${order eq '교육체험'}">active</c:if>" data-filter="교육체험">교육체험</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=농장체험"
-						class="cas_category <c:if test="${order eq '농장체험'}">active</c:if>" data-filter="농장체험">농장체험</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=문화행사"
-						class="cas_category <c:if test="${order eq '문화행사'}">active</c:if>" data-filter="문화행사">문화행사</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전시관람"
-						class="cas_category <c:if test="${order eq '전시관람'}">active</c:if>" data-filter="전시/관람">전시/관람</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
-						class="cas_category <c:if test="${order eq '기타'}">active</c:if>" data-filter="기타">기타</a>
+					<c:if test="${cas eq '문화'}">
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
+							class="cas_category <c:if test="${order eq ''}">active</c:if>"
+							data-filter="전체">전체</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=교육체험"
+							class="cas_category <c:if test="${order eq '교육체험'}">active</c:if>"
+							data-filter="교육체험">교육체험</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=농장체험"
+							class="cas_category <c:if test="${order eq '농장체험'}">active</c:if>"
+							data-filter="농장체험">농장체험</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=문화행사"
+							class="cas_category <c:if test="${order eq '문화행사'}">active</c:if>"
+							data-filter="문화행사">문화행사</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전시관람"
+							class="cas_category <c:if test="${order eq '전시관람'}">active</c:if>"
+							data-filter="전시/관람">전시/관람</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
+							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
+							data-filter="기타">기타</a>
 					</c:if>
-					
-					<!-- 공연 전시 문화 -->
-					<c:if test="${cas eq 'showExh'}">
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
-						class="cas_category <c:if test="${order eq ''}">active</c:if>" data-filter="전체">전체</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=대중음악"
-						class="cas_category <c:if test="${order eq '대중음악'}">active</c:if>" data-filter="대중음악">대중음악</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기획전시"
-						class="cas_category <c:if test="${order eq '기획전시'}">active</c:if>" data-filter="기획전시">기획전시</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=오페라"
-						class="cas_category <c:if test="${order eq '오페라'}">active</c:if>" data-filter="오페라">오페라</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=연극"
-						class="cas_category <c:if test="${order eq '연극'}">active</c:if>" data-filter="연극">연극</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
-						class="cas_category <c:if test="${order eq '기타'}">active</c:if>" data-filter="기타">기타</a>
+
+					<!-- 장소대여 문화 -->
+					<c:if test="${cas eq '대관'}">
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
+							class="cas_category <c:if test="${order eq ''}">active</c:if>"
+							data-filter="전체">전체</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=다목적실"
+							class="cas_category <c:if test="${order eq '다목적실'}">active</c:if>"
+							data-filter="다목적실">다목적실</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=캠핑장"
+							class="cas_category <c:if test="${order eq '캠핑장'}">active</c:if>"
+							data-filter="캠핑장">캠핑장</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=강당"
+							class="cas_category <c:if test="${order eq '강당'}">active</c:if>"
+							data-filter="강당">강당</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=강의실"
+							class="cas_category <c:if test="${order eq '강의실'}">active</c:if>"
+							data-filter="강의실">강의실</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
+							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
+							data-filter="기타">기타</a>
 					</c:if>
-					
+
 					<!-- 자기 계발  -->
-					<c:if test="${cas eq 'imp'}">
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
-						class="cas_category <c:if test="${order eq ''}">active</c:if>" data-filter="전체">전체</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=공예취미"
-						class="cas_category <c:if test="${order eq '공예취미'}">active</c:if>" data-filter="공예/취미">공예/취미</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=교양어학"
-						class="cas_category <c:if test="${order eq '교양어학'}">active</c:if>" data-filter="교양/어학">교양/어학</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=스포츠"
-						class="cas_category <c:if test="${order eq '스포츠'}">active</c:if>" data-filter="스포츠">스포츠</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전문자격증"
-						class="cas_category <c:if test="${order eq '전문자격증'}">active</c:if>" data-filter="전문/자격증">전문/자격증</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
-						class="cas_category <c:if test="${order eq '기타'}">active</c:if>" data-filter="기타">기타</a>
+					<c:if test="${cas eq '교육'}">
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
+							class="cas_category <c:if test="${order eq ''}">active</c:if>"
+							data-filter="전체">전체</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=공예취미"
+							class="cas_category <c:if test="${order eq '공예취미'}">active</c:if>"
+							data-filter="공예/취미">공예/취미</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=교양어학"
+							class="cas_category <c:if test="${order eq '교양어학'}">active</c:if>"
+							data-filter="교양/어학">교양/어학</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=스포츠"
+							class="cas_category <c:if test="${order eq '스포츠'}">active</c:if>"
+							data-filter="스포츠">스포츠</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전문자격증"
+							class="cas_category <c:if test="${order eq '전문자격증'}">active</c:if>"
+							data-filter="전문/자격증">전문/자격증</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
+							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
+							data-filter="기타">기타</a>
 					</c:if>
-		
+
 					<!-- 체육시설  -->
-					<c:if test="${cas eq 'sportsFac'}">
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
-						class="cas_category <c:if test="${order eq ''}">active</c:if>" data-filter="전체">전체</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=체육관"
-						class="cas_category <c:if test="${order eq '체육관'}">active</c:if>" data-filter="체육관">체육관</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=축구장"
-						class="cas_category <c:if test="${order eq '축구장'}">active</c:if>" data-filter="축구장">축구장</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=풋살장"
-						class="cas_category <c:if test="${order eq '풋살장'}">active</c:if>" data-filter="풋살장">풋살장</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=다목적경기장"
-						class="cas_category <c:if test="${order eq '다목적경기장'}">active</c:if>" data-filter="다목적경기장">다목적경기장</a>
-						<a href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
-						class="cas_category <c:if test="${order eq '기타'}">active</c:if>" data-filter="기타">기타</a>
+					<c:if test="${cas eq '체육'}">
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}"
+							class="cas_category <c:if test="${order eq ''}">active</c:if>"
+							data-filter="전체">전체</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=체육관"
+							class="cas_category <c:if test="${order eq '체육관'}">active</c:if>"
+							data-filter="체육관">체육관</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=축구장"
+							class="cas_category <c:if test="${order eq '축구장'}">active</c:if>"
+							data-filter="축구장">축구장</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=풋살장"
+							class="cas_category <c:if test="${order eq '풋살장'}">active</c:if>"
+							data-filter="풋살장">풋살장</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=다목적경기장"
+							class="cas_category <c:if test="${order eq '다목적경기장'}">active</c:if>"
+							data-filter="다목적경기장">다목적경기장</a>
+						<a
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
+							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
+							data-filter="기타">기타</a>
 					</c:if>
-				 </div> 
+				</div>
 				<div class="row cas_item">
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 1번"
-								src="https://www.sejongpac.or.kr:443/upload/2021/02/20210208_161151105_59967.jpg"
-								onclick="location.href='../casPage/cas_detail.jsp'"
-								style="cursor: pointer;">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
+					<c:forEach var="item_theme" items="${output_theme }">
+						<div class="col-xs-6 col-sm-4 col-md-3 casItem">
+							<div class="thumbnail item">
+								<img alt="테스트이미지 1번" src="${item_theme.IMGURL }"
+									onclick="location.href='../casPage/cas_detail.do'"
+									style="cursor: pointer;">
+								<div class="caption clearfix">
+									<p>
+										${item_theme.MAXCLASSNM }<span class="middel_dot"></span>${item_theme.MINCLASSNM}<span
+											class="heart pull-right"><i class="fa fa-heart-o"
+											aria-hidden="true" role="button"></i></span>
+									</p>
+									<h4 class="explan">${item_theme.SVCNM }</h4>
+									<p class="pull-left" style="max-width: 110px;">${item_theme.PLACENM}</p>
+									<p class="pull-right">${item_theme.SVCSTATNM}</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 2번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 3번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 4번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 5번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 6번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 7번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 8번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 9번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 10번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 11번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-3 casItem">
-						<div class="thumbnail item">
-							<img alt="테스트이미지 12번" src="#"
-								style="max-height: 100%; max-width: 100%; cursor: pointer;"
-								onclick="location.href='#'">
-							<div class="caption clearfix">
-								<p>
-									${result }
-									태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4 class="explan">${result }
-									제목 OR 간단설명
-								</h4>
-								<p class="pull-left">장소</p>
-								<p class="pull-right">서비스 상태</p>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
-			<div class="text-center">
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">&laquo;</a></li>
-					<li class="page-item active"><span>1<span
-							class="sr-only">(current)</span></span></li>
-					<li class="page-item"><a href="#">2</a></li>
-					<li class="page-item"><a href="#">3</a></li>
-					<li class="page-item"><a href="#">4</a></li>
-					<li class="page-item"><a href="#">5</a></li>
-					<li class="page-item"><a href="#">&raquo;</a></li>
-				</ul>
-			</div>
+			<!-- 페이지 번호 구현 -->
+			<%-- 이전 그룹에 대한 링크 --%>
+			<c:choose>
+				<%-- 이전 그룹으로 이동 가능하다면? --%>
+				<c:when test="${pageData.prevPage > 0}">
+					<%-- 이동할 URL 생성 --%>
+					<c:url value="/casPage/cas_themeList.do" var="prevPageUrl">
+						<c:param name="page" value="${pageData.prevPage}" />
+						<c:param name="cas" value="${cas}" />
+					</c:url>
+					<a href="${prevPageUrl}">[이전]</a>
+				</c:when>
+				<c:otherwise>
+            [이전]
+        </c:otherwise>
+			</c:choose>
+
+			<%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
+			<c:forEach var="i" begin="${pageData.startPage}"
+				end="${pageData.endPage}" varStatus="status">
+				<%-- 이동할 URL 생성 --%>
+				<c:url value="/casPage/cas_themeList.do" var="pageUrl">
+					<c:param name="page" value="${i}" />
+					<c:param name="cas" value="${cas}" />
+				</c:url>
+
+				<%-- 페이지 번호 출력 --%>
+				<c:choose>
+					<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+					<c:when test="${pageData.nowPage == i}">
+						<strong>[${i}]</strong>
+					</c:when>
+					<%-- 나머지 페이지의 경우 링크 적용함 --%>
+					<c:otherwise>
+						<a href="${pageUrl}">[${i}]</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 다음 그룹에 대한 링크 --%>
+			<c:choose>
+				<%-- 다음 그룹으로 이동 가능하다면? --%>
+				<c:when test="${pageData.nextPage > 0}">
+					<%-- 이동할 URL 생성 --%>
+					<c:url value="/casPage/cas_themeList.do" var="nextPageUrl">
+						<c:param name="page" value="${pageData.nextPage}" />
+						<c:param name="cas" value="${cas}" />
+					</c:url>
+					<a href="${nextPageUrl}">[다음]</a>
+				</c:when>
+				<c:otherwise>
+            [다음]
+        </c:otherwise>
+			</c:choose>
 		</div>
 		<!-- // 본문영역 끝 -->
 	</div>

@@ -73,7 +73,7 @@
 		create_datetime,
 		edit_datetime
 		FROM user_info
-		WHERE user_no=#{user_no};
+		WHERE user_id=#{user_id};
 	</select>
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectList"
@@ -116,7 +116,7 @@
 	<!-- 단일행 삭제를 위한 기능 정의 -->
 	<delete id="deleteItem"
 		parameterType="study.spring.goodspring.model.Member">
-		DELETE FROM user_info WHERE user_no=#{user_no};
+		DELETE FROM user_info WHERE user_id=#{user_id};
 	</delete>
 
 	<!-- 회원정보 수정-->

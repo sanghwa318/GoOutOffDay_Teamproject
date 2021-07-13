@@ -63,7 +63,7 @@ public class bicycleAPITest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		/** 조회결과를 반복문을 활용해서 출력한다. */
 		if (bicycle != null) {
 			List<row> list = bicycle.getRentBikeStatus().getRow_list();

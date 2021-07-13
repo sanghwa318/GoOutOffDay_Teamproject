@@ -1,82 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CasDBMapper">
-	<!-- 공연전시 항목 -->
-	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
-	<resultMap type="study.spring.goodspring.model.CasShowExh"
-		id="showExhMap">
-		<!-- Beans의 멤버변수와 대상테이블의 컬럼을 연결 -->
-		<result property="PERFORM_CODE" column="PERFORM_CODE" />
-		<result property="TITLE" column="TITLE" />
-		<result property="START_DATE" column="START_DATE" />
-		<result property="END_DATE" column="END_DATE" />
-		<result property="PLACE_NAME" column="PLACE_NAME" />
-		<result property="PLAY_TIME" column="PLAY_TIME" />
-		<result property="AGE" column="AGE" />
-		<result property="PLAN_COMPANY" column="PLAN_COMPANY" />
-		<result property="INQUIRY_PHONE" column="INQUIRY_PHONE" />
-		<result property="INQUIRY_EMAIL" column="INQUIRY_EMAIL" />
-		<result property="TICKET_INFO" column="TICKET_INFO" />
-		<result property="GENRE_NAME" column="GENRE_NAME" />
-		<result property="ISOPEN" column="ISOPEN" />
-		<result property="FILE_URL_MI" column="FILE_URL_MI" />
-		<result property="FILE_URL_TI" column="FILE_URL_TI" />
-		<result property="INFO" column="INFO" />
-		<result property="service_tag" column="service_tag" />
-		<result property="regDate" column="regDate" />
-		<result property="editDate" column="editDate" />
-	</resultMap>
-	<!-- 단일행 조회를 위한 기능정의 -->
-	<select id="show_selectItem"
-		parameterType="study.spring.goodspring.model.CasShowExh"
-		resultMap="showExhMap">
-		SELECT PERFORM_CODE, TITLE, START_DATE, END_DATE,
-		PLACE_NAME, PLAY_TIME, AGE, PLAN_COMPANY, INQUIRY_PHONE,
-		INQUIRY_EMAIL, TICKET_INFO,
-		GENRE_NAME, ISOPEN, FILE_URL_MI,
-		FILE_URL_TI, INFO,
-		service_tag,
-		regDate, editDate
-		FROM cas_showexh
-		WHERE
-		PERFORM_CODE=#{PERFORM_CODE}
-		AND INFO is not null
-		AND TITLE NOT LIKE
-		'%취소%'
-		AND TITLE NOT LIKE '%cancel%';
-	</select>
-
-	<!-- 다중행 조회를 위한 기능 정의 -->
-	<select id="show_selectMainList"
-		parameterType="study.spring.goodspring.model.CasShowExh"
-		resultMap="showExhMap">
-		SELECT PERFORM_CODE, TITLE, PLACE_NAME, GENRE_NAME,
-		INFO,
-		service_tag,
-		AGE
-		FROM cas_showexh
-		WHERE INFO is not null
-		AND
-		service_tag=#{service_tag}
-		AND TITLE NOT LIKE '%취소%'
-		AND TITLE NOT LIKE
-		'%cancel%'
-		ORDER BY regDate DESC
-		LIMIT 15;
-	</select>
-
-	<!-- 데이터 수 조회하기 -->
-	<select id="show_selectCountAll"
-		parameterType="study.spring.goodspring.model.CasShowExh"
-		resultType="int">
-		SELECT COUNT(*) FROM cas_showexh
-		WHERE INFO is not null
-		<if test="listCount > 0">
-			LIMIT #{offset}, #{listCount};
-		</if>
-	</select>
-
-	<!-- 공연전시 항목 -->
+	<!-- 문화체육 항목 -->
 	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
 	<resultMap type="study.spring.goodspring.model.CasOther"
 		id="CasOtherMap">
@@ -123,7 +48,7 @@
 		AND SVCSTATNM LIKE '%접수중%';
 	</select>
 
-	<!-- 다중행 조회를 위한 기능 정의 -->
+	<!-- 케러셀항목 랜덤표시를 위한 기능 정의 -->
 	<select id="Other_selectMainList"
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultMap="CasOtherMap">
@@ -134,17 +59,35 @@
 		FROM cas_other
 		WHERE SVCSTATNM LIKE '%접수중%'
 		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
+		ORDER BY rand() 
 		LIMIT 15;
+	</select>
+	
+	<!-- 케러셀항목 랜덤표시를 위한 기능 정의 -->
+	<select id="Other_selectCategoryList"
+		parameterType="study.spring.goodspring.model.CasOther"
+		resultMap="CasOtherMap">
+		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
+		SVCNM, PAYATNM, PLACENM,
+		SVCURL, AREANM, IMGURL, TELNO, V_MAX,
+		V_MIN
+		FROM cas_other
+		WHERE SVCSTATNM LIKE '%접수중%'
+		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
+		AND MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%')
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount};
+		</if>
 	</select>
 
 	<!-- 데이터 수 조회하기 -->
 	<select id="Other_selectCountAll"
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultType="int">
-		SELECT COUNT(*) FROM cas_other
+		SELECT COUNT(*) 
+		FROM cas_other
 		WHERE SVCSTATNM LIKE '%접수중%'
-		<if test="listCount > 0">
-			LIMIT #{offset}, #{listCount};
-		</if>
+		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
+		AND MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%');
 	</select>
 </mapper>

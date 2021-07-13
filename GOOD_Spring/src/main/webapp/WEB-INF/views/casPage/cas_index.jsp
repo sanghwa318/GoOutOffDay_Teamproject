@@ -83,14 +83,14 @@ html, body {
 .show_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/공연전시문화 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/장소대여 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
 	display: inline-block;
 	margin-left: 10px;
 	position: absolute;
-	top: 2px;
+	top: 1px;
 }
 
 .exp_list .header h2:after {
@@ -270,6 +270,18 @@ html, body {
 	.body .sport_item .caption h4 {
 	color: #495056;
 }
+
+/** 대분류 소분류 사이의 중간점 **/
+.middel_dot {
+	content: "";
+	display: inline-block;
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	background-color: #848c94;
+	vertical-align: middle;
+	margin: 0 5px;
+}
 </style>
 </head>
 
@@ -290,50 +302,13 @@ html, body {
 						</span>
 					</h1>
 				</div>
-				<!-- 본문 공연 전시 영역 -->
-				<div class="row show_list">
-					<div class="header clearfix">
-						<h2 class="pull-left">공연 전시(시설대관으로 바꿀예정 위치도 변경예정)</h2>
-						<div class="pull-right">
-							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=showExh">더
-								보기 &gt;</a>
-						</div>
-					</div>
-					<!-- 공연 전시 캐러셀 영역 -->
-					<div class="row show_item">
-						<!--  캐러셀 시작 -->
-						<div class="owl-carousel owl-theme" id="owl-walk">
-							<c:forEach var="item_borrow" items="${output_borrow }">
-								<div class="thumbnail item">
-									<img src="${item_borrow.IMGURL }" alt="테스트이미지1"
-										style="max-height: 100%; max-width: 100%; cursor: pointer;">
-									<div class="caption clearfix">
-										<p>
-											${item_borrow.MAXCLASSNM } &middot; ${item_borrow.MINCLASSNM}<span
-												class="heart pull-right"><i class="fa fa-heart-o"
-												aria-hidden="true" role="button"></i></span>
-										</p>
-										<h4 class="explan">${item_borrow.SVCNM }</h4>
-										<p class="pull-left">${item_borrow.PLACENM}</p>
-										<p class="pull-right">${item_borrow.SVCSTATNM}</p>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-				<!-- // 공연 전시 영역 끝 -->
-				<!-- 영역 구분선 모바일에서만 표시 -->
-				<div class="visible-xs"></div>
-				<!-- // 영역 영역 구분선 끝 -->
 				<!-- 본문 창의 체험 영역 -->
 				<div class="row exp_list">
 					<div class="header clearfix">
 						<h2 class="pull-left">문화 창의 체험</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=exp">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=문화">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -347,7 +322,7 @@ html, body {
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_exp.MAXCLASSNM } &middot; ${item_exp.MINCLASSNM}<span
+											${item_exp.MAXCLASSNM }<span class="middel_dot"></span>${item_exp.MINCLASSNM}<span
 												class="heart pull-right"><i class="fa fa-heart-o"
 												aria-hidden="true" role="button"></i></span>
 										</p>
@@ -370,7 +345,7 @@ html, body {
 						<h2 class="pull-left">교육 자기 계발</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=imp">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=교육">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -384,7 +359,7 @@ html, body {
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_imp.MAXCLASSNM } &middot; ${item_imp.MINCLASSNM}<span
+											${item_imp.MAXCLASSNM }<span class="middel_dot"></span>${item_imp.MINCLASSNM}<span
 												class="heart pull-right"><i class="fa fa-heart-o"
 												aria-hidden="true" role="button"></i></span>
 										</p>
@@ -401,13 +376,50 @@ html, body {
 				<!-- 영역 구분선 모바일에서만 표시 -->
 				<div class="visible-xs"></div>
 				<!-- // 영역 영역 구분선 끝 -->
+				<!-- 본문 장소대여 영역 -->
+				<div class="row show_list">
+					<div class="header clearfix">
+						<h2 class="pull-left">장소대여</h2>
+						<div class="pull-right">
+							<a
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=대관">더
+								보기 &gt;</a>
+						</div>
+					</div>
+					<!-- 장소대여 캐러셀 영역 -->
+					<div class="row show_item">
+						<!--  캐러셀 시작 -->
+						<div class="owl-carousel owl-theme" id="owl-walk">
+							<c:forEach var="item_borrow" items="${output_borrow }">
+								<div class="thumbnail item">
+									<img src="${item_borrow.IMGURL }" alt="이미지"
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											${item_borrow.MAXCLASSNM }<span class="middel_dot"></span>${item_borrow.MINCLASSNM}<span
+												class="heart pull-right"><i class="fa fa-heart-o"
+												aria-hidden="true" role="button"></i></span>
+										</p>
+										<h4 class="explan">${item_borrow.SVCNM }</h4>
+										<p class="pull-left" style="max-width: 110px;">${item_borrow.PLACENM}</p>
+										<p class="pull-right">${item_borrow.SVCSTATNM}</p>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+				<!-- // 장소대여 영역 끝 -->
+				<!-- 영역 구분선 모바일에서만 표시 -->
+				<div class="visible-xs"></div>
+				<!-- // 영역 영역 구분선 끝 -->
 				<!-- 본문 체육시설 영역 -->
 				<div class="row sport_list">
 					<div class="header clearfix">
 						<h2 class="pull-left">체육시설</h2>
 						<div class="pull-right">
 							<a
-								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=sportsFac">더
+								href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=체육">더
 								보기 &gt;</a>
 						</div>
 					</div>
@@ -421,7 +433,7 @@ html, body {
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_sprot.MAXCLASSNM } &middot; ${item_sprot.MINCLASSNM}<span
+											${item_sprot.MAXCLASSNM }<span class="middel_dot"></span>${item_sprot.MINCLASSNM}<span
 												class="heart pull-right"><i class="fa fa-heart-o"
 												aria-hidden="true" role="button"></i></span>
 										</p>
