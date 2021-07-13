@@ -152,11 +152,10 @@
 					</div>
 					<div class="col-md-2  pull-right">
 						<select class="form-control" id="crew_condition"
-							name="crew_condition">
+							name="order">
 							<option value="">조건</option>
-							<option value="fast">최신순</option>
-							<option value="low">오래된순</option>
-							<option value="popular">인기순</option>
+							<option value=1>최신순</option>
+							<option value=2>오래된순</option>
 						</select>
 					</div>
 				</div>

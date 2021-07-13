@@ -36,9 +36,10 @@
 		SELECT crew_no, crew_name, crew_area, crew_sinto,
 		crew_createtime,
 		crew_category, crew_photo, crew_dinto, crew_member,
-		user_info_user_no FROM crew 
-		
-				<where>
+		user_info_user_no
+		FROM crew
+
+		<where>
 			<if test="crew_name != null and crew_name != '' ">
 				crew_name LIKE CONCAT('%', #{crew_name}, '%')
 			</if>
@@ -53,14 +54,17 @@
 			<if test="crew_area != null and crew_area != '' ">
 				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
+			<if test="crew_createtime != null and crew_createtime != '' ">
+				OR ORDER BY crew_createtime DESC
+			</if>
 		</where>
-		
-		
-		
+
+
+
 		ORDER BY crew_no DESC
-		
-		
-		
+
+
+
 	</select>
 
 
@@ -86,9 +90,16 @@
 			<if test="crew_area != null and crew_area != '' ">
 				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
+
 		</where>
 
-		ORDER BY crew_no DESC
+			<if test="order == 1 ">
+				ORDER BY crew_no DESC
+			</if>
+			<if test="order == 2 ">
+				ORDER BY crew_no ASC
+			</if>
+
 
 		<if test="listCount > 0">
 			LIMIT #{offset}, #{listCount}
@@ -131,7 +142,7 @@
 	<select id="selectCountAll"
 		parameterType="study.spring.goodspring.model.Crew" resultType="int">
 		SELECT COUNT(*) FROM crew
-		
+
 		<where>
 			<if test="crew_name != null and crew_name != '' ">
 				OR crew_name LIKE CONCAT('%', #{crew_name}, '%')
@@ -144,11 +155,10 @@
 			<if test="crew_sinto != null and crew_sinto != '' ">
 				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
 			</if>
-			<if test="crew_area != null and crew_area != '' ">
-				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
-			</if>
+
 		</where>
-					
+
+
 	</select>
 
 

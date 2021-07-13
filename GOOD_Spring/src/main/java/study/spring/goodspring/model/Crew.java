@@ -22,6 +22,7 @@ public class Crew {
 	private int crew_member; 
 	private int user_info_user_no;
 	
+	
 	/** 프로필사진 정보{json=UploadItem}, IS NULL */
     public void setPhotoJson(String crew_photo) {
         this.crew_photo = new Gson().fromJson(crew_photo, UploadItem.class);
@@ -68,5 +69,16 @@ public class Crew {
 		Crew.listCount = listCount;
 	}
 	
+	//3) 순서 정렬을 위한 static 변수
+	private static int order;
+
+
+	public static int getOrder() {
+		return order;
+	}
+
+	public static void setOrder(int order) {
+		Crew.order = order;
+	}
 	
 }

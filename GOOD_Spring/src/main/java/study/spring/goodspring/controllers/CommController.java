@@ -94,6 +94,8 @@ public class CommController {
 			@RequestParam(value="keyword", required=false) String keyword,
 			//지역 버튼
 			@RequestParam(value ="crew_regeion", required=false) String region,
+			//조건 버튼
+			@RequestParam(value="order", defaultValue="1") int order,
 			//페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value="page", defaultValue="1") int nowPage) {
 		
@@ -106,12 +108,10 @@ public class CommController {
 		//2) 데이터 조회하기
 		//조회에 필요한 조건값을 Beans에 담는다
 		Crew input = new Crew();
-
 		
 		input.setCrew_name(keyword);
 		input.setCrew_sinto(keyword);
 		input.setCrew_area(region);
-		
 		
 		List<Crew> output = null; //조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
@@ -130,6 +130,7 @@ public class CommController {
 			//SQL의 LIMIT절에서 사용될 값을 BEANS의 static 변수에 저장
 			Crew.setOffset(pageData.getOffset());
 			Crew.setListCount(pageData.getListCount());
+			Crew.setOrder(order);
 			
 			//데이터 조회하기
 			output = crewService.getCrewList(input);
