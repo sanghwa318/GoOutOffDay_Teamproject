@@ -48,7 +48,8 @@
 		VOTE_CNT,
 		RELATE_SUBWAY,
 		TRAFFIC_INFO,
-		COURSE_NAME
+		COURSE_NAME,
+		CPI_NAME
 		FROM seoulgil_walk_course
 
 		<where>
@@ -81,6 +82,14 @@
 			<if test="COURSE_NAME != null and COURSE_NAME != ''">
 				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
 			</if>
+			<if test="CPI_NAME != null and CPI_NAME != ''">
+				OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+			</if>
+			
+			<if test="COURSE_CATEGORY_NM != null and COURSE_CATEGORY_NM != ''">
+				OR COURSE_CATEGORY_NM LIKE concat('%', #{COURSE_CATEGORY_NM}, '%')
+			</if>
+			
 		</where>
 		ORDER BY REG_DATE DESC
 
@@ -124,6 +133,9 @@
 			</if>
 			<if test="COURSE_NAME != null and COURSE_NAME != ''">
 				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
+			</if>
+			<if test="CPI_NAME != null and CPI_NAME != ''">
+				OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
 			</if>
 		</where>
 	</select>

@@ -86,17 +86,19 @@ div#category_acco .accordian-toggle {
 								</form>
 								<!-- //검색 하기 창 -->
 								<!-- 카테고리영역 -->
-								<form class="form-horizontal" role="form">
+								<form method="get"
+									action="${pageContext.request.contextPath }/walkPage/walk_search.do"
+									class="form-horizontal" role="form">
 									<fieldset>
 										<div class="form-group">
 											<div class="col-xs-3">
-												<select class="form-control">
+												<select class="form-control" name="category" id="category">
 													<option value="">유형별</option>
-													<option value="1">한양도성길</option>
-													<option value="2">근교산자락길</option>
-													<option value="3">생태문화길</option>
-													<option value="4">한양/지천길</option>
-													<option value="5">서울둘레길</option>
+													<option value="생태문화길">생태문화길</option>
+													<option value="서울둘레길">서울둘레길</option>
+													<option value="근교산자락길">근교산자락길</option>
+													<option value="한양도성길">한양도성길</option>
+													<option value="한강지천길/계절길">한강지천길/계절길</option>
 												</select>
 											</div>
 											<div class="col-xs-3">
@@ -165,21 +167,24 @@ div#category_acco .accordian-toggle {
 							<%-- 조회 결과에 따른 반복 처리 --%>
 							<c:forEach var="item" items="${output }" varStatus="status">
 								<%-- 출력을 위해 준비한 파라미터들 --%>
-								<c:set var="COURSE_CATEGORY_NM" value="${item.COURSE_CATEGORY_NM }" />
-								<c:set var="SOUTH_NORTH_DIV_NM" value="${item.SOUTH_NORTH_DIV_NM }" />
+								<c:set var="COURSE_CATEGORY_NM"
+									value="${item.COURSE_CATEGORY_NM }" />
+								<c:set var="SOUTH_NORTH_DIV_NM"
+									value="${item.SOUTH_NORTH_DIV_NM }" />
 								<c:set var="AREA_GU" value="${item.AREA_GU }" />
 								<c:set var="DISTANCE" value="${item.DISTANCE }" />
 								<c:set var="LEAD_TIME" value="${item.LEAD_TIME }" />
-								
+
 								<c:set var="COURSE_LEVEL" value="${item.COURSE_LEVEL }" />
 								<c:set var="VOTE_CNT" value="${item.VOTE_CNT }" />
 								<c:set var="RELATE_SUBWAY" value="${item.RELATE_SUBWAY }" />
 								<c:set var="TRAFFIC_INFO" value="${item.TRAFFIC_INFO }" />
 								<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
+								<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
 
 								<%-- 상세 페이지로 이동하기 위한 URL --%>
 								<c:url value="/walkPage/walk_search.do" var="viewUrl">
-									<c:param name="course_pk" value="${item.CPI_IDX }" />
+									<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
 								</c:url>
 
 								<div class="media">
@@ -191,7 +196,7 @@ div#category_acco .accordian-toggle {
 									<div class="media-body" style="padding-left: 20px;">
 										<!-- 내용의 제목 -->
 										<h2 class="media-heading">
-											<a href="${viewUrl }">${COURSE_NAME}</a>
+											<a href="${viewUrl }">${COURSE_NAME} > ${CPI_NAME }</a>
 										</h2>
 										<div style="padding: 5px 20px;">
 											<h4 class="media-heading">

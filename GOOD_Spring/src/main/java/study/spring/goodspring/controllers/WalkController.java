@@ -53,6 +53,8 @@ public class WalkController {
 	public String walk_search(Model model, HttpServletResponse response,
 			// 검색어
 			@RequestParam(value="keyword", required=false) String keyword,
+			// 유형별(코스카테고리별)
+			@RequestParam(value="category", required=false) String category,
 			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value="page", defaultValue="1") int nowPage) {
 		
@@ -75,6 +77,10 @@ public class WalkController {
 		input.setRELATE_SUBWAY(keyword);
 		input.setTRAFFIC_INFO(keyword);
 		input.setCOURSE_NAME(keyword);
+		input.setCPI_NAME(keyword);
+
+		// 유형별(코스카테고리별)
+		input.setCOURSE_CATEGORY_NM(category);
 		
 		List<WalkCourse> output = null; //조회 결과가 저장될 객체
        
