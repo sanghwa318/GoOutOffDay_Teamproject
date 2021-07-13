@@ -112,4 +112,13 @@ public class MyCourseController {
 
 		return "commPage/comm_myCourseWrite";
 	}
+	
+	/*
+	 * comm_myPost
+	 */
+	@RequestMapping(value = "/commPage/comm_myPost.do", method = RequestMethod.GET)
+	public String myPost(Model model) {
+
+		return "commPage/comm_myPost";
+	}
 }
