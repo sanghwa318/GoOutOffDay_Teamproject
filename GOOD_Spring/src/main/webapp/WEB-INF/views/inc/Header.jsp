@@ -15,7 +15,7 @@
 					<div
 						style="padding: 30px 10px; padding-left: 0; padding-bottom: 0;"
 						id="logo">
-						<a href="<%=request.getContextPath()%>/mainPage/index.do"
+						<a href="<%=request.getContextPath()%>/"
 							style="position: relative; z-index: 999999;"><img
 							src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
 							style="width: 250px; height: 53px;"></a>

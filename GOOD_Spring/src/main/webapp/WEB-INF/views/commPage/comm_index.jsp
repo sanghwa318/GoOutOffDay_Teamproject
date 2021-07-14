@@ -189,12 +189,12 @@ h4 {
 	<div class="wrapper">
 
 		<!-- 상단영역 시작 -->
-		<%@ include file="../inc/Header.jsp"%>
+		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 		<!-- // 상단영역 끝 -->
 		<!-- 본문 컨테이터 -->
 		<div class="container" id="content">
 			<h1 class="page-header page-title text-center">
-				커뮤니티<img src="../icon_img/커뮤니티 아이콘.png" />
+				커뮤니티<img src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png" />
 			</h1>
 			<!-- 본문영역 시작 -->
 			<div class="comm_index_middle">
@@ -204,7 +204,7 @@ h4 {
 					<div class="header clearfix">
 						<h2 class="pull-left">나만의 코스</h2>
 						<div class="pull-right">
-							<a href="../commPage/comm_myCourse.jsp?pageNo=1">더 보기 &gt;</a>
+							<a href="${pageContext.request.contextPath}/commPage/comm_myCourse.do">더 보기 &gt;</a>
 						</div>
 					</div>
 					<!-- 공연 전시 문화 캐러셀 영역 -->
@@ -323,7 +323,7 @@ h4 {
 					<div class="header clearfix">
 						<h2 class="pull-left">크루</h2>
 						<div class="pull-right">
-							<a href="../commPage/comm_crew.jsp">더 보기 &gt;</a>
+							<a href="${pageContext.request.contextPath}/commPage/comm_crew.do">더 보기 &gt;</a>
 						</div>
 					</div>
 					<!-- 창의 체험 캐러셀 영역 -->
@@ -440,9 +440,9 @@ h4 {
 		</div>
 	</div>
 	<!-- 하단영역 시작 -->
-	<%@ include file="../inc/Footer.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 	<!-- // 하단영역 끝 -->
-	<%@ include file="../inc/plugin.jsp"%>
+	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 	<script>
 		$('.owl-carousel')
 				.owlCarousel(
