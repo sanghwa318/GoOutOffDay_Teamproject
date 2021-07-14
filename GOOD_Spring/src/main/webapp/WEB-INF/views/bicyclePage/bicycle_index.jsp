@@ -391,9 +391,6 @@ p {
 				.indexOf('/', hostIndex + 1));
 		return contextPath;
 	}
-	var stationLatitude=new Array();
-	var stationLongitude=new Array();
-	var size = 0;
 
 	$(function() {
 		$("#mapSearch")
