@@ -2,7 +2,11 @@ package study.spring.goodspring.controllers;
 
 
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,14 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
-import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
+import study.spring.goodspring.model.CrewPost;
+import study.spring.goodspring.model.Member;
+import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
 
 @Controller
@@ -32,6 +37,9 @@ public class CommController {
 	
 	@Autowired
 	CrewService crewService;
+	
+	@Autowired
+	CrewPostService crewPostService;
 	
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
@@ -57,7 +65,6 @@ public class CommController {
 	}
 	/*
 	 * comm_crew_info
-	 *  2) 상세페이지
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_info.do", method = RequestMethod.GET)
 	public String crewinfo(Model model) {
@@ -167,13 +174,63 @@ public class CommController {
 		
 		return "commPage/comm_crew_postEdit";
 	}
+	
+	
 	/*
 	 * comm_crew_postWrite
+	 * 작성 폼 페이지
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_postWrite.do", method = RequestMethod.GET)
-	public String crewPostWrite(Model model) {
+	public ModelAndView crewPostWrite(Model model) {
 		
-		return "commPage/comm_crew_postWrite";
+		return new ModelAndView("commPage/comm_crew_postWrite");
+	}
+	
+	
+	/*
+	 * comm_crew_postWrite_ok
+	 * 작성 폼에 대한 action 페이지
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_postWrite_ok.do", method = RequestMethod.POST)
+	public void crewPostWrite(Model model,HttpServletResponse response, HttpServletRequest request,
+			//제목
+			@RequestParam(value="post_title", defaultValue="") String title,
+			//내용
+			@RequestParam(value="post_content", defaultValue="") String content
+			) {
+		
+		Member login_info = (Member) webHelper.getSession("login_info");
+		int userNo = login_info.getUser_no();
+		
+		Crew crew_info = (Crew) webHelper.getSession("crew_info");
+		String crewName = crew_info.getCrew_name();
+		
+		//1) 데이터 저장
+		CrewPost input = new CrewPost();
+		input.setPost_title(title);
+		input.setPost_content(content);
+		input.setUser_info_user_no(userNo);
+		input.setPost_crew(crewName);
+		
+		try {
+			//데이터 저장
+			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
+			crewPostService.insertCrewPost(input);
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+		}
+		
+		// 3) 결과를 확인하기 위한 페이지 이동
+		String redirectUrl = contextPath + "/commPage/comm_crew_post?post_no=" + input.getPost_no();
+		
+		
+		try {
+			response.sendRedirect(redirectUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 

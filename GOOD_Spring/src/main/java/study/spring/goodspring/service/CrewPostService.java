@@ -13,17 +13,17 @@ public interface CrewPostService {
 	/*
 	 * 크루 게시물 등록
 	 */
-	public void insertCrewPost(CrewPost crewPost) throws Exception;
+	public int insertCrewPost(CrewPost crewPost) throws Exception;
 	
 	/*
 	 *크루 게시물 수정 
 	 */
-	public void updateCrewPost(CrewPost crewPost) throws Exception;
+	public int updateCrewPost(CrewPost crewPost) throws Exception;
 	
 	/*
 	 * 크루 게시물 삭제
 	 */
-	public void deleteCrewPost(CrewPost crewPost) throws Exception;
+	public int deleteCrewPost(CrewPost crewPost) throws Exception;
 	
 	/*
 	 * 크루 게시물 조회

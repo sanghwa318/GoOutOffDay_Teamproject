@@ -78,10 +78,10 @@ input#title {
 			</div>
 			<h1 class="page-header">크루게시판</h1>
 			<h2>게시글 작성</h2>
-			<form action="comm_crew_post.jsp" method="post">
+			<form role="form" method="POST" action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite_ok.do" >
 				<input type="text" id="title" name="post_title" placeholder="제목을 입력해주세요." />
 
-				<div id="editable"><textarea rows="20" cols="120" name="post_content"></textarea>
+				<div id="editable"><textarea rows="20" cols="120" name="post_content" id="post_content"></textarea>
 				</div>
 
 				<div class="btn-group pull-right">
@@ -119,15 +119,14 @@ input#title {
 						// 창이 닫히는 애니메이션의 시간이 있으므로,
 						// 0.1초의 딜레이 적용 후 포커스 이동
 						setTimeout(function() {
-
+							$("#title").focus(); // <-- 커서를 강제로 넣기
 						}, 100);
 					}); // <-- 메시지 표시
-					$("#title").focus(); // <-- 커서를 강제로 넣기
 					return false; // <-- 실행 중단
 				}
-				var editable_val = $("#editable").val();
+				var post_content_val = $("#post_content").val();
 
-				if (!editable_val) { // 입력되지 않았다면?
+				if (!post_content_val) { // 입력되지 않았다면?
 					swal({
 						title : "에러",
 						text : "내용을 입력해주세요.",
@@ -136,10 +135,9 @@ input#title {
 						// 창이 닫히는 애니메이션의 시간이 있으므로,
 						// 0.1초의 딜레이 적용 후 포커스 이동
 						setTimeout(function() {
-
+							$("#post_content").focus(); // <-- 커서를 강제로 넣기
 						}, 100);
 					}); // <-- 메시지 표시
-					$("#editable").focus(); // <-- 커서를 강제로 넣기
 					return false; // <-- 실행 중단
 				}
 				 else {

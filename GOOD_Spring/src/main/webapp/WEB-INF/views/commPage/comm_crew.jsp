@@ -12,11 +12,7 @@
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style>
 /* 폼 전체 박스 */
-.form-horizontal {
-	width: auto;
-	margin: auto;
-	padding: 30px 10px;
-}
+
 
 .col-md-2 {
 	display: inline-block;
@@ -62,13 +58,10 @@
 	height: 180px;
 }
 
-.pagination {
-	position: relative;
+.pagination{
+margin-top:-100px;
 }
 
-.row_paging{
-
-}
 </style>
 </head>
 <body>
@@ -210,15 +203,11 @@
 				</c:otherwise>
 			</c:choose>
 
-
-
-			<!-- 페이지네이션 -->
-			<div class="row_paging">
-				<%@ include file="../inc/pagenation.jsp"%>
-				<!-- //페이지네이션 -->
-			</div>
 		</div>
 	</div>
+					<!-- 페이지네이션 -->
+				<%@ include file="../inc/pagenation.jsp"%>
+				<!-- //페이지네이션 -->
 
 	<!-- 본문하단 끝 -->
 
