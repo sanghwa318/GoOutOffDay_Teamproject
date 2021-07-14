@@ -147,6 +147,10 @@ p {
 	padding-left: 5px;
 }
 
+.detail_content3 {
+	padding-left: 5px;
+}
+
 /** 최상단 메인 제목 **/
 .main_header h1 {
 	position: relative;
@@ -430,6 +434,18 @@ p {
 										}
 									});
 						})
+						$("#map_btn").click(function(e) {
+							$(this).panTo();
+						});
+						
+						function panTo() {
+						    // 이동할 위도 경도 위치를 생성합니다 
+						    var moveLatLon = new kakao.maps.LatLng(position.stationLatitude, position.stationLongitude);
+						    
+						    // 지도 중심을 부드럽게 이동시킵니다
+						    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+						    map.panTo(moveLatLon);
+						}
 	});
 </script>
 
@@ -441,7 +457,13 @@ p {
 	// 지도의 확대 레벨 
 	});
 
+
 	//Ajax를 통해 좌표 데이터 map를 전송받는다.
+	
+	var imageSrc = '../assets/img/bicycle_marker.png',  // 마커이미지의 주소입니다    
+   		imageSize = new kakao.maps.Size(50, 40); 		// 마커이미지의 크기입니다
+   	// 마커 이미지 생성
+ 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 	
 	// 마커 클러스터러를 생성합니다 
 	var clusterer = new kakao.maps.MarkerClusterer({
@@ -460,19 +482,22 @@ p {
         dataType : "json",
         success : function(data){
             //요청에 성공하면 DB에서 꺼낸 데이터를 json 형식으로 응답 받는다.
+            
                     
             //마커들을 저장할 변수
                    var markers = $(data.item).map(function(i, position) {
                        //마커를 하나 새로 만드는데, 위치값을 지정하고 클릭이 가능하게 설정함.
                        var marker = new kakao.maps.Marker({
                             position : new kakao.maps.LatLng(position.stationLatitude, position.stationLongitude),
+                            image : markerImage,
                             clickable : true
                         });
                        
                        //띄울 인포윈도우 정의
                       var iwContent = '<div style="padding:5px;">'
                        +position.stationName+'<br/>'
-                       +position.parkingBikeTotCnt+
+                       + "이용 가능한 자전거 수 : "
+                       + position.parkingBikeTotCnt+
                        '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
@@ -482,11 +507,16 @@ p {
                             removable : iwRemoveable
                         });
                        
-                        // 마커에 클릭이벤트를 등록합니다
-                        daum.maps.event.addListener(marker, 'click', function() {
-                              // 마커 위에 인포윈도우를 표시합니다
-                         
-                              infowindow.open(map, marker);      
+                   		// 마커에 마우스오버 이벤트를 등록합니다
+                        kakao.maps.event.addListener(marker, 'mouseover', function() {
+                          // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                            infowindow.open(map, marker);
+                        });
+
+                        // 마커에 마우스아웃 이벤트를 등록합니다
+                        kakao.maps.event.addListener(marker, 'mouseout', function() {
+                            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                            infowindow.close();
                         });
                        
                         //생성된 마커를 반환합니다.
@@ -499,5 +529,6 @@ p {
         });
    
 	});
+	
 </script>
 </html>

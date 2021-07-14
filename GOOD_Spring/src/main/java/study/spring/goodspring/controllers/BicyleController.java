@@ -36,11 +36,6 @@ public class BicyleController {
 	@RequestMapping(value = "/bicyclePage/bicycle_index.do", method = RequestMethod.GET)
 	public ModelAndView bicycle_index(Model model, HttpServletResponse response) {
 		
-		/*
-		 * row input = new row(); List<row> output = null; try { output =
-		 * bicycleUpload.getBicycle(input); model.addAttribute("output", output); }
-		 * catch (Exception e) { // TODO: handle exception }
-		 */
 		return new ModelAndView("/bicyclePage/bicycle_index");
 
 	}
