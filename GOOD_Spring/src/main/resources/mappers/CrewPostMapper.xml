@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CrewPostMapper">
+
+	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+	<resultMap type="study.spring.goodspring.model.CrewPost"
+		id="crewPostMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="post_no" column="post_no" />
+		<result property="post_like" column="post_like" />
+		<result property="post_crew" column="post_crew" />
+		<result property="post_createdate" column="post_createdate" />
+		<result property="post_editdate" column="post_editdate" />
+		<result property="post_title" column="post_title" />
+		<result property="post_content" column="post_content" />
+		<result property="post_img" column="post_img" />
+		<result property="post_hits" column="post_hits" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+
+	</resultMap>
+
+
+
+	<!-- 데이터 저장 -->
+	<insert id="insertCrewPost"
+		parameterType="study.spring.goodspring.model.CrewPost"
+		useGeneratedKeys="true" keyProperty="post_no">
+		INSERT INTO crew_post (post_like,
+		post_crew, post_createdate, post_editdate,
+		post_title, post_content,
+		post_img
+		post_hits, user_info_user_no)
+		VALUES (#{post_like}, #{post_crew},
+		now(), now(), #{post_title},
+		#{post_content}, #{photoJson},
+		#{post_hits}, #{user_info_user_no});
+		
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

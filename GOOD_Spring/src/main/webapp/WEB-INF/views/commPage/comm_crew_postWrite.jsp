@@ -79,14 +79,15 @@ input#title {
 			<h1 class="page-header">크루게시판</h1>
 			<h2>게시글 작성</h2>
 			<form action="comm_crew_post.jsp" method="post">
-				<input type="text" id="title" placeholder="제목을 입력해주세요." />
+				<input type="text" id="title" name="post_title" placeholder="제목을 입력해주세요." />
 
-				<div id="editable"></div>
+				<div id="editable"><textarea rows="20" cols="120" name="post_content"></textarea>
+				</div>
 
 				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-warning wr_cancel"
-						id="wr_cancel">취소</button>
-					<button type="button" class="btn btn-primary wr_ok" id="wr_ok">작성완료</button>
+					<button type="reset" class="btn btn-warning wr_cancel"
+						id="wr_cancel"><span>취소</span></button>
+					<button type="submit" class="btn btn-primary wr_ok" id="wr_ok"><span>작성완료</span></button>
 				</div>
 			</form>
 		</div>
@@ -150,8 +151,7 @@ input#title {
 							// 창이 닫히는 애니메이션의 시간이 있으므로,
 							// 0.1초의 딜레이 적용 후 포커스 이동
 							setTimeout(function() {
-								location.href="${pageContext.request.contextPath}
-		/commPage/comm_crew_post.jsp";
+								location.href="${pageContext.request.contextPath}/commPage/comm_crew_post.jsp";
 																}, 1000);
 													})
 								}
