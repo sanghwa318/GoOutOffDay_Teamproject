@@ -107,7 +107,7 @@
 						<button type='reset' class="btn btn-primary" id="btn"
 							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
 						<button type="reset" class="btn btn-primary" id="btn"
-							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.jsp'">마이크루</button>
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.do'">마이크루</button>
 					</div>
 					<div class="col-md-4" role="search">
 						<div class="form-group input-group">

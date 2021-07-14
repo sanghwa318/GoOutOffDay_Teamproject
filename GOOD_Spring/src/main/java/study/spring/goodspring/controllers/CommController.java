@@ -77,7 +77,7 @@ public class CommController {
 	 * comm_crew_myCrew
 	 */
 	
-	@RequestMapping(value = "/commPage/comm_crew_myCrew", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew_myCrew.do", method = RequestMethod.GET)
 	public String mycrew(Model model) {
 		
 		return "commPage/comm_crew_myCrew";
