@@ -317,8 +317,11 @@ html, body {
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
 							<c:forEach var="item_exp" items="${output_exp }">
+								<c:url value="/casPage/cas_detail.do" var="detailUrl">
+									<c:param name="SVCID" value="${item_exp.SVCID }"></c:param>
+								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_exp.IMGURL }" alt="테스트이미지1"
+									<img src="${item_exp.IMGURL }" alt="테스트이미지1" onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
@@ -354,8 +357,11 @@ html, body {
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
 							<c:forEach var="item_imp" items="${output_imp }">
+								<c:url value="/casPage/cas_detail.do" var="detailUrl">
+									<c:param name="SVCID" value="${item_imp.SVCID }"></c:param>
+								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_imp.IMGURL }" alt="테스트이미지1"
+									<img src="${item_imp.IMGURL }" alt="테스트이미지1" onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
@@ -391,8 +397,11 @@ html, body {
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
 							<c:forEach var="item_borrow" items="${output_borrow }">
+								<c:url value="/casPage/cas_detail.do" var="detailUrl">
+									<c:param name="SVCID" value="${item_borrow.SVCID }"></c:param>
+								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_borrow.IMGURL }" alt="이미지"
+									<img src="${item_borrow.IMGURL }" alt="이미지" onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
@@ -428,8 +437,11 @@ html, body {
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
 							<c:forEach var="item_sprot" items="${output_sprot }">
+								<c:url value="/casPage/cas_detail.do" var="detailUrl">
+									<c:param name="SVCID" value="${item_sprot.SVCID }"></c:param>
+								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_sprot.IMGURL }" alt="테스트이미지1"
+									<img src="${item_sprot.IMGURL }" alt="테스트이미지1" onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>

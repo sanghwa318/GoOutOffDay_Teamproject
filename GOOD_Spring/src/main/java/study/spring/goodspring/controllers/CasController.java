@@ -132,7 +132,7 @@ public class CasController {
 
 		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-			totalCount = CasService.getOtherCount(null);
+			totalCount = CasService.getOtherCount(input_theme);
 			// [페이지네이션] 페이지 번호 계산
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
 
@@ -174,5 +174,35 @@ public class CasController {
 		model.addAttribute("pageData", pageData);
 
 		return new ModelAndView("casPage/cas_themeList");
+	}
+	
+	/** 상세페이지 **/
+	@RequestMapping(value = "/casPage/cas_detail.do", method = RequestMethod.GET)
+	public ModelAndView detail(Model model,
+			@RequestParam(value = "SVCID", defaultValue = "") String SVCID) {
+		
+		/** 1) 유효성 검사 **/
+		// 값이존재하지 않는다면 조회불가능하므로 필수값으로 처리
+		if (SVCID == "" ) {
+			return WebHelper.redirect(null, "조회된 항목이 없습니다.");
+		}
+		
+		/** 2) 데이터 조회 **/
+		CasOther input = new CasOther();
+		input.setSVCID(SVCID);
+		
+		// 조회된 결과를 저장할 객체 선언
+		CasOther output = null;
+		
+		try {
+			output = CasService.getOtherItem(input);
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+		
+		/** 3) View 처리 **/
+		model.addAttribute("output", output);
+		
+		return new ModelAndView("casPage/cas_detail");
 	}
 }

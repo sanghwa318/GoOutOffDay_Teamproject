@@ -28,8 +28,8 @@
 		<result property="IMGURL" column="IMGURL" />
 		<result property="DTLCONT" column="DTLCONT" />
 		<result property="TELNO" column="TELNO" />
-		<result property="V_MAX" column="V_MAX" />
-		<result property="V_MIN" column="V_MIN" />
+		<result property="VMAX" column="VMAX" />
+		<result property="VMIN" column="VMIN" />
 		<result property="REVSTDDAY" column="REVSTDDAY" />
 		<result property="REVSTDDAYNM" column="REVSTDDAYNM" />
 		<result property="regDate" column="regDate" />
@@ -40,12 +40,11 @@
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultMap="CasOtherMap">
 		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
-		SVCNM, PAYATNM, PLACENM
-		SVCURL, AREANM, IMGURL, DTLCONT, TELNO, V_MAX,
-		V_MIN
+		SVCNM, PAYATNM, PLACENM,
+		SVCURL, AREANM, IMGURL, TELNO, VMAX,
+		VMIN, USETGTINFO, RCPTBGNDT, RCPTENDDT
 		FROM cas_other
-		WHERE SVCID=#{SVCID}
-		AND SVCSTATNM LIKE '%접수중%';
+		WHERE SVCID=#{SVCID};
 	</select>
 
 	<!-- 케러셀항목 랜덤표시를 위한 기능 정의 -->
@@ -54,40 +53,89 @@
 		resultMap="CasOtherMap">
 		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
 		SVCNM, PAYATNM, PLACENM,
-		SVCURL, AREANM, IMGURL, TELNO, V_MAX,
-		V_MIN
+		SVCURL, AREANM, IMGURL, TELNO
 		FROM cas_other
 		WHERE SVCSTATNM LIKE '%접수중%'
-		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
-		ORDER BY rand() 
+		AND DIV_COL LIKE concat('%',
+		#{DIV_COL}, '%')
+		ORDER BY rand()
 		LIMIT 15;
 	</select>
-	
-	<!-- 케러셀항목 랜덤표시를 위한 기능 정의 -->
+
+	<!-- 페이지네이션을 위한 기능 정의 -->
 	<select id="Other_selectCategoryList"
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultMap="CasOtherMap">
 		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
-		SVCNM, PAYATNM, PLACENM,
-		SVCURL, AREANM, IMGURL, TELNO, V_MAX,
-		V_MIN
-		FROM cas_other
-		WHERE SVCSTATNM LIKE '%접수중%'
-		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
-		AND MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%')
-		<if test="listCount > 0">
-			LIMIT #{offset}, #{listCount};
-		</if>
+		SVCNM,
+		PAYATNM, PLACENM,
+		SVCURL, AREANM, IMGURL, TELNO
+		FROM
+		cas_other
+		<where>
+			SVCSTATNM LIKE '%접수중%'
+			AND DIV_COL LIKE concat('%',
+			#{DIV_COL}, '%')
+			<choose>
+				<when test="!MINCLASSNM.equals('기타')">
+					AND MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%')
+				</when>
+				<otherwise>
+					AND MINCLASSNM NOT LIKE '%교육%'
+					AND MINCLASSNM NOT LIKE '%농장%'
+					AND MINCLASSNM NOT LIKE '%문화%'
+					AND MINCLASSNM NOT LIKE '%전시%'
+					AND MINCLASSNM NOT LIKE '%다목적%'
+					AND MINCLASSNM NOT LIKE '%강당%'
+					AND MINCLASSNM NOT LIKE '%강의%'
+					AND MINCLASSNM NOT LIKE '%공예%'
+					AND MINCLASSNM NOT LIKE '%자연%'
+					AND MINCLASSNM NOT LIKE '%스포츠%'
+					AND MINCLASSNM NOT LIKE '%어학%'
+					AND MINCLASSNM NOT LIKE '%배드민턴%'
+					AND MINCLASSNM NOT LIKE '%축구%'
+					AND MINCLASSNM NOT LIKE '%풋살%'
+					AND MINCLASSNM NOT LIKE '%다목적경기%'
+				</otherwise>
+			</choose>
+			<if test="listCount > 0">
+				LIMIT #{offset}, #{listCount};
+			</if>
+		</where>
 	</select>
 
 	<!-- 데이터 수 조회하기 -->
 	<select id="Other_selectCountAll"
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultType="int">
-		SELECT COUNT(*) 
+		SELECT COUNT(*)
 		FROM cas_other
-		WHERE SVCSTATNM LIKE '%접수중%'
-		AND DIV_COL LIKE concat('%', #{DIV_COL}, '%')
-		AND MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%');
+		<where>
+			SVCSTATNM LIKE '%접수중%'
+			AND DIV_COL LIKE concat('%',
+			#{DIV_COL}, '%')
+			<choose>
+				<when test="!MINCLASSNM.equals('기타')">
+					AND MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%')
+				</when>
+				<otherwise>
+					AND MINCLASSNM NOT LIKE '%교육%'
+					AND MINCLASSNM NOT LIKE '%농장%'
+					AND MINCLASSNM NOT LIKE '%문화%'
+					AND MINCLASSNM NOT LIKE '%전시%'
+					AND MINCLASSNM NOT LIKE '%다목적%'
+					AND MINCLASSNM NOT LIKE '%강당%'
+					AND MINCLASSNM NOT LIKE '%강의%'
+					AND MINCLASSNM NOT LIKE '%공예%'
+					AND MINCLASSNM NOT LIKE '%자연%'
+					AND MINCLASSNM NOT LIKE '%스포츠%'
+					AND MINCLASSNM NOT LIKE '%어학%'
+					AND MINCLASSNM NOT LIKE '%배드민턴%'
+					AND MINCLASSNM NOT LIKE '%축구%'
+					AND MINCLASSNM NOT LIKE '%풋살%'
+					AND MINCLASSNM NOT LIKE '%다목적경기%'
+				</otherwise>
+			</choose>
+		</where>
 	</select>
 </mapper>

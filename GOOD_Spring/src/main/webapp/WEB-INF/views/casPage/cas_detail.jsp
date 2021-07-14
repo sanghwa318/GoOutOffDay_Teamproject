@@ -93,6 +93,7 @@ ul, li {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	max-height: 100%;
+	min-width: 100%;
 	max-width: 100%;
 	height: 300px;
 }
@@ -134,6 +135,18 @@ ul, li {
 	margin-left: 5px;
 	margin-right: 5px;
 }
+
+/** 대분류 소분류 사이의 중간점 **/
+.middel_dot {
+	content: "";
+	display: inline-block;
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	background-color: #848c94;
+	vertical-align: middle;
+	margin: 0 5px;
+}
 </style>
 </head>
 
@@ -145,29 +158,29 @@ ul, li {
 	<div class="container">
 		<!-- 본문영역 시작 -->
 		<div class="body">
+			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../casPage/cas_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">문화 체육<img
-						src="../icon_img/문화체육 아이콘.png;" />
+						src="${pageContext.request.contextPath }/assets/icon_img/문화체육 아이콘.png;" />
 					</span>
 				</h1>
 			</div>
 			<div class="row detail_info clearfix">
 				<div class="itemHeader">
-					<h2 style="color: #343a40;">청계천박물관 상설 및 기획전시실 사전예약관람</h2>
+					<h2 style="color: #343a40;">${output.SVCNM }</h2>
 				</div>
 				<div class="row detail_item">
 					<div class="col-md-5 col-sm-6 col-xs-12">
 						<div class="detail_img">
-							<img alt="이미지"
-								src="https://yeyak.seoul.go.kr/web/common/file/FileDown.do?file_id=SVC_IMG_FILE_287478">
+							<img alt="이미지" src="${output.IMGURL }">
 						</div>
 						<!-- 버튼 -->
 						<div class="btn_container" style="text-align: center;">
-							<button class="btn btn-primary" type="submit"
-								style="width: 140px;">
+							<button class="btn btn-primary" type="button"
+								onclick="location.href='${output.SVCURL}'" style="width: 140px;">
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
 							<button class="heart btn btn-warning" type="button"
@@ -181,29 +194,29 @@ ul, li {
 						<ul class="info">
 							<li class="infoItem"><strong class="infoLabel">분류명
 									: </strong>
-								<p class="infoText">문화체험 (전시/관람)</p></li>
-							<li class="infoItem"><strong class="infoLabel">이용기간
+								<p class="infoText">${output.MAXCLASSNM }<span
+										class="middel_dot"></span>${output.MINCLASSNM }</p></li>
+  							<li class="infoItem"><strong class="infoLabel">이용기간
 									: </strong>
-								<p class="infoText">2020.05.06 ~ 2021.12.31</p></li>
+								<p class="infoText">${output.VMIN } ~ ${output.VMAX }</p></li>  
 							<li class="infoItem"><strong class="infoLabel">접수기간
 									: </strong>
-								<p class="infoText">2020.05.05 10:00 ~ 2021.12.31 17:00 이용예정
-									1 일 전 17시 까지</p></li>
+								<p class="infoText">${output.RCPTBGNDT} ~ ${output.RCPTENDDT }</p></li>
 							<li class="infoItem"><strong class="infoLabel">서비스
 									상태 : </strong>
-								<p class="infoText">접수중</p></li>
+								<p class="infoText">${output.SVCSTATNM }</p></li>
 							<li class="infoItem"><strong class="infoLabel">이용요금
 									: </strong>
-								<p class="infoText">무료</p></li>
+								<p class="infoText">${output.PAYATNM }</p></li>
 							<li class="infoItem"><strong class="infoLabel">대상연령
 									: </strong>
-								<p class="infoText">제한없음</p></li>
+								<p class="infoText">${output.USETGTINFO }</p></li>
 							<li class="infoItem"><strong class="infoLabel">장소명
 									: </strong>
-								<p class="infoText">서울시 어디어디 어디어디</p></li>
+								<p class="infoText">${output.AREANM}<span class="middel_dot"></span>${output.PLACENM }</p></li>
 							<li class="infoItem"><strong class="infoLabel">문의전화
 									: </strong>
-								<p class="infoText">02-1234-5678</p></li>
+								<p class="infoText">${output.TELNO }</p></li>
 						</ul>
 					</div>
 				</div>

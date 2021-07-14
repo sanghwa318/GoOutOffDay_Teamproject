@@ -188,9 +188,6 @@ html, body {
 </style>
 </head>
 <body>
-	<!-- [페이지네이션] -->
-	<c:set var="URL" value="/casPage/cas_themeList.do" />
-	<!-- //[페이지네이션] --
 	<!-- 상단영역 시작 -->
 	<%@ include file="../inc/Header.jsp"%>
 	<!-- // 상단영역 끝 -->
@@ -234,13 +231,9 @@ html, body {
 							class="cas_category <c:if test="${order eq '문화행사'}">active</c:if>"
 							data-filter="문화행사">문화행사</a>
 						<a
-							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전시관람"
-							class="cas_category <c:if test="${order eq '전시관람'}">active</c:if>"
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전시"
+							class="cas_category <c:if test="${order eq '전시'}">active</c:if>"
 							data-filter="전시/관람">전시/관람</a>
-						<a
-							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
-							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
-							data-filter="기타">기타</a>
 					</c:if>
 
 					<!-- 장소대여 문화 -->
@@ -278,21 +271,21 @@ html, body {
 							class="cas_category <c:if test="${order eq ''}">active</c:if>"
 							data-filter="전체">전체</a>
 						<a
-							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=공예취미"
-							class="cas_category <c:if test="${order eq '공예취미'}">active</c:if>"
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=공예"
+							class="cas_category <c:if test="${order eq '공예'}">active</c:if>"
 							data-filter="공예/취미">공예/취미</a>
 						<a
-							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=교양어학"
-							class="cas_category <c:if test="${order eq '교양어학'}">active</c:if>"
-							data-filter="교양/어학">교양/어학</a>
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=자연과학"
+							class="cas_category <c:if test="${order eq '자연과학'}">active</c:if>"
+							data-filter="교양/어학">자연/과학</a>
 						<a
 							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=스포츠"
 							class="cas_category <c:if test="${order eq '스포츠'}">active</c:if>"
 							data-filter="스포츠">스포츠</a>
 						<a
-							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=전문자격증"
-							class="cas_category <c:if test="${order eq '전문자격증'}">active</c:if>"
-							data-filter="전문/자격증">전문/자격증</a>
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=어학"
+							class="cas_category <c:if test="${order eq '어학'}">active</c:if>"
+							data-filter="전문/자격증">교양/어학</a>
 						<a
 							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=기타"
 							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
@@ -306,9 +299,9 @@ html, body {
 							class="cas_category <c:if test="${order eq ''}">active</c:if>"
 							data-filter="전체">전체</a>
 						<a
-							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=체육관"
-							class="cas_category <c:if test="${order eq '체육관'}">active</c:if>"
-							data-filter="체육관">체육관</a>
+							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=배드민턴"
+							class="cas_category <c:if test="${order eq '배드민턴'}">active</c:if>"
+							data-filter="체육관">배드민턴장</a>
 						<a
 							href="${pageContext.request.contextPath }/casPage/cas_themeList.do?cas=${cas}&order=축구장"
 							class="cas_category <c:if test="${order eq '축구장'}">active</c:if>"
@@ -329,10 +322,13 @@ html, body {
 				</div>
 				<div class="row cas_item">
 					<c:forEach var="item_theme" items="${output_theme }">
+						<c:url value="/casPage/cas_detail.do" var="detailUrl">
+							<c:param name="SVCID" value="${item_theme.SVCID }" />
+						</c:url>
 						<div class="col-xs-6 col-sm-4 col-md-3 casItem">
 							<div class="thumbnail item">
 								<img alt="테스트이미지 1번" src="${item_theme.IMGURL }"
-									onclick="location.href='../casPage/cas_detail.do'"
+									onclick="location.href='${detailUrl}'"
 									style="cursor: pointer;">
 								<div class="caption clearfix">
 									<p>

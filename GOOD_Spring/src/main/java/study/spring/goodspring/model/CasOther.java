@@ -26,8 +26,8 @@ public class CasOther {
 	private String IMGURL;
 	private String DTLCONT;
 	private String TELNO;
-	private String V_MAX;
-	private String V_MIN;
+	private String VMAX;
+	private String VMIN;
 	private int REVSTDDAY;
 	private String REVSTDDAYNM;
 	private String regDate;
