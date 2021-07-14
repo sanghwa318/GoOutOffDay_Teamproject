@@ -319,7 +319,7 @@ public class myPageController {
 	}
 
 	/**
-	 * 1:1문의 페이지
+	 * 1:1문의 리스트 페이지
 	 * 
 	 * @return ModelAndView
 	 */
@@ -345,6 +345,32 @@ public class myPageController {
 		// 3) View 처리
 		model.addAttribute("output", output);
 		return new ModelAndView("myPage/myPage_inquiry");
+
+	}
+	
+	/**
+	 * 1:1문의 상세 페이지
+	 * 
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/myPage/myPage_inquiryDetail.do", method = RequestMethod.GET)
+	public ModelAndView InquiryDetail(Model model,
+			@RequestParam(value="QnA_no") int QnA_no) {
+		/* 1) 데이터 조회하기 */
+
+		Inquiry input = new Inquiry();
+		input.setQnA_no(QnA_no);
+		Inquiry output = null;
+
+		try {
+			// 데이터 조회
+			output = inquiryService.getInquiryItem(input);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 3) View 처리
+		model.addAttribute("output", output);
+		return new ModelAndView("myPage/myPage_inquiryDetail");
 
 	}
 

@@ -7,7 +7,6 @@
 <%@ include file="../inc/head.jsp"%>
 
 <style type="text/css">
-
 #inq>.jumbotron {
 	min-height: 500px;
 	box-shadow: none;
@@ -23,63 +22,28 @@
 		<div class="container">
 			<h1 class="page-header">1:1 문의</h1>
 			<div id="inq">
-				<h2>회원 문의</h2>
+				<h2>${output.getQnA_title()}</h2>
 				<div class="jumbotron">
-					<p>질문 내용</p>
+					<p>${output.getQnA_text()}</p>
 				</div>
 			</div>
 			<div id="ans">
 				<h2>관리자 답변</h2>
 				<div class="jumbotron">
-					<p>답변내용</p>
+					<p>
+					<c:if test="${!output.answer_yn}">아직 답변이 없습니다. 조금만 기다려주세요. </c:if> 
+					<c:if test="${output.answer_yn}">${output.getAnswer_detail()}</c:if>
+					</p>
 				</div>
 			</div>
 			<a type="button" class="pull-left btn btn-default"
-				href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do" style="width: 75px; margin-bottom:50px;">목록</a>
+				href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do"
+				style="width: 75px; margin-bottom: 50px;">목록으로</a>
 		</div>
 	</div>
 	<%@ include file="../inc/Footer.jsp"%>
 
 
 	<%@ include file="../inc/plugin.jsp"%>
-
-	<script type="text/x-handlebars-template" id="inq">
-		{{#array.data}}
-				<h2>{{title}}</h2>
-				<div class="jumbotron">
-					<p>{{content}}</p>
-				</div>
-		{{/array.data}}
-    </script>
-    <script type="text/x-handlebars-template" id="ans">
-		{{#array.data}}
-				<h2>{{title}}</h2>
-				<div class="jumbotron">
-					<p>{{content}}</p>
-				</div>
-		{{/array.data}}
-    </script>
-	<script type="text/javascript">
-		function get_inqItem() {
-			// 미리 준비한 HTML틀을 읽어온다.
-			var template = Handlebars.compile($("#inq-tmpl").html());
-			var html = template(content);
-			// #list에 읽어온 내용을 추가한다.
-			$("#inq").append(html);
-			if ('#inq' == null) {
-				$("#inq").append(html);
-			}
-		};
-		function get_ansItem() {
-			// 미리 준비한 HTML틀을 읽어온다.
-			var template = Handlebars.compile($("#ans-tmpl").html());
-			var html = template(content);
-			// #list에 읽어온 내용을 추가한다.
-			$("#ans").append(html);
-			if ('#ans' == null) {
-				$("#ans").append(html);
-			}
-		};
-	</script>
 </body>
 </html>
