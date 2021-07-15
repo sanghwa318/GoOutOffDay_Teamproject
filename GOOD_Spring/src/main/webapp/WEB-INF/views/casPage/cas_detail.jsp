@@ -196,7 +196,7 @@ ul, li {
 									: </strong>
 								<p class="infoText">${output.MAXCLASSNM }<span
 										class="middel_dot"></span>${output.MINCLASSNM }</p></li>
-  							<li class="infoItem"><strong class="infoLabel">이용기간
+  							<li class="infoItem"><strong class="infoLabel">이용시간
 									: </strong>
 								<p class="infoText">${output.VMIN } ~ ${output.VMAX }</p></li>  
 							<li class="infoItem"><strong class="infoLabel">접수기간

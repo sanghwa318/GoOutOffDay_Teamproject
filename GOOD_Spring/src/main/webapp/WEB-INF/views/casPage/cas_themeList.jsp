@@ -37,6 +37,13 @@ html, body {
 	margin: auto;
 }
 
+.body .text-center {
+	padding-bottom: 20px;
+}
+.body .cas_list {
+	padding-bottom: 0;
+}
+
 .body .main_header {
 	padding-bottom: 0;
 }
@@ -188,6 +195,9 @@ html, body {
 </style>
 </head>
 <body>
+	<!-- [페이지네이션] -->
+	<c:set var="URL" value="/casPage/cas_themeList.do" />
+	<!-- //[페이지네이션] -->
 	<!-- 상단영역 시작 -->
 	<%@ include file="../inc/Header.jsp"%>
 	<!-- // 상단영역 끝 -->
@@ -328,8 +338,7 @@ html, body {
 						<div class="col-xs-6 col-sm-4 col-md-3 casItem">
 							<div class="thumbnail item">
 								<img alt="테스트이미지 1번" src="${item_theme.IMGURL }"
-									onclick="location.href='${detailUrl}'"
-									style="cursor: pointer;">
+									onclick="location.href='${detailUrl}'" style="cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
 										${item_theme.MAXCLASSNM }<span class="middel_dot"></span>${item_theme.MINCLASSNM}<span
@@ -346,59 +355,58 @@ html, body {
 				</div>
 			</div>
 			<!-- 페이지 번호 구현 -->
-			<%-- 이전 그룹에 대한 링크 --%>
-			<c:choose>
-				<%-- 이전 그룹으로 이동 가능하다면? --%>
-				<c:when test="${pageData.prevPage > 0}">
-					<%-- 이동할 URL 생성 --%>
-					<c:url value="/casPage/cas_themeList.do" var="prevPageUrl">
-						<c:param name="page" value="${pageData.prevPage}" />
-						<c:param name="cas" value="${cas}" />
-					</c:url>
-					<a href="${prevPageUrl}">[이전]</a>
-				</c:when>
-				<c:otherwise>
-            [이전]
-        </c:otherwise>
-			</c:choose>
+			<div class="text-center">
+				<%-- 이전 그룹에 대한 링크 --%>
+				<ul class="pagination">
+					<c:choose>
+						<%-- 이전 그룹으로 이동 가능하다면? --%>
+						<c:when test="${pageData.prevPage > 0}">
+							<%-- 이동할 URL 생성 --%>
+							<c:url value="${getList }" var="prevPageUrl">
+								<c:param name="page" value="${pageData.prevPage}" />
+								<c:param name="cas" value="${cas}" />
+							</c:url>
+							<li class="page-item"><a href="${prevPageUrl}">&laquo;</a></li>
+						</c:when>
+					</c:choose>
 
-			<%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
-			<c:forEach var="i" begin="${pageData.startPage}"
-				end="${pageData.endPage}" varStatus="status">
-				<%-- 이동할 URL 생성 --%>
-				<c:url value="/casPage/cas_themeList.do" var="pageUrl">
-					<c:param name="page" value="${i}" />
-					<c:param name="cas" value="${cas}" />
-				</c:url>
+					<%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
+					<c:forEach var="i" begin="${pageData.startPage}"
+						end="${pageData.endPage}" varStatus="status">
+						<%-- 이동할 URL 생성 --%>
+						<c:url value="${getList }" var="pageUrl">
+							<c:param name="page" value="${i}" />
+							<c:param name="cas" value="${cas}" />
+						</c:url>
 
-				<%-- 페이지 번호 출력 --%>
-				<c:choose>
-					<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
-					<c:when test="${pageData.nowPage == i}">
-						<strong>[${i}]</strong>
-					</c:when>
-					<%-- 나머지 페이지의 경우 링크 적용함 --%>
-					<c:otherwise>
-						<a href="${pageUrl}">[${i}]</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
+						<%-- 페이지 번호 출력 --%>
+						<c:choose>
+							<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+							<c:when test="${pageData.nowPage == i}">
+								<li class="page-item active"><span style="color: #fff;">${i}<span
+										class="sr-only">(current)</span></span></li>
+							</c:when>
+							<%-- 나머지 페이지의 경우 링크 적용함 --%>
+							<c:otherwise>
+								<li class="page-item"><a href="${pageUrl}">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 
-			<%-- 다음 그룹에 대한 링크 --%>
-			<c:choose>
-				<%-- 다음 그룹으로 이동 가능하다면? --%>
-				<c:when test="${pageData.nextPage > 0}">
-					<%-- 이동할 URL 생성 --%>
-					<c:url value="/casPage/cas_themeList.do" var="nextPageUrl">
-						<c:param name="page" value="${pageData.nextPage}" />
-						<c:param name="cas" value="${cas}" />
-					</c:url>
-					<a href="${nextPageUrl}">[다음]</a>
-				</c:when>
-				<c:otherwise>
-            [다음]
-        </c:otherwise>
-			</c:choose>
+					<%-- 다음 그룹에 대한 링크 --%>
+					<c:choose>
+						<%-- 다음 그룹으로 이동 가능하다면? --%>
+						<c:when test="${pageData.nextPage > 0}">
+							<%-- 이동할 URL 생성 --%>
+							<c:url value="/casPage/cas_themeList.do" var="nextPageUrl">
+								<c:param name="page" value="${pageData.nextPage}" />
+								<c:param name="cas" value="${cas}" />
+							</c:url>
+							<li class="page-item"><a href="${nextPageUrl}">&raquo;</a></li>
+						</c:when>
+					</c:choose>
+				</ul>
+			</div>
 		</div>
 		<!-- // 본문영역 끝 -->
 	</div>
