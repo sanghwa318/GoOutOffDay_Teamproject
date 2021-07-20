@@ -78,7 +78,7 @@ div#category_acco .accordian-toggle {
 									<input type="search" name="keyword" id="course_search"
 										class="form-control" placeholder="검색하기" value="${keyword }" />
 									<span class="input-group-btn">
-										<button class="btn btn-blue" type="submit">
+										<button class="btn btn-blue" type="submit" form="dropdown">
 											<span style="color: #0069a6;">검색 </span><i
 												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
 										</button>
@@ -88,7 +88,7 @@ div#category_acco .accordian-toggle {
 								<!-- 카테고리영역 -->
 								<form method="get"
 									action="${pageContext.request.contextPath }/walkPage/walk_search.do"
-									class="form-horizontal" role="form">
+									class="form-horizontal" role="form" id="dropdown">
 									<fieldset>
 										<div class="form-group">
 											<div class="col-xs-3">
