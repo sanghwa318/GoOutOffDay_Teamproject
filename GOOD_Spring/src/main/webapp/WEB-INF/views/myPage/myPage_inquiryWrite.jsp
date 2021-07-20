@@ -10,6 +10,9 @@
 	height: 34px;
 	padding-top: 7px;
 }
+.cke_contents{
+min-height: 400px;
+}
 </style>
 </head>
 <body>
@@ -20,39 +23,35 @@
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">1:1 문의</h1>
-			<form class="form-group col-md-10 col-md-offset-1" action="${pageContext.request.contextPath}/myPage/myPage_inquiry.do">
+			<form class="form-group col-md-10 col-md-offset-1"
+				action="${pageContext.request.contextPath}/myPage/myPage_inquiryWriteOk.do"
+				method="post">
 				<div class="row">
-					<div class="col-md-6">
-						<label for="inq_title" class="col-md-3">제목:</label>
-						<div class="col-md-9">
-							<input type="text" name="inq_title" class="form-control"
-								name="inq_title">
-						</div>
+					<div class="col-md-8">
+						<label for="QnA_title">제목</label> <input type="text"
+							name="QnA_title" class="form-control" name="QnA_title"
+							style="display: inline-block; width: 90%; margin-left: 10px">
 					</div>
-					<div class="col-md-6">
-						<label for="inq_cateory" class="col-md-3 control-label categorydiv">카테고리</label>
-						<div class="col-md-4">
-							<select class="form-control" id="inq_cateory" name="inq_cateory">
-								<option value="">category</option>
-								<option value="walk">걷기</option>
-								<option value="cas">문화체육</option>
-								<option value="bicycle">자전거</option>
-								<option value="community">커뮤니티</option>
-							</select>
-						</div>
+					<div class="col-md-4">
+						<label for="inq_cateory" class="control-label categorydiv">카테고리</label>
+						<select class="form-control" id="QnA_category" name="QnA_category"
+							style="display: inline-block; width: 75%; margin-left: 10px; margin-top:3px">
+							<option value="">category</option>
+							<option value="walk">걷기</option>
+							<option value="cas">문화체육</option>
+							<option value="bicycle">자전거</option>
+							<option value="community">커뮤니티</option>
+						</select>
 					</div>
 				</div>
 				<br>
-				<div class="row">
-					<div class="col-md-12">
-						<label for="inq_content" class="col-md-3">내용</label>
-						<textarea class="form-control" id="inq_content" name="inq_content"
-							style="min-height: 500px; resize: none"></textarea>
-					</div>
-				</div>
+						<textarea name="QnA_text" class="ckeditor"></textarea>
+
 				<br>
 				<div class="pull-left">
-					<a href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do" class="btn btn-info">목록</a>
+					<a
+						href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do"
+						class="btn btn-info">목록</a>
 				</div>
 				<div class="pull-right">
 					<button type="submit" class="btn btn-info">작성완료</button>
@@ -61,5 +60,7 @@
 		</div>
 	</div>
 	<%@ include file="../inc/Footer.jsp"%>
+	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
+
 </body>
 </html>

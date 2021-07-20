@@ -78,12 +78,14 @@ public class InquiryServiceImpl implements InquiryService {
 	 * @throws Exception
 	 */
 	@Override
-	public int addInquiry(Inquiry input) throws Exception {
+	public Inquiry addInquiry(Inquiry input) throws Exception {
+		Inquiry output=null;
+		
 		int result = 0;
 
 		try {
-			result = sqlSession.insert("InquiryMapper.insertCrew", input);
-
+			result = sqlSession.insert("InquiryMapper.insertInquiry", input);
+			output = sqlSession.selectOne("InquiryMapper.selectInquiryItem", input);
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}
@@ -96,7 +98,7 @@ public class InquiryServiceImpl implements InquiryService {
 			throw new Exception("데이터 등록에 실패했습니다.");
 		}
 
-		return result;
+		return output;
 	}
 	
 	/**

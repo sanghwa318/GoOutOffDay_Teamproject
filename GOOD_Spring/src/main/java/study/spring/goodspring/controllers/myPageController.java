@@ -67,7 +67,7 @@ public class myPageController {
 			return webHelper.redirect(null, "업로드에 실패했습니다.");
 		}
 		/** 2) 데이터 저장 */
-		Member loginInfo = (Member) request.getSession().getAttribute("login_info");
+		Member loginInfo = (Member) webHelper.getSession("login_info");
 
 		loginInfo.setUser_photo(item);
 
@@ -372,6 +372,47 @@ public class myPageController {
 		model.addAttribute("output", output);
 		return new ModelAndView("myPage/myPage_inquiryDetail");
 
+	}
+	/**
+	 * 1:1 문의 작성 페이지
+	 * @return
+	 */
+	@RequestMapping(value = "/myPage/myPage_inquiryWrite.do", method = RequestMethod.GET)
+	public ModelAndView InquiryWrite() {
+		
+		
+		return new ModelAndView("myPage/myPage_inquiryWrite");
+		
+	}
+	
+	/**
+	 * 1:1 문의 작성을 위한 action 페이지
+	 * @return
+	 */
+	@RequestMapping(value = "/myPage/myPage_inquiryWriteOk.do", method = RequestMethod.POST)
+	public ModelAndView InquiryWriteOk(Model model,
+			@RequestParam(value="QnA_title") String QnA_title,
+			@RequestParam(value="QnA_category") String QnA_category,
+			@RequestParam(value="QnA_text") String QnA_text
+			) {
+		Inquiry input=new Inquiry();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		input.setQnA_title(QnA_title);
+		input.setQnA_category(QnA_category);
+		input.setQnA_text(QnA_text);
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		
+		Inquiry output=null;
+		
+		try {
+			output = inquiryService.addInquiry(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return webHelper.redirect(contextPath+"/myPage/myPage_inquiryDetail.do"+"?QnA_no="+output.getQnA_no(), "작성되었습니다.");
+		
 	}
 
 }

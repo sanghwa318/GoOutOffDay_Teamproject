@@ -62,8 +62,8 @@
 		VALUES (#{user_info_user_no},
 		#{QnA_title},
 		#{QnA_text},
-		#{QnA_category}, #{answer_detail},
-		#{answer_yn},
+		#{QnA_category}, null,
+		'N',
 		now() );
 	</insert>
 

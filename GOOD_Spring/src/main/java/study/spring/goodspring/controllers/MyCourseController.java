@@ -15,7 +15,6 @@ import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.MyCourses;
-import study.spring.goodspring.service.CrewService;
 import study.spring.goodspring.service.MyCourseService;
 @Controller
 public class MyCourseController {

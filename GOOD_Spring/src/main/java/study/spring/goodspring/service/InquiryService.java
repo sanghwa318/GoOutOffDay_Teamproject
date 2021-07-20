@@ -30,7 +30,7 @@ public interface InquiryService {
 	 * @return int 
 	 * @throws Exception
 	 */
-	public int addInquiry(Inquiry input) throws Exception;
+	public Inquiry addInquiry(Inquiry input) throws Exception;
 	
 	
 	/*
