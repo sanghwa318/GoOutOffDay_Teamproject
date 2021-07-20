@@ -347,15 +347,14 @@ public class myPageController {
 		return new ModelAndView("myPage/myPage_inquiry");
 
 	}
-	
+
 	/**
 	 * 1:1문의 상세 페이지
 	 * 
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/myPage/myPage_inquiryDetail.do", method = RequestMethod.GET)
-	public ModelAndView InquiryDetail(Model model,
-			@RequestParam(value="QnA_no") int QnA_no) {
+	public ModelAndView InquiryDetail(Model model, @RequestParam(value = "QnA_no") int QnA_no) {
 		/* 1) 데이터 조회하기 */
 
 		Inquiry input = new Inquiry();
@@ -373,46 +372,55 @@ public class myPageController {
 		return new ModelAndView("myPage/myPage_inquiryDetail");
 
 	}
+
 	/**
 	 * 1:1 문의 작성 페이지
-	 * @return
+	 * 
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/myPage/myPage_inquiryWrite.do", method = RequestMethod.GET)
 	public ModelAndView InquiryWrite() {
-		
-		
+
 		return new ModelAndView("myPage/myPage_inquiryWrite");
-		
+
 	}
-	
+
 	/**
 	 * 1:1 문의 작성을 위한 action 페이지
-	 * @return
+	 * 
+	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/myPage/myPage_inquiryWriteOk.do", method = RequestMethod.POST)
-	public ModelAndView InquiryWriteOk(Model model,
-			@RequestParam(value="QnA_title") String QnA_title,
-			@RequestParam(value="QnA_category") String QnA_category,
-			@RequestParam(value="QnA_text") String QnA_text
-			) {
-		Inquiry input=new Inquiry();
+	public ModelAndView InquiryWriteOk(Model model, @RequestParam(value = "QnA_title") String QnA_title,
+			@RequestParam(value = "QnA_category") String QnA_category,
+			@RequestParam(value = "QnA_text") String QnA_text) {
+		if (!regexHelper.isValue(QnA_title)) {
+			return webHelper.redirect(null, "제목을 입력하세요");
+		}
+		if (!regexHelper.isValue(QnA_category)) {
+			return webHelper.redirect(null, "카테고리를 선택하세요");
+		}
+		if (!regexHelper.isValue(QnA_text)) {
+			return webHelper.redirect(null, "내용을 입력하세요");
+		}
+		Inquiry input = new Inquiry();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 		input.setQnA_title(QnA_title);
 		input.setQnA_category(QnA_category);
 		input.setQnA_text(QnA_text);
 		input.setUser_info_user_no(loginInfo.getUser_no());
-		
-		Inquiry output=null;
-		
+
+		Inquiry output = null;
+
 		try {
 			output = inquiryService.addInquiry(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		return webHelper.redirect(contextPath+"/myPage/myPage_inquiryDetail.do"+"?QnA_no="+output.getQnA_no(), "작성되었습니다.");
-		
+
+		return webHelper.redirect(contextPath + "/myPage/myPage_inquiryDetail.do" + "?QnA_no=" + output.getQnA_no(),
+				"작성되었습니다.");
+
 	}
 
 }
