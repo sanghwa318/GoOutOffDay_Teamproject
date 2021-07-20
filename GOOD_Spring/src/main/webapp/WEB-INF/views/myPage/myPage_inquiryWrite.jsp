@@ -37,10 +37,10 @@ min-height: 400px;
 						<select class="form-control" id="QnA_category" name="QnA_category"
 							style="display: inline-block; width: 75%; margin-left: 10px; margin-top:3px">
 							<option value="">category</option>
-							<option value="walk">걷기</option>
-							<option value="cas">문화체육</option>
-							<option value="bicycle">자전거</option>
-							<option value="community">커뮤니티</option>
+							<option value="걷기">걷기</option> 
+							<option value="문화체육">문화체육</option>
+							<option value="자전거">자전거</option>
+							<option value="커뮤니티">커뮤니티</option>
 						</select>
 					</div>
 				</div>
