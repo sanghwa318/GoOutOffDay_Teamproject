@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -47,20 +50,20 @@
 	<div class="wrapper">
 
 		<!-- 상단영역 -->
-		<%@ include file="../inc/Header.jsp"%>
+		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 		<!-- 본문영역 -->
 		<div class="container">
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="../icon_img/커뮤니티 아이콘.png;" />
+						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
 					</span>
 				</h1>
 			</div>
-			<h1 class="page-header">크루를 소개합니다</h1>
+			<h1 class="page-header">${output.crew_name} 크루를 소개합니다</h1>
 			<!-- 본문 상단 영역 -->
 			<div class="crew_info_header col-md-12 "></div>
 			<!-- //본문 상단 영역 -->
@@ -69,22 +72,18 @@
 				<div class="col-md-3" id="crew_middle">
 					<div class="form-group">
 						<span class="title-img"><img
-							src="../img/profile_default.png"> <span class='sr-only'>이미지</span>
+							src="${pageContext.request.contextPath}/assets/img/profile_default.png"> <span class='sr-only'>이미지</span>
 						</span>
-						<h5>가입된 회원 수 : 6명</h5>
-						<h3 class="title-name">ezen 크루</h3>
-						<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-						<P>매주 토요일 6~8시 걷기 진행</P>
+						<h5>가입된 회원 수 : ${output.crew_member}</h5>
+						<h3 class="title-name">${output.crew_name} 크루</h3>
+						<p>${output.crew_sinto}</p>
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->
 				<div class="col-md-8">
-					<h2>ezen크루 정보</h2>
+					<h2>${output.crew_name} 크루 정보</h2>
 					<p>
-						우리 ezen크루는 과도한 업무 스트레스 및 학업, 일상에서 오는 스트레스를 줄이고자 크루를 개설하였습니다.<br />
-						지친 일상에서 벗어나 깨끗한 공기와 가벼운 마음으로 걷기를 통한 체력 증진 및 소통을 통한 서로에 대한 소속감을 형성!
-						<br /> 저희와 함께 스트레스를 이겨내실 분들을 기다립니다! 동해물과 백두사니 마르고 닳도록 하느님이 보우하사
-						우리 나라 만세<br /> 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세~ <br /> ezen크루~~!
+						${output.crew_dinto}
 					</p>
 				</div>
 				<!-- 크루 상세 정보 끝 -->
@@ -97,7 +96,7 @@
 					<div class="text-center">
 						<button type='submit' id="join" class="btn btn-primary">가입하기</button>
 						<button type="submit" class="btn btn-info"
-							onClick="location.href='../commPage/comm_crew.jsp'">목록</button>
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.jsp'">목록</button>
 					</div>
 					<hr />
 				</div>

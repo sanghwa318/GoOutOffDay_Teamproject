@@ -104,12 +104,12 @@ margin-top:-100px;
 					</div>
 					<div class="col-md-4" role="search">
 						<div class="form-group input-group">
-							<span class="input-group-btn">
+							<input type="text" class="form-control" placeholder="크루, 게시글 검색"
+								id="keyword" name="keyword" value=""><span class="input-group-btn">
 								<button class="btn btn-blue" type="submit">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
-							</span><input type="text" class="form-control" placeholder="크루, 게시글 검색"
-								id="keyword" name="keyword" value="${keyword}">
+							</span>
 						</div>
 					</div>
 					<div class="col-md-2 pull-right">
@@ -181,14 +181,15 @@ margin-top:-100px;
 						</c:if>
 
 						<%-- 상세페이지로 이동하기위한 URL --%>
-						<c:url value="/commPage/comm.crew.info.do" var="infoUrl">
+						<c:url value="/commPage/comm_crew_info.do" var="infoUrl">
 							<c:param name="crew_no" value="${item.crew_no}" />
 						</c:url>
 
 						<div class="col-xs-6 col-sm-4 col-md-3">
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
-								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}">
+								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
+								onclick="location.href='${infoUrl}'" style="cursor:pointer;">
 								<div class="caption clearfix">
 									<p>
 										<a href="${infoUrl}">크루 이름: ${item.crew_name}</a>
