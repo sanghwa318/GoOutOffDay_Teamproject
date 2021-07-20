@@ -109,56 +109,33 @@
 						</tr>
 					</thead>
 					<tbody id="list">
-						<tr>
-							<td class="text-center">1</td>
-							<td class="text-center"><a
-								href="../commPage/comm_crew_post.jsp">팀 프로젝트 상황</a></td>
-							<td class="text-center">김도훈</td>
-							<td class="text-center">2021-06-09</td>
-							<td class="text-center">111</td>
-						</tr>
-						<tr>
-							<td class="text-center">2</td>
-							<td class="text-center"><a
-								href="../commPage/comm_crew_post.jsp">오늘 점심은 또죠 입니다</a></td>
-							<td class="text-center">박찬희</td>
-							<td class="text-center">2021-06-10</td>
-							<td class="text-center">222</td>
-						</tr>
-						<tr>
-							<td class="text-center">3</td>
-							<td class="text-center"><a
-								href="../commPage/comm_crew_post.jsp">동해물과 백두산이 마르고 닳도록</a></td>
-							<td class="text-center">이상화</td>
-							<td class="text-center">2021-06-11</td>
-							<td class="text-center">333</td>
-						</tr>
-						<tr>
-							<td class="text-center">4</td>
-							<td class="text-center"><a
-								href="../commPage/comm_crew_post.jsp">탕수육 짱</a></td>
-							<td class="text-center">이준복</td>
-							<td class="text-center">2021-06-12</td>
-							<td class="text-center">555</td>
-						</tr>
-						<tr>
-							<td class="text-center">5</td>
-							<td class="text-center"><a
-								href="../commPage/comm_crew_post.jsp">하느님이 보우하사 우리나라만세</a></td>
-							<td class="text-center">정채원</td>
-							<td class="text-center">2021-06-13</td>
-							<td class="text-center">666</td>
-						</tr>
-						<tr>
-							<td class="text-center">6</td>
-							<td class="text-center"><a
-								href="../commPage/comm_crew_post.jsp">무궁화 삼천리 화려강산</a></td>
-							<td class="text-center">한남규</td>
-							<td class="text-center">2021-06-14</td>
-							<td class="text-center">777</td>
-						</tr>
+					<c:choose>
+						<%--조회결과가 없는 경우 --%>
+						<c:when test="${crewpostoutput == null || fn:length(crewpostoutput) == 0 })">
+							<tr>
+								<td class="text-center">등록된 게시글이 없습니다.</td>
+							</tr>
+						
+						<%--조회결과가 있는 경우 --%>
+						<c:otherwise>
+							<c:forEach var="item" items="${crewpostoutput}" varStatus="status">
+							
+							</c:forEach>
+							
+							<tr>
+								<td class="text-center">${crewpostoutput.post_no}</td>
+								<td class="text-center">${crewpostoutput.post_title}</td>
+								<td class="text-center">${crewpostoutput.user_info_user_no}</td>
+								<td class="text-center">${crewpostoutput.post_hits}</td>
+							</tr>
+						
+						</c:otherwise>
+						</c:when>
+						
+						</c:choose>
 					</tbody>
 				</table>
+				
 				<div class="form-group">
 					<div class="col-md-4" role="search">
 						<div class="form-group input-group">
@@ -171,9 +148,9 @@
 						</div>
 					</div>
 					<button type="button" id="btn1" class="btn btn-primary pull-right"
-						onclick="location.href='../commPage/comm_crew_postWrite.jsp'">글쓰기</button>
+						onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do'">글쓰기</button>
 					<button type="button" id="btn2" class="btn btn-primary pull-right"
-						onclick="location.href='../commPage/comm_crew_memberJoin.jsp'">회원관리</button>
+						onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do'">회원관리</button>
 				</div>
 			</div>
 			<!-- //본문 중단2 영역 -->
