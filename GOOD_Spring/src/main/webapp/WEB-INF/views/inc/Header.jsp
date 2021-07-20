@@ -210,22 +210,21 @@
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=exp">문화
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=문화">문화
 												창의 체험</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=showExh">공연
-												전시</a>
-										</div>
-										<div class="panel-body">
-											<a class="btn-block"
-												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=imp">교육
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=교육">교육
 												자기 계발</a>
 										</div>
 										<div class="panel-body">
 											<a class="btn-block"
-												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=sportsFac">체육시설</a>
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=대관">장소대여</a>
+										</div>
+										<div class="panel-body">
+											<a class="btn-block"
+												href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=체육">체육시설</a>
 										</div>
 									</div>
 								</div>
@@ -297,16 +296,16 @@
 										style="width: 30px; height: 24px; padding: 0 3px;" />문화 체육</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
-											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=exp"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=문화"
 											class="cbp-tm-icon-pencil">문화 창의 체험</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=showExh"
-											class="cbp-tm-icon-pictures">공연 전시</a></li>
-										<li><a
-											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=imp"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=교육"
 											class="cbp-tm-icon-contract">교육 자기 계발</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=sportsFac"
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=대관"
+											class="cbp-tm-icon-pictures">장소대여</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/casPage/cas_themeList.do?cas=체육"
 											class="cbp-tm-icon-location">체육시설</a></li>
 									</ul></li>
 								<!--커뮤니티 메뉴-->

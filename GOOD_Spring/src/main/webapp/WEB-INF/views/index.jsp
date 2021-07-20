@@ -62,7 +62,8 @@ h4 {
 
 .walking_list  .header  h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -74,7 +75,8 @@ h4 {
 
 .show_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/공연전시문화 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/장소대여 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -86,7 +88,8 @@ h4 {
 
 .exp_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/창의 체험 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/창의 체험 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -98,7 +101,8 @@ h4 {
 
 .adu_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/자기계발 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/자기계발 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -110,7 +114,8 @@ h4 {
 
 .crew_list .header h2:after {
 	content: "";
-	background-image: url("${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png");
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -161,6 +166,12 @@ h4 {
 
 .item .caption {
 	border-top: 1px solid rgba(102, 109, 117, 0.32);
+}
+
+.owl-theme .item img {
+	height: 180px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 
 /** 버튼 CSS 적용 **/
@@ -316,6 +327,18 @@ h4 {
 	background-image: linear-gradient(142deg, rgba(0, 0, 0, 0.7),
 		hsla(0, 0%, 100%, 0) 65%);
 }
+
+/** 대분류 소분류 사이의 중간점 **/
+.middel_dot {
+	content: "";
+	display: inline-block;
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	background-color: #848c94;
+	vertical-align: middle;
+	margin: 0 5px;
+}
 </style>
 </head>
 <body>
@@ -336,36 +359,40 @@ h4 {
 				<div class="row good_item">
 					<!--  캐러셀 시작 -->
 					<div class="owl-carousel owl-theme" id="owl-GOOD">
-						<div class="item" id="bicycle_GOOD">
-							<img src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_bicycle1.png" alt="오늘의 자전거 항목 추천"
-								style="cursor: pointer;" />
+						<div class="item" id="bicycle_GOOD" onclick="location.href='${pageContext.request.contextPath}/bicyclePage/bicycle_index.do'">
+							<img
+								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_bicycle1.png"
+								alt="오늘의 자전거 항목 추천" style="cursor: pointer;" />
 							<div class="gradientBackground"></div>
 							<div class="module_header">
 								<h2 class="module_title">자전거</h2>
 								<span class="module_text">따릉이 타러갈래?</span>
 							</div>
 						</div>
-						<div class="item" id="walk_GOOD">
-							<img src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_walk2.png" alt="오늘의 걷기 항목 추천"
-								style="cursor: pointer;" />
+						<div class="item" id="walk_GOOD" onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'">
+							<img
+								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_walk2.png"
+								alt="오늘의 걷기 항목 추천" style="cursor: pointer;" />
 							<div class="gradientBackground"></div>
 							<div class="module_header">
 								<h2 class="module_title">걷기</h2>
 								<span class="module_text">같이 걸으러갈래?</span>
 							</div>
 						</div>
-						<div class="item" id="cas_GOOD">
-							<img src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_img1.png" alt="오늘의 문화체육 항목 추천"
-								style="cursor: pointer;" />
+						<div class="item" id="cas_GOOD" onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'">
+							<img
+								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_img1.png"
+								alt="오늘의 문화체육 항목 추천" style="cursor: pointer;" />
 							<div class="gradientBackground"></div>
 							<div class="module_header">
 								<h2 class="module_title">문화 체육</h2>
 								<span class="module_text">오늘은 어떤걸 배워볼래?</span>
 							</div>
 						</div>
-						<div class="item" id="comm_GOOD">
-							<img src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_crew1.png" alt="오늘의 커뮤니티 항목 추천"
-								style="cursor: pointer;" />
+						<div class="item" id="comm_GOOD" onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'">
+							<img
+								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_crew1.png"
+								alt="오늘의 커뮤니티 항목 추천" style="cursor: pointer;" />
 							<div class="gradientBackground"></div>
 							<div class="module_header">
 								<h2 class="module_title">커뮤니티</h2>
@@ -520,142 +547,6 @@ h4 {
 			<!-- 영역 구분선 모바일에서만 표시 -->
 			<div class="visible-xs"></div>
 			<!-- // 영역 영역 구분선 끝 -->
-			<!-- 본문 공연 전시 문화 영역 -->
-			<div class="row show_list">
-				<div class="header">
-					<h2>공연 전시</h2>
-				</div>
-				<!-- 공연 전시 문화 캐러셀 영역 -->
-				<div class="row show_item">
-					<!--  캐러셀 시작 -->
-					<div class="owl-carousel owl-theme" id="owl-walk">
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지1" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지2" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지3" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지4" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지5" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지6" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지7" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지8" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지9" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지10" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									공연 전시 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>공연 전시 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- // 공연 전시 문화 영역 끝 -->
-			<!-- 영역 구분선 모바일에서만 표시 -->
-			<div class="visible-xs"></div>
-			<!-- // 영역 영역 구분선 끝 -->
 			<!-- 본문 창의 체험 영역 -->
 			<div class="row exp_list">
 				<div class="header">
@@ -665,126 +556,26 @@ h4 {
 				<div class="row exp_item">
 					<!--  캐러셀 시작 -->
 					<div class="owl-carousel owl-theme" id="owl-walk">
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지1" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
+						<c:forEach var="item_exp" items="${output_exp }">
+							<c:url value="/casPage/cas_detail.do" var="detailUrl">
+								<c:param name="SVCID" value="${item_exp.SVCID }"></c:param>
+							</c:url>
+							<div class="thumbnail item">
+								<img src="${item_exp.IMGURL }" alt="테스트이미지1"
+									onclick="location.href='${detailUrl}'"
+									style="max-height: 100%; max-width: 100%; cursor: pointer;">
+								<div class="caption clearfix">
+									<p>
+										${item_exp.MAXCLASSNM }<span class="middel_dot"></span>${item_exp.MINCLASSNM}<span
+											class="heart pull-right"><i class="fa fa-heart-o"
+											aria-hidden="true" role="button"></i></span>
+									</p>
+									<h4 class="explan">${item_exp.SVCNM }</h4>
+									<p class="pull-left" style="max-width: 110px;">${item_exp.PLACENM}</p>
+									<p class="pull-right">${item_exp.SVCSTATNM}</p>
+								</div>
 							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지2" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지3" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지4" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지5" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지6" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지7" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지8" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지9" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지10" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									문화 창의 체험 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>창의 체험 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -801,130 +592,66 @@ h4 {
 				<div class="row adu_item">
 					<!--  캐러셀 시작 -->
 					<div class="owl-carousel owl-theme" id="owl-walk">
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지1" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
+						<c:forEach var="item_imp" items="${output_imp }">
+							<c:url value="/casPage/cas_detail.do" var="detailUrl">
+								<c:param name="SVCID" value="${item_imp.SVCID }"></c:param>
+							</c:url>
+							<div class="thumbnail item">
+								<img src="${item_imp.IMGURL }" alt="테스트이미지1"
+									onclick="location.href='${detailUrl}'"
+									style="max-height: 100%; max-width: 100%; cursor: pointer;">
+								<div class="caption clearfix">
+									<p>
+										${item_imp.MAXCLASSNM }<span class="middel_dot"></span>${item_imp.MINCLASSNM}<span
+											class="heart pull-right"><i class="fa fa-heart-o"
+											aria-hidden="true" role="button"></i></span>
+									</p>
+									<h4 class="explan">${item_imp.SVCNM }</h4>
+									<p class="pull-left" style="max-width: 110px;">${item_imp.PLACENM}</p>
+									<p class="pull-right">${item_imp.SVCSTATNM}</p>
+								</div>
 							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지2" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지3" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지4" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지5" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지6" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지7" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지8" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지9" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지10" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									교육 자기계발 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>교육 자기계발 제목 OR 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 			<!-- // 교육 자기계발 영역 끝 -->
+			<!-- 영역 구분선 모바일에서만 표시 -->
+			<div class="visible-xs"></div>
+			<!-- // 영역 영역 구분선 끝 -->
+			<!-- 본문 장소대여 영역 -->
+			<div class="row show_list">
+				<div class="header">
+					<h2>장소대여</h2>
+				</div>
+				<!-- 장소대여 캐러셀 영역 -->
+				<div class="row show_item">
+					<!--  캐러셀 시작 -->
+					<div class="owl-carousel owl-theme" id="owl-walk">
+						<c:forEach var="item_borrow" items="${output_borrow }">
+							<c:url value="/casPage/cas_detail.do" var="detailUrl">
+								<c:param name="SVCID" value="${item_borrow.SVCID }"></c:param>
+							</c:url>
+							<div class="thumbnail item">
+								<img src="${item_borrow.IMGURL }" alt="이미지"
+									onclick="location.href='${detailUrl}'"
+									style="max-height: 100%; max-width: 100%; cursor: pointer;">
+								<div class="caption clearfix">
+									<p>
+										${item_borrow.MAXCLASSNM }<span class="middel_dot"></span>${item_borrow.MINCLASSNM}<span
+											class="heart pull-right"><i class="fa fa-heart-o"
+											aria-hidden="true" role="button"></i></span>
+									</p>
+									<h4 class="explan">${item_borrow.SVCNM }</h4>
+									<p class="pull-left" style="max-width: 110px;">${item_borrow.PLACENM}</p>
+									<p class="pull-right">${item_borrow.SVCSTATNM}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<!-- // 장소대여 영역 끝 -->
 			<!-- 영역 구분선 모바일에서만 표시 -->
 			<div class="visible-xs"></div>
 			<!-- // 영역 영역 구분선 끝 -->
