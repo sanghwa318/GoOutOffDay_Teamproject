@@ -56,7 +56,7 @@
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
@@ -72,10 +72,10 @@
 				<div class="col-md-3" id="crew_middle">
 					<div class="form-group">
 						<span class="title-img"><img
-							src="${pageContext.request.contextPath}/assets/img/profile_default.png"> <span class='sr-only'>이미지</span>
+							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
 						<h5>가입된 회원 수 : ${output.crew_member}</h5>
-						<h3 class="title-name">${output.crew_name} 크루</h3>
+						<h3 class="title-name">${output.crew_name} 크루 간단소개</h3>
 						<p>${output.crew_sinto}</p>
 					</div>
 				</div>
@@ -91,12 +91,18 @@
 			</div>
 			<!--// 본문 중단 영역 -->
 			<!-- 본문 하단 영역 -->
+			
+			<%-- 상세페이지로 이동하기위한 URL --%>
+						<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">
+							<c:param name="crew_no" value="${output.crew_no}" />
+						</c:url>
+			
 			<div class="crew_info_footer">
 				<div class="col-md-12">
 					<div class="text-center">
 						<button type='submit' id="join" class="btn btn-primary">가입하기</button>
 						<button type="submit" class="btn btn-info"
-							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.jsp'">목록</button>
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.do'">목록</button>
 					</div>
 					<hr />
 				</div>
@@ -123,7 +129,7 @@
 																		'success');
 																setTimeout(
 																		function() {
-																			location.href = '../commPage/comm_crew_bbs.jsp';
+																			location.href = '${bbsUrl}';
 																		}, 1000);
 
 															} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우

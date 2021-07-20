@@ -39,31 +39,7 @@
 		user_info_user_no
 		FROM crew
 
-		<where>
-			<if test="crew_name != null and crew_name != '' ">
-				crew_name LIKE CONCAT('%', #{crew_name}, '%')
-			</if>
-
-			<if test="crew_category != null and crew_category != '' ">
-				OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
-			</if>
-
-			<if test="crew_sinto != null and crew_sinto != '' ">
-				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
-			</if>
-			<if test="crew_area != null and crew_area != '' ">
-				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
-			</if>
-			<if test="crew_createtime != null and crew_createtime != '' ">
-				OR ORDER BY crew_createtime DESC
-			</if>
-		</where>
-
-
-
-		ORDER BY crew_no DESC
-
-
+		WHERE crew_no = #{crew_no};
 
 	</select>
 

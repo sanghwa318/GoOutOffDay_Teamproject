@@ -76,7 +76,7 @@
 				<div class="col-md-3" id="crew_middle">
 					<div class="form-group">
 						<span class="title-img"><img
-							src="${item.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
+							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
 						<h5>가입된 회원 수 : 6명</h5>
 						<h3 class="crew_name">${output.crew_name} 크루</h3>
