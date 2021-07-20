@@ -106,6 +106,10 @@ p {
 	background-color: #258fff;
 }
 
+.menu_header {
+	padding-top: 7px;
+}
+
 .menu_header h4 {
 	padding-top: 10px;
 	color: #ffffff;
@@ -414,7 +418,7 @@ p {
 												for (var i = 0; i < result.item.length; i++) {
 													var x=result.item[i].stationLatitude;
 													var y=result.item[i].stationLongitude;
-													t a
+													
 													str += '<div class="menu_detail" onclick="panTo('+x+','+y+')" style="cursor:pointer;">';
 													str += "<button id='map_btn' class='btn btn-info pull-right' type='button' style='display:none'>위치 찾기 </button>";
 													str += "<p class='detail_content1'>대여소 : "
@@ -468,7 +472,6 @@ p {
 	// 지도 중심을 부드럽게 이동시킵니다
 	// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 	map.panTo(moveLatLon);
-	displayInfowindow(map, marker);
 	}
 
 
