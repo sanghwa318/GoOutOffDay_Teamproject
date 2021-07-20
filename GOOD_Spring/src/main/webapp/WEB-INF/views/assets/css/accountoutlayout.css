@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+
+
+
+/* 입력요소 단위 박스 */
+.form-group1 {
+	margin-top: 15px;
+}
+
+
+
+/* Float 마감제 */
+.form-group1:after {
+	content: '';
+	display: block;
+	clear: both;
+	float: none;
+}
+
+/* <label>에 대한 박스 처리 */
+.col-md-2 {
+	width: 25%;
+	display: block;
+	float: left;
+	font-size: 20px;
+	padding-top: 7px;
+	text-indent: 5px;
+	text-align: right;
+}
+
+/* <input>태그가 배치되는 박스의 처리 */
+.col-md-10 {
+	width: 50%;
+	display: block;
+	float: left;
+}
+
+.col-md-10 #gender1, .col-md-10 #gender2 {
+	margin-left: 30px;
+	margin-top: 10px;
+}
+
+.gender {
+	font-size: 20px;
+}
+
+.col-md-10 #user_id, .col-md-10 #user_nikname, .col-md-10 #sample4_postcode{
+	width: 200px;
+	display: block;
+	float: left;
+}
+
+/* <input>태그 */
+.form-control1 {
+	width: 100%;
+	padding: 5px 0;
+	font-size: 14px;
+	border: 1px solid #eee;
+}
+
+/* 글자 중앙 정렬 */
+.text-center {
+	text-align: center;
+}
+
+/* 필수항목 표시를 위한 `*` */
+.identify {
+	font-size: 14px;
+	color: #f00;
+}
+
+/* 에러 메시지에 대한 글자 색상 */
+.error {
+	color: red;
+	
+}
+
+/* 에러가 발생한 <input>태그 */
+input.error {
+	background-color: #ffff00;
+}
+
+/* 에러메시지가 표시중인 <label>태그 */
+label.error {
+	font-size: 10px;
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 0;
+	display: none;
+}
+
+label#error1{
+	margin-left: 130px;
+}
+
+#id_uniq_check, #nikname_uniq_check {
+	margin-left: 20px;
+}
+/* 인풋요소 ui*/
+.form-control1 {
+	border: none;
+	border-bottom: 2px solid #ced4da;
+	border-radius: 0px;
+	background-color: transparent;
+	padding-left: 5px;
+	box-shadow: none;
+
+}
+
+.form-control1:focus {
+	border-bottom-color: #007bff;
+	color: #000;
+	box-shadow: none;
+}
+
+.form-control1:focus.invalid {
+	border-bottom-color: #dc3545;
+}
+
+
+#cancel {
+
+margin-left: 6px;
+} 
+

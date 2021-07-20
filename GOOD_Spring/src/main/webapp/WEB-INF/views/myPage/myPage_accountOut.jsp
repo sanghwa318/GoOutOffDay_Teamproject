@@ -7,16 +7,8 @@
 <!doctype html>
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Joinlayout.css" />
-<style>
-.form-horizontal{
-border: 1px solid #87ceeb;
-}
-#del {
-margin-bottom: 15px;
-}
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/accountoutlayout.css" />
 
-</style>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 
 </head>
@@ -103,28 +95,16 @@ margin-bottom: 15px;
                     </div>
                 </div>
                 <!-- //상세주소 -->	     
-         <div class="form-group1">
-				<div class="col-sm-10 col-sm-offset-2 text-center">
-         <button  type='submit'class="btn btn-danger" id="del" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_accountOut_delete_ok.do?user_id=${login_info.getUser_id()}/'">탈퇴하기</button>
-         </div>
-         </div>
 		</form>
-		
+		<div class="form-group1 text-center">
+			<button class="btn btn-danger" id="del" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_accountOut_delete_ok.do?user_id=${login_info.getUser_id()}/'">탈퇴하기</button>
+			<button class="btn btn-default" id ="cancel"onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
+		</div>
 		</div>
 	</div>
 </div>
 </div>
-		<%-- <h1 class="page-header">회원탈퇴</h1>
-		<h1>회원정보</h1>
-		<p>아이디: ${login_info.getUser_id()}</p>
-		<p>이름: ${login_info.getUser_name()}</p>
-		<p>닉네임: ${login_info.getUser_nick()}</p>
-		<p>연락처: ${login_info.getTel()}</p>
-		<p>이메일: ${login_info.getEmail()}</p>
-		<p>우편번호: ${login_info.getPost()}</p>
-		<p>도로명주소: ${login_info.getAddress1()}</p>
-		<p>상세주소: ${login_info.getAddress2()}</p>
-		<button  type='submit'class="btn btn-danger" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_accountOut_delete_ok.do?user_id=${login_info.getUser_id()}/'">탈퇴하기</button> --%>
+	 
 
 </body>
 
