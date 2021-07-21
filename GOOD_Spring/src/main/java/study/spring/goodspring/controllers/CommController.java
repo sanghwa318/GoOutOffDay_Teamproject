@@ -310,29 +310,34 @@ public class CommController {
 			// 제목
 			@RequestParam(value = "post_title", defaultValue = "") String title,
 			// 내용
-			@RequestParam(value = "post_content", defaultValue = "") String content) {
+			@RequestParam(value = "post_content", defaultValue = "") String content,
+			// 크루번호
+			@RequestParam(value = "crew_name", defaultValue = "") String crew_name) {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();
 
-		Crew crew_info = new Crew();
+		Crew output = new Crew();
+		output.setCrew_name(crew_name);
 
 		// 1) 데이터 저장
 		CrewPost input = new CrewPost();
 		input.setPost_title(title);
 		input.setPost_content(content);
 		input.setUser_info_user_no(userNo);
-
+		input.setPost_crew(crew_name);
+		
 		try {
 			// 데이터 저장
 			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
 			crewPostService.insertCrewPost(input);
+			
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
 
 		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_post?post_no=" + input.getPost_no();
+		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no();
 
 		try {
 			response.sendRedirect(redirectUrl);

@@ -149,7 +149,6 @@ input#title {
 							// 창이 닫히는 애니메이션의 시간이 있으므로,
 							// 0.1초의 딜레이 적용 후 포커스 이동
 							setTimeout(function() {
-								location.href="${pageContext.request.contextPath}/commPage/comm_crew_post.jsp";
 																}, 1000);
 													})
 								}
@@ -166,9 +165,8 @@ input#title {
 					cancelButtonText : '아니오', // 취소버튼 표시 문구
 				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('삭제', '크루 개설이 취소되었습니다.', 'success');
+						swal('삭제', '게시글 작성이 취소되었습니다.', 'success');
 						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew.jsp';
 						}, 1000);
 
 					}
