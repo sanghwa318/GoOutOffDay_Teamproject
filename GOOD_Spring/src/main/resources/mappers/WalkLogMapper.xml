@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WalkLogMapper">
+
+	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+	<resultMap type="study.spring.goodspring.model.WalkLog"
+		id="WalkLogMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="walk_log_no" column="walk_log_no" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="walk_log_datetime" column="walk_log_datetime" />
+		<result property="walking_time" column="walking_time" />
+		<result property="walking_distance" column="walking_distance" />
+		<result property="lon" column="lon" />
+		<result property="lat" column="lat" />
+		<result property="event_name" column="event_name" />
+	</resultMap>
+
+	<!-- 단일행 조회 -->
+	<select id="selectWalkLogItem" resultMap="WalkLogMap"
+		parameterType="study.spring.goodspring.model.WalkLog">
+		SELECT walk_log_no, walk_log_datetime, walking_time,
+		walking_distance, lon,
+		lat, event_name
+		FROM walk_log where
+		user_info_user_no=#{user_info_user_no} ORDER BY walk_log_no DESC LIMIT
+		0,1;
+
+	</select>
+
+	<!-- 중복 데이터 삭제를 위한 단일행 조회 -->
+	<select id="selectSamePosition" resultMap="WalkLogMap"
+		parameterType="study.spring.goodspring.model.WalkLog">
+		SELECT walk_log_no, walk_log_datetime, walking_time,
+		walking_distance, lon,
+		lat, event_name
+		FROM walk_log where
+		user_info_user_no=#{user_info_user_no} ORDER BY walk_log_no DESC LIMIT
+		0,1;
+
+	</select>
+
+	<!--다중행 조회 -->
+	<select id="selectWalkLogList"
+		parameterType="study.spring.goodspring.model.WalkLog"
+		resultMap="WalkLogMap">
+		SELECT walk_log_no, walk_log_datetime, walking_time,
+		walking_distance, lon, lat, event_name
+		FROM walk_log
+		WHERE
+		user_info_user_no=#{user_info_user_no}
+
+	</select>
+
+	<!-- 데이터 저장 기능 -->
+
+	<insert id="insertWalkLog"
+		parameterType="study.spring.goodspring.model.WalkLog"
+		useGeneratedKeys="true" keyProperty="walk_log_no">
+		INSERT INTO walk_log
+		(user_info_user_no, walk_log_datetime,
+		walking_time, walking_distance,
+		lon,
+		lat, event_name)
+		VALUES (#{user_info_user_no},
+		now(),
+		#{walking_time},
+		null,
+		#{lon},
+		#{lat},
+		'걷기기록' );
+	</insert>
+
+	<!-- 데이터 삭제 기능 -->
+	<delete id="deleteWalkLog"
+		parameterType="study.spring.goodspring.model.WalkLog">
+		DELETE FROM walk_log WHERE walk_log_no=#{walk_log_no};
+	</delete>
+
+
+	<!-- 데이터 수정 기능 (답변 추가) -->
+	<update id="updateWalkLog"
+		parameterType="study.spring.goodspring.model.WalkLog">
+		UPDATE inquiry_qna SET
+		answer_detail=#{answer_detail},
+		answer_yn=#{answer_yn},
+		answer_create_datetime=now()
+		WHERE
+		QnA_no =
+		#{QnA_no};
+	</update>
+
+
+
+
+</mapper>

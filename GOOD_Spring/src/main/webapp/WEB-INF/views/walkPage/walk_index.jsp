@@ -187,8 +187,13 @@ carousel-title2 {
 			</h1>
 
 		</div>
-
 		<div class="pull-right">
+			<div class="wk_log" id="wk_log">
+				<button type="button" class="btn btn-primary" id="endRecord-btn">기록 중지</button>
+
+			</div>
+		</div>
+		<div class="pull-right"  style="margin-right: 20px;">
 			<div class="wk_log" id="wk_log">
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#myModal">걷기 기록 하기</button>
@@ -503,109 +508,18 @@ carousel-title2 {
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<!-- content -->
-				
-					<div class="modal-header">
-						<h3>
-							<strong>걷기 기록</strong>
-						</h3>
-						<p>기록하고 싶은 해당 코스를 입력해주세요.</p>
-					</div>
 
-					<div class="modal-body">
-
-						<div>
-						<h3>
-							<a class="accordian-toggle" data-toggle="collapse"
-								data-parent="#category_acco" href="#category_list"> 카테고리별 검색<i
-								class="glyphicon glyphicon-chevron-down"
-								style="color: #bcbcbc; font-size: 17px; left: 6px;"></i>
-							</a>
-						</h3>
-						<div id="category_list" class="panel-collapse collapse">
-							<div class="panel-body">
-								<!-- 검색 하기 창 -->
-								<div class="form-group input-group">
-									<input type="text" id="course_search" class="form-control"
-										placeholder="검색하기" /> <span class="input-group-btn">
-										<button class="btn btn-blue" type="submit">
-											<span style="color: #0069a6;">검색 </span><i
-												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
-										</button>
-									</span>
-								</div>
-								<!-- //검색 하기 창 -->
-								<!-- 카테고리영역 -->
-								<form class="form-horizontal" role="form">
-									<fieldset>
-										<div class="form-group">
-											<div class="col-xs-3">
-												<select class="form-control">
-													<option value="">유형별</option>
-													<option value="1">한양도성길</option>
-													<option value="2">근교산자락길</option>
-													<option value="3">생태문화길</option>
-													<option value="4">한양/지천길</option>
-													<option value="5">서울둘레길</option>
-												</select>
-											</div>
-											<div class="col-xs-3">
-												<select class="form-control">
-													<option value="">지역</option>
-													<option value="all">전체</option>
-													<option value="gangnam">강남구</option>
-													<option value="gangdong">강동구</option>
-													<option value="gangbug">강북구</option>
-													<option value="gangseo">강서구</option>
-													<option value="gwan-ag">관악구</option>
-													<option value="gwangjin">광진구</option>
-													<option value="gulo">구로구</option>
-													<option value="geumcheon">금천구</option>
-													<option value="nowon">노원구</option>
-													<option value="dobong">도봉구</option>
-													<option value="dongdaemun">동대문구</option>
-													<option value="dongjag">동작구</option>
-													<option value="mapo">마포구</option>
-													<option value="seodaemun">서대문구</option>
-													<option value="seocho">서초구</option>
-													<option value="seongdong">성동구</option>
-													<option value="seongbug">성북구</option>
-													<option value="songpa">송파구</option>
-													<option value="yangcheon">양천구</option>
-													<option value="yeongdeungpo">영등포구</option>
-													<option value="yongsan">용산구</option>
-													<option value="eunpyeong">은평구</option>
-													<option value="jonglo">종로구</option>
-													<option value="jung-gu">중구</option>
-													<option value="junglang">중랑구</option>
-												</select>
-											</div>
-											<div class="col-sm-2 col-xs-3 pull-right">
-												<select class="form-control">
-													<option value="">거리별</option>
-													<option value="time">시간별</option>
-													<option value="level">난이도별</option>
-												</select>
-											</div>
-										</div>
-									</fieldset>
-								</form>
-								<!-- //카테고리영역 -->
-							</div>
-						</div>
-					</div>
-
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal"
-							style="width: 150px;">닫기</button>
-						<button type="submit" class="btn btn-primary" data-dismiss="modal"
-							style="width: 150px;">시작</button>
-
-					</div>
-				
-
-
+				<div class="modal-header">
+					<h3>
+						<strong>걷기 기록</strong>
+					</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" data-dismiss="modal"
+						style="width: 150px;">닫기</button>
+					<button id="startRecord" type="button"
+						class="btn btn-primary" data-dismiss="modal" style="width: 150px;">시작</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -617,7 +531,6 @@ carousel-title2 {
 
 
 	<%@ include file="../inc/plugin.jsp"%>
-
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script>
@@ -699,6 +612,8 @@ carousel-title2 {
 			map.setCenter(locPosition);
 		}
 	</script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 
 	<script>
 		//캐러셀 JS

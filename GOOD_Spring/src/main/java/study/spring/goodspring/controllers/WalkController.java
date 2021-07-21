@@ -2,6 +2,7 @@ package study.spring.goodspring.controllers;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import study.spring.goodspring.helper.PageData;
+import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.WalkCourse;
+import study.spring.goodspring.model.WalkLog;
 import study.spring.goodspring.service.WalkCourseService;
+import study.spring.goodspring.service.WalkLogService;
 
 
 
@@ -29,7 +35,10 @@ public class WalkController {
 	/** Service 패턴 구현체 주입 */
 	@Autowired
 	WalkCourseService walkCourseService; // 코스목록
-	
+	@Autowired
+	WebHelper webHelper;
+	@Autowired
+	WalkLogService walkLogService; //걷기기록하기
 	/** "/프로젝트이름"에 해당하는 ContextPath 변수 주입 */
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
@@ -42,6 +51,33 @@ public class WalkController {
 			// walkPage/walk_index.jsp파일을 View로 지정 
 			return "walkPage/walk_index";
 		}
+	/**
+	 * 걷기 기록하기로 얻어진 위,경도값을 db에 저장하기 위한 가상의 페이지
+	 * @param wat_latitude watchposition 함수로 얻어지는 위도 값
+	 * @param wat_longitude watchposition 함수로 얻어지는  경도 값
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/walkPage/walk_record.do", method = RequestMethod.POST)
+	public Map<String, Object> walkRecord(
+			@RequestParam(value="wat_latitude")double wat_latitude,
+			@RequestParam(value="wat_longitude")double wat_longitude,
+			@RequestParam(value="wat_timestamp")long wat_timestamp) {
+		WalkLog input = new WalkLog();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		input.setLat(wat_latitude);
+		input.setLon(wat_longitude);
+		input.setWalking_time(wat_timestamp);
+		
+		try {
+			walkLogService.addWalkLog(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return webHelper.getJsonData();
+	}
 	
 	@RequestMapping(value="/walkPage/walk_hallOfFame.do", method=RequestMethod.GET)
 	public String walk_hallOfFame(Model model, HttpServletRequest request, HttpServletResponse response) {
