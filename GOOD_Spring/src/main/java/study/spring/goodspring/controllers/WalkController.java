@@ -62,7 +62,9 @@ public class WalkController {
 	public Map<String, Object> walkRecord(
 			@RequestParam(value="wat_latitude")double wat_latitude,
 			@RequestParam(value="wat_longitude")double wat_longitude,
-			@RequestParam(value="wat_timestamp")long wat_timestamp) {
+			@RequestParam(value="wat_timestamp")long wat_timestamp,
+			@RequestParam(value="count")int count
+			) {
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 		
@@ -72,12 +74,39 @@ public class WalkController {
 		input.setWalking_time(wat_timestamp);
 		
 		try {
+			if(count==0) {
+				walkLogService.startRecord(input);
+			}else if(count!=0) {
 			walkLogService.addWalkLog(input);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return webHelper.getJsonData();
 	}
+	
+	/**
+	 * 걷기 기록하기로 얻어진 위,경도값을 db에 저장하기 위한 가상의 페이지
+	 * @param wat_latitude watchposition 함수로 얻어지는 위도 값
+	 * @param wat_longitude watchposition 함수로 얻어지는  경도 값
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/walkPage/walk_recordEnd.do", method = RequestMethod.POST)
+	public Map<String, Object> walkRecordEnd() {
+		WalkLog input = new WalkLog();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		
+		try {
+				walkLogService.endRecord(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return webHelper.getJsonData();
+	}
+	
 	
 	@RequestMapping(value="/walkPage/walk_hallOfFame.do", method=RequestMethod.GET)
 	public String walk_hallOfFame(Model model, HttpServletRequest request, HttpServletResponse response) {
