@@ -78,7 +78,7 @@
 						<span class="title-img"><img
 							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
-						<h5>가입된 회원 수 : 6명</h5>
+						<h5>가입된 회원 수 : ${output.crew_member} 명</h5>
 						<h3 class="crew_name">${output.crew_name} 크루</h3>
 						<p>${output.crew_sinto}</p>
 					</div>

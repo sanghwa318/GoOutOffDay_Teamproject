@@ -91,11 +91,13 @@ public class CrewServiceImpl implements CrewService{
 	 */
 
 	@Override
-	public int addCrew(Crew input) throws Exception {
+	public Crew addCrew(Crew input) throws Exception {
 		int result = 0;
+		Crew output = null;
 		
 		try {
 			result = sqlSession.insert("CrewMapper.insertCrew", input);
+			output = sqlSession.selectOne("CrewMapper.selectCrewItem", input);
 			
 			if(result == 0) {
 				throw new NullPointerException("result=0");
@@ -110,7 +112,7 @@ public class CrewServiceImpl implements CrewService{
 			throw new Exception("크루 등록에 실패했습니다.");
 		}
 		
-		return result;
+		return output;
 	}
 
 	/*
@@ -200,13 +202,22 @@ public class CrewServiceImpl implements CrewService{
 	}
 
 
-
-
-
-
+	@Override
+	public int updateCrewMemberCount(Crew input) throws Exception {
+		
+		int result= 0;
+		
+		try {
+			result = sqlSession.update("CrewMapper.updateCrewMemberCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
 	
-	
-	
+
 
 
 }

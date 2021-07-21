@@ -32,7 +32,7 @@ public interface CrewService {
 	 * @return int 
 	 * @throws Exception
 	 */
-	public int addCrew(Crew input) throws Exception;
+	public Crew addCrew(Crew input) throws Exception;
 	
 	
 	/*
@@ -59,5 +59,14 @@ public interface CrewService {
 	 * @throws Exception
 	 */
 	public int getCrewCount(Crew input) throws Exception;
+	
+	
+	/*
+	 * 크루멤버 데이터 카운트 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int updateCrewMemberCount(Crew input) throws Exception;
 	
 }

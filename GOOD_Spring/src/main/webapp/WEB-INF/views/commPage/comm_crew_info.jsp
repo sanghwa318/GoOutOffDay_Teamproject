@@ -100,12 +100,25 @@
 			<div class="crew_info_footer">
 				<div class="col-md-12">
 					<div class="text-center">
-						<button type='submit' id="join" class="btn btn-primary">가입하기</button>
-						<button type="submit" class="btn btn-info"
+					<form class="form-horizontal" role="form" class="form-crew" method="get"
+					action="${pageContext.request.contextPath}/commPage/comm_crew_info_ok.do">
+						<input type="text" name="crew_no" value="${output.crew_no}">
+						<button type='submit' id="join" class="btn btn-primary" >가입하기</button>
+						<button type="reset" class="btn btn-info"
 							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.do'">목록</button>
+					</form>
 					</div>
 					<hr />
 				</div>
+
+			</div>
+			<!--// 본문 하단 영역 -->
+		</div>
+	</div>
+	<%@ include file="../inc/Footer.jsp"%>
+
+
+	<%@ include file="../inc/plugin.jsp"%>
 
 				<script>
 					$("#join")
@@ -129,7 +142,6 @@
 																		'success');
 																setTimeout(
 																		function() {
-																			location.href = '${bbsUrl}';
 																		}, 1000);
 
 															} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
@@ -142,15 +154,6 @@
 														});
 									});
 				</script>
-			</div>
-			<!--// 본문 하단 영역 -->
-		</div>
-	</div>
-	<%@ include file="../inc/Footer.jsp"%>
-
-
-	<%@ include file="../inc/plugin.jsp"%>
-
 
 
 </body>

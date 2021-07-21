@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CrewMemberMapper">
+<resultMap type="study.spring.goodspring.model.CrewMember"
+		id="crewMemberMap">
+		<result property="member_no" column="member_no"/>
+		<result property="member_create_datetime" column="member_create_datetime"/>
+		<result property="member_visit_datetime" column="member_visit_datetime"/>
+		<result property="user_info_user_no" column="user_info_user_no"/>
+		<result property="crew_crew_no" column="crew_crew_no"/>
+		
+		</resultMap>
+
+
+<!-- 크루멤버 등록 기능 -->
+<insert id="insertCrewMember" parameterType="study.spring.goodspring.model.CrewMember"
+useGeneratedKeys="true" keyProperty="member_no">
+INSERT INTO crew_member 
+(member_create_datetime, member_visit_datetime, user_info_user_no,crew_crew_no)
+VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
+</insert>
+
+
+</mapper>

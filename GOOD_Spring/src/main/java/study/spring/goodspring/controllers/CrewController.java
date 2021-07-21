@@ -22,7 +22,9 @@ import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
+import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewService;
 
 @Controller
@@ -44,6 +46,8 @@ public class CrewController {
 	@Autowired
 	WebHelper webHelper;
 
+	@Autowired
+	CrewMemberService crewMemberService;
 	
 	
 	//작성 폼 페이지
@@ -66,7 +70,6 @@ public class CrewController {
 			
 	
 		Member login_info = (Member) webHelper.getSession("login_info");
-		
 		int userNo = login_info.getUser_no();
 		
 		
@@ -110,16 +113,22 @@ public class CrewController {
 		
 		
 		
+		CrewMember member = new CrewMember();
+		member.setUser_info_user_no(userNo);
+		
+		
 		try {
 			//데이터 저장
 			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
-			crewService.addCrew(input);
+			input = crewService.addCrew(input);
+			member.setCrew_crew_no(input.getCrew_no());
+			crewMemberService.addCrewMember(member);
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
 		
 		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_info.do?crew_no=" + input.getCrew_no();
+		String redirectUrl = contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_no();
 		
 		
 		try {

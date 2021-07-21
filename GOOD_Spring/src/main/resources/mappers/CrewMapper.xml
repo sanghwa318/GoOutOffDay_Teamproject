@@ -38,9 +38,7 @@
 		crew_category, crew_photo, crew_dinto, crew_member,
 		user_info_user_no
 		FROM crew
-
-		WHERE crew_no = #{crew_no};
-
+		WHERE crew_no = #{crew_no}
 	</select>
 
 
@@ -69,12 +67,12 @@
 
 		</where>
 
-			<if test="order == 1 ">
-				ORDER BY crew_no DESC
-			</if>
-			<if test="order == 2 ">
-				ORDER BY crew_no ASC
-			</if>
+		<if test="order == 1 ">
+			ORDER BY crew_no DESC
+		</if>
+		<if test="order == 2 ">
+			ORDER BY crew_no ASC
+		</if>
 
 
 		<if test="listCount > 0">
@@ -131,11 +129,14 @@
 			<if test="crew_sinto != null and crew_sinto != '' ">
 				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
 			</if>
-
 		</where>
-
-
 	</select>
+
+	<!-- 그룸 멤버 카운트 -->
+	<update id="updateCrewMemberCount" parameterType="study.spring.goodspring.model.Crew">
+		update crew c set crew_member=(select count(member_no) from crew_member
+		where crew_crew_no=c.crew_no) where crew_no =#{crew_no};
+	</update>
 
 
 

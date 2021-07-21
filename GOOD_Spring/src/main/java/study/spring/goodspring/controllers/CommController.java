@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,10 @@ import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
+import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
 
@@ -39,6 +42,9 @@ public class CommController {
 
 	@Autowired
 	CrewPostService crewPostService;
+	
+	@Autowired
+	CrewMemberService crewMemberService;
 
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
@@ -122,18 +128,18 @@ public class CommController {
 		if (crew_no == 0) {
 			return webHelper.redirect(null, "조회된 크루가 없습니다.");
 		}
-
+		
+		
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
 		Crew input = new Crew();
 		input.setCrew_no(crew_no);
 
-		// 조회결과가 저장될 객체
 		Crew output = null;
 
 		try {
 			// 데이터 조회하기
-			output = crewService.getCrewItem(input);
+		output = crewService.getCrewItem(input);
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
@@ -143,6 +149,47 @@ public class CommController {
 		return new ModelAndView("commPage/comm_crew_info");
 	}
 
+	/*
+	 * comm_crew_info_ok.do
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_info_ok.do", method = RequestMethod.GET)
+	public void crewinfoOk(Model model,HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no) {
+		
+		Member login_info = (Member) webHelper.getSession("login_info");
+		int userNo = login_info.getUser_no();
+		
+		
+		//1)데이터 저장
+		CrewMember input = new CrewMember();
+		input.setUser_info_user_no(userNo);
+		input.setCrew_crew_no(crew_no);
+		
+		Crew output = new Crew();
+		output.setCrew_no(crew_no);
+		
+		try {
+			//데이터 저장
+			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
+			crewMemberService.addCrewMember(input);
+			crewService.updateCrewMemberCount(output);
+			
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+		}
+		
+		
+		// 3) 결과를 확인하기 위한 페이지 이동
+		String redirectUrl = contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_crew_no();
+
+		try {
+			response.sendRedirect(redirectUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+	}
 	/*
 	 * comm_crew_memberJoin
 	 */
@@ -223,6 +270,10 @@ public class CommController {
 
 		return new ModelAndView("commPage/comm_crew");
 	}
+	
+	
+	
+	
 
 	/*
 	 * comm_crew_post
