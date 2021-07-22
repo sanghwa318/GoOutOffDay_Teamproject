@@ -79,6 +79,6 @@ $(function() {
 	});
 
 	$("#endRecord-btn").click(function(e) {
-		endRecord()
+		endRecord();
 	});
 });
