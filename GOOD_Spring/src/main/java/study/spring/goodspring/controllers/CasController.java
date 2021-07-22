@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import retrofit2.Retrofit;
+import study.spring.goodspring.APIservice.CasAPISerchService;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
+import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.CasOther;
@@ -24,6 +27,8 @@ import study.spring.goodspring.service.CasService;
 
 @Controller
 public class CasController {
+	@Autowired
+	RetrofitHelper retrofitHelper;
 	@Autowired
 	WebHelper WebHelper;
 	@Autowired
@@ -215,10 +220,11 @@ public class CasController {
 
 	/** 문화체육 아이템 찜하기 **/
 	@ResponseBody
-	@RequestMapping(value = "/casPage/BookMark.co", method = RequestMethod.POST)
+	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(
-			@RequestParam(value = "SVCID", defaultValue = "") String SVCID,
-			@RequestParam(value = "cas", defaultValue = "") String cas) {
+			@RequestParam(value = "SVCID") String SVCID,
+			@RequestParam(value = "cas") String cas) {
+
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
 
@@ -237,4 +243,20 @@ public class CasController {
 		}
 		return WebHelper.getJsonData();
 	}
+	
+	// 상품 상세페이지 찜하기 기능 
+	//@Transactional(rollbackFor = Exception.class)
+	//@PostMapping("/prdct/{prdct_id}") 
+	//public ResponseEntity<String> prdctLike(@RequestBody PrdctLikeVO prdctLikeVO) { 
+	//	ResponseEntity<String> entity = null; 
+	//	log.info("prdctLike..."); 
+	//	try { 
+	//		commonService.setPrdctLike(prdctLikeVO); 
+	//		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
+	//		} catch (Exception e) { 
+	//			e.printStackTrace(); 
+	//			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
+	//			} 
+	//	return entity; }
+
 }

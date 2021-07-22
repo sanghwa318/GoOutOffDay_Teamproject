@@ -184,9 +184,9 @@ ul, li {
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
 							<button class="heart btn btn-warning" type="button"
-								style="width: 140px; font-size: 18px;">
+								style="width: 140px; font-size: 18px;" >
 								<i class="fa fa-heart-o" aria-hidden="true" role="button"
-									style="padding-right: 5px; font-size: 18px;"></i>찜하기
+									style="padding-right: 5px; font-size: 18px;" ></i>찜하기
 							</button>
 						</div>
 					</div>
@@ -196,12 +196,12 @@ ul, li {
 									: </strong>
 								<p class="infoText">${output.MAXCLASSNM }<span
 										class="middel_dot"></span>${output.MINCLASSNM }</p></li>
-  							<li class="infoItem"><strong class="infoLabel">이용시간
+							<li class="infoItem"><strong class="infoLabel">이용시간
 									: </strong>
-								<p class="infoText">${output.VMIN } ~ ${output.VMAX }</p></li>  
+								<p class="infoText">${output.VMIN }~${output.VMAX }</p></li>
 							<li class="infoItem"><strong class="infoLabel">접수기간
 									: </strong>
-								<p class="infoText">${output.RCPTBGNDT} ~ ${output.RCPTENDDT }</p></li>
+								<p class="infoText">${output.RCPTBGNDT}~${output.RCPTENDDT }</p></li>
 							<li class="infoItem"><strong class="infoLabel">서비스
 									상태 : </strong>
 								<p class="infoText">${output.SVCSTATNM }</p></li>
@@ -236,16 +236,49 @@ ul, li {
 						"click",
 						function() {
 							if ($(this).hasClass("liked")) {
-								$(this)
+								$(".heart")
 										.html(
 												'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
-								$(this).removeClass("liked");
+								$(".heart").removeClass("liked");
 							} else {
-								$(this)
-										.html(
-												'<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
-								$(this).addClass("liked");
+
+								swal({
+									title : '확인',
+									text : "찜목록에 추가할까요?",
+									type : 'question',
+									confirmButtonText : '네',
+									showCancelButton : true,
+									cancelButtonText : '아니요',
+								})
+										.then(
+												function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+													if (result.value) { // 확인 버튼이 눌러진 경우
+														$(".heart")
+																.html(
+																		'<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+														$(".heart").addClass(
+																"liked");
+														swal(
+																'성공',
+																'찜목록에 추가되었습니다.',
+																'success');
+														setTimeout(function() {
+														}, 1000);
+													} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+														$(".heart")
+																.html(
+																		'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+														$(".heart")
+																.removeClass(
+																		"liked");
+														swal(
+																'취소',
+																'찜하기가 취소되었습니다.',
+																'error');
+													}
+												});
 							}
+
 						});
 	</script>
 	<!-- //하트 -->
