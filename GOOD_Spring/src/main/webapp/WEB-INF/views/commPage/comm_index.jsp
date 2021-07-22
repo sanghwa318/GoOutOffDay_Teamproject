@@ -4,7 +4,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="../inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style type="text/css">
 /** 공통 영역 **/
 html, body {

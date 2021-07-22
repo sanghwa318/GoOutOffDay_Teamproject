@@ -19,7 +19,7 @@ $(function(){
 	});
 	$.validator.addMethod("address", function(value, element){
 		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) ||
-		/[~!@#$%^&*()_+|<>?:{}]/i.test(value) || /[0-9]/i.test(value) ;
+		/[~!@#$%^&*()_+|<>?:{}]/i.test(value) || /[0-9]/i.test(value) || /^[a-zA-Z]*$/i.test(value) ;
 	});
 	$.validator.addMethod("nick", function(value, element){
 		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) ||
@@ -43,7 +43,7 @@ $(function(){
                 }
             },
 				//[닉네임] 필수 + 알파벳, 숫자 조합
-				user_nick: {required: true, alphanumeric: true, minlength: 4, maxlength: 30,
+				user_nick: {required: true, nick: true, minlength: 1, maxlength: 30,
                 remote : {
                     url : getContextPath() + '/mainPage/join/nickname_unique_check_jquery',
                     type : 'post',
@@ -95,7 +95,7 @@ $(function(){
 				},
 				user_nick: {
 					required: "닉네임을 입력하세요.",
-					alphanumeric: "닉네임은 영어, 숫자만 입력 가능합니다.",
+					nick: "닉네임은 한글, 영어, 숫자만 입력 가능합니다.",
 					minlength: "닉네임은 최소 {0}글자 이상 입력하셔야 합니다.",
                     maxlength: '닉네임은 최대 {0}글자까지 가능합니다.',
                     remote: '이미 사용중인 닉네임 입니다.'
@@ -136,7 +136,7 @@ $(function(){
 				
 				addr2:{
 					required: '나머지 주소를 입력하세요.',
-					address: '나머지 주소는 한글, 숫자, "-" 만 가능합니다.'
+					address: '나머지 주소는 한글, 영어, 숫자, 특수문자만 가능합니다.'
 				},
 				gender: {
 					required: '성별을 선택하세요.'
