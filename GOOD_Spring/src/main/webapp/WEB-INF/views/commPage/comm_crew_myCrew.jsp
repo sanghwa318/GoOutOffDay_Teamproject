@@ -44,6 +44,10 @@
 .out {
 	padding-bottom: 30px;
 }
+
+.page-header button{
+float: right;
+}
 </style>
 </head>
 
@@ -58,14 +62,18 @@
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="../icon_img/커뮤니티 아이콘.png;" />
+						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
 					</span>
 				</h1>
 			</div>
-			<h1 class="page-header">마이크루</h1>
+			<h1 class="page-header">
+				마이크루
+				<!-- 탈퇴버튼 -->
+					<button type='submit' id="out" class="btn btn-danger">탈퇴하기</button>
+			</h1>
 
 
 			<!-- 마이크루 본문영역 중단 -->
@@ -95,8 +103,8 @@
 								</c:url>
 
 								<div class="col-xs-6 col-sm-4 col-md-3">
-									<div class="thumbnail item"
-										onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
+									<div class="thumbnail item" onclick="location.href='${bbsUrl}'"
+										style="cursor: pointer;">
 										<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
 											onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
 										<div class="caption clearfix">
@@ -111,73 +119,55 @@
 								</div>
 							</c:forEach>
 						</c:otherwise>
-
-
 					</c:choose>
-
 				</div>
-			</div>
-
-
-			<!-- 본문중단 끝 -->
-
-
-			<!-- 크루 본문영역 하단 -->
-
-			<div class="text-center" id="paging">
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">&laquo;</a></li>
-					<li class="page-item active"><span>1<span
-							class="sr-only">(current)</span></span></li>
-					<li class="page-item"><a href="#">2</a></li>
-					<li class="page-item"><a href="#">3</a></li>
-					<li class="page-item"><a href="#">4</a></li>
-					<li class="page-item"><a href="#">5</a></li>
-					<li class="page-item"><a href="#">&raquo;</a></li>
-				</ul>
-			</div>
-			<div class="out text-right">
-				<button type='submit' id="out" class="btn btn-danger">탈퇴하기</button>
 			</div>
 			<!-- 본문하단 끝 -->
 		</div>
-		<script>
-			$("#out").click(function() {
-				const delcrew = [];
-				const obj = $(".del:checked");
 
-				if (obj.length < 1) {
-					swal('알림', '선택된 크루가 없습니다.');
-					return false;
-				}
-				// 확인, 취소버튼에 따른 후속 처리 구현
-				swal({
-					title : '확인', // 제목
-					text : "해당 크루에서 탈퇴 하시겠습니까?", // 내용
-					type : 'question', // 종류
-					confirmButtonText : '네', // 확인버튼 표시 문구
-					showCancelButton : true, // 취소버튼 표시 여부
-					cancelButtonText : '아니오', // 취소버튼 표시 문구
-				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('성공', '탈퇴되었습니다.', 'success');
-						setTimeout(function() {
-							location.href = '../commPage/comm_crew_myCrew.jsp';
-						}, 1000);
-
-					} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
-						swal('취소', '탈퇴가 취소되었습니다.', 'error');
-					}
-
-				});
-			});
-		</script>
 	</div>
+
+	<!-- 페이지네이션 -->
+	<%@ include file="../inc/pagenation.jsp"%>
+	<!-- //페이지네이션 -->
+
+
 	<!-- 공통 푸터 -->
 	<%@ include file="../inc/Footer.jsp"%>
 	<!-- //공통 푸터 -->
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
+	<script>
+		$("#out").click(function() {
+			const delcrew = [];
+			const obj = $(".del:checked");
+
+			if (obj.length < 1) {
+				swal('알림', '선택된 크루가 없습니다.');
+				return false;
+			}
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title : '확인', // 제목
+				text : "해당 크루에서 탈퇴 하시겠습니까?", // 내용
+				type : 'question', // 종류
+				confirmButtonText : '네', // 확인버튼 표시 문구
+				showCancelButton : true, // 취소버튼 표시 여부
+				cancelButtonText : '아니오', // 취소버튼 표시 문구
+			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+				if (result.value) { // 확인 버튼이 눌러진 경우
+					swal('성공', '탈퇴되었습니다.', 'success');
+					setTimeout(function() {
+						location.href = '../commPage/comm_crew_myCrew.jsp';
+					}, 1000);
+
+				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+					swal('취소', '탈퇴가 취소되었습니다.', 'error');
+				}
+
+			});
+		});
+	</script>
 </body>
 </html>

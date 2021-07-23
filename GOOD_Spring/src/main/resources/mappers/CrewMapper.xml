@@ -145,9 +145,21 @@
 	<select id="selectjoinedCrewItem" resultMap="crewMap"
 		parameterType="study.spring.goodspring.model.Crew">
 		SELECT * FROM crew c
-INNER JOIN crew_member cm ON c.crew_no = cm.crew_crew_no
-INNER JOIN user_info u ON cm.user_info_user_no = u.user_no
-WHERE u.user_no = #{user_info_user_no};
+		INNER JOIN crew_member cm ON c.crew_no = cm.crew_crew_no
+		INNER JOIN user_info u ON cm.user_info_user_no = u.user_no
+		WHERE u.user_no = #{user_info_user_no};
+	</select>
+
+	<!--가입한 크루 수 조회를 위한 기능 정의 -->
+
+	<select id="selectJoinedCountAll"
+		parameterType="study.spring.goodspring.model.Crew" resultType="int">
+		SELECT COUNT(*) FROM crew c
+		INNER JOIN crew_member cm ON c.crew_no =
+		cm.crew_crew_no
+		INNER JOIN user_info u ON cm.user_info_user_no = u.user_no
+		WHERE u.user_no = #{user_info_user_no};
+
 	</select>
 
 </mapper>

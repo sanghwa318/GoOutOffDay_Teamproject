@@ -230,16 +230,17 @@ public class CommController {
 
 		try {
 			// 전체 게시글 수 조회
-			
+			totalCount = crewService.getJoinedCrewCount(input);
 
-			// 전체 게시글 수 조회
-			
-
+		
 			// 페이지 번호 계산 --> 계산 결과를 로그로 출력
-			
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
 
 			// SQL의 LIMIT절에서 사용될 값을 BEANS의 static 변수에 저장
-			
+			Crew.setOffset(pageData.getOffset());
+			Crew.setListCount(pageData.getListCount());
+			Crew.setOrder(order);
+
 
 			// 데이터 조회하기
 			output = crewService.selectJoinedCrew(input);

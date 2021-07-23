@@ -49,7 +49,7 @@
 			<%-- 다음 그룹으로 이동 가능하다면? --%>
 			<c:when test="${pageData.nextPage > 0}">
 				<%-- 이동할 URL 생성 --%>
-				<c:url value="/walkPage/walk_search.do" var="nextPageUrl">
+				<c:url value="${getList }" var="nextPageUrl">
 					<c:param name="page" value="${pageData.nextPage}" />
 					<c:param name="keyword" value="${keyword}" />
 				</c:url>

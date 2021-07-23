@@ -77,7 +77,14 @@ public interface CrewService {
 	 */
 	public List<Crew> selectJoinedCrew(Crew input) throws Exception;
 
-	public List<Crew> selectJoinedCrew(CrewMember input) throws Exception;
+	/*
+	 * 가입한 크루멤버 데이터 카운트 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+
+	int getJoinedCrewCount(Crew input) throws Exception;
 
 
 

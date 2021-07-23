@@ -201,8 +201,34 @@ public class CrewServiceImpl implements CrewService{
 		
 		return result;
 	}
+	
+	/*
+	 * 가입한 크루 데이터 저장되어 있는 갯수 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int getJoinedCrewCount(Crew input) throws Exception {
+		
+		int result= 0;
+		
+		try {
+			result = sqlSession.selectOne("CrewMapper.selectJoinedCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
 
-
+	/*
+	 * 가입한 크루 멤버원 수 업데이트
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
 	@Override
 	public int updateCrewMemberCount(Crew input) throws Exception {
 		
@@ -233,24 +259,6 @@ public class CrewServiceImpl implements CrewService{
 		
 		return result;
 	}
-
-
-
-
-	@Override
-	public List<Crew> selectJoinedCrew(CrewMember input) throws Exception {
-		List<Crew> result= null;
-		
-		try {
-			result = sqlSession.selectList("CrewMapper.selectjoinedCrewItem", input);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
-		}
-		
-		return result;
-		}
-
 
 
 }
