@@ -104,39 +104,40 @@ div#category_acco .accordian-toggle {
 											<div class="col-xs-3">
 												<select class="form-control" name="area" id="area">
 													<option value="">지역</option>
-													<option value="">전체</option>
-													<option value="강남구">강남구</option>
-													<option value="강동구">강동구</option>
-													<option value="강북구">강북구</option>
-													<option value="강서구">강서구</option>
-													<option value="관악구">관악구</option>
-													<option value="광진구">광진구</option>
-													<option value="구로구">구로구</option>
-													<option value="금천구">금천구</option>
-													<option value="노원구">노원구</option>
-													<option value="도봉구">도봉구</option>
-													<option value="동대문구">동대문구</option>
-													<option value="동작구">동작구</option>
-													<option value="마포구">마포구</option>
-													<option value="서대문구">서대문구</option>
-													<option value="서초구">서초구</option>
-													<option value="서초구">성동구</option>
-													<option value="성북구">성북구</option>
-													<option value="송파구">송파구</option>
-													<option value="양천구">양천구</option>
-													<option value="영등포구">영등포구</option>
-													<option value="용산구">용산구</option>
-													<option value="은평구">은평구</option>
-													<option value="종로구">종로구</option>
-													<option value="중구">중구</option>
-													<option value="중랑구">중랑구</option>
+													<option value="강남구" <c:if test="${area eq '강남구'}">selected</c:if>>강남구</option>
+													<option value="강동구" <c:if test="${area eq '강동구'}">selected</c:if>>강동구</option>
+													<option value="강북구" <c:if test="${area eq '강북구'}">selected</c:if>>강북구</option>
+													<option value="강서구" <c:if test="${area eq '강서구'}">selected</c:if>>강서구</option>
+													<option value="관악구" <c:if test="${area eq '관악구'}">selected</c:if>>관악구</option>
+													<option value="광진구" <c:if test="${area eq '광진구'}">selected</c:if>>광진구</option>
+													<option value="구로구" <c:if test="${area eq '구로구'}">selected</c:if>>구로구</option>
+													<option value="금천구" <c:if test="${area eq '금천구'}">selected</c:if>>금천구</option>
+													<option value="노원구" <c:if test="${area eq '노원구'}">selected</c:if>>노원구</option>
+													<option value="도봉구" <c:if test="${area eq '도봉구'}">selected</c:if>>도봉구</option>
+													<option value="동대문구" <c:if test="${area eq '동대문구'}">selected</c:if>>동대문구</option>
+													<option value="동작구" <c:if test="${area eq '동작구'}">selected</c:if>>동작구</option>
+													<option value="마포구" <c:if test="${area eq '마포구'}">selected</c:if>>마포구</option>
+													<option value="서대문구" <c:if test="${area eq '서대문구'}">selected</c:if>>서대문구</option>
+													<option value="서초구" <c:if test="${area eq '서초구'}">selected</c:if>>서초구</option>
+													<option value="서초구" <c:if test="${area eq '성동구'}">selected</c:if>>성동구</option>
+													<option value="성북구" <c:if test="${area eq '성북구'}">selected</c:if>>성북구</option>
+													<option value="송파구" <c:if test="${area eq '송파구'}">selected</c:if>>송파구</option>
+													<option value="양천구" <c:if test="${area eq '양천구'}">selected</c:if>>양천구</option>
+													<option value="영등포구" <c:if test="${area eq '영등포구'}">selected</c:if>>영등포구</option>
+													<option value="용산구" <c:if test="${area eq '용산구'}">selected</c:if>>용산구</option>
+													<option value="은평구" <c:if test="${area eq '은평구'}">selected</c:if>>은평구</option>
+													<option value="종로구" <c:if test="${area eq '종로구'}">selected</c:if>>종로구</option>
+													<option value="중구" <c:if test="${area eq '중구'}">selected</c:if>>중구</option>
+													<option value="중랑구" <c:if test="${area eq '중랑구'}">selected</c:if>>중랑구</option>
 												</select>
 											</div>
 											<div class="col-sm-2 col-xs-3 pull-right">
 												<select class="form-control">
-													<option value="">거리별</option>
-													<option value="time">시간별</option>
-													<option value="level">난이도별</option>
+													<option value="">정렬</option>
+													<option value="">정렬</option>
+													<option value="distance">거리순</option>
+													<option value="time">시간순</option>
+													<option value="level">난이도순</option>
 												</select>
 											</div>
 										</div>
