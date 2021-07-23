@@ -94,11 +94,11 @@ div#category_acco .accordian-toggle {
 											<div class="col-xs-3">
 												<select class="form-control" name="category" id="category">
 													<option value="">유형별</option>
-													<option value="생태문화길">생태문화길</option>
-													<option value="서울둘레길">서울둘레길</option>
-													<option value="근교산자락길">근교산자락길</option>
-													<option value="한양도성길">한양도성길</option>
-													<option value="한강지천길/계절길">한강지천길/계절길</option>
+													<option value="생태문화길" <c:if test="${category eq '생태문화길'}">selected</c:if>>생태문화길</option>
+													<option value="서울둘레길" <c:if test="${category eq '서울둘레길'}">selected</c:if>>서울둘레길</option>
+													<option value="근교산자락길" <c:if test="${category eq '근교산자락길'}">selected</c:if>>근교산자락길</option>
+													<option value="한양도성길" <c:if test="${category eq '한양도성길'}">selected</c:if>>한양도성길</option>
+													<option value="한강지천길/계절길" <c:if test="${category eq '한강지천길/계절길'}">selected</c:if>>한강지천길/계절길</option>
 												</select>
 											</div>
 											<div class="col-xs-3">
@@ -133,7 +133,6 @@ div#category_acco .accordian-toggle {
 											</div>
 											<div class="col-sm-2 col-xs-3 pull-right">
 												<select class="form-control">
-													<option value="">정렬</option>
 													<option value="">정렬</option>
 													<option value="distance">거리순</option>
 													<option value="time">시간순</option>

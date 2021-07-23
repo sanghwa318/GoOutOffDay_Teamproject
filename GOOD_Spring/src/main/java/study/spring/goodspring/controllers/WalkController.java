@@ -174,10 +174,6 @@ public class WalkController {
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
-<<<<<<< HEAD
-=======
-		input.setCOURSE_CATEGORY_NM(keyword);
->>>>>>> ed3c7228646dc61f43f95f5a5b013f35be19b159
 		input.setSOUTH_NORTH_DIV_NM(keyword);
 		input.setLEAD_TIME(keyword);
 		input.setCOURSE_LEVEL(keyword);
@@ -213,11 +209,8 @@ public class WalkController {
 		// View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("keyword", keyword);
-<<<<<<< HEAD
 		model.addAttribute("category", category);
 		model.addAttribute("area", area);
-=======
->>>>>>> ed3c7228646dc61f43f95f5a5b013f35be19b159
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정
