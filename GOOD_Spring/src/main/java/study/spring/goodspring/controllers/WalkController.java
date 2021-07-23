@@ -114,6 +114,13 @@ public class WalkController {
 		return "walkPage/walk_hallOfFame";
 	}
 	
+	/**
+	 * 코스목록을 보여주고 검색하는 기능을 가진 페이지
+	 * @param keyword 검색어
+	 * @param category 유형별
+	 * @param nowPage 페이지 네이션
+	 * @return view
+	 */
 	@RequestMapping(value="/walkPage/walk_search.do", method=RequestMethod.GET)
 	public String walk_search(Model model, HttpServletResponse response,
 			// 검색어
@@ -133,7 +140,7 @@ public class WalkController {
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
-		input.setCOURSE_CATEGORY_NM(keyword);
+//		input.setCOURSE_CATEGORY_NM(keyword);
 		input.setSOUTH_NORTH_DIV_NM(keyword);
 		input.setAREA_GU(keyword);
 		input.setDISTANCE(keyword);
@@ -166,6 +173,7 @@ public class WalkController {
 		// View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("category", category);
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정

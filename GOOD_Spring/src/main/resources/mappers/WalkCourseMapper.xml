@@ -53,44 +53,70 @@
 		FROM seoulgil_walk_course
 
 		<where>
-			<if test="COURSE_CATEGORY_NM != null and COURSE_CATEGORY_NM != ''">
-				COURSE_CATEGORY_NM LIKE concat('%',
-				#{COURSE_CATEGORY_NM}, '%')
-			</if>
-			<if test="SOUTH_NORTH_DIV_NM != null and SOUTH_NORTH_DIV_NM != ''">
-				OR SOUTH_NORTH_DIV_NM LIKE concat('%',
-				#{SOUTH_NORTH_DIV_NM}, '%')
-			</if>
-			<if test="AREA_GU != null and AREA_GU != ''">
-				OR AREA_GU LIKE concat('%', #{AREA_GU}, '%')
-			</if>
-			<if test="DISTANCE != null and DISTANCE != ''">
-				OR DISTANCE LIKE concat('%', #{DISTANCE}, '%')
-			</if>
-			<if test="LEAD_TIME != null and LEAD_TIME != ''">
-				OR LEAD_TIME LIKE concat('%', #{LEAD_TIME}, '%')
-			</if>
-			<if test="COURSE_LEVEL != null and COURSE_LEVEL != ''">
-				OR COURSE_LEVEL LIKE concat('%', #{COURSE_LEVEL}, '%')
-			</if>
-			<if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
-				OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY}, '%')
-			</if>
-			<if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
-				OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
-			</if>
-			<if test="COURSE_NAME != null and COURSE_NAME != ''">
-				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
-			</if>
-			<if test="CPI_NAME != null and CPI_NAME != ''">
-				OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
-			</if>
-			
-			<if test="COURSE_CATEGORY_NM != null and COURSE_CATEGORY_NM != ''">
-				OR COURSE_CATEGORY_NM LIKE concat('%', #{COURSE_CATEGORY_NM}, '%')
-			</if>
-			
-		</where>
+         <choose>
+            <when test="COURSE_CATEGORY_NM != null and COURSE_CATEGORY_NM != ''">
+               COURSE_CATEGORY_NM LIKE concat('%', #{COURSE_CATEGORY_NM}, '%')
+               <if
+                  test="SOUTH_NORTH_DIV_NM != null and SOUTH_NORTH_DIV_NM != ''">
+                  AND ( SOUTH_NORTH_DIV_NM LIKE concat('%', #{SOUTH_NORTH_DIV_NM},'%')
+               </if>
+               <if test="AREA_GU != null and AREA_GU != ''">
+                  OR AREA_GU LIKE concat('%', #{AREA_GU}, '%')
+               </if>
+               <if test="DISTANCE != null and DISTANCE != ''">
+                  OR DISTANCE LIKE concat('%', #{DISTANCE}, '%')
+               </if>
+               <if test="LEAD_TIME != null and LEAD_TIME != ''">
+                  OR LEAD_TIME LIKE concat('%', #{LEAD_TIME}, '%')
+               </if>
+               <if test="COURSE_LEVEL != null and COURSE_LEVEL != ''">
+                  OR COURSE_LEVEL LIKE concat('%', #{COURSE_LEVEL}, '%')
+               </if>
+               <if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
+                  OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY},
+                  '%')
+               </if>
+               <if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
+                  OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
+               </if>
+               <if test="COURSE_NAME != null and COURSE_NAME != ''">
+                  OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
+               </if>
+               <if test="CPI_NAME != null and CPI_NAME != ''">
+                  OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
+               </if>
+            </when>
+            <otherwise>
+               <if test="SOUTH_NORTH_DIV_NM != null and SOUTH_NORTH_DIV_NM != ''">
+                  SOUTH_NORTH_DIV_NM LIKE concat('%', #{SOUTH_NORTH_DIV_NM}, '%')
+               </if>
+               <if test="AREA_GU != null and AREA_GU != ''">
+                  OR AREA_GU LIKE concat('%', #{AREA_GU}, '%')
+               </if>
+               <if test="DISTANCE != null and DISTANCE != ''">
+                  OR DISTANCE LIKE concat('%', #{DISTANCE}, '%')
+               </if>
+               <if test="LEAD_TIME != null and LEAD_TIME != ''">
+                  OR LEAD_TIME LIKE concat('%', #{LEAD_TIME}, '%')
+               </if>
+               <if test="COURSE_LEVEL != null and COURSE_LEVEL != ''">
+                  OR COURSE_LEVEL LIKE concat('%', #{COURSE_LEVEL}, '%')
+               </if>
+               <if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
+                  OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY}, '%')
+               </if>
+               <if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
+                  OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
+               </if>
+               <if test="COURSE_NAME != null and COURSE_NAME != ''">
+                  OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
+               </if>
+               <if test="CPI_NAME != null and CPI_NAME != ''">
+                  OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+               </if>
+            </otherwise>
+         </choose>
+      </where>
 		ORDER BY REG_DATE DESC
 
 		<!-- 페이지네이션에 필요 -->
