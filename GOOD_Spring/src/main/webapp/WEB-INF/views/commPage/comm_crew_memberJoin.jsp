@@ -149,7 +149,7 @@
 							name='member_id[]' class="member_id" value="001" checked /></td>
 						<td class='text-center' rowspan="1"><a href="#"> 7 </a></td>
 						<td class='text-center' rowspan="1">보우하사</td>
-						<td class='text-center'>kim</td>
+						<td class='text-center'>kim1</td>
 						<td class='text-center'>2021-06-11</td>
 						<td class='text-center text-primary'><span class='visit'
 							data-value=""> 300</span></td>
