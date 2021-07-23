@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import retrofit2.Retrofit;
-import study.spring.goodspring.APIservice.CasAPISerchService;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.RetrofitHelper;
@@ -222,15 +220,15 @@ public class CasController {
 	@ResponseBody
 	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(
-			@RequestParam(value = "SVCID") String SVCID,
-			@RequestParam(value = "cas") String cas) {
+			@RequestParam(value = "svcid", required = false) String svcid,
+			@RequestParam(value = "catid", required = false) String catid) {
 
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
 
 		CasOther Info = new CasOther();
-		Info.setDIV_COL(cas);
-		Info.setSVCID(SVCID);
+		Info.setDIV_COL(catid);
+		Info.setSVCID(svcid);
 
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setCategory_id(Info.getDIV_COL());
@@ -242,21 +240,8 @@ public class CasController {
 			e.printStackTrace();
 		}
 		return WebHelper.getJsonData();
-	}
+	} 
 	
-	// 상품 상세페이지 찜하기 기능 
-	//@Transactional(rollbackFor = Exception.class)
-	//@PostMapping("/prdct/{prdct_id}") 
-	//public ResponseEntity<String> prdctLike(@RequestBody PrdctLikeVO prdctLikeVO) { 
-	//	ResponseEntity<String> entity = null; 
-	//	log.info("prdctLike..."); 
-	//	try { 
-	//		commonService.setPrdctLike(prdctLikeVO); 
-	//		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
-	//		} catch (Exception e) { 
-	//			e.printStackTrace(); 
-	//			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
-	//			} 
-	//	return entity; }
+
 
 }

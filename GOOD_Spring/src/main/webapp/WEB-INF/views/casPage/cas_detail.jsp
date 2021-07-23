@@ -184,9 +184,9 @@ ul, li {
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
 							<button class="heart btn btn-warning" type="button"
-								style="width: 140px; font-size: 18px;" >
+								style="width: 140px; font-size: 18px;">
 								<i class="fa fa-heart-o" aria-hidden="true" role="button"
-									style="padding-right: 5px; font-size: 18px;" ></i>찜하기
+									style="padding-right: 5px; font-size: 18px;"></i>찜하기
 							</button>
 						</div>
 					</div>
@@ -241,7 +241,6 @@ ul, li {
 												'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
 								$(".heart").removeClass("liked");
 							} else {
-
 								swal({
 									title : '확인',
 									text : "찜목록에 추가할까요?",
@@ -264,6 +263,16 @@ ul, li {
 																'success');
 														setTimeout(function() {
 														}, 1000);
+														var catid = '${output.DIV_COL}';
+														var svcid = '${output.SVCID}';
+														$.ajax({
+															cache: false,
+															url:  getContextPath() + '/casPage/BookMark',
+															type: 'POST',
+															dataType: 'json',
+															data: {catid, svcid},
+															timeout: 10000,
+														})
 													} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 														$(".heart")
 																.html(
@@ -283,5 +292,6 @@ ul, li {
 	</script>
 	<!-- //하트 -->
 	<!-- // js -->
+
 </body>
 </html>

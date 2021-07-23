@@ -12,17 +12,23 @@
 			column="bookmark_create_datetime" />
 		<result property="user_info_user_no" column="user_info_user_no" />
 	</resultMap>
-
+	<!-- 중복검사를 위한 조회문 -->
+	<select id="selectInBookMark" parameterType="study.spring.goodspring.model.BookMark">
+		SELECT count(*) as cnt FROM bookmark
+		WHERE user_info_user_no = #{user_info_user_no}
+		AND service_id = ${service_id};
+	</select>
+	
 	<!-- 데이터 저장기능 -->
 	<insert id="insertBookMark"
 		parameterType="study.spring.goodspring.model.BookMark"
 		useGeneratedKeys="true" keyProperty="bookmark_no">
 		INSERT INTO bookmark
 		(bookmark_no,
-		catagory_id,, bookmark_create_datetime, user_info_user_no)
+		category_id, service_id,bookmark_create_datetime, user_info_user_no)
 		VALUES
-		(#{bookmark_no}, #{category_id}, now(),
-		#{user_info_userno});
+		(#{bookmark_no}, #{category_id}, #{service_id},now(),
+		#{user_info_user_no});
 	</insert>
 	
 	<!-- 데이터 삭제기능 -->
