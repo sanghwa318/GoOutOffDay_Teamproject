@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CrewCrewMemberMapper">
+	<resultMap id="CrewCrewMemeberMap" type="study.spring.goodspring.model.CrewCrewMember" >
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="crew_no" column="crew_no" />
+		<result property="crew_name" column="crew_name" />
+		<result property="crew_area" column="crew_area" />
+		<result property="crew_sinto" column="crew_sinto" />
+		<result property="crew_createtime" column="crew_createtime" />
+		<result property="crew_category" column="crew_category" />
+		<result property="crew_dinto" column="crew_dinto" />
+		<result property="crew_member" column="crew_member" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="crew_crew_no" column="crew_crew_no" />
+	</resultMap>
+	
+	<!-- Crew 와 CrewMember Join -->
+	<select id="selectCrewCrewMemberList"
+		parameterType="study.spring.goodspring.model.CrewCrewMember" resultMap="CrewCrewMemeberMap">
+		SELECT crew_no, crew_name, crew_area, crew_sinto, crew_createtime,
+		crew_category, crew_photo, crew_dinto, crew_member,
+		c.user_info_user_no, crew_crew_no
+		FROM crew c
+		INNER JOIN crew_member cm
+		ON c.crew_no = cm.crew_crew_no;
+		<where>
+			<if test="crew_name != null and crew_name != '' ">
+				crew_name LIKE CONCAT('%', #{crew_name}, '%')
+			</if>
+
+			<if test="crew_category != null and crew_category != '' ">
+				OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
+			</if>
+
+			<if test="crew_sinto != null and crew_sinto != '' ">
+				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+			</if>
+			<if test="crew_area != null and crew_area != '' ">
+				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
+			</if>
+
+		</where>
+
+		<if test="order == 1 ">
+			ORDER BY crew_no DESC
+		</if>
+		<if test="order == 2 ">
+			ORDER BY crew_no ASC
+		</if>
+
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+
+	</select>
+</mapper>

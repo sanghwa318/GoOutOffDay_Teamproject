@@ -179,7 +179,7 @@ public class AccountRestController {
     @RequestMapping(value = "/mainPage/join", method = RequestMethod.POST)
     public Map<String, Object> join(
             @RequestParam(value = "user_id",        required = false) String userId,
-            @RequestParam(value = "user_nick",  required = false) String userNick,
+            @RequestParam(value = "user_nick",      required = false) String userNick,
             @RequestParam(value = "user_pw",        required = false) String userPw,
             @RequestParam(value = "user_pw_re",		required = false) String userPwRe,
             @RequestParam(value = "user_name",      required = false) String userName,
@@ -198,8 +198,8 @@ public class AccountRestController {
         if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
         
         if (!regexHelper.isValue(userNick)) { return webHelper.getJsonWarning("닉네임을 입력하세요."); }
-        if (!regexHelper.isEngNum(userNick)) { return webHelper.getJsonWarning("닉네임은 영어,숫자만 입력 가능합니다."); }
-        if (userNick.length() < 4 || userNick.length() > 30) { return webHelper.getJsonWarning("닉네임은 4~30글자로 입력 가능합니다."); }
+        if (!regexHelper.isNick(userNick)) { return webHelper.getJsonWarning("닉네임은 한글,영어,숫자만 입력 가능합니다."); }
+        if (userNick.length() < 1 || userNick.length() > 30) { return webHelper.getJsonWarning("닉네임은 1~30글자로 입력 가능합니다."); }
         
         if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
         if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
@@ -214,6 +214,7 @@ public class AccountRestController {
         if (!regexHelper.isValue(postcode)) { return webHelper.getJsonWarning("우편번호를 입력하세요."); }
         if (!regexHelper.isValue(addr1)) { return webHelper.getJsonWarning("도로명주소를 입력하세요."); }
         if (!regexHelper.isValue(addr2)) { return webHelper.getJsonWarning("나머지주소를 입력하세요."); }
+        if (!regexHelper.isAddr2(addr2)) { return webHelper.getJsonWarning("나머지주소는 한글,영어,숫자만 입력 가능합니다.."); }
         if (!regexHelper.isValue(gender)) { return webHelper.getJsonWarning("성별을 선택하세요."); }
         
        

@@ -189,11 +189,12 @@ carousel-title2 {
 		</div>
 		<div class="pull-right">
 			<div class="wk_log" id="wk_log">
-				<button type="button" class="btn btn-primary" id="endRecord-btn">기록 중지</button>
+				<button type="button" class="btn btn-primary" id="endRecord-btn">기록
+					중지</button>
 
 			</div>
 		</div>
-		<div class="pull-right"  style="margin-right: 20px;">
+		<div class="pull-right" style="margin-right: 20px;">
 			<div class="wk_log" id="wk_log">
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#myModal">걷기 기록 하기</button>
@@ -517,8 +518,8 @@ carousel-title2 {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal"
 						style="width: 150px;">닫기</button>
-					<button id="startRecord" type="button"
-						class="btn btn-primary" data-dismiss="modal" style="width: 150px;">시작</button>
+					<button id="startRecord" type="button" class="btn btn-primary"
+						data-dismiss="modal" style="width: 150px;">시작</button>
 				</div>
 			</div>
 		</div>
@@ -666,8 +667,5 @@ carousel-title2 {
 						});
 	</script>
 	<!-- //하트 -->
-
-
-
 </body>
 </html>

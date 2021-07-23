@@ -48,7 +48,7 @@
 				<label for='user_nick' class="col-sm-2 control-label">닉네임</label>
 				<div class="col-sm-10">
                         
-                            <input type="text" name="user_nick" class="form-control" id="user_nick" placeholder="영문,숫자조합 최대 30글자">
+                            <input type="text" name="user_nick" class="form-control" id="user_nick" placeholder="한글,영문,숫자조합 최대 30글자">
                            
                       
 			</div>

@@ -1,6 +1,7 @@
 package study.spring.goodspring.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,16 +10,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import retrofit2.Retrofit;
+import study.spring.goodspring.APIservice.CasAPISerchService;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
+import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.CasOther;
+import study.spring.goodspring.model.Member;
+import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.CasService;
 
 @Controller
 public class CasController {
+	@Autowired
+	RetrofitHelper retrofitHelper;
 	@Autowired
 	WebHelper WebHelper;
 	@Autowired
@@ -28,6 +38,9 @@ public class CasController {
 
 	@Autowired
 	CasService CasService;
+
+	@Autowired
+	BookMarkService bookMarkService;
 
 	/** 문화체육 메인페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_index.do", method = RequestMethod.GET)
@@ -107,8 +120,8 @@ public class CasController {
 	@RequestMapping(value = "/casPage/cas_themeList.do", method = RequestMethod.GET)
 	public ModelAndView cas_ThemeList(Model model,
 			// GET 파라미터 받기
-			@RequestParam(value = "cas", required=false, defaultValue = "") String cas,
-			@RequestParam(value = "order", required=false, defaultValue = "") String order,
+			@RequestParam(value = "cas", required = false, defaultValue = "") String cas,
+			@RequestParam(value = "order", required = false, defaultValue = "") String order,
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
 		String result = null;
@@ -175,34 +188,75 @@ public class CasController {
 
 		return new ModelAndView("casPage/cas_themeList");
 	}
-	
+
 	/** 상세페이지 **/
 	@RequestMapping(value = "/casPage/cas_detail.do", method = RequestMethod.GET)
-	public ModelAndView detail(Model model,
-			@RequestParam(value = "SVCID", defaultValue = "") String SVCID) {
-		
+	public ModelAndView detail(Model model, @RequestParam(value = "SVCID", defaultValue = "") String SVCID) {
+
 		/** 1) 유효성 검사 **/
 		// 값이존재하지 않는다면 조회불가능하므로 필수값으로 처리
-		if (SVCID == "" ) {
+		if (SVCID == "") {
 			return WebHelper.redirect(null, "조회된 항목이 없습니다.");
 		}
-		
+
 		/** 2) 데이터 조회 **/
 		CasOther input = new CasOther();
 		input.setSVCID(SVCID);
-		
+
 		// 조회된 결과를 저장할 객체 선언
 		CasOther output = null;
-		
+
 		try {
 			output = CasService.getOtherItem(input);
 		} catch (Exception e) {
 			return WebHelper.redirect(null, e.getLocalizedMessage());
 		}
-		
+
 		/** 3) View 처리 **/
 		model.addAttribute("output", output);
-		
+
 		return new ModelAndView("casPage/cas_detail");
 	}
+
+	/** 문화체육 아이템 찜하기 **/
+	@ResponseBody
+	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
+	public Map<String, Object> eddBookMark(
+			@RequestParam(value = "SVCID") String SVCID,
+			@RequestParam(value = "cas") String cas) {
+
+		BookMark input = new BookMark();
+		Member loginInfo = (Member) WebHelper.getSession("login_info");
+
+		CasOther Info = new CasOther();
+		Info.setDIV_COL(cas);
+		Info.setSVCID(SVCID);
+
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		input.setCategory_id(Info.getDIV_COL());
+		input.setService_id(Info.getSVCID());
+		
+		try {
+			bookMarkService.addBookMark(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return WebHelper.getJsonData();
+	}
+	
+	// 상품 상세페이지 찜하기 기능 
+	//@Transactional(rollbackFor = Exception.class)
+	//@PostMapping("/prdct/{prdct_id}") 
+	//public ResponseEntity<String> prdctLike(@RequestBody PrdctLikeVO prdctLikeVO) { 
+	//	ResponseEntity<String> entity = null; 
+	//	log.info("prdctLike..."); 
+	//	try { 
+	//		commonService.setPrdctLike(prdctLikeVO); 
+	//		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK); 
+	//		} catch (Exception e) { 
+	//			e.printStackTrace(); 
+	//			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); 
+	//			} 
+	//	return entity; }
+
 }
