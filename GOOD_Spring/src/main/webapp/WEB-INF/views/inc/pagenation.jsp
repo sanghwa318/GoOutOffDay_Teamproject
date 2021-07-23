@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+<!-- 페이지네이션 -->
 <div class="text-center">
 	<!-- 페이지 번호 구현 -->
 	<ul class="pagination">
@@ -35,7 +36,7 @@
 			<c:choose>
 				<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
 				<c:when test="${pageData.nowPage == i}">
-					<li class="page-item active"><span style="color:#fff;">${i}<span
+					<li class="page-item active"><span style="color: #fff;">${i}<span
 							class="sr-only">(current)</span></span></li>
 				</c:when>
 				<%-- 나머지 페이지의 경우 링크 적용함 --%>

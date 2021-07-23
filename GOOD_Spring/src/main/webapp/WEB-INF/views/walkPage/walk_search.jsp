@@ -83,12 +83,12 @@ div#category_acco .accordian-toggle {
 												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
 										</button>
 									</span>
-<!-- 								</form> -->
-								<!-- //검색 하기 창 -->
-								<!-- 카테고리영역 -->
-<!-- 								<form method="get" -->
-<%-- 									action="${pageContext.request.contextPath }/walkPage/walk_search.do" --%>
-<!-- 									class="form-horizontal" role="form" id="dropdown"> -->
+									<!-- 								</form> -->
+									<!-- //검색 하기 창 -->
+									<!-- 카테고리영역 -->
+									<!-- 								<form method="get" -->
+									<%-- 									action="${pageContext.request.contextPath }/walkPage/walk_search.do" --%>
+									<!-- 									class="form-horizontal" role="form" id="dropdown"> -->
 									<fieldset>
 										<div class="form-group">
 											<div class="col-xs-3">
@@ -102,34 +102,34 @@ div#category_acco .accordian-toggle {
 												</select>
 											</div>
 											<div class="col-xs-3">
-												<select class="form-control">
+												<select class="form-control" name="area" id="area">
 													<option value="">지역</option>
-													<option value="all">전체</option>
-													<option value="gangnam">강남구</option>
-													<option value="gangdong">강동구</option>
-													<option value="gangbug">강북구</option>
-													<option value="gangseo">강서구</option>
-													<option value="gwan-ag">관악구</option>
-													<option value="gwangjin">광진구</option>
-													<option value="gulo">구로구</option>
-													<option value="geumcheon">금천구</option>
-													<option value="nowon">노원구</option>
-													<option value="dobong">도봉구</option>
-													<option value="dongdaemun">동대문구</option>
-													<option value="dongjag">동작구</option>
-													<option value="mapo">마포구</option>
-													<option value="seodaemun">서대문구</option>
-													<option value="seocho">서초구</option>
-													<option value="seongdong">성동구</option>
-													<option value="seongbug">성북구</option>
-													<option value="songpa">송파구</option>
-													<option value="yangcheon">양천구</option>
-													<option value="yeongdeungpo">영등포구</option>
-													<option value="yongsan">용산구</option>
-													<option value="eunpyeong">은평구</option>
-													<option value="jonglo">종로구</option>
-													<option value="jung-gu">중구</option>
-													<option value="junglang">중랑구</option>
+													<option value="">전체</option>
+													<option value="강남구">강남구</option>
+													<option value="강동구">강동구</option>
+													<option value="강북구">강북구</option>
+													<option value="강서구">강서구</option>
+													<option value="관악구">관악구</option>
+													<option value="광진구">광진구</option>
+													<option value="구로구">구로구</option>
+													<option value="금천구">금천구</option>
+													<option value="노원구">노원구</option>
+													<option value="도봉구">도봉구</option>
+													<option value="동대문구">동대문구</option>
+													<option value="동작구">동작구</option>
+													<option value="마포구">마포구</option>
+													<option value="서대문구">서대문구</option>
+													<option value="서초구">서초구</option>
+													<option value="서초구">성동구</option>
+													<option value="성북구">성북구</option>
+													<option value="송파구">송파구</option>
+													<option value="양천구">양천구</option>
+													<option value="영등포구">영등포구</option>
+													<option value="용산구">용산구</option>
+													<option value="은평구">은평구</option>
+													<option value="종로구">종로구</option>
+													<option value="중구">중구</option>
+													<option value="중랑구">중랑구</option>
 												</select>
 											</div>
 											<div class="col-sm-2 col-xs-3 pull-right">
@@ -232,7 +232,64 @@ div#category_acco .accordian-toggle {
 								<hr />
 							</c:forEach>
 							<!-- 페이지네이션 -->
-							<%@ include file="../inc/pagenation.jsp"%>
+							<div class="text-center">
+								<!-- 페이지 번호 구현 -->
+								<ul class="pagination">
+									<%-- 이전 그룹에 대한 링크 --%>
+									<c:choose>
+										<%-- 이전 그룹으로 이동 가능하다면? --%>
+										<c:when test="${pageData.prevPage > 0}">
+											<%-- 이동할 URL 생성 --%>
+											<c:url value="${getList }" var="prevPageUrl">
+												<c:param name="page" value="${pageData.prevPage}" />
+												<c:param name="keyword" value="${keyword}" />
+												<c:param name="category" value="${category}" />
+												<c:param name="area" value="${area}" />
+											</c:url>
+											<li class="page-item"><a href="${prevPageUrl}">&laquo;</a></li>
+										</c:when>
+									</c:choose>
+
+									<%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
+									<c:forEach var="i" begin="${pageData.startPage}"
+										end="${pageData.endPage}" varStatus="status">
+										<%-- 이동할 URL 생성 --%>
+										<c:url value="${getList }" var="pageUrl">
+											<c:param name="page" value="${i}" />
+											<c:param name="keyword" value="${keyword}" />
+											<c:param name="category" value="${category}" />
+											<c:param name="area" value="${area}" />
+										</c:url>
+
+										<%-- 페이지 번호 출력 --%>
+										<c:choose>
+											<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+											<c:when test="${pageData.nowPage == i}">
+												<li class="page-item active"><span style="color: #fff;">${i}<span
+														class="sr-only">(current)</span></span></li>
+											</c:when>
+											<%-- 나머지 페이지의 경우 링크 적용함 --%>
+											<c:otherwise>
+												<li class="page-item"><a href="${pageUrl}">${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<%-- 다음 그룹에 대한 링크 --%>
+									<c:choose>
+										<%-- 다음 그룹으로 이동 가능하다면? --%>
+										<c:when test="${pageData.nextPage > 0}">
+											<%-- 이동할 URL 생성 --%>
+											<c:url value="${getList }" var="nextPageUrl">
+												<c:param name="page" value="${pageData.nextPage}" />
+												<c:param name="keyword" value="${keyword}" />
+												<c:param name="category" value="${category}" />
+												<c:param name="area" value="${area}" />
+											</c:url>
+											<li class="page-item"><a href="${nextPageUrl}">&raquo;</a></li>
+										</c:when>
+									</c:choose>
+								</ul>
+							</div>
 							<!-- //페이지네이션 -->
 						</c:otherwise>
 					</c:choose>

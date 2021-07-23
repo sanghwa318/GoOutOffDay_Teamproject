@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.WebHelper;
@@ -122,11 +123,13 @@ public class WalkController {
 	 * @return view
 	 */
 	@RequestMapping(value="/walkPage/walk_search.do", method=RequestMethod.GET)
-	public String walk_search(Model model, HttpServletResponse response,
+	public ModelAndView walk_search(Model model, HttpServletResponse response,
 			// 검색어
 			@RequestParam(value="keyword", required=false) String keyword,
 			// 유형별(코스카테고리별)
 			@RequestParam(value="category", required=false) String category,
+			// 지역별(코스카테고리별)
+			@RequestParam(value="area", required=false) String area,
 			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value="page", defaultValue="1") int nowPage) {
 		
@@ -140,19 +143,19 @@ public class WalkController {
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
-//		input.setCOURSE_CATEGORY_NM(keyword);
 		input.setSOUTH_NORTH_DIV_NM(keyword);
-		input.setAREA_GU(keyword);
-		input.setDISTANCE(keyword);
 		input.setLEAD_TIME(keyword);
 		input.setCOURSE_LEVEL(keyword);
 		input.setRELATE_SUBWAY(keyword);
-		input.setTRAFFIC_INFO(keyword);
 		input.setCOURSE_NAME(keyword);
 		input.setCPI_NAME(keyword);
+//		input.setDISTANCE(keyword);
+//		input.setTRAFFIC_INFO(keyword);
 
 		// 유형별(코스카테고리별)
 		input.setCOURSE_CATEGORY_NM(category);
+		// 지역별(코스카테고리별)
+		input.setAREA_GU(area);
 		
 		List<WalkCourse> output = null; //조회 결과가 저장될 객체
        
@@ -170,14 +173,17 @@ public class WalkController {
 			output = walkCourseService.getWalkCourseList(input);
 		} catch (Exception e) {e.printStackTrace();}
 		
+		// select 태그 상태 유지
+		
 		// View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);
+		model.addAttribute("area", area);
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정
-		return "walkPage/walk_search";
+		return new ModelAndView("walkPage/walk_search");
 	}
 	
 	@RequestMapping(value="/walkPage/walk_log.do", method=RequestMethod.GET)
