@@ -94,12 +94,35 @@ public class MyCourseController {
 	}
 
 	/*
-	 * comm_myCourseDetail
+	 * 
+	 * comm_myCourseDetail 나만의코스 상세 정보 페이지
 	 */
 	@RequestMapping(value = "/commPage/comm_myCourseDetail.do", method = RequestMethod.GET)
-	public String mycourseDetail(Model model) {
+	public ModelAndView mycourseDetail(Model model,
+			@RequestParam(value="mycourse_no")int mycourse_no) {
+		
+		/* 1) 데이터 조회하기 */
+		MyCourses input = new MyCourses();
+		input.setMycourse_no(mycourse_no);
 
-		return "commPage/comm_myCourseDetail";
+		MyCourses output=null;
+
+		try {
+			//조회수 증가
+			myCourseService.updateHits(input);
+			//데이터 조회
+			output= myCourseService.getMyCourseItem(input);
+		} catch (Exception e) {
+			webHelper.redirect(null, e.getLocalizedMessage());
+			
+		}		
+		
+		
+		/* 3) 지도 생성을 위한 좌표값 조회하기 */
+		//아직
+		
+		model.addAttribute("output", output);
+		return new ModelAndView("commPage/comm_myCourseDetail");
 	}
 
 	/*
@@ -116,7 +139,7 @@ public class MyCourseController {
 	 */
 	@RequestMapping(value = "/commPage/comm_myCourseWrite.do", method = RequestMethod.GET)
 	public ModelAndView mycourseWrite(Model model) {
-		/* 1) 지도 생성을 위한 좌표값 조회하기 */
+		/* 1) 코스 이름 조회하기 */
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 		WalkLog input = new WalkLog();
 		input.setUser_info_user_no(loginInfo.getUser_no());
@@ -134,6 +157,40 @@ public class MyCourseController {
 		return new ModelAndView("commPage/comm_myCourseWrite");
 	}
 
+	
+	
+	/*
+	 * 나만의코스 작성 action 페이지.
+	 */
+	@RequestMapping(value = "/commPage/comm_myCourseWriteOk.do", method = RequestMethod.POST)
+	public ModelAndView mycourseWriteOk(Model model,
+			@RequestParam(value = "mycourse_name") String mycourse_name,
+			@RequestParam(value = "mycourse_area") String mycourse_area,
+			@RequestParam(value = "mycourse_content") String mycourse_content) {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+
+		
+		MyCourses input = new MyCourses();
+		input.setMycourse_name(mycourse_name);
+		input.setMycourse_area(mycourse_area);
+		input.setMycourse_content(mycourse_content);
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		MyCourses output=null;
+		
+		
+		
+		try {
+			// 데이터 추가하기
+			myCourseService.addMyCourse(input);
+			output= myCourseService.getMyCoursePost(input);
+		} catch (Exception e) {
+			webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		
+		
+		return webHelper.redirect(contextPath+"commPage/comm_myCourseDetail.do"+"?mycourse_no="+output.getMycourse_no(), "작성되었습니다.");
+
+	}
 	/*
 	 * 나만의코스 작성을 위한 List형태의 좌표값을 json으로 전달한다.
 	 */
@@ -159,18 +216,6 @@ public class MyCourseController {
 		return webHelper.getJsonData(map);
 	}
 	
-	/*
-	 * 나만의코스 작성 action 페이지.
-	 */
-	/**@RequestMapping(value = "/commPage/comm_myCourseWriteOk.do", method = RequestMethod.POST)
-	public ModelAndView mycourseWriteOk(Model model, @RequestParam(value = "QnA_title") String QnA_title,
-			@RequestParam(value = "QnA_category") String QnA_category,
-			@RequestParam(value = "QnA_text") String QnA_text) {
-
-		return webHelper.redirect(contextPath+"commPage/comm_myCourseDetail.do"+"?mycourse_no="+output.getMycourse_no(), "작성되었습니다.");
-
-	}*/
-
 	/*
 	 * comm_myPost
 	 */

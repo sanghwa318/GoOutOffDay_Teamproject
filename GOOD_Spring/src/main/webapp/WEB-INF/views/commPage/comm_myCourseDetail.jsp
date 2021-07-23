@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -62,6 +65,97 @@ hr {
 .body .main_header {
 	padding-bottom: 0;
 }
+
+
+
+.title-img>img {
+	width: 100px;
+	height: 100px;
+}
+ul, li {
+	list-style: none;
+}
+
+.body .detail_info .info {
+	box-shadow: 0 2px 7px rgba(102, 109, 117, 0.32);
+}
+
+.detail_info .info li {
+	padding: 17px 20px 20px 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.body .header {
+	padding-bottom: 10px;
+	padding-top: 20px;
+}
+
+.main_header h1 {
+	position: relative;
+	text-align: center;
+}
+
+.main_header>h1 {
+	transition: all 0.3s ease;
+	transform: translateY(0);
+}
+
+.main_header>h1:hover {
+	transform: translate(0, -10px);
+}
+
+.main_header>h1>span>img {
+	width: 3rem;
+	height: 3rem;
+	position: relative;
+	left: 5px;
+	bottom: 5px;
+}
+
+.detail_info {
+	padding-top: 10px;
+}
+
+.detail_info .detail_item {
+	padding-left: 10px;
+}
+
+.detail_info .info p {
+	font-size: 15px;
+	display: inline;
+}
+
+.detail_info .info strong {
+	font-size: 20px;
+}
+
+.detail_info .detail_img img {
+	border: 1px solid #ddd;
+	box-shadow: 0 2px 7px rgba(102, 109, 117, 0.32);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	max-height: 100%;
+	min-width: 100%;
+	max-width: 100%;
+	height: 300px;
+}
+
+.detail_info .itemHeader {
+	padding-left: 5px;
+	margin-bottom: 10px;
+}
+
+.detail_info .detail_item {
+	padding-top: 10px;
+}
+
+.main_info .info strong {
+	color: #343a40;
+}
+
+.main_info .info p {
+	color: #495056;
+}
 </style>
 <body>
 	<!-- 푸터빼고 감싸주세요 -->
@@ -89,20 +183,34 @@ hr {
 				<div class="courseimg col-md-4">
 					<img alt="코스사진" src="${pageContext.request.contextPath}/assets/img/profile_default.png" width="300">
 				</div>
-				<div class="courseInfo col-md-8">
-					<h3>코스 이름</h3>
-					<p>
-						내용 <br>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하<br>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하<br>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하<br>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하<br>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하<br>가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하
-					</p>
-				</div>
+					<div class="col-md-7 col-sm-6 col-xs-12 main_info">
+						<ul class="info">
+							<li class="infoItem"><strong class="infoLabel">코스 이름
+									: </strong>
+								<p class="infoText">${output.mycourse_name }}</p></li>
+							<li class="infoItem"><strong class="infoLabel">코스 지역
+									: </strong>
+								<p class="infoText">${output.mycourse_area }</p></li>
+							<li class="infoItem"><strong class="infoLabel">코스 설명
+									: </strong>
+								<p class="infoText">${output.mycourse_content}</p></li>
+							<li class="infoItem"><strong class="infoLabel">작성일시
+									 : </strong>
+								<p class="infoText">${output.mycourse_createdate }</p></li>
+							<li class="infoItem"><strong class="infoLabel">수정일시
+									: </strong>
+								<p class="infoText">${output.mycourse_editdate }</p></li>
+						</ul>
+					</div>
 			</div>
 			<hr>
 			<div class="row">
 				<div class="col-md-2 col-lg-1 col-xs-2 text-center"
 					style="font-size: 20px">댓글</div>
 				<div class="pull-right" style="margin-right: 15px">
+				조회수 ${output.mycourse_hits } 작성자 ${output.like }
 					<span class="heart"><i class="fa fa-heart-o"
-						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
+						aria-hidden="true" role="button"></i> </span> 좋아요 ${output.like } <span class="comment"><i
 						class="fa fa-comment-o"></i></span> 댓글 28
 				</div>
 			</div>

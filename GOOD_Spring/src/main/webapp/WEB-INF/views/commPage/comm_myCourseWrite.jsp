@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -35,7 +38,6 @@ input#title {
 	margin: 30px 0;
 }
 
-
 .main_header>h1 {
 	position: relative;
 	text-align: center;
@@ -55,9 +57,11 @@ input#title {
 	bottom: 0px;
 }
 
-
 .body .main_header {
 	padding-bottom: 0;
+}
+.cke_contents{
+min-height: 400px;
 }
 </style>
 </head>
@@ -81,18 +85,66 @@ input#title {
 				</h1>
 			</div>
 			<div class="header">
-				<h1 style="color: #343a40; padding-left:32px">코스 작성</h1>
+				<h1 style="color: #343a40; padding-left: 32px">코스 작성</h1>
 			</div>
-			<form action="${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do" method="post">
-				<select name="course_name" id="course_name">
-				<c:forEach var="courseName" items="${courseName }" varStatus="status">
-					<option value="${courseName.course_name }">${courseName.course_name}</option>
-				</c:forEach>
-			</select>
-				<div id="editable"></div>
+			<form
+				action="${pageContext.request.contextPath}/commPage/comm_myCourseWriteOk.do"
+				method="post">
+				<div class="row">
+				<div class="col-md-6">
+				<label for="mycourse_name" class="control-label categorydiv">코스
+					선택</label> 
+					<select class="form-control" name="mycourse_name"
+					id="course_name"
+					style="display: inline-block; width: 80%; margin-left: 10px; margin-top: 3px">
+					
+					<c:forEach var="courseName" items="${courseName}"
+						varStatus="status">
+						<option value="${courseName.course_name }">${courseName.course_name}</option>
+					</c:forEach>
+				</select>
+				</div>
+				<div class="col-md-6">
+				<label for="mycourse_area" class="control-label categorydiv">지역 선택</label>
+				<select class="form-control" id="mycourse_area" name="mycourse_area"
+					style="display: inline-block; width: 80%; margin-left: 10px; margin-top: 3px">
+					<option value="">지역</option>
+					<option value="전체">전체</option>
+					<option value="강남구">강남구</option>
+					<option value="강동구">강동구</option>
+					<option value="강북구">강북구</option>
+					<option value="강서구">강서구</option>
+					<option value="관악구">관악구</option>
+					<option value="광진구">광진구</option>
+					<option value="구로구">구로구</option>
+					<option value="금천구">금천구</option>
+					<option value="노원구">노원구</option>
+					<option value="도봉구">도봉구</option>
+					<option value="동대문구">동대문구</option>
+					<option value="동작구">동작구</option>
+					<option value="마포구">마포구</option>
+					<option value="서대문구">서대문구</option>
+					<option value="서초구">서초구</option>
+					<option value="성동구">성동구</option>
+					<option value="성북구">성북구</option>
+					<option value="송파구">송파구</option>
+					<option value="양천구">양천구</option>
+					<option value="영등포구">영등포구</option>
+					<option value="용산구">용산구</option>
+					<option value="은평구">은평구</option>
+					<option value="종로구">종로구</option>
+					<option value="중구">중구</option>
+					<option value="중랑구">중랑구</option>
+				</select>
+				</div>
+				</div>
+				<br>
+				<textarea name="mycourse_content" class="ckeditor"></textarea>
 
 				<div class="btn-group pull-right">
-					<a id="btn_cancel" type="button" href="${pageContext.request.contextPath}/commPage/comm_myCourse.do" class="btn btn-warning">취소</a>
+					<a id="btn_cancel" type="button"
+						href="${pageContext.request.contextPath}/commPage/comm_myCourse.do"
+						class="btn btn-warning">취소</a>
 					<button type="submit" class="btn btn-primary">작성완료</button>
 				</div>
 			</form>
@@ -104,33 +156,39 @@ input#title {
 	<!-- //공통 푸터 -->
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
 	<!-- // js -->
 	<script>
-		new FroalaEditor('#editable');
 		$(function() {
-			$("#btn_cancel").click(function(e) {
-				e.preventDefault();
-				// 확인, 취소버튼에 따른 후속 처리 구현
-				swal({
-					title : '확인', // 제목
-					text : "정말 취소 하시겠습니까?", // 내용
-					type : 'warning', // 종류
-					confirmButtonText : '네', // 확인버튼 표시 문구
-					showCancelButton : true, // 취소버튼 표시 여부
-					cancelButtonText : '아니오', // 취소버튼 표시 문구
-				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('취소', '나만의 코스 작성이 취소되었습니다.', 'success');
-						setTimeout(function() {
-							location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.jsp?pageNo=1';
-						}, 1000);
+			$("#btn_cancel")
+					.click(
+							function(e) {
+								e.preventDefault();
+								// 확인, 취소버튼에 따른 후속 처리 구현
+								swal({
+									title : '확인', // 제목
+									text : "정말 취소 하시겠습니까?", // 내용
+									type : 'warning', // 종류
+									confirmButtonText : '네', // 확인버튼 표시 문구
+									showCancelButton : true, // 취소버튼 표시 여부
+									cancelButtonText : '아니오', // 취소버튼 표시 문구
+								})
+										.then(
+												function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+													if (result.value) { // 확인 버튼이 눌러진 경우
+														swal(
+																'취소',
+																'나만의 코스 작성이 취소되었습니다.',
+																'success');
+														setTimeout(
+																function() {
+																	location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.jsp?pageNo=1';
+																}, 1000);
 
-					}
+													}
 
-				});
-			});
+												});
+							});
 		});
 	</script>
 </body>
