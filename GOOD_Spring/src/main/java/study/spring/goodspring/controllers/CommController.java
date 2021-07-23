@@ -195,6 +195,7 @@ public class CommController {
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
 	public String crewmemberjoin(Model model) {
+		
 
 		return "commPage/comm_crew_memberJoin";
 	}

@@ -75,7 +75,7 @@
 					<tr class="member-item member-item-001">
 						<td class='text-center' rowspan="1"><input type='checkbox'
 							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 1 </a></td>
+						<td class='text-center' rowspan="1"><a href="#">  </a></td>
 						<td class='text-center' rowspan="1">김아무개</td>
 						<td class='text-center'>kim</td>
 						<td class='text-center'>2021-06-11</td>
