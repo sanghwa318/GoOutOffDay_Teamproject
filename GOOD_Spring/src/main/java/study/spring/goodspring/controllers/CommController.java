@@ -195,19 +195,7 @@ public class CommController {
 
 
 	}
-	/*
-	 * comm_crew_memberJoin
-	 */
-	@RequestMapping(value = "/commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
-	public String crewmemberjoin(Model model) {
-		
-<<<<<<< HEAD
-		
-=======
->>>>>>> de70b4169209570b04707ea413b19f196ed548b3
 
-		return "commPage/comm_crew_memberJoin";
-	}
 
 	/*
 	 * comm_crew_myCrew
