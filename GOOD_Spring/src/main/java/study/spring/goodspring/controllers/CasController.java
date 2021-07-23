@@ -203,25 +203,35 @@ public class CasController {
 
 		// 조회된 결과를 저장할 객체 선언
 		CasOther output = null;
-
+		
+		BookMark bookinput = new BookMark();
+		
+		Member loginInfo = (Member) WebHelper.getSession("login_info");
+		bookinput.setUser_info_user_no(loginInfo.getUser_no());
+		bookinput.setCategory_id(input.getDIV_COL());
+		bookinput.setService_id(input.getSVCID());
+		
+		int outputcount = 0;
 		try {
 			output = CasService.getOtherItem(input);
+			outputcount = bookMarkService.BookMarkUniqueCheck(bookinput);
 		} catch (Exception e) {
 			return WebHelper.redirect(null, e.getLocalizedMessage());
 		}
 
 		/** 3) View 처리 **/
 		model.addAttribute("output", output);
+		model.addAttribute("outputcount", outputcount);
 
 		return new ModelAndView("casPage/cas_detail");
 	}
 
-	/** 문화체육 아이템 찜하기 **/
+	/** 문화체육 아이템 찜하기 
+	 * @throws Exception **/
 	@ResponseBody
 	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
-	public Map<String, Object> eddBookMark(
-			@RequestParam(value = "svcid", required = false) String svcid,
-			@RequestParam(value = "catid", required = false) String catid) {
+	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
+			@RequestParam(value = "catid", required = false) String catid) throws Exception {
 
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
@@ -235,13 +245,16 @@ public class CasController {
 		input.setService_id(Info.getSVCID());
 		
 		try {
-			bookMarkService.addBookMark(input);
+			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {
+				bookMarkService.deleteBookMark(input);
+			}
+			else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
+				bookMarkService.addBookMark(input);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return WebHelper.getJsonData();
-	} 
-	
-
-
+	}
 }

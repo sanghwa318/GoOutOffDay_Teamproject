@@ -13,7 +13,8 @@ import study.spring.goodspring.service.BookMarkService;
 public class bookmarkServiceImpl implements BookMarkService {
 	@Autowired
 	SqlSession sqlSession;
-
+	
+	/** 찜목록 추가 **/
 	@Override
 	public void addBookMark(BookMark input) throws Exception {
 		int result = 0;
@@ -34,6 +35,7 @@ public class bookmarkServiceImpl implements BookMarkService {
 		return;
 	}
 
+	/** 찜목록 삭제 **/
 	@Override
 	public void deleteBookMark(BookMark input) throws Exception {
 		int result = 0;
@@ -52,5 +54,26 @@ public class bookmarkServiceImpl implements BookMarkService {
 		}
 		return;
 	}
+
+	@Override
+	public int BookMarkUniqueCheck(BookMark input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("BookMarkMapper.selectInBookMark", input);
+
+			
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("저장된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 등록에 실패했습니다.");
+		}
+		return result;
+		
+	}
+
+
 
 }

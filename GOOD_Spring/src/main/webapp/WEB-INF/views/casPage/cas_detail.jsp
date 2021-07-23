@@ -183,11 +183,20 @@ ul, li {
 								onclick="location.href='${output.SVCURL}'" style="width: 140px;">
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
+							<c:if test="${outputcount >= 1}">
+							<button class="heart btn btn-warning liked" type="button"
+								style="width: 140px; font-size: 18px;">
+								<i class="fa fa-heart" aria-hidden="true" role="button"
+									style="padding-right: 5px; font-size: 18px;"></i>찜하기
+							</button>
+							</c:if>
+							<c:if test="${outputcount == 0}">
 							<button class="heart btn btn-warning" type="button"
 								style="width: 140px; font-size: 18px;">
 								<i class="fa fa-heart-o" aria-hidden="true" role="button"
 									style="padding-right: 5px; font-size: 18px;"></i>찜하기
 							</button>
+							</c:if>
 						</div>
 					</div>
 					<div class="col-md-7 col-sm-6 col-xs-12 main_info">
@@ -236,14 +245,9 @@ ul, li {
 						"click",
 						function() {
 							if ($(this).hasClass("liked")) {
-								$(".heart")
-										.html(
-												'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
-								$(".heart").removeClass("liked");
-							} else {
 								swal({
 									title : '확인',
-									text : "찜목록에 추가할까요?",
+									text : "찜목록에서 제거할까요?",
 									type : 'question',
 									confirmButtonText : '네',
 									showCancelButton : true,
@@ -252,27 +256,8 @@ ul, li {
 										.then(
 												function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 													if (result.value) { // 확인 버튼이 눌러진 경우
-														$(".heart")
-																.html(
-																		'<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
-														$(".heart").addClass(
-																"liked");
-														swal(
-																'성공',
-																'찜목록에 추가되었습니다.',
-																'success');
-														setTimeout(function() {
-														}, 1000);
-														var catid = '${output.DIV_COL}';
-														var svcid = '${output.SVCID}';
-														$.ajax({
-															cache: false,
-															url:  getContextPath() + '/casPage/BookMark',
-															type: 'POST',
-															dataType: 'json',
-															data: {catid, svcid},
-															timeout: 10000,
-														})
+														deleteBookMark();
+														
 													} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 														$(".heart")
 																.html(
@@ -286,9 +271,139 @@ ul, li {
 																'error');
 													}
 												});
+							} else {
+								swal({
+									title : '확인',
+									text : "찜목록에 추가할까요?",
+									type : 'question',
+									confirmButtonText : '네',
+									showCancelButton : true,
+									cancelButtonText : '아니요',
+								})
+										.then(
+												function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+													if (result.value) { // 확인 버튼이 눌러진 경우
+														addBookMark();
+														
+													} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+														$(".heart")
+																.html(
+																		'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+														$(".heart")
+																.removeClass(
+																		"liked");
+														swal(
+																'취소',
+																'취소되었습니다.',
+																'error');
+													}
+												});
 							}
 
 						});
+	</script>
+	<script>
+	// 찜추가
+	function addBookMark() {
+	var catid = '${output.DIV_COL}';
+	var svcid = '${output.SVCID}';
+	$.ajax({
+		cache: false,
+		url:  getContextPath() + '/casPage/BookMark',
+		type: 'POST',
+		dataType: 'json',
+		data: {catid, svcid},
+		timeout: 10000,
+		success: function(req) {
+			
+			console.log("성공 >> " + req);
+			$(".heart")
+			.html(
+					'<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+	$(".heart").addClass(
+			"liked");
+	swal(
+			'성공',
+			'찜목록에 추가되었습니다.',
+			'success');
+	setTimeout(function() {
+	}, 1000);
+		},
+		error: function (error) {
+			console.log("에러 >> " + error.status);
+			swal('주의', '찜추가에 실패했습니다.', 'warning'),{
+				closeOnClickOutside: false,
+				closeOnEsc: false,
+				buttons : {
+					confirm: {
+						text: '닫기',
+						value: true,
+						className : 'btn btn-outline-primary'
+					}
+				}
+			}
+			$(".heart")
+			.html(
+					'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+	$(".heart")
+			.removeClass(
+					"liked");
+		}
+	})
+	}
+	
+	// 찜삭제 
+	function deleteBookMark() {
+		var catid = '${output.DIV_COL}';
+		var svcid = '${output.SVCID}';
+		$.ajax({
+			cache: false,
+			url:  getContextPath() + '/casPage/BookMark',
+			type: 'POST',
+			dataType: 'json',
+			data: {catid, svcid},
+			timeout: 10000,
+			success: function(req) {
+				
+				console.log("삭제 성공 >> " + req);
+				$(".heart")
+				.html(
+						'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+		$(".heart").removeClass("liked");
+		swal(
+				'성공',
+				'찜목록에서 제거되었습니다.',
+				'success'),{buttons : {
+					confirm: {
+						text: '닫기',
+						value: true,
+						className : 'btn btn-outline-primary'
+					}}}
+		setTimeout(function() {
+		}, 1000);
+			},
+			error: function (error) {
+				console.log("에러 >> " + error.status);
+				swal('주의', '찜목록에 제거하기가 실패했습니다.', 'warning'),{
+					closeOnClickOutside: false,
+					closeOnEsc: false,
+					buttons : {
+						confirm: {
+							text: '닫기',
+							value: true,
+							className : 'btn btn-outline-primary'
+						}
+					}
+				}
+				$(".heart")
+				.html(
+						'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+		$(".heart")
+				.removeClass(
+						"liked");
+			}
+		})
+		}
 	</script>
 	<!-- //하트 -->
 	<!-- // js -->
