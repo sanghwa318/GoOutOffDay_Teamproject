@@ -133,12 +133,21 @@
 	</select>
 
 	<!-- 그룸 멤버 카운트 -->
-	<update id="updateCrewMemberCount" parameterType="study.spring.goodspring.model.Crew">
-		update crew c set crew_member=(select count(member_no) from crew_member
-		where crew_crew_no=c.crew_no) where crew_no =#{crew_no};
+	<update id="updateCrewMemberCount"
+		parameterType="study.spring.goodspring.model.Crew">
+		update crew c set crew_member=(select count(member_no)
+		from crew_member
+		where crew_crew_no=c.crew_no) where crew_no
+		=#{crew_no};
 	</update>
 
-
-
+	<!-- 가입한 크루 조회 -->
+	<select id="selectjoinedCrewItem"
+		parameterType="study.spring.goodspring.model.CrewMember">
+		SELECT c.* FROM user_info u
+		INNER JOIN crew_member cm ON u.user_no = cm.user_info_user_no
+		INNER JOIN crew c ON c.crew_no = cm.crew_crew_no
+		WHERE u.user_no = #{user_no};
+	</select>
 
 </mapper>

@@ -386,23 +386,14 @@ button span {
                            
                            return false; // <-- 실행 중단
                            
-                        }  else {
-                           swal({
-                              title : '확인', // 제목
-                              text : "개설을 축하합니다!", // 내용
-                              type : 'success', // 종류
-                           })
-                                 .then(
-                                       function(result) {
-                                          // 창이 닫히는 애니메이션의 시간이 있으므로,
-                                          // 0.1초의 딜레이 적용 후 포커스 이동
-                                          setTimeout(
-                                                function() {
-                                    location.href = '${pageContext.request.contextPath}/commPage/comm_crew_info.do';
-                                                }, 100);
-                                       })
+                        }else{
+                        	    swal({
+                                title : '확인', // 제목
+                                text : "개설을 축하합니다!", // 내용
+                                type : 'success', // 종류
+                                confirmButtonText : '확인', // 확인버튼 표시 문구
+                             })
                         }
-
                      });
 
          $("#btn_cancel").click(function() {

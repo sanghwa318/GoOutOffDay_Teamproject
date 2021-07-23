@@ -4,6 +4,7 @@ package study.spring.goodspring.service;
 import java.util.List;
 
 import study.spring.goodspring.model.Crew;
+import study.spring.goodspring.model.CrewMember;
 
 //크루 데이터 관리 기능을 제공하기위한 Service
 public interface CrewService {
@@ -60,7 +61,6 @@ public interface CrewService {
 	 */
 	public int getCrewCount(Crew input) throws Exception;
 	
-	
 	/*
 	 * 크루멤버 데이터 카운트 조회
 	 * @param Crew 검색 조건을 담고 있는 Beans
@@ -68,5 +68,22 @@ public interface CrewService {
 	 * @throws Exception
 	 */
 	public int updateCrewMemberCount(Crew input) throws Exception;
+	
+	/*
+	 * 가입한 크루 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public List<Crew> selectJoinedCrew(Crew input) throws Exception;
+
+	public List<Crew> selectJoinedCrew(CrewMember input) throws Exception;
+
+
+
+
+	
+	
+	
 	
 }

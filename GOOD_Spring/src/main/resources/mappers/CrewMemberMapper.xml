@@ -23,4 +23,6 @@ VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 </insert>
 
 
+
+
 </mapper>

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -69,99 +72,52 @@
 			<div class="crew_middle">
 				<div class="best">
 
-					<div class="row multi-columns-row product-list">
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="../commPage/comm_crew_bbs.jsp">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
+					<c:choose>
 
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
+						<%--조회결과가 없는 경우 --%>
+						<c:when test="${output==null || fn:length(output) == 0} ">
+							<div class="null">
+								<div align="center">조회결과가 없습니다.</div>
+							</div>
+						</c:when>
+
+						<%--조회결과가 있는 경우  --%>
+						<c:otherwise>
+							<%-- 조회 결과에 따른 반복 처리 --%>
+							<c:forEach var="item" items="${output}" varStatus="status">
+								<%-- 출력을 위해 준비한 크루이름 변수  --%>
+								<c:set var="crew_name" value="${item.crew_name}" />
+
+
+								<%-- 상세페이지로 이동하기위한 URL --%>
+								<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">
+									<c:param name="crew_no" value="${item.crew_no}" />
+								</c:url>
+
+								<div class="col-xs-6 col-sm-4 col-md-3">
+									<div class="thumbnail item"
+										onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
+										<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
+											onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
+										<div class="caption clearfix">
+											<p>
+												<a href="${bbsUrl}">크루 이름: ${item.crew_name}</a>
+											</p>
+											<h4>크루 소개: ${item.crew_sinto}</h4>
+											<p class="pull-left">지역: ${item.crew_area}</p>
+										</div>
+
+									</div>
 								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-						<div class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-							<a href="#">
-								<div class="title-img">
-									<img src="../img/profile_default.png"> <span
-										class='sr-only'>이미지</span>
-								</div>
-								<h3>걷기 크루</h3>
-								<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-							</a> <input type='checkbox' class='del'>
-							<hr />
-						</div>
-					</div>
+							</c:forEach>
+						</c:otherwise>
+
+
+					</c:choose>
+
 				</div>
 			</div>
+
 
 			<!-- 본문중단 끝 -->
 

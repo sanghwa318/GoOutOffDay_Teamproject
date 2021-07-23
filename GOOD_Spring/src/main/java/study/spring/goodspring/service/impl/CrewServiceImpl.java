@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.Crew;
+import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.service.CrewService;
 
 //크루 데이터 관리 기능을 제공하기 위한 Service 계층에대한 구현체
@@ -216,7 +217,39 @@ public class CrewServiceImpl implements CrewService{
 		
 		return result;
 	}
-	
+
+
+	@Override
+	public List<Crew> selectJoinedCrew(Crew input) throws Exception {
+		
+		List<Crew> result= null;
+		
+		try {
+			result = sqlSession.selectList("CrewMapper.selectjoinedCrewItem", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+
+
+
+	@Override
+	public List<Crew> selectJoinedCrew(CrewMember input) throws Exception {
+		List<Crew> result= null;
+		
+		try {
+			result = sqlSession.selectList("CrewMapper.selectjoinedCrewItem", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+		}
 
 
 

@@ -62,7 +62,8 @@ public class CommController {
 	 * comm_crew_bbs
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_bbs.do", method = RequestMethod.GET)
-	public ModelAndView crewbbs(Model model, @RequestParam(value = "crew_no", defaultValue = "0") int crew_no) {
+	public ModelAndView crewbbs(Model model, 
+			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no) {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();
@@ -122,7 +123,10 @@ public class CommController {
 	 * comm_crew_info
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_info.do", method = RequestMethod.GET)
-	public ModelAndView crewinfo(Model model, @RequestParam(value = "crew_no", defaultValue = "0") int crew_no) {
+	public ModelAndView crewinfo(Model model, 
+			HttpServletRequest request,
+			 HttpServletResponse response,
+			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no) {
 
 		// 1) 유효성 검사
 		if (crew_no == 0) {
@@ -143,6 +147,7 @@ public class CommController {
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
+	
 
 		// 3) View 처리
 		model.addAttribute("output", output);
@@ -195,6 +200,8 @@ public class CommController {
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
 	public String crewmemberjoin(Model model) {
+		
+		
 
 		return "commPage/comm_crew_memberJoin";
 	}
@@ -204,9 +211,46 @@ public class CommController {
 	 */
 
 	@RequestMapping(value = "/commPage/comm_crew_myCrew.do", method = RequestMethod.GET)
-	public String mycrew(Model model) {
+	public ModelAndView mycrew(Model model,
+			//조건
+			@RequestParam(value = "order", defaultValue = "1") int order,
+			// 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+		
+		Member login_info = (Member) webHelper.getSession("login_info");
+		int userNo = login_info.getUser_no();
+		
 
-		return "commPage/comm_crew_myCrew";
+
+		// 2) 데이터 조회하기
+		// 조회에 필요한 조건값을 Beans에 담는다
+		 Crew input = new Crew();
+		input.setUser_info_user_no(userNo);
+		
+		
+		
+		List<Crew> output = null; // 조회결과가 저장될 객체
+		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
+
+		try {
+
+			// 전체 게시글 수 조회
+			output = crewService.selectJoinedCrew(input);
+
+
+
+
+			// 데이터 조회하기
+			output = crewService.selectJoinedCrew(input);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		// 3) View 처리
+		model.addAttribute("output", output);
+		model.addAttribute("pageData", pageData);
+
+		return new ModelAndView("commPage/comm_crew_myCrew");
 	}
 
 	/*
