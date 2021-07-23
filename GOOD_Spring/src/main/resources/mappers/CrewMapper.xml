@@ -142,12 +142,12 @@
 	</update>
 
 	<!-- 가입한 크루 조회 -->
-	<select id="selectjoinedCrewItem"
+	<select id="selectjoinedCrewItem" resultMap="crewMap"
 		parameterType="study.spring.goodspring.model.Crew">
 		SELECT * FROM crew c
 INNER JOIN crew_member cm ON c.crew_no = cm.crew_crew_no
 INNER JOIN user_info u ON cm.user_info_user_no = u.user_no
-WHERE user_no = #{user_no};
+WHERE u.user_no = #{user_info_user_no};
 	</select>
 
 </mapper>
