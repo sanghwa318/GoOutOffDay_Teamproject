@@ -84,7 +84,11 @@ input#title {
 				<h1 style="color: #343a40; padding-left:32px">코스 작성</h1>
 			</div>
 			<form action="${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do" method="post">
-				<input type="text" id="title" placeholder="코스명을 입력해주세요." />
+				<select name="course_name" id="course_name">
+				<c:forEach var="courseName" items="${courseName }" varStatus="status">
+					<option value="${courseName.course_name }">${courseName.course_name}</option>
+				</c:forEach>
+			</select>
 				<div id="editable"></div>
 
 				<div class="btn-group pull-right">

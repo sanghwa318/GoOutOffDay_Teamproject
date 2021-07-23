@@ -1,6 +1,7 @@
 package study.spring.goodspring.controllers;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,8 @@ public class WalkController {
 			// walkPage/walk_index.jsp파일을 View로 지정 
 			return "walkPage/walk_index";
 		}
+	
+	
 	/**
 	 * 걷기 기록하기로 얻어진 위,경도값을 db에 저장하기 위한 가상의 페이지
 	 * @param wat_latitude watchposition 함수로 얻어지는 위도 값
@@ -86,26 +89,61 @@ public class WalkController {
 	}
 	
 	/**
-	 * 걷기 기록하기로 얻어진 위,경도값을 db에 저장하기 위한 가상의 페이지
-	 * @param wat_latitude watchposition 함수로 얻어지는 위도 값
-	 * @param wat_longitude watchposition 함수로 얻어지는  경도 값
+	 * 걷기 기록하기를 중지를 위한 가상의 페이지. 가장 마지막 로그의 event_name을 종료로 바꾼다.
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_recordEnd.do", method = RequestMethod.POST)
-	public Map<String, Object> walkRecordEnd() {
+	public Map<String, Object> walkRecordEnd(@RequestParam(value="course_name")String course_name) {
+		if(course_name!=null) {
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 		
 		input.setUser_info_user_no(loginInfo.getUser_no());
-		
+		input.setCourse_name(course_name);
 		try {
 				walkLogService.endRecord(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			walkLogService.updateCourseName(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		}else {
+			webHelper.redirect(null, "코스 이름을 입력하세요.");
+		}
 		return webHelper.getJsonData();
 	}
+	
+    /** 코스 이름 중복검사 
+     * @return */
+	@ResponseBody
+    @RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck.do", method = RequestMethod.POST)
+    public Map<String, Object> courseNameUniqueCheck(
+            @RequestParam(value="course_name")String course_name) {
+        
+		WalkLog input = new WalkLog();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		input.setCourse_name(course_name);
+		Map<String, Object> map = new HashMap<String, Object>();
+		String result="true";
+		
+		
+        try {
+            walkLogService.courseNameUniqueCheck(input);
+        } catch (Exception e) {
+        	result = "false";
+        	map.put("result", result);
+            return webHelper.getJsonData(map);
+        }
+        map.put("result", result);
+        return webHelper.getJsonData(map);
+    }
+	
 	
 	
 	@RequestMapping(value="/walkPage/walk_hallOfFame.do", method=RequestMethod.GET)
@@ -114,13 +152,6 @@ public class WalkController {
 		return "walkPage/walk_hallOfFame";
 	}
 	
-	/**
-	 * 코스목록을 보여주고 검색하는 기능을 가진 페이지
-	 * @param keyword 검색어
-	 * @param category 유형별
-	 * @param nowPage 페이지 네이션
-	 * @return view
-	 */
 	@RequestMapping(value="/walkPage/walk_search.do", method=RequestMethod.GET)
 	public String walk_search(Model model, HttpServletResponse response,
 			// 검색어
@@ -140,7 +171,7 @@ public class WalkController {
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
-//		input.setCOURSE_CATEGORY_NM(keyword);
+		input.setCOURSE_CATEGORY_NM(keyword);
 		input.setSOUTH_NORTH_DIV_NM(keyword);
 		input.setAREA_GU(keyword);
 		input.setDISTANCE(keyword);
@@ -173,7 +204,6 @@ public class WalkController {
 		// View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("category", category);
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정
@@ -185,10 +215,6 @@ public class WalkController {
 		// walkPage/walk_log.jsp파일을 View로 지정
 		return "walkPage/walk_log";
 	}
-	
-	
-
-	
 	
 }
 
