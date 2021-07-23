@@ -13,10 +13,10 @@
 		<result property="user_info_user_no" column="user_info_user_no" />
 	</resultMap>
 	<!-- 중복검사를 위한 조회문 -->
-	<select id="selectInBookMark" parameterType="study.spring.goodspring.model.BookMark">
-		SELECT count(*) as cnt FROM bookmark
+	<select id="selectInBookMark" parameterType="study.spring.goodspring.model.BookMark" resultType="int">
+		SELECT count(*) FROM bookmark
 		WHERE user_info_user_no = #{user_info_user_no}
-		AND service_id = ${service_id};
+		AND service_id = #{service_id};
 	</select>
 	
 	<!-- 데이터 저장기능 -->
@@ -34,7 +34,7 @@
 	<!-- 데이터 삭제기능 -->
 	<delete id="deleteBookMark" parameterType="study.spring.goodspring.model.BookMark">
 		DELETE FROM bookmark
-		WHERE serive_id =#{service_id}
+		WHERE service_id =#{service_id}
 		AND user_info_user_no=#{user_info_user_no};
 	</delete>
 </mapper>

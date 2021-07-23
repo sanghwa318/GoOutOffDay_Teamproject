@@ -129,6 +129,9 @@
 			<if test="crew_sinto != null and crew_sinto != '' ">
 				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
 			</if>
+			<if test="crew_area != null and crew_area != '' ">
+				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
+			</if>
 		</where>
 	</select>
 
@@ -159,6 +162,11 @@
 		cm.crew_crew_no
 		INNER JOIN user_info u ON cm.user_info_user_no = u.user_no
 		WHERE u.user_no = #{user_info_user_no};
+		
+				<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+		
 
 	</select>
 

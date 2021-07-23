@@ -64,7 +64,7 @@ public class CrewController {
 			@RequestParam(value = "crew_name", defaultValue="") String crew_name,
 			@RequestParam(value = "crew_category", defaultValue="") String crew_category,
 			@RequestParam(value = "crew_area", defaultValue="") String crew_area,
-			@RequestParam(value="crew_photo", required=false) MultipartFile crew_photo,
+			@RequestParam(value="crew_photo", defaultValue="") MultipartFile crew_photo,
 			@RequestParam(value = "crew_sinto", defaultValue="") String crew_sinto,
 			@RequestParam(value = "crew_dinto", defaultValue="") String crew_dinto) {
 			

@@ -15,14 +15,13 @@
 		<result property="lon" column="lon" />
 		<result property="lat" column="lat" />
 		<result property="event_name" column="event_name" />
+		<result property="course_name" column="course_name" />
 	</resultMap>
 
 	<!-- 단일행 조회 -->
 	<select id="selectWalkLogItem" resultMap="WalkLogMap"
 		parameterType="study.spring.goodspring.model.WalkLog">
-		SELECT walk_log_no, walk_log_datetime, walking_time,
-		walking_distance, lon,
-		lat, event_name
+		SELECT *
 		FROM walk_log where
 		user_info_user_no=#{user_info_user_no} ORDER BY walk_log_no DESC LIMIT
 		0,1;
@@ -45,8 +44,7 @@
 	<select id="selectWalkLogList"
 		parameterType="study.spring.goodspring.model.WalkLog"
 		resultMap="WalkLogMap">
-		SELECT walk_log_no, walk_log_datetime, walking_time,
-		walking_distance, lon, lat, event_name
+		SELECT *
 		FROM walk_log
 		WHERE
 		user_info_user_no=#{user_info_user_no}
@@ -109,9 +107,68 @@
 	<update id="endRecord"
 		parameterType="study.spring.goodspring.model.WalkLog">
 		UPDATE walk_log SET event_name='종료'
-		WHERE user_info_user_no=#{user_info_user_no} ORDER BY walk_log_no DESC LIMIT 1;
+		WHERE
+		user_info_user_no=#{user_info_user_no} and event_name='기록'
+		ORDER BY walk_log_no DESC LIMIT
+		1;
 	</update>
+	<!-- 가장 최근의 기록 시작부터 기록 종료까지의 값을 가져온다. -->
+	<select id="selectLogList" resultMap="WalkLogMap"
+		parameterType="study.spring.goodspring.model.WalkLog">
+		SELECT walk_log_no, walk_log_datetime
 
+		FROM walk_log
 
+		WHERE
+		(walk_log_datetime BETWEEN
+		(SELECT MAX(walk_log_datetime)
+		FROM walk_log
+		WHERE
+		event_name='시작')
 
+		AND (SELECT MAX(walk_log_datetime) FROM walk_log
+		WHERE event_name='종료'))
+
+		AND user_info_user_no=#{user_info_user_no};
+	</select>
+
+	<!-- 좌표값 전달을 위한 다중행 조회 -->
+	<select id="selectLocationList"
+		parameterType="study.spring.goodspring.model.WalkLog"
+		resultMap="WalkLogMap">
+		SELECT *
+		FROM walk_log
+		WHERE
+		user_info_user_no=#{user_info_user_no} and course_name=#{course_name}
+	</select>
+	<!-- 사용자가 저장한 코스 이름을 다중행 조회 -->
+	<select id="selectCourseNameList"
+		parameterType="study.spring.goodspring.model.WalkLog"
+		resultMap="WalkLogMap">
+		SELECT course_name
+		FROM walk_log
+		where
+		user_info_user_no=#{user_info_user_no}
+		GROUP BY course_name
+	</select>
+	<!-- 기록하기 중지 할때 , 현재 기록된 데이터에 코스 이름을 저장한다.-->
+	<update id="updateCourseName"
+		parameterType="study.spring.goodspring.model.WalkLog">
+		update good.walk_log 
+		SET course_name=#{course_name} 
+		WHERE walk_log_datetime
+		in (select walk_log_datetime from (SELECT walk_log_datetime FROM
+		good.walk_log
+		WHERE (walk_log_datetime BETWEEN (SELECT MAX(walk_log_datetime) FROM
+		walk_log
+		WHERE event_name='시작') AND (SELECT MAX(walk_log_datetime) FROM walk_log
+		WHERE
+		event_name='종료')) AND user_info_user_no=#{user_info_user_no}) as temp);
+	</update>
+	<!--  코스 이름을 중복검사-->
+    <select id="courseNameUniqueCheck" parameterType="study.spring.goodspring.model.WalkLog" resultType="int">
+        SELECT COUNT(*) 
+        FROM walk_log 
+        WHERE course_name=#{course_name} and user_info_user_no=#{user_info_user_no}
+    </select>
 </mapper>

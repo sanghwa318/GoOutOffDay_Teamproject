@@ -44,8 +44,23 @@ public class CrewMemberServiceImpl implements CrewMemberService {
 		 */
 		@Override
 		public List<CrewMember> getCrewMemberList(CrewMember input) throws Exception {
-			// TODO Auto-generated method stub
-			return null;
+			List<CrewMember> result = null;
+			
+			try {
+				result = sqlSession.selectList("CrewMemberMapper.selectCrewCrewMemberList",input);
+				
+				if(result== null) {
+					throw new NullPointerException("result=null");
+				}
+			} catch (NullPointerException e) {
+				log.error(e.getLocalizedMessage());
+				throw new Exception("조회된 데이터가 없습니다.");
+			}catch (Exception e) {
+				log.error(e.getLocalizedMessage());
+				throw new Exception("데이터 조회에 실패했습니다.");
+			}
+			
+			return result;
 		}
 
 
@@ -110,7 +125,14 @@ public class CrewMemberServiceImpl implements CrewMemberService {
 		 */
 		@Override
 		public int getCrewMemberCount(CrewMember input) throws Exception {
-			// TODO Auto-generated method stub
-			return 0;
+			int result = 0;
+			
+			try {
+				result = sqlSession.selectOne("CrewMemberMapper.selectCountAll", input);
+			} catch (Exception e) {
+				log.error(e.getLocalizedMessage());
+				throw new Exception("데이터 조회에 실패했습니다..");
+			}
+			return result;
 		}
 }

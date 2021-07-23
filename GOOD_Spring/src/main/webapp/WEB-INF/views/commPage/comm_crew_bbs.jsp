@@ -147,10 +147,12 @@
 							</span>
 						</div>
 					</div>
+					<form action="${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do" method="GET">
+					<input type="hidden" name="crew_crew_no" value="${output.crew_no}"  />
 					<button type="button" id="btn1" class="btn btn-primary pull-right"
 						onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do'">글쓰기</button>
-					<button type="button" id="btn2" class="btn btn-primary pull-right"
-						onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do'">회원관리</button>
+					<button type="submit" id="btn2" class="btn btn-primary pull-right">회원관리</button>
+					</form>
 				</div>
 			</div>
 			<!-- //본문 중단2 영역 -->

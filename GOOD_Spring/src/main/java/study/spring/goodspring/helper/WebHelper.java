@@ -36,7 +36,7 @@ public class WebHelper {
 
 	/** 업로드 된 파일이 식별될 경로 */
 	private String uploadPath;
-	
+
 	/** JSP의 session 내장 객체 */
 	// --> import javax.servlet.http.HttpSession;
 	private HttpSession session;
@@ -147,7 +147,6 @@ public class WebHelper {
 		return this.virtualView(html);
 
 	}
-	
 
 	/**
 	 * 파라미터로 받은 내용을 가상의 View로 생성후 리턴한다. 브라우저에게 전달할 HTML, CSS, JS 조합을 출력하기 위해 사용한다.
@@ -340,101 +339,104 @@ public class WebHelper {
 		item.setFileUrl(fileUrl);
 		return item;
 	}
+
 	/**
 	 * 리사이즈 된 썸네일 이미지를 생성하고 경로를 리턴한다.
 	 * 
 	 * @param loadFile - 원본파일의 경로
-	 * @param width - 최대 이미지 가로 크기 
-	 * @param height -최대 이미지 세로크기
-	 * @param crop -이미지 크롭 사용 여부
+	 * @param width    - 최대 이미지 가로 크기
+	 * @param height   -최대 이미지 세로크기
+	 * @param crop     -이미지 크롭 사용 여부
 	 * @return 생성된 이미지의 절대 경로
 	 * @throws Exception
 	 */
 	public String createThumbnail(String path, int width, int height, boolean crop) throws Exception {
-		/**1) 썸네일 생성 정보를 로그로 기록하기 */
-		log.debug(String.format("[Thumbnail] path : %s, size: %dx%d, crop: %s", path, width, height, String.valueOf(crop)));
-		
-		
-		/**2) 저장될 썸네일 이미지의 경로 문자열 만들기 */
-		File loadFile =new File(this.uploadDir, path); //원본 파일의 전체경로 --> 업로스 폴더(상수값) + 파일명
-		String dirPath = loadFile.getParent(); //전체 경로에서 파일이 위치한 폴더 경로 분리
-		String fileName = loadFile.getName(); //전체 경로에서 파일 이름 분리
-		int p = fileName.lastIndexOf("."); //파일이름에서 마지막 점의 위치
-		String name = fileName.substring(0, p); //파일명 분리 --> 파일이름에서 마지막 점의 위치 전까지
-		String ext = fileName.substring(p+1); //확장자 분리 --> 파일이름에서 마지막 점의 위치 다음부터 끝까지.
-		String prefix =crop ? "_crop_" : "_resize_"; //크롭인지 리사이즈인지에 대한 문자열
-		//최종 파일이름을 구성한다. --> 원본이름 + 크롭여부 + 요청된 사이즈
-		//->ex) myphoto.jpg --> myphoto_resize_320x240.jpg
-		String thumbName = name + prefix + width + "x" + height +"."+ext;
-		
-		File f = new File(dirPath, thumbName); //생성될 썸네일 파일 객체 --> 업로드폴더+썸네일이름
-		String saveFile = f.getAbsolutePath(); //생성될 썸네일 파일 객체로부터 절대경로 추출 (리턴할 값)
-		
-		//생성될 썸네일 이미지의 경로를 로그로 기록
+		/** 1) 썸네일 생성 정보를 로그로 기록하기 */
+		log.debug(String.format("[Thumbnail] path : %s, size: %dx%d, crop: %s", path, width, height,
+				String.valueOf(crop)));
+
+		/** 2) 저장될 썸네일 이미지의 경로 문자열 만들기 */
+		File loadFile = new File(this.uploadDir, path); // 원본 파일의 전체경로 --> 업로스 폴더(상수값) + 파일명
+		String dirPath = loadFile.getParent(); // 전체 경로에서 파일이 위치한 폴더 경로 분리
+		String fileName = loadFile.getName(); // 전체 경로에서 파일 이름 분리
+		int p = fileName.lastIndexOf("."); // 파일이름에서 마지막 점의 위치
+		String name = fileName.substring(0, p); // 파일명 분리 --> 파일이름에서 마지막 점의 위치 전까지
+		String ext = fileName.substring(p + 1); // 확장자 분리 --> 파일이름에서 마지막 점의 위치 다음부터 끝까지.
+		String prefix = crop ? "_crop_" : "_resize_"; // 크롭인지 리사이즈인지에 대한 문자열
+		// 최종 파일이름을 구성한다. --> 원본이름 + 크롭여부 + 요청된 사이즈
+		// ->ex) myphoto.jpg --> myphoto_resize_320x240.jpg
+		String thumbName = name + prefix + width + "x" + height + "." + ext;
+
+		File f = new File(dirPath, thumbName); // 생성될 썸네일 파일 객체 --> 업로드폴더+썸네일이름
+		String saveFile = f.getAbsolutePath(); // 생성될 썸네일 파일 객체로부터 절대경로 추출 (리턴할 값)
+
+		// 생성될 썸네일 이미지의 경로를 로그로 기록
 		log.debug(String.format("[Thumbnail] saveFile: %s", saveFile));
-		
-		/**3) 썸네일 이미지 생성하고 최종 경로 리턴*/
-		//해당 경로에 이미지가 없는 경우만 수행
+
+		/** 3) 썸네일 이미지 생성하고 최종 경로 리턴 */
+		// 해당 경로에 이미지가 없는 경우만 수행
 		if (!f.exists()) {
-			//원본 이미지 가져오기
+			// 원본 이미지 가져오기
 			Builder<File> builder = Thumbnails.of(loadFile);
-			//이미지 크롭여부 파라미터에 따라 크롭 옵션을 지정한다.
-			if (crop==true) {
+			// 이미지 크롭여부 파라미터에 따라 크롭 옵션을 지정한다.
+			if (crop == true) {
 				builder.crop(Positions.CENTER);
 			}
-			
-			builder.size(width, height); //축소할 사이즈 지정
-			builder.useExifOrientation(true); //세로로 촬영된 사진을 회전시킴
-			builder.outputFormat(ext); //파일의 확장명 지정
-			builder.toFile(saveFile); //저장할 파일경로 지정
+
+			builder.size(width, height); // 축소할 사이즈 지정
+			builder.useExifOrientation(true); // 세로로 촬영된 사진을 회전시킴
+			builder.outputFormat(ext); // 파일의 확장명 지정
+			builder.toFile(saveFile); // 저장할 파일경로 지정
 		}
-		
-		//최종적으로 생성된 경로에서 업로드 폴더까지의 경로를 제거한다.
+
+		// 최종적으로 생성된 경로에서 업로드 폴더까지의 경로를 제거한다.
 		saveFile = saveFile.replace("\\", "/").replace(this.uploadDir, "");
-		
+
 		return saveFile;
-		
-		
+
 	}
-	
+
 	/**
 	 * 세션값을 저장한다
-	 * @param key - 세션이름
+	 * 
+	 * @param key   - 세션이름
 	 * @param value - 저장할 데이터
 	 */
 	public void setSession(String key, Object value) {
 		this.session = request.getSession(true);
-			this.session.setAttribute(key, value);
+		this.session.setAttribute(key, value);
 	}
-	
+
 	/**
 	 * 세션값을 조회한다
-	 * @param key - 조회할 세션의 이름
+	 * 
+	 * @param key          - 조회할 세션의 이름
 	 * @param defaultValue - 값이 없을 경우 대체할 기본값
 	 * @return Object이므로 명시작 형변환이 필요하다.
 	 */
 	public Object getSession(String key, Object defaultValue) {
 		Object value = this.session.getAttribute(key);
-		
-		if(value == null) {
+
+		if (value == null) {
 			value = defaultValue;
 		}
-		
+
 		return value;
 	}
-	
+
 	/**
-	 * 세션값을 조회한다.
-	 * 값이 없을 경우에 대한 기본값을 null로 설정
+	 * 세션값을 조회한다. 값이 없을 경우에 대한 기본값을 null로 설정
+	 * 
 	 * @param key - 세션 이름
 	 * @return - Object이므로 명시적 형변환 필요함
 	 */
 	public Object getSession(String key) {
 		return this.getSession(key, null);
 	}
-	
+
 	/**
 	 * 특정 세션값을 삭제한다.
+	 * 
 	 * @param key - 세션 이름
 	 */
 	public void removeSession(String key) {
@@ -442,6 +444,6 @@ public class WebHelper {
 	}
 
 	public void removeAllSession() {
-this.session.invalidate();		
+		this.session.invalidate();
 	}
 }

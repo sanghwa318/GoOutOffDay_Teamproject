@@ -189,7 +189,8 @@ carousel-title2 {
 		</div>
 		<div class="pull-right">
 			<div class="wk_log" id="wk_log">
-				<button type="button" class="btn btn-primary" id="endRecord-btn">기록
+				<button type="button" class="btn btn-primary"
+					id="endRecord-modal-btn" data-toggle="modal" data-target="#recordEnd-modal">기록
 					중지</button>
 
 			</div>
@@ -504,7 +505,7 @@ carousel-title2 {
 	</div>
 
 
-	<!-- Modal -->
+	<!-- 기록하기 Modal -->
 	<div class="modal fade" id="myModal" style="z-index: 100000000;">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
@@ -524,7 +525,33 @@ carousel-title2 {
 			</div>
 		</div>
 	</div>
+	<!-- 기록 중지 Modal -->
+	<div class="modal fade" id="recordEnd-modal"
+		style="z-index: 100000000;">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<!-- content -->
 
+				<div class="modal-header">
+					<h3>
+						<strong>걷기 기록</strong>
+					</h3>
+				</div>
+				<div class="modal-footer">
+					<form>
+						<label for="course-name">코스 이름: </label> <input type="text"
+							name="course_name" id="course_name" placeholder="코스 이름을 입력해주세요."
+							style="display: inline-block; height: 30px; width: 80%; margin-bottom: 3px">
+						<br>
+						<button type="button" class="btn btn-warning" data-dismiss="modal"
+							style="width: 150px;">닫기</button>
+						<button id="endRecord-btn" type="submit" class="btn btn-primary"
+							data-dismiss="modal" style="width: 150px;">중지</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- 공용 푸터 -->
@@ -532,6 +559,7 @@ carousel-title2 {
 
 
 	<%@ include file="../inc/plugin.jsp"%>
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script>
@@ -615,7 +643,27 @@ carousel-title2 {
 	</script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
+	<script type="text/javascript">
+	var loginInfo = "<%=session.getAttribute("login_info")%>"
 
+		$(function() {
+
+			$("#startRecord").click(function(event) {
+				if (loginInfo != "null") {
+					interval = setInterval(function() {
+						startRecord();
+					}, 15000 //check every 15 seconds
+					);
+				} else {
+					alert("로그인이 필요한 서비스입니다. 로그인하고 진행해주세요.");
+				}
+
+			});
+			$("#endRecord-btn").click(function(e) {
+				endRecord();
+			});
+		});
+	</script>
 	<script>
 		//캐러셀 JS
 		$('.owl-carousel')

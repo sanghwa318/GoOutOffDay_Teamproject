@@ -28,7 +28,7 @@ public class MyCourseServiceImpl implements MyCourseService {
 		MyCourses result = null;
 
 		try {
-			result = sqlSession.selectOne("MyCourseMapper.selectMyCoursesItem", input);
+			result = sqlSession.selectOne("MyCourseMapper.selectMyCourseItem", input);
 
 			if (result == null) {
 				throw new NullPointerException("result = null");
@@ -43,6 +43,34 @@ public class MyCourseServiceImpl implements MyCourseService {
 
 		return result;
 	}
+	
+	/*
+	 * 나만의코스 입력 후 조회.
+	 * @param MyCourses 조회할 데이터의 이름, 내용, 지역정보를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	@Override
+	public MyCourses getMyCoursePost(MyCourses input) throws Exception {
+		MyCourses result = null;
+
+		try {
+			result = sqlSession.selectOne("MyCourseMapper.selectMyCoursePost", input);
+
+			if (result == null) {
+				throw new NullPointerException("result = null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 코스 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+	
 	/*
 	 * 데이터 목록 조회
 	 * @return 조회된 데이터가 저장된 Beans
@@ -79,7 +107,7 @@ public class MyCourseServiceImpl implements MyCourseService {
 		int result = 0;
 
 		try {
-			result = sqlSession.insert("MyCourseMapper.insertCrew", input);
+			result = sqlSession.insert("MyCourseMapper.insertMyCourse", input);
 
 			if (result == 0) {
 				throw new NullPointerException("result=0");
@@ -169,6 +197,18 @@ public class MyCourseServiceImpl implements MyCourseService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public void updateHits(MyCourses input) throws Exception {
+		int result = 0;
+		try {
+			result = sqlSession.update("MyCourseMapper.updateHits", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
 	}
 
 }

@@ -48,6 +48,17 @@
 .page-header button{
 float: right;
 }
+
+.thumbnail img {
+	max-hieght: 100%;
+	min-width: 100%;
+	height: 180px;
+}
+
+.pagination {
+	margin-top: -100px;
+}
+
 </style>
 </head>
 

@@ -11,7 +11,6 @@ public class MyCourses {
 	private String mycourse_name; // 코스 이름
 	private String mycourse_area; // 코스 지역
 	private String mycourse_content; // 코스 설명
-	private String mycourse_mapdata; // 지도 데이터
 	private String mycourse_createdate; // 생성시간
 	private String mycourse_editdate; // 수정 시간
 	private int mycourse_hits; // 조회수

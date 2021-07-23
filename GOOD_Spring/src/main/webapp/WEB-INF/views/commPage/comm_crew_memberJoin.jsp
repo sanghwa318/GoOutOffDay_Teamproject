@@ -67,107 +67,26 @@
 							<th class='text-center'>회원번호</th>
 							<th class='text-center'>아이디</th>
 							<th class='text-center'>닉네임</th>
+							<th class='text-center'>게시글 수</th>
 							<th class='text-center'>가입일시</th>
-							<th class='text-center'>방문수</th>
 							<th class='text-center'>최종접속일</th>
 						</tr>
 					</thead>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#">  </a></td>
-						<td class='text-center' rowspan="1">김아무개</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 2 </a></td>
-						<td class='text-center' rowspan="1">동해물과</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 3 </a></td>
-						<td class='text-center' rowspan="1">백두산이</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 4 </a></td>
-						<td class='text-center' rowspan="1">마르고</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 5 </a></td>
-						<td class='text-center' rowspan="1">닳도록</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 6 </a></td>
-						<td class='text-center' rowspan="1">하느님이</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 7 </a></td>
-						<td class='text-center' rowspan="1">보우하사</td>
-						<td class='text-center'>kim1</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 8 </a></td>
-						<td class='text-center' rowspan="1">우리나라</td>
-						<td class='text-center'>kim</td>
-						<td class='text-center'>2021-06-11</td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-23</span></td>
-					</tr>
+					<tbody>
+							<%-- 조회결과에 따른 반복 처리 --%>
+							<c:forEach var="item" items="${output}">
+							<c:set var="i" value="${i+1}" />
+							<tr>
+								<td align="center"><input type='checkbox' name='member_id[]' class="member_id" value="001" /></td>
+								<td align="center">${i}</td>
+								<td align="center">${item.user_id}</td>
+								<td align="center">${item.user_nick}</td>
+								<td align="center">${item.member_no}</td>
+								<td align="center">${item.member_create_datetime}</td>
+								<td align="center">${item.member_visit_datetime}</td>
+							</tr>
+							</c:forEach>
+					</tbody>
 				</table>
 				<hr />
 				<div class="text-center">

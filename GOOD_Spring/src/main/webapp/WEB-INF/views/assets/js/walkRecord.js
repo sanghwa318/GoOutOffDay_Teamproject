@@ -47,38 +47,44 @@ function startRecord() {
 }
 
 function endRecord() {
-	if (watchId == 0) {
+if (watchId != null) {
 
-	} else if (watchId != null) {
-		navigator.geolocation.clearWatch(watchId);
-		console.log(watchId);
-		alert("기록을 중지합니다.")
-		watchId = 0;
-		clearInterval(interval);
-		$.ajax({
-			url: getContextPath() + '/walkPage/walk_recordEnd.do',
-			type: 'post',
-			dataType: 'json',
-			data: {},
-			success: function(data) { }
-		});
-	} else if (watchId == null) {
-		alert("기록하기를 눌러 기록을 시작해주세요.")
+		var course_name=$("#course_name").val();
+		if(course_name==null || course_name==""){
+			alert("코스 이름을 입력해주세요.")
+			
+		}else{
+
+			$.ajax({
+				url: getContextPath() + '/walkPage/walk_courseNameUniqueCheck.do',
+				type: 'post',
+				dataType: 'json',
+				data: {course_name},
+				success: function(result) {
+						if(result.result=='true'){
+							navigator.geolocation.clearWatch(watchId);
+							console.log(watchId);
+							swal("기록을 중지합니다.")
+							watchId = 0;
+							clearInterval(interval);
+								$.ajax({
+									url: getContextPath() + '/walkPage/walk_recordEnd.do',
+									type: 'post',
+									dataType: 'json',
+									data: {course_name},
+									success: function(data){}
+								})
+						}else {
+							alert("이미 존재하는 코스 이름입니다. 다시 입력해주세요.")
+						}
+				 }
+			});
+
+		}
+		
+	} else {
+		swal("기록하기를 눌러 기록을 시작해주세요.")
 	}
 }
 
-$(function() {
 
-
-	$("#startRecord").click(function(event) {
-		interval = setInterval(function() {
-			startRecord();
-		},
-			15000 //check every 15 seconds
-		);
-	});
-
-	$("#endRecord-btn").click(function(e) {
-		endRecord();
-	});
-});

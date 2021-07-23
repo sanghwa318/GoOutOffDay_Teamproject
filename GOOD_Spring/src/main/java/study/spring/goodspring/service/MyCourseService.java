@@ -15,6 +15,13 @@ public interface MyCourseService {
 	 */
 	public MyCourses getMyCourseItem(MyCourses input) throws Exception;
 	
+	/**
+	 * 나만의코스 입력 후 조회.
+	 * @param MyCourses 조회할 데이터의 이름, 내용, 지역정보를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	public MyCourses getMyCoursePost(MyCourses input) throws Exception;
 	
 	/**
 	 * 나만의코스 데이터 목록 조회
@@ -52,9 +59,17 @@ public interface MyCourseService {
 	
 	/*
 	 * 나만의코스 데이터 저장되어 있는 갯수 조회
-	 * @param MyCourse 검색 조건을 담고 있는 Beans
+	 * @param MyCourse 조회할 정보를  담고 있는 Beans
 	 * @return int
 	 * @throws Exception
 	 */
 	public int getMyCourseCount(MyCourses input) throws Exception;
+	
+	/*
+	 * 나만의코스 조회수 증가 메서드.
+	 * @param MyCourse update할 데이터를 검색할 조건을 담고 있는 Beans
+	 * @return void
+	 * @throws Exception
+	 */
+	public void updateHits(MyCourses input) throws Exception;
 }

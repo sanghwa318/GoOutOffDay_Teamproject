@@ -12,8 +12,6 @@
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style>
 /* 폼 전체 박스 */
-
-
 .col-md-2 {
 	display: inline-block;
 	margin-left: 10px;
@@ -58,9 +56,10 @@
 	height: 180px;
 }
 
-.pagination{
-margin-top:-100px;
+.pagination {
+	margin-top: -100px;
 }
+
 
 </style>
 </head>
@@ -96,24 +95,20 @@ margin-top:-100px;
 				role="form" method="get"
 				action="${pageContext.request.contextPath}/commPage/comm_crew.do">
 				<div class="form-group">
-					<div class="col-md-3 pull-right">
-						<button type='reset' class="btn btn-primary" id="btn"
-							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
-						<button type="reset" class="btn btn-primary" id="btn"
-							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.do'">마이크루</button>
-					</div>
-					<div class="col-md-4" role="search">
+
+					<div class="col-md-3 col-sm-2 col-md-offset-1" role="search">
 						<div class="form-group input-group">
 							<input type="text" class="form-control" placeholder="크루, 게시글 검색"
-								id="keyword" name="keyword" value=""><span class="input-group-btn">
+								id="keyword" name="keyword" value=""><span
+								class="input-group-btn">
 								<button class="btn btn-blue" type="submit">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</span>
 						</div>
 					</div>
-					<div class="col-md-2 pull-right">
-						<select class="form-control" id="crew_regeion" name="crew_regeion" >
+					<div class="col-md-2 col-sm-3"  >
+						<select class="form-control" id="crew_regeion" name="crew_regeion">
 							<option value="">지역</option>
 							<option value="all">전체</option>
 							<option value="강남구">강남구</option>
@@ -143,13 +138,18 @@ margin-top:-100px;
 							<option value="중랑구">중랑구</option>
 						</select>
 					</div>
-					<div class="col-md-2  pull-right">
-						<select class="form-control" id="crew_condition"
-							name="order">
+					<div class="col-md-2 col-sm-3 ">
+						<select class="form-control" id="crew_condition" name="order">
 							<option value="">조건</option>
 							<option value=1>최신순</option>
 							<option value=2>오래된순</option>
 						</select>
+					</div>
+					<div class="col-md-2 col-sm-3 pull-right btn_se" >
+						<button type='reset' class="btn btn-primary" id="btn"
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
+						<button type="reset" class="btn btn-primary" id="btn"
+							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.do'">마이크루</button>
 					</div>
 				</div>
 			</form>
@@ -189,7 +189,7 @@ margin-top:-100px;
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
-								onclick="location.href='${infoUrl}'" style="cursor:pointer;">
+									onclick="location.href='${infoUrl}'" style="cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
 										<a href="${infoUrl}">크루 이름: ${item.crew_name}</a>
@@ -206,9 +206,9 @@ margin-top:-100px;
 
 		</div>
 	</div>
-					<!-- 페이지네이션 -->
-				<%@ include file="../inc/pagenation.jsp"%>
-				<!-- //페이지네이션 -->
+	<!-- 페이지네이션 -->
+	<%@ include file="../inc/pagenation.jsp"%>
+	<!-- //페이지네이션 -->
 
 	<!-- 본문하단 끝 -->
 

@@ -22,7 +22,65 @@ INSERT INTO crew_member
 VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 </insert>
 
+<!-- Crew 와 CrewMember Join -->
+	<select id="selectCrewCrewMemberList"
+		parameterType="study.spring.goodspring.model.CrewMember" resultMap="crewMemberMap">
+		SELECT member_no, member_create_datetime, member_visit_datetime, cm.user_info_user_no, crew_crew_no, user_id , user_nick
+		FROM crew_member cm
+		INNER JOIN crew c
+		ON c.crew_no = #{crew_crew_no}
+		INNER JOIN user_info ui
+		On ui.user_no = cm.user_info_user_no 
+		<where>
+			<if test="member_no != null and member_no != '' ">
+				member_no = #{member_no}
+			</if>
 
+			<if test="user_info_user_no != null and user_info_user_no != '' ">
+				OR user_info_user_no = #{user_info_user_no}
+			</if>
+
+			<if test="crew_crew_no != null and crew_crew_no != '' ">
+				OR crew_crew_no = #{crew_crew_no}
+			</if>
+
+		</where>
+
+		<if test="order == 1 ">
+			ORDER BY crew_no DESC
+		</if>
+		<if test="order == 2 ">
+			ORDER BY crew_no ASC
+		</if>
+
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+
+	</select>
+	
+	<!-- 데이터 수 조회를 위한 기능 정의 -->
+
+	<select id="selectCountAll"
+		parameterType="study.spring.goodspring.model.CrewMember" resultType="int">
+		SELECT COUNT(*) FROM crew_member cm
+		INNER JOIN crew c
+		ON cm.crew_crew_no =  #{crew_crew_no}	
+		<where>
+			<if test="member_no != null and member_no != '' ">
+				member_no = #{member_no}
+			</if>
+
+			<if test="user_info_user_no != null and user_info_user_no != '' ">
+				OR user_info_user_no = #{user_info_user_no}
+			</if>
+
+			<if test="crew_crew_no != null and crew_crew_no != '' ">
+				OR crew_crew_no = #{crew_crew_no}
+			</if>
+		</where>
+	</select>
 
 
 </mapper>
