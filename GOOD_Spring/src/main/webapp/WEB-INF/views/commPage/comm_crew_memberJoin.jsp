@@ -90,7 +90,7 @@
 				</table>
 				<hr />
 				<div class="text-center">
-					<button type="button" class="btn btn-danger" id="check-delete">회원
+					<button type="button" class="btn btn-danger" id="check-delete" onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_memberJoin_delete'">회원
 						추방</button>
 						<button type="button" class="btn btn-info" id="check-back" 	
 					onClick="history.back(); return false;">뒤로가기</button>

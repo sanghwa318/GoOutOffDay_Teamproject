@@ -65,4 +65,30 @@ public class CrewCrewMemberController {
 		model.addAttribute("output", output);
 		return new ModelAndView("commPage/comm_crew_memberJoin");
 	}
+	
+	/**
+	 * 크루멤버 추방 처리
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_memberJoin_delete", method = RequestMethod. GET)
+	public ModelAndView delete(Model model,
+			@RequestParam(value="crew_crew_no", defaultValue="0") int crew_crew_no) {
+		
+		/** 1) 파라미터 유효성 검사 */
+		if(crew_crew_no == 0) {
+			return webHelper.redirect(null, "멤버번호가 없습니다.");
+		}
+		/** 2) 데이터 삭제하기 */
+		CrewMember input = new CrewMember();
+		input.setMember_no(crew_crew_no);
+		
+		try {
+			crewMemberService.deleteCrewMember(input); // 데아터 삭제
+			
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		
+		/** 3) 페이지 이동 */
+		return new ModelAndView("commPage/comm_crew_memberJoin");
+	}
 }

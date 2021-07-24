@@ -82,5 +82,9 @@ VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 		</where>
 	</select>
 
-
+	<!-- 크루멤버 추방을 위한 기능 정의 -->
+	<delete id="deleteCrewCrewMember"
+		parameterType="study.spring.goodspring.model.CrewMember">
+		DELETE FROM crew_member WHERE member_no = #{member_no}
+	</delete>
 </mapper>
