@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
@@ -74,16 +75,38 @@ public class CrewPostServiceImpl implements CrewPostService {
 	}
 
 	@Override
-	public int deleteCrewPost(CrewPost crewPost) throws Exception {
+	public int deleteCrewPost(CrewPost input) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 		
 	}
 
 	@Override
-	public CrewPost selectCrewPost(CrewPost crewPost) throws Exception {
+	public CrewPost selectCrewPost(CrewPost input) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
+	/*
+	 * 크루포스트 데이터 저장되어 있는 갯수 조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int getCrewPostCount(CrewPost input) throws Exception {
+		
+		int result= 0;
+		
+		try {
+			result = sqlSession.selectOne("CrewMapper.selectCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
 }

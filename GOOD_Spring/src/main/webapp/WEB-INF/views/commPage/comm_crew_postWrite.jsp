@@ -69,7 +69,7 @@ input#title {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
@@ -80,7 +80,6 @@ input#title {
 			<h2>게시글 작성</h2>
 			<form role="form" method="POST" action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite_ok.do" >
 				<input type="text" id="title" name="post_title" placeholder="제목을 입력해주세요." />
-
 				<div id="editable"><textarea rows="20" cols="120" name="post_content" id="post_content"></textarea>
 				</div>
 

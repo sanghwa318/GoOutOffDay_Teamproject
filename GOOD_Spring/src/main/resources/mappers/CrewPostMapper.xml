@@ -35,9 +35,17 @@
 		now(), now(), #{post_title},
 		#{post_content}, #{post_img},
 		#{user_info_user_no});
-		
 	</insert>
 
+
+	<!-- 포스트 게시물 데이터 수 조회를 위한 기능 정의 -->
+	<select id="selectCountPostAll"
+		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
+		SELECT COUNT(*) FROM crew_post cp
+		INNER JOIN crew c ON c.crew_no = cp.post_crew
+		WHERE  c.crew_no = #{post_crew}
+	
+	</select>
 
 
 
