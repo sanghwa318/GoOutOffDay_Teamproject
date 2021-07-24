@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
@@ -194,8 +195,10 @@ public class MyCourseController {
 	/*
 	 * 나만의코스 작성을 위한 List형태의 좌표값을 json으로 전달한다.
 	 */
-	@RequestMapping(value = "/commPage/comm_myCourseGetLoc.do", method = RequestMethod.GET)
-	public Map<String, Object> mycourseGetLoc(@RequestParam(value="course_name")String course_name) {
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_myCourseGetLoc.do", method = RequestMethod.POST)
+	public Map<String, Object> mycourseGetLoc(
+			@RequestParam(value="course_name")String course_name) {
 		/* 1) 코스 이름 조회하기 */
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 		WalkLog input = new WalkLog();

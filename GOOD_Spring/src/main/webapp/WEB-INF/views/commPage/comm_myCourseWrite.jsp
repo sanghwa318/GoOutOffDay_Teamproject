@@ -157,6 +157,8 @@ min-height: 400px;
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/myCourseWrite-js.js"></script>
+	
 	<!-- // js -->
 	<script>
 		$(function() {
