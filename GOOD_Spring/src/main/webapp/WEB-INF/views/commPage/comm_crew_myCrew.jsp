@@ -63,6 +63,9 @@ float: right;
 </head>
 
 <body>
+	<!-- [페이지네이션] -->
+	<c:set var="URL" value="/commPage/comm_crew_myCrew.do" />
+	<!-- //[페이지네이션] -->
 	<div class="wrapper">
 
 		<!-- 공통 헤더 -->
