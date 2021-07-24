@@ -40,6 +40,7 @@ html, body {
 .body .text-center {
 	padding-bottom: 20px;
 }
+
 .body .cas_list {
 	padding-bottom: 0;
 }
@@ -341,9 +342,7 @@ html, body {
 									onclick="location.href='${detailUrl}'" style="cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
-										${item_theme.MAXCLASSNM }<span class="middel_dot"></span>${item_theme.MINCLASSNM}<span
-											class="heart pull-right"><i class="fa fa-heart-o"
-											aria-hidden="true" role="button"></i></span>
+										${item_theme.MAXCLASSNM }<span class="middel_dot"></span>${item_theme.MINCLASSNM}
 									</p>
 									<h4 class="explan">${item_theme.SVCNM }</h4>
 									<p class="pull-left" style="max-width: 110px;">${item_theme.PLACENM}</p>
@@ -365,6 +364,7 @@ html, body {
 							<c:url value="${getList }" var="prevPageUrl">
 								<c:param name="page" value="${pageData.prevPage}" />
 								<c:param name="cas" value="${cas}" />
+								<c:param name="order" value="${order}" />
 							</c:url>
 							<li class="page-item"><a href="${prevPageUrl}">&laquo;</a></li>
 						</c:when>
@@ -377,6 +377,7 @@ html, body {
 						<c:url value="${getList }" var="pageUrl">
 							<c:param name="page" value="${i}" />
 							<c:param name="cas" value="${cas}" />
+							<c:param name="order" value="${order}" />
 						</c:url>
 
 						<%-- 페이지 번호 출력 --%>
@@ -401,6 +402,7 @@ html, body {
 							<c:url value="/casPage/cas_themeList.do" var="nextPageUrl">
 								<c:param name="page" value="${pageData.nextPage}" />
 								<c:param name="cas" value="${cas}" />
+								<c:param name="order" value="${order}" />
 							</c:url>
 							<li class="page-item"><a href="${nextPageUrl}">&raquo;</a></li>
 						</c:when>
@@ -414,30 +416,6 @@ html, body {
 	<%@ include file="../inc/Footer.jsp"%>
 	<!-- // 하단영역 끝 -->
 	<%@ include file="../inc/plugin.jsp"%>
-	<!-- 찜하기 버튼 -->
-	<script>
-		$(".heart")
-				.on(
-						"click",
-						function() {
-							if ($(this).hasClass("liked")) {
-								$(this)
-										.html(
-												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
-								$(this).removeClass("liked");
-							} else {
-								$(this)
-										.html(
-												'<i class="fa fa-heart" aria-hidden="true"></i>');
-								$(this).addClass("liked");
-							}
-						});
-	</script>
-	<script>
-		$(".cas_category").on('click', function() {
-			$(".cas_category").removeClass('active');
-			$(this).addClass('active');
-		});
-	</script>
+
 </body>
 </html>
