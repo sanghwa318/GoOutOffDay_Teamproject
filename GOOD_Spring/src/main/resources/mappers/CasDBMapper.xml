@@ -108,7 +108,7 @@
 	<select id="Other_selectCountAll"
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(*) 
 		FROM cas_other
 		<where>
 			SVCSTATNM LIKE '%접수중%'

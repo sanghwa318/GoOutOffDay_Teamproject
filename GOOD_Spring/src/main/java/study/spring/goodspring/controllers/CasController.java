@@ -141,20 +141,6 @@ public class CasController {
 
 		input_theme.setMINCLASSNM(order);
 
-		try {
-			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-			totalCount = CasService.getOtherCount(input_theme);
-			// [페이지네이션] 페이지 번호 계산
-			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
-
-			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-			CasOther.setOffset(pageData.getOffset());
-			CasOther.setListCount(pageData.getListCount());
-
-			output_theme = CasService.getOtherCategoryList(input_theme);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
-		}
 		// 시설대관 끝
 
 		if (cas == null || cas.equals("")) {
@@ -175,6 +161,22 @@ public class CasController {
 			iconurl = "'../assets/icon_img/체육시설 아이콘.png'";
 		}
 
+		try {
+			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
+			totalCount = CasService.getOtherCount(input_theme);
+			// [페이지네이션] 페이지 번호 계산
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+			CasOther.setOffset(pageData.getOffset());
+			CasOther.setListCount(pageData.getListCount());
+
+			output_theme = CasService.getOtherCategoryList(input_theme);
+
+		} catch (Exception e) {
+			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+
 		// 파라미터 값을 View에게 전달
 		model.addAttribute("cas", cas);
 		model.addAttribute("result", result);
@@ -183,6 +185,8 @@ public class CasController {
 		model.addAttribute("output_theme", output_theme);
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
+
+		// 찜목록 갯수확인
 
 		return new ModelAndView("casPage/cas_themeList");
 	}
@@ -203,22 +207,36 @@ public class CasController {
 
 		// 조회된 결과를 저장할 객체 선언
 		CasOther output = null;
-		
-		BookMark bookinput = new BookMark();
-		
-		Member loginInfo = (Member) WebHelper.getSession("login_info");
-		bookinput.setUser_info_user_no(loginInfo.getUser_no());
-		bookinput.setCategory_id(input.getDIV_COL());
-		bookinput.setService_id(input.getSVCID());
-		
-		int outputcount = 0;
-		try {
-			output = CasService.getOtherItem(input);
-			outputcount = bookMarkService.BookMarkUniqueCheck(bookinput);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
-		}
 
+		// 찜하기
+		BookMark bookinput = new BookMark();
+
+		Member loginInfo = (Member) WebHelper.getSession("login_info");
+
+		int outputcount = 0;
+		if (loginInfo == null) {
+			try {
+				output = CasService.getOtherItem(input);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			// 로그인확인
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+
+			// 저장
+			bookinput.setCategory_id(input.getDIV_COL());
+			bookinput.setService_id(input.getSVCID());
+			
+			try {
+				output = CasService.getOtherItem(input);
+				outputcount = bookMarkService.BookMarkUniqueCheck(bookinput);
+
+			} catch (Exception e) {
+				return WebHelper.redirect(null, e.getLocalizedMessage());
+			}
+
+		}
 		/** 3) View 처리 **/
 		model.addAttribute("output", output);
 		model.addAttribute("outputcount", outputcount);
@@ -226,8 +244,11 @@ public class CasController {
 		return new ModelAndView("casPage/cas_detail");
 	}
 
-	/** 문화체육 아이템 찜하기 
-	 * @throws Exception **/
+	/**
+	 * 문화체육 아이템 찜하기
+	 * 
+	 * @throws Exception
+	 **/
 	@ResponseBody
 	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
@@ -243,18 +264,17 @@ public class CasController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setCategory_id(Info.getDIV_COL());
 		input.setService_id(Info.getSVCID());
-		
+
 		try {
-			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {
+			if (bookMarkService.BookMarkUniqueCheck(input) == 1) {
 				bookMarkService.deleteBookMark(input);
-			}
-			else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
+			} else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
 				bookMarkService.addBookMark(input);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return WebHelper.getJsonData();
 	}
 }
