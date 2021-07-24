@@ -29,6 +29,9 @@ public class WalkCourse {
 	private String Y; // Y좌표
 
 	private String CPI_CONTENT; // 포인트설명
+	
+	// 정렬에 필요한 변수 정의
+	private String order;
 
 	/** [페이지 네이션] (static) */
 	private static int offset;

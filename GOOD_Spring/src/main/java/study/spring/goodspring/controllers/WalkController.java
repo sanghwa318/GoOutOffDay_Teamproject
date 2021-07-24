@@ -161,6 +161,8 @@ public class WalkController {
 			@RequestParam(value="category", required=false) String category,
 			// 지역별(코스카테고리별)
 			@RequestParam(value="area", required=false) String area,
+			// 정렬(코스카테고리별)
+			@RequestParam(value="order", required=false) String order,
 			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value="page", defaultValue="1") int nowPage) {
 		
@@ -187,6 +189,8 @@ public class WalkController {
 		input.setCOURSE_CATEGORY_NM(category);
 		// 지역별(코스카테고리별)
 		input.setAREA_GU(area);
+		// 정렬(코스카테고리별)
+		input.setOrder(order);
 		
 		List<WalkCourse> output = null; //조회 결과가 저장될 객체
        
@@ -211,6 +215,7 @@ public class WalkController {
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);
 		model.addAttribute("area", area);
+		model.addAttribute("order", order);
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정
