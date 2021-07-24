@@ -90,7 +90,7 @@
 				</table>
 				<hr />
 				<div class="text-center">
-					<button type="button" class="btn btn-danger" id="check-delete" onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_memberJoin_delete'">회원
+					<button type="button" class="btn btn-danger" id="check-delete"  onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_memberJoin_delete'">회원
 						추방</button>
 						<button type="button" class="btn btn-info" id="check-back" 	
 					onClick="history.back(); return false;">뒤로가기</button>
@@ -109,5 +109,40 @@
 	<!-- js -->
 	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 	<!-- // js -->
+	
+	<script>
+		$("#check-delete").click(function() {
+			const delcrew = [];
+			const obj = $(".member_id:checked");
+
+			if (obj.length < 1) {
+				swal('알림', '선택된 멤버가 없습니다.');
+				setTimeout(function(){
+					
+				}, 10000);
+				return false;
+			}
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title : '확인', // 제목
+				text : "해당 회원을 크루에서 추방 하시겠습니까?", // 내용
+				type : 'question', // 종류
+				confirmButtonText : '네', // 확인버튼 표시 문구
+				showCancelButton : true, // 취소버튼 표시 여부
+				cancelButtonText : '아니오', // 취소버튼 표시 문구
+			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+				if (result.value) { // 확인 버튼이 눌러진 경우
+					swal('성공', '추방되었습니다.', 'success');
+					setTimeout(function() {
+						location.href = '${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do';
+					}, 10000);
+
+				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+					swal('취소', '추방이 취소되었습니다.', 'error');
+				}
+
+			});
+		});
+	</script>
 </body>
 </html>
