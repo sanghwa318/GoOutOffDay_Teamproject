@@ -131,7 +131,7 @@ ul, li {
 
 				</div>
 				<div class="text-center">
-					<button class="btn btn-default"
+					<button onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_search.do'" class="btn btn-default"
 						style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
 						목록</button>
 				</div>
