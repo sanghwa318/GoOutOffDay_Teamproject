@@ -64,8 +64,8 @@ public class WalkController {
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_record.do", method = RequestMethod.POST)
 	public Map<String, Object> walkRecord(
-			@RequestParam(value="wat_latitude")double wat_latitude,
-			@RequestParam(value="wat_longitude")double wat_longitude,
+			@RequestParam(value="wat_latitude")String wat_latitude,
+			@RequestParam(value="wat_longitude")String wat_longitude,
 			@RequestParam(value="wat_timestamp")long wat_timestamp,
 			@RequestParam(value="count")int count
 			) {

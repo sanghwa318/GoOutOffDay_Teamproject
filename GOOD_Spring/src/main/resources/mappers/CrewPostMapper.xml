@@ -44,10 +44,15 @@
 		SELECT COUNT(*) FROM crew_post cp
 		INNER JOIN crew c ON c.crew_no = cp.post_crew
 		WHERE  c.crew_no = #{post_crew}
-	
 	</select>
 
-
+	<!-- 단일행 조회 -->
+	<select id="selectCrewPostItem" resultMap="crewPostMap"
+		parameterType="study.spring.goodspring.model.CrewPost">
+		SELECT *
+		FROM crew_post
+		WHERE post_no = #{post_no}
+	</select>
 
 
 

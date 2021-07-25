@@ -77,7 +77,9 @@
 							<c:forEach var="item" items="${output}">
 							<c:set var="i" value="${i+1}" />
 							<tr>
-								<td align="center"><input type='checkbox' name='member_id[]' class="member_id" value="001" /></td>
+								<td align="center"><input type='radio' data-memberno="${item.member_no}"
+								data-crewno="${item.crew_crew_no}" name='member_id' class="member_id"
+								  id="member_id" value="001" /></td>
 								<td align="center">${i}</td>
 								<td align="center">${item.user_id}</td>
 								<td align="center">${item.user_nick}</td>
@@ -90,10 +92,10 @@
 				</table>
 				<hr />
 				<div class="text-center">
-					<button type="button" class="btn btn-danger" id="check-delete">회원
-						추방</button>
+					<button type="button" class="btn btn-danger" id="check-delete">추방하기</button>
 						<button type="button" class="btn btn-info" id="check-back" 	
-					onClick="history.back(); return false;">뒤로가기</button>
+					onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_bbs.do?crew_no=${output[0].crew_crew_no}'">뒤로가기</button>
+					
 				</div>
 			</form>
 			<!-- //리스트영역 끝-->
@@ -109,5 +111,46 @@
 	<!-- js -->
 	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 	<!-- // js -->
+	
+	<script>
+	 function getContextPath() {
+	      var hostIndex = location.href.indexOf(location.host)
+	            + location.host.length;
+	      var contextPath = location.href.substring(hostIndex, location.href
+	            .indexOf('/', hostIndex + 1));
+	      return contextPath;
+	   }
+		$("#check-delete").click(function() {
+			const delcrew = [];
+			const obj = $(".member_id:checked");
+
+			if (obj.length < 1) {
+				swal('알림', '선택된 멤버가 없습니다.');
+				setTimeout(function(){
+					
+				}, 1000);
+				return false;
+			}
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title : '확인', // 제목
+				text : "해당 회원을 크루에서 추방 하시겠습니까?", // 내용
+				type : 'question', // 종류
+				confirmButtonText : '네', // 확인버튼 표시 문구
+				showCancelButton : true, // 취소버튼 표시 여부
+				cancelButtonText : '아니오', // 취소버튼 표시 문구
+			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+				if (result.value) { // 확인 버튼이 눌러진 경우
+					var mn = $("#member_id:checked").data("memberno");
+					var cn = $("#member_id:checked").data("crewno")
+					window.location.href=getContextPath() +"/commPage/comm_crew_memberJoin_delete?member_no=" + mn +"&crew_crew_no=" + cn ;
+
+				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+					swal('취소', '추방이 취소되었습니다.', 'error');
+				}
+
+			});
+		});
+	</script>
 </body>
 </html>

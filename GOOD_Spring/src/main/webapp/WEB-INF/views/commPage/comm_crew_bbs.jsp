@@ -23,12 +23,12 @@
 	margin-left: 40px;
 }
 
-#btn2 {
-	margin-right: 5px;
-}
-
 .col-md-4 {
 	margin-left: 350px;
+}
+
+.out {
+	padding-bottom: 30px;
 }
 
 .main_header>h1 {
@@ -71,7 +71,14 @@
 					</span>
 				</h1>
 			</div>
-			<h1 class="page-header">${output.crew_name}크루</h1>
+			<h1 class="page-header">${output.crew_name}크루
+				<!-- 탈퇴버튼 -->
+				<form action="${pageContext.request.contextPath}/commPage/comm_crew_bbs_delete_ok.do" method="get">
+				<input type="hidden" name="crew_no" value="${output.crew_no}" />
+				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
+				</form>
+			</h1>
+			
 			<!-- 본문 상단 영역 -->
 			<div class="crew_bbs_header col-md-12 "></div>
 			<!-- //본문 상단 영역 -->
@@ -149,19 +156,19 @@
 							</span>
 						</div>
 					</div>
-					<form
-						action="${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do"
-						method="GET">
-						<input type="hidden" name="crew_crew_no" value="${output.crew_no}" />
-						<button type="submit" id="btn2" class="btn btn-primary pull-right">회원관리</button>
-					</form>
 
 					<form
 						action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
 						method="GET">
 						<input type="hidden" name="post_crew" value="${output.crew_name}" />
-						<input type="hidden" name="crew_no" value="${output.crew_no}" />
+						
 						<button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
+					</form>
+					<form
+						action="${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do"
+						method="GET">
+						<input type="hidden" name="crew_crew_no" value="${output.crew_no}" />
+						<button type="submit" id="btn2" class="btn btn-primary pull-right">크루관리</button>
 					</form>
 				</div>
 			</div>
@@ -180,4 +187,31 @@
 
 
 </body>
+<script>
+		$("#out").click(function() {
+			const delcrew = [];
+			const obj = $(".del:checked");
+						
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title : '확인', // 제목
+				text : "해당 크루에서 탈퇴 하시겠습니까?", // 내용
+				type : 'question', // 종류
+				confirmButtonText : '네', // 확인버튼 표시 문구
+				showCancelButton : true, // 취소버튼 표시 여부
+				cancelButtonText : '아니오', // 취소버튼 표시 문구
+			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+				if (result.value) { // 확인 버튼이 눌러진 경우
+					swal('성공', '탈퇴되었습니다.', 'success');
+					setTimeout(function() {
+						location.href = '../commPage/comm_crew_myCrew.jsp';
+					}, 1000);
+
+				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+					swal('취소', '탈퇴가 취소되었습니다.', 'error');
+				}
+
+			});
+		});
+	</script>
 </html>

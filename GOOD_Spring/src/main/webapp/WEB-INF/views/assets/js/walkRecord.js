@@ -10,8 +10,8 @@ function startRecord() {
 	if (navigator.geolocation) { // GPS를 지원하면
 		watchId = navigator.geolocation.watchPosition(function(position) {
 			//alert(position.coords.latitude + ' ' + position.coords.longitude);
-			var wat_latitude = position.coords.latitude; // 위도
-			var wat_longitude = position.coords.longitude; //경도
+			var wat_latitude = String(position.coords.latitude); // 위도
+			var wat_longitude = String(position.coords.longitude); //경도
 			var wat_accuracy = position.coords.accuracy; //정확도
 			var wat_timestamp = position.timestamp; // 시간
 

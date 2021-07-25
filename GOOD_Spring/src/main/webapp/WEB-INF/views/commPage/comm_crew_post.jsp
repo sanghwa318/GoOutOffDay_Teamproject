@@ -78,7 +78,6 @@ form {
 		<!-- 컨테이너 -->
 
 
-
 		<div class="container crew_container">
 			<!-- 대제목 -->
 			<div class="row main_header">
@@ -98,10 +97,9 @@ form {
 					<span class="title-img"><img
 						src="${pageContext.request.contextPath}/assets/img/profile_default.png"> <span class='sr-only'>이미지</span>
 					</span>
-					<h4>가입된 회원 수 : 6명</h4>
-					<h3 class="title-name">ezen 크루</h3>
-					<p>서울 서초구(걷기 모임), 20~30대 환영합니다.^^</p>
-					<P>매주 토요일 6~8시 걷기 진행</P>
+					<h4>가입된 회원 수 :</h4>
+					<h3 class="title-name">#{output.post_crew}크루</h3>
+					<p>${output.crew_sinto}</p>
 				</div>
 			</div>
 			<!-- //사이드 영역 -->
@@ -111,13 +109,12 @@ form {
 			<div class="row row_a">
 				<div class="pull-left writer_profile">
 					<a href="#"><img style="border-radius: 25px"
-						onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
-						src="${sessionScope.principal.userProfile}" width="50px"
+						src="" width="50px"
 						height="50px"></img></a>
 				</div>
 				<div class="pull-left writer_info" style="margin-left: 15px;">
-					<h4>작성자</h4>
-					<p class="pull-left">2021 5월 6일 오후 12:14</p>
+					<h4>작성자 번호</h4>
+					<p class="pull-left">${output.post_createdate}</p>
 					<p class="pull-left" style="margin-left: 15px;">조회수 : 185</p>
 
 				</div>

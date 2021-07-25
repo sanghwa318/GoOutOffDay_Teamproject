@@ -343,19 +343,18 @@ public class CommController {
 	public ModelAndView crewPost(Model model,
 			HttpServletRequest request,
 			 HttpServletResponse response,
-			 @RequestParam(value = "crew_no", defaultValue = "0") int crew_no) {
-		
-		// 1) 유효성 검사
-		if (crew_no == 0) {
-			return webHelper.redirect(null, "조회된 크루가 없습니다.");
-		}
-		
+			@RequestParam(value = "crew_name", defaultValue = "f123") String crew_name,
+			@RequestParam(value = "crew_no", defaultValue = "92") int crew_no) {
+
+	
 		
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
 		Crew input = new Crew();
+		
+		input.setCrew_name(crew_name);
 		input.setCrew_no(crew_no);
-
+		
 		Crew output = null;
 
 		try {
@@ -368,7 +367,8 @@ public class CommController {
 
 		// 3) View 처리
 		model.addAttribute("output", output);
-
+		model.addAttribute("crew_no", crew_no);
+		model.addAttribute("crew_name", crew_name);
 		return new ModelAndView("commPage/comm_crew_post");
 	}
 
@@ -424,14 +424,14 @@ public class CommController {
 			@RequestParam(value = "post_title", defaultValue = "") String title,
 			// 내용
 			@RequestParam(value = "post_content", defaultValue = "") String content,
-			// 크루번호
-			@RequestParam(value = "post_crew", defaultValue = "") String post_crew) {
+			// 크루이름
+			@RequestParam(value = "post_crew", defaultValue = "") String post_crew,
+			@RequestParam(value = "crew_no", defaultValue = "") int crew_no) {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();
 
-		Crew output = new Crew();
-		output.setCrew_name(post_crew);
+
 
 		// 1) 데이터 저장
 		CrewPost input = new CrewPost();
@@ -440,17 +440,22 @@ public class CommController {
 		input.setUser_info_user_no(userNo);
 		input.setPost_crew(post_crew);
 		
+		Crew output = new Crew();
+		output.setCrew_no(crew_no);
+	
+		
+		
 		try {
 			// 데이터 저장
 			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
 			crewPostService.insertCrewPost(input);
-			
+			output = crewService.getCrewItem(output);
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
 
 		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no();
+		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no?=" +input.getPost_no();
 
 		try {
 			response.sendRedirect(redirectUrl);
