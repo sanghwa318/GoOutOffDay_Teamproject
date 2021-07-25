@@ -49,11 +49,9 @@ public class CrewController {
 	@Autowired
 	CrewMemberService crewMemberService;
 	
-	
 	//작성 폼 페이지
 	@RequestMapping(value = "/commPage/comm_crew_est.do", method = RequestMethod.GET) 
 		public ModelAndView add(Model model) {
-		
 		
 		return new ModelAndView("commPage/comm_crew_est");
 	}
@@ -67,11 +65,9 @@ public class CrewController {
 			@RequestParam(value="crew_photo", defaultValue="") MultipartFile crew_photo,
 			@RequestParam(value = "crew_sinto", defaultValue="") String crew_sinto,
 			@RequestParam(value = "crew_dinto", defaultValue="") String crew_dinto) {
-			
 	
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();
-		
 		
 //		//1) 사용자가 입력한 파라미터 유효성 검사
 //		//일반 문자열 입력
@@ -80,8 +76,6 @@ public class CrewController {
 //		if(!regexHelper.isValue(crew_area)) { return webHelper.redirect(null, "크루 지역을 입력하세요"); }
 //		if(!regexHelper.isValue(crew_sinto)) { return webHelper.redirect(null, "크루 소개글을 입력하세요"); }
 //		if(!regexHelper.isValue(crew_dinto)) { return webHelper.redirect(null, "크루 소개글을 입력하세요"); }
-//		
-		
 		
 		//6) 업로드 결과를 Beans에 저장
 		UploadItem item = null;
@@ -100,7 +94,6 @@ public class CrewController {
 			e.printStackTrace();
 		}
 		
-		
 		//2) 데이터 저장하기
 		Crew input = new Crew();
 		input.setCrew_name(crew_name);
@@ -110,8 +103,6 @@ public class CrewController {
 		input.setCrew_sinto(crew_sinto);
 		input.setCrew_dinto(crew_dinto);
 		input.setUser_info_user_no(userNo);
-		
-		
 		
 		CrewMember member = new CrewMember();
 		member.setUser_info_user_no(userNo);
@@ -130,18 +121,37 @@ public class CrewController {
 		// 3) 결과를 확인하기 위한 페이지 이동
 		String redirectUrl = contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_no();
 		
-		
 		try {
 			response.sendRedirect(redirectUrl);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-
 		//7) View 처리
 		//업로드 정보를 View로 전달
 		model.addAttribute("item",item);
 
+	}
+	
+	/** 크루탈퇴 */
+	@RequestMapping(value = "/commPage/comm_crew_bbs.do", method = RequestMethod.GET)
+	public ModelAndView delete_ok(
+			@RequestParam(value="crewno", defaultValue = "0") int crewno) {
 
-}
+		/** 2) 데이터 삭제하기 */
+		Crew input = new Crew();
+		input.setCrew_no(crewno);
+
+		try {
+			crewService.deleteCrew(input);  // 데이터 삭제
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		/** 3) 페이지 이동 */
+		// 확인할 대상이 삭제된 상태이므로 메인 페이지로 이동
+		webHelper.removeAllSession();
+		return webHelper.redirect(contextPath + "/", "탈퇴되었습니다.");
+
+	}
 }

@@ -85,7 +85,7 @@
 			<h1 class="page-header">
 				마이크루
 				<!-- 탈퇴버튼 -->
-				<button type='submit' id="out" class="btn btn-danger">탈퇴하기</button>
+				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
 			</h1>
 
 
@@ -133,18 +133,18 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<!-- 페이지네이션 -->
-					<%@ include file="../inc/pagenation.jsp"%>
-					<!-- //페이지네이션 -->
+					
 				</div>
-
+					
 			</div>
 			<!-- 본문하단 끝 -->
 		</div>
 
 	</div>
 
-
+			<!-- 페이지네이션 -->
+			<%@ include file="../inc/pagenation.jsp"%>
+			<!-- //페이지네이션 -->
 
 
 	<!-- 공통 푸터 -->
