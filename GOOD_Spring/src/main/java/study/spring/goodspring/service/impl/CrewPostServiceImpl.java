@@ -81,9 +81,29 @@ public class CrewPostServiceImpl implements CrewPostService {
 		
 	}
 
+	/*
+	 * 크루 데이터 상세 조회
+	 * @param Crew 조회할 크루의 일련번호를 담고있는 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
 	@Override
 	public CrewPost selectCrewPost(CrewPost input) throws Exception {
-		// TODO Auto-generated method stub
+		CrewPost result = null;
+		
+		try {
+			result = sqlSession.selectOne("CrewMapper.selectCrewItem", input);
+			
+			if(result == null) {
+				throw new NullPointerException("result = null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 크루 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("크루 조회에 실패했습니다.");
+		}
 		return null;
 	}
 

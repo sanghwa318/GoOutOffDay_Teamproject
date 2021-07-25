@@ -90,10 +90,7 @@
 			<!--// 본문 중단 영역 -->
 			<!-- 본문 하단 영역 -->
 
-			<%-- 상세페이지로 이동하기위한 URL --%>
-			<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">
-				<c:param name="crew_no" value="${output.crew_no}" />
-			</c:url>
+
 
 			<div class="crew_info_footer">
 				<div class="col-md-12">

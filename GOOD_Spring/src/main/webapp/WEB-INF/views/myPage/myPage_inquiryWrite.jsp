@@ -10,8 +10,9 @@
 	height: 34px;
 	padding-top: 7px;
 }
-.cke_contents{
-min-height: 400px;
+
+.cke_contents {
+	min-height: 400px;
 }
 </style>
 </head>
@@ -35,9 +36,9 @@ min-height: 400px;
 					<div class="col-md-4">
 						<label for="inq_cateory" class="control-label categorydiv">카테고리</label>
 						<select class="form-control" id="QnA_category" name="QnA_category"
-							style="display: inline-block; width: 75%; margin-left: 10px; margin-top:3px">
+							style="display: inline-block; width: 75%; margin-left: 10px; margin-top: 3px">
 							<option value="">category</option>
-							<option value="걷기">걷기</option> 
+							<option value="걷기">걷기</option>
 							<option value="문화체육">문화체육</option>
 							<option value="자전거">자전거</option>
 							<option value="커뮤니티">커뮤니티</option>
@@ -45,7 +46,7 @@ min-height: 400px;
 					</div>
 				</div>
 				<br>
-						<textarea name="QnA_text" class="ckeditor"></textarea>
+				<textarea name="QnA_text" class="ckeditor"></textarea>
 
 				<br>
 				<div class="pull-left">
