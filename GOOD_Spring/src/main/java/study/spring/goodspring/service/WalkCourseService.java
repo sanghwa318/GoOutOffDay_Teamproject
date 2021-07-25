@@ -8,6 +8,14 @@ import study.spring.goodspring.model.WalkCourse;
 public interface WalkCourseService {
 	
 	/**
+	 * 걷기코스 데이터 상세 조회
+	 * @param input 조회할 코스의 일련번호를 담고 있는 beans
+	 * @return 조회된 데이터가 저장된 beans
+	 * @throws Exception
+	 */
+	public WalkCourse getWalkCourseItem(WalkCourse input) throws Exception;
+	
+	/**
 	 * 걷기코스 목록 조회
 	 * @return 조회 결과에 대한 컬렉션
 	 * @throws Exception

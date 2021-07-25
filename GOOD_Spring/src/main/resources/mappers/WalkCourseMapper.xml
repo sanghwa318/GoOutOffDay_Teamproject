@@ -37,6 +37,36 @@
 		<result property="order" column="order" />
 	</resultMap>
 
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="selectItem"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT COURSE_CATEGORY_NM,
+		SOUTH_NORTH_DIV_NM,
+		AREA_GU, 
+		DISTANCE,
+		LEAD_TIME,
+		COURSE_LEVEL,
+		VOTE_CNT,
+		RELATE_SUBWAY,
+		TRAFFIC_INFO,
+		CONTENT,
+		PDF_FILE_PATH,
+		COURSE_NAME,
+		REG_DATE,
+		DETAIL_COURSE,
+		CPI_NAME,
+		X,
+		Y,
+		CPI_CONTENT
+		FROM seoulgil_walk_course
+		<where>
+			<if test="CPI_IDX != null and CPI_IDX != ''">
+				CPI_IDX = #{CPI_IDX}
+			</if>
+		</where>
+	</select>
+
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectList"
@@ -52,7 +82,8 @@
 		RELATE_SUBWAY,
 		TRAFFIC_INFO,
 		COURSE_NAME,
-		CPI_NAME
+		CPI_NAME,
+		CPI_IDX
 		FROM seoulgil_walk_course
 
 		<where>
@@ -144,12 +175,14 @@
 		<if test="order == 'time'">
 			ORDER BY
 			CASE
-			WHEN INSTR(LEAD_TIME,"시간") = 0 THEN STR_TO_DATE(LEAD_TIME, "%i분")
-			WHEN INSTR(LEAD_TIME,"시간") > -1 THEN STR_TO_DATE(LEAD_TIME, "%H시간%i분")
+			WHEN INSTR(LEAD_TIME,"시간") = 0 THEN
+			STR_TO_DATE(LEAD_TIME, "%i분")
+			WHEN INSTR(LEAD_TIME,"시간") > -1 THEN
+			STR_TO_DATE(LEAD_TIME, "%H시간%i분")
 			END ASC
 		</if>
 		<if test="order == 'level'">
-			 ORDER BY COURSE_LEVEL ASC
+			ORDER BY COURSE_LEVEL ASC
 		</if>
 		<if test="order == null or order == ''">
 			ORDER BY REG_DATE DESC

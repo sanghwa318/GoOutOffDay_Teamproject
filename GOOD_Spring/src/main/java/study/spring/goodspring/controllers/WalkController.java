@@ -153,6 +153,38 @@ public class WalkController {
 		return "walkPage/walk_hallOfFame";
 	}
 	
+	@RequestMapping(value="/walkPage/walk_detailCourse.do", method=RequestMethod.GET)
+	public ModelAndView walk_detailCourse(Model model, HttpServletResponse response,
+			// 포인트 지점(기본키)
+			@RequestParam(value="CPI_IDX") int CPI_IDX) {
+		
+		// 데이터 조회에 필요한 값을 beans에 전달
+		WalkCourse input = new WalkCourse();
+		input.setCPI_IDX(CPI_IDX);
+		
+		// 조회 결과를 저장할 객체 선언
+		WalkCourse output = null;
+
+		try {
+			output = walkCourseService.getWalkCourseItem(input);
+		} catch (Exception e) {e.printStackTrace();}
+		
+		// view 처리
+		model.addAttribute("output", output);
+		
+		// walkPage/walk_detailCourse.jsp파일을 View로 지정
+		return new ModelAndView("walkPage/walk_detailCourse");
+	}
+	
+	/**
+	 * 걷기(코스) 목록 페이지
+	 * @param keyword 검색어
+	 * @param category 코스분류 카테고리
+	 * @param area 지역구 카테고리
+	 * @param order 정렬 카테고리
+	 * @param nowPage 페이지네이션
+	 * @return
+	 */
 	@RequestMapping(value="/walkPage/walk_search.do", method=RequestMethod.GET)
 	public ModelAndView walk_search(Model model, HttpServletResponse response,
 			// 검색어

@@ -216,49 +216,59 @@ div#category_acco .accordian-toggle {
 								<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
 
 								<%-- 상세 페이지로 이동하기 위한 URL --%>
-								<c:url value="/walkPage/walk_search.do" var="viewUrl">
+								<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
 									<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
 								</c:url>
 
 								<div class="media">
 									<!-- 이미지 왼쪽 배치 -->
-									<a class="pull-left" href="#"><img class="media-object"
-										src="../img/profile_default.png" height="170" width="170"
-										alt="도심의 야경"></a>
+									<!-- 									<a class="pull-left" href="#"><img class="media-object" -->
+									<!-- 										src="../img/profile_default.png" height="170" width="170" -->
+									<!-- 										alt="도심의 야경"></a> -->
 									<!-- 미디어 내용 영역 -->
-									<div class="media-body" style="padding-left: 20px;">
+									<div class="media-body">
+										<div class="col-xs-2">
+											<h2>${COURSE_CATEGORY_NM }</h2>
+										</div>
 										<!-- 내용의 제목 -->
-										<h2 class="media-heading">
-											<a href="${viewUrl }">${COURSE_NAME} > ${CPI_NAME }</a>
-										</h2>
-										<div style="padding: 5px 20px;">
-											<h4 class="media-heading">
-												<a href="#">카테고리 : ${COURSE_CATEGORY_NM } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">강남/강북 : ${SOUTH_NORTH_DIV_NM } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">지역구 : ${AREA_GU } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">거리 : ${DISTANCE } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">소요시간 : ${LEAD_TIME } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">코스레벨 : ${COURSE_LEVEL } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">관련지하철 : ${RELATE_SUBWAY } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">교통정보 : ${TRAFFIC_INFO } </a>
-											</h4>
-											<h4 class="media-heading">
-												<a href="#">추천수 : ${VOTE_CNT } </a>
-											</h4>
+										<div class="col-xs-8">
+											<h3 class="media-heading">
+												<a href="${viewUrl }">${COURSE_NAME} > ${CPI_NAME }</a>
+											</h3>
+											<div class="row" style="padding: 5px 20px;">
+												<div class="col-xs-3">
+													<h4 class="media-heading">
+														<a href="#">강남/강북 : ${SOUTH_NORTH_DIV_NM } </a>
+													</h4>
+													<h4 class="media-heading">
+														<a href="#">지역구 : ${AREA_GU } </a>
+													</h4>
+												</div>
+												<div class="col-xs-3">
+													<h4 class="media-heading">
+														<a href="#">거리 : ${DISTANCE } </a>
+													</h4>
+													<h4 class="media-heading">
+														<a href="#">소요시간 : ${LEAD_TIME } </a>
+													</h4>
+												</div>
+												<div class="col-xs-3">
+													<h4 class="media-heading">
+														<a href="#">난이도 : <c:choose>
+																<c:when test="${COURSE_LEVEL =='1'}">초급</c:when>
+																<c:when test="${COURSE_LEVEL =='2'}">중급</c:when>
+																<c:when test="${COURSE_LEVEL =='3'}">고급</c:when>
+															</c:choose>
+														</a>
+													</h4>
+													<h4 class="media-heading">
+														<a href="#">관련지하철 : ${RELATE_SUBWAY } </a>
+													</h4>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-2">
+											<p style="text-align: right;">추천수 : ${VOTE_CNT }</p>
 										</div>
 									</div>
 								</div>

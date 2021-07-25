@@ -2,6 +2,7 @@ package study.spring.goodspring.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,10 @@ public class WalkCourseServiceTest {
 	/** Service 객체 주입 설정 */
 	@Autowired
 	private WalkCourseService walkCourseService;
+	
+	/** MyBatis의 SQL세션 객체 주입 설정 */
+	@Autowired
+	private SqlSession sqlSession;
 	
 	/* 다중행 조회 테스트 */
 	@Test
@@ -79,4 +84,23 @@ public class WalkCourseServiceTest {
 		
 	}
 
+	/* 단일행 조회 테스트 */
+	@Test
+	public void testD() {
+		WalkCourse input = new WalkCourse();
+		input.setCPI_IDX(1010);
+		
+//		mapper sql문 test
+//		sqlSession.selectOne("WalkCourseMapper.selectItem", input);
+		
+		WalkCourse output = null;
+		try {
+			output = walkCourseService.getWalkCourseItem(input);
+			log.debug(output.toString());
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		
+	}
 }
