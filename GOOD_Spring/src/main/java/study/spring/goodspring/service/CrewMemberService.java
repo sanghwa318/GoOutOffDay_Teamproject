@@ -13,7 +13,7 @@ public interface CrewMemberService {
 	 * @throws Exception
 	 */
 	
-	public CrewMember getCrewMemberItem(CrewMember input) throws Exception;
+	public boolean getCrewMemberItem(CrewMember input) throws Exception;
 	
 	
 	/**

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewPostService;
@@ -71,24 +72,35 @@ public class CrewCrewMemberController {
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_memberJoin_delete", method = RequestMethod. GET)
 	public ModelAndView delete(Model model,
+			@RequestParam(value="member_no", defaultValue="0") int member_no,
 			@RequestParam(value="crew_crew_no", defaultValue="0") int crew_crew_no) {
 		
 		/** 1) 파라미터 유효성 검사 */
-		if(crew_crew_no == 0) {
-			return webHelper.redirect(null, "멤버번호가 없습니다.");
+		if(member_no == 0 || crew_crew_no == 0) {
+			return webHelper.redirect(null, "멤버번호 또는 크루번호가 없습니다.");
 		}
-		/** 2) 데이터 삭제하기 */
+			
+		/** 조회삭제를 위한 select */
+
+		
 		CrewMember input = new CrewMember();
-		input.setMember_no(crew_crew_no);
+		input.setMember_no(member_no);
+		input.setCrew_crew_no(crew_crew_no);
+		
 		
 		try {
+			if(crewMemberService.getCrewMemberItem(input)) {
+				return webHelper.redirect(null, "본인은 추방할 수 없습니다.");
+			}
+			else {
 			crewMemberService.deleteCrewMember(input); // 데아터 삭제
-			
+			}
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 		
+		
 		/** 3) 페이지 이동 */
-		return new ModelAndView("commPage/comm_crew_memberJoin");
+		return webHelper.redirect(contextPath + "/commPage/comm_crew_memberJoin.do?crew_crew_no=" + input.getCrew_crew_no(), "추방되었습니다.");
 	}
 }
