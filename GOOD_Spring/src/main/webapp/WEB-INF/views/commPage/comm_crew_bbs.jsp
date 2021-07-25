@@ -23,10 +23,6 @@
 	margin-left: 40px;
 }
 
-#btn2 {
-	margin-right: 5px;
-}
-
 .col-md-4 {
 	margin-left: 350px;
 }
@@ -77,7 +73,10 @@
 			</div>
 			<h1 class="page-header">${output.crew_name}크루
 				<!-- 탈퇴버튼 -->
+				<form action="${pageContext.request.contextPath}/commPage/comm_crew_bbs_delete_ok.do" method="get">
+				<input type="hidden" name="crew_no" value="${output.crew_no}" />
 				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
+				</form>
 			</h1>
 			
 			<!-- 본문 상단 영역 -->
@@ -162,7 +161,7 @@
 						action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
 						method="GET">
 						<input type="hidden" name="post_crew" value="${output.crew_name}" />
-						<input type="hidden" name="crew_no" value="${output.crew_no}" />
+						
 						<button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
 					</form>
 					<form

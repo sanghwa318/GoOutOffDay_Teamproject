@@ -96,5 +96,10 @@ VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 		WHERE member_no = #{member_no}
 	</select>
 	
+	<!-- 특정 크루를 참조하는 크루 멤버 데이터를 모두 참조 해제한다. -->
+	<update id="unsetCrew" parameterType="study.spring.goodspring.model.CrewMember">
+		UPDATE crew_member SET crew_crew_no = null WHERE crew_no = #{crew_no}
+	</update>
+	
 
 </mapper>
