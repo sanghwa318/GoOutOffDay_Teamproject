@@ -8,8 +8,8 @@ public class WalkLog {
 	private String walk_log_datetime;
 	private long walking_time;
 	private String walking_distance;
-	private double lon;
-	private double lat;
+	private String lon;
+	private String lat;
 	private String event_name;
 	private int user_info_user_no;
 	private String course_name;
