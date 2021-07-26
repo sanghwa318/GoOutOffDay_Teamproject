@@ -203,4 +203,37 @@ public class CrewMemberServiceImpl implements CrewMemberService {
 			}
 			return result;
 		}
+
+
+		@Override
+		public boolean getCrewno(CrewMember input) throws Exception {
+			CrewMember result3 = null;
+			Crew result4 = null;
+			
+			try {
+				
+				result3 = sqlSession.selectOne("CrewMemberMapper.selectCrewno", input);
+				result4 = sqlSession.selectOne("CrewMapper.selectCrew", input);
+				if(result3 == null) {
+					throw new NullPointerException("result1=null");
+				}
+				if(result4 == null) {
+					throw new NullPointerException("result2=null");
+				}
+			}catch (NullPointerException e) {
+				log.error(e.getLocalizedMessage());
+				throw new Exception("조회된 데이터가 없습니다.");
+			}catch (Exception e) {
+				log.error(e.getLocalizedMessage());
+				throw new Exception("데이터 조회에 실패했습니다.");
+			}
+			
+			if(result3.getUser_info_user_no() == result4.getUser_info_user_no()) {
+				
+		
+				return true;
+			}else {
+				return false;
+			}
+		}
 }

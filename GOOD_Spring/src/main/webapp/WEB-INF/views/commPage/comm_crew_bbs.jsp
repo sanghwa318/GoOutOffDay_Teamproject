@@ -73,7 +73,7 @@
 			</div>
 			<h1 class="page-header">${output.crew_name}크루
 				<!-- 탈퇴버튼 -->
-				<form action="${pageContext.request.contextPath}/commPage/comm_crew_bbs_delete_ok.do" method="get">
+				<form method="get" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs_delete_ok.do" >
 				<input type="hidden" name="crew_no" value="${output.crew_no}" />
 				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
 				</form>

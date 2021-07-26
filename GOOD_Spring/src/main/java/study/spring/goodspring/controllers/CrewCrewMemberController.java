@@ -82,8 +82,6 @@ public class CrewCrewMemberController {
 		}
 			
 		/** 조회삭제를 위한 select */
-
-		
 		CrewMember input = new CrewMember();
 		input.setMember_no(member_no);
 		input.setCrew_crew_no(crew_crew_no);
@@ -120,7 +118,12 @@ public class CrewCrewMemberController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		
 		try {
+			if(crewMemberService.getCrewno(input)) {
+				return webHelper.redirect(null, "크루장은 탈퇴 수 없습니다.");
+			}
+			else {
 			crewMemberService.deleteMyCrew(input);  // 데이터 삭제
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
