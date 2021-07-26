@@ -189,8 +189,6 @@
 </body>
 <script>
 		$("#out").click(function() {
-			const delcrew = [];
-			const obj = $(".del:checked");
 						
 			// 확인, 취소버튼에 따른 후속 처리 구현
 			swal({
@@ -202,11 +200,8 @@
 				cancelButtonText : '아니오', // 취소버튼 표시 문구
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 				if (result.value) { // 확인 버튼이 눌러진 경우
-					swal('성공', '탈퇴되었습니다.', 'success');
-					setTimeout(function() {
-						location.href = '../commPage/comm_crew_myCrew.jsp';
-					}, 1000);
-
+					window.location.href=getContextPath() +"/commPage/comm_crew_bbs_delete_ok.do" ;
+	
 				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 					swal('취소', '탈퇴가 취소되었습니다.', 'error');
 				}
