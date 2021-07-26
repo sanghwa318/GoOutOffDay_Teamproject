@@ -3,6 +3,9 @@ package study.spring.goodspring.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -193,7 +196,8 @@ public class CasController {
 
 	/** 상세페이지 **/
 	@RequestMapping(value = "/casPage/cas_detail.do", method = RequestMethod.GET)
-	public ModelAndView detail(Model model, @RequestParam(value = "SVCID", defaultValue = "") String SVCID) {
+	public ModelAndView detail(Model model, @RequestParam(value = "SVCID", defaultValue = "") String SVCID,
+			HttpServletRequest request, HttpServletResponse response, Object handler) {
 
 		/** 1) 유효성 검사 **/
 		// 값이존재하지 않는다면 조회불가능하므로 필수값으로 처리
@@ -211,37 +215,45 @@ public class CasController {
 		// 찜하기
 		BookMark bookinput = new BookMark();
 
-		Member loginInfo = (Member) WebHelper.getSession("login_info");
-
 		int outputcount = 0;
-		if (loginInfo == null) {
-			try {
-				output = CasService.getOtherItem(input);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			// 로그인확인
-			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+		
+		if (request.getSession().getAttribute("login_info") == null) {
 
-			// 저장
 			bookinput.setCategory_id(input.getDIV_COL());
 			bookinput.setService_id(input.getSVCID());
 			
 			try {
 				output = CasService.getOtherItem(input);
-				outputcount = bookMarkService.BookMarkUniqueCheck(bookinput);
 
 			} catch (Exception e) {
-				return WebHelper.redirect(null, e.getLocalizedMessage());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
+		} else {
+			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
+			
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
 
+			// 조회
+			bookinput.setCategory_id(input.getDIV_COL());
+			bookinput.setService_id(input.getSVCID());
+			
+			// 저장
+			try {
+				output = CasService.getOtherItem(input);
+				outputcount = bookMarkService.BookMarkUniqueCheck(bookinput);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 		/** 3) View 처리 **/
 		model.addAttribute("output", output);
 		model.addAttribute("outputcount", outputcount);
 
-		return new ModelAndView("casPage/cas_detail");
+		return new ModelAndView("/casPage/cas_detail");
 	}
 
 	/**

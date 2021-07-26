@@ -40,9 +40,12 @@
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultMap="CasOtherMap">
 		SELECT DIV_COL, SVCID, MAXCLASSNM, MINCLASSNM, SVCSTATNM,
-		SVCNM, PAYATNM, PLACENM,
+		SVCNM,
+		PAYATNM, PLACENM,
 		SVCURL, AREANM, IMGURL, TELNO, VMAX,
-		VMIN, USETGTINFO, RCPTBGNDT, RCPTENDDT
+		VMIN,
+		USETGTINFO,
+		RCPTBGNDT, RCPTENDDT
 		FROM cas_other
 		WHERE SVCID=#{SVCID};
 	</select>
@@ -57,7 +60,8 @@
 		FROM cas_other
 		WHERE SVCSTATNM LIKE '%접수중%'
 		AND DIV_COL LIKE concat('%',
-		#{DIV_COL}, '%')
+		#{DIV_COL},
+		'%')
 		ORDER BY rand()
 		LIMIT 15;
 	</select>
@@ -82,20 +86,26 @@
 				</when>
 				<otherwise>
 					AND MINCLASSNM NOT LIKE '%교육%'
-					AND MINCLASSNM NOT LIKE '%농장%'
+					AND MINCLASSNM NOT LIKE
+					'%농장%'
 					AND MINCLASSNM NOT LIKE '%문화%'
 					AND MINCLASSNM NOT LIKE '%전시%'
 					AND MINCLASSNM NOT LIKE '%다목적%'
 					AND MINCLASSNM NOT LIKE '%강당%'
-					AND MINCLASSNM NOT LIKE '%강의%'
+					AND
+					MINCLASSNM NOT LIKE '%강의%'
 					AND MINCLASSNM NOT LIKE '%공예%'
-					AND MINCLASSNM NOT LIKE '%자연%'
+					AND
+					MINCLASSNM NOT LIKE '%자연%'
 					AND MINCLASSNM NOT LIKE '%스포츠%'
-					AND MINCLASSNM NOT LIKE '%어학%'
+					AND
+					MINCLASSNM NOT LIKE '%어학%'
 					AND MINCLASSNM NOT LIKE '%배드민턴%'
-					AND MINCLASSNM NOT LIKE '%축구%'
+					AND
+					MINCLASSNM NOT LIKE '%축구%'
 					AND MINCLASSNM NOT LIKE '%풋살%'
-					AND MINCLASSNM NOT LIKE '%다목적경기%'
+					AND
+					MINCLASSNM NOT LIKE '%다목적경기%'
 				</otherwise>
 			</choose>
 			<if test="listCount > 0">
@@ -108,7 +118,7 @@
 	<select id="Other_selectCountAll"
 		parameterType="study.spring.goodspring.model.CasOther"
 		resultType="int">
-		SELECT COUNT(*) 
+		SELECT COUNT(*)
 		FROM cas_other
 		<where>
 			SVCSTATNM LIKE '%접수중%'
@@ -120,20 +130,26 @@
 				</when>
 				<otherwise>
 					AND MINCLASSNM NOT LIKE '%교육%'
-					AND MINCLASSNM NOT LIKE '%농장%'
+					AND MINCLASSNM NOT LIKE
+					'%농장%'
 					AND MINCLASSNM NOT LIKE '%문화%'
 					AND MINCLASSNM NOT LIKE '%전시%'
 					AND MINCLASSNM NOT LIKE '%다목적%'
 					AND MINCLASSNM NOT LIKE '%강당%'
-					AND MINCLASSNM NOT LIKE '%강의%'
+					AND
+					MINCLASSNM NOT LIKE '%강의%'
 					AND MINCLASSNM NOT LIKE '%공예%'
-					AND MINCLASSNM NOT LIKE '%자연%'
+					AND
+					MINCLASSNM NOT LIKE '%자연%'
 					AND MINCLASSNM NOT LIKE '%스포츠%'
-					AND MINCLASSNM NOT LIKE '%어학%'
+					AND
+					MINCLASSNM NOT LIKE '%어학%'
 					AND MINCLASSNM NOT LIKE '%배드민턴%'
-					AND MINCLASSNM NOT LIKE '%축구%'
+					AND
+					MINCLASSNM NOT LIKE '%축구%'
 					AND MINCLASSNM NOT LIKE '%풋살%'
-					AND MINCLASSNM NOT LIKE '%다목적경기%'
+					AND
+					MINCLASSNM NOT LIKE '%다목적경기%'
 				</otherwise>
 			</choose>
 		</where>
