@@ -145,9 +145,6 @@ public class CrewMemberServiceImpl implements CrewMemberService {
 			int result = 0;
 			
 			try {
-				// 크루 삭제 전 해당 크루를 참조하는 크루 멤버의 crew_no 컬럼을 null로 수정
-				sqlSession.update("CrewMemberMapper.unsetCrew", input);
-				
 				result = sqlSession.delete("CrewMemberMapper.deleteCrewCrewMember", input);
 				
 				if(result == 0) {

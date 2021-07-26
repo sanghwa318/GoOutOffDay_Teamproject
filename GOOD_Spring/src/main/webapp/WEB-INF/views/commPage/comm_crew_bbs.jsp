@@ -194,7 +194,7 @@
 			swal({
 				title : '확인', // 제목
 				text : "해당 크루에서 탈퇴 하시겠습니까?", // 내용
-				type : 'question', // 종류
+				type : 'question', // 종류	
 				confirmButtonText : '네', // 확인버튼 표시 문구
 				showCancelButton : true, // 취소버튼 표시 여부
 				cancelButtonText : '아니오', // 취소버튼 표시 문구
