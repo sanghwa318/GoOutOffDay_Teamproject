@@ -150,6 +150,6 @@ public class CrewController {
 
 		/** 3) 페이지 이동 */
 		// 확인할 대상이 삭제된 상태이므로 크루 페이지로 이동
-		return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do", "탈퇴되었습니다.");
+		return webHelper.redirect(contextPath + "/commPage/comm_crew_myCrew.do", "탈퇴되었습니다.");
 	}
 }
