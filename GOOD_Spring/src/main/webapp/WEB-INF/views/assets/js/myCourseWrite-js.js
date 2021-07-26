@@ -3,6 +3,31 @@
  */
 
 
+$(function() {
+
+
+
+	$("#btn_cancel").click(function(e) {
+			e.preventDefault();
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title: '확인', // 제목
+				text: "정말 취소 하시겠습니까?", // 내용
+				type: 'warning', // 종류
+				confirmButtonText: '네', // 확인버튼 표시 문구
+				showCancelButton: true, // 취소버튼 표시 여부
+				cancelButtonText: '아니오', // 취소버튼 표시 문구
+				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+					if (result.value) { // 확인 버튼이 눌러진 경우
+					swal('취소',	'나만의 코스 작성이 취소되었습니다.', 'success');
+					setTimeout(function() {
+					location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.do';
+				}, 1000);
+			}
+		});
+	});
+});
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center: new kakao.maps.LatLng(37.5160832, 126.9661696), // 지도의 중심좌표
@@ -15,7 +40,7 @@ $(function() {
 	$('#course_name').change(function(e) {
 		$('#map').html("");
 		e.preventDefault();
-		var course_name=$(this[this.selectedIndex]).val();
+		var course_name = $(this[this.selectedIndex]).val();
 		map = null;
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 		$.ajax({

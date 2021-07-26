@@ -132,7 +132,7 @@
 		AND user_info_user_no=#{user_info_user_no};
 	</select>
 
-	<!-- 좌표값 전달을 위한 다중행 조회 (작성페이지) -->
+	<!-- 좌표값 전달을 위한 다중행 조회 (작성페이지, 리스트페이지) -->
 	<select id="selectLocationList"
 		parameterType="study.spring.goodspring.model.WalkLog"
 		resultMap="WalkLogMap">
@@ -150,6 +150,8 @@
 		WHERE
 		course_name=#{course_name}
 	</select>
+	
+	
 	<!-- 사용자가 저장한 코스 이름을 다중행 조회 -->
 	<select id="selectCourseNameList"
 		parameterType="study.spring.goodspring.model.WalkLog"

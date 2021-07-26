@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class WebHelper {
-//기본 인코딩 타입 설정
+	//기본 인코딩 타입 설정
 	private String encType;
 
 	// JSP의 request 내장 객체
@@ -31,6 +31,7 @@ public class WebHelper {
 
 	// JSP의 response 내장 객체
 	private HttpServletResponse response;
+	
 	/** 업로드 된 결과물이 저장될 폴더 */
 	private String uploadDir;
 
@@ -51,7 +52,8 @@ public class WebHelper {
 	public void init(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-
+		this.session = this.request.getSession(); // request 객체를 사용하여 세션 생성하기
+		
 		String methodName = request.getMethod(); // Get방식인지, post방식인지 조회
 		String url = request.getRequestURL().toString(); // 현재 url을 획득
 		String queryString = request.getQueryString(); // url에서 "?"이후의 GET파라미터 문자열을 모두 가져옴
@@ -94,6 +96,14 @@ public class WebHelper {
 
 	public void setResponse(HttpServletResponse response) {
 		this.response = response;
+	}
+
+	public HttpSession getSession() {
+		return session;
+	}
+
+	public void setSession(HttpSession session) {
+		this.session = session;
 	}
 
 	public String getUploadDir() {
@@ -396,54 +406,70 @@ public class WebHelper {
 
 	}
 
-	/**
-	 * 세션값을 저장한다
-	 * 
-	 * @param key   - 세션이름
-	 * @param value - 저장할 데이터
-	 */
-	public void setSession(String key, Object value) {
-		this.session = request.getSession(true);
-		this.session.setAttribute(key, value);
-	}
+	   /**
+	    * 세션값을 저장한다.
+	    *
+	    * @param key   - 세션이름
+	    * @param value - 저장할 데이터
+	    */
+	   public void setSession(String key, Object value) {
+	      // 세션의 기록 정보를 로그로 남긴다.
+	      log.debug(String.format("(s) <-- %s = %s", key, value.toString()));
 
-	/**
-	 * 세션값을 조회한다
-	 * 
-	 * @param key          - 조회할 세션의 이름
-	 * @param defaultValue - 값이 없을 경우 대체할 기본값
-	 * @return Object이므로 명시작 형변환이 필요하다.
-	 */
-	public Object getSession(String key, Object defaultValue) {
-		Object value = this.session.getAttribute(key);
+	      // 세션을 저장한다.
+	      this.session.setAttribute(key, value);
+	   }
 
-		if (value == null) {
-			value = defaultValue;
-		}
+	   /**
+	    * 세션값을 조회한다.
+	    *
+	    * @param key          - 조회할 세션의 이름
+	    * @param defaultValue - 값이 없을 경우 대체할 기본값
+	    * @return Object이므로 명시적 형변환 필요함
+	    */
+	   public Object getSession(String key, Object defaultValue) {
+	      // 세션값 가져오기
+	      Object value = this.session.getAttribute(key);
 
-		return value;
-	}
+	      if (value == null) {
+	         value = defaultValue;
+	      }
 
-	/**
-	 * 세션값을 조회한다. 값이 없을 경우에 대한 기본값을 null로 설정
-	 * 
-	 * @param key - 세션 이름
-	 * @return - Object이므로 명시적 형변환 필요함
-	 */
-	public Object getSession(String key) {
-		return this.getSession(key, null);
-	}
+	      // 조회된 세션 정보를 로그로 남긴다.
+	      if (value == null) {
+	         log.debug(String.format("(s) --> %s = null", key));
+	      } else {
+	         log.debug(String.format("(s) --> %s = %s", key, value.toString()));
+	      }
 
-	/**
-	 * 특정 세션값을 삭제한다.
-	 * 
-	 * @param key - 세션 이름
-	 */
-	public void removeSession(String key) {
-		this.session.removeAttribute(key);
-	}
+	      return value;
+	   }
 
-	public void removeAllSession() {
-		this.session.invalidate();
-	}
+	   /**
+	    * 세션값을 조회한다. 값이 없을 경우에 대한 기본값을 null로 설정
+	    *
+	    * @param key - 세션 이름
+	    * @return Object이므로 명시적 형변환 필요함
+	    */
+	   public Object getSession(String key) {
+	      return this.getSession(key, null);
+	   }
+
+	   /**
+	    * 특정 세션값을 삭제한다.
+	    *
+	    * @param key - 세션 이름
+	    */
+	   public void removeSession(String key) {
+	      log.debug(String.format("(s) <-- %s delete", key));
+	      this.session.removeAttribute(key);
+	   }
+
+	   /**
+	    * 현재 사용자에 대한 모든 세션값을 일괄 삭제한다.
+	    */
+	   public void removeAllSession() {
+	      log.debug(String.format("(s) <-- delete all"));
+	      this.session.invalidate();
+	   }
 }

@@ -67,7 +67,7 @@
 			</div>
 			<!-- //제목영역 끝 -->
 			<!-- 리스트영역-->
-			<div class="row cas_item">
+			<div class="row cas_item" id="item-box" data-length="${fn:length(output)}">
 				<c:choose>
 					<%--조회결과가 없는 경우 --%>
 					<c:when test="${output==null || fn:length(output) == 0} ">
@@ -88,11 +88,10 @@
 							</c:url>
 
 							<div class="col-xs-6 col-sm-4 col-md-3">
-								<div class="thumbnail item"
+								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}'
 									onclick="location.href='${infoUrl}'"
 									style="cursor: pointer;">
-									<img alt="나만의 코스 이미지"
-										src="${pageContext.request.contextPath}/assets/img/profile_default.png">
+									<div class="map" id="map${status.index}" style="height:180px"></div>
 									<div class="caption clearfix">
 										<p>${item.user_info_user_no}</p>
 										<h4>${item.mycourse_name }</h4>
@@ -137,6 +136,10 @@
 	<!-- 하단영역 -->
 	<%@ include file="../inc/Footer.jsp"%>
 	<%@ include file="../inc/plugin.jsp"%>
+			<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js"></script>
+	
 	<script type="text/javascript">
 		
 	</script>

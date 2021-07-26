@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -203,13 +206,17 @@ public class MyCourseController {
 	 */
 	@RequestMapping(value = "/commPage/comm_myCourseWrite.do", method = RequestMethod.GET)
 	public ModelAndView mycourseWrite(Model model) {
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if(loginInfo==null) {
+			
+			String redirectUrl= contextPath+"/mainPage/login.do";
+			return webHelper.redirect(redirectUrl,"로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		/* 1) 코스 이름 조회하기 */
-		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 		WalkLog input = new WalkLog();
 		input.setUser_info_user_no(loginInfo.getUser_no());
 
 		List<WalkLog> courseName = null;
-
 		try {
 			// 데이터 조회
 			courseName = walkLogService.getCoureName(input);
@@ -231,6 +238,17 @@ public class MyCourseController {
 			@RequestParam(value = "mycourse_name") String mycourse_name,
 			@RequestParam(value = "mycourse_area") String mycourse_area,
 			@RequestParam(value = "mycourse_content") String mycourse_content) {
+		if(mycourse_name==null || mycourse_name=="") {
+			return webHelper.redirect(null, "코스를 선택해주세요.");
+		}
+		if(mycourse_area==null || mycourse_area=="") {
+			return webHelper.redirect(null, "지역을 선택해주세요.");
+		}
+		if(mycourse_content==null || mycourse_content=="") {
+			return webHelper.redirect(null, "내용을 입력해주세요.");
+		}
+		
+		
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 
 		
@@ -305,6 +323,52 @@ public class MyCourseController {
 		map.put("courseName", courseName);
 		return webHelper.getJsonData(map);
 	}
+	
+	/*
+	 * 나만의코스 리스트페이지를 위한 List형태의 좌표값을 json으로 전달한다.
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_myCourseListGetLoc.do", method = RequestMethod.POST)
+	public Map<String, Object> mycourseListGetLoc(
+			@RequestParam(value="mycourse_no" )int mycourse_no) {
+		
+		
+		/* 1) 코스 번호로 작성자번호와 코스 이름을 가져오기 위해 객체 생성. */
+		MyCourses mycourse = new MyCourses();
+		mycourse.setMycourse_no(mycourse_no);
+		
+		/* 2) 코스 번호로 작성자번호와 코스 이름을 가져온다. */
+		MyCourses mycourse_result =null;
+		try {
+			mycourse_result=myCourseService.getMyCourseItem(mycourse);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+		
+		int user_no=mycourse_result.getUser_info_user_no();
+		String course_name= mycourse_result.getMycourse_name();
+		
+		
+		/* 3) 유저 번호와 코스 이름으로 좌표값 조회하기 */
+		WalkLog input = new WalkLog();
+		input.setCourse_name(course_name);
+		input.setUser_info_user_no(user_no);
+		
+		//좌표값을 담을 List 객체
+		List<WalkLog> courseName = null;
+
+		try {
+			// 데이터 조회
+			courseName = walkLogService.getLoc(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+		// 4) json 데이터 전송처리
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("courseName", courseName);
+		return webHelper.getJsonData(map);
+	}
+	
 	/*
 	 * comm_myPost
 	 */

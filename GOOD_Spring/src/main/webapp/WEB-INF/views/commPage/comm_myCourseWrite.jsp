@@ -142,13 +142,13 @@ input#title {
 				<br>
 				<div class="map" id="map" style="width: 100%; height: 250px;"></div>
 
-				<textarea name="mycourse_content" class="ckeditor"></textarea>
+				<textarea name="mycourse_content" id="mycourse_content" class="ckeditor"></textarea>
 
 				<div class="btn-group pull-right">
 					<a id="btn_cancel" type="button"
 						href="${pageContext.request.contextPath}/commPage/comm_myCourse.do"
 						class="btn btn-warning">취소</a>
-					<button type="submit" class="btn btn-primary">작성완료</button>
+					<input type="submit" value="작성완료" class="btn btn-primary"/>
 				</div>
 			</form>
 		</div>
@@ -166,38 +166,5 @@ input#title {
 		src="${pageContext.request.contextPath}/assets/js/myCourseWrite-js.js"></script>
 
 	<!-- // js -->
-	<script>
-		$(function() {
-			$("#btn_cancel")
-					.click(
-							function(e) {
-								e.preventDefault();
-								// 확인, 취소버튼에 따른 후속 처리 구현
-								swal({
-									title : '확인', // 제목
-									text : "정말 취소 하시겠습니까?", // 내용
-									type : 'warning', // 종류
-									confirmButtonText : '네', // 확인버튼 표시 문구
-									showCancelButton : true, // 취소버튼 표시 여부
-									cancelButtonText : '아니오', // 취소버튼 표시 문구
-								})
-										.then(
-												function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-													if (result.value) { // 확인 버튼이 눌러진 경우
-														swal(
-																'취소',
-																'나만의 코스 작성이 취소되었습니다.',
-																'success');
-														setTimeout(
-																function() {
-																	location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.do?pageNo=1';
-																}, 1000);
-
-													}
-
-												});
-							});
-		});
-	</script>
 </body>
 </html>

@@ -180,7 +180,7 @@ ul, li {
 				<h1 style="color: #343a40;">나만의 코스</h1>
 			</div>
 			<div class="row">
-				<div class="map col-md-4" id="map" style="height:250px"></div>
+				<div class="map col-md-4" id="map" style="height:250px; width:250px"></div>
 					<div class="col-md-7 col-sm-6 col-xs-12 main_info">
 						<ul class="info">
 							<li class="infoItem"><strong class="infoLabel">코스 이름
@@ -261,6 +261,8 @@ ul, li {
 			<button class="btn btn-default pull-right">코스 삭제</button>
 			<br> <br> <br>
 		</div>
+		
+		<button id="save">아아아아아아저장</button>
 		<!-- //컨테이너 -->
 	</div>
 	<!-- 공통 푸터 -->
