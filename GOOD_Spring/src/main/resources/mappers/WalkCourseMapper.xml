@@ -43,7 +43,7 @@
 		resultMap="WalkCourseMap">
 		SELECT COURSE_CATEGORY_NM,
 		SOUTH_NORTH_DIV_NM,
-		AREA_GU, 
+		AREA_GU,
 		DISTANCE,
 		LEAD_TIME,
 		COURSE_LEVEL,
@@ -191,6 +191,21 @@
 		<if test="listCount > 0">
 			LIMIT #{offset}, #{listCount};
 		</if>
+	</select>
+
+	<select id="selectRandomList"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT COURSE_CATEGORY_NM,
+		SOUTH_NORTH_DIV_NM,
+		AREA_GU,
+		COURSE_NAME,
+		CPI_NAME,
+		CPI_IDX,
+		CPI_CONTENT
+		FROM seoulgil_walk_course
+		ORDER BY rand()
+		LIMIT 15;
 	</select>
 
 	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->

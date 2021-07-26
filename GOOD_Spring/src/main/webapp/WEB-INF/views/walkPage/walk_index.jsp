@@ -190,8 +190,8 @@ carousel-title2 {
 		<div class="pull-right">
 			<div class="wk_log" id="wk_log">
 				<button type="button" class="btn btn-primary"
-					id="endRecord-modal-btn" data-toggle="modal" data-target="#recordEnd-modal">기록
-					중지</button>
+					id="endRecord-modal-btn" data-toggle="modal"
+					data-target="#recordEnd-modal">기록 중지</button>
 
 			</div>
 		</div>
@@ -377,126 +377,24 @@ carousel-title2 {
 		<div class="row good_item wk_row">
 			<!--  캐러셀 시작 -->
 			<div class="owl-carousel owl-theme" id="owl-GOOD">
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지1" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당1</h4>
-						<p>여기 가봐라</p>
+				<c:forEach var="item" items="${output }" varStatus="status">
+					<c:url value="/walkPage/walk_detailCourse.do" var="detailUrl">
+						<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+					</c:url>
+					<div class="thumbnail item" onclick="location.href='${detailUrl}'"
+						style="cursor: pointer;">
+						<img src="#" alt="테스트이미지1" height="200" width="250">
+						<div class="caption">
+							<h4>${item.COURSE_NAME}> ${item.CPI_NAME }</h4>
+							<p>${item.CPI_CONTENT }</p>
+						</div>
+						<div class="wishlist">
+							<span class=heart><i class="fa fa-heart-o"
+								aria-hidden="true" role="button"></i> </span>
+						</div>
 					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지2" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당2</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지3" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당3</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지4" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당4</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지5" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당5</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지6" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당6</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지7" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당7</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지8" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당8</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지9" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당9</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지10" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당10</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
+
+				</c:forEach>
 			</div>
 
 		</div>
@@ -644,7 +542,8 @@ carousel-title2 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 	<script type="text/javascript">
-	var loginInfo = "<%=session.getAttribute("login_info")%>"
+	var loginInfo = "<%=session.getAttribute("login_info")%>
+		"
 
 		$(function() {
 

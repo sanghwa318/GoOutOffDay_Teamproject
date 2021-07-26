@@ -21,6 +21,7 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 
 	/**
 	 * 걷기코스 데이터 상세 조회
+	 * 
 	 * @param input 조회할 코스의 일련번호를 담고 있는 beans
 	 * @return 조회된 데이터가 저장된 beans
 	 * @throws Exception
@@ -28,7 +29,7 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 	@Override
 	public WalkCourse getWalkCourseItem(WalkCourse input) throws Exception {
 		WalkCourse result = null;
-		
+
 		try {
 			result = sqlSession.selectOne("WalkCourseMapper.selectItem", input);
 
@@ -42,10 +43,10 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 코스 데이터 목록 조회
 	 * 
@@ -58,7 +59,34 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 
 		try {
 			result = sqlSession.selectList("WalkCourseMapper.selectList", input);
+			
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
 
+		return result;
+	}
+
+	/**
+	 * 걷기코스 랜덤 목록 조회(걷기메인페이지)
+	 * 
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	@Override
+	public List<WalkCourse> getWalkCourseRandomList(WalkCourse input) throws Exception {
+		List<WalkCourse> result = null;
+
+		try {
+			result = sqlSession.selectList("WalkCourseMapper.selectRandomList", input);
+			
 			if (result == null) {
 				throw new NullPointerException("result=null");
 			}
@@ -92,7 +120,5 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 
 		return result;
 	}
-
-	
 
 }

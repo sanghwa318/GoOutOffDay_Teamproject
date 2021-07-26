@@ -22,6 +22,13 @@ public interface WalkCourseService {
 	 */
 	public List<WalkCourse> getWalkCourseList(WalkCourse input) throws Exception;
 	
+	/**
+	 * 걷기코스 랜덤 목록 조회(걷기메인페이지)
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	public List<WalkCourse> getWalkCourseRandomList(WalkCourse input) throws Exception;
+	
 	
 	/**
 	 * [페이지네이션에 필요]
