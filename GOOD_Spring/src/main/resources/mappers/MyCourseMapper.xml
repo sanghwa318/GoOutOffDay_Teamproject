@@ -28,7 +28,7 @@
 		WHERE mycourse_no=#{mycourse_no}
 		ORDER BY mycourse_no DESC
 	</select>
-	<!-- 데이터 입력후 해당 데이터를 불러오기 위한 단일행 조회 -->
+	<!-- 데이터 입력,수정후 해당 데이터를 불러오기 위한 단일행 조회 -->
 	<select id="selectMyCoursePost" resultMap="MyCourseMap"
 		parameterType="study.spring.goodspring.model.MyCourses">
 		SELECT mycourse_no
@@ -89,9 +89,9 @@
 	<!-- 데이터 수정 기능 -->
 	<update id="updateMyCourse"
 		parameterType="study.spring.goodspring.model.MyCourses">
-		UPDATE mycoures_post SET mycourse_name=#{mycourse_name},mycourse_area=#{mycourse_area},
+		UPDATE mycoures_post SET mycourse_area=#{mycourse_area},
 		mycourse_content=#{mycourse_content}, mycourse_editdate=now()
-		WHERE mycourse_no = #{mycourse_no};
+		WHERE mycourse_name = #{mycourse_name};
 	</update>
 
 	<!-- 데이터 수 조회를 위한 기능 정의 -->

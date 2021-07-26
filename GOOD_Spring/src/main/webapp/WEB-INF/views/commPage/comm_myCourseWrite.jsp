@@ -190,7 +190,7 @@ input#title {
 																'success');
 														setTimeout(
 																function() {
-																	location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.jsp?pageNo=1';
+																	location.href = '/WEB-INF/VIEWS/commPage/comm_myCourse.do?pageNo=1';
 																}, 1000);
 
 													}

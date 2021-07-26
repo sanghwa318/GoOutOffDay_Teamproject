@@ -82,19 +82,6 @@
 							<%-- 출력을 위해 준비한 코스이름 변수  --%>
 							<c:set var="mycourse_name" value="${item.mycourse_name}" />
 
-							<%-- 검색어가 있다면? --%>
-							<c:if test="${keyword != '' }">
-								<%-- 검색어에 <mark> 적용 --%>
-								<c:set var="mark" value="<mark>${keyword}</mark>" />
-								<%--출력을 위해 크루 이름에서 검색어와 일치하는 단어를 형광펜 효과 --%>
-								<c:set var="mycourse_name"
-									value="${fn:replace(mycourse_name,keyword,mark)}" />
-								<c:set var="mycourse_area"
-									value="${fn:replace(mycourse_area,keyword,mark)}" />
-								<c:set var="mycourse_content"
-									value="${fn:replace(mycourse_content,keyword,mark)}" />
-							</c:if>
-
 							<%-- 상세페이지로 이동하기위한 URL --%>
 							<c:url value="/commPage/comm_myCourseDetail.do" var="infoUrl">
 								<c:param name="mycourse_no" value="${item.mycourse_no}" />
@@ -122,9 +109,9 @@
 			<!-- //리스트영역 끝-->
 			<div style="height: 70px;">
 				<form class="searchform col-md-4 col-md-offset-4 col-xs-9"
-					role="search" style="padding-top: 15px;">
+					role="search" style="padding-top: 15px;" action="${pageContext.request.contextPath}/commPage/comm_myCourse.do?keyword=${keyword}" >
 					<div class="form-group input-group">
-						<input type="text" class="form-control" placeholder="검색">
+						<input type="text" class="form-control" name="keyword" placeholder="검색">
 						<span class="input-group-btn">
 							<button class="btn btn-blue" type="submit">
 								<i class="glyphicon glyphicon-search"></i>

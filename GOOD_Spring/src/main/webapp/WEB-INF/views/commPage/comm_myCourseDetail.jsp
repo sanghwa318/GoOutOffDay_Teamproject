@@ -180,14 +180,12 @@ ul, li {
 				<h1 style="color: #343a40;">나만의 코스</h1>
 			</div>
 			<div class="row">
-				<div class="courseimg col-md-4">
-					<img alt="코스사진" src="${pageContext.request.contextPath}/assets/img/profile_default.png" width="300">
-				</div>
+				<div class="map col-md-4" id="map" style="height:250px"></div>
 					<div class="col-md-7 col-sm-6 col-xs-12 main_info">
 						<ul class="info">
 							<li class="infoItem"><strong class="infoLabel">코스 이름
 									: </strong>
-								<p class="infoText">${output.mycourse_name }}</p></li>
+								<p class="infoText" id="mycourse_name" data-mycoursename='${output.mycourse_name}' >${output.mycourse_name}</p></li>
 							<li class="infoItem"><strong class="infoLabel">코스 지역
 									: </strong>
 								<p class="infoText">${output.mycourse_area }</p></li>
@@ -258,7 +256,7 @@ ul, li {
 			<hr>
 			<a class="btn btn-default pull-left"
 				href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=1">목록</a> <a
-				class="btn btn-default pull-right" href="${pageContext.request.contextPath}/commPage/comm_myCourseEdit.do">코스
+				class="btn btn-default pull-right" href="${pageContext.request.contextPath}/commPage/comm_myCourseEdit.do?mycourse_no=${output.mycourse_no}">코스
 				수정</a>
 			<button class="btn btn-default pull-right">코스 삭제</button>
 			<br> <br> <br>
@@ -270,6 +268,11 @@ ul, li {
 	<!-- //공통 푸터 -->
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
+	
+		<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/myCourseDetail-js.js"></script>
 	<script>
 		$(".heart")
 				.on(

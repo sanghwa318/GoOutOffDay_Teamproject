@@ -130,11 +130,10 @@ public class MyCourseServiceImpl implements MyCourseService {
 	 * @throws Exception
 	 */
 	@Override
-	public int editMyCourse(MyCourses input) throws Exception {
+	public void editMyCourse(MyCourses input) throws Exception {
 		int result = 0;
-
 		try {
-			result = sqlSession.update("MyCourseMapper.updateCrew", input);
+			result = sqlSession.update("MyCourseMapper.updateMyCourse", input);
 
 			if (result == 0) {
 				throw new NullPointerException("result=0");
@@ -147,8 +146,6 @@ public class MyCourseServiceImpl implements MyCourseService {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 수정에 실패했습니다.");
 		}
-
-		return result;
 	}
 	/*
 	 * 데이터 삭제

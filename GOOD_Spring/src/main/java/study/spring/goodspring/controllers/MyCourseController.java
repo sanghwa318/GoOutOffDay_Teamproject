@@ -127,12 +127,75 @@ public class MyCourseController {
 	}
 
 	/*
-	 * comm_myCourseEdit
+	 * comm_myCourseEdit 나만의 코스 수정 페이지
 	 */
 	@RequestMapping(value = "/commPage/comm_myCourseEdit.do", method = RequestMethod.GET)
-	public String mycourseEdit(Model model) {
+	public ModelAndView mycourseEdit(Model model,
+			@RequestParam(value="mycourse_no")int mycourse_no
+			) {
+		/* 1) 코스 이름 조회하기 */
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 
-		return "commPage/comm_myCourseEdit";
+		WalkLog input = new WalkLog();
+		input.setUser_info_user_no(loginInfo.getUser_no());
+
+		List<WalkLog> courseName = null;
+		
+		/* 2) 현재 코스 글 정보 조회*/
+		MyCourses mycourseInput = new MyCourses();
+		mycourseInput.setMycourse_no(mycourse_no);
+		MyCourses output = null;
+		
+		try {
+			output=myCourseService.getMyCourseItem(mycourseInput);
+			
+			//로그인된 사용자의 정보와 코스 작성자가 같을 경우만 연결시킨다.
+			if(loginInfo.getUser_no()==output.getUser_info_user_no()) {
+				webHelper.redirect(null, "코스 작성자만 수정가능합니다.");
+			}
+			// 지도 정보를 위한 코스이름 데이터 조회
+			courseName = walkLogService.getCoureName(input);
+
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 3) View 처리
+		model.addAttribute("courseName", courseName);
+		model.addAttribute("output", output);
+		return new ModelAndView("commPage/comm_myCourseEdit");
+	}
+	
+	/*
+	 * 나만의코스 수정 action 페이지.
+	 */
+	@RequestMapping(value = "/commPage/comm_myCourseEditOk.do", method = RequestMethod.POST)
+	public ModelAndView mycourseEditOk(Model model,
+			@RequestParam(value = "mycourse_name") String mycourse_name,
+			@RequestParam(value = "mycourse_area") String mycourse_area,
+			@RequestParam(value = "mycourse_content") String mycourse_content) {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+
+		
+		MyCourses input = new MyCourses();
+		input.setMycourse_name(mycourse_name);
+		input.setMycourse_area(mycourse_area);
+		input.setMycourse_content(mycourse_content);
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		MyCourses output=null;
+		
+		
+		
+		try {
+			// 데이터 수정하기
+			myCourseService.editMyCourse(input);
+			output= myCourseService.getMyCoursePost(input);
+		} catch (Exception e) {
+			webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		
+		
+		return webHelper.redirect(contextPath+"/commPage/comm_myCourseDetail.do"+"?mycourse_no="+output.getMycourse_no(), "수정되었습니다.");
+
 	}
 
 	/*
@@ -189,7 +252,7 @@ public class MyCourseController {
 		}
 		
 		
-		return webHelper.redirect(contextPath+"commPage/comm_myCourseDetail.do"+"?mycourse_no="+output.getMycourse_no(), "작성되었습니다.");
+		return webHelper.redirect(contextPath+"/commPage/comm_myCourseDetail.do"+"?mycourse_no="+output.getMycourse_no(), "작성되었습니다.");
 
 	}
 	/*
@@ -218,7 +281,30 @@ public class MyCourseController {
 		map.put("courseName", courseName);
 		return webHelper.getJsonData(map);
 	}
-	
+	/*
+	 * 나만의코스 상세페이지를 위한 List형태의 좌표값을 json으로 전달한다.
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_myCourseDetailGetLoc.do", method = RequestMethod.POST)
+	public Map<String, Object> mycourseDetailGetLoc(
+			@RequestParam(value="course_name" )String course_name) {
+		/* 1) 코스 이름으로 좌표값 조회하기 */
+		WalkLog input = new WalkLog();
+		input.setCourse_name(course_name);
+		
+		List<WalkLog> courseName = null;
+
+		try {
+			// 데이터 조회
+			courseName = walkLogService.getLoc2(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+		// 3) json 데이터 전송처리
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("courseName", courseName);
+		return webHelper.getJsonData(map);
+	}
 	/*
 	 * comm_myPost
 	 */

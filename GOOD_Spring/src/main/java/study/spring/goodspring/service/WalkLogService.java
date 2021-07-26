@@ -37,6 +37,15 @@ public interface WalkLogService {
 	 * @throws Exception
 	 */
 	public List<WalkLog> getLoc(WalkLog input) throws Exception;
+	
+	/**
+	 * 나만의코스 코스 상세페이지를 위한 좌표값을 받아오는 메서드
+	 * 
+	 * @param WalkLog 조회할 데이터가 담긴 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	public List<WalkLog> getLoc2(WalkLog input) throws Exception;
 
 	/**
 	 * 나만의코스 데이터 등록을 위한 코스이름을 받아오는 메서드
