@@ -3,34 +3,41 @@
 
 
 <mapper namespace="CrewMemberMapper">
-<resultMap type="study.spring.goodspring.model.CrewMember"
+	<resultMap type="study.spring.goodspring.model.CrewMember"
 		id="crewMemberMap">
-		<result property="member_no" column="member_no"/>
-		<result property="member_create_datetime" column="member_create_datetime"/>
-		<result property="member_visit_datetime" column="member_visit_datetime"/>
-		<result property="user_info_user_no" column="user_info_user_no"/>
-		<result property="crew_crew_no" column="crew_crew_no"/>
-		
-		</resultMap>
+		<result property="member_no" column="member_no" />
+		<result property="member_create_datetime"
+			column="member_create_datetime" />
+		<result property="member_visit_datetime"
+			column="member_visit_datetime" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="crew_crew_no" column="crew_crew_no" />
+
+	</resultMap>
 
 
-<!-- 크루멤버 등록 기능 -->
-<insert id="insertCrewMember" parameterType="study.spring.goodspring.model.CrewMember"
-useGeneratedKeys="true" keyProperty="member_no">
-INSERT INTO crew_member 
-(member_create_datetime, member_visit_datetime, user_info_user_no,crew_crew_no)
-VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
-</insert>
+	<!-- 크루멤버 등록 기능 -->
+	<insert id="insertCrewMember"
+		parameterType="study.spring.goodspring.model.CrewMember"
+		useGeneratedKeys="true" keyProperty="member_no">
+		INSERT INTO crew_member
+		(member_create_datetime, member_visit_datetime, user_info_user_no,crew_crew_no)
+		VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
+	</insert>
 
-<!-- Crew 와 CrewMember Join -->
+	<!-- Crew 와 CrewMember Join -->
 	<select id="selectCrewCrewMemberList"
-		parameterType="study.spring.goodspring.model.CrewMember" resultMap="crewMemberMap">
-		SELECT member_no, member_create_datetime, member_visit_datetime, cm.user_info_user_no, crew_crew_no, user_id , user_nick
-		FROM crew_member cm
+		parameterType="study.spring.goodspring.model.CrewMember"
+		resultMap="crewMemberMap">
+		SELECT member_no, member_create_datetime, member_visit_datetime,
+		cm.user_info_user_no, crew_crew_no, user_id , user_nick
+		FROM
+		crew_member cm
 		INNER JOIN crew c
 		ON c.crew_no = #{crew_crew_no}
-		INNER JOIN user_info ui
-		ON ui.user_no = cm.user_info_user_no 
+		INNER
+		JOIN user_info ui
+		ON ui.user_no = cm.user_info_user_no
 		<where>
 			<if test="member_no != null and member_no != '' ">
 				member_no = #{member_no}
@@ -59,14 +66,16 @@ VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 		</if>
 
 	</select>
-	
+
 	<!-- 데이터 수 조회를 위한 기능 정의 -->
 
 	<select id="selectCountAll"
-		parameterType="study.spring.goodspring.model.CrewMember" resultType="int">
+		parameterType="study.spring.goodspring.model.CrewMember"
+		resultType="int">
 		SELECT COUNT(*) FROM crew_member cm
 		INNER JOIN crew c
-		ON cm.crew_crew_no =  #{crew_crew_no}	
+		ON cm.crew_crew_no
+		= #{crew_crew_no}
 		<where>
 			<if test="member_no != null and member_no != '' ">
 				member_no = #{member_no}
@@ -85,27 +94,33 @@ VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 	<!-- 크루멤버 추방을 위한 기능 정의 -->
 	<delete id="deleteCrewCrewMember"
 		parameterType="study.spring.goodspring.model.CrewMember">
-		DELETE FROM crew_member WHERE crew_crew_no = #{crew_crew_no} AND member_no = #{member_no}
-	</delete>
-	
-	<!-- 크루멤버에 대한 user_info_user_no  조회 -->
-	<select id="selectCrew" 
-		parameterType="study.spring.goodspring.model.CrewMember" resultMap="crewMemberMap">
-		SELECT user_info_user_no
-		FROM crew_member
-		WHERE member_no = #{member_no}
-	</select>
-	
-	<!-- 마이크루 탈퇴 기능 -->
-	<delete id="deleteMyCrew" parameterType="study.spring.goodspring.model.CrewMember">
-		DELETE FROM crew_member WHERE crew_crew_no = #{crew_crew_no} AND user_info_user_no = #{user_info_user_no};
+		DELETE FROM crew_member WHERE crew_crew_no =
+		#{crew_crew_no} AND member_no = #{member_no}
 	</delete>
 
-	<select id="selectCrewno" 
-		parameterType="study.spring.goodspring.model.CrewMember" resultMap="crewMemberMap">
+	<!-- 크루멤버에 대한 user_info_user_no 조회 -->
+	<select id="selectCrew"
+		parameterType="study.spring.goodspring.model.CrewMember"
+		resultMap="crewMemberMap">
 		SELECT user_info_user_no
 		FROM crew_member
-		WHERE crew_crew_no = #{crew_crew_no}
+		WHERE member_no =
+		#{member_no}
+	</select>
+
+	<!-- 마이크루 탈퇴 기능 -->
+	<delete id="deleteMyCrew"
+		parameterType="study.spring.goodspring.model.CrewMember">
+		DELETE FROM crew_member WHERE crew_crew_no =
+		#{crew_crew_no} AND user_info_user_no = #{user_info_user_no};
+	</delete>
+
+	<select id="selectCrewno"
+		parameterType="study.spring.goodspring.model.CrewMember"
+		resultMap="crewMemberMap">
+		SELECT cm.user_info_user_no FROM crew_member cm INNER
+		JOIN crew c ON cm.crew_crew_no = c.crew_no
+		WHERE cm.user_info_user_no = #{user_info_user_no};
 	</select>
 
 </mapper>
