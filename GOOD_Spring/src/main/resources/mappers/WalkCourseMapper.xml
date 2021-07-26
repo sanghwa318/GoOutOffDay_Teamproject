@@ -58,7 +58,8 @@
 		CPI_NAME,
 		X,
 		Y,
-		CPI_CONTENT
+		CPI_CONTENT,
+		CPI_IDX
 		FROM seoulgil_walk_course
 		<where>
 			<if test="CPI_IDX != null and CPI_IDX != ''">
@@ -193,6 +194,7 @@
 		</if>
 	</select>
 
+	<!-- [걷기메인]에 필요한 랜덤 추출 -->
 	<select id="selectRandomList"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
@@ -207,6 +209,7 @@
 		ORDER BY rand()
 		LIMIT 15;
 	</select>
+	<!-- //[걷기메인]에 필요한 랜덤 추출 -->
 
 	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->
 	<select id="selectCountAll"
@@ -298,4 +301,5 @@
 			</choose>
 		</where>
 	</select>
+
 </mapper>

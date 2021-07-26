@@ -389,7 +389,7 @@ carousel-title2 {
 							<p>${item.CPI_CONTENT }</p>
 						</div>
 						<div class="wishlist">
-							<span class=heart><i class="fa fa-heart-o"
+							<span class="heart"><i class="fa fa-heart-o"
 								aria-hidden="true" role="button"></i> </span>
 						</div>
 					</div>

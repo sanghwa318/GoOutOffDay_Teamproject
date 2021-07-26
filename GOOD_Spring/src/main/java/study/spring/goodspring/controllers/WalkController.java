@@ -19,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.model.WalkLog;
+import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.WalkCourseService;
 import study.spring.goodspring.service.WalkLogService;
 
@@ -32,6 +34,8 @@ public class WalkController {
 	/** Service 패턴 구현체 주입 */
 	@Autowired
 	WalkCourseService walkCourseService; // 코스목록
+	@Autowired
+	BookMarkService bookmarkService; // 코스목록
 	@Autowired
 	WebHelper webHelper;
 	@Autowired
@@ -156,7 +160,7 @@ public class WalkController {
 	}
 
 	@RequestMapping(value = "/walkPage/walk_detailCourse.do", method = RequestMethod.GET)
-	public ModelAndView walk_detailCourse(Model model, HttpServletResponse response,
+	public ModelAndView walk_detailCourse(Model model, HttpServletRequest request, HttpServletResponse response,
 			// 포인트 지점(기본키)
 			@RequestParam(value = "CPI_IDX") int CPI_IDX) {
 
@@ -166,18 +170,41 @@ public class WalkController {
 
 		// 조회 결과를 저장할 객체 선언
 		WalkCourse output = null;
+		BookMark bookinput = new BookMark();
+		int outputcount = 0;
 
-		try {
-			output = walkCourseService.getWalkCourseItem(input);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (request.getSession().getAttribute("login_info") == null) {
+
+			String stsvcid = Integer.toString(input.getCPI_IDX());
+			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
+			bookinput.setService_id(stsvcid);
+			try {
+				output = walkCourseService.getWalkCourseItem(input);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			Member loginInfo = (Member) webHelper.getSession("login_info");
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+			
+			String stsvcid = Integer.toString(input.getCPI_IDX());
+			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
+			bookinput.setService_id(stsvcid);
+			try {
+				output = walkCourseService.getWalkCourseItem(input);
+				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 
 		// view 처리
 		model.addAttribute("output", output);
+		model.addAttribute("outputcount", outputcount);
 
 		// walkPage/walk_detailCourse.jsp파일을 View로 지정
-		return new ModelAndView("walkPage/walk_detailCourse");
+		return new ModelAndView("/walkPage/walk_detailCourse");
 	}
 
 	/**
@@ -267,4 +294,41 @@ public class WalkController {
 		return "walkPage/walk_log";
 	}
 
+	/**
+	 * 코스상세 아이템 찜하기
+	 * 
+	 * @throws Exception
+	 **/
+	@ResponseBody
+	@RequestMapping(value = "/walkPage/BookMark", method = RequestMethod.POST)
+	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
+			@RequestParam(value = "catid", required = false) String catid) throws Exception {
+
+		int intset = Integer.parseInt(svcid);
+		BookMark input = new BookMark();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+
+		WalkCourse Info = new WalkCourse();
+		Info.setCOURSE_CATEGORY_NM(catid);
+		Info.setCPI_IDX(intset);
+		String stsvcid = Integer.toString(Info.getCPI_IDX());
+
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		input.setCategory_id(Info.getCOURSE_CATEGORY_NM());
+		input.setService_id(stsvcid);
+
+		try {
+			// 추가 삭제 구문
+			if (bookmarkService.BookMarkUniqueCheck(input) == 1) {
+				bookmarkService.deleteBookMark(input);
+			} else if (bookmarkService.BookMarkUniqueCheck(input) == 0) {
+				bookmarkService.addBookMark(input);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return webHelper.getJsonData();
+
+	}
 }

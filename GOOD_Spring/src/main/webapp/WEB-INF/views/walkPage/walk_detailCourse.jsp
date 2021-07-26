@@ -56,7 +56,7 @@ ul, li {
 		<div class="row">
 			<div class="container" style="margin-bottom: 10px;">
 				<div class="header" style="margin-bottom: 50px;">
-					<h1 style="text-align: center;">${output.COURSE_NAME} > 
+					<h1 style="text-align: center;">${output.COURSE_NAME}>
 						${output.CPI_NAME }</h1>
 					<h3 style="text-align: right;">추천수: ${output.VOTE_CNT }</h3>
 				</div>
@@ -79,12 +79,20 @@ ul, li {
 									class="glyphicon glyphicon-arrow-right"
 									style="padding-right: 5px;"></i> 위치 안내</span>
 							</button>
-							<button class="heart btn btn-success"
-								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
-								<i class="fa fa-heart-o" aria-hidden="true" role="button"
-									style="padding-right: 5px;"></i> 찜하기
-							</button>
-
+							<c:if test="${outputcount eq 1}">
+								<button class="heart btn btn-warning liked" type="button"
+									style="width: 140px; font-size: 18px;">
+									<i class="fa fa-heart" aria-hidden="true" role="button"
+										style="padding-right: 5px; font-size: 18px;"></i>찜제거
+								</button>
+							</c:if>
+							<c:if test="${outputcount eq 0}">
+								<button class="heart btn btn-warning" type="button"
+									style="width: 140px; font-size: 18px;">
+									<i class="fa fa-heart-o" aria-hidden="true" role="button"
+										style="padding-right: 5px; font-size: 18px;"></i>찜하기
+								</button>
+							</c:if>
 						</div>
 					</div>
 
@@ -131,7 +139,9 @@ ul, li {
 
 				</div>
 				<div class="text-center">
-					<button onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_search.do'" class="btn btn-default"
+					<button
+						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_search.do'"
+						class="btn btn-default"
 						style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
 						목록</button>
 				</div>
@@ -157,26 +167,6 @@ ul, li {
 
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	</script>
-	<script>
-		// 하트
-		$(".heart")
-				.on(
-						"click",
-						function() {
-							if ($(this).hasClass("liked")) {
-								$(this)
-										.html(
-												'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
-								$(this).removeClass("liked");
-							} else {
-								$(this)
-										.html(
-												'<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
-								$(this).addClass("liked");
-							}
-						});
-	</script>
-	<!-- //하트 -->
 
 	<script type="text/javascript">
 	$(function(){
@@ -187,6 +177,113 @@ ul, li {
 							});
 
 		});
+	</script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/Book-Mark.js">
+	</script>
+	<script>
+	// 찜 추가
+	function addBookMark(){
+	var catid = '${output.COURSE_CATEGORY_NM}';
+	var svcid = '${output.CPI_IDX}';
+	svcid = String(svcid);
+	
+	$.ajax({
+		catch:false,
+		url: getContextPath()+'/walkPage/BookMark',
+		type: 'post',
+		dataType : 'json',
+		data : {catid, svcid},
+		timeout : 10000,
+		success: function(req){
+			console.log("성공 : " + req);
+			$(".heart").html(
+                  '<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜제거');
+            $(".heart").addClass(
+               "liked");
+            swal(
+               '성공',
+               '찜목록에 추가되었습니다.',
+               'success');
+            setTimeout(function() {
+            }, 1000);
+         },
+         error: function(error) {
+            console.log("에러 >> " + error.status);
+            swal('주의', '찜추가에 실패했습니다.', 'warning'), {
+               closeOnClickOutside: false,
+               closeOnEsc: false,
+               buttons: {
+                  confirm: {
+                     text: '닫기',
+                     value: true,
+                     className: 'btn btn-outline-primary'
+                  }
+               }
+            }
+            $(".heart")
+               .html(
+                  '<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+            $(".heart")
+               .removeClass("liked");
+         }
+      })
+   }
+	// 찜삭제
+	function deleteBookMark() {
+		var catid = '${output.COURSE_CATEGORY_NM}';
+		var svcid = '${output.CPI_IDX}';
+		svcid = String(svcid);
+
+		$.ajax({
+			catch:false,
+			url: getContextPath()+'/walkPage/BookMark',
+			type: 'post',
+			dataType : 'json',
+			data : {catid, svcid},
+			timeout : 10000,
+			success: function(req){
+				console.log("삭제 : " + req);
+			$(".heart").html(
+            '<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜하기');
+      		$(".heart").removeClass("liked");
+      		swal(
+                    '성공',
+                    '찜목록에서 제거되었습니다.',
+                    'success'), {
+                    buttons: {
+                       confirm: {
+                          text: '닫기',
+                          value: true,
+                          className: 'btn btn-outline-primary'
+                       }
+                    }
+                 }
+                 setTimeout(function() {
+                 }, 1000);
+              },
+              error: function(error) {
+                 console.log("에러 >> " + error.status);
+                 swal('주의', '찜목록에 제거하기가 실패했습니다.', 'warning'), {
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                    buttons: {
+                       confirm: {
+                          text: '닫기',
+                          value: true,
+                          className: 'btn btn-outline-primary'
+                       }
+                    }
+                 }
+                 $(".heart")
+                    .html(
+                       '<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜제거');
+                 $(".heart")
+                    .removeClass(
+                       "liked");
+              }
+           })
+        }
 	</script>
 </body>
 </html>
