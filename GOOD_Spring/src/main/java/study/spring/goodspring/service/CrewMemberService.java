@@ -58,6 +58,14 @@ public interface CrewMemberService {
 	 */
 	public int getCrewMemberCount(CrewMember input) throws Exception;
 	
+	/**
+	 * 마이크루 삭제
+	 * @param input
+	 * @return int
+	 * @throws Exception
+	 */
+	public int deleteMyCrew(CrewMember input) throws Exception;
+	
 
 	
 }

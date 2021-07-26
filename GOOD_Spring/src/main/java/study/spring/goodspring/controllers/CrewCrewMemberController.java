@@ -18,6 +18,7 @@ import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
+import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
@@ -102,5 +103,30 @@ public class CrewCrewMemberController {
 		
 		/** 3) 페이지 이동 */
 		return webHelper.redirect(contextPath + "/commPage/comm_crew_memberJoin.do?crew_crew_no=" + input.getCrew_crew_no(), "추방되었습니다.");
+	}
+	
+	/** 크루탈퇴 */
+	@RequestMapping(value = "/commPage/comm_crew_bbs_delete_ok.do", method = RequestMethod.GET)
+	public ModelAndView delete_ok(Model model, HttpServletResponse response,
+			@RequestParam(value="crew_no", defaultValue = "0") int crew_crew_no)
+			{
+		
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		
+		
+		/** 2) 데이터 삭제하기 */
+		CrewMember input = new CrewMember();
+		input.setCrew_crew_no(crew_crew_no);
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		
+		try {
+			crewMemberService.deleteMyCrew(input);  // 데이터 삭제
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		/** 3) 페이지 이동 */
+		// 확인할 대상이 삭제된 상태이므로 크루 페이지로 이동
+		return webHelper.redirect(contextPath + "/commPage/comm_crew_myCrew.do", "탈퇴되었습니다.");
 	}
 }

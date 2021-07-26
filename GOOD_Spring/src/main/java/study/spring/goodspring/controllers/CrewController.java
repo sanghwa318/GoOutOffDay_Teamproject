@@ -133,23 +133,5 @@ public class CrewController {
 
 	}
 	
-	/** 크루탈퇴 */
-	@RequestMapping(value = "/commPage/comm_crew_bbs_delete_ok.do", method = RequestMethod.GET)
-	public ModelAndView delete_ok(Model model, HttpServletResponse response,
-			@RequestParam(value="crew_no", defaultValue = "0") int crew_no) {
-
-		/** 2) 데이터 삭제하기 */
-		Crew input = new Crew();
-		input.setCrew_no(crew_no);
-
-		try {
-			crewService.deleteCrew(input);  // 데이터 삭제
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		/** 3) 페이지 이동 */
-		// 확인할 대상이 삭제된 상태이므로 크루 페이지로 이동
-		return webHelper.redirect(contextPath + "/commPage/comm_crew_myCrew.do", "탈퇴되었습니다.");
-	}
+	
 }

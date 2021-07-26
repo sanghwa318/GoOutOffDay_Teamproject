@@ -96,7 +96,10 @@ VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
 		WHERE member_no = #{member_no}
 	</select>
 	
-	
+	<!-- 마이크루 탈퇴 기능 -->
+	<delete id="deleteMyCrew" parameterType="study.spring.goodspring.model.CrewMember">
+		DELETE FROM crew_member WHERE crew_crew_no = #{crew_crew_no} AND user_info_user_no = #{user_info_user_no};
+	</delete>
 
 	
 
