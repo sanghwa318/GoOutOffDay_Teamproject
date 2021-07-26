@@ -1,5 +1,6 @@
 package study.spring.goodspring.model;
 
+
 import com.google.gson.Gson;
 
 import lombok.Data;
@@ -20,24 +21,51 @@ public class CrewPost {
 	private String post_hits;
 	private int user_info_user_no;
 	
-//	/** 프로필사진 정보{json=UploadItem}, IS NULL */
-//    public void setPhotoJson(String post_img) {
-//        this.post_img = new Gson().fromJson(post_img, UploadItem.class);
-//    }
-//
-//    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-//    public void setCrewPost_photo(UploadItem post_img) {
-//        this.post_img = post_img;
-//    }
-//
-//    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-//    public UploadItem getCrewPost_photo() {
-//        return this.post_img;
-//    }
-//
-//    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-//    public String getPhotoJson() {
-//        return new Gson().toJson(this.post_img);
-//    }
+	//Crew 컬럼
+	private int crew_no;
+	private String crew_name;
+	private String crew_area;
+	private String crew_sinto; 
+	private String crew_createtime; 
+	private String crew_category; 
+	private UploadItem crew_photo; 
+	private String crew_dinto; 
+	private int crew_member; 
 	
+	//Member컬럼
+	private int user_no; //(사용자 일련번호)
+	private String user_id;// (사용자 ID)
+	private String user_name;// (사용자 이름)
+	private String user_nick;// (사용자 닉네임)
+	private String user_pw;// (비밀번호)
+	private String gender;// (성별)
+	private String address1;// (주소)	
+	private String address2;// (주소)	
+	private String post;// (우편번호)
+	private String tel;// (연락처)
+	private String email;// (이메일)
+	private UploadItem user_photo;// (프로필 사진)
+	private boolean user_admin;// (관리자 권한)
+	private String create_datetime;// (가입일자)
+	private String edit_datetime;// (수정일자)
+	
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public void setPhotoJson(String user_photo) {
+        this.user_photo = new Gson().fromJson(user_photo, UploadItem.class);
+    }
+
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public void setCrewUser_photo(UploadItem user_photo) {
+        this.user_photo = user_photo;
+    }
+
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public UploadItem getCrewUser_photo() {
+        return this.user_photo;
+    }
+
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public String getPhotoJson() {
+        return new Gson().toJson(this.user_photo);
+    }
 }

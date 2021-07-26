@@ -92,19 +92,19 @@ public class CrewPostServiceImpl implements CrewPostService {
 		CrewPost result = null;
 		
 		try {
-			result = sqlSession.selectOne("CrewMapper.selectCrewItem", input);
+			result = sqlSession.selectOne("CrewPostMapper.selectCrewPostItem", input);
 			
 			if(result == null) {
 				throw new NullPointerException("result = null");
 			}
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("조회된 크루 데이터가 없습니다.");
+			throw new Exception("조회된 크루포스트 데이터가 없습니다.");
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("크루 조회에 실패했습니다.");
+			throw new Exception("크루 포스트 조회에 실패했습니다.");
 		}
-		return null;
+		return result;
 	}
 
 	
@@ -121,6 +121,42 @@ public class CrewPostServiceImpl implements CrewPostService {
 		
 		try {
 			result = sqlSession.selectOne("CrewMapper.selectCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+
+
+
+	@Override
+	public CrewPost getCrewNoPostCount(CrewPost input) throws Exception {
+		
+		CrewPost result= null;
+		
+		try {
+			result = sqlSession.selectOne("CrewPostMapper.selectCrewPost", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+
+
+
+	@Override
+	public CrewPost selectCrewUser(CrewPost input) throws Exception {
+		
+		CrewPost result= null;
+		
+		try {
+			result = sqlSession.selectOne("CrewPostMapper.selectCrewUser", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

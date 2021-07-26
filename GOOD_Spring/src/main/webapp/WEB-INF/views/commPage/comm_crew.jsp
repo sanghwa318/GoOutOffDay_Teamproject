@@ -206,6 +206,7 @@
 
 		</div>
 	</div>
+	<br>
 	<!-- 페이지네이션 -->
 	<%@ include file="../inc/pagenation.jsp"%>
 	<!-- //페이지네이션 -->

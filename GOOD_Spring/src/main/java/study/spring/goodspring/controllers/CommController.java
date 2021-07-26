@@ -334,7 +334,6 @@ public class CommController {
 	
 	
 	
-	
 
 	/*
 	 * comm_crew_post
@@ -343,33 +342,43 @@ public class CommController {
 	public ModelAndView crewPost(Model model,
 			HttpServletRequest request,
 			 HttpServletResponse response,
-			@RequestParam(value = "crew_name", defaultValue = "f123") String crew_name,
-			@RequestParam(value = "crew_no", defaultValue = "92") int crew_no) {
-
-	
+			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
+		
+		
+		Member login_info = (Member) webHelper.getSession("login_info");
+		int userNo = login_info.getUser_no();
 		
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
-		Crew input = new Crew();
+		CrewPost post = new CrewPost();
+		post.setPost_no(post_no);
+		post.setUser_info_user_no(userNo);
 		
-		input.setCrew_name(crew_name);
-		input.setCrew_no(crew_no);
+		CrewPost postout = null;
 		
-		Crew output = null;
-
+		CrewPost input = new CrewPost();
+		input.setPost_no(post_no);
+		
+		CrewPost postout2 = null;
+		
+		CrewPost postout3 = null;
+		
 		try {
 			// 데이터 조회하기
-		output = crewService.getCrewItem(input);
+		postout = crewPostService.selectCrewPost(input);
+		postout2 = crewPostService.getCrewNoPostCount(input);
+		postout3 = crewPostService.selectCrewUser(input);
 		} catch (Exception e) {
-			return webHelper.redirect(null, e.getLocalizedMessage());
+			e.getLocalizedMessage();
+//			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 	
 
 		// 3) View 처리
-		model.addAttribute("output", output);
-		model.addAttribute("crew_no", crew_no);
-		model.addAttribute("crew_name", crew_name);
-		return new ModelAndView("commPage/comm_crew_post");
+		model.addAttribute("postout", postout);
+		model.addAttribute("postout2", postout2);
+		model.addAttribute("postout3", postout3);
+		return new ModelAndView("/commPage/comm_crew_post");
 	}
 
 	/*
@@ -392,7 +401,6 @@ public class CommController {
 			@RequestParam(value = "crew_no", defaultValue = "") int crew_no) {
 
 	
-		
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
 		Crew input = new Crew();
@@ -455,7 +463,7 @@ public class CommController {
 		}
 
 		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no?=" +input.getPost_no();
+		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" +input.getPost_no();
 
 		try {
 			response.sendRedirect(redirectUrl);

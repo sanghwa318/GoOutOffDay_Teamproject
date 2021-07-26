@@ -56,7 +56,7 @@
 
 				<br />
 				<textarea name="post_content" id="post_content" class="ckeditor"
-					style="font-size: 20px; resize: none">내용: </textarea>
+					style="font-size: 20px; resize: none">내용:</textarea>
 				<br />
 
 				<div class="btn-group pull-right">
@@ -64,7 +64,7 @@
 						id="wr_cancel">
 						<span>취소</span>
 					</button>
-					<button type="submit" class="btn btn-primary wr_ok" id="wr_ok">
+					<button type="submit" class="btn btn-primary wr_ok" id="wr_ok" >
 						<span>작성완료</span>
 					</button>
 				</div>

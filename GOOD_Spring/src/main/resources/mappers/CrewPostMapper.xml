@@ -43,7 +43,7 @@
 		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
 		SELECT COUNT(*) FROM crew_post cp
 		INNER JOIN crew c ON c.crew_no = cp.post_crew
-		WHERE  c.crew_no = #{post_crew}
+		WHERE  c.crew_no = #{post_crew};
 	</select>
 
 	<!-- 단일행 조회 -->
@@ -51,14 +51,24 @@
 		parameterType="study.spring.goodspring.model.CrewPost">
 		SELECT *
 		FROM crew_post
-		WHERE post_no = #{post_no}
+		WHERE post_no = #{post_no};
+	</select>
+	
+	
+		<!-- Post_no를 통한 Crew 조회 -->
+	<select id="selectCrewPost" resultMap="crewPostMap"
+		parameterType="study.spring.goodspring.model.CrewPost">
+		SELECT c.* FROM crew_post cp
+		INNER JOIN crew c ON c.crew_name=cp.post_crew
+		WHERE  cp.post_no = #{post_no};
 	</select>
 
-
-
-
-
-
-
+<!-- post게시자 닉네임 -->
+	<select id="selectCrewUser" resultMap="crewPostMap"
+		parameterType="study.spring.goodspring.model.CrewPost">
+				SELECT u.* FROM crew_post cp
+		INNER JOIN user_info u ON u.user_no=cp.user_info_user_no
+		WHERE  cp.post_no = #{post_no};
+	</select>
 
 </mapper>

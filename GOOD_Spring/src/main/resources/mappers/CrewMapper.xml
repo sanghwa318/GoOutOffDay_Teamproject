@@ -156,12 +156,12 @@
 		WHERE u.user_no = #{user_info_user_no}
 
 		ORDER BY crew_no DESC
-		
+
 		<if test="listCount > 0">
 			LIMIT #{offset}, #{listCount}
 		</if>
-		
-		
+
+
 
 	</select>
 
@@ -178,13 +178,16 @@
 		WHERE u.user_no = #{user_info_user_no};
 	</select>
 
-    <!-- 크루에 대한 user_info_user_no 조회 기능 -->
-    <!-- 크루멤버 단일행 조회 -->
+	<!-- 크루에 대한 user_info_user_no 조회 기능 -->
+	<!-- 크루멤버 단일행 조회 -->
 	<select id="selectCrew" resultMap="crewMap"
 		parameterType="study.spring.goodspring.model.Crew">
-		SELECT user_info_user_no 
+		SELECT user_info_user_no
 		FROM crew
 		WHERE crew_no = #{crew_crew_no}
 	</select>
+
+
+
 
 </mapper>

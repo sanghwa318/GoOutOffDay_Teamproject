@@ -36,4 +36,14 @@ public interface CrewPostService {
 	 */
 	public int getCrewPostCount(CrewPost input) throws Exception;
 	
+	/*
+	 * 크루 멤버 조회
+	 */
+	public CrewPost getCrewNoPostCount(CrewPost input) throws Exception;
+	
+	
+	/*
+	 * 유저 닉네임 조회
+	 */
+	public CrewPost selectCrewUser (CrewPost input) throws Exception;
 }

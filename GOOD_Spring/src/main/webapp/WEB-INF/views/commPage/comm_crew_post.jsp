@@ -68,15 +68,22 @@
 form {
 	margin-left: 25%;
 }
+
+.title-img img {
+	width: 3rem;
+	height: 3rem;
+	position: relative;
+	left: 5px;
+	bottom: 0px;
+}
 </style>
 </head>
 <body>
 	<div class="wrapper">
-	<!-- 공용 헤더 -->
-	<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
+		<!-- 공용 헤더 -->
+		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 		<!-- //공통 헤더 -->
 		<!-- 컨테이너 -->
-
 
 		<div class="container crew_container">
 			<!-- 대제목 -->
@@ -95,11 +102,12 @@ form {
 			<div class="sidebar">
 				<div class="form-group">
 					<span class="title-img"><img
-						src="${pageContext.request.contextPath}/assets/img/profile_default.png"> <span class='sr-only'>이미지</span>
+						src="${postout2.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
-					<h4>가입된 회원 수 :</h4>
-					<h3 class="title-name">#{output.post_crew}크루</h3>
-					<p>${output.crew_sinto}</p>
+					<h4>가입된 회원 수 : ${postout2.crew_member}명</h4>
+					<h3 class="title-name">크루: ${postout2.crew_name}</h3>
+					<p>
+						크루 간단 소개: <br>${postout2.crew_sinto}</p>
 				</div>
 			</div>
 			<!-- //사이드 영역 -->
@@ -108,27 +116,22 @@ form {
 
 			<div class="row row_a">
 				<div class="pull-left writer_profile">
-					<a href="#"><img style="border-radius: 25px"
-						src="" width="50px"
-						height="50px"></img></a>
+					<img style="border-radius: 25px"
+						src="${postout2.user_photo.fileUrl}" width="50px"
+						height="50px"></img>
 				</div>
 				<div class="pull-left writer_info" style="margin-left: 15px;">
-					<h4>작성자 번호</h4>
-					<p class="pull-left">${output.post_createdate}</p>
-					<p class="pull-left" style="margin-left: 15px;">조회수 : 185</p>
-
+					<h4>${postout3.getUser_name()}</h4>
+					<p class="pull-left">작성일자: ${postout.getPost_createdate()}</p>
+					<p class="pull-left" style="margin-left: 15px;">조회수
+						: ${postout.post_hits}</p>
+					<p>${postout.getPost_content()}</p>
 				</div>
+
+
 			</div>
 
-			<div class="row row_a">
 
-				<div class="col-md-11" style="margin-top: -230px;">댓글내용
-					ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*qweqwewqeqwwqeweweqasdasasddsdasadsdasd
-					sassdasddsdsdasdsa()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()
-					ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()
-					ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()
-				</div>
-			</div>
 
 			<div class="row row_a">
 				<div class="col-md-2 col-lg-1 col-xs-2 text-center"
@@ -250,49 +253,64 @@ form {
 
 							});
 
-			$('#wr_delete').click(function(e) {
+			$('#wr_delete')
+					.click(
+							function(e) {
 
-				swal({
-					title : '확인', // 제목
-					text : "정말 게시글을 삭제하시겠습니까?", // 내용
-					type : 'warning', // 종류
-					confirmButtonText : '네', // 확인버튼 표시 문구
-					showCancelButton : true, // 취소버튼 표시 여부
-					cancelButtonText : '아니오', // 취소버튼 표시 문구
-				}).then(function(result) {
-					// 창이 닫히는 애니메이션의 시간이 있으므로,
-					// 0.1초의 딜레이 적용 후 포커스 이동
-					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('삭제', '게시글이 삭제되었습니다..', 'success');
-						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_bbs.jsp';
-						}, 1000);
+								swal({
+									title : '확인', // 제목
+									text : "정말 게시글을 삭제하시겠습니까?", // 내용
+									type : 'warning', // 종류
+									confirmButtonText : '네', // 확인버튼 표시 문구
+									showCancelButton : true, // 취소버튼 표시 여부
+									cancelButtonText : '아니오', // 취소버튼 표시 문구
+								})
+										.then(
+												function(result) {
+													// 창이 닫히는 애니메이션의 시간이 있으므로,
+													// 0.1초의 딜레이 적용 후 포커스 이동
+													if (result.value) { // 확인 버튼이 눌러진 경우
+														swal(
+																'삭제',
+																'게시글이 삭제되었습니다..',
+																'success');
+														setTimeout(
+																function() {
+																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_bbs.jsp';
+																}, 1000);
 
-					}
-				});
-			});
+													}
+												});
+							});
 
-			$('#d_delete').click(function(e) {
+			$('#d_delete')
+					.click(
+							function(e) {
 
-				swal({
-					title : '확인', // 제목
-					text : "정말 게시글을 삭제하시겠습니까?", // 내용
-					type : 'warning', // 종류
-					confirmButtonText : '네', // 확인버튼 표시 문구
-					showCancelButton : true, // 취소버튼 표시 여부
-					cancelButtonText : '아니오', // 취소버튼 표시 문구
-				}).then(function(result) {
-					// 창이 닫히는 애니메이션의 시간이 있으므로,
-					// 0.1초의 딜레이 적용 후 포커스 이동
-					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('삭제', '댓글이 삭제되었습니다.', 'success');
-						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp';
-						}, 1000);
+								swal({
+									title : '확인', // 제목
+									text : "정말 게시글을 삭제하시겠습니까?", // 내용
+									type : 'warning', // 종류
+									confirmButtonText : '네', // 확인버튼 표시 문구
+									showCancelButton : true, // 취소버튼 표시 여부
+									cancelButtonText : '아니오', // 취소버튼 표시 문구
+								})
+										.then(
+												function(result) {
+													// 창이 닫히는 애니메이션의 시간이 있으므로,
+													// 0.1초의 딜레이 적용 후 포커스 이동
+													if (result.value) { // 확인 버튼이 눌러진 경우
+														swal('삭제',
+																'댓글이 삭제되었습니다.',
+																'success');
+														setTimeout(
+																function() {
+																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp';
+																}, 1000);
 
-					}
-				});
-			});
+													}
+												});
+							});
 
 		});
 	</script>
