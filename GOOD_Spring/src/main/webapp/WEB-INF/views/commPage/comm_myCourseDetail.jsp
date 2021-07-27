@@ -255,10 +255,13 @@ ul, li {
 			</form>
 			<hr>
 			<a class="btn btn-default pull-left"
-				href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=1">목록</a> <a
+				href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=1">목록</a> 
+				<c:if test="${output.user_info_user_no==login_info.user_no}">
+				<a
 				class="btn btn-default pull-right" href="${pageContext.request.contextPath}/commPage/comm_myCourseEdit.do?mycourse_no=${output.mycourse_no}">코스
 				수정</a>
-			<button class="btn btn-default pull-right">코스 삭제</button>
+			<button class="btn btn-default pull-right" id='delete-btn' data-mycourseno="${output.mycourse_no}">코스 삭제</button>
+			</c:if>
 			<br> <br> <br>
 		</div>
 		
@@ -275,24 +278,6 @@ ul, li {
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script
 		src="${pageContext.request.contextPath}/assets/js/myCourseDetail-js.js"></script>
-	<script>
-		$(".heart")
-				.on(
-						"click",
-						function() {
-							if ($(this).hasClass("liked")) {
-								$(this)
-										.html(
-												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
-								$(this).removeClass("liked");
-							} else {
-								$(this)
-										.html(
-												'<i class="fa fa-heart" aria-hidden="true"></i>');
-								$(this).addClass("liked");
-							}
-						});
-	</script>
-	<!-- //js -->
+
 </body>
 </html>

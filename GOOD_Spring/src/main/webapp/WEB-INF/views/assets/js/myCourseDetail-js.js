@@ -1,6 +1,25 @@
 /**
  * 
  */
+$(".heart").on("click",function() {
+	 if($(this).hasClass("liked")) {
+		$(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+		$(this).removeClass("liked");
+	} else {
+		$(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
+		$(this).addClass("liked");
+	}
+});
+var course_no = $('#delete-btn').data('mycourseno');
+
+$("#delete-btn").on("click",function() {
+		if(confirm("삭제하시겠습니까?")){
+		location.href = getContextPath()+"/commPage/comm_myCourseDeleteOk.do?mycourse_no="+course_no;
+		return true;
+	}else{
+		return false;
+	}
+})
 
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

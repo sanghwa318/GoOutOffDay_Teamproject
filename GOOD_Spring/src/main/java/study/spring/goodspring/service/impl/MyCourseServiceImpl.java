@@ -158,7 +158,7 @@ public class MyCourseServiceImpl implements MyCourseService {
 		int result = 0;
 
 		try {
-			result = sqlSession.delete("MyCourseMapper.deleteCrew", input);
+			result = sqlSession.delete("MyCourseMapper.deleteMyCourse", input);
 
 			if (result == 0) {
 				throw new NullPointerException("result=0");

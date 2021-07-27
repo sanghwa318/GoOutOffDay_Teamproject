@@ -153,7 +153,7 @@ public class MyCourseController {
 			output=myCourseService.getMyCourseItem(mycourseInput);
 			
 			//로그인된 사용자의 정보와 코스 작성자가 같을 경우만 연결시킨다.
-			if(loginInfo.getUser_no()==output.getUser_info_user_no()) {
+			if(loginInfo.getUser_no()!=output.getUser_info_user_no()) {
 				webHelper.redirect(null, "코스 작성자만 수정가능합니다.");
 			}
 			// 지도 정보를 위한 코스이름 데이터 조회
@@ -368,6 +368,38 @@ public class MyCourseController {
 		map.put("courseName", courseName);
 		return webHelper.getJsonData(map);
 	}
+	/**
+	 * 나만의코스 삭제 처리 action 페이지
+	 * @param mycourse_no 나만의코스 글번호
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/commPage/comm_myCourseDeleteOk.do", method = RequestMethod.GET)
+	public ModelAndView mycourseDeleteOk(Model model,
+			@RequestParam(value="mycourse_no" )int mycourse_no) {
+		//삭제처리를 위한 객체 준비
+		MyCourses input =new MyCourses();
+		input.setMycourse_no(mycourse_no);
+		MyCourses output=null;
+		//현재 사용자 정보 조회
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		
+		try {
+			//로그인된 사용자의 정보와 코스 작성자가 같을 경우만 연결시킨다.
+			output=myCourseService.getMyCourseItem(input);
+			if(loginInfo.getUser_no()!=output.getUser_info_user_no()) {
+				return webHelper.redirect(null,"코스 작성자만 삭제가능합니다.");
+			}else {
+				//삭제처리
+				myCourseService.deleteMyCourse(input);
+			}
+		} catch (Exception e) {
+			webHelper.redirect(null , e.getLocalizedMessage());
+		}
+		return webHelper.redirect(contextPath+"/commPage/comm_myCourse.do", "삭제되었습니다.");
+		
+	}
+	
+	
 	
 	/*
 	 * comm_myPost
