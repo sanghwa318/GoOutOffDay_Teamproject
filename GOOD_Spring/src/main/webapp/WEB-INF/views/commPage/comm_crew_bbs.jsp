@@ -167,10 +167,10 @@
 						<button type="submit" id="btn2" class="btn btn-primary pull-right">크루관리</button>
 					</form>
 					<!-- 탈퇴버튼 -->
-				<form method="get" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs_delete_ok.do" >
-				<input type="hidden" name="crew_no" value="${output.crew_no}" />
+				<div>
+				<input type="hidden" id="crew_no" name="crew_no" value="${output.crew_no}" />
 				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
-				</form>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -197,7 +197,8 @@
 	    return contextPath;
 	 }
 		$("#out").click(function() {
-						
+
+			event.preventDefault();		
 			// 확인, 취소버튼에 따른 후속 처리 구현
 			swal({
 				title : '확인', // 제목
@@ -208,12 +209,9 @@
 				cancelButtonText : '아니오', // 취소버튼 표시 문구
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 				if (result.value) { // 확인 버튼이 눌러진 경우
-					setTimeout(function() {
-						return false;
-						window.location.href=getContextPath() +"/commPage/comm_crew_bbs_delete_ok.do" ;
-					}, 10000);
-					
-	
+
+					window.location.href=getContextPath() +"/commPage/comm_crew_bbs_delete_ok.do?crew_no=" + ${output.crew_no} ;
+
 				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 					swal('취소', '탈퇴가 취소되었습니다.', 'error');
 				}

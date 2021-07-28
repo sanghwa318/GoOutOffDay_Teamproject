@@ -142,7 +142,7 @@
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 				if (result.value) { // 확인 버튼이 눌러진 경우
 					var mn = $("#member_id:checked").data("memberno");
-					var cn = $("#member_id:checked").data("crewno")
+					var cn = $("#member_id:checked").data("crewno");
 					window.location.href=getContextPath() +"/commPage/comm_crew_memberJoin_delete?member_no=" + mn +"&crew_crew_no=" + cn ;
 
 				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
