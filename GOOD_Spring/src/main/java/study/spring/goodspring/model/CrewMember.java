@@ -14,6 +14,7 @@ public class CrewMember {
 	private String user_id;
 	private String user_nick;
 	
+	
 	//2) 페이지 구현을 위한 static 변수
 	
 	//LIMIT절에서 사용할 조회 시작 위치

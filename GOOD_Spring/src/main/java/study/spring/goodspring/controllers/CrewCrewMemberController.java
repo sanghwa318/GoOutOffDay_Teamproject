@@ -117,15 +117,15 @@ public class CrewCrewMemberController {
 		input.setCrew_crew_no(crew_crew_no);
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		
-		try {
+		try { 
 			if(crewMemberService.getCrewno(input)) {
-				return webHelper.redirect(null, "크루장은 탈퇴 수 없습니다.");
+				return webHelper.redirect(null, "크루장은 탈퇴 할 수 없습니다.");
 			}
 			else {
 			crewMemberService.deleteMyCrew(input);  // 데이터 삭제
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 		
 		/** 3) 페이지 이동 */

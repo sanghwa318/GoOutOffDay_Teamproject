@@ -8,8 +8,7 @@
 <html>
 <head>
 <%@ include file="../inc/head.jsp"%>
-<link
-	href="../plugins/drag-drop-image-uploader/dist/image-uploader.min.css"
+<link href="${pageContext.request.contextPath}/assets/plugins/drag-drop-image-uploader/dist/image-uploader.min.css"
 	rel="stylesheet">
 
 <style>

@@ -120,7 +120,8 @@
 		resultMap="crewMemberMap">
 		SELECT cm.user_info_user_no FROM crew_member cm INNER
 		JOIN crew c ON cm.crew_crew_no = c.crew_no
-		WHERE cm.user_info_user_no = #{user_info_user_no};
+		WHERE cm.user_info_user_no = #{user_info_user_no}
+		LIMIT 1;
 	</select>
 
 </mapper>
