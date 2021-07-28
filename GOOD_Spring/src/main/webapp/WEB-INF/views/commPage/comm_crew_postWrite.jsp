@@ -41,7 +41,7 @@
 			<br />
 
 
-			<form role="form" method="POST"
+			<form role="form" method="POST" id='post_form'
 				action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite_ok.do">
 				<input type="hidden" name="post_crew" value="${output.crew_name}" />
 				<input type="hidden" name="crew_no" value="${output.crew_no}" />
@@ -86,6 +86,7 @@
 	<script>
 		$(function() {
 			$('#wr_ok').click(function(e) {
+				e.preventDefault();
 
 				var post_title_val = $("#post_title").val();
 
@@ -126,8 +127,7 @@
 					}).then(function(result) {
 						// 창이 닫히는 애니메이션의 시간이 있으므로,
 						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
-						}, 1000);
+						$('#post_form').submit();
 					})
 				}
 
@@ -144,8 +144,7 @@
 				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('삭제', '게시글 작성이 취소되었습니다.', 'success');
-						setTimeout(function() {
-						}, 1000);
+						
 
 					}
 

@@ -157,6 +157,7 @@
 						action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
 						method="GET">
 						<input type="hidden" name="post_crew" value="${output.crew_name}" />
+						<input type="hidden" id="crew_no" name="crew_no" value="${output.crew_no}" />
 						
 						<button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
 					</form>

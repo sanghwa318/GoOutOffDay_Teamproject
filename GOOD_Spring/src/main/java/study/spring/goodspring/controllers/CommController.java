@@ -62,7 +62,8 @@ public class CommController {
 	 * comm_crew_bbs
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_bbs.do", method = RequestMethod.GET)
-	public ModelAndView crewbbs(Model model, @RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
+	public ModelAndView crewbbs(Model model,
+			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
 			// 조건 버튼
 			@RequestParam(value = "order", defaultValue = "1") int order,
 			// 페이지 구현에서 사용할 현재 페이지 번호

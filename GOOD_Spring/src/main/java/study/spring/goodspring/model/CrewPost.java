@@ -10,27 +10,27 @@ import study.spring.goodspring.helper.UploadItem;
 public class CrewPost {
 
 	//기본컬럼
-	private int post_no;
-	private String post_like;
-	private String post_crew;
-	private String post_createdate;
-	private String post_editdate;
-	private String post_title;
-	private String post_content;
-	private String post_img;
-	private String post_hits;
-	private int user_info_user_no;
+	private int post_no; //게시물 번호
+	private String post_like; // 게시물 좋아요 수
+	private String post_crew; // 크루 이름
+	private String post_createdate; // 게시물 생성일자
+	private String post_editdate; // 게시물 수정 일자
+	private String post_title; // 게시물 제목
+	private String post_content; // 게시물 내용
+	private String post_img; // 게시물 사진
+	private String post_hits; // 게시물 조회수
+	private int user_info_user_no; // 게시물 작성자No
 	
 	//Crew 컬럼
-	private int crew_no;
-	private String crew_name;
-	private String crew_area;
-	private String crew_sinto; 
-	private String crew_createtime; 
-	private String crew_category; 
-	private UploadItem crew_photo; 
-	private String crew_dinto; 
-	private int crew_member; 
+	private int crew_no; //크루번호
+	private String crew_name; //크루이름
+	private String crew_area; //크루지역
+	private String crew_sinto;  //크루 간단소개
+	private String crew_createtime; //크루 생성날짜
+	private String crew_category; //크루 카테고리 
+	private UploadItem crew_photo; //크루 사진
+	private String crew_dinto;  //크루 소개
+	private int crew_member;  // 크루 인원
 	
 	//Member컬럼
 	private int user_no; //(사용자 일련번호)

@@ -1,6 +1,5 @@
 package study.spring.goodspring.model;
 
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -11,16 +10,16 @@ import study.spring.goodspring.helper.UploadItem;
 @Data
 public class Crew {
 	//1) 기본 컬럼
-	private int crew_no;
-	private String crew_name;
-	private String crew_area;
-	private String crew_sinto; 
-	private String crew_createtime; 
-	private String crew_category; 
-	private UploadItem crew_photo; 
-	private String crew_dinto; 
-	private int crew_member; 
-	private int user_info_user_no;
+	private int crew_no; //크루번호
+	private String crew_name; //크루이름
+	private String crew_area; //크루지역
+	private String crew_sinto;  //크루 간단소개
+	private String crew_createtime; //크루 생성날짜
+	private String crew_category; //크루 카테고리 
+	private UploadItem crew_photo; //크루 사진
+	private String crew_dinto;  //크루 소개
+	private int crew_member;  // 크루 인원
+	private int user_info_user_no; // 크루장 No
 	
 	
 	/** 프로필사진 정보{json=UploadItem}, IS NULL */
