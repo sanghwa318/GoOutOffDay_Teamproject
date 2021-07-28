@@ -24,7 +24,7 @@
 		SELECT mycourse_no, `like`, mycourse_name, mycourse_area, mycourse_content,
 		 mycourse_createdate, mycourse_editdate, mycourse_hits,
 		user_info_user_no 
-		FROM mycoures_post 
+		FROM mycourse_post 
 		WHERE mycourse_no=#{mycourse_no}
 		ORDER BY mycourse_no DESC
 	</select>
@@ -32,7 +32,7 @@
 	<select id="selectMyCoursePost" resultMap="MyCourseMap"
 		parameterType="study.spring.goodspring.model.MyCourses">
 		SELECT mycourse_no
-		FROM mycoures_post 
+		FROM mycourse_post 
 		WHERE mycourse_name=#{mycourse_name} AND mycourse_area=#{mycourse_area} AND mycourse_content=#{mycourse_content}
 		ORDER BY mycourse_no DESC
 	</select>
@@ -43,7 +43,7 @@
 		SELECT mycourse_no, `like`, mycourse_name, mycourse_area, mycourse_content, mycourse_createdate, mycourse_editdate, mycourse_hits,
 		user_info_user_no
 		
-		FROM mycoures_post
+		FROM mycourse_post
 		<where>
 			<if test="mycourse_name != null and mycourse_name != '' ">
 				mycourse_name LIKE CONCAT('%', #{mycourse_name}, '%')
@@ -71,7 +71,7 @@
 	<insert id="insertMyCourse"
 		parameterType="study.spring.goodspring.model.MyCourses"
 		useGeneratedKeys="true" keyProperty="mycourse_no">
-		INSERT INTO mycoures_post (mycourse_name, mycourse_area, mycourse_content,
+		INSERT INTO mycourse_post (mycourse_name, mycourse_area, mycourse_content,
 		mycourse_createdate, mycourse_editdate, mycourse_hits,
 		user_info_user_no)
 		VALUES (#{mycourse_name}, #{mycourse_area}, #{mycourse_content},
@@ -82,14 +82,14 @@
 	<!-- 데이터 삭제 기능 -->
 	<delete id="deleteMyCourse"
 		parameterType="study.spring.goodspring.model.MyCourses">
-		DELETE FROM mycoures_post WHERE mycourse_no = #{mycourse_no};
+		DELETE FROM mycourse_post WHERE mycourse_no = #{mycourse_no};
 	</delete>
 
 
 	<!-- 데이터 수정 기능 -->
 	<update id="updateMyCourse"
 		parameterType="study.spring.goodspring.model.MyCourses">
-		UPDATE mycoures_post SET mycourse_area=#{mycourse_area},
+		UPDATE mycourse_post SET mycourse_area=#{mycourse_area},
 		mycourse_content=#{mycourse_content}, mycourse_editdate=now()
 		WHERE mycourse_name = #{mycourse_name};
 	</update>
@@ -98,7 +98,7 @@
 
 	<select id="selectCountAll"
 		parameterType="study.spring.goodspring.model.MyCourses" resultType="int">
-		SELECT COUNT(*) FROM mycoures_post
+		SELECT COUNT(*) FROM mycourse_post
 		
 		<where>
 			<if test="mycourse_name != null and mycourse_name != '' ">
@@ -120,7 +120,7 @@
 	<!-- 조회수 증가 기능 -->
 	<update id="updateHits"
 		parameterType="study.spring.goodspring.model.MyCourses">
-		UPDATE mycoures_post SET mycourse_hits=mycourse_hits+1
+		UPDATE mycourse_post SET mycourse_hits=mycourse_hits+1
 		WHERE mycourse_no = #{mycourse_no};
 	</update>
 
