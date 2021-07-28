@@ -83,8 +83,6 @@
 			</div>
 			<h1 class="page-header">
 				마이크루
-				<!-- 탈퇴버튼 -->
-				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
 			</h1>
 
 
