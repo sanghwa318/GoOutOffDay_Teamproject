@@ -4,7 +4,7 @@
 	<!-- 공공서비스 최초 업로드 -->
 	<insert id="insertItemOther"
 		parameterType="study.spring.goodspring.model.CasAPIList$tvYeyakCOllect$Row">
-		INSERT INTO cas_other (
+		INSERT INTO CAS (
 		DIV_COL,
 		SERVICE,
 		GUBUN,
@@ -17,20 +17,13 @@
 		PLACENM,
 		USETGTINFO,
 		SVCURL,
-		X,
-		Y,
-		SVCOPNBGNDT,
-		SVCOPNENDDT,
 		RCPTBGNDT,
 		RCPTENDDT,
 		AREANM,
 		IMGURL,
-		DTLCONT,
 		TELNO,
 		VMAX,
 		VMIN,
-		REVSTDDAY,
-		REVSTDDAYNM,
 		regDate, 
 		editDate
 		) VALUES
@@ -47,20 +40,13 @@
 		#{PLACENM},
 		#{USETGTINFO},
 		#{SVCURL},
-		#{X},
-		#{Y},
-		#{SVCOPNBGNDT},
-		#{SVCOPNENDDT},
 		#{RCPTBGNDT},
 		#{RCPTENDDT},
 		#{AREANM},
 		#{IMGURL},
-		#{DTLCONT},
 		#{TELNO},
 		#{V_MAX},
 		#{V_MIN},
-		#{REVSTDDAY},
-		#{REVSTDDAYNM},
 		now(),
 		now()
 		);
@@ -68,7 +54,7 @@
 	<!-- 공공서비스 동일값이면 수정날짜만 업데이트 -->
 	<update id="updateItemOther"
 		parameterType="study.spring.goodspring.model.CasAPIList$tvYeyakCOllect$Row">
-		UPDATE cas_other SET
+		UPDATE CAS SET
 		DIV_COL=#{DIV},
 		SERVICE=#{SERVICE},
 		GUBUN=#{GUBUN},
@@ -81,20 +67,13 @@
 		PLACENM=#{PLACENM},
 		USETGTINFO=#{USETGTINFO},
 		SVCURL=#{SVCURL},
-		X=#{X},
-		Y=#{Y},
-		SVCOPNBGNDT=#{SVCOPNBGNDT},
-		SVCOPNENDDT=#{SVCOPNENDDT},
 		RCPTBGNDT=#{RCPTBGNDT},
 		RCPTENDDT=#{RCPTENDDT},
 		AREANM=#{AREANM},
 		IMGURL=#{IMGURL},
-		DTLCONT=#{DTLCONT},
 		TELNO=#{TELNO},
 		VMAX=#{V_MAX},
 		VMIN=#{V_MIN},
-		REVSTDDAY=#{REVSTDDAY},
-		REVSTDDAYNM=#{REVSTDDAYNM},
 		editDate = now()
 		WHERE SERVICE=#{SERVICE} 
 		AND SVCID=#{SVCID};

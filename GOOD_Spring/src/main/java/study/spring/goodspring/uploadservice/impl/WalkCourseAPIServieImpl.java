@@ -24,8 +24,8 @@ public class WalkCourseAPIServieImpl implements WalkCourseUploadService {
 			// 수집결과를 반복수행하면서 데이터를 저장
 			for (Row item : row) {
 				// 시작일자와 고유ID가 일치하는 데이터에대한 UPDATE를 시도
-				if(sqlSession.update("WalkCourseMapper.updateItem", item) == 0) {
-					sqlSession.insert("WalkCourseMapper.insertItem", item);
+				if(sqlSession.update("WalkCourseAPIMapper.updateItem", item) == 0) {
+					sqlSession.insert("WalkCourseAPIMapper.insertItem", item);
 				}
 			}
 		} catch (Exception e) {
