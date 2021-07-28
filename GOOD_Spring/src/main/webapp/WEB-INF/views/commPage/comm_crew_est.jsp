@@ -89,10 +89,11 @@ button span {
 
 			<h1 class="page-header">크루 개설</h1>
 
-			
-				<form role="form" class="form-crew" method="POST" enctype="multipart/form-data"
+
+			<form role="form" class="form-crew" method="post" id='est_form'
+				enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
-<div class="row " style="margin-bottom: 30px;"> 
+				<div class="row " style="margin-bottom: 30px;">
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> <input
 							type="text" id="crew_name" class="form-control crew_input"
@@ -118,7 +119,7 @@ button span {
 						<div>
 							<select class="form-control " id="crew_location" name="crew_area"
 								style="width: 200px; text-align-last: center; font-size: 20px; padding: 0;">
-								<option value="none" hidden >지역</option>
+								<option value="none" hidden>지역</option>
 								<option value="강남구">강남구</option>
 								<option value="강동구">강동구</option>
 								<option value="강북구">강북구</option>
@@ -147,95 +148,97 @@ button span {
 							</select>
 						</div>
 					</div>
-				
-			</div>
 
-			<!-- //상단 -->
+				</div>
+
+				<!-- //상단 -->
 
 
 
-			<!-- 파일 드래그 앤 드롭 -->
+				<!-- 파일 드래그 앤 드롭 -->
 
-			<div class="row view text-center col-md-3 col-xs-12">
-				
+				<div class="row view text-center col-md-3 col-xs-12">
+
 					<div class="form-group ">
-						<input type="image" id="img__wrap" name="crew_photo" 
+						<input type="image" id="img__wrap" name="crew_photo"
 							onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
 							src="${sessionScope.principal.userProfile}" width="200px"
 							height="200px" style="border-radius: 100px" />
 					</div>
-				
-
-				<div class="form-group text-center bg-light">
-					<label for="img__preview" class=" btn btn-default"
-						style="font-size: 20px;">크루 사진 변경</label> <input type="file" name="crew_photo"
-						 id="img__preview" class="hidden" /> 
-				</div>
-
-			</div>
 
 
-			<div class="row col-md-offset-2 img_prev">
-
-				<div class="col-md-10 col-sm-10 col-xs-10">
-					<h3 class="header text-center ">기본 이미지</h3>
-					<ul style="list-style: none;" class="default-img">
-						<li><a href="#123" onclick="setImage(0); return fasle"><img
-								src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png" /></a></li>
-						<li><a href="#123" onclick="setImage(1); return fasle"><img
-								src="${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png" /></a></li>
-						<li><a href="#123" onclick="setImage(2); return fasle"><img
-								src="${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png" /></a></li>
-						<li><a href="#123" onclick="setImage(3); return fasle;"><img
-								src="${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png" /></a></li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="container col-md-3 " style="margin-left: 25px">
-					<h3 class="header" style="padding-left: 40px;">크루 간단 소개</h3>
-					<textarea class="form-control" rows="5" id="crew_sinto" name="crew_sinto"
-						style="width: 200px; font-size: 15px; resize: none"
-						placeholder="크루를  간단히 소개해주세요."></textarea>
-				</div>
-
-				<div class="container col-md-4" style="margin-left: 25px">
-					<h3 class="header">크루 소개</h3>
-					<textarea class="form-control" rows="5" id="crew_dinto" name="crew_dinto"
-						style="width: 550px; font-size: 20px; resize: none"
-						placeholder="크루 소개글을 작성해주세요."></textarea>
-				</div>
-			</div>
-
-
-
-			<div class="row col-md-offset-5 col-xs-offset-4">
-				<div class="text-center btn_container" style="float: left;">
-					<button type="submit" class="btn btn-primary" id="btn_ok">
-						<span>개설 완료</span>
-					</button>
-				</div>
-
-
-				<div class="text-center btn_container " style="float: left;">
-					<button type="reset" class="btn btn-danger" id="btn_cancel">
-						<span>취소</span>
-					</button>
+					<div class="form-group text-center bg-light">
+						<label for="img__preview" class=" btn btn-default"
+							style="font-size: 20px;">크루 사진 변경</label> <input type="file"
+							name="crew_photo" id="img__preview" class="hidden" />
+					</div>
 
 				</div>
 
 
-			</div>
+				<div class="row col-md-offset-2 img_prev">
 
-</form>
+					<div class="col-md-10 col-sm-10 col-xs-10">
+						<h3 class="header text-center ">기본 이미지</h3>
+						<ul style="list-style: none;" class="default-img">
+							<li><a href="#123" onclick="setImage(0); return fasle"><img
+									src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png" /></a></li>
+							<li><a href="#123" onclick="setImage(1); return fasle"><img
+									src="${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png" /></a></li>
+							<li><a href="#123" onclick="setImage(2); return fasle"><img
+									src="${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png" /></a></li>
+							<li><a href="#123" onclick="setImage(3); return fasle;"><img
+									src="${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png" /></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="container col-md-3 " style="margin-left: 25px">
+						<h3 class="header" style="padding-left: 40px;">크루 간단 소개</h3>
+						<textarea class="form-control" rows="5" id="crew_sinto"
+							name="crew_sinto"
+							style="width: 200px; font-size: 15px; resize: none"
+							placeholder="크루를  간단히 소개해주세요."></textarea>
+					</div>
+
+					<div class="container col-md-4" style="margin-left: 25px">
+						<h3 class="header">크루 소개</h3>
+						<textarea class="form-control" rows="5" id="crew_dinto"
+							name="crew_dinto"
+							style="width: 550px; font-size: 20px; resize: none"
+							placeholder="크루 소개글을 작성해주세요."></textarea>
+					</div>
+				</div>
+
+
+
+				<div class="row col-md-offset-5 col-xs-offset-4">
+					<div class="text-center btn_container" style="float: left;">
+						<button type="submit" class="btn btn-primary" id="btn_ok">
+							<span>개설 완료</span>
+						</button>
+					</div>
+
+
+					<div class="text-center btn_container " style="float: left;">
+						<button type="reset" class="btn btn-danger" id="btn_cancel">
+							<span>취소</span>
+						</button>
+
+					</div>
+
+
+				</div>
+
+			</form>
 
 		</div>
-		
+
 	</div>
-	
-	
-	
+
+
+
 	<!-- 공용 푸터 -->
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 	<!-- //공통 푸터 -->
@@ -277,8 +280,9 @@ button span {
 	<script type="text/javascript">
 		function setImage(index) {
 
-			var image_list = [ '${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png',
-					'${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png', 
+			var image_list = [
+					'${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png',
+					'${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png',
 					'${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png',
 					'${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png' ];
 
@@ -287,138 +291,150 @@ button span {
 			image.src = image_list[index];
 		}
 	</script>
-   <script>
-      $(function() {
-         $('#btn_ok')
-               .click(
-                     function(e) {
+	<script>
+		$(function() {
+			$('#btn_ok')
+					.click(
+							function(e) {
+								e.preventDefault();
 
-                        var crew_name_val = $("#crew_name").val();
+								var crew_name_val = $("#crew_name").val();
 
-                        if (!crew_name_val) { // 입력되지 않았다면?
-                           swal({
-                              title : "에러",
-                              text : "크루명을 입력해 주세요.",
-                              type : "error"
-                           }).then(function(result) {
-                              // 창이 닫히는 애니메이션의 시간이 있으므로,
-                              // 0.1초의 딜레이 적용 후 포커스 이동
-                              setTimeout(function() {
-                                 $("#crew_name").focus();
-                              }, 1);
-                           }); // <-- 메시지 표시
-                           
-                           return false; // <-- 실행 중단
-                        } 
-                        
-                        var crew_category_val = $("#crew_category").val();
+								if (!crew_name_val) { // 입력되지 않았다면?
+									swal({
+										title : "에러",
+										text : "크루명을 입력해 주세요.",
+										type : "error"
+									}).then(function(result) {
+										// 창이 닫히는 애니메이션의 시간이 있으므로,
+										// 0.1초의 딜레이 적용 후 포커스 이동
+										setTimeout(function() {
+											$("#crew_name").focus();
+										}, 1);
+									}); // <-- 메시지 표시
 
-                        if (!crew_category_val) { // 입력되지 않았다면?
-                           swal({
-                              title : "에러",
-                              text : "크루종류를 입력해 주세요.",
-                              type : "error"
-                           }).then(function(result) {
-                              // 창이 닫히는 애니메이션의 시간이 있으므로,
-                              // 0.1초의 딜레이 적용 후 포커스 이동
-                              setTimeout(function() {
-                                 $("#crew_category").focus();
-                              }, 1);
-                           }); // <-- 메시지 표시
-                           
-                           return false; // <-- 실행 중단
-                        }
+									return false; // <-- 실행 중단
+								}
 
-                        var crew_location_val = $(
-                              "#crew_location option").index(
-                              $("#crew_location option:selected"));
+								var crew_category_val = $("#crew_category")
+										.val();
 
-                        if (!crew_location_val) { // 입력되지 않았다면?
-                           swal({
-                              title : "에러",
-                              text : "지역을 선택해 주세요.",
-                              type : "error"
-                           }).then(function(result) {
-                              // 창이 닫히는 애니메이션의 시간이 있으므로,
-                              // 0.1초의 딜레이 적용 후 포커스 이동
-                              setTimeout(function() {
-                                 $("#crew_location").focus(); // <-- 커서를 강제로 넣기
-                              }, 1);
-                           }); // <-- 메시지 표시
-                           
-                           return false; // <-- 실행 중단
-                        }
+								if (!crew_category_val) { // 입력되지 않았다면?
+									swal({
+										title : "에러",
+										text : "크루종류를 입력해 주세요.",
+										type : "error"
+									}).then(function(result) {
+										// 창이 닫히는 애니메이션의 시간이 있으므로,
+										// 0.1초의 딜레이 적용 후 포커스 이동
+										setTimeout(function() {
+											$("#crew_category").focus();
+										}, 1);
+									}); // <-- 메시지 표시
 
-                        var crew_sinto_val = $("#crew_sinto").val();
+									return false; // <-- 실행 중단
+								}
 
-                        if (!crew_sinto_val) { // 입력되지 않았다면?
-                           swal({
-                              title : "에러",
-                              text : "크루 간단소개를 입력해 주세요.",
-                              type : "error"
-                           }).then(function(result) {
-                              // 창이 닫히는 애니메이션의 시간이 있으므로,
-                              // 0.1초의 딜레이 적용 후 포커스 이동
-                              
-                              setTimeout(function() {
-                            	  $("#crew_sinto").focus(); // <-- 커서를 강제로 넣기
-                              }, 1);
-                           }); // <-- 메시지 표시
-                           
-                           return false; // <-- 실행 중단
-                        } 
-                        
-                        var crew_dinto_val = $("#crew_dinto").val();
+								var crew_location_val = $(
+										"#crew_location option").index(
+										$("#crew_location option:selected"));
 
-                        if (!crew_dinto_val) { // 입력되지 않았다면?
-                           swal({
-                              title : "에러",
-                              text : "크루 소개를 입력해 주세요.",
-                              type : "error"
-                           }).then(function(result) {
-                              // 창이 닫히는 애니메이션의 시간이 있으므로,
-                              // 0.1초의 딜레이 적용 후 포커스 이동
-                              
-                              setTimeout(function() {
-                            	  $("#crew_dinto").focus(); // <-- 커서를 강제로 넣기
-                              }, 1);
-                           }); // <-- 메시지 표시
-                           
-                           return false; // <-- 실행 중단
-                           
-                        }else{
-                        	    swal({
-                                title : '확인', // 제목
-                                text : "개설을 축하합니다!", // 내용
-                                type : 'success', // 종류
-                                confirmButtonText : '확인', // 확인버튼 표시 문구
-                             })
-                        }
-                     });
+								if (!crew_location_val) { // 입력되지 않았다면?
+									swal({
+										title : "에러",
+										text : "지역을 선택해 주세요.",
+										type : "error"
+									}).then(function(result) {
+										// 창이 닫히는 애니메이션의 시간이 있으므로,
+										// 0.1초의 딜레이 적용 후 포커스 이동
+										setTimeout(function() {
+											$("#crew_location").focus(); // <-- 커서를 강제로 넣기
+										}, 1);
+									}); // <-- 메시지 표시
 
-         $("#btn_cancel").click(function() {
-            // 확인, 취소버튼에 따른 후속 처리 구현
-            swal({
-               title : '확인', // 제목
-               text : "정말 취소를 하시겠습니까?", // 내용
-               type : 'warning', // 종류
-               confirmButtonText : '네', // 확인버튼 표시 문구
-               showCancelButton : true, // 취소버튼 표시 여부
-               cancelButtonText : '아니오', // 취소버튼 표시 문구
-            }).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-               if (result.value) { // 확인 버튼이 눌러진 경우
-                  swal('삭제', '크루 개설이 취소되었습니다.', 'success');
-                  setTimeout(function() {
-                     location.href = '${pageContext.request.contextPath}/commPage/comm_crew.do';
-                  }, 1000);
+									return false; // <-- 실행 중단
+								}
 
-               }
+								var crew_sinto_val = $("#crew_sinto").val();
 
-            });
-         });
+								if (!crew_sinto_val) { // 입력되지 않았다면?
+									swal({
+										title : "에러",
+										text : "크루 간단소개를 입력해 주세요.",
+										type : "error"
+									}).then(function(result) {
+										// 창이 닫히는 애니메이션의 시간이 있으므로,
+										// 0.1초의 딜레이 적용 후 포커스 이동
 
-      });
-   </script>
+										setTimeout(function() {
+											$("#crew_sinto").focus(); // <-- 커서를 강제로 넣기
+										}, 1);
+									}); // <-- 메시지 표시
+
+									return false; // <-- 실행 중단
+								}
+
+								var crew_dinto_val = $("#crew_dinto").val();
+
+								if (!crew_dinto_val) { // 입력되지 않았다면?
+									swal({
+										title : "에러",
+										text : "크루 소개를 입력해 주세요.",
+										type : "error"
+									}).then(function(result) {
+										// 창이 닫히는 애니메이션의 시간이 있으므로,
+										// 0.1초의 딜레이 적용 후 포커스 이동
+
+										setTimeout(function() {
+											$("#crew_dinto").focus(); // <-- 커서를 강제로 넣기
+										}, 1);
+									}); // <-- 메시지 표시
+
+									return false; // <-- 실행 중단
+
+								} else {
+									swal({
+										title : '확인', // 제목
+										text : "개설을 축하합니다!", // 내용
+										type : 'success', // 종류
+										confirmButtonText : '네', // 확인버튼 표시 문구
+									}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+										if (result.value) { // 확인 버튼이 눌러진 경우
+											$('#est_form').submit();
+																	
+														}
+
+													});
+
+								}
+							});
+
+			$("#btn_cancel")
+					.click(
+							function() {
+								// 확인, 취소버튼에 따른 후속 처리 구현
+								swal({
+									title : '확인', // 제목
+									text : "정말 취소를 하시겠습니까?", // 내용
+									type : 'warning', // 종류
+									confirmButtonText : '네', // 확인버튼 표시 문구
+									showCancelButton : true, // 취소버튼 표시 여부
+									cancelButtonText : '아니오', // 취소버튼 표시 문구
+								}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+									if (result.value) { // 확인 버튼이 눌러진 경우
+										swal(
+												'삭제','크루 개설이 취소되었습니다.','success');
+									setTimeout(function() {
+										location.href = '${pageContext.request.contextPath}/commPage/comm_crew.do';
+																}, 100000000);
+
+													}
+
+												});
+							});
+
+		});
+	</script>
 
 
 

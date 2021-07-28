@@ -63,7 +63,7 @@
 					</span>
 				</h1>
 			</div>
-			<h1 class="page-header">${output.crew_name}크루를 소개합니다</h1>
+			<h1 class="page-header">${output.crew_name} 크루를 소개합니다</h1>
 			<!-- 본문 상단 영역 -->
 			<div class="crew_info_header col-md-12 "></div>
 			<!-- //본문 상단 영역 -->
@@ -75,13 +75,13 @@
 							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
 						<h5>가입된 회원 수 : ${output.crew_member}</h5>
-						<h3 class="title-name">${output.crew_name}크루 간단소개</h3>
+						<h3 class="title-name">${output.crew_name} 크루 소개</h3>
 						<p>${output.crew_sinto}</p>
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->
 				<div class="col-md-8">
-					<h2>${output.crew_name}크루 정보</h2>
+					<h2>${output.crew_name} &nbsp 크루 정보</h2>
 					<p>${output.crew_dinto}</p>
 				</div>
 				<!-- 크루 상세 정보 끝 -->
@@ -95,7 +95,7 @@
 			<div class="crew_info_footer">
 				<div class="col-md-12">
 					<div class="text-center">
-						<form class="form-horizontal" role="form" class="form-crew"
+						<form class="form-horizontal" role="form" class="form-crew" id='crew_form'
 							method="get"
 							action="${pageContext.request.contextPath}/commPage/comm_crew_info_ok.do">
 							<input type="hidden" name="crew_no" value="${output.crew_no}">
@@ -117,7 +117,11 @@
 	<%@ include file="../inc/plugin.jsp"%>
 
 	<script>
+	$().ready(function(){
+		
 		$("#join").click(function() {
+			event.preventDefault();
+			 // prevent form submit
 			// 확인, 취소버튼에 따른 후속 처리 구현
 			swal({
 				title : '확인', // 제목
@@ -125,18 +129,19 @@
 				type : 'question', // 종류
 				confirmButtonText : '네', // 확인버튼 표시 문구
 				showCancelButton : true, // 취소버튼 표시 여부
-				cancelButtonText : '아니오', // 취소버튼 표시 문구
+				cancelButtonText : '아니오' // 취소버튼 표시 문구
+				
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 				if (result.value) { // 확인 버튼이 눌러진 경우
-					swal('성공', '해당크루에 가입되었습니다.', 'success');
-					setTimeout(function() {
-					}, 1000);
+					$('#crew_form').submit();
 				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 					swal('취소', '가입이 취소되었습니다.', 'error');
 				}
 
 			});
+			
 		});
+	});
 	</script>
 
 
