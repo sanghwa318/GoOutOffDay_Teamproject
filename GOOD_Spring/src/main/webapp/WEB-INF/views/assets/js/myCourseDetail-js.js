@@ -24,6 +24,7 @@ $("#delete-btn").on("click",function() {
 	
 	/**댓글 등록하기 ajax */
 	function cmt_add(){
+
 		var comment_text=$('#comment_text').val();
 		$.ajax({
 					url: getContextPath() + '/commPage/comm_myCourseDetail/comment',
@@ -32,8 +33,11 @@ $("#delete-btn").on("click",function() {
 					data: { mycourse_no, comment_text },
 					success: function(data) { 
 						cmt_list();
+					},error:function(request,status,error){
+						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
 					}
 		});
+		
 	}
 	
 		/**댓글 목록 불러오기 ajax */
@@ -56,7 +60,7 @@ $("#delete-btn").on("click",function() {
 							str[i]+='<h4>'+data.cmtList[i].comment_user_nick+'</h4>'
 							str[i]+='<p>'+data.cmtList[i].comment_create_datetime+'</p></div>'
 							str[i]+='<div class="pull-right">'
-							str[i]+='<button type="button" class="btn btn-link test1" style="padding: 0; margin-right: 0" onclick="cmt_delete('+data.cmtList[i].comment_no+')">댓글 삭제</button></div></div><div class="row">'
+							str[i]+='<button type="button" class="btn btn-link" style="padding: 0; margin-right: 0" onclick="cmt_delete('+data.cmtList[i].comment_no+')">댓글 삭제</button></div></div><div class="row">'
 							str[i]+='<div class="col-md-offset-1 col-md-11" style="margin-left: 10px;">'+data.cmtList[i].comment_text+'</div>'
 							str[i]+='</div></div><hr>'
 						}
@@ -78,9 +82,14 @@ $("#delete-btn").on("click",function() {
 					dataType: 'json',
 					data: {comment_no},
 					success: function(data) {
+						if(data.rt)
 						alert("삭제되었습니다.")
 						cmt_list()
-				 }
+						
+						
+				 },error:function(request,status,error){
+						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
+					}
 			});
 			}
 			

@@ -542,8 +542,7 @@ carousel-title2 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 	<script type="text/javascript">
-	var loginInfo = "<%=session.getAttribute("login_info")%>
-		"
+	var loginInfo = "<%=session.getAttribute("login_info")%>"
 
 		$(function() {
 
