@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import study.spring.goodspring.model.CasOther;
+import study.spring.goodspring.model.CAS;
 import study.spring.goodspring.service.CasService;
 
 @Slf4j
@@ -26,8 +26,8 @@ public class CasServiceImpl implements CasService {
 	 * @throws Exception
 	 */
 	@Override
-	public CasOther getOtherItem(CasOther input) throws Exception {
-		CasOther result = null;
+	public CAS getOtherItem(CAS input) throws Exception {
+		CAS result = null;
 
 		try {
 			result = SqlSession.selectOne("CasDBMapper.Other_selectItem", input);
@@ -52,8 +52,8 @@ public class CasServiceImpl implements CasService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<CasOther> getOtherList(CasOther input) throws Exception {
-		List<CasOther> result = null;
+	public List<CAS> getOtherList(CAS input) throws Exception {
+		List<CAS> result = null;
 
 		try {
 			result = SqlSession.selectList("CasDBMapper.Other_selectMainList", input);
@@ -76,7 +76,7 @@ public class CasServiceImpl implements CasService {
 	 * @throws Exception
 	 */
 	@Override
-	public int getOtherCount(CasOther input) throws Exception {
+	public int getOtherCount(CAS input) throws Exception {
 		int result = 0;
 
 		try {
@@ -93,8 +93,8 @@ public class CasServiceImpl implements CasService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<CasOther> getOtherCategoryList(CasOther input) throws Exception {
-		List<CasOther> result = null;
+	public List<CAS> getOtherCategoryList(CAS input) throws Exception {
+		List<CAS> result = null;
 
 		try {
 			result = SqlSession.selectList("CasDBMapper.Other_selectCategoryList", input);

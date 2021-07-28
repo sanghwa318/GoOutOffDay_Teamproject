@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
-import study.spring.goodspring.model.CasOther;
+import study.spring.goodspring.model.CAS;
 import study.spring.goodspring.service.CasService;
 
 /**
@@ -49,11 +49,11 @@ public class HomeController {
 		/** 홈컨트롤러 기본값 끝 **/
 
 		// 문화 창의 체험 시작
-		CasOther input_exp = new CasOther();
+		CAS input_exp = new CAS();
 
 		input_exp.setDIV_COL(keyword_exp);
 
-		List<CasOther> output_exp = null;
+		List<CAS> output_exp = null;
 
 		try {
 			output_exp = CasService.getOtherList(input_exp);
@@ -64,10 +64,10 @@ public class HomeController {
 		// 문화 창의 체험 끝
 
 		// 교육 자기계발 시작
-		CasOther input_imp = new CasOther();
+		CAS input_imp = new CAS();
 		input_imp.setDIV_COL(keyword_imp);
 
-		List<CasOther> output_imp = null;
+		List<CAS> output_imp = null;
 
 		try {
 			output_imp = CasService.getOtherList(input_imp);
@@ -77,10 +77,10 @@ public class HomeController {
 		// 교육 자기계발 끝
 
 		// 시설대관 시작
-		CasOther input_borrow = new CasOther();
+		CAS input_borrow = new CAS();
 		input_borrow.setDIV_COL(keyword_borrow);
 
-		List<CasOther> output_borrow = null;
+		List<CAS> output_borrow = null;
 
 		try {
 			output_borrow = CasService.getOtherList(input_borrow);

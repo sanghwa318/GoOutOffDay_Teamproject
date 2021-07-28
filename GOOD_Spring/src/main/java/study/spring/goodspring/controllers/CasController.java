@@ -21,7 +21,7 @@ import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
-import study.spring.goodspring.model.CasOther;
+import study.spring.goodspring.model.CAS;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.CasService;
@@ -52,11 +52,11 @@ public class CasController {
 			@RequestParam(value = "keyword_borrow", required = false, defaultValue = "대관") String keyword_borrow) {
 
 		// 문화 창의 체험 시작
-		CasOther input_exp = new CasOther();
+		CAS input_exp = new CAS();
 
 		input_exp.setDIV_COL(keyword_exp);
 
-		List<CasOther> output_exp = null;
+		List<CAS> output_exp = null;
 
 		try {
 			output_exp = CasService.getOtherList(input_exp);
@@ -67,10 +67,10 @@ public class CasController {
 		// 문화 창의 체험 끝
 
 		// 교육 자기계발 시작
-		CasOther input_imp = new CasOther();
+		CAS input_imp = new CAS();
 		input_imp.setDIV_COL(keyword_imp);
 
-		List<CasOther> output_imp = null;
+		List<CAS> output_imp = null;
 
 		try {
 			output_imp = CasService.getOtherList(input_imp);
@@ -80,10 +80,10 @@ public class CasController {
 		// 교육 자기계발 끝
 
 		// 체육시설 시작
-		CasOther input_sport = new CasOther();
+		CAS input_sport = new CAS();
 		input_sport.setDIV_COL(keyword_sport);
 
-		List<CasOther> output_sprot = null;
+		List<CAS> output_sprot = null;
 
 		try {
 			output_sprot = CasService.getOtherList(input_sport);
@@ -93,10 +93,10 @@ public class CasController {
 		// 체육시설 끝
 
 		// 시설대관 시작
-		CasOther input_borrow = new CasOther();
+		CAS input_borrow = new CAS();
 		input_borrow.setDIV_COL(keyword_borrow);
 
-		List<CasOther> output_borrow = null;
+		List<CAS> output_borrow = null;
 
 		try {
 			output_borrow = CasService.getOtherList(input_borrow);
@@ -137,10 +137,10 @@ public class CasController {
 		// [페이지네이션] 변수 추가 (종료)
 
 		// 시설대관 시작
-		CasOther input_theme = new CasOther();
+		CAS input_theme = new CAS();
 		input_theme.setDIV_COL(cas);
 
-		List<CasOther> output_theme = null;
+		List<CAS> output_theme = null;
 
 		input_theme.setMINCLASSNM(order);
 
@@ -171,8 +171,8 @@ public class CasController {
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
 
 			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-			CasOther.setOffset(pageData.getOffset());
-			CasOther.setListCount(pageData.getListCount());
+			CAS.setOffset(pageData.getOffset());
+			CAS.setListCount(pageData.getListCount());
 
 			output_theme = CasService.getOtherCategoryList(input_theme);
 
@@ -206,11 +206,11 @@ public class CasController {
 		}
 
 		/** 2) 데이터 조회 **/
-		CasOther input = new CasOther();
+		CAS input = new CAS();
 		input.setSVCID(SVCID);
 
 		// 조회된 결과를 저장할 객체 선언
-		CasOther output = null;
+		CAS output = null;
 
 		// 찜하기
 		BookMark bookinput = new BookMark();
@@ -269,7 +269,7 @@ public class CasController {
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
 
-		CasOther Info = new CasOther();
+		CAS Info = new CAS();
 		Info.setDIV_COL(catid);
 		Info.setSVCID(svcid);
 
