@@ -141,7 +141,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js"></script>
 	
 	<script type="text/javascript">
-		
+
 	</script>
 </body>
 </html>

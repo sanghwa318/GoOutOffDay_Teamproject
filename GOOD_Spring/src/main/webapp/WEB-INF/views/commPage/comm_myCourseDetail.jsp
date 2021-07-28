@@ -252,42 +252,11 @@ ul, li {
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
-	<!-- Handlebar 템플릿 코드 -->
-	<script id="cmt-list-tmpl" type="text/x-handlebars-template">
-		{{#each item}}
-			<div class="row" style="margin: 15px 0px 0 15px;">
-				<div class="pull-left writer_profile">
-					<a href="#"><img style="border-radius: 25px"
-						onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
-						src="${sessionScope.principal.userProfile}" width="50px"
-						height="50px"></img></a>
-				</div>
-				<div class="pull-left writer_info" style="margin-left: 15px;">
-					<h4>{{comment_user_nick}}</h4>
-					<p>2021 5월 6일 오후 12:14</p>
-
-				</div>
-				<div class="pull-right">
-					<button type="button" class="btn btn-link"
-						style="padding: 0; margin-right: 0">댓글 수정</button>
-					<span class="vertical-bar"></span>
-					<button type="button" class="btn btn-link"
-						style="padding: 0; margin-right: 0">댓글 삭제</button>
-				</div>
-			</div>
-			<div class="row">
-
-				<div class="col-md-offset-1 col-md-11" style="margin-left: 10px;">
-					{{comment_text}}
-				</div>
-			</div>
-
-		{{/each}}
-</script>
-	<!-- Handlebar CDN 참조 -->
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/assets/js/myCourseDetail-js.js"></script>
+<script type="text/javascript">
+
+
+</script>
 </body>
 </html>

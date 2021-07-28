@@ -403,7 +403,7 @@
 				dataType : 'html',
 				success : function(req) {
 					//페이지 새로고침
-					window.location.reload()
+					window.location.href=getContextPath()
 				}
 
 			})
