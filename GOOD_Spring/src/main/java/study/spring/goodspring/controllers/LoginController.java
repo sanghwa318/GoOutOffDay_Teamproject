@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.MailHelper;
 import study.spring.goodspring.helper.RegexHelper;
@@ -28,6 +29,10 @@ public class LoginController {
 	RegexHelper regexHelper;
 	@Autowired
 	MailHelper mailHelper;
+
+	/** "/프로젝트이름"에 해당하는 ContextPath 변수 주입 */
+	@Value("#{servletContext.contextPath}")
+	String contextPath;
 	
 	/** RESTFUL 로그인 */
 	@RequestMapping(value = "/mainPage/login_ok.do", method = RequestMethod.POST)
@@ -86,9 +91,9 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/mainPage/logout.do", method = RequestMethod.GET)
-	public Map<String, Object> logout() {
+	public ModelAndView logout() {
 		webHelper.removeSession("login_info");
-		return webHelper.getJsonData();
+		return webHelper.redirect(contextPath, null);
 	}
 	
 	
