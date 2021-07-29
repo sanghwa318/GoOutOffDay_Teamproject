@@ -1,5 +1,7 @@
 package study.spring.goodspring.service;
 
+import java.util.List;
+
 import study.spring.goodspring.model.BookMark;
 
 public interface BookMarkService {
@@ -12,4 +14,6 @@ public interface BookMarkService {
 	/** 중복검사 **/ 
 	public int BookMarkUniqueCheck(BookMark input) throws Exception;
 	
+	/** 중복검사 **/ 
+	public List<BookMark> BookMarkSVCIDUniqueCheck(BookMark input) throws Exception;
 }

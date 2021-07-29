@@ -12,11 +12,17 @@
 			column="bookmark_create_datetime" />
 		<result property="user_info_user_no" column="user_info_user_no" />
 	</resultMap>
-	<!-- 중복검사를 위한 조회문 -->
+	<!-- 단일 중복검사를 위한 조회문 -->
 	<select id="selectInBookMark" parameterType="study.spring.goodspring.model.BookMark" resultType="int">
 		SELECT count(*) FROM bookmark
 		WHERE user_info_user_no = #{user_info_user_no}
 		AND service_id = #{service_id};
+	</select>
+	
+	<!-- 다중 중복검사를 위한 조회문 -->
+	<select id="SVCIDInBookMark" parameterType="study.spring.goodspring.model.BookMark"  resultMap="BookMarkMap">
+		SELECT service_id FROM bookmark
+		WHERE user_info_user_no = #{user_info_user_no}
 	</select>
 	
 	<!-- 데이터 저장기능 -->

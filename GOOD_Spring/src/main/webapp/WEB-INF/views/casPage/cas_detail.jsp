@@ -185,14 +185,14 @@ ul, li {
 								onclick="location.href='${output.SVCURL}'" style="width: 140px;">
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
-							<c:if test="${outputcount eq 1}">
+							<c:if test="${outputcount >= 1}">
 								<button class="heart btn btn-warning liked" type="button"
 									style="width: 140px; font-size: 18px;">
 									<i class="fa fa-heart" aria-hidden="true" role="button"
 										style="padding-right: 5px; font-size: 18px;"></i>찜제거
 								</button>
 							</c:if>
-							<c:if test="${outputcount eq 0}">
+							<c:if test="${outputcount == 0}">
 								<button class="heart btn btn-warning" type="button"
 									style="width: 140px; font-size: 18px;">
 									<i class="fa fa-heart-o" aria-hidden="true" role="button"

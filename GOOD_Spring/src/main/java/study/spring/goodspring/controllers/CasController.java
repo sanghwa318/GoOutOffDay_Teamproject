@@ -123,7 +123,8 @@ public class CasController {
 			// GET 파라미터 받기
 			@RequestParam(value = "cas", required = false, defaultValue = "") String cas,
 			@RequestParam(value = "order", required = false, defaultValue = "") String order,
-			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+			@RequestParam(value = "page", defaultValue = "1") int nowPage, HttpServletRequest request,
+			HttpServletResponse response, Object handler) {
 
 		String result = null;
 		String iconurl = null;
@@ -174,10 +175,42 @@ public class CasController {
 			CAS.setOffset(pageData.getOffset());
 			CAS.setListCount(pageData.getListCount());
 
-			output_theme = CasService.getOtherCategoryList(input_theme);
-
 		} catch (Exception e) {
 			return WebHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		// 찜하기
+		BookMark bookinput = new BookMark();
+		
+		BookMark Uniqueinput = new BookMark();
+		
+		List<BookMark> outputUnique = null;
+		if (request.getSession().getAttribute("login_info") == null) {
+
+			try {
+				output_theme = CasService.getOtherCategoryList(input_theme);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
+
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+			Uniqueinput.setUser_info_user_no(loginInfo.getUser_no());
+			// 조회
+			bookinput.setCategory_id(input_theme.getDIV_COL());
+			bookinput.setService_id(input_theme.getSVCID());
+			
+			// 저장
+			try {
+				output_theme = CasService.getOtherCategoryList(input_theme);
+				outputUnique = bookMarkService.BookMarkSVCIDUniqueCheck(Uniqueinput);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// 파라미터 값을 View에게 전달
@@ -189,7 +222,8 @@ public class CasController {
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 
-		// 찜목록 갯수확인
+		// 찜목록 확인
+		model.addAttribute("outputUnique", outputUnique);
 
 		return new ModelAndView("casPage/cas_themeList");
 	}
@@ -216,12 +250,9 @@ public class CasController {
 		BookMark bookinput = new BookMark();
 
 		int outputcount = 0;
-		
+
 		if (request.getSession().getAttribute("login_info") == null) {
 
-			bookinput.setCategory_id(input.getDIV_COL());
-			bookinput.setService_id(input.getSVCID());
-			
 			try {
 				output = CasService.getOtherItem(input);
 
@@ -229,16 +260,16 @@ public class CasController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		} else {
 			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
-			
+
 			bookinput.setUser_info_user_no(loginInfo.getUser_no());
 
 			// 조회
 			bookinput.setCategory_id(input.getDIV_COL());
 			bookinput.setService_id(input.getSVCID());
-			
+
 			// 저장
 			try {
 				output = CasService.getOtherItem(input);
@@ -248,7 +279,7 @@ public class CasController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		/** 3) View 처리 **/
 		model.addAttribute("output", output);
 		model.addAttribute("outputcount", outputcount);
@@ -277,8 +308,10 @@ public class CasController {
 		input.setCategory_id(Info.getDIV_COL());
 		input.setService_id(Info.getSVCID());
 
+		
 		try {
-			if (bookMarkService.BookMarkUniqueCheck(input) == 1) {
+
+			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {
 				bookMarkService.deleteBookMark(input);
 			} else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
 				bookMarkService.addBookMark(input);
