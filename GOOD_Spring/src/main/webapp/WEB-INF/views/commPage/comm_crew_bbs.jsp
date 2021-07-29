@@ -140,7 +140,10 @@
 						</c:choose>
 					</tbody>
 				</table>
-
+			<div>
+				<input type="hidden" id="crew_del" name="crew_del" value="${output.crew_no}" />
+				<button type='submit' id="crew_del" class="btn btn-danger pull-left">크루해체</button>
+				</div>
 				<div class="form-group">
 					<div class="col-md-4" role="search">
 						<div class="form-group input-group">
