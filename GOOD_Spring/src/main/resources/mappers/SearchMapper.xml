@@ -33,7 +33,7 @@
 	</resultMap>
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
-	<select id="selectList"
+	<select id="selectListWalk"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
 		SELECT COURSE_CATEGORY_NM,
@@ -114,7 +114,7 @@
 	</resultMap>
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
-	<select id="selectList"
+	<select id="selectListMyCourse"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
 		SELECT mycourse_no,
@@ -155,7 +155,7 @@
 	</resultMap>
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
-	<select id="selectList"
+	<select id="selectListCrew"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
 		SELECT crew_no,
