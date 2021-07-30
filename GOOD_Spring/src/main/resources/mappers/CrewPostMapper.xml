@@ -55,7 +55,7 @@
 	</select>
 	
 	<!-- 다중행 조회 -->
-	<select id="selectCrewPostList"
+	<select id="selectCrewPostInList"
 		parameterType="study.spring.goodspring.model.CrewPost" resultMap="crewPostMap">
 		SELECT * FROM crew_post
 		<where>

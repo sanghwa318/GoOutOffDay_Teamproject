@@ -37,7 +37,7 @@ public class CrewPostServiceImpl implements CrewPostService {
 		List<CrewPost> result = null;
 		
 		try {
-			result = sqlSession.selectList("CrewPostMapper.selectCrewPostList",crewpost);
+			result = sqlSession.selectList("CrewPostMapper.selectCrewPostInList",crewpost);
 			
 			if(result== null) {
 				throw new NullPointerException("result=null");
