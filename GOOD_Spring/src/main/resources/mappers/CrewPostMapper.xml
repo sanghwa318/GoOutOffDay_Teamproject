@@ -95,5 +95,18 @@
 		INNER JOIN user_info u ON u.user_no=cp.user_info_user_no
 		WHERE  cp.post_no = #{post_no};
 	</select>
+	
+	<!-- myPost 페이지를 위한 사용자가 작성한 글 목록 조회-->
+	<select id="selectCrewPostList" resultMap="crewPostMap"
+		parameterType="study.spring.goodspring.model.CrewPost">
+		SELECT post_no, post_like,
+		post_crew, date_format(post_createdate, '%Y%m%d%H%i%s')  AS `post_createdate`, post_editdate,
+		post_title, post_content,
+		post_img, post_hits
+		user_info_user_no 
+		FROM crew_post
+		WHERE user_info_user_no = #{user_info_user_no}
+		ORDER BY post_createdate ASC
+	</select>
 
 </mapper>

@@ -85,5 +85,7 @@ public class CrewPost {
 			CrewPost.order = order;
 		}
     
-    
+		///내가쓴글page 객체 판별 변수
+		private String dtype;
+
 }
