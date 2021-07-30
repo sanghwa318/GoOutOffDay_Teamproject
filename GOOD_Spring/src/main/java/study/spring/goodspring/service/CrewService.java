@@ -51,7 +51,7 @@ public interface CrewService {
 	 * @return int 
 	 * @throws Exception
 	 */
-	public int deleteCrew(Crew input) throws Exception;
+	public int deleteCrew(int input) throws Exception;
 	
 	/*
 	 * 크루 데이터 저장되어 있는 갯수 조회

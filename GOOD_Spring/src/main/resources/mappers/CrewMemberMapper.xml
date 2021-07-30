@@ -123,5 +123,10 @@
 		WHERE cm.user_info_user_no = #{user_info_user_no}
 		LIMIT 1;
 	</select>
-
+	
+	<!-- 크루 해체 -->
+	<delete id="deleteCrew"
+		parameterType="study.spring.goodspring.model.CrewMember">
+		DELETE FROM crew_member WHERE crew_crew_no = #{crew_crew_no} 
+	</delete>
 </mapper>

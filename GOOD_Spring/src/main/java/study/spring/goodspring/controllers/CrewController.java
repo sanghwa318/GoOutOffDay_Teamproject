@@ -133,5 +133,21 @@ public class CrewController {
 
 	}
 	
+	/**크루 삭제 */
+	@RequestMapping(value = "/commPage/comm_crew_bbs_deletecrew.do", method = RequestMethod.GET)
+	public ModelAndView deletecrew(Model model, HttpServletResponse response,
+			@RequestParam(value="crew_no") int crew_no) {
+		
+		try {
+			crewService.deleteCrew(crew_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/** 3) 페이지 이동 */
+		// 확인할 대상이 삭제된 상태이므로 크루 페이지로 이동
+		return webHelper.redirect(contextPath + "/commPage/comm_crew.do", "크루가 해체 되었습니다.");
+	}
+		
 	
 }
