@@ -39,4 +39,6 @@ public class MyCourses {
 	public static void setListCount(int listCount) {
 		MyCourses.listCount = listCount;
 	}
+	///객체 판별 변수
+	private String dtype;
 }

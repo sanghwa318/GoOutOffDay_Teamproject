@@ -45,7 +45,7 @@ public class MyCourseServiceImpl implements MyCourseService {
 	}
 	
 	/*
-	 * 나만의코스 입력 후 조회.
+	 * 나만의코스 작성 후 조회.
 	 * @param MyCourses 조회할 데이터의 이름, 내용, 지역정보를 담고있는 Beans
 	 * @return 조회된 데이터가 저장된 Beans
 	 * @throws Exception

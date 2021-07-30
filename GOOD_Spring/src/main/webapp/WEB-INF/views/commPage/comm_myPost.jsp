@@ -59,8 +59,7 @@
 			</div>
 
 			<!-- 리스트영역-->
-			<div class="col-md-12 table-responsive">
-				<table class="table table-bordered table-hover">
+			<div class="col-md-12 table-responsive"><table class="table table-bordered table-hover">
 					<thead>
 						<tr class="active">
 							<th class="text-center">#</th>
@@ -71,50 +70,40 @@
 						</tr>
 					</thead>
 					<tbody id="list">
-						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
-							onMouseOut=" window.status = '' ">
-							<td class="text-center">1</td>
-							<td class="text-center">하얗게 피어난 얼음꽃 하나가</td>
-							<td class="text-center">크루</td>
-							<td class="text-center">Tree</td>
-							<td class="text-center">100</td>
-						</tr>
-						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
-							onMouseOut=" window.status = '' ">
-							<td class="text-center">2</td>
-							<td class="text-center">달가운 바람에 얼굴을 내밀어</td>
-							<td class="text-center">크루</td>
-							<td class="text-center">Tree</td>
-							<td class="text-center">100</td>
-
-						</tr>
-						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_crew_post.do' "
-							onMouseOut=" window.status = '' ">
-							<td class="text-center">3</td>
-							<td class="text-center">아무말 못 했던 이름도 몰랐던</td>
-							<td class="text-center">크루</td>
-							<td class="text-center">Tree</td>
-							<td class="text-center">100</td>
-
-						</tr>
-
-						<tr style="cursor: pointer;"
-							onclick=" location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do' "
-							onMouseOver=" window.status = '${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do' "
-							onMouseOut=" window.status = '' ">
-							<td class="text-center">4</td>
-							<td class="text-center">지나간 날들에 눈물이 흘러</td>
-							<td class="text-center">나만의 코스</td>
-							<td class="text-center">Tree</td>
-							<td class="text-center">100</td>
-
-						</tr>
+						<c:choose>
+						<%--조회결과가 없는 경우 --%>
+						<c:when test="${(list==null||fn:length(list)==0)}">
+							<tr>
+								<td>조회결과가 없습니다.</td>
+							</tr>
+						</c:when>
+						<%--조회결과가 있는 경우 --%>
+						<c:otherwise>
+							<%--조회결과에 따른 반복 처리 --%>
+							<c:forEach var="list" items="${list}" varStatus="status">
+								<c:if test="${list.dtype=='mycourse'}">
+-								<tr style="cursor: pointer;"
+									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do?mycourse_no=${list.mycourse_no}'">
+									<td class="text-center">${status.index+1}</td>
+									<td class="text-center">${list.mycourse_name }</td>
+									<td class="text-center">나만의 코스</td>
+									<td class="text-center">${list.mycourse_createdate }</td>
+									<td class="text-center">${list.mycourse_hits }</td>
+								</tr>
+								</c:if>
+								<c:if test="${list.dtype=='crewpost'}">
+-								<tr style="cursor: pointer;"
+									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do?post_no=${list.post_no}'">
+									<td class="text-center">${status.index+1}</td>
+									<td class="text-center">${list.post_title }</td>
+									<td class="text-center">크루</td>
+									<td class="text-center">${list.post_createdate }</td>
+									<td class="text-center">${list.post_hits} </td>
+								</tr>
+								</c:if>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>

@@ -385,7 +385,7 @@ carousel-title2 {
 						style="cursor: pointer;">
 						<img src="#" alt="테스트이미지1" height="200" width="250">
 						<div class="caption">
-							<h4>${item.COURSE_NAME}> ${item.CPI_NAME }</h4>
+							<h4>${item.COURSE_NAME}>${item.CPI_NAME }</h4>
 							<p>${item.CPI_CONTENT }</p>
 						</div>
 						<div class="wishlist">
