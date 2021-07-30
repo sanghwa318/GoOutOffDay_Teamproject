@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SearchMapper">
+
+	<!-- 걷기 (코스목록) -->
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
+	<resultMap id="WalkCourseMap"
+		type="study.spring.goodspring.model.WalkCourse">
+
+		<result property="COURSE_CATEGORY_NM"
+			column="COURSE_CATEGORY_NM" />
+		<result property="SOUTH_NORTH_DIV_NM"
+			column="SOUTH_NORTH_DIV_NM" />
+		<result property="AREA_GU" column="AREA_GU" />
+
+		<result property="DISTANCE" column="DISTANCE" />
+		<result property="LEAD_TIME" column="LEAD_TIME" />
+		<result property="COURSE_LEVEL" column="COURSE_LEVEL" />
+
+		<result property="RELATE_SUBWAY" column="RELATE_SUBWAY" />
+		<result property="TRAFFIC_INFO" column="TRAFFIC_INFO" />
+		<result property="CONTENT" column="CONTENT" />
+
+		<result property="COURSE_NAME" column="COURSE_NAME" />
+		<result property="REG_DATE" column="REG_DATE" />
+		<result property="DETAIL_COURSE" column="DETAIL_COURSE" />
+
+		<result property="CPI_IDX" column="CPI_IDX" />
+
+		<result property="CPI_NAME" column="CPI_NAME" />
+		<result property="CPI_CONTENT" column="CPI_CONTENT" />
+
+	</resultMap>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT COURSE_CATEGORY_NM,
+		SOUTH_NORTH_DIV_NM,
+		AREA_GU,
+
+		DISTANCE,
+		LEAD_TIME,
+		COURSE_LEVEL,
+
+		RELATE_SUBWAY,
+		TRAFFIC_INFO,
+		CONTENT,
+
+		COURSE_NAME,
+		REG_DATE,
+		DETAIL_COURSE,
+
+		CPI_NAME,
+		CPI_IDX,
+		CPI_CONTENT
+		FROM
+		seoulgil_walk_course
+
+		<where>
+			<if test="COURSE_CATEGORY_NM != null and COURSE_CATEGORY_NM != ''">
+				COURSE_CATEGORY_NM LIKE concat('%',
+				#{COURSE_CATEGORY_NM}, '%')
+			</if>
+			<if test="SOUTH_NORTH_DIV_NM != null and SOUTH_NORTH_DIV_NM != ''">
+				OR SOUTH_NORTH_DIV_NM LIKE concat('%',
+				#{SOUTH_NORTH_DIV_NM}, '%')
+			</if>
+			<if test="AREA_GU != null and AREA_GU != ''">
+				OR AREA_GU LIKE concat('%', #{AREA_GU}, '%')
+			</if>
+
+			<if test="DISTANCE != null and DISTANCE != ''">
+				OR DISTANCE LIKE concat('%', #{DISTANCE}, '%')
+			</if>
+			<if test="LEAD_TIME != null and LEAD_TIME != ''">
+				OR LEAD_TIME LIKE concat(#{LEAD_TIME}, '%')
+			</if>
+			<if test="COURSE_LEVEL != null and COURSE_LEVEL != ''">
+				OR COURSE_LEVEL LIKE concat('%', #{COURSE_LEVEL}, '%')
+			</if>
+
+			<if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
+				OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY}, '%')
+			</if>
+			<if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
+				OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
+			</if>
+			<if test="CONTENT != null and CONTENT != ''">
+				OR CONTENT LIKE concat('%', #{CONTENT}, '%')
+			</if>
+
+			<if test="CPI_NAME != null and CPI_NAME != ''">
+				OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+			</if>
+			<if test="CPI_CONTENT != null and CPI_CONTENT != ''">
+				OR CPI_CONTENT LIKE concat('%', #{CPI_CONTENT}, '%')
+			</if>
+		</where>
+	</select>
+	<!-- //걷기 (코스목록) -->
+
+	<!-- 나만의 코스 -->
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
+	<resultMap id="MyCoursesMap"
+		type="study.spring.goodspring.model.MyCourses">
+
+		<result property="mycourse_no" column="mycourse_no" />
+		<result property="mycourse_name" column="mycourse_name" />
+		<result property="mycourse_area" column="mycourse_area" />
+
+		<result property="mycourse_content" column="mycourse_content" />
+	</resultMap>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT mycourse_no,
+		mycourse_name,
+		mycourse_area,
+
+		mycourse_content
+		FROM
+		mycourse_post
+
+		<where>
+			<if test="mycourse_name != null and mycourse_name != ''">
+				mycourse_name LIKE concat('%', #{mycourse_name}, '%')
+			</if>
+			<if test="mycourse_area != null and mycourse_area != ''">
+				OR mycourse_area LIKE concat('%', #{mycourse_area}, '%')
+			</if>
+
+			<if test="mycourse_content != null and mycourse_content != ''">
+				OR mycourse_content LIKE concat('%', #{mycourse_content},
+				'%')
+			</if>
+		</where>
+	</select>
+	<!-- //나만의 코스 -->
+
+	<!-- 크루 -->
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
+	<resultMap id="CrewMap"
+		type="study.spring.goodspring.model.Crew">
+
+		<result property="crew_no" column="crew_no" />
+		<result property="crew_name" column="crew_name" />
+		<result property="crew_area" column="crew_area" />
+
+		<result property="crew_sinto" column="crew_sinto" />
+		<result property="crew_category" column="crew_category" />
+	</resultMap>
+
+	<!-- 다중행 조회를 위한 기능 정의 -->
+	<select id="selectList"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT crew_no,
+		crew_name,
+		crew_area,
+		crew_sinto,
+
+		crew_category
+		FROM
+		crew
+
+		<where>
+			<if test="crew_name != null and crew_name != ''">
+				crew_name LIKE concat('%', #{crew_name}, '%')
+			</if>
+			<if test="crew_area != null and crew_area != ''">
+				OR crew_area LIKE concat('%', #{crew_area}, '%')
+			</if>
+
+			<if test="crew_sinto != null and crew_sinto != ''">
+				OR crew_sinto LIKE concat('%', #{crew_sinto}, '%')
+			</if>
+		</where>
+	</select>
+	<!-- //크루 -->
+	
+	<!-- 문화체육 -->
+	
+	<!-- //문화체육 -->
+	
+</mapper>
