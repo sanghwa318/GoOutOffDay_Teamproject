@@ -54,6 +54,31 @@
 		WHERE post_no = #{post_no};
 	</select>
 	
+	<!-- 다중행 조회 -->
+	<select id="selectCrewPostList"
+		parameterType="study.spring.goodspring.model.CrewPost" resultMap="crewPostMap">
+		SELECT * FROM crew_post
+		<where>
+			<if test="post_title != null and post_title != '' ">
+				post_title LIKE CONCAT('%', #{post_title}, '%')
+			</if>
+
+			<if test="post_content != null and post_content != '' ">
+				OR post_content LIKE CONCAT('%', #{post_content}, '%')
+			</if>
+
+		</where>
+		
+		ORDER BY post_no DESC
+
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount}
+		</if>
+		
+	</select>
+	
+	
+	
 	
 		<!-- Post_no를 통한 Crew 조회 -->
 	<select id="selectCrewPost" resultMap="crewPostMap"

@@ -71,10 +71,8 @@
 					</span>
 				</h1>
 			</div>
-			<h1 class="page-header">${output.crew_name}크루
-				
-			</h1>
-			
+			<h1 class="page-header">${output.crew_name}크루</h1>
+
 			<!-- 본문 상단 영역 -->
 			<div class="crew_bbs_header col-md-12 "></div>
 			<!-- //본문 상단 영역 -->
@@ -114,45 +112,75 @@
 						</tr>
 					</thead>
 					<tbody id="list">
+						<!-- 크루 게시물 영역 -->
 						<c:choose>
 							<%--조회결과가 없는 경우 --%>
-							<c:when test="${crewpost == null || fn:length(crewpost) == 0 })">
+							<c:when
+								test="${crewpostoutput == null || fn:length(crewpostoutput) == 0 })">
 								<tr>
 									<td class="text-center">등록된 게시글이 없습니다.</td>
 								</tr>
+							</c:when>
 
-								<%--조회결과가 있는 경우 --%>
-								<c:otherwise>
-									<c:forEach var="item" items="${crewpost}" varStatus="status">
+							<%--조회결과가 있는 경우 --%>
+							<c:otherwise>
+								<!--조회 결과에 따른 반복 처리 -->
+								<c:forEach var="item" items="${crewpostoutput}"
+									varStatus="status">
+									<%-- 검색어가 있다면? --%>
+									<c:if test="${keyword != '' }">
+										<%-- 검색어에 <mark> 적용 --%>
+										<c:set var="mark" value="<mark>${keyword}</mark>" />
+										<%--출력을 위해 크루 게시물에서 검색어와 일치하는 단어를 형광펜 효과 --%>
+										<c:set var="post_title"
+											value="${fn:replace(post_title,keyword,mark)}" />
+										<c:set var="post_content"
+											value="${fn:replace(post_content,keyword,mark)}" />
+									</c:if>
 
-									</c:forEach>
+									<%-- 상세페이지로 이동하기위한 URL --%>
+									<c:url value="/commPage/comm_crew_post.do" var="postUrl">
+										<c:param name="post_no" value="${item.post_no}" />
+									</c:url>
 
 									<tr>
-										<td class="text-center">${crewpost.post_no}</td>
-										<td class="text-center">${crewpostoutput.post_title}</td>
-										<td class="text-center">${crewpost.user_info_user_no}</td>
-										<td class="text-center">${crewpost.post_hits}</td>
+										<td class="text-center">${item.post_no}</td>
+										<td class="text-center">${item.post_title}</td>
+										<td class="text-center">${item.user_info_user_no}</td>
+										<td class="text-center">${item.post_createdate}</td>
+										<td class="text-center">${item.post_hits}</td>
 									</tr>
 
-								</c:otherwise>
-							</c:when>
+
+
+								</c:forEach>
+
+
+
+
+							</c:otherwise>
+
 
 						</c:choose>
 					</tbody>
 				</table>
-			<div>
-				<input type="hidden" id="crew_del" name="crew_del" value="${output.crew_no}" />
-				<button type='submit' id="crew_del" class="btn btn-danger pull-left">크루해체</button>
+				<div>
+					<input  type="hidden" id="crew_del" name="crew_del"
+						value="${output.crew_no}" />
+					<button type='submit' id="crew_del"
+						class="btn btn-danger pull-left">크루해체</button>
 				</div>
 				<div class="form-group">
 					<div class="col-md-4" role="search">
 						<div class="form-group input-group">
-							<input type="text" class="form-control" placeholder="게시글 검색">
-							<span class="input-group-btn">
-								<button class="btn btn-blue" type="submit">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</span>
+							<form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+								<input type="text" class="form-control" name="keyword"
+									placeholder="게시글 검색"> <span class="input-group-btn">
+									<button class="btn btn-blue" type="submit">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</form>
 						</div>
 					</div>
 
@@ -160,8 +188,9 @@
 						action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
 						method="GET">
 						<input type="hidden" name="post_crew" value="${output.crew_name}" />
-						<input type="hidden" id="crew_no" name="crew_no" value="${output.crew_no}" />
-						
+						<input type="hidden" id="crew_no" name="crew_no"
+							value="${output.crew_no}" />
+
 						<button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
 					</form>
 					<form
@@ -171,10 +200,11 @@
 						<button type="submit" id="btn2" class="btn btn-primary pull-right">크루관리</button>
 					</form>
 					<!-- 탈퇴버튼 -->
-				<div>
-				<input type="hidden" id="crew_no" name="crew_no" value="${output.crew_no}" />
-				<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
-				</div>
+					<div>
+						<input type="hidden" id="crew_no" name="crew_no"
+							value="${output.crew_no}" />
+						<button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -194,33 +224,44 @@
 </body>
 <script>
 	function getContextPath() {
-	    var hostIndex = location.href.indexOf(location.host)
-	          + location.host.length;
-	    var contextPath = location.href.substring(hostIndex, location.href
-	          .indexOf('/', hostIndex + 1));
-	    return contextPath;
-	 }
-		$("#out").click(function() {
+		var hostIndex = location.href.indexOf(location.host)
+				+ location.host.length;
+		var contextPath = location.href.substring(hostIndex, location.href
+				.indexOf('/', hostIndex + 1));
+		return contextPath;
+	}
+	$("#out")
+			.click(
+					function() {
 
-			event.preventDefault();		
-			// 확인, 취소버튼에 따른 후속 처리 구현
-			swal({
-				title : '확인', // 제목
-				text : "해당 크루에서 탈퇴 하시겠습니까?", // 내용
-				type : 'question', // 종류	
-				confirmButtonText : '네', // 확인버튼 표시 문구
-				showCancelButton : true, // 취소버튼 표시 여부
-				cancelButtonText : '아니오', // 취소버튼 표시 문구
-			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-				if (result.value) { // 확인 버튼이 눌러진 경우
+						event.preventDefault();
+						// 확인, 취소버튼에 따른 후속 처리 구현
+						swal({
+							title : '확인', // 제목
+							text : "해당 크루에서 탈퇴 하시겠습니까?", // 내용
+							type : 'question', // 종류	
+							confirmButtonText : '네', // 확인버튼 표시 문구
+							showCancelButton : true, // 취소버튼 표시 여부
+							cancelButtonText : '아니오', // 취소버튼 표시 문구
+						})
+								.then(
+										function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+											if (result.value) { // 확인 버튼이 눌러진 경우
 
-					window.location.href=getContextPath() +"/commPage/comm_crew_bbs_delete_ok.do?crew_no=" + ${output.crew_no} ;
+												window.location.href = getContextPath()
+														+ "/commPage/comm_crew_bbs_delete_ok.do?crew_no="
+														+ $
+												{
+													output.crew_no
+												}
+												;
 
-				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
-					swal('취소', '탈퇴가 취소되었습니다.', 'error');
-				}
+											} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+												swal('취소', '탈퇴가 취소되었습니다.',
+														'error');
+											}
 
-			});
-		});
-	</script>
+										});
+					});
+</script>
 </html>

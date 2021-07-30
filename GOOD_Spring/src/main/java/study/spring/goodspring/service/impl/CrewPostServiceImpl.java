@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
@@ -27,11 +26,31 @@ public class CrewPostServiceImpl implements CrewPostService {
 	
 	
 
-
+	/*
+	 * CrewPost 리스트 조회
+	 * @param CrewPost 저장할 정보를 담고 있는 Beans
+	 * @return List
+	 * @throws Exception
+	 */
 	@Override
-	public List<CrewPost> selectCrewPostList(CrewPost crewPost) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CrewPost> selectCrewPostList(CrewPost crewpost) throws Exception {
+		List<CrewPost> result = null;
+		
+		try {
+			result = sqlSession.selectList("CrewPostMapper.selectCrewPostList",crewpost);
+			
+			if(result== null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 게시물이 없습니다.");
+		}catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("게시물 조회에 실패했습니다.");
+		}
+		
+		return result;
 	}
 	
 	

@@ -49,23 +49,41 @@ public class CrewPost {
 	private String create_datetime;// (가입일자)
 	private String edit_datetime;// (수정일자)
 	
-    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-    public void setPhotoJson(String user_photo) {
-        this.user_photo = new Gson().fromJson(user_photo, UploadItem.class);
-    }
+	//2) 페이지 구현을 위한 static 변수
+	
+		//LIMIT절에서 사용할 조회 시작 위치
+		private static int offset;
+		
+		//LIMIT절에서 사용할 조회할 데이터 수
+		private static int listCount;
 
-    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-    public void setCrewUser_photo(UploadItem user_photo) {
-        this.user_photo = user_photo;
-    }
+		public static int getOffset() {
+			return offset;
+		}
 
-    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-    public UploadItem getCrewUser_photo() {
-        return this.user_photo;
-    }
+		public static void setOffset(int offset) {
+			CrewPost.offset = offset;
+		}
 
-    /** 프로필사진 정보{json=UploadItem}, IS NULL */
-    public String getPhotoJson() {
-        return new Gson().toJson(this.user_photo);
-    }
+		public static int getListCount() {
+			return listCount;
+		}
+
+		public static void setListCount(int listCount) {
+			CrewPost.listCount = listCount;
+		}
+		
+		//3) 순서 정렬을 위한 static 변수
+		private static int order;
+
+
+		public static int getOrder() {
+			return order;
+		}
+
+		public static void setOrder(int order) {
+			CrewPost.order = order;
+		}
+    
+    
 }

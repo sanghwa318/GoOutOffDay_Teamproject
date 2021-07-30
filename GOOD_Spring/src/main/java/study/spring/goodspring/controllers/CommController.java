@@ -63,6 +63,9 @@ public class CommController {
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_bbs.do", method = RequestMethod.GET)
 	public ModelAndView crewbbs(Model model,
+			// 검색어
+			@RequestParam(value = "keyword", required = false) String keyword,
+			//크루번호
 			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
 			// 조건 버튼
 			@RequestParam(value = "order", defaultValue = "1") int order,
@@ -90,8 +93,13 @@ public class CommController {
 
 		// 조회결과가 저장될 객체
 		Crew output = null;
+		
 
 		CrewPost crewpost = new CrewPost();
+		crewpost.setPost_title(keyword);
+		crewpost.setPost_content(keyword);
+		
+		
 		List<CrewPost> crewpostoutput = null; // 조회결과가 저장될 객체
 
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
@@ -372,6 +380,7 @@ public class CommController {
 		}
 
 		// 3) View 처리
+		model.addAttribute("post", post);
 		model.addAttribute("postout", postout);
 		model.addAttribute("postout2", postout2);
 		model.addAttribute("postout3", postout3);

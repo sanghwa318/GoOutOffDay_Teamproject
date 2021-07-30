@@ -1,6 +1,6 @@
 package study.spring.goodspring.service;
 
-import java.util.List;import study.spring.goodspring.model.Crew;
+import java.util.List;
 import study.spring.goodspring.model.CrewPost;
 
 public interface CrewPostService {
