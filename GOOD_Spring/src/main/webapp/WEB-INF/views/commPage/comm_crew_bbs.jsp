@@ -164,30 +164,26 @@
                   </c:choose>
                </tbody>
             </table>
+            <c:if test="${output.user_info_user_no == login_info.getUser_no()}">
             <div>
             <input type="hidden" id="crew-del" name="crew-del" value="${output.crew_no}" />
             <button type='submit' id="crew_del" class="btn btn-danger pull-left">크루해체</button>
-            
             </div>
+            </c:if>
             <div class="form-group">
-
-     					<form class="form-horizontal" role="form"
-						action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
-						method="GET">
-						<div class="col-md-4 col-sm-5 col-md-offset-1" role="search">
-							<div class="form-group input-group">
-								<input type="text" class="form-control" name="keyword"
-									placeholder="게시글 검색"> <span class="input-group-btn">
-									<button class="btn btn-blue pull-left" type="submit">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
-								</span>
-							</div>
-						</div>
-					</form>
-
-
-
+               <div class="col-md-4" role="search">
+                  <div class="form-group input-group">
+                     <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+                        <input type="text" class="form-control" name="keyword"
+                           placeholder="게시글 검색"> <span class="input-group-btn">
+                           <button class="btn btn-blue" type="submit">
+                              <i class="glyphicon glyphicon-search"></i>
+                           </button>
+                        </span>
+                     </form>
+                  </div>
+               </div>
+				
                <form
                   action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
                   method="GET">
@@ -197,12 +193,14 @@
 
                   <button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
                </form>
+                <c:if test="${output.user_info_user_no == login_info.getUser_no()}">
                <form
                   action="${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do"
                   method="GET">
                   <input type="hidden" name="crew_crew_no" value="${output.crew_no}" />
                   <button type="submit" id="btn2" class="btn btn-primary pull-right">크루관리</button>
                </form>
+               </c:if>
                <!-- 탈퇴버튼 -->
                <div>
                   <input type="hidden" id="crew_no" name="crew_no"
@@ -252,17 +250,7 @@
                               function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
                                  if (result.value) { // 확인 버튼이 눌러진 경우
 
-
-                                    window.location.href = getContextPath()
-                                          + "/commPage/comm_crew_bbs_delete_ok.do?crew_no="
-                                          + $
-                                    {
-                                       output.crew_no
-                                    }
-                                    ;
-=
                                     window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok.do?crew_no="+ ${output.crew_no};
-
 
                                  } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
                                     swal('취소', '탈퇴가 취소되었습니다.',

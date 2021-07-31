@@ -121,9 +121,10 @@ public class CommController {
 
 
 		// 3) View 처리
-		model.addAttribute("output", output);
+		model.addAttribute("output", output);  //크루정보 
 		model.addAttribute("crewpostoutput", crewpostoutput);
 		model.addAttribute("pageData", pageData);
+		model.addAttribute("login_info", login_info);
 		return new ModelAndView("commPage/comm_crew_bbs");
 
 	}
