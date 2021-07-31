@@ -50,7 +50,6 @@ h4 {
 
 .show_list .header h2:after {
 	content: "";
-	background-image: url("../icon_img/걷기 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -62,7 +61,6 @@ h4 {
 
 .exp_list .header h2:after {
 	content: "";
-	background-image: url("../icon_img/크루 아이콘.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -208,14 +206,15 @@ h4 {
 						</div>
 					</div>
 					<!-- 나만의 코스 캐러셀 영역 -->
-					<div class="row exp_item"  id="item-box" data-length="${fn:length(mycourse)}">
+					<div class="row exp_item"  id="item-box" data-length="${fn:length(mycourses)}">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
 							<c:forEach var="item" items="${mycourses}" varStatus="status">
 								<c:url value="/commPage/comm_myCourseDetail.do" var="detailUrl">
 									<c:param name="mycourse_no" value="${item.mycourse_no}"></c:param>
 								</c:url>
-								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}'>
+								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}' 
+								onclick="location.href='${detailUrl}'">
 									<div class="map" id="map${status.index}"
 										style="height: 180px; width: 263px; cursor: pointer;">
 									</div>
@@ -304,7 +303,9 @@ h4 {
 						});
 	</script>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing">
+	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js">
+	</script>
 </body>
 </html>
