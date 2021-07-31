@@ -152,10 +152,16 @@
 				</table>
 
 				<div>
+<<<<<<< HEAD
 					<input type="hidden" id="crew_del" name="crew_del"
 						value="${output.crew_no}" />
 					<button type='submit' id="crew_del"
 						class="btn btn-danger pull-left" style="margin-right: 120px;">크루해체</button>
+=======
+				<input type="hidden" id="crew-del" name="crew-del" value="${output.crew_no}" />
+				<button type='submit' id="crew_del" class="btn btn-danger pull-left">크루해체</button>
+				
+>>>>>>> 289aede2e10961be69bdd28b52798f1be7acfe31
 				</div>
 				<div class="row form-group">
 
@@ -259,4 +265,35 @@
 										});
 					});
 </script>
+<script>
+	function getContextPath() {
+	    var hostIndex = location.href.indexOf(location.host)
+	          + location.host.length;
+	    var contextPath = location.href.substring(hostIndex, location.href
+	          .indexOf('/', hostIndex + 1));
+	    return contextPath;
+	 }
+		$("#crew_del").click(function() {
+
+			event.preventDefault();		
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title : '확인', // 제목
+				text : "해당 크루를 해체하시겠습니까?", // 내용
+				type : 'question', // 종류	
+				confirmButtonText : '네', // 확인버튼 표시 문구
+				showCancelButton : true, // 취소버튼 표시 여부
+				cancelButtonText : '아니오', // 취소버튼 표시 문구
+			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+				if (result.value) { // 확인 버튼이 눌러진 경우
+
+					window.location.href=getContextPath() +"/commPage/comm_crew_bbs_deletecrew.do?crew_no=" + ${output.crew_no} ;
+
+				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+					swal('취소', '해체가 취소되었습니다.', 'error');
+				}
+
+			});
+		});
+	</script>
 </html>

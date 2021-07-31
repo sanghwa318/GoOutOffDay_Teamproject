@@ -80,6 +80,5 @@ public class MainController {
 		
 		return "myPage/myPage_accountEdit";
 	}
-	
 
 }

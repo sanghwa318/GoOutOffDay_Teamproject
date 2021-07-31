@@ -157,23 +157,24 @@ public class CrewServiceImpl implements CrewService{
 	 */
 	
 	@Override
-	public int deleteCrew(Crew input) throws Exception {
+	public int deleteCrew(int input) throws Exception {
 		int result = 0;
 		
 		try {
-			result = sqlSession.delete("CrewMapper.deleteCrew", input);
+			sqlSession.delete("CrewMemberMapper.deleteCrew", input);
+			result = sqlSession.delete("CrewMapper.deleteCrew", input);	
 			
 			if(result ==0) {
 				throw new NullPointerException("result=0");
 			}
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("삭제된 크루가 없습니다.");
+			throw new Exception("해체된 크루가 없습니다.");
 		}
 		
 		catch (Exception e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("크루 삭제에 실패했습니다.");
+			throw new Exception("크루 해체에 실패했습니다.");
 		}
 		
 		
