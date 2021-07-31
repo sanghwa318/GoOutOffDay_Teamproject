@@ -24,9 +24,11 @@ import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
+import study.spring.goodspring.service.MyCourseService;
 
 @Controller
 public class CommController {
@@ -45,7 +47,10 @@ public class CommController {
 
 	@Autowired
 	CrewMemberService crewMemberService;
-
+	
+	@Autowired
+	MyCourseService myCourseService;
+	
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
 
@@ -53,9 +58,27 @@ public class CommController {
 	 * comm_index
 	 */
 	@RequestMapping(value = "/commPage/comm_index.do", method = RequestMethod.GET)
-	public String commindex(Model model) {
+	public ModelAndView commindex(Model model){
+		
+		// 나만의 코스 시작
+		List<MyCourses> mycourses = null;
+		
+		// 크루 시작
+		List<Crew> crew = null;
+		
+		try {
+			// 데이터 조회하기
+			crew = crewService.getCrewList(null);
+			mycourses = myCourseService.getMyCourseList(null);
 
-		return "commPage/comm_index";
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		model.addAttribute("crew", crew);
+		model.addAttribute("mycourses", mycourses);
+
+		return new ModelAndView("commPage/comm_index");
 	}
 
 	/*

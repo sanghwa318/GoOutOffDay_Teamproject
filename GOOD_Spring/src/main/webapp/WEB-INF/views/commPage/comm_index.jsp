@@ -207,110 +207,26 @@ h4 {
 							<a href="${pageContext.request.contextPath}/commPage/comm_myCourse.do">더 보기 &gt;</a>
 						</div>
 					</div>
-					<!-- 공연 전시 문화 캐러셀 영역 -->
-					<div class="row show_item">
+					<!-- 나만의 코스 캐러셀 영역 -->
+					<div class="row exp_item"  id="item-box" data-length="${fn:length(mycourse)}">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지1" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
+							<c:forEach var="item" items="${mycourses}" varStatus="status">
+								<c:url value="/commPage/comm_myCourseDetail.do" var="detailUrl">
+									<c:param name="mycourse_no" value="${item.mycourse_no}"></c:param>
+								</c:url>
+								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}'>
+									<div class="map" id="map${status.index}"
+										style="height: 180px; width: 263px; cursor: pointer;">
+									</div>
+									<div class="caption clearfix">
+										<p>나만의 코스</p>
+										<h4 class="explan">${item.mycourse_name}</h4>
+										<p class="pull-left" style="max-width: 110px;">${item.mycourse_area}</p>
+										<p class="pull-right">좋아요 ${item.like}</p>
+									</div>
 								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지2" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지3" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지4" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지5" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지6" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지7" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지8" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지9" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지10" height="166" width="250">
-								<div class="caption clearfix">
-									<p>한적한 도심길</p>
-									<h4>거리가 조용하고 이쁘네요</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">테헤란로</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -326,110 +242,25 @@ h4 {
 							<a href="${pageContext.request.contextPath}/commPage/comm_crew.do">더 보기 &gt;</a>
 						</div>
 					</div>
-					<!-- 창의 체험 캐러셀 영역 -->
+					<!-- 크루 캐러셀 영역 -->
 					<div class="row exp_item">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지1" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
+							<c:forEach var="item" items="${crew}" varStatus="status">
+								<c:url value="/commPage/comm_crew_info.do" var="detailUrl">
+									<c:param name="crew_no" value="${item.crew_no}"></c:param>
+								</c:url>
+								<div class="thumbnail item">
+									<img src="${item.crew_photo.fileUrl}" alt="크루 이미지" onclick="location.href='${detailUrl}'"
+										style="height: 180px; width: 263px; cursor: pointer;">
+									<div class="caption clearfix">
+										<p>${item.crew_name}크루</p>
+										<h4 class="explan">${item.crew_sinto}</h4>
+										<p class="pull-left" style="max-width: 110px;">${item.crew_area}</p>
+										<p class="pull-right">회원수 ${item.crew_member}</p>
+									</div>
 								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지2" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지3" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지4" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지5" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지6" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지7" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지8" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지9" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
-							<div class="thumbnail item" onclick="location.href='#'"
-								style="cursor: pointer;">
-								<img src="#" alt="테스트이미지10" height="166" width="250">
-								<div class="caption clearfix">
-									<p>걷기크루</p>
-									<h4>20~30대 환영합니다~^^</h4>
-									<p class="pull-left">강남</p>
-									<p class="pull-right">강남대로</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -472,5 +303,8 @@ h4 {
 							}
 						});
 	</script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js"></script>
 </body>
 </html>
