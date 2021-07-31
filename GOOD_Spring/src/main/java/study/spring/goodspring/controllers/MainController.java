@@ -80,17 +80,5 @@ public class MainController {
 		
 		return "myPage/myPage_accountEdit";
 	}
-	
-	/**
-	 * 마이 페이지 회원 수정 페이지
-	 * 
-	 * @return String
-	 */
-	@RequestMapping(value = "/myPage/myPage_accountEdit.do", method = RequestMethod.GET)
-	public String search() {
-		
-		return "myPage/myPage_accountEdit";
-	}
-	
 
 }

@@ -100,7 +100,7 @@
 	<select id="selectCrewPostList" resultMap="crewPostMap"
 		parameterType="study.spring.goodspring.model.CrewPost">
 		SELECT post_no, post_like,
-		post_crew, date_format(post_createdate, '%Y%m%d%H%i%s')  AS `post_createdate`, post_editdate,
+		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
 		post_img, post_hits
 		user_info_user_no 
