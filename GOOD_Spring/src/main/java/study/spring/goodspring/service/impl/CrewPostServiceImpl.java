@@ -149,8 +149,12 @@ public class CrewPostServiceImpl implements CrewPostService {
 	}
 
 
-
-
+	/*
+	 * post_no를 통한 Crew조회
+	 * @param Crew 검색 조건을 담고 있는 Beans
+	 * @return int
+	 * @throws Exception
+	 */
 	@Override
 	public CrewPost getCrewNoPostCount(CrewPost input) throws Exception {
 		
