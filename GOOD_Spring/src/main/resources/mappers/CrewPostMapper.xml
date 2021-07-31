@@ -108,5 +108,25 @@
 		WHERE user_info_user_no = #{user_info_user_no}
 		ORDER BY post_createdate ASC
 	</select>
+	
+	<!-- 크루게시물 수 조회를 위한 기능 정의 -->
+		<select id="selectPostCountAll"
+		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
+		SELECT COUNT(*) FROM crew_post
+
+		<where>
+			<if test="post_title != null and post_title != '' ">
+				post_title LIKE CONCAT('%', #{post_title}, '%')
+			</if>
+
+			<if test="post_content != null and post_content != '' ">
+				OR post_content LIKE CONCAT('%', #{post_content}, '%')
+			</if>
+
+		</where>
+		
+	</select>
+	
+	
 
 </mapper>

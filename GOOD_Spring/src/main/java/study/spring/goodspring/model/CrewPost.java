@@ -1,7 +1,6 @@
 package study.spring.goodspring.model;
 
 
-import com.google.gson.Gson;
 
 import lombok.Data;
 import study.spring.goodspring.helper.UploadItem;

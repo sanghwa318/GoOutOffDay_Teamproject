@@ -32,7 +32,7 @@ public interface CrewPostService {
 
 	
 	/*
-	 * 크루 포스트 데이터 조회
+	 * 크루 포스트 수 조회
 	 */
 	public int getCrewPostCount(CrewPost input) throws Exception;
 	

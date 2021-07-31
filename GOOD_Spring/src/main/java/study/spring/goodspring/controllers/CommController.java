@@ -67,10 +67,9 @@ public class CommController {
 			@RequestParam(value = "keyword", required = false) String keyword,
 			//크루번호
 			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
-			// 조건 버튼
-			@RequestParam(value = "order", defaultValue = "1") int order,
+
 			// 페이지 구현에서 사용할 현재 페이지 번호
-			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) throws Exception {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();
@@ -80,10 +79,6 @@ public class CommController {
 		int listCount = 8; // 한 페이지당 표시할 항목 수
 		int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
 
-		// 1) 유효성 검사
-		if (crew_no == 0) {
-			return webHelper.redirect(null, "조회된 크루가 없습니다.");
-		}
 
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
@@ -93,20 +88,20 @@ public class CommController {
 
 		// 조회결과가 저장될 객체
 		Crew output = null;
+		//크루 데이터 불러오기
+		output = crewService.getCrewItem(input);
 		
 
 		CrewPost crewpost = new CrewPost();
 		crewpost.setPost_title(keyword);
 		crewpost.setPost_content(keyword);
 		
-		
 		List<CrewPost> crewpostoutput = null; // 조회결과가 저장될 객체
-
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
 
 		try {
 			// 전체 게시글 수 조회
-//					totalCount = crewPostService.getCrewCount(input);
+			totalCount = crewPostService.getCrewPostCount(crewpost);
 			// 전체 게시글 수 조회
 			crewpostoutput = crewPostService.selectCrewPostList(crewpost);
 
@@ -114,24 +109,21 @@ public class CommController {
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
 
 			// SQL의 LIMIT절에서 사용될 값을 BEANS의 static 변수에 저장
-			Crew.setOffset(pageData.getOffset());
-			Crew.setListCount(pageData.getListCount());
-			Crew.setOrder(order);
+			CrewPost.setOffset(pageData.getOffset());
+			CrewPost.setListCount(pageData.getListCount());
 
 			// 데이터 조회하기
-			output = crewService.getCrewItem(input);
+			crewpostoutput = crewPostService.selectCrewPostList(crewpost);
+			
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 
-		// 3) View 처리
-//				model.addAttribute("keyword",keyword);
-//				model.addAttribute("region",region);
-//				model.addAttribute("pageData", pageData);
 
 		// 3) View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("crewpostoutput", crewpostoutput);
+		model.addAttribute("pageData", pageData);
 		return new ModelAndView("commPage/comm_crew_bbs");
 
 	}

@@ -134,12 +134,12 @@ public class CrewPostServiceImpl implements CrewPostService {
 	 * @throws Exception
 	 */
 	@Override
-	public int getCrewPostCount(CrewPost input) throws Exception {
+	public int getCrewPostCount(CrewPost crewpost) throws Exception {
 		
 		int result= 0;
 		
 		try {
-			result = sqlSession.selectOne("CrewMapper.selectCountAll", input);
+			result = sqlSession.selectOne("CrewPostMapper.selectPostCountAll", crewpost);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

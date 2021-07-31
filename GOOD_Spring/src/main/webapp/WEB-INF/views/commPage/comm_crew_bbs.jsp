@@ -113,20 +113,15 @@
 					</thead>
 					<tbody id="list">
 						<!-- 크루 게시물 영역 -->
-						<c:choose>
-							<%--조회결과가 없는 경우 --%>
-							<c:when
-								test="${crewpostoutput == null || fn:length(crewpostoutput) == 0 })">
-								<tr>
-									<td class="text-center">등록된 게시글이 없습니다.</td>
-								</tr>
-							</c:when>
 
-							<%--조회결과가 있는 경우 --%>
-							<c:otherwise>
+
+
+
 								<!--조회 결과에 따른 반복 처리 -->
 								<c:forEach var="item" items="${crewpostoutput}"
 									varStatus="status">
+									<c:set var="i" value="${i+1}" />
+									
 									<%-- 검색어가 있다면? --%>
 									<c:if test="${keyword != '' }">
 										<%-- 검색어에 <mark> 적용 --%>
@@ -150,39 +145,36 @@
 										<td class="text-center">${item.post_createdate}</td>
 										<td class="text-center">${item.post_hits}</td>
 									</tr>
-
-
-
 								</c:forEach>
 
 
-
-
-							</c:otherwise>
-
-
-						</c:choose>
 					</tbody>
 				</table>
+
 				<div>
-					<input  type="hidden" id="crew_del" name="crew_del"
+					<input type="hidden" id="crew_del" name="crew_del"
 						value="${output.crew_no}" />
 					<button type='submit' id="crew_del"
-						class="btn btn-danger pull-left">크루해체</button>
+						class="btn btn-danger pull-left" style="margin-right: 120px;">크루해체</button>
 				</div>
-				<div class="form-group">
-					<div class="col-md-4" role="search">
-						<div class="form-group input-group">
-							<form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+				<div class="row form-group">
+
+
+					<form class="form-horizontal" role="form"
+						action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
+						method="GET">
+						<div class="col-md-6 col-sm-5 " role="search">
+							<div class="form-group input-group">
 								<input type="text" class="form-control" name="keyword"
 									placeholder="게시글 검색"> <span class="input-group-btn">
-									<button class="btn btn-blue" type="submit">
+									<button class="btn btn-blue pull-left" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</span>
-							</form>
+							</div>
 						</div>
-					</div>
+					</form>
+
 
 					<form
 						action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
@@ -213,6 +205,9 @@
 	<!-- 페이지네이션 -->
 	<%@ include file="../inc/pagenation.jsp"%>
 	<!-- //페이지네이션 -->
+
+
+
 	<!--// 본문 하단 영역 -->
 	<%@ include file="../inc/Footer.jsp"%>
 
