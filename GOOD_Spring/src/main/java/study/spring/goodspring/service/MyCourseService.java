@@ -34,10 +34,10 @@ public interface MyCourseService {
 	/*
 	 * 나만의코스 데이터 등록
 	 * @param MyCourse 저장할 정보를 담고 있는 Beans
-	 * @return int 
+	 * @return MyCourses 
 	 * @throws Exception
 	 */
-	public int addMyCourse(MyCourses input) throws Exception;
+	public MyCourses addMyCourse(MyCourses input) throws Exception;
 	
 	
 	/*
@@ -79,5 +79,5 @@ public interface MyCourseService {
 	 * @return int
 	 * @throws Exception
 	 */
-	public int courseUniqueChk(MyCourses input) throws Exception;
+	public boolean courseUniqueChk(MyCourses input) throws Exception;
 }

@@ -252,20 +252,18 @@ public class MyCourseController {
 		MyCourses output = null;
 		
 		try {
-			if(myCourseService.courseUniqueChk(input)>0) {
+			if(myCourseService.courseUniqueChk(input)) {
 				return webHelper.redirect(null, "이미 작성된 코스입니다. 다른 코스를 선택해주세요.");
 			}
 			// 데이터 추가하기
-			myCourseService.addMyCourse(input);
-			output = myCourseService.getMyCoursePost(input);
-		} catch (Exception e) {
+			output = myCourseService.addMyCourse(input);
+					} catch (Exception e) {
 			webHelper.redirect(null, e.getLocalizedMessage());
 		}
 
 		return webHelper.redirect(
-				contextPath + "/commPage/comm_myCourseDetail.do?mycourse_no=" + output.getMycourse_no(),
+				contextPath + "/commPage/comm_myCourseDetail.do" + "?mycourse_no=" + output.getMycourse_no(),
 				"작성되었습니다.");
-
 	}
 
 	/*

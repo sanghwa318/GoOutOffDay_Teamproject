@@ -136,7 +136,7 @@
 	</select>
 	<!-- 나만의 코스 글 중복 검사 -->
 	<select id="courseUniqueChk" parameterType="study.spring.goodspring.model.MyCourses" resultMap="MyCourseMap">
-	SELECT COUNT(*) 
+	SELECT mycourse_no
 	FROM mycourse_post
 	WHERE mycourse_name=#{mycourse_name}
 	</select>

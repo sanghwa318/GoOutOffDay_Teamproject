@@ -103,16 +103,15 @@ public class MyCourseServiceImpl implements MyCourseService {
 	 * @throws Exception
 	 */
 	@Override
-	public int addMyCourse(MyCourses input) throws Exception {
-		int result = 0;
-
+	public MyCourses addMyCourse(MyCourses input) throws Exception {
+		MyCourses result = null;
 		try {
-			result = sqlSession.insert("MyCourseMapper.insertMyCourse", input);
+			sqlSession.insert("MyCourseMapper.insertMyCourse", input);
+			result= sqlSession.selectOne("MyCourseMapper.selectMyCoursePost", input);
 
-			if (result == 0) {
-				throw new NullPointerException("result=0");
+			if (result == null) {
+				throw new NullPointerException("result=null");
 			}
-
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("저장된 데이터가 없습니다.");
@@ -120,7 +119,6 @@ public class MyCourseServiceImpl implements MyCourseService {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 등록에 실패했습니다.");
 		}
-
 		return result;
 	}
 	/*
@@ -198,9 +196,8 @@ public class MyCourseServiceImpl implements MyCourseService {
 
 	@Override
 	public void updateHits(MyCourses input) throws Exception {
-		int result = 0;
 		try {
-			result = sqlSession.update("MyCourseMapper.updateHits", input);
+			sqlSession.update("MyCourseMapper.updateHits", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
@@ -209,19 +206,19 @@ public class MyCourseServiceImpl implements MyCourseService {
 	}
 
 	@Override
-	public int courseUniqueChk(MyCourses input) throws Exception {
-		int result = 0;
-		
+	public boolean courseUniqueChk(MyCourses input) throws Exception {
+		MyCourses result=null;
 		
 		try {
-			result = sqlSession.selectOne("MyCourseMapper.courseUniqueChk", input);
+			result= sqlSession.selectOne("MyCourseMapper.courseUniqueChk", input);
+			if(result==null) {
+				return false;
+			}
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
-		
-		
-		return result;
+		return true;
 	}
 
 }
