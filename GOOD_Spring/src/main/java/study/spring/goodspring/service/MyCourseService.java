@@ -72,4 +72,12 @@ public interface MyCourseService {
 	 * @throws Exception
 	 */
 	public void updateHits(MyCourses input) throws Exception;
+	
+	/**
+	 * 나만의 코스 중복검사
+	 * @param MyCourse 코스이름이 담긴 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int courseUniqueChk(MyCourses input) throws Exception;
 }

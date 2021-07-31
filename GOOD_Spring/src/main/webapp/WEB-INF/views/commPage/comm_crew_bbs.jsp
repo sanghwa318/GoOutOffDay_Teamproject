@@ -170,6 +170,7 @@
             
             </div>
             <div class="form-group">
+<<<<<<< HEAD
      					<form class="form-horizontal" role="form"
 						action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
 						method="GET">
@@ -184,6 +185,20 @@
 							</div>
 						</div>
 					</form>
+=======
+               <div class="col-md-4" role="search">
+                  <div class="form-group input-group">
+                     <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+                        <input type="text" class="form-control" name="keyword"
+                           placeholder="게시글 검색"> <span class="input-group-btn">
+                           <button class="btn btn-blue" type="submit">
+                              <i class="glyphicon glyphicon-search"></i>
+                           </button>
+                        </span>
+                     </form>
+                  </div>
+               </div>
+>>>>>>> 77247d814809ee26e23b74ec921d27b2880f3ce3
 
                <form
                   action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
@@ -249,6 +264,7 @@
                               function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
                                  if (result.value) { // 확인 버튼이 눌러진 경우
 
+<<<<<<< HEAD
                                     window.location.href = getContextPath()
                                           + "/commPage/comm_crew_bbs_delete_ok.do?crew_no="
                                           + $
@@ -256,6 +272,9 @@
                                        output.crew_no
                                     }
                                     ;
+=======
+                                    window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok.do?crew_no="+ ${output.crew_no};
+>>>>>>> 77247d814809ee26e23b74ec921d27b2880f3ce3
 
                                  } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
                                     swal('취소', '탈퇴가 취소되었습니다.',

@@ -250,8 +250,11 @@ public class MyCourseController {
 		input.setMycourse_content(mycourse_content);
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		MyCourses output = null;
-
+		
 		try {
+			if(myCourseService.courseUniqueChk(input)>0) {
+				return webHelper.redirect(null, "이미 작성된 코스입니다. 다른 코스를 선택해주세요.");
+			}
 			// 데이터 추가하기
 			myCourseService.addMyCourse(input);
 			output = myCourseService.getMyCoursePost(input);
@@ -260,7 +263,7 @@ public class MyCourseController {
 		}
 
 		return webHelper.redirect(
-				contextPath + "/commPage/comm_myCourseDetail.do" + "?mycourse_no=" + output.getMycourse_no(),
+				contextPath + "/commPage/comm_myCourseDetail.do?mycourse_no=" + output.getMycourse_no(),
 				"작성되었습니다.");
 
 	}
