@@ -274,8 +274,6 @@ public class WalkController {
 			e.printStackTrace();
 		}
 
-		// select 태그 상태 유지
-
 		// View 처리
 		model.addAttribute("output", output);
 		model.addAttribute("keyword", keyword);
