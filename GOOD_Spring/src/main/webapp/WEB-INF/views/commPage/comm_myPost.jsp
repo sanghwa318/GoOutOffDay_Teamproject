@@ -95,7 +95,7 @@
 -								<tr style="cursor: pointer;"
 									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do?post_no=${list.post_no}'">
 									<td class="text-center">${status.index+1}</td>
-									<td class="text-center">${list.post_title }</td>
+									<td class="text-center">${list.post_title}</td>
 									<td class="text-center">크루</td>
 									<td class="text-center">${list.post_createdate }</td>
 									<td class="text-center">${list.post_hits} </td>

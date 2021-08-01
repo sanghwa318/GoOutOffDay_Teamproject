@@ -51,8 +51,9 @@ $(function() {
                 level: 5, // 지도의 확대 레벨
                 mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
             };
-        map[j] = new kakao.maps.Map(mapContainer[j], mapOption);
-				               polyline = new kakao.maps.Polyline({
+        		map[j] = new kakao.maps.Map(mapContainer[j], mapOption);
+				map[j].setDraggable(false);
+				polyline = new kakao.maps.Polyline({
 					map: map[j], // 선을 표시할 지도 객체 
 					path: linepath,
 					strokeWeight: 2, // 선의 두께
@@ -78,12 +79,10 @@ $(function() {
 						kakao.maps.event.addListener(polyline, 'mouseover', function() {
 							console.log('도형에 mouseover 이벤트가 발생했습니다!');
 						});
-
 						// 도형에 mouseout 이벤트를 등록한다
 						kakao.maps.event.addListener(polyline, 'mouseout', function() {
 							console.log('도형에 mouseout 이벤트가 발생했습니다!');
 						});
-
 						// 도형에 mousedown 이벤트를 등록한다
 						kakao.maps.event.addListener(polyline, 'mousedown', function() {
 							console.log('도형에 mousedown 이벤트가 발생했습니다!');

@@ -80,6 +80,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 
 		return;
 	}
+
 	@Override
 	public void updateCourseName(WalkLog input) throws Exception {
 		int result = 0;
@@ -100,6 +101,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 
 		return;
 	}
+
 	@Override
 	public List<WalkLog> getLoc(WalkLog input) throws Exception {
 		List<WalkLog> result = null;
@@ -124,7 +126,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 	public List<WalkLog> getCoureName(WalkLog input) throws Exception {
 		List<WalkLog> result = null;
 		try {
-			result=sqlSession.selectList("WalkLogMapper.selectCourseNameList", input);
+			result = sqlSession.selectList("WalkLogMapper.selectCourseNameList", input);
 			if (result == null) {
 				throw new NullPointerException("output =null");
 			}
@@ -135,7 +137,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
-		
+
 		return result;
 	}
 
@@ -143,8 +145,8 @@ public class WalkLogServiceImpl implements WalkLogService {
 	public void courseNameUniqueCheck(WalkLog input) throws Exception {
 		int result = 0;
 		try {
-			result=sqlSession.selectOne("WalkLogMapper.courseNameUniqueCheck", input);
-			if (result>0) {
+			result = sqlSession.selectOne("WalkLogMapper.courseNameUniqueCheck", input);
+			if (result > 0) {
 				throw new Exception("result=" + result);
 			}
 		} catch (NullPointerException e) {
@@ -174,5 +176,18 @@ public class WalkLogServiceImpl implements WalkLogService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public void deleteNull(WalkLog input) throws Exception {
+		try {
+			sqlSession.delete("WalkLogMapper.deleteNull", input);
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("삭제된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 삭제에 실패했습니다.");
 		}
+	}
 }

@@ -182,4 +182,8 @@
         FROM walk_log 
         WHERE course_name=#{course_name} and user_info_user_no=#{user_info_user_no}
     </select>
+    	<!-- 나만의 코스 작성 페이지 진입 시 코스이름이 없는 워크 로그를 지운다. -->
+    <delete id="deleteNull" parameterType="study.spring.goodspring.model.WalkLog">
+    DELETE FROM walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name IS NULL
+    </delete>
 </mapper>

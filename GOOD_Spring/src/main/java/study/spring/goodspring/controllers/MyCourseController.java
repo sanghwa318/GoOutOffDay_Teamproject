@@ -1,9 +1,5 @@
 package study.spring.goodspring.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -209,10 +205,17 @@ public class MyCourseController {
 			String redirectUrl = contextPath + "/mainPage/login.do";
 			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
 		}
-		/* 1) 코스 이름 조회하기 */
 		WalkLog input = new WalkLog();
 		input.setUser_info_user_no(loginInfo.getUser_no());
+		
+		/* 1) 사용자의 걷기로그 중 코스 이름이 없는 값을 지운다. */
+		try {
+			walkLogService.deleteNull(input);
+		} catch (Exception e1) {
+			return webHelper.redirect(null, e1.getLocalizedMessage());
+		}
 
+		/* 2) 코스 이름 조회하기 */
 		List<WalkLog> courseName = null;
 		try {
 			// 데이터 조회
@@ -411,58 +414,13 @@ public class MyCourseController {
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
-		int a = mycourse.size();
-		int b = crewpost.size();
-		int i = 0;
-		int j = 0;
-		List<Object> list = new ArrayList<Object>();
-
-		while (true) {
-			if (i == a) {
-				for (int k = j; k < b; k++) {
-					crewpost.get(i).setDtype("crewpost");
-					list.add(crewpost.get(k));
-				}
-				break;
-			}
-			if (j == b) {
-				for (int k = i; k < a; k++) {
-					mycourse.get(i).setDtype("mycourse");
-					list.add(mycourse.get(k));
-				}
-				break;
-			}
-			SimpleDateFormat input_format = new SimpleDateFormat("yyyyMMddHHmmss"); // 입력포멧
-			MyCourses mycourse_tmp = mycourse.get(i);
-			CrewPost crewpost_tmp = crewpost.get(j);
-			
-			String str1= mycourse_tmp.getMycourse_createdate();
-			String str2= crewpost_tmp.getPost_createdate();
-			try {
-				Date mycourse_t = input_format.parse(str1);
-				
-				
-				
-				Date crewpost_t = input_format.parse(str2);
-		
-				long mt = mycourse_t.getTime();
-				long ct = crewpost_t.getTime();
-
-				if (mt < ct) {
-					mycourse.get(i).setDtype("mycourse");
-					list.add(mycourse.get(i));
-					i++;
-					continue;
-				} else if (mt > ct) {
-					crewpost.get(i).setDtype("crewpost");
-					list.add(crewpost.get(i));
-					j++;
-					continue;
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+		List<Object> list;
+		try {
+			list = myPostService.sortPost(mycourse, crewpost);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
+		
 		model.addAttribute("list", list);
 		return new ModelAndView("commPage/comm_myPost");
 	}

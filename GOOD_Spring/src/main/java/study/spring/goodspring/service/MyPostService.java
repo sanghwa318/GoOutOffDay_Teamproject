@@ -23,4 +23,5 @@ public interface MyPostService {
 	 */
 	public List<CrewPost> getCrewPost(int input) throws Exception;
 	
+	public List<Object> sortPost(List<MyCourses> mycourse, List<CrewPost> crewpost) throws Exception;
 }
