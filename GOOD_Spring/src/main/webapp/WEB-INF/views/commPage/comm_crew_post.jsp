@@ -89,7 +89,7 @@ form {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
@@ -186,8 +186,15 @@ form {
 				</div>
 			</form>
 			<hr>
-			<a class="btn btn-default pull-left"
-				href="${pageContext.request.contextPath}/commPage/comm_crew_bbs.jsp">목록</a>
+			
+		<form action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+                  <input type="hidden" name="crew_no" value="${postout2.crew_no}" />
+                  <input type="hidden" id="crew_name" name="crew_name"
+                     value="${postout2.crew_name}" />
+                  <button type="submit" id="btn1" class="btn btn-default pull-left">목록</button>
+               </form>
+			
+			
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-warning wr_delete"
 					id="wr_delete">삭제</button>
@@ -203,6 +210,8 @@ form {
 	<!-- //공통 푸터 -->
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
+
+		 
 	<script>
 		$(".heart")
 				.on(
