@@ -188,6 +188,10 @@
 	</select>
 
 
-
+	<!-- 크루명 중복검사 -->
+    <select id="crewNameUinqueCheck" parameterType="study.spring.goodspring.model.Crew" resultType="int">
+        SELECT COUNT(*) FROM crew WHERE crew_name=#{crew_name}
+    </select>
+	
 
 </mapper>

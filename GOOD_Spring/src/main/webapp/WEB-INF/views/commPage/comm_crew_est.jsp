@@ -9,7 +9,7 @@
 <head>
 
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
-
+<script	src="${pageContext.request.contextPath}/assets/js/regex-crew-est.js"></script>
 <style>
 //
 상단 //
@@ -97,9 +97,10 @@ button span {
 					<div class="form-group col-md-3 col-xs-6">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> <input
 							type="text" id="crew_name" class="form-control crew_input"
-							placeholder="크루명을 입력하세요." name="crew_name" value="${crew_name}"
+							placeholder="한글로 입력하세요." name="crew_name" value="${crew_name}"
 							style="width: 200px; text-align-last: center; font-size: 20px;">
-						<button type="submit" id="crewname_check" class="btn btn-default">중복확인</button>
+							<input type="hidden" name="crewname_unique_check" value="">
+						<button type="button" id="crewname_unique_check" class="btn btn-default">중복확인</button>
 					</div>
 
 
@@ -293,8 +294,7 @@ button span {
 	</script>
 	<script>
 		$(function() {
-			$('#btn_ok')
-					.click(
+			$('#btn_ok').click(
 							function(e) {
 								e.preventDefault();
 
@@ -315,6 +315,47 @@ button span {
 
 									return false; // <-- 실행 중단
 								}
+								
+						         /** id중복 체크 확인 */
+			
+
+						            // 입력값을 취득하고, 내용의 존재여부를 검사한다.
+						            var crew_name_val = $("#crew_name").val();
+
+						            if (!crew_name_val) { // 입력되지 않았다면?
+						               swal({
+						                  title : "에러",
+						                  text : "크루명을 입력해 주세요.",
+						                  type : "error"
+						               }).then(function(result) {
+						                  // 창이 닫히는 애니메이션의 시간이 있으므로,
+						                  // 0.1초의 딜레이 적용 후 포커스 이동
+						                  setTimeout(function() {
+
+						                  }, 100);
+						               }); // <-- 메시지 표시
+						               $("#crew_name_val").focus(); // <-- 커서를 강제로 넣기
+						               return false; // <-- 실행 중단
+						            }
+
+						            if ($("input[name='crewname_unique_check']").val() == '') {
+						               swal({
+						                  title : "경고",
+						                  text : "크루명 중복확인을 해주세요.",
+						                  type : "warning"
+						               }).then(function(result) {
+						                  // 창이 닫히는 애니메이션의 시간이 있으므로,
+						                  // 0.1초의 딜레이 적용 후 포커스 이동
+						                  setTimeout(function() {
+
+						                  }, 100);
+						               });
+						               $("input[name='crewname_unique_check']").eq(0).focus();
+						               return false;
+						            } 
+						            
+						            
+					
 
 								var crew_category_val = $("#crew_category")
 										.val();
@@ -400,8 +441,8 @@ button span {
 										confirmButtonText : '네', // 확인버튼 표시 문구
 									}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 										if (result.value) { // 확인 버튼이 눌러진 경우
-											$('#est_form').submit();
-																	
+											 $("#crew_name").removeAttr('disabled');
+											document.getElementById("est_form").submit();   // 유효성 검사 후 submit
 														}
 
 													});
@@ -409,8 +450,7 @@ button span {
 								}
 							});
 
-			$("#btn_cancel")
-					.click(
+			$("#btn_cancel").click(
 							function() {
 								// 확인, 취소버튼에 따른 후속 처리 구현
 								swal({
@@ -422,11 +462,10 @@ button span {
 									cancelButtonText : '아니오', // 취소버튼 표시 문구
 								}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 									if (result.value) { // 확인 버튼이 눌러진 경우
-										swal(
-												'삭제','크루 개설이 취소되었습니다.','success');
+										swal('삭제','크루 개설이 취소되었습니다.','success');
 									setTimeout(function() {
 										location.href = '${pageContext.request.contextPath}/commPage/comm_crew.do';
-																}, 100000000);
+																}, 100);
 
 													}
 

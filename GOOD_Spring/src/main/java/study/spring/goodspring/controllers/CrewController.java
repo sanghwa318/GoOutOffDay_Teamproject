@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,32 +60,23 @@ public class CrewController {
 	
 	//작성 폼에대한 action 페이지
 	@RequestMapping(value = "/commPage/comm_crew_est_ok.do", method = RequestMethod.POST) 
-	public void addOk(Model model, HttpServletResponse response, HttpServletRequest request,
+	public ModelAndView addOk(Model model,
 			@RequestParam(value = "crew_name", defaultValue="") String crew_name,
 			@RequestParam(value = "crew_category", defaultValue="") String crew_category,
 			@RequestParam(value = "crew_area", defaultValue="") String crew_area,
 			@RequestParam(value="crew_photo", defaultValue="") MultipartFile crew_photo,
 			@RequestParam(value = "crew_sinto", defaultValue="") String crew_sinto,
 			@RequestParam(value = "crew_dinto", defaultValue="") String crew_dinto) {
-	
+		
+
+		
+		
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();
 		
-//		//1) 사용자가 입력한 파라미터 유효성 검사
-//		//일반 문자열 입력
-//		if(!regexHelper.isValue(crew_name)) { return webHelper.redirect(null, "크루 명을 입력하세요"); }
-//		if(!regexHelper.isValue(crew_category)) { return webHelper.redirect(null, "크루 종류를 입력하세요"); }
-//		if(!regexHelper.isValue(crew_area)) { return webHelper.redirect(null, "크루 지역을 입력하세요"); }
-//		if(!regexHelper.isValue(crew_sinto)) { return webHelper.redirect(null, "크루 소개글을 입력하세요"); }
-//		if(!regexHelper.isValue(crew_dinto)) { return webHelper.redirect(null, "크루 소개글을 입력하세요"); }
-		
-		//6) 업로드 결과를 Beans에 저장
+
 		UploadItem item = null;
-		//item.setContentType(crew_photo.getContentType());
-		//item.setFieldName(crew_photo.getName());
-		//item.setFileSize(crew_photo.getSize());
-		//item.setOriginName(crew_photo.getOriginalFilename());
-		//item.setFilePath(filePath);
+
 		
 		try {
 			item = webHelper.saveMultipartFile(crew_photo);
@@ -115,22 +108,16 @@ public class CrewController {
 			member.setCrew_crew_no(input.getCrew_no());
 			crewMemberService.addCrewMember(member);
 		} catch (Exception e) {
-			e.getLocalizedMessage();
+			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 		
-		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_no();
-		
-		try {
-			response.sendRedirect(redirectUrl);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
+	
 		//7) View 처리
 		//업로드 정보를 View로 전달
 		model.addAttribute("item",item);
-
+		
+		return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_no(), null);
 	}
 	
 	/**크루 삭제 */
@@ -149,5 +136,34 @@ public class CrewController {
 		return webHelper.redirect(contextPath + "/commPage/comm_crew.do", "크루가 해체 되었습니다.");
 	}
 		
-	
+	/** 크루이름 중복검사 */
+	@ResponseBody
+    @RequestMapping(value = "/commPage/comm_crew_est_ok.do/crewname_unique_check", method = RequestMethod.POST)
+    public Map<String, Object> crewNameUinqueCheck(
+            // 아이디
+            @RequestParam(value = "crew_name", required = false) String crew_name) {
+
+        if (!regexHelper.isValue(crew_name)) {
+            return webHelper.getJsonWarning("크루명을 입력하세요.");
+        }
+        if (!regexHelper.isKor(crew_name)) { return webHelper.getJsonWarning("크루명은 한글만 입력 가능합니다."); }
+        if (crew_name.length() < 2 || crew_name.length() > 10) { return webHelper.getJsonWarning("크루명은 2~10글자로 입력 가능합니다."); }
+        
+        Crew input = new Crew();
+        input.setCrew_name(crew_name);
+        
+        try {
+            if(!crewService.crewNameUinqueCheck(input)) {
+            	return webHelper.getJsonWarning("이미 사용중인 크루명 입니다.");
+            }
+            else {
+            	 return webHelper.getJsonData();
+            }
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+
+
+    }
+  
 }
