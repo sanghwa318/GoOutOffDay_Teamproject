@@ -10,8 +10,6 @@
 <%@ include file="../inc/head.jsp"%>
 
 <style type="text/css">
-
-
 .main_header>h1 {
 	position: relative;
 	text-align: center;
@@ -31,7 +29,6 @@
 	bottom: 0px;
 }
 
-
 .body .main_header {
 	padding-bottom: 0;
 }
@@ -50,16 +47,17 @@
 					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;"/>
+						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
 					</span>
 				</h1>
 			</div>
 			<div class="header">
-				<h1 style="color: #343a40; padding-left:15px">내가 쓴 글</h1>
+				<h1 style="color: #343a40; padding-left: 15px">내가 쓴 글</h1>
 			</div>
 
 			<!-- 리스트영역-->
-			<div class="col-md-12 table-responsive"><table class="table table-bordered table-hover">
+			<div class="col-md-12 table-responsive">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr class="active">
 							<th class="text-center">#</th>
@@ -71,62 +69,43 @@
 					</thead>
 					<tbody id="list">
 						<c:choose>
-						<%--조회결과가 없는 경우 --%>
-						<c:when test="${(list==null||fn:length(list)==0)}">
-							<tr>
-								<td>조회결과가 없습니다.</td>
-							</tr>
-						</c:when>
-						<%--조회결과가 있는 경우 --%>
-						<c:otherwise>
-							<%--조회결과에 따른 반복 처리 --%>
-							<c:forEach var="list" items="${list}" varStatus="status">
-								<c:if test="${list.dtype=='mycourse'}">
--								<tr style="cursor: pointer;"
-									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do?mycourse_no=${list.mycourse_no}'">
-									<td class="text-center">${status.index+1}</td>
-									<td class="text-center">${list.mycourse_name }</td>
-									<td class="text-center">나만의 코스</td>
-									<td class="text-center">${list.mycourse_createdate }</td>
-									<td class="text-center">${list.mycourse_hits }</td>
+							<%--조회결과가 없는 경우 --%>
+							<c:when test="${(list==null||fn:length(list)==0)}">
+								<tr>
+									<td>조회결과가 없습니다.</td>
 								</tr>
-								</c:if>
-								<c:if test="${list.dtype=='crewpost'}">
--								<tr style="cursor: pointer;"
-									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do?post_no=${list.post_no}'">
-									<td class="text-center">${status.index+1}</td>
-									<td class="text-center">${list.post_title}</td>
-									<td class="text-center">크루</td>
-									<td class="text-center">${list.post_createdate }</td>
-									<td class="text-center">${list.post_hits} </td>
-								</tr>
-								</c:if>
-							</c:forEach>
-						</c:otherwise>
+							</c:when>
+							<%--조회결과가 있는 경우 --%>
+							<c:otherwise>
+								<%--조회결과에 따른 반복 처리 --%>
+								<c:forEach var="list" items="${list}" varStatus="status">
+									<c:if test="${list.dtype=='mycourse'}">
+										<tr style="cursor: pointer;"
+											onclick="location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do?mycourse_no=${list.mycourse_no}'">
+											<td class="text-center">${status.index+1}</td>
+											<td class="text-center">${list.mycourse_name }</td>
+											<td class="text-center">나만의 코스</td>
+											<td class="text-center">${list.mycourse_createdate }</td>
+											<td class="text-center">${list.mycourse_hits }</td>
+										</tr>
+									</c:if>
+									<c:if test="${list.dtype=='crewpost'}">
+										<tr style="cursor: pointer;"
+											onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do?post_no=${list.post_no}'">
+											<td class="text-center">${status.index+1}</td>
+											<td class="text-center">${list.post_title}</td>
+											<td class="text-center">크루</td>
+											<td class="text-center">${list.post_createdate }</td>
+											<td class="text-center">${list.post_hits}</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:otherwise>
 						</c:choose>
 					</tbody>
 				</table>
 			</div>
-
-
 			<!-- //리스트영역 끝-->
-
-
-			<!-- 페이지네이션영역-->
-			<div class="text-center">
-				<ul class="pagination" style="margin-top: 0;">
-					<li class="page-item disabled"><a href="#">&laquo;</a></li>
-					<li class="page-item active"><span>1<span
-							class="sr-only">(current)</span></span></li>
-					<li class="page-item"><a href="#">2</a></li>
-					<li class="page-item"><a href="#">3</a></li>
-					<li class="page-item"><a href="#">4</a></li>
-					<li class="page-item"><a href="#">5</a></li>
-					<li class="page-item"><a href="#">&raquo;</a></li>
-				</ul>
-			</div>
-
-			<!-- //페이지네이션영역 끝-->
 		</div>
 		<!-- //본문영역 끝 -->
 	</div>

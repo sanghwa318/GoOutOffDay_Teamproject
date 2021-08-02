@@ -407,15 +407,11 @@ public class MyCourseController {
 
 		List<MyCourses> mycourse = null;
 		List<CrewPost> crewpost = null;
-
+		List<Object> list=null;
 		try {
 			mycourse = myPostService.getMyCoursePost(user_no);
 			crewpost = myPostService.getCrewPost(user_no);
-		} catch (Exception e) {
-			return webHelper.redirect(null, e.getLocalizedMessage());
-		}
-		List<Object> list;
-		try {
+			
 			list = myPostService.sortPost(mycourse, crewpost);
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
