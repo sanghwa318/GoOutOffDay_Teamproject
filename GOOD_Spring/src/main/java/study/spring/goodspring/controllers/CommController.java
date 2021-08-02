@@ -188,6 +188,8 @@ public class CommController {
 		try {
 			// 데이터 조회하기
 			output = crewService.getCrewItem(input);
+			
+			
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
@@ -201,9 +203,9 @@ public class CommController {
 	 * comm_crew_info_ok.do
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_info_ok.do", method = RequestMethod.GET)
-	public void crewinfoOk(Model model, HttpServletResponse response, HttpServletRequest request,
+	public ModelAndView crewinfoOk(Model model,
 			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
-			@RequestParam(value = "crew_name", defaultValue = "0") String crew_name)
+			@RequestParam(value = "crew_name", defaultValue = "") String crew_name)
 	{
 
 		Member login_info = (Member) webHelper.getSession("login_info");
@@ -218,27 +220,22 @@ public class CommController {
 
 		Crew output = new Crew();
 		output.setCrew_no(crew_no);
-
+		
 		try {
-
+			if(crewMemberService.RegexCrewMemberList(input)) {
+				return webHelper.redirect(null, "이미 가입된 크루입니다.");
+			}
 			// 데이터 저장
 			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
 			crewMemberService.addCrewMember(input);
 			crewService.updateCrewMemberCount(output);
+			
 
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
 
-		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_crew_no() + "&crew_name=" + input.getCrew_name();
-
-		try {
-			response.sendRedirect(redirectUrl);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_crew_no(), "가입되었습니다.");
 	}
 
 	/*

@@ -76,4 +76,12 @@ public interface CrewMemberService {
 	
 	public boolean getCrewno(CrewMember input) throws Exception;
 	
+	/**
+	 * 크루가입 중복방지
+	 * @param input
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	public boolean RegexCrewMemberList(CrewMember input) throws Exception;
+	
 }

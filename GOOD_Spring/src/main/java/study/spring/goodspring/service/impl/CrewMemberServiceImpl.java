@@ -236,4 +236,24 @@ public class CrewMemberServiceImpl implements CrewMemberService {
 				return false;
 			}
 		}
+
+		/**
+		 * 크루 중복가입 방지를 위한 조회
+		 */
+		@Override
+		public boolean RegexCrewMemberList(CrewMember input) throws Exception {
+			CrewMember result = null;
+			
+			try {
+				result = sqlSession.selectOne("CrewMemberMapper.regexCrew",input);
+				if(result == null) {
+					return false;
+				}
+			}catch (Exception e) {
+				log.error(e.getLocalizedMessage());
+				throw new Exception("데이터 조회에 실패했습니다.");
+			}
+			
+			return true;
+		}
 }

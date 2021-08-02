@@ -127,6 +127,13 @@
 	<!-- 크루 해체 -->
 	<delete id="deleteCrew"
 		parameterType="study.spring.goodspring.model.CrewMember">
-		DELETE FROM crew_member WHERE crew_crew_no = #{crew_crew_no} 
+		DELETE FROM crew_member WHERE crew_crew_no = #{crew_crew_no};
 	</delete>
+	
+	<!-- 크루 중복가입 방지 -->
+	<select id="regexCrew" parameterType="study.spring.goodspring.model.CrewMember" resultMap="crewMemberMap">
+		SELECT user_info_user_no FROM crew_member
+        WHERE crew_crew_no = #{crew_crew_no} AND user_info_user_no = #{user_info_user_no}
+        LIMIT 1;
+	</select>
 </mapper>
