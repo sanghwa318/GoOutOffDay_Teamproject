@@ -55,6 +55,15 @@ public class CrewController {
 	@RequestMapping(value = "/commPage/comm_crew_est.do", method = RequestMethod.GET) 
 		public ModelAndView add(Model model) {
 		
+		Member login_info = (Member) webHelper.getSession("login_info");
+
+		if (login_info == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+
+		int userNo = login_info.getUser_no();
 		return new ModelAndView("commPage/comm_crew_est");
 	}
 	

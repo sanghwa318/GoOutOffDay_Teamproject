@@ -318,7 +318,7 @@ public class CommController {
 			@RequestParam(value = "order", defaultValue = "1") int order,
 			// 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
-
+		
 		// 1) 페이지 구현에 필요한 변수값 생성
 		int totalCount = 0; // 전체 게시글 수
 		int listCount = 8; // 한 페이지당 표시할 항목 수
