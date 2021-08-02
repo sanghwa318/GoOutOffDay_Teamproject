@@ -103,10 +103,10 @@ public class MainController {
 	 * 
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value = "/mainPage/Search.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage/search.do", method = RequestMethod.GET)
 	public ModelAndView Search(Model model, HttpServletResponse response,
 			// 검색어
-			@RequestParam(value = "keyword", required = false) String keyword) {
+			@RequestParam(value = "keyword", defaultValue = "") String keyword) {
 
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		// 걷기 코스
@@ -176,7 +176,7 @@ public class MainController {
 		model.addAttribute("output_c", output_c);
 		model.addAttribute("output_cas", output_cas);
 		
-		return new ModelAndView("mainPage/Search");
+		return new ModelAndView("/mainPage/search");
 	}
 
 }
