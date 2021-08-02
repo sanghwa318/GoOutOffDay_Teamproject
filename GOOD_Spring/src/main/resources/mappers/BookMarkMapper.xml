@@ -12,19 +12,26 @@
 			column="bookmark_create_datetime" />
 		<result property="user_info_user_no" column="user_info_user_no" />
 	</resultMap>
-	<!-- 단일 중복검사를 위한 조회문 -->
-	<select id="selectInBookMark" parameterType="study.spring.goodspring.model.BookMark" resultType="int">
+
+	<!-- 중복검사를 위한 조회문 -->
+	<select id="selectInBookMark"
+		parameterType="study.spring.goodspring.model.BookMark"
+		resultType="int">
 		SELECT count(*) FROM bookmark
-		WHERE user_info_user_no = #{user_info_user_no}
+		WHERE user_info_user_no =
+		#{user_info_user_no}
 		AND service_id = #{service_id};
 	</select>
-	
-	<!-- 다중 중복검사를 위한 조회문 -->
-	<select id="SVCIDInBookMark" parameterType="study.spring.goodspring.model.BookMark"  resultMap="BookMarkMap">
-		SELECT service_id FROM bookmark
-		WHERE user_info_user_no = #{user_info_user_no}
+
+	<!-- 다중행 불러오기 위한 조회문 -->
+	<select id="selectListBookMark"
+		parameterType="study.spring.goodspring.model.BookMark"
+		resultMap="BookMarkMap">
+		SELECT * FROM bookmark
+		WHERE user_info_user_no =
+		#{user_info_user_no}
 	</select>
-	
+
 	<!-- 데이터 저장기능 -->
 	<insert id="insertBookMark"
 		parameterType="study.spring.goodspring.model.BookMark"
@@ -36,11 +43,41 @@
 		(#{bookmark_no}, #{category_id}, #{service_id},now(),
 		#{user_info_user_no});
 	</insert>
-	
+
 	<!-- 데이터 삭제기능 -->
-	<delete id="deleteBookMark" parameterType="study.spring.goodspring.model.BookMark">
+	<delete id="deleteBookMark"
+		parameterType="study.spring.goodspring.model.BookMark">
 		DELETE FROM bookmark
 		WHERE service_id =#{service_id}
-		AND user_info_user_no=#{user_info_user_no};
+		AND
+		user_info_user_no=#{user_info_user_no};
 	</delete>
+
+	<!-- 나의 찜목록을 불러오기 위한 조회문 -->
+	<select id="CASListBookMark"
+		parameterType="study.spring.goodspring.model.BookMark"
+		resultMap="BookMarkMap">
+		SELECT * FROM bookmark b
+		INNER JOIN cas c ON b.service_id = c.SVCID
+		<where>
+			user_info_user_no =
+			#{user_info_user_no}
+			<if test="listCount > 0">
+				LIMIT #{offset}, #{listCount};
+			</if>
+		</where>
+	</select>
+
+	<!-- 찜목록 데이터 수 조회하기 -->
+	<select id="BookMark_selectCountAll"
+		parameterType="study.spring.goodspring.model.BookMark"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM bookmark b
+		INNER JOIN cas c ON b.service_id = c.SVCID
+		<where>
+			user_info_user_no =
+			#{user_info_user_no}
+		</where>
+	</select>
 </mapper>

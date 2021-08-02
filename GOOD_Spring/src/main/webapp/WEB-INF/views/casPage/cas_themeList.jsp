@@ -328,9 +328,11 @@ html, body {
 							class="cas_category <c:if test="${order eq '기타'}">active</c:if>"
 							data-filter="기타">기타</a>
 					</c:if>
+
 				</div>
 				<div class="row cas_item">
-					<c:forEach var="item_theme" items="${output_theme}">
+					<c:forEach var="item_theme" items="${output_theme}"
+						varStatus="status">
 						<c:url value="/casPage/cas_detail.do" var="detailUrl">
 							<c:param name="SVCID" value="${item_theme.SVCID }" />
 						</c:url>
@@ -341,16 +343,8 @@ html, body {
 								<div class="caption clearfix">
 									<p>
 										${item_theme.MAXCLASSNM }<span class="middel_dot"></span>${item_theme.MINCLASSNM}
-										<c:forEach var="book_SVCID" items="${outputUnique}">
-											<c:if test="${book_SVCID.service_id eq item_theme.SVCID }">
-												<button class="heart pull-right liked" type="button"
-													value="${item_theme.DIV_COL}"
-													data-value="${item_theme.SVCID}">
-													<i class="fa fa-heart" aria-hidden="true" role="button"></i>
-												</button>
-											</c:if>
-											<c:if
-												test="${book_SVCID.service_id ne item_theme.SVCID }">
+										<c:forEach var="book_Unique" items="${outputUnique}">
+											<c:if test="${book_Unique.service_id ne item_theme.SVCID }">
 												<button class="heart pull-right" type="button"
 													value="${item_theme.DIV_COL}"
 													data-value="${item_theme.SVCID}">

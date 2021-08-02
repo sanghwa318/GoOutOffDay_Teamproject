@@ -19,11 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.MailHelper;
+import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.InquiryService;
 import study.spring.goodspring.service.MemberService;
 
@@ -40,6 +43,10 @@ public class myPageController {
 	RegexHelper regexHelper;
 	@Autowired
 	MailHelper mailHelper;
+
+	@Autowired
+	BookMarkService bookMarkService;
+
 	// 프로젝트이름에 해당하는 ContextPath 변수 주입
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
@@ -423,4 +430,49 @@ public class myPageController {
 
 	}
 
+	/** 나의 찜목록 보기를 위한 컨트롤러 **/
+	@RequestMapping(value = "/myPage/myPage_bookmark.do", method = RequestMethod.GET)
+	public ModelAndView CASListBookMark(Model model, @RequestParam(value = "page", defaultValue = "1") int nowPage,
+			HttpServletRequest request, HttpServletResponse response) {
+		// [페이지네이션] 변수 추가
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 3; // 한페이지단 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		// [페이지네이션] 객체 추가
+		PageData pageData = null;
+		// [페이지네이션] 변수 추가 (종료)
+
+		Member loginInfo = (Member) webHelper.getSession("login_info", new Member());
+		BookMark input_cas = new BookMark();
+
+		input_cas.setUser_info_user_no(loginInfo.getUser_no());
+
+		List<BookMark> output = null;
+
+		try {
+			output = bookMarkService.myBookMarkCasList(input_cas);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
+			totalCount = bookMarkService.getBookMarkCount(input_cas);
+			// [페이지네이션] 페이지 번호 계산
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+			BookMark.setOffset(pageData.getOffset());
+			BookMark.setListCount(pageData.getListCount());
+
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		// [페이지네이션]
+		model.addAttribute("pageData", pageData);
+		model.addAttribute("output", output);
+
+		return new ModelAndView("myPage/myPage_bookmark");
+	}
 }

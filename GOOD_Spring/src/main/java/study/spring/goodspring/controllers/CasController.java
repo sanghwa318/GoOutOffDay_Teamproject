@@ -124,7 +124,7 @@ public class CasController {
 			@RequestParam(value = "cas", required = false, defaultValue = "") String cas,
 			@RequestParam(value = "order", required = false, defaultValue = "") String order,
 			@RequestParam(value = "page", defaultValue = "1") int nowPage, HttpServletRequest request,
-			HttpServletResponse response, Object handler) {
+			HttpServletResponse response) {
 
 		String result = null;
 		String iconurl = null;
@@ -182,9 +182,10 @@ public class CasController {
 		// 찜하기
 		BookMark bookinput = new BookMark();
 		
-		BookMark Uniqueinput = new BookMark();
+		BookMark bookUnique = new BookMark();
 		
 		List<BookMark> outputUnique = null;
+		
 		if (request.getSession().getAttribute("login_info") == null) {
 
 			try {
@@ -198,21 +199,24 @@ public class CasController {
 			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
 
 			bookinput.setUser_info_user_no(loginInfo.getUser_no());
-			Uniqueinput.setUser_info_user_no(loginInfo.getUser_no());
 			// 조회
 			bookinput.setCategory_id(input_theme.getDIV_COL());
 			bookinput.setService_id(input_theme.getSVCID());
 			
+			bookUnique.setUser_info_user_no(loginInfo.getUser_no());
+			
 			// 저장
 			try {
 				output_theme = CasService.getOtherCategoryList(input_theme);
-				outputUnique = bookMarkService.BookMarkSVCIDUniqueCheck(Uniqueinput);
+				outputUnique = bookMarkService.BookMarkSelectList(bookUnique);
+						
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
+		
+		
 		// 파라미터 값을 View에게 전달
 		model.addAttribute("cas", cas);
 		model.addAttribute("result", result);
@@ -224,7 +228,6 @@ public class CasController {
 
 		// 찜목록 확인
 		model.addAttribute("outputUnique", outputUnique);
-
 		return new ModelAndView("casPage/cas_themeList");
 	}
 

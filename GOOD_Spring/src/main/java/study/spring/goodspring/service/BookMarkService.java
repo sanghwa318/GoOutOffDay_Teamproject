@@ -14,6 +14,16 @@ public interface BookMarkService {
 	/** 중복검사 **/ 
 	public int BookMarkUniqueCheck(BookMark input) throws Exception;
 	
-	/** 중복검사 **/ 
-	public List<BookMark> BookMarkSVCIDUniqueCheck(BookMark input) throws Exception;
+	/** 다중행조회 **/ 
+	public List<BookMark> BookMarkSelectList(BookMark input) throws Exception;
+	
+	
+	/** 나의 찜목록 불러오기 (문화체육) **/
+	public List<BookMark> myBookMarkCasList(BookMark input) throws Exception;
+	
+	/** 문화체육Other 총 데이터 갯수 조회 
+	 * @return int 
+	 * @throws Exception
+	 */
+	public int getBookMarkCount(BookMark input) throws Exception;
 }
