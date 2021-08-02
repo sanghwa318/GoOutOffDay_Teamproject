@@ -21,12 +21,12 @@
 	<!-- 단일행 조회 -->
 	<select id="selectMyCourseItem" resultMap="MyCourseMap"
 		parameterType="study.spring.goodspring.model.MyCourses">
-		SELECT mycourse_no, `like`, mycourse_name, mycourse_area, mycourse_content,
-		 mycourse_createdate, mycourse_editdate, mycourse_hits,
-		user_info_user_no 
+		SELECT mycourse_no, `like`, mycourse_name, mycourse_area, mycourse_content, 
+		mycourse_createdate, mycourse_editdate, mycourse_hits, 
+		user_info_user_no, user_id, user_name, user_nick, user_photo
 		FROM mycourse_post 
+		INNER JOIN user_info ON user_info_user_no=user_no
 		WHERE mycourse_no=#{mycourse_no}
-		ORDER BY mycourse_no DESC
 	</select>
 	<!-- 데이터 입력,수정후 해당 데이터를 불러오기 위한 단일행 조회 -->
 	<select id="selectMyCoursePost" resultMap="MyCourseMap"

@@ -108,4 +108,12 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public int editPhoto(Member input) throws Exception;
+	/**
+	 * 회원 정보 불러오기 (나만의 코스 상세페이지 등)
+	 * @param userNo 
+	 * @return
+	 * @throws Exception
+	 */
+	public Member selectItemByNo(int userNo) throws Exception;
+	
 }

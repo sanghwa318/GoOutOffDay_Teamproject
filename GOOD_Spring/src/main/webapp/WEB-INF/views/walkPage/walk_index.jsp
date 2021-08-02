@@ -187,6 +187,9 @@ carousel-title2 {
 			</h1>
 
 		</div>
+		<div id="recording" class="pull-left" style="font-size:18px; color:#EA80FC">
+		
+		</div>
 		<div class="pull-right">
 			<div class="wk_log" id="wk_log">
 				<button type="button" class="btn btn-primary"
@@ -459,7 +462,7 @@ carousel-title2 {
 	<%@ include file="../inc/plugin.jsp"%>
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		mapOption = {
@@ -543,23 +546,87 @@ carousel-title2 {
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 	<script type="text/javascript">
 	var loginInfo = "<%=session.getAttribute("login_info")%>"
-
+	function Recording(){
+		
+		var num = 0;
+        setInterval(function() {
+        	var colorcode =	'#F50057';
+            var str =  [
+            			'<span style="color:'+colorcode+'">기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>', 
+            			'기<span style="color:'+colorcode+'">록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>', 
+            			'기록<span style="color:'+colorcode+'">하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하<span style="color:'+colorcode+'">기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 <span style="color:'+colorcode+'">기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기<span style="color:'+colorcode+'">능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 <span style="color:'+colorcode+'">동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동<span style="color:'+colorcode+'">작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 <span style="color:'+colorcode+'">중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중<span style="color:'+colorcode+'">... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중.<span style="color:'+colorcode+'">.. 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중..<span style="color:'+colorcode+'">. 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... <span style="color:'+colorcode+'">기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기<span style="color:'+colorcode+'">록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 <span style="color:'+colorcode+'">중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중<span style="color:'+colorcode+'">지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지<span style="color:'+colorcode+'">를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 <span style="color:'+colorcode+'">누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누<span style="color:'+colorcode+'">르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르<span style="color:'+colorcode+'">지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지<span style="color:'+colorcode+'">않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않<span style="color:'+colorcode+'">고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 <span style="color:'+colorcode+'">창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창<span style="color:'+colorcode+'">을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 <span style="color:'+colorcode+'">닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫<span style="color:'+colorcode+'">거나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거<span style="color:'+colorcode+'">나 페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 <span style="color:'+colorcode+'">페이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페<span style="color:'+colorcode+'">이지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이<span style="color:'+colorcode+'">지를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지<span style="color:'+colorcode+'">를 이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 <span style="color:'+colorcode+'">이동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이<span style="color:'+colorcode+'">동하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동<span style="color:'+colorcode+'">하면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하<span style="color:'+colorcode+'">면 기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 <span style="color:'+colorcode+'">기록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기<span style="color:'+colorcode+'">록이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록<span style="color:'+colorcode+'">이 사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 <span style="color:'+colorcode+'">사라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사<span style="color:'+colorcode+'">라집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라<span style="color:'+colorcode+'">집니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집<span style="color:'+colorcode+'">니다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니<span style="color:'+colorcode+'">다.</span>',
+            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다<span style="color:'+colorcode+'">.</span>'
+            			];
+            num = ++num % str.length;
+            $('#recording').html(str[num]);
+        }, 100);
+        		
+		
+}
+	function noRecording(){
+		$('#recording').html('');
+}
 		$(function() {
-
+			
 			$("#startRecord").click(function(event) {
 				if (loginInfo != "null") {
+					Recording();
+					startRecord();
 					interval = setInterval(function() {
 						startRecord();
+						
 					}, 15000 //check every 15 seconds
 					);
 				} else {
 					alert("로그인이 필요한 서비스입니다. 로그인하고 진행해주세요.");
 				}
-
 			});
+			
 			$("#endRecord-btn").click(function(e) {
 				endRecord();
+				noRecording();
 			});
+
 		});
 	</script>
 	<script>

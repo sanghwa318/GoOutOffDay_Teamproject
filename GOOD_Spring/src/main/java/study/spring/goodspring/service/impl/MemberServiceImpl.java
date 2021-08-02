@@ -317,5 +317,22 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+	/**
+	 * 회원 정보 불러오기 (나만의 코스 상세페이지 등)
+	 */
+	@Override
+	public Member selectItemByNo(int userNo) throws Exception {
+		Member result=null;
+		try {
+		result =sqlSession.selectOne("MemberMapper.selectItemByNo", userNo);
+	} catch (NullPointerException e) {
+		log.error(e.getLocalizedMessage());
+		throw new Exception("조회된 데이터가 없습니다.");
+	} catch (Exception e) {
+		log.error(e.getLocalizedMessage());
+		throw new Exception("데이터 조회에 실패했습니다.");
+	}
+		return result;
+	}
 
 }

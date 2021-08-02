@@ -75,6 +75,13 @@
 		FROM user_info
 		WHERE user_id=#{user_id};
 	</select>
+	<!-- 단일행 조회를 위한 기능 정의 (나만의코스 상세페이지)-->
+	<select id="selectItemByNo"
+		parameterType="study.spring.goodspring.model.Member"
+		resultMap="MemberMap">SELECT *
+		FROM user_info
+		WHERE user_no=#{user_no};
+	</select>
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectList"
 		parameterType="study.spring.goodspring.model.Member"

@@ -16,11 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
+import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.model.WalkLog;
+import study.spring.goodspring.service.MemberService;
 import study.spring.goodspring.service.MyCourseService;
 import study.spring.goodspring.service.MyPostService;
 import study.spring.goodspring.service.WalkLogService;
@@ -40,6 +42,8 @@ public class MyCourseController {
 	WalkLogService walkLogService;
 	@Autowired
 	MyPostService myPostService;
+	@Autowired
+	MemberService memberService;
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
 
@@ -109,20 +113,36 @@ public class MyCourseController {
 		input.setMycourse_no(mycourse_no);
 
 		MyCourses output = null;
-
+		Member member =null;
 		try {
 			// 조회수 증가
 			myCourseService.updateHits(input);
 			// 데이터 조회
 			output = myCourseService.getMyCourseItem(input);
+			
+			int userNo=output.getUser_info_user_no();
+			member= memberService.selectItemByNo(userNo);
+			
 		} catch (Exception e) {
 			webHelper.redirect(null, e.getLocalizedMessage());
 
 		}
 
-		/* 3) 지도 생성을 위한 좌표값 조회하기 */
-		// 아직
+		/** 2) 글 작성자의 프로필 사진 썸네일 이미지 생성 */
+		UploadItem photo = member.getUser_photo();
+		if (photo != null) {
+			try {
+				String thumbPath = webHelper.createThumbnail(photo.getFilePath(), 150, 150, true);
 
+				// 웹 상에서 접근할 수 있는 URL정보 등록
+				photo.setFileUrl(webHelper.getUploadUrl(photo.getFilePath()));
+				photo.setThumbnailUrl(webHelper.getUploadUrl(thumbPath));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		model.addAttribute("member", member);
 		model.addAttribute("output", output);
 		return new ModelAndView("commPage/comm_myCourseDetail");
 	}
