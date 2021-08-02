@@ -90,7 +90,8 @@ public class CommController {
 			@RequestParam(value = "keyword", required = false) String keyword,
 			//크루번호
 			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
-
+			//크루 이름
+			@RequestParam(value = "crew_name", defaultValue = "0") String crew_name,
 			// 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) throws Exception {
 
@@ -108,6 +109,7 @@ public class CommController {
 		Crew input = new Crew();
 		input.setCrew_no(crew_no);
 		input.setUser_info_user_no(userNo);
+		input.setCrew_name(crew_name);
 
 		// 조회결과가 저장될 객체
 		Crew output = null;
@@ -118,13 +120,14 @@ public class CommController {
 		CrewPost crewpost = new CrewPost();
 		crewpost.setPost_title(keyword);
 		crewpost.setPost_content(keyword);
+		crewpost.setPost_crew(crew_name);
 		
 		List<CrewPost> crewpostoutput = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
 
 		try {
 			// 전체 게시글 수 조회
-			totalCount = crewPostService.getCrewPostCount(crewpost);
+			//totalCount = crewPostService.getCrewPostCount(crewpost);
 			// 전체 게시글 수 조회
 			crewpostoutput = crewPostService.selectCrewPostList(crewpost);
 

@@ -110,6 +110,7 @@
 								<%-- 상세페이지로 이동하기위한 URL --%>
 								<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">
 									<c:param name="crew_no" value="${item.crew_no}" />
+									<c:param name="crew_name" value="${item.crew_name}" />
 								</c:url>
 
 								<div class="col-xs-6 col-sm-4 col-md-3">

@@ -171,18 +171,21 @@
             </div>
             </c:if>
             <div class="form-group">
-               <div class="col-md-4" role="search">
+            <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+               <div class="col-md-4 col-sm-4 col-xs-4" role="search">
                   <div class="form-group input-group">
-                     <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+                     <input type="hidden" id="crew_no" name="crew_no"
+                     value="${output.crew_no}" />
                         <input type="text" class="form-control" name="keyword"
                            placeholder="게시글 검색"> <span class="input-group-btn">
                            <button class="btn btn-blue" type="submit">
                               <i class="glyphicon glyphicon-search"></i>
                            </button>
                         </span>
-                     </form>
+                     
                   </div>
                </div>
+				</form>
 				
                <form
                   action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
