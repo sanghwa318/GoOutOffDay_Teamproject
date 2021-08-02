@@ -99,6 +99,7 @@
 							method="get"
 							action="${pageContext.request.contextPath}/commPage/comm_crew_info_ok.do">
 							<input type="hidden" name="crew_no" value="${output.crew_no}">
+							<input type="hidden" name="crew_name" value="${output.crew_name}">
 							<button type='submit' id="join" class="btn btn-primary">가입하기</button>
 							<button type="reset" class="btn btn-info"
 								onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.do'">목록</button>
