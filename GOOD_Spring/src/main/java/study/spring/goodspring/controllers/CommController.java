@@ -127,7 +127,7 @@ public class CommController {
 
 		try {
 			// 전체 게시글 수 조회
-			//totalCount = crewPostService.getCrewPostCount(crewpost);
+			totalCount = crewPostService.getCrewPostCount(crewpost);
 			// 전체 게시글 수 조회
 			crewpostoutput = crewPostService.selectCrewPostList(crewpost);
 

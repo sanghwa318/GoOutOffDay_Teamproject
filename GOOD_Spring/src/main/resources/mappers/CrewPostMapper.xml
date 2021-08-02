@@ -57,14 +57,13 @@
 	<!-- 다중행 조회 -->
 	<select id="selectCrewPostInList"
 		parameterType="study.spring.goodspring.model.CrewPost" resultMap="crewPostMap">
-		SELECT cr.* FROM crew_post cr
-		INNER JOIN crew c ON c.crew_name = cr.post_crew
-		WHERE c.crew_name = ${post_crew};
-		
+		SELECT * FROM crew_post
 		
 		<where>
+			post_crew LIKE #{post_crew}
+		
 			<if test="post_title != null and post_title != '' ">
-				post_title LIKE CONCAT('%', #{post_title}, '%')
+				OR post_title LIKE CONCAT('%', #{post_title}, '%')
 			</if>
 
 			<if test="post_content != null and post_content != '' ">
@@ -117,12 +116,12 @@
 		<select id="selectPostCountAll"
 		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
 		SELECT COUNT(*) FROM crew_post
-		INNER JOIN crew c ON c.crew_name = crew_post.post_crew
-		WHERE c.crew_name = ${post_crew};
-
+		
 		<where>
+			post_crew LIKE #{post_crew}
+		
 			<if test="post_title != null and post_title != '' ">
-				post_title LIKE CONCAT('%', #{post_title}, '%')
+				OR post_title LIKE CONCAT('%', #{post_title}, '%')
 			</if>
 
 			<if test="post_content != null and post_content != '' ">
@@ -130,6 +129,8 @@
 			</if>
 
 		</where>
+		
+			
 		
 	</select>
 	
