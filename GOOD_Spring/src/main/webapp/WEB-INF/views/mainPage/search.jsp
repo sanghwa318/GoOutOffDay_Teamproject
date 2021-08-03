@@ -93,10 +93,7 @@ body>div.container {
 							<div onclick="location.href='${viewUrl }'"
 								style="cursor: pointer;'">
 								<h3>${COURSE_NAME}
-									> ${CPI_NAME } [생성날짜:${REG_DATE }] 코스난이도 -
-									<c:if test="${COURSE_LEVEL==1 }">초급</c:if>
-									<c:if test="${COURSE_LEVEL==2 }">중급</c:if>
-									<c:if test="${COURSE_LEVEL==3 }">고급</c:if>
+									> ${CPI_NAME } [생성날짜:${REG_DATE }] 코스난이도 - ${COURSE_LEVEL }
 								</h3>
 <!-- 								<p> -->
 <%-- 									코스유형: ${COURSE_CATEGORY_NM } | 지역 : (${SOUTH_NORTH_DIV_NM }) --%>
@@ -131,7 +128,7 @@ body>div.container {
 	<script id="listW-tmpl" type="text/x-handlebars-template">
 	{{#each item_w}}
 	<div>
-		<h3>{{COURSE_NAME}} > {{CPI_NAME}} [생성날짜:{{REG_DATE}}] </h3>
+		<h3>{{COURSE_NAME}} > {{CPI_NAME}} [생성날짜:{{REG_DATE}}] 코스난이도 - {{COURSE_LEVEL}}</h3>
 	</div>
 	<hr/>
 	{{/each}}
