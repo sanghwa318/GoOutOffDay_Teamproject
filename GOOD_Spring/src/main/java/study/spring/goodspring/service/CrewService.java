@@ -96,6 +96,11 @@ public interface CrewService {
     public boolean crewNameUinqueCheck(Crew input) throws Exception;
 	
 	
-	
-	
+    /**
+     * crew_no를 통한 크루 조회
+     * @param input
+	 * @return 
+     * @throws Exception
+     */
+	public Crew getCrewItemByNo(int crewNo) throws Exception;
 }

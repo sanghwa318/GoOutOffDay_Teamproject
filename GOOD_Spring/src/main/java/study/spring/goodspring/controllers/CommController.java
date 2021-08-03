@@ -28,6 +28,7 @@ import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
+import study.spring.goodspring.service.MemberService;
 import study.spring.goodspring.service.MyCourseService;
 
 @Controller
@@ -38,6 +39,9 @@ public class CommController {
 
 	@Autowired
 	RegexHelper regexHelper;
+	
+	@Autowired
+	MemberService memberService;
 
 	@Autowired
 	CrewService crewService;
@@ -235,7 +239,7 @@ public class CommController {
 			e.getLocalizedMessage();
 		}
 
-		return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_crew_no(), "가입되었습니다.");
+		return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_crew_no() + "&crew_name=" + input.getCrew_name(), "가입되었습니다.");
 	}
 
 	/*
@@ -370,14 +374,12 @@ public class CommController {
 	public ModelAndView crewPost(Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
 
-		Member login_info = (Member) webHelper.getSession("login_info");
-		int userNo = login_info.getUser_no();
+		
 
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
 		CrewPost post = new CrewPost();
 		post.setPost_no(post_no);
-		post.setUser_info_user_no(userNo);
 
 		CrewPost postout = null;
 
@@ -387,12 +389,22 @@ public class CommController {
 		CrewPost postout2 = null;
 
 		CrewPost postout3 = null;
+		
+		Member member =null;
+		Crew crew =null;
+		
 
 		try {
 			// 데이터 조회하기
 			postout = crewPostService.selectCrewPost(input);
 			postout2 = crewPostService.getCrewNoPostCount(input);
 			postout3 = crewPostService.selectCrewUser(input);
+			
+			int userNo=postout.getUser_info_user_no();
+			member= memberService.selectItemByNo(userNo);
+			int crewNo = postout2.getCrew_no();
+			crew = crewService.getCrewItemByNo(crewNo);
+			
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 //			return webHelper.redirect(null, e.getLocalizedMessage());
@@ -403,6 +415,8 @@ public class CommController {
 		model.addAttribute("postout", postout);
 		model.addAttribute("postout2", postout2);
 		model.addAttribute("postout3", postout3);
+		model.addAttribute("member", member);
+		model.addAttribute("crew", crew);
 		return new ModelAndView("/commPage/comm_crew_post");
 	}
 

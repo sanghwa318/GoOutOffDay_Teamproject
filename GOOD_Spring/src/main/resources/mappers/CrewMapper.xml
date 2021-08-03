@@ -193,5 +193,11 @@
         SELECT COUNT(*) FROM crew WHERE crew_name=#{crew_name}
     </select>
 	
+			<!-- crew_no를 통한 Crew 조회 -->
+	<select id="selectCrewByno" resultMap="crewMap"
+		parameterType="study.spring.goodspring.model.Crew">
+		SELECT * FROM crew
+		WHERE crew_no = #{crew_no};
+	</select>
 
 </mapper>

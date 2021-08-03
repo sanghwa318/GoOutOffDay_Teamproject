@@ -117,7 +117,7 @@ form {
 			<div class="row row_a">
 				<div class="pull-left writer_profile">
 					<img style="border-radius: 25px"
-						src="${postout.user_photo.fileUrl}" width="50px"
+						src="${member.user_photo.fileUrl}" width="50px"
 						height="50px"></img>
 				</div>
 				<div class="pull-left writer_info" style="margin-left: 15px;">
