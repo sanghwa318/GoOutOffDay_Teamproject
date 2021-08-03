@@ -71,7 +71,7 @@
                </span>
             </h1>
          </div>
-         <h1 class="page-header">${output.crew_name}크루</h1>
+         <h1 class="page-header">${output.crew_name} 크루</h1>
 
          <!-- 본문 상단 영역 -->
          <div class="crew_bbs_header col-md-12 "></div>
@@ -84,13 +84,13 @@
                      src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
                   </span>
                   <h5>가입된 회원 수 : ${output.crew_member} 명</h5>
-                  <h3 class="crew_name">${output.crew_name}크루</h3>
+                  <h3 class="crew_name">${output.crew_name} 크루</h3>
                   <p>${output.crew_sinto}</p>
                </div>
             </div>
             <!-- 크루 상세 정보  -->
             <div class="col-md-6">
-               <h2>${output.crew_name}크루정보</h2>
+               <h2>${output.crew_name} 크루정보</h2>
                <p>${output.crew_dinto}</p>
             </div>
             <!-- 크루 상세 정보 끝 -->

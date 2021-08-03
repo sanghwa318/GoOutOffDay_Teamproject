@@ -102,7 +102,7 @@ form {
 			<div class="sidebar">
 				<div class="form-group">
 					<span class="title-img"><img
-						src="${postout2.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
+						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
 					<h4>가입된 회원 수 : ${postout2.crew_member}명</h4>
 					<h3 class="title-name">크루: ${postout2.crew_name}</h3>

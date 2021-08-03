@@ -82,6 +82,14 @@
 	
 	
 	
+	
+		<!-- Post_no를 통한 Crew 조회 -->
+	<select id="selectCrewPost" resultMap="crewPostMap"
+		parameterType="study.spring.goodspring.model.CrewPost">
+		SELECT c.* FROM crew_post cp
+		INNER JOIN crew c ON c.crew_name=cp.post_crew
+		WHERE  cp.post_no = #{post_no};
+	</select>
 
 <!-- post게시자 닉네임 -->
 	<select id="selectCrewUser" resultMap="crewPostMap"

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
+import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
@@ -374,17 +375,18 @@ public class CommController {
 	public ModelAndView crewPost(Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
 
+		Member login_info = (Member) webHelper.getSession("login_info");
+		int user_no = login_info.getUser_no();
 		
 
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
 		CrewPost post = new CrewPost();
 		post.setPost_no(post_no);
+		post.setUser_info_user_no(user_no);
 
 		CrewPost postout = null;
 
-		CrewPost input = new CrewPost();
-		input.setPost_no(post_no);
 
 		CrewPost postout2 = null;
 
@@ -396,19 +398,22 @@ public class CommController {
 
 		try {
 			// 데이터 조회하기
-			postout = crewPostService.selectCrewPost(input);
-			postout2 = crewPostService.getCrewNoPostCount(input);
-			postout3 = crewPostService.selectCrewUser(input);
+			postout = crewPostService.selectCrewPost(post);
+			postout2 = crewPostService.getCrewNoPostCount(post);
+			postout3 = crewPostService.selectCrewUser(post);
 			
 			int userNo=postout.getUser_info_user_no();
 			member= memberService.selectItemByNo(userNo);
-			int crewNo = postout2.getCrew_no();
+			int crewNo = postout3.getCrew_no();
 			crew = crewService.getCrewItemByNo(crewNo);
 			
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 //			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
+		
+
+		
 
 		// 3) View 처리
 		model.addAttribute("post", post);
@@ -494,7 +499,7 @@ public class CommController {
 		}
 
 		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no();
+		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no" + input.getPost_no();
 
 		try {
 			response.sendRedirect(redirectUrl);
