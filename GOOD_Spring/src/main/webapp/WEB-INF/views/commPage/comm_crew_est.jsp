@@ -106,7 +106,6 @@ margin-bottom: 5px;
 			<!-- 개설 폼 시작 -->
 			<form role="form" class="form-crew" method="post" id='est_form'	enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
-				<!-- 본문상단 -->
 					<div class="form-group">
 					<div class="col-md-4">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> 
@@ -117,9 +116,6 @@ margin-bottom: 5px;
 						<button type="button" id="crewname_unique_check" class="btn btn-default">중복확인</button>
 						</div>
 					</div>
-
-
-
 					<div class="form-group">
 					<div class="col-md-4">
 						<label for="crew_category" style="font-size: 20px;">크루 종류</label>
@@ -134,8 +130,6 @@ margin-bottom: 5px;
 						</div>
 					</div>
 					</div>
-
-
 					<div class="form-group">
 					<div class="col-md-4">
 						<label for="crew_location" class=" control-label"
@@ -173,59 +167,46 @@ margin-bottom: 5px;
 						</div>
 					</div>
 				</div>
-				<!-- //본문 상단 끝 -->
-
-			
-				<!-- 파일 드래그 앤 드롭 -->
-					
-				<!-- 본문 중단 끝 -->
 					
 					<div class="col-md-12">
 					<div class="col-sm-3">
-						<input type="image" id="img__wrap" name="crew_photo"
+						<input type="image" id="img__wrap" name="crew_photo" id="crew_photo"
 							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
-							 width="50%"
-							height="50%" style="border-radius: 100%" />
-							<label for="img__preview" class=" btn btn-default"
-							style="font-size: 20px;">크루 사진 변경</label> <input type="file"
+							 width="50%" height="50%" style="border-radius: 100%" />
+							<label for="img__preview" class=" btn btn-default" id="crew_insert"
+							style="font-size: 20px;">크루 사진 등록</label> <input type="file"
 							name="crew_photo" id="img__preview" class="hidden" />
 					</div>
 					
 					<div class="col-md-9">
-						<h3 class="header">크루 설명</h3>
-						<textarea class="form-control" rows="5" id="crew_dinto"
+						<h3 class="header">크루 간단 소개</h3>
+						<textarea class="form-control" rows="5" id="crew_sinto"
 							name="crew_dinto"
 							style="font-size: 20px; resize: none"
-							placeholder="크루 설명을 작성해주세요."></textarea>
+							placeholder="자신의 크루를 간단하게 소개해주세요."></textarea>
 					</div>
 					
 					</div>
 					<div class="col-sm-12">
-						<h3 class="header">크루 간단 소개</h3>
-						<textarea class="form-control" rows="5" id="crew_sinto"
+						<h3 class="header">크루 설명</h3>
+						<textarea class="form-control" rows="5" id="crew_dinto"
 							name="crew_sinto"
 							style="font-size: 15px; resize: none"
-							placeholder="크루를  간단히 소개해주세요."></textarea>
+							placeholder="해당 크루에 대한 설명 혹은 공지사항을 적어주세요."></textarea>
 					
-					</div>
-					
-					
-
-
+					</div>	
 					<div class="col-sm-12">
 					<div class="text-center btn_container" >
 						<button type="submit" class="btn btn-primary" id="btn_ok">
 							<span>개설 완료</span>
 						</button>
-
 						<button type="reset" class="btn btn-danger" id="btn_cancel">
 							<span>취소</span>
 						</button>
 
 					</div>		
 					</div>			
-				
-				<!-- //본문footer 끝 -->
+
 			</form><!-- //개설폼 끝 -->
 
 		</div>
@@ -239,7 +220,8 @@ margin-bottom: 5px;
 	<!-- js -->
 	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 	<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript">
+ 	<script type="text/javascript">
+ 	var test = false;
 		$('#img__preview').on("change", function(e) {
 			console.log(e.target.files);
 
@@ -249,13 +231,13 @@ margin-bottom: 5px;
 			var f = e.target.files[0];
 
 			if (!f.type.match("image*")) {
-				alert("이미지만 첨부할 수 있습니다.");
+				alert("이미지파일만 첨부할 수 있습니다.");
 				$("#img__preview").val('');
 				return;
 			}
 
 			if (f.size > 1024 * 1024 * 2) {
-				alert("이미지는 2MB 이하만 가능합니다.");
+				alert("이미지크기는 2MB 이하만 가능합니다.");
 				$('#img__preview').val('');
 				return;
 			}
@@ -265,23 +247,14 @@ margin-bottom: 5px;
 				$('#img__wrap').attr("src", e.target.result);
 			};
 			reader.readAsDataURL(f);
+			
+			test = e.target.files[0].type.includes("image");
+			
+			
 		});
 	</script>
 
-	<script type="text/javascript">
-		function setImage(index) {
 
-			var image_list = [
-					'${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png',
-					'${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png',
-					'${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png',
-					'${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png' ];
-
-			var image = document.getElementById("img__wrap");
-
-			image.src = image_list[index];
-		}
-	</script>
 	<script>
 		$(function() {
 			$('#btn_ok').click(
@@ -384,6 +357,27 @@ margin-bottom: 5px;
 
 									return false; // <-- 실행 중단
 								}
+								
+								var crew_photo_val = $("#crew_photo").val();
+							
+								if(!test) {
+									swal({
+										title :"에러",
+										text : "크루 사진을 등록해주세요.",
+										type : "error"
+									}).then(function(result){
+									
+										setTimeout(function(){
+											
+										}, 100);
+									});
+									
+									return false;
+									
+								}
+								
+								
+								
 
 								var crew_sinto_val = $("#crew_sinto").val();
 
@@ -409,7 +403,7 @@ margin-bottom: 5px;
 								if (!crew_dinto_val) { // 입력되지 않았다면?
 									swal({
 										title : "에러",
-										text : "크루 소개를 입력해 주세요.",
+										text : "크루 설명을 입력해 주세요.",
 										type : "error"
 									}).then(function(result) {
 										// 창이 닫히는 애니메이션의 시간이 있으므로,
