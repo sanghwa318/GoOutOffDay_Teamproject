@@ -11,10 +11,6 @@
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <script	src="${pageContext.request.contextPath}/assets/js/regex-crew-est.js"></script>
 <style>
-//
-상단 //
-상단 끝
-
 
 .view {
 	float: left;
@@ -72,6 +68,27 @@ button span {
 	left: 5px;
 	bottom: 0px;
 }
+
+/** 이미지 클릭 금지*/
+#img__wrap {
+	pointer-events: none;
+}
+
+/** 버튼,input 인라인 변경 */
+#crewname_unique_check, #crew_name{
+
+	display: inline-block;
+}
+
+/** label  블록레벨 변경*/
+label {
+	display: block;
+}
+
+/** 중복확인 버튼 위치 조정 */
+#crewname_unique_check {
+margin-bottom: 5px;
+}
 </style>
 
 </head>
@@ -84,48 +101,56 @@ button span {
 
 		<div class="container" style="margin-bottom: 50px;">
 
-			<!-- 상단  -->
-
-
+			
 			<h1 class="page-header">크루 개설</h1>
-
-
-			<form role="form" class="form-crew" method="post" id='est_form'
-				enctype="multipart/form-data"
+			
+			<!-- 개설 폼 시작 -->
+			<form role="form" class="form-crew" method="post" id='est_form'	enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
-				<div class="row " style="margin-bottom: 30px;">
-					<div class="form-group col-md-3 col-xs-6">
-						<label for="crew_name" style="font-size: 20px;">크루 이름</label> <input
-							type="text" id="crew_name" class="form-control crew_input"
+				<!-- 본문상단 -->
+				<div class="container-header" style="margin-bottom: 30px;">
+					<div class="form-group">
+					<div class="col-md-4">
+						<label for="crew_name" style="font-size: 20px;">크루 이름</label> 
+						<input type="text" id="crew_name" class="form-control crew_input"
 							placeholder="한글로 입력하세요." name="crew_name" value="${crew_name}"
-							style="width: 200px; text-align-last: center; font-size: 20px;">
-							<input type="hidden" name="crewname_unique_check" value="">
+							style="width: 75%; text-align-last: center; font-size: 20px;" />
+							<input type="hidden" name="crewname_unique_check" value="" />
 						<button type="button" id="crewname_unique_check" class="btn btn-default">중복확인</button>
+						</div>
 					</div>
 
 
 
-					<div class="form-group col-md-3 col-xs-6">
+					<div class="form-group">
+					<div class="col-md-4">
 						<label for="crew_category" style="font-size: 20px;">크루 종류</label>
-						<input type="text" id="crew_category"
-							class="form-control crew_input" placeholder="크루 종류를 입력하세요."
-							name="crew_category"
-							style="width: 200px; text-align-last: center; font-size: 20px;">
+						<div>
+						<select class="form-control " id="crew_category" name="crew_category"
+								style="width: 75%; text-align-last: center; font-size: 20px; padding: 0;">
+								<option value="none">종류</option>
+								<option value="강남구">걷기/체육</option>
+								<option value="강동구">친목/모임</option>
+								<option value="강북구">문화/창작/예술</option>
+							</select>
+						</div>
+					</div>
 					</div>
 
 
-					<div class="form-group col-md-3 col-xs-6">
-						<label for="crew_location" class="col-md-4 control-label"
+					<div class="form-group">
+					<div class="col-md-4">
+						<label for="crew_location" class=" control-label"
 							style="font-size: 20px;">지역</label>
 						<div>
 							<select class="form-control " id="crew_location" name="crew_area"
-								style="width: 200px; text-align-last: center; font-size: 20px; padding: 0;">
-								<option value="none" hidden>지역</option>
+								style="width: 75%; text-align-last: center; font-size: 20px; padding: 0;">
+								<option value="none">지역</option>
 								<option value="강남구">강남구</option>
 								<option value="강동구">강동구</option>
 								<option value="강북구">강북구</option>
-								<option value="">강서구</option>
-								<option value="">관악구</option>
+								<option value="강서구">강서구</option>
+								<option value="관악구">관악구</option>
 								<option value="광진구">광진구</option>
 								<option value="구로구">구로구</option>
 								<option value="금천구">금천구</option>
@@ -149,60 +174,42 @@ button span {
 							</select>
 						</div>
 					</div>
-
 				</div>
+				</div><!-- //본문 상단 끝 -->
 
-				<!-- //상단 -->
+				
 
 
 
 				<!-- 파일 드래그 앤 드롭 -->
-
-				<div class="row view text-center col-md-3 col-xs-12">
-
+				<div class="container-content">
 					<div class="form-group ">
+					<div class="col-md-5">
 						<input type="image" id="img__wrap" name="crew_photo"
-							onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
-							src="${sessionScope.principal.userProfile}" width="200px"
-							height="200px" style="border-radius: 100px" />
-					</div>
-
-
-					<div class="form-group text-center bg-light">
-						<label for="img__preview" class=" btn btn-default"
+							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
+							 width="50%"
+							height="50%" style="border-radius: 100%" />
+							<label for="img__preview" class=" btn btn-default"
 							style="font-size: 20px;">크루 사진 변경</label> <input type="file"
 							name="crew_photo" id="img__preview" class="hidden" />
 					</div>
 
-				</div>
-
-
-				<div class="row col-md-offset-2 img_prev">
-
-					<div class="col-md-10 col-sm-10 col-xs-10">
-						<h3 class="header text-center ">기본 이미지</h3>
-						<ul style="list-style: none;" class="default-img">
-							<li><a href="#123" onclick="setImage(0); return fasle"><img
-									src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png" /></a></li>
-							<li><a href="#123" onclick="setImage(1); return fasle"><img
-									src="${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png" /></a></li>
-							<li><a href="#123" onclick="setImage(2); return fasle"><img
-									src="${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png" /></a></li>
-							<li><a href="#123" onclick="setImage(3); return fasle;"><img
-									src="${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png" /></a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="container col-md-3 " style="margin-left: 25px">
+					
+					<div class="form-group">
+					<div class="container col-md-5 " style="margin-left: 25px">
 						<h3 class="header" style="padding-left: 40px;">크루 간단 소개</h3>
 						<textarea class="form-control" rows="5" id="crew_sinto"
 							name="crew_sinto"
 							style="width: 200px; font-size: 15px; resize: none"
 							placeholder="크루를  간단히 소개해주세요."></textarea>
 					</div>
-
+					
+					</div>
+				</div>
+				</div><!-- 본문 중단 끝 -->
+					<div class="container-fotter">
+					
+					<div class="col-md-9">
 					<div class="container col-md-4" style="margin-left: 25px">
 						<h3 class="header">크루 소개</h3>
 						<textarea class="form-control" rows="5" id="crew_dinto"
@@ -210,11 +217,13 @@ button span {
 							style="width: 550px; font-size: 20px; resize: none"
 							placeholder="크루 소개글을 작성해주세요."></textarea>
 					</div>
-				</div>
+					</div>
+					
+				
 
 
 
-				<div class="row col-md-offset-5 col-xs-offset-4">
+			
 					<div class="text-center btn_container" style="float: left;">
 						<button type="submit" class="btn btn-primary" id="btn_ok">
 							<span>개설 완료</span>
@@ -227,12 +236,10 @@ button span {
 							<span>취소</span>
 						</button>
 
-					</div>
-
-
-				</div>
-
-			</form>
+					</div>					
+				
+				</div><!-- //본문footer 끝 -->
+			</form><!-- //개설폼 끝 -->
 
 		</div>
 
@@ -244,11 +251,8 @@ button span {
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 	<!-- //공통 푸터 -->
 	<!-- js -->
-	<%@ include file="../inc/plugin.jsp"%>
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
+	<%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
+	<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 		$('#img__preview').on("change", function(e) {
 			console.log(e.target.files);
@@ -357,13 +361,12 @@ button span {
 						            
 					
 
-								var crew_category_val = $("#crew_category")
-										.val();
+								var crew_category_val = $("#crew_category option").index($("#crew_category option:selected"))										
 
-								if (!crew_category_val) { // 입력되지 않았다면?
+								if (!crew_category_val) { // 선택되지 않았다면?
 									swal({
 										title : "에러",
-										text : "크루종류를 입력해 주세요.",
+										text : "크루종류를 선택해 주세요.",
 										type : "error"
 									}).then(function(result) {
 										// 창이 닫히는 애니메이션의 시간이 있으므로,
@@ -474,9 +477,5 @@ button span {
 
 		});
 	</script>
-
-
-
-
 </body>
 </html>
