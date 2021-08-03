@@ -58,6 +58,7 @@
 	<select id="selectCrewPostInList"
 		parameterType="study.spring.goodspring.model.CrewPost" resultMap="crewPostMap">
 		SELECT * FROM crew_post
+		INNER JOIN user_info ON user_info_user_no = user_no
 		
 		<where>
 			post_crew LIKE #{post_crew}

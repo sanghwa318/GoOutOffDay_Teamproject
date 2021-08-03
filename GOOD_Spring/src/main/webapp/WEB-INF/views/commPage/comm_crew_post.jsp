@@ -108,6 +108,7 @@ form {
 					<h3 class="title-name">크루: ${postout2.crew_name}</h3>
 					<p>
 						크루 간단 소개: <br>${postout2.crew_sinto}</p>
+						<input type="hidden" name=crew_post_post_no id="post_no" value="${postout.post_no}">
 				</div>
 			</div>
 			<!-- //사이드 영역 -->
@@ -148,41 +149,18 @@ form {
 
 			<hr />
 
+			<!-- 댓글 영역 -->
+			<div id="cmt-list">
 
-			<div class="row row_a">
-				<div class="pull-left writer_profile">
-					<a href="#"><img style="border-radius: 25px"
-						onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
-						src="${sessionScope.principal.userProfile}" width="50px"
-						height="50px"></img></a>
-				</div>
-				<div class="pull-left writer_info" style="margin-left: 15px;">
-					<h4>작성자</h4>
-					<p>2021 5월 6일 오후 12:14</p>
-
-				</div>
-				<button type="button" class="btn btn-default pull-right"
-					id="d_delete" style="margin-right: 15px">댓글 삭제</button>
 			</div>
-			<div class="row row_a">
-
-				<div class="col-md-offset-1 col-md-11" style="margin-left: 10px;">
-					댓글내용
-					ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*qweqwewqeqwwqeweweqasdasasddsdasadsdasd
-					sassdasddsdsdasdsa()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()
-					ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()
-					ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()
-				</div>
-			</div>
-
-			<hr>
-
+			
 			<form>
 				<div class="form-group input-group">
-					<textarea class="form-control" style="height: 60px; resize: none;"
-						placeholder="내용을 입력해주세요."></textarea>
+					<textarea class="form-control" id="comment_text"
+						style="height: 60px; resize: none;" placeholder="내용을 입력해주세요."></textarea>
 					<span class="input-group-btn"><button type="button"
-							class="btn btn-default" style="height: 60px;">댓글 등록</button></span>
+							class="btn btn-default" style="height: 60px;"  onclick="cmt_add()">댓글
+							등록</button></span>
 				</div>
 			</form>
 			<hr>
@@ -211,6 +189,8 @@ form {
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 
+<!-- 댓글 js-->
+<script	src="${pageContext.request.contextPath}/assets/js/crewPost-js.js"></script>
 		 
 	<script>
 		$(".heart")

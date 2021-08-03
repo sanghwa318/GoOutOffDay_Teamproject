@@ -127,12 +127,8 @@ public class CommController {
 		List<CrewPost> crewpostoutput = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
 		
-		//조회결과를 이용한 유저정보 받아오기
-		CrewPost postout = null;
 
 		try {
-			//크루 유저 정보 사용하기 위한 객체 조회
-			postout = crewPostService.selectCrewUser(crewpost);
 			// 전체 게시글 수 조회
 			totalCount = crewPostService.getCrewPostCount(crewpost);
 			// 전체 게시글 수 조회
@@ -158,7 +154,6 @@ public class CommController {
 		model.addAttribute("crewpostoutput", crewpostoutput);
 		model.addAttribute("pageData", pageData);
 		model.addAttribute("login_info", login_info);
-		model.addAttribute("postout", postout);
 		return new ModelAndView("commPage/comm_crew_bbs");
 
 	}

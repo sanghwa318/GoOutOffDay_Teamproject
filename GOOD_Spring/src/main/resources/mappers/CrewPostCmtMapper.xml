@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper  namespace="CrewPostCmtMapper">
+
+	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+	<resultMap type="study.spring.goodspring.model.CrewPostCmt"
+		id="CrewPostCmtMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="comment_no" column="comment_no" />
+		<result property="comment_create_datetime" column="comment_create_datetime" />
+		<result property="comment_text" column="comment_text" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="crew_post_post_no" column="crew_post_post_no" />
+		<result property="comment_usernick" column="comment_usernick" />
+	</resultMap>
+
+
+	<!-- 데이터 저장 기능 -->
+	<insert id="insertCrewPostCmt"
+		parameterType="study.spring.goodspring.model.CrewPostCmt"
+		useGeneratedKeys="true" keyProperty="comment_no">
+		INSERT INTO crew_comment (comment_create_datetime, comment_text, user_info_user_no, 
+		crew_post_post_no, comment_usernick)
+		VALUES (now(), #{comment_text}, #{user_info_user_no},
+		#{crew_post_post_no}, #{comment_usernick});
+	</insert>
+
+	<!--다중행 조회 -->
+	<select id="selectCrewPostCmtList"
+		parameterType="study.spring.goodspring.model.CrewPostCmt" resultMap="CrewPostCmtMap">
+		SELECT *
+		FROM crew_comment
+		WHERE crew_post_post_no=#{crew_post_post_no}
+		ORDER BY crew_post_post_no ASC
+	</select>
+
+
+</mapper>
+
+
+

@@ -148,7 +148,7 @@
                            <tr onclick="location.href='${postUrl}'"  style="cursor: pointer;">
                               <td class="text-center">${item.post_no}</td>
                               <td class="text-center">${item.post_title}</td>
-                              <td class="text-center">${item.user_info_user_no}</td>
+                              <td class="text-center">${item.user_nick}</td>
                               <td class="text-center">${item.post_createdate}</td>
                               <td class="text-center">${item.post_hits}</td>
                            </tr>
