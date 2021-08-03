@@ -499,7 +499,7 @@ public class CommController {
 		}
 
 		// 3) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no" + input.getPost_no();
+		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no();
 
 		try {
 			response.sendRedirect(redirectUrl);
