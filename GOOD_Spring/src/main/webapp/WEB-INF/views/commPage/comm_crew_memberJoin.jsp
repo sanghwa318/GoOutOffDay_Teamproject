@@ -58,7 +58,6 @@
 						<col width="200" />
 						<col width="200" />
 						<col width="250" />
-						<col width="200" />
 						<col width="250" />
 					</colgroup>
 					<thead>
@@ -67,7 +66,6 @@
 							<th class='text-center'>회원번호</th>
 							<th class='text-center'>아이디</th>
 							<th class='text-center'>닉네임</th>
-							<th class='text-center'>게시글 수</th>
 							<th class='text-center'>가입일시</th>
 							<th class='text-center'>최종접속일</th>
 						</tr>
@@ -83,7 +81,6 @@
 								<td align="center">${i}</td>
 								<td align="center">${item.user_id}</td>
 								<td align="center">${item.user_nick}</td>
-								<td align="center">${item.member_no}</td>
 								<td align="center">${item.member_create_datetime}</td>
 								<td align="center">${item.member_visit_datetime}</td>
 							</tr>

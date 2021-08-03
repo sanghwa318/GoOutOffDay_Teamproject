@@ -99,8 +99,7 @@ margin-bottom: 5px;
 		<%@ include file="/WEB-INF/views/inc/Header.jsp"%>
 		<!-- //공통 헤더 -->
 
-		<div class="container" style="margin-bottom: 50px;">
-
+		<div class="container" >
 			
 			<h1 class="page-header">크루 개설</h1>
 			
@@ -108,7 +107,6 @@ margin-bottom: 5px;
 			<form role="form" class="form-crew" method="post" id='est_form'	enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
 				<!-- 본문상단 -->
-				<div class="container-header" style="margin-bottom: 30px;">
 					<div class="form-group">
 					<div class="col-md-4">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> 
@@ -175,16 +173,15 @@ margin-bottom: 5px;
 						</div>
 					</div>
 				</div>
-				</div><!-- //본문 상단 끝 -->
+				<!-- //본문 상단 끝 -->
 
-				
-
-
-
+			
 				<!-- 파일 드래그 앤 드롭 -->
-				<div class="container-content">
-					<div class="form-group ">
-					<div class="col-md-5">
+					
+				<!-- 본문 중단 끝 -->
+					
+					<div class="col-md-12">
+					<div class="col-sm-3">
 						<input type="image" id="img__wrap" name="crew_photo"
 							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
 							 width="50%"
@@ -193,56 +190,45 @@ margin-bottom: 5px;
 							style="font-size: 20px;">크루 사진 변경</label> <input type="file"
 							name="crew_photo" id="img__preview" class="hidden" />
 					</div>
-
-					
-					<div class="form-group">
-					<div class="container col-md-5 " style="margin-left: 25px">
-						<h3 class="header" style="padding-left: 40px;">크루 간단 소개</h3>
-						<textarea class="form-control" rows="5" id="crew_sinto"
-							name="crew_sinto"
-							style="width: 200px; font-size: 15px; resize: none"
-							placeholder="크루를  간단히 소개해주세요."></textarea>
-					</div>
-					
-					</div>
-				</div>
-				</div><!-- 본문 중단 끝 -->
-					<div class="container-fotter">
 					
 					<div class="col-md-9">
-					<div class="container col-md-4" style="margin-left: 25px">
-						<h3 class="header">크루 소개</h3>
+						<h3 class="header">크루 설명</h3>
 						<textarea class="form-control" rows="5" id="crew_dinto"
 							name="crew_dinto"
-							style="width: 550px; font-size: 20px; resize: none"
-							placeholder="크루 소개글을 작성해주세요."></textarea>
-					</div>
+							style="font-size: 20px; resize: none"
+							placeholder="크루 설명을 작성해주세요."></textarea>
 					</div>
 					
-				
+					</div>
+					<div class="col-sm-12">
+						<h3 class="header">크루 간단 소개</h3>
+						<textarea class="form-control" rows="5" id="crew_sinto"
+							name="crew_sinto"
+							style="font-size: 15px; resize: none"
+							placeholder="크루를  간단히 소개해주세요."></textarea>
+					
+					</div>
+					
+					
 
 
-
-			
-					<div class="text-center btn_container" style="float: left;">
+					<div class="col-sm-12">
+					<div class="text-center btn_container" >
 						<button type="submit" class="btn btn-primary" id="btn_ok">
 							<span>개설 완료</span>
 						</button>
-					</div>
 
-
-					<div class="text-center btn_container " style="float: left;">
 						<button type="reset" class="btn btn-danger" id="btn_cancel">
 							<span>취소</span>
 						</button>
 
-					</div>					
+					</div>		
+					</div>			
 				
-				</div><!-- //본문footer 끝 -->
+				<!-- //본문footer 끝 -->
 			</form><!-- //개설폼 끝 -->
 
 		</div>
-
 	</div>
 
 
@@ -476,6 +462,12 @@ margin-bottom: 5px;
 							});
 
 		});
+		
+		$('input[type="text"]').keydown(function() {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+			});
 	</script>
 </body>
 </html>
