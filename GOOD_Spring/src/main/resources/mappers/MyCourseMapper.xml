@@ -140,4 +140,8 @@
 	FROM mycourse_post
 	WHERE mycourse_name=#{mycourse_name}
 	</select>
+	
+	<select id="" parameterType="study.spring.goodspring.model.MyCourses" resultMap="MyCourseMap">
+	
+	</select>
 </mapper>

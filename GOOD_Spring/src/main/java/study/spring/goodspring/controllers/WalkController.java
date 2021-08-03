@@ -1,5 +1,6 @@
 package study.spring.goodspring.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -186,7 +187,7 @@ public class WalkController {
 		} else {
 			Member loginInfo = (Member) webHelper.getSession("login_info");
 			bookinput.setUser_info_user_no(loginInfo.getUser_no());
-			
+
 			String stsvcid = Integer.toString(input.getCPI_IDX());
 			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
 			bookinput.setService_id(stsvcid);
@@ -196,7 +197,7 @@ public class WalkController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		// view 처리
@@ -286,12 +287,6 @@ public class WalkController {
 		return new ModelAndView("walkPage/walk_search");
 	}
 
-	@RequestMapping(value = "/walkPage/walk_log.do", method = RequestMethod.GET)
-	public String walk_log(Model model, HttpServletRequest request, HttpServletResponse response) {
-		// walkPage/walk_log.jsp파일을 View로 지정
-		return "walkPage/walk_log";
-	}
-
 	/**
 	 * 코스상세 아이템 찜하기
 	 * 
@@ -328,5 +323,82 @@ public class WalkController {
 
 		return webHelper.getJsonData();
 
+	}
+
+	/**
+	 * 걷기 Log 페이지
+	 * 
+	 */
+	@RequestMapping(value = "/walkPage/walk_log.do", method = RequestMethod.GET)
+	public ModelAndView walk_log(Model model) {
+
+		return new ModelAndView("walkPage/walk_log");
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/walkPage/walk_myLog.do", method = RequestMethod.GET)
+	public ModelAndView walk_myLog(Model model) {
+
+		WalkLog input = new WalkLog();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		input.setUser_info_user_no(loginInfo.getUser_no());
+
+		List<WalkLog> walklog = null;
+		List<WalkLog> locList = null;
+		double distance = 0;
+		long time = 0;
+		try {
+			walklog = walkLogService.getCoureName(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (walklog != null) {
+			double tmp = 0;
+			for (int i = 0; i < walklog.size(); i++) {
+				String course_name = walklog.get(i).getCourse_name();
+				input.setCourse_name(course_name);
+				
+				try {
+					WalkLog tmp_time=walkLogService.getTime(input);
+					time+=tmp_time.getTime();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				try {
+					locList = walkLogService.getLatLonList(input);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (locList != null) {
+					for (int j = 0; j < locList.size() - 1; j++) {
+						double fromlat = Double.parseDouble(locList.get(j).getLat());
+						double fromlon = Double.parseDouble(locList.get(j).getLon());
+						double tolat = Double.parseDouble(locList.get(j + 1).getLat());
+						double tolon = Double.parseDouble(locList.get(j + 1).getLon());
+
+						tmp += walkLogService.distance(fromlat, fromlon, tolat, tolon, "meter");
+					}
+				}
+
+			}
+			distance = tmp;
+		}
+
+		model.addAttribute("time", time);
+		model.addAttribute("distance", distance);
+		return new ModelAndView("/walkPage/walk_myLog");
+	}
+
+	@RequestMapping(value = "/walkPage/walk_logCompare.do", method = RequestMethod.GET)
+	public ModelAndView walk_logCompare(Model model) {
+
+		return new ModelAndView("walkPage/walk_logCompare");
+	}
+
+	@RequestMapping(value = "/walkPage/walk_logSetGoal.do", method = RequestMethod.GET)
+	public ModelAndView walk_logSetGoal(Model model) {
+
+		return new ModelAndView("walkPage/walk_logSetGoal");
 	}
 }

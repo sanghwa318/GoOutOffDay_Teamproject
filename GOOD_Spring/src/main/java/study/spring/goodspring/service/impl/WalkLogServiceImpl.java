@@ -190,4 +190,68 @@ public class WalkLogServiceImpl implements WalkLogService {
 			throw new Exception("데이터 삭제에 실패했습니다.");
 		}
 	}
+
+	@Override
+	public List<WalkLog> getLatLonList(WalkLog input) throws Exception {
+		List<WalkLog> output = null;
+		try {
+			output = sqlSession.selectList("WalkLogMapper.selectLogByCourse", input);
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return output;
+	}
+
+	@Override
+	public double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+
+		double theta = lon1 - lon2;
+		double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2))
+				+ Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+
+		dist = Math.acos(dist);
+		dist = rad2deg(dist);
+		dist = dist * 60 * 1.1515;
+
+		if (unit == "kilometer") {
+			dist = dist * 1.609344;
+		} else if (unit == "meter") {
+			dist = dist * 1609.344;
+		}
+
+		return (dist);
+	}
+
+	@Override
+	// This function converts decimal degrees to radians
+	public double deg2rad(double deg) {
+		return (deg * Math.PI / 180.0);
+	}
+
+	@Override
+	// This function converts radians to decimal degrees
+	public double rad2deg(double rad) {
+		return (rad * 180 / Math.PI);
+	}
+
+	@Override
+	public WalkLog getTime(WalkLog input) throws Exception {
+		WalkLog result = null;
+		try {
+			result = sqlSession.selectOne("WalkLogMapper.selectLogTime", input);
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
 }

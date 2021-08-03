@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -82,8 +85,15 @@ h2 {
 </body>
 
 <script type="text/javascript">
+function getContextPath() {
+    var hostIndex = location.href.indexOf(location.host)
+          + location.host.length;
+    var contextPath = location.href.substring(hostIndex, location.href
+          .indexOf('/', hostIndex + 1));
+    return contextPath;
+ }
 	$(function() {
-		$.get('walk_myLog.jsp', function(req) {
+		$.get(getContextPath()+'/walkPage/walk_myLog.do', function(req) {
 
 			$('#result').html(req);
 		}, 'html');
@@ -91,7 +101,7 @@ h2 {
 		$("#log_tab1").click(function(e) {
 			// e.preventDefault();
 
-			$.get('walk_myLog.jsp', function(req) {
+			$.get(getContextPath()+'/walkPage/walk_myLog.do', function(req) {
 
 				$('#result').html(req);
 			}, 'html');
@@ -99,7 +109,7 @@ h2 {
 		$("#log_tab2").click(function(e) {
 			// e.preventDefault();
 
-			$.get('walk_logCompare.jsp', function(req) {
+			$.get(getContextPath()+'/walkPage/walk_logCompare.do', function(req) {
 
 				$('#result').html(req);
 			}, 'html');
@@ -107,7 +117,7 @@ h2 {
 		$("#log_tab3").click(function(e) {
 			// e.preventDefault();
 
-			$.get('walk_logSetGoal.jsp', function(req) {
+			$.get(getContextPath()+'/walkPage/walk_logSetGoal.do', function(req) {
 
 				$('#result').html(req);
 			}, 'html');

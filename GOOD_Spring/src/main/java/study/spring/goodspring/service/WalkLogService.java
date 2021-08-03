@@ -77,4 +77,30 @@ public interface WalkLogService {
 	 * @throws Exception
 	 */
 	public void deleteNull(WalkLog input) throws Exception;
+	
+	/**
+	 * 사용자의 특정 코스이름에 해당하는 좌표값을 리턴하는 메서드
+	 * @param WalkLog 조회할 사용자 일련번호와 코스 이름이 담긴 Beans
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WalkLog> getLatLonList(WalkLog input) throws Exception;
+	
+	/**
+	 * 사용자의 특정 코스에서 걸린 시간(종료-시작)을 조회하여 리턴하는 메서드
+	 * @param WalkLog 조회할 사용자 일련번호와 코스 이름이 담긴 Beans
+	 * @return
+	 * @throws Exception
+	 */
+	public WalkLog getTime(WalkLog input) throws Exception;
+	
+
+	//두 좌표간의 거리를 계산하는 메서드
+	public double distance(double lat1, double lon1, double lat2, double lon2, String unit);
+	
+    // decimal degrees를 radians으로 바꾼다.
+    public  double deg2rad(double deg);
+     
+    // radians을 decimal degrees로 바꾼다.
+    public  double rad2deg(double rad);
 }

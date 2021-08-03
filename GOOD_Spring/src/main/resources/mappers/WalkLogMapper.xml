@@ -184,6 +184,19 @@
     </select>
     	<!-- 나만의 코스 작성 페이지 진입 시 코스이름이 없는 워크 로그를 지운다. -->
     <delete id="deleteNull" parameterType="study.spring.goodspring.model.WalkLog">
-    DELETE FROM walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name IS NULL
+   	 DELETE FROM walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name IS NULL
     </delete>
+    
+    <select id="selectLogByCourse" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+	    SELECT lat, lon
+	    FROM walk_log
+	    WHERE user_info_user_no=#{user_info_user_no} 
+	    	AND course_name=#{course_name}
+    </select>
+    <select id="selectLogTime" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+    SELECT TIMESTAMPDIFF(SECOND,(SELECT walk_log_datetime FROM good.walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name=#{course_name} AND event_name='시작'), 
+    (SELECT walk_log_datetime FROM good.walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name=#{course_name} AND event_name='종료')) as 'time'
+    </select>
+    
+    
 </mapper>

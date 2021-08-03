@@ -13,4 +13,7 @@ public class WalkLog {
 	private String event_name;
 	private int user_info_user_no;
 	private String course_name;
+	
+	
+	private long time;
 }
