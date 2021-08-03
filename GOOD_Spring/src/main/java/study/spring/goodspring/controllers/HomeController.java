@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CAS;
+import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.CasService;
 
 /**
@@ -35,12 +36,15 @@ public class HomeController {
 	/** 문화체욱 선언 **/
 	@Autowired
 	CasService CasService;
+	@Autowired
+	WebHelper webHelper;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model,
 			@RequestParam(value = "keyword_exp", required = false, defaultValue = "문화") String keyword_exp,
 			@RequestParam(value = "keyword_imp", required = false, defaultValue = "교육") String keyword_imp,
 			@RequestParam(value = "keyword_borrow", required = false, defaultValue = "대관") String keyword_borrow) {
+
 		/** 홈컨트롤러 기본값 **/
 		log.debug("HomeController 실행됨");
 		Date date = new Date();
@@ -88,11 +92,11 @@ public class HomeController {
 			return WebHelper.redirect(null, e.getLocalizedMessage());
 		}
 		// 시설대관 끝
-		
+
 		model.addAttribute("keyword_exp", keyword_exp);
 		model.addAttribute("keyword_imp", keyword_imp);
 		model.addAttribute("keyword_borrow", keyword_borrow);
-		
+
 		model.addAttribute("output_exp", output_exp);
 		model.addAttribute("output_imp", output_imp);
 		model.addAttribute("output_borrow", output_borrow);
