@@ -130,9 +130,14 @@
 
 		</where>
 		
-			
-		
 	</select>
+	
+		<!-- 조회수 증가 기능 -->
+	<update id="updateHitsCrewPost"
+		parameterType="study.spring.goodspring.model.CrewPost">
+		UPDATE crew_post SET post_hits=post_hits+1
+		WHERE post_no = #{post_no};
+	</update>
 	
 	
 

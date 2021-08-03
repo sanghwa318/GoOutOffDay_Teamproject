@@ -5,13 +5,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
-import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
@@ -129,8 +126,13 @@ public class CommController {
 		
 		List<CrewPost> crewpostoutput = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
+		
+		//조회결과를 이용한 유저정보 받아오기
+		CrewPost postout = null;
 
 		try {
+			//크루 유저 정보 사용하기 위한 객체 조회
+			postout = crewPostService.selectCrewUser(crewpost);
 			// 전체 게시글 수 조회
 			totalCount = crewPostService.getCrewPostCount(crewpost);
 			// 전체 게시글 수 조회
@@ -156,6 +158,7 @@ public class CommController {
 		model.addAttribute("crewpostoutput", crewpostoutput);
 		model.addAttribute("pageData", pageData);
 		model.addAttribute("login_info", login_info);
+		model.addAttribute("postout", postout);
 		return new ModelAndView("commPage/comm_crew_bbs");
 
 	}
@@ -386,17 +389,17 @@ public class CommController {
 		post.setUser_info_user_no(user_no);
 
 		CrewPost postout = null;
-
-
 		CrewPost postout2 = null;
-
 		CrewPost postout3 = null;
 		
 		Member member =null;
 		Crew crew =null;
 		
-
 		try {
+			
+			//게시글 조회수 증가
+			crewPostService.updateHits(post);
+			
 			// 데이터 조회하기
 			postout = crewPostService.selectCrewPost(post);
 			postout2 = crewPostService.getCrewNoPostCount(post);
@@ -404,16 +407,13 @@ public class CommController {
 			
 			int userNo=postout.getUser_info_user_no();
 			member= memberService.selectItemByNo(userNo);
-			int crewNo = postout3.getCrew_no();
+			int crewNo = postout2.getCrew_no();
 			crew = crewService.getCrewItemByNo(crewNo);
 			
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 //			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
-		
-
-		
 
 		// 3) View 처리
 		model.addAttribute("post", post);

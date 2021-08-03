@@ -188,4 +188,19 @@ public class CrewPostServiceImpl implements CrewPostService {
 		return result;
 	}
 	
+	
+	/*
+	 * 크루 게시글 조회수 증가
+	 */
+	@Override
+	public void updateHits(CrewPost input) throws Exception {
+		try {
+			sqlSession.update("CrewPostMapper.updateHitsCrewPost", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+	}
+	
 }

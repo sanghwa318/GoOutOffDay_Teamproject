@@ -127,6 +127,7 @@
                         <!--조회 결과에 따른 반복 처리 -->
                         <c:forEach var="item" items="${crewpostoutput}"
                            varStatus="status">
+                           
                            <%-- 검색어가 있다면? --%>
                            <c:if test="${keyword != '' }">
                               <%-- 검색어에 <mark> 적용 --%>
@@ -152,11 +153,7 @@
                               <td class="text-center">${item.post_hits}</td>
                            </tr>
 
-
-
                         </c:forEach>
-
-
 
 
                      </c:otherwise>
