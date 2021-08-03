@@ -450,12 +450,6 @@ public class myPageController {
 		List<BookMark> output = null;
 
 		try {
-			output = bookMarkService.myBookMarkCasList(input_cas);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
 			totalCount = bookMarkService.getBookMarkCount(input_cas);
 			// [페이지네이션] 페이지 번호 계산
@@ -465,10 +459,13 @@ public class myPageController {
 			BookMark.setOffset(pageData.getOffset());
 			BookMark.setListCount(pageData.getListCount());
 
+			output = bookMarkService.myBookMarkCasList(input_cas);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 
+		
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		model.addAttribute("output", output);
