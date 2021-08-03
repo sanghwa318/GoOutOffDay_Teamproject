@@ -1,6 +1,5 @@
 package study.spring.goodspring.controllers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -334,27 +333,37 @@ public class WalkController {
 
 		return new ModelAndView("walkPage/walk_log");
 	}
-
+	
+	/**
+	 * 걷기 log의 하위 페이지 myLog
+	 * @param model
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_myLog.do", method = RequestMethod.GET)
 	public ModelAndView walk_myLog(Model model) {
-
+		//사용자 정보조회
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 		input.setUser_info_user_no(loginInfo.getUser_no());
-
+		//조회된 값을 담을 객체 준비
 		List<WalkLog> walklog = null;
 		List<WalkLog> locList = null;
+		//사용자의 걸은 거리와 걸은 시간이 담길 변수
 		double distance = 0;
 		long time = 0;
 		try {
+			//사용자가 기록한 코스이름을 조회
 			walklog = walkLogService.getCoureName(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (walklog != null) {
 			double tmp = 0;
+			//사용자가 기록한 코스 수 만큼, 거리와 시간 계산을 반복하고,
+			//거리와 시간을 누적시킨다.
 			for (int i = 0; i < walklog.size(); i++) {
+				
 				String course_name = walklog.get(i).getCourse_name();
 				input.setCourse_name(course_name);
 				
@@ -384,15 +393,129 @@ public class WalkController {
 			}
 			distance = tmp;
 		}
-
+		
+		//view 처리
 		model.addAttribute("time", time);
 		model.addAttribute("distance", distance);
 		return new ModelAndView("/walkPage/walk_myLog");
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_logCompare.do", method = RequestMethod.GET)
 	public ModelAndView walk_logCompare(Model model) {
+		//사용자 정보조회
+		WalkLog input = new WalkLog();
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		//조회된 값을 담을 객체 준비
+		List<WalkLog> walklog = null;
+		List<WalkLog> locList = null;
+		//사용자의 걸은 거리와 걸은 시간이 담길 변수
+		double distance = 0;
+		long time = 0;
+		try {
+			//사용자가 기록한 코스이름을 조회
+			walklog = walkLogService.getCoureName(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (walklog != null) {
+			double tmp = 0;
+			//사용자가 기록한 코스 수 만큼, 거리와 시간 계산을 반복하고,
+			//거리와 시간을 누적시킨다.
+			for (int i = 0; i < walklog.size(); i++) {
+				
+				String course_name = walklog.get(i).getCourse_name();
+				input.setCourse_name(course_name);
+				
+				try {
+					WalkLog tmp_time=walkLogService.getTime(input);
+					time+=tmp_time.getTime();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				try {
+					locList = walkLogService.getLatLonList(input);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (locList != null) {
+					for (int j = 0; j < locList.size() - 1; j++) {
+						double fromlat = Double.parseDouble(locList.get(j).getLat());
+						double fromlon = Double.parseDouble(locList.get(j).getLon());
+						double tolat = Double.parseDouble(locList.get(j + 1).getLat());
+						double tolon = Double.parseDouble(locList.get(j + 1).getLon());
 
+						tmp += walkLogService.distance(fromlat, fromlon, tolat, tolon, "meter");
+					}
+				}
+
+			}
+			distance = tmp;
+		}
+		/**DB에 있는 전체 walklog에 대한 거리와 시간 계산.*/
+		//조회된 값을 담을 객체 준비
+		List<WalkLog> walklog_all = null;
+		List<WalkLog> locList_all = null;
+		//전체사용자의 걸은 거리와 걸은 시간이 담길 변수
+		double dist_all=0;
+		long time_all=0;
+		try {
+			walklog_all=walkLogService.getCoureName();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(walklog_all !=null) {
+			double tmp2 = 0;
+			long tmp_time=0;
+			//코스 수 만큼, 거리와 시간 계산을 반복하고,
+			//거리와 시간을 누적시킨다.
+			for (int i = 0; i < walklog_all.size(); i++) {
+				
+				String course_name = walklog_all.get(i).getCourse_name();
+				input.setCourse_name(course_name);
+				
+				try {
+					tmp_time+=walkLogService.getTime(input).getTime();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				try {
+					locList_all = walkLogService.getLatLonList(input);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (locList != null) {
+					for (int j = 0; j < locList_all.size() - 1; j++) {
+						double fromlat = Double.parseDouble(locList_all.get(j).getLat());
+						double fromlon = Double.parseDouble(locList_all.get(j).getLon());
+						double tolat = Double.parseDouble(locList_all.get(j + 1).getLat());
+						double tolon = Double.parseDouble(locList_all.get(j + 1).getLon());
+
+						tmp2 += walkLogService.distance(fromlat, fromlon, tolat, tolon, "meter");
+					}
+				}
+
+			}
+			int usercount = 0;
+			try {
+				usercount = walkLogService.getUserNoList().size();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//누적값을 기록하기 서비스를 이용한 회원 수로 나누어 평균을 구한다.
+			time_all = tmp_time/usercount;
+			dist_all = tmp2/usercount;
+		}
+		
+		//view 처리
+		model.addAttribute("time_all", time_all);
+		model.addAttribute("dist_all", dist_all);
+		model.addAttribute("time", time);
+		model.addAttribute("distance", distance);
 		return new ModelAndView("walkPage/walk_logCompare");
 	}
 

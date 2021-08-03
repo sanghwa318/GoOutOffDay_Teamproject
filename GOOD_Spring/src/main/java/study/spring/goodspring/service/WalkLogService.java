@@ -57,6 +57,13 @@ public interface WalkLogService {
 	public List<WalkLog> getCoureName(WalkLog input) throws Exception;
 
 	/**
+	 * DB에 있는 모든 코스 이름을 조회하여 리턴하는 메서드
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+	public List<WalkLog> getCoureName() throws Exception;
+	
+	/**
 	 * 일련의 좌표데이터의 course_name을 설정해주기 위한 update 메서드
 	 * 
 	 * @param WalkLog 수정할 데이터가 담긴 Beans
@@ -94,7 +101,22 @@ public interface WalkLogService {
 	 */
 	public WalkLog getTime(WalkLog input) throws Exception;
 	
-
+	/**
+	 * DB에 있는 모든 사용자 기록에 대한 걸은 거리를 계산하기 위해 좌표값을 조회하는 메서드
+	 * @param WalkLog 코스이름이 담긴 Beans
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WalkLog> getAllLatLonList(WalkLog input) throws Exception;
+	
+	/**
+	 * 기록하기를 이용한 모든 회원의 일련번호를 리턴하는 메서드
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WalkLog> getUserNoList() throws Exception;
+	
+	
 	//두 좌표간의 거리를 계산하는 메서드
 	public double distance(double lat1, double lon1, double lat2, double lon2, String unit);
 	
@@ -103,4 +125,10 @@ public interface WalkLogService {
      
     // radians을 decimal degrees로 바꾼다.
     public  double rad2deg(double rad);
+    
+
+    
+    
+    
+    
 }

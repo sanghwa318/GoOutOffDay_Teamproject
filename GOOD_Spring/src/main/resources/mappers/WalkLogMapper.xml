@@ -187,16 +187,35 @@
    	 DELETE FROM walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name IS NULL
     </delete>
     
-    <select id="selectLogByCourse" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+    <!--걸은 거리 계산을 위해 특정 이름에 해당하는 코스의 좌표값 가져오기-->
+    <select id="selectDistByCourse" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
 	    SELECT lat, lon
 	    FROM walk_log
 	    WHERE user_info_user_no=#{user_info_user_no} 
 	    	AND course_name=#{course_name}
     </select>
+    <!-- 걸은 시간(종료-시작)을 가져오기 -->
     <select id="selectLogTime" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
-    SELECT TIMESTAMPDIFF(SECOND,(SELECT walk_log_datetime FROM good.walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name=#{course_name} AND event_name='시작'), 
-    (SELECT walk_log_datetime FROM good.walk_log WHERE user_info_user_no=#{user_info_user_no} AND course_name=#{course_name} AND event_name='종료')) as 'time'
+    SELECT TIMESTAMPDIFF(SECOND,(SELECT walk_log_datetime FROM good.walk_log WHERE course_name=#{course_name} AND event_name='시작'), 
+    (SELECT walk_log_datetime FROM good.walk_log WHERE course_name=#{course_name} AND event_name='종료')) as 'time'
     </select>
     
+    <!-- DB에 있는 모든 코스 이름을 가져오기 -->
+    <select id="selectCourseNameAll" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+   	    SELECT course_name
+	    FROM walk_log GROUP BY course_name
+    </select>
     
+    <!-- DB에 있는 모든 코스에 대한 거리 계산을 위한 좌표값을 가져오기 -->
+    <select id="selectDistanceAll" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+   	    SELECT lat, lon
+	    FROM walk_log
+	    WHERE course_name=#{course_name}
+    </select>
+    <!-- 기록하기 서비스를 이용한 모든 회원의 일련번호를 가져오기 -->
+    <select id="selectAllUserNoList" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+		SELECT user_info_user_no
+		FROM walk_log 
+		group by user_info_user_no
+	</select>
 </mapper>

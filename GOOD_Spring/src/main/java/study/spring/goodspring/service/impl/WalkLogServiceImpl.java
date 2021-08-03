@@ -140,6 +140,24 @@ public class WalkLogServiceImpl implements WalkLogService {
 
 		return result;
 	}
+	@Override
+	public List<WalkLog> getCoureName() throws Exception {
+		List<WalkLog> result = null;
+		try {
+			result = sqlSession.selectList("WalkLogMapper.selectCourseNameAll");
+			if (result == null) {
+				throw new NullPointerException("output =null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
 
 	@Override
 	public void courseNameUniqueCheck(WalkLog input) throws Exception {
@@ -195,7 +213,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 	public List<WalkLog> getLatLonList(WalkLog input) throws Exception {
 		List<WalkLog> output = null;
 		try {
-			output = sqlSession.selectList("WalkLogMapper.selectLogByCourse", input);
+			output = sqlSession.selectList("WalkLogMapper.selectDistByCourse", input);
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("조회된 데이터가 없습니다.");
@@ -252,6 +270,37 @@ public class WalkLogServiceImpl implements WalkLogService {
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		return result;
+	}
+
+	@Override
+	public List<WalkLog> getAllLatLonList(WalkLog input) throws Exception {
+		List<WalkLog> output = null;
+		try {
+			output = sqlSession.selectList("WalkLogMapper.selectDistanceAll", input);
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return output;
+	}
+
+	@Override
+	public List<WalkLog> getUserNoList() throws Exception {
+		List<WalkLog> output = null;
+		try {
+			output = sqlSession.selectList("WalkLogMapper.selectAllUserNoList");
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return output;
 	}
 
 }
