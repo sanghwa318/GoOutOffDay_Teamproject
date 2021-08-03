@@ -48,6 +48,26 @@ public class SearchServiceImpl implements SearchService {
 
 		return result;
 	}
+	
+	/**
+	 * [페이지네이션에 필요] 데이터가 저장되어있는 갯수 조회
+	 * 
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int getSearchWalkCourseCount(WalkCourse input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("SearchMapper.selectWalkCourseCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
 
 	/**
 	 * 나만의 코스 목록 조회

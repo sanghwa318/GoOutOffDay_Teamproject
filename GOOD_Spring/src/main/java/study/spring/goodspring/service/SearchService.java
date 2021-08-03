@@ -16,6 +16,13 @@ public interface SearchService {
 	 * @throws Exception
 	 */
 	public List<WalkCourse> getSearchWalkCourseList(WalkCourse input) throws Exception;
+	/**
+	 * [페이지네이션에 필요]
+	 * 데이터가 저장되어 있는 갯수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getSearchWalkCourseCount(WalkCourse input) throws Exception;
 
 	/**
 	 * 나만의 코스 목록 조회

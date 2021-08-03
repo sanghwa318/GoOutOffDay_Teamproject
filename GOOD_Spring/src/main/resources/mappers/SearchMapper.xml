@@ -90,7 +90,66 @@
 			<if test="CONTENT != null and CONTENT != ''">
 				OR CONTENT LIKE concat('%', #{CONTENT}, '%')
 			</if>
-			
+
+			<if test="COURSE_NAME != null and COURSE_NAME != ''">
+				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
+			</if>
+			<if test="REG_DATE != null and REG_DATE != ''">
+				OR REG_DATE LIKE concat('%', #{REG_DATE}, '%')
+			</if>
+			<if test="DETAIL_COURSE != null and DETAIL_COURSE != ''">
+				OR DETAIL_COURSE LIKE concat('%', #{DETAIL_COURSE}, '%')
+			</if>
+
+			<if test="CPI_NAME != null and CPI_NAME != ''">
+				OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+			</if>
+			<if test="CPI_CONTENT != null and CPI_CONTENT != ''">
+				OR CPI_CONTENT LIKE concat('%', #{CPI_CONTENT}, '%')
+			</if>
+		</where>
+		<!-- 페이지네이션에 필요 -->
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount};
+		</if>
+	</select>
+	<select id="selectWalkCourseCountAll"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultType="int">
+		SELECT COUNT(*) FROM seoulgil_walk_course
+		<where>
+			<if test="COURSE_CATEGORY_NM != null and COURSE_CATEGORY_NM != ''">
+				COURSE_CATEGORY_NM LIKE concat('%',
+				#{COURSE_CATEGORY_NM}, '%')
+			</if>
+			<if test="SOUTH_NORTH_DIV_NM != null and SOUTH_NORTH_DIV_NM != ''">
+				OR SOUTH_NORTH_DIV_NM LIKE concat('%',
+				#{SOUTH_NORTH_DIV_NM}, '%')
+			</if>
+			<if test="AREA_GU != null and AREA_GU != ''">
+				OR AREA_GU LIKE concat('%', #{AREA_GU}, '%')
+			</if>
+
+			<if test="DISTANCE != null and DISTANCE != ''">
+				OR DISTANCE LIKE concat('%', #{DISTANCE}, '%')
+			</if>
+			<if test="LEAD_TIME != null and LEAD_TIME != ''">
+				OR LEAD_TIME LIKE concat(#{LEAD_TIME}, '%')
+			</if>
+			<if test="COURSE_LEVEL != null and COURSE_LEVEL != ''">
+				OR COURSE_LEVEL LIKE concat('%', #{COURSE_LEVEL}, '%')
+			</if>
+
+			<if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
+				OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY}, '%')
+			</if>
+			<if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
+				OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
+			</if>
+			<if test="CONTENT != null and CONTENT != ''">
+				OR CONTENT LIKE concat('%', #{CONTENT}, '%')
+			</if>
+
 			<if test="COURSE_NAME != null and COURSE_NAME != ''">
 				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
 			</if>
@@ -166,8 +225,7 @@
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectListCrew"
-		parameterType="study.spring.goodspring.model.Crew"
-		resultMap="CrewMap">
+		parameterType="study.spring.goodspring.model.Crew" resultMap="CrewMap">
 		SELECT crew_no,
 		crew_name,
 		crew_area,
@@ -191,7 +249,7 @@
 		</where>
 	</select>
 	<!-- //크루 -->
-	
+
 	<!-- 문화체육 -->
 	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
 	<resultMap id="CASMap"
@@ -204,25 +262,24 @@
 		<result property="SVCSTATNM" column="SVCSTATNM" />
 		<result property="SVCNM" column="SVCNM" />
 		<result property="PLACENM" column="PLACENM" />
-		
+
 		<result property="USETGTINFO" column="USETGTINFO" />
 		<result property="AREANM" column="AREANM" />
 		<result property="TELNO" column="TELNO" />
-		
+
 	</resultMap>
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectListCAS"
-		parameterType="study.spring.goodspring.model.CAS"
-		resultMap="CASMap">
+		parameterType="study.spring.goodspring.model.CAS" resultMap="CASMap">
 		SELECT SVCID,
 		MAXCLASSNM,
 		MINCLASSNM,
-		
+
 		SVCSTATNM,
 		SVCNM,
 		PLACENM,
-		
+
 		USETGTINFO,
 		AREANM,
 		TELNO
@@ -236,21 +293,21 @@
 			<if test="MINCLASSNM != null and MINCLASSNM != ''">
 				OR MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%')
 			</if>
-			
+
 			<if test="SVCSTATNM != null and SVCSTATNM != ''">
 				OR SVCSTATNM LIKE concat('%', #{SVCSTATNM}, '%')
 			</if>
 			<if test="SVCNM != null and SVCNM != ''">
 				OR SVCNM LIKE concat('%', #{SVCNM}, '%')
 			</if>
-			
+
 			<if test="PLACENM != null and PLACENM != ''">
 				OR PLACENM LIKE concat('%', #{PLACENM}, '%')
 			</if>
 			<if test="USETGTINFO != null and USETGTINFO != ''">
 				OR USETGTINFO LIKE concat('%', #{USETGTINFO}, '%')
 			</if>
-			
+
 			<if test="AREANM != null and AREANM != ''">
 				OR PLACENM LIKE concat('%', #{PLACENM}, '%')
 			</if>
@@ -263,5 +320,5 @@
 		</where>
 	</select>
 	<!-- //문화체육 -->
-	
+
 </mapper>
