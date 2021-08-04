@@ -155,5 +155,11 @@
 		post_content = #{post_content}
 		WHERE post_no = #{post_no};
 	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteCrewPost" parameterType="study.spring.goodspring.model.CrewPost">
+	DELETE FROM crew_post
+	WHERE post_no = #{post_no};
+	</delete>
 
 </mapper>

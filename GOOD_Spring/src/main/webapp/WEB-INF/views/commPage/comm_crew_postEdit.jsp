@@ -82,7 +82,7 @@ input#title {
 			</div>
 			<h1 class="page-header">크루게시판</h1>
 			<h2>게시글 수정</h2>
-			<form action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit_ok.do" method="post">
+			<form action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit_ok.do" method="post" id="re_ok">
 				
 
 				<div class="row">
@@ -122,6 +122,7 @@ input#title {
 
 	<script>
 		$(function() {
+			e.preventDefault();
 			$("#btn_ok").click(function() {
 				// 확인, 취소버튼에 따른 후속 처리 구현
 				swal({
@@ -134,9 +135,7 @@ input#title {
 				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('수정', '게시글 수정이 완료되었습니다.', 'success');
-						setTimeout(function() {
-							
-						}, 1000);
+						document.getElementById("re_ok").submit();   // 재 submit
 
 					}
 
@@ -156,7 +155,7 @@ input#title {
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('삭제', '게시글 수정이 취소되었습니다.', 'success');
 						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp';
+							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.do';
 						}, 1000);
 
 					}

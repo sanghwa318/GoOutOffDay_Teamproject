@@ -76,6 +76,12 @@ form {
 	left: 5px;
 	bottom: 0px;
 }
+
+.sidebar img{
+	max-hieght: 100%;
+	min-width: 100%;
+	height: 180px;
+}
 </style>
 </head>
 <body>
@@ -104,10 +110,9 @@ form {
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
-					<h4>가입된 회원 수 : ${postout2.crew_member}명</h4>
-					<h3 class="title-name">크루: ${postout2.crew_name}</h3>
-					<p>
-						크루 간단 소개: <br>${postout2.crew_sinto}</p>
+					<h3>가입된 회원 수 : ${postout2.crew_member}명</h3>
+					<h3 class="crew_name">${postout2.crew_name} 크루 소개</h3>
+                  <p style="font-size:25px;">${postout2.crew_sinto}</p>
 					<input type="hidden" name=crew_post_post_no id="post_no"
 						value="${postout.post_no}">
 				</div>
@@ -115,27 +120,32 @@ form {
 			<!-- //사이드 영역 -->
 
 
-
+<div class="article header">
 			<div class="row row_a">
-				<div class="pull-left writer_profile">
+			<div class="pull-left writer_profile">
 					<img style="border-radius: 25px" src="${member.user_photo.fileUrl}"
 						width="50px" height="50px"></img>
 				</div>
+				
 				<div class="pull-left writer_info" style="margin-left: 15px;">
 					<h4>${postout3.getUser_name()}</h4>
 					<p class="pull-left">작성일자: ${postout.getPost_createdate()}</p>
-					<p class="pull-left" style="margin-left: 15px;">조회수 :
+					<p  class="pull-left " style="margin-left: 15px;">조회수 :
 						${postout.post_hits}</p>
-					<p>${postout.getPost_content()}</p>
+						<p style="margin-top:100px">${postout.getPost_content()}</p>
 				</div>
-
+			
+				
+				</div>
 			</div>
-
+			
+			</div>
+				
 
 			<div class="row row_a">
 				<div class="col-md-2 col-lg-1 col-xs-2 text-center"
 					style="font-size: 20px"></div>
-				<div class="pull-right" style="margin-right: 15px">
+				<div class="pull-right" style="margin-right: 25px">
 					<span class="heart"><i class="fa fa-heart-o"
 						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
 						class="fa fa-comment-o"></i></span> 댓글 ${total}
@@ -148,48 +158,60 @@ form {
 			<!-- 댓글 영역 -->
 			<div id="cmt-list"></div>
 
-			<div class="row " style="margin-left: -260px;">
+
+		<div>
 				<form>
-					<div class="form-group input-group col-md-6">
+					<div class="form-group input-group col-md-12 col-sm-12">
 						<textarea class="form-control" id="comment_text"
-							style="height: 60px; resize: none;"
+							style="height: 60px; width=100%; resize: none;"
 							placeholder="내용을 입력해주세요."></textarea>
 						<span class="input-group-btn"><button type="button"
 								class="btn btn-default" style="height: 60px;"
 								onclick="cmt_add()">댓글 등록</button></span>
 					</div>
 				</form>
-			</div>
 			<hr>
 
-
-
+		<div class="container col-md-12 col-sm-12">
+		<div class="row pull-left">
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
-				method="GET">
+				method="GET" >
 				<input type="hidden" name="crew_no" value="${postout2.crew_no}" />
 				<input type="hidden" id="crew_name" name="crew_name"
 					value="${postout2.crew_name}" />
-				<button type="submit" id="btn1" class="btn btn-default pull-left"
-					style="margin-left: -250px;">목록</button>
+				<button type="submit" id="btn1" class="btn btn-default" style="margin-left:30px">목록</button>
 			</form>
-
-
+		</div>
+			
+			<c:if test="${postout.user_info_user_no==login_info.user_no}">
+			<div class="row">
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do"
 				method="GET">
 				<input type="hidden" name=post_no id="post_no"
 					value="${postout.post_no}">
 				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-warning wr_delete"
-						id="wr_delete">삭제</button>
 					<button type="submit" class="btn btn-primary wr_edit" id="wr_edit">수정</button>
 				</div>
 			</form>
-
+			<form
+				action="${pageContext.request.contextPath}/commPage/comm_crew_postDelete_ok.do"
+				method="GET" id="delete_ok">
+				<input type="hidden" name=post_no id="post_no"value="${postout.post_no}">
+				<input type="hidden" name=crew_no id="name=crew_no"value="${postout2.crew_no}">
+				<input type="hidden" name=crew_name id="crew_name"value="${postout2.crew_name}">
+				<div class="btn-group pull-right">
+					<button type="submit" class="btn btn-warning wr_delete" id="wr_delete">삭제</button>
+				</div>
+			</form>
+			</div>
+			
+			</c:if>
+			</div>
+		</div>
 		</div>
 
-	</div>
 	<!-- //컨테이너 -->
 	<!-- 공용 푸터 -->
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
@@ -254,7 +276,7 @@ form {
 			$('#wr_delete')
 					.click(
 							function(e) {
-
+								e.preventDefault();
 								swal({
 									title : '확인', // 제목
 									text : "정말 게시글을 삭제하시겠습니까?", // 내용
@@ -272,10 +294,7 @@ form {
 																'삭제',
 																'게시글이 삭제되었습니다..',
 																'success');
-														setTimeout(
-																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_bbs.do';
-																}, 1000);
+														document.getElementById("delete_ok").submit();   // 재 submit
 
 													}
 												});
@@ -284,7 +303,6 @@ form {
 			$('#d_delete')
 					.click(
 							function(e) {
-
 								swal({
 									title : '확인', // 제목
 									text : "정말 게시글을 삭제하시겠습니까?", // 내용
@@ -301,10 +319,7 @@ form {
 														swal('삭제',
 																'댓글이 삭제되었습니다.',
 																'success');
-														setTimeout(
-																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.do';
-																}, 1000);
+														
 
 													}
 												});

@@ -567,6 +567,7 @@ public class CommController {
 			@RequestParam(value = "post_content", defaultValue = "") String content,
 			// 크루이름
 			@RequestParam(value = "post_crew", defaultValue = "") String post_crew,
+			//크루번호
 			@RequestParam(value = "crew_no", defaultValue = "") int crew_no) {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
@@ -591,7 +592,7 @@ public class CommController {
 			e.getLocalizedMessage();
 		}
 
-		// 3) 결과를 확인하기 위한 페이지 이동
+		// 2) 결과를 확인하기 위한 페이지 이동
 		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no();
 
 		try {
@@ -601,5 +602,52 @@ public class CommController {
 		}
 
 	}
+	
+	/*
+	 * 크루 게시글 삭제
+	 */
+@RequestMapping(value="/commPage/comm_crew_postDelete_ok.do", method = RequestMethod.GET)
+public ModelAndView crewPostDelete(Model model,
+		//포스트 번호
+		@RequestParam(value = "post_no", defaultValue = "") int post_no,
+		//크루 번호
+		@RequestParam(value = "crew_no", defaultValue = "") int crew_no,
+		//크루 이름
+		@RequestParam(value = "crew_name", defaultValue = "") String crew_name) {
+	
+	// 삭제 가능한 사용자 정보
+	Member login_info = (Member) webHelper.getSession("login_info");
+	int userNo = login_info.getUser_no();
+		
+	// 1) 삭제하는 게시물
+	CrewPost input = new CrewPost();
+	input.setPost_no(post_no);
+	input.setCrew_no(crew_no);
+	input.setCrew_name(crew_name);
+	
+	CrewPost output = null;
+	
+	try {
+		// 로그인한 사용자와 작성자 정보가 같은 경우 삭제
+		output = crewPostService.selectCrewPost(input);
+		
+		if(login_info.getUser_no() != output.getUser_info_user_no()) {
+			return webHelper.redirect(null, "작성자만 삭제가능합니다.");
+		}else
+			crewPostService.deleteCrewPost(input);
+		
+	} catch (Exception e) {
+		webHelper.redirect(null, e.getLocalizedMessage());
+	}
+	
+	
+	return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_no() + "&crew_name=" + input.getCrew_name(),null);
+	
+	
+	
+
+
+	
+}
 
 }
