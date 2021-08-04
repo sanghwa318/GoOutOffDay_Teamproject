@@ -86,25 +86,36 @@
 							<th class="text-center">제목</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td class="text-center">1</td>
-							<td class="text-center">완료</td>
-							<td class="text-center">걷기</td>
-							<td class="text-center">코스등록 문의드립니다.</td>
-						</tr>
-						<tr>
-							<td class="text-center">2</td>
-							<td class="text-center">미완료</td>
-							<td class="text-center">문화체육</td>
-							<td class="text-center">행사정보가 잘못되었습니다.</td>
-						</tr>
-						<tr>
-							<td class="text-center">3</td>
-							<td class="text-center">완료</td>
-							<td class="text-center">커뮤니티</td>
-							<td class="text-center">정채원입니다.</td>
-						</tr>
+					<tbody id="list">
+						<c:choose>
+							<%--조회결과가 없는 경우 --%>
+							<c:when test="${output==null || fn:length(output) == 0} ">
+								<tr>
+									<td class="text-center">조회결과가 없습니다.</td>
+								</tr>
+							</c:when>
+							<%--조회결과가 있는 경우  --%>
+							<c:otherwise>
+								<%-- 조회 결과에 따른 반복 처리 --%>
+								<c:forEach var="item" items="${output}" varStatus="status">
+									<%-- 출력을 위해 준비한 문의글제목 변수  --%>
+									<c:set var="QnA_no" value="${item.getQnA_no()}" />
+									<%-- 상세페이지로 이동하기위한 URL --%>
+									<c:url value="/adminPage/admin_inquiryDetail.do" var="infoUrl">
+										<c:param name="QnA_no" value="${item.getQnA_no()}" />
+									</c:url>
+									<tr onclick="location.href='${infoUrl}'" style="cursor:pointer;">
+										<td class="text-center">${status.count}</td>
+										<td class="text-center">
+											<c:if test="${item.answer_yn}">답변 완료</c:if>
+											<c:if test="${!item.answer_yn}">답변 중</c:if>
+										</td>
+										<td class="text-center">${item.getQnA_category()}</td>
+										<td class="text-center">${item.getQnA_title()}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 				<!-- 페이지네이션 -->

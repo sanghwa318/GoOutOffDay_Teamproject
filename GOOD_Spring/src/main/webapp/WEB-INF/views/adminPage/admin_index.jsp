@@ -47,7 +47,7 @@ div.wrapper {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../adminPage/admin_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">관리자페이지 </span>
 				</h1>

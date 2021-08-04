@@ -33,7 +33,7 @@
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../adminPage/admin_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">관리자페이지 </span>
 				</h1>
@@ -48,14 +48,18 @@
 				<div class="form-group">
 					<label for='reason' class="col-md-12"><h3>회원 문의</h3> </label>
 					<div class="col-md-12">
-						<textarea class="form-control" name="inq_content"
-							style="min-height: 500px; resize: none" disabled></textarea>
+					<div id="inq">
+						<h2>${output.getQnA_title()}</h2>
+						<div class="jumbotron">
+							<p>${output.getQnA_text()}</p>
+						</div>
+					</div>
 					</div>
 				</div>
 			</div>
 			<!-- 본문 중단1 영역 끝 -->
 			<!-- 본문 중단 영역 -->
-			<div class="admin_inquiryDetail_middle2">
+			<div class="admin_inquiryDeta.conteil_middle2">
 				<div class="form-group">
 					<label for='reason' class="col-md-12"><h3>관리자 답변</h3> </label>
 					<div class="col-md-12">
@@ -69,7 +73,7 @@
 			<div class="form-group">
 				<div class="btn text-center pull-left">
 					<button type='submit' id="list" class="btn btn-info"
-						onClick="location.href='../adminPage/admin_inquiry.jsp'">목록</button>
+						onClick="location.href='${pageContext.request.contextPath}/adminPage/admin_inquiry.do'">목록</button>
 				</div>
 				<div class="btn text-center pull-right">
 					<button type='submit' id="add" class="btn btn-success">등록</button>

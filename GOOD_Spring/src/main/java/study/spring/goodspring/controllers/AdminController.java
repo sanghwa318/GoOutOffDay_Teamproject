@@ -1,19 +1,34 @@
 package study.spring.goodspring.controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.Inquiry;
+import study.spring.goodspring.model.Member;
+import study.spring.goodspring.service.AdminService;
 
 @Controller
 public class AdminController {
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
-
+	
+	@Autowired
+	WebHelper webHelper;
+	
+	@Autowired
+	AdminService adminService;
+	
 	/**
 	 * 관리자 메인페이지 
 	 * 
@@ -25,10 +40,47 @@ public class AdminController {
 		return new ModelAndView ("adminPage/admin_index");
 	}
 	
+	/**
+	 * 1:1 문의 조회 (관리자)
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/adminPage/admin_inquiry.do", method = RequestMethod.GET)
 	public ModelAndView adminInquiry(Model model) {
 		
+		/* 1) 데이터 조회하기 */
+		List<Inquiry> output = null;
+
+		try {
+			// 데이터 조회
+			output = adminService.getInquiryListAdmin(null);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 3) View 처리
+		model.addAttribute("output", output);
 		return new ModelAndView ("adminPage/admin_inquiry");
+	}
+	
+	@RequestMapping(value = "/adminPage/admin_inquiryDetail.do", method = RequestMethod.GET)
+	public ModelAndView adminInquiryDetail(Model model,
+			@RequestParam(value="QnA_no") int QnA_no) {
+		
+		/* 1) 데이터 조회하기 */
+		
+	      Inquiry input = new Inquiry();
+	      input.setQnA_no(QnA_no);
+	      Inquiry output = null;
+
+	      try {
+	         // 데이터 조회
+	         output = adminService.getInquiryItemAdmin(input);
+	      } catch (Exception e) {
+	         return webHelper.redirect(null, e.getLocalizedMessage());
+	      }
+	      // 3) View 처리
+	      model.addAttribute("output", output);
+	      return new ModelAndView("adminPage/admin_inquiryDetail");
 	}
 	
 	@RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
