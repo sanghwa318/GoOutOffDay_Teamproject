@@ -2,8 +2,7 @@ package study.spring.goodspring.controllers;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Inquiry;
-import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.AdminService;
 
 @Controller
@@ -62,6 +60,12 @@ public class AdminController {
 		return new ModelAndView ("adminPage/admin_inquiry");
 	}
 	
+	/**
+	 * 1:1문의 상세
+	 * @param model
+	 * @param QnA_no
+	 * @return
+	 */
 	@RequestMapping(value = "/adminPage/admin_inquiryDetail.do", method = RequestMethod.GET)
 	public ModelAndView adminInquiryDetail(Model model,
 			@RequestParam(value="QnA_no") int QnA_no) {
@@ -82,6 +86,32 @@ public class AdminController {
 	      model.addAttribute("output", output);
 	      return new ModelAndView("adminPage/admin_inquiryDetail");
 	}
+	
+	/**
+	 * 1:1 문의 답변을 위한 action 페이지
+	 * 
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/adminPage/admin_inquiryanswerOk.do", method = RequestMethod.POST)
+	public ModelAndView InquiryAnswerOk(Model model) {
+		
+		Inquiry input = new Inquiry();
+
+		Inquiry output = null;
+
+		try {
+			output = adminService.addInquiryAdmin(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return webHelper.redirect(contextPath + "/adminPage/admin_inquiryDetail.do" + "?QnA_no=" + output.getQnA_no(),
+				"작성되었습니다.");
+
+	}
+
+	
+	
 	
 	@RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
 	public ModelAndView adminMember(Model model) {

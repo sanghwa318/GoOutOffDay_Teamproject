@@ -38,6 +38,8 @@
 					<span class="test01">관리자페이지 </span>
 				</h1>
 			</div>
+			<form class="col-md-10 col-md-offset-1" action="${pageContext.request.contextPath}/adminPage/admin_inquiryanswerOk.do"
+				method="post">
 			<!-- 본문 상단 영역 -->
 			<div class="admin_inquiryDetail-header">
 				<h1 class="page-header">1:1 문의 관리</h1>
@@ -82,6 +84,7 @@
 				</div>
 			</div>
 			<!-- 본문하단영역 끝 -->
+			</form>
 		</div>
 		<!-- //컨테이너 -->
 	</div>

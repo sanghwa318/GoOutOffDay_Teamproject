@@ -42,5 +42,18 @@
 		FROM inquiry_qna
 		ORDER BY QnA_no ASC;
 	</select>
+	
+	
+	<!-- 1:1문의 답변 저장 기능 -->
+	<insert id="insertInquiryAdmin"
+		parameterType="study.spring.goodspring.model.Inquiry"
+		useGeneratedKeys="true" keyProperty="QnA_no">
+		INSERT INTO inquiry_qna
+		(answer_yn,ansewer_detail,answer_create_datetime)
+		VALUES ('Y', 
+		#{answer_detail],
+		now() );
+	</insert>
+
 
 </mapper>

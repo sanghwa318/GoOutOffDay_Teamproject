@@ -20,6 +20,13 @@ public interface AdminService {
 	    * @return 조회된 데이터가 저장된 Beans
 	    * @throws Exception
 	    */
-	   public Inquiry getInquiryItemAdmin(Inquiry input) throws Exception;
-
+	 public Inquiry getInquiryItemAdmin(Inquiry input) throws Exception;
+	 
+	 /**
+		 * 문의글 답변 데이터 등록
+		 * @param Inquiry 저장할 정보를 담고 있는 Beans
+		 * @return int 
+		 * @throws Exception
+		 */
+		public Inquiry addInquiryAdmin(Inquiry input) throws Exception;
 }
