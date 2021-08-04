@@ -24,7 +24,7 @@ $(function(){
 //글삭제
 $("#delete-btn").on("click",function() {
 		if(confirm("삭제하시겠습니까?")){
-		location.href = getContextPath()+"/commPage/comm_myCourseDeleteOk.do?mycourse_no="+mycourse_no;
+		location.href = getContextPath()+"/commPage/comm_crew_postDeleteOk.do?post_no="+post_no;
 		return true;
 	}else{
 		return false;
@@ -87,12 +87,11 @@ $("#delete-btn").on("click",function() {
 		/**댓글 삭제 ajax*/
 		function cmt_delete(comment_no){
 
-			
 			if (confirm("정말 삭제하시겠습니까?")){
 			
 				console.log(comment_no)
 			$.ajax({
-					url: getContextPath() + '/commPage/comm_myCourseDetail/comment',
+					url: getContextPath() + '/commPage/comm_crew_post/comment',
 					type: 'DELETE',
 					dataType: 'json',
 					data: {comment_no},

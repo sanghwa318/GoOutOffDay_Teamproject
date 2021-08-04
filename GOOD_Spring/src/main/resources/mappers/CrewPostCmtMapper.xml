@@ -35,7 +35,21 @@
 		WHERE crew_post_post_no=#{crew_post_post_no}
 		ORDER BY crew_post_post_no ASC
 	</select>
-
+	
+		<!-- 데이터 삭제 기능 -->
+	<delete id="deleteCrewPostCmt"
+		parameterType="study.spring.goodspring.model.CrewPostCmt">
+		DELETE FROM crew_comment WHERE comment_no = #{comment_no};
+	</delete>
+	
+	<!-- 단일행 조회 (댓글 수정 삭제) -->
+ 	<select id="selectCrewPostCmtItem" resultMap="CrewPostCmtMap"
+		parameterType="study.spring.goodspring.model.CrewPostCmt">
+		SELECT *
+		FROM crew_comment
+		WHERE comment_no=#{comment_no}
+		ORDER BY comment_no ASC
+	</select>
 
 </mapper>
 

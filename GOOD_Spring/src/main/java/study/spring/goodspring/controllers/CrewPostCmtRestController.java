@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CrewPostCmt;
 import study.spring.goodspring.model.Member;
+
 import study.spring.goodspring.service.CrewPostCmtService;
 
 @RestController
@@ -87,6 +88,41 @@ public class CrewPostCmtRestController {
 		map.put("cmtList", list);
 		return webHelper.getJsonData(map);
 	}
+	
+	/**
+	 * 댓글 삭제를 위한 Rest Controller 메서드
+	 * @param comment_no
+	 * @return
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_post/comment", method = RequestMethod.DELETE)
+	public Map<String, Object> deleteCmt(
+			@RequestParam(value = "comment_no") int comment_no) {
+		CrewPostCmt input = new CrewPostCmt();
+		input.setComment_no(comment_no);
+		int result = 0;
+		
+		// 사용자 정보 유효성 검사를 위해 세션값 받아오기
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		int sessionUser_no = loginInfo.getUser_no();
+
+		try {
+			int cmtUser_no=crewPostCmtService.getCmtItem(input).getUser_info_user_no();
+			//사용자가 로그인 하지 않았거나, 로그인정보가 댓글 작성자의 사용자 번호와 다를 경우 예외처리
+			if(sessionUser_no!=cmtUser_no || loginInfo==null ) {
+				return webHelper.getJsonError("잘못된 요청입니다. 로그인 정보를 확인하세요.");
+			}else {
+			//사용자 정보가 맞으면, 삭제 진행
+			result = crewPostCmtService.deleteCmt(input);
+			}
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		return webHelper.getJsonData(map);
+	}
+	
 	
 	
 }

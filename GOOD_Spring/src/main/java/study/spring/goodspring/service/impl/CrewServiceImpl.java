@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.Crew;
-import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.CrewService;
 
 //크루 데이터 관리 기능을 제공하기 위한 Service 계층에대한 구현체
