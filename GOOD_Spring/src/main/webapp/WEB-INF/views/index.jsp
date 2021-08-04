@@ -359,7 +359,8 @@ h4 {
 				<div class="row good_item">
 					<!--  캐러셀 시작 -->
 					<div class="owl-carousel owl-theme" id="owl-GOOD">
-						<div class="item" id="bicycle_GOOD" onclick="location.href='${pageContext.request.contextPath}/bicyclePage/bicycle_index.do'">
+						<div class="item" id="bicycle_GOOD"
+							onclick="location.href='${pageContext.request.contextPath}/bicyclePage/bicycle_index.do'">
 							<img
 								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_bicycle1.png"
 								alt="오늘의 자전거 항목 추천" style="cursor: pointer;" />
@@ -369,7 +370,8 @@ h4 {
 								<span class="module_text">따릉이 타러갈래?</span>
 							</div>
 						</div>
-						<div class="item" id="walk_GOOD" onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'">
+						<div class="item" id="walk_GOOD"
+							onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'">
 							<img
 								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_walk2.png"
 								alt="오늘의 걷기 항목 추천" style="cursor: pointer;" />
@@ -379,7 +381,8 @@ h4 {
 								<span class="module_text">같이 걸으러갈래?</span>
 							</div>
 						</div>
-						<div class="item" id="cas_GOOD" onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'">
+						<div class="item" id="cas_GOOD"
+							onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'">
 							<img
 								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_img1.png"
 								alt="오늘의 문화체육 항목 추천" style="cursor: pointer;" />
@@ -389,7 +392,8 @@ h4 {
 								<span class="module_text">오늘은 어떤걸 배워볼래?</span>
 							</div>
 						</div>
-						<div class="item" id="comm_GOOD" onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'">
+						<div class="item" id="comm_GOOD"
+							onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'">
 							<img
 								src="${pageContext.request.contextPath}/assets/img/GOOD_img/today_crew1.png"
 								alt="오늘의 커뮤니티 항목 추천" style="cursor: pointer;" />
@@ -818,9 +822,7 @@ h4 {
 		}(document, 'script', 'weatherwidget-io-js');
 	</script>
 	<script>
-		$('.owl-carousel')
-				.owlCarousel(
-						{
+		$('.owl-carousel').owlCarousel({
 							loop : false,
 							margin : 10,
 							nav : true,
