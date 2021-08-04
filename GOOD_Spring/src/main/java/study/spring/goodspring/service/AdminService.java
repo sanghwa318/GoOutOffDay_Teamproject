@@ -29,4 +29,12 @@ public interface AdminService {
 		 * @throws Exception
 		 */
 		public Inquiry addInquiryAdmin(Inquiry input) throws Exception;
+		
+	/**
+	    * [페이지네이션에 필요]
+	    * 데이터가 저장되어 있는 갯수 조회
+	    * @return int
+	    * @throws Exception
+	    */
+	   public int getInquiryListAdminCount(Inquiry input) throws Exception;
 }

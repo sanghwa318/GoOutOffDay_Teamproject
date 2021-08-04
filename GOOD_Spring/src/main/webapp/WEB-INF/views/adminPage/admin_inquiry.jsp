@@ -43,10 +43,12 @@
 								<label for="answer" class="col-sm-4 col-xs-3 control-label">답변상태
 									: </label>
 								<div class="col-sm-8 col-xs-9">
-									<select class="form-control" id="answer">
+									<select class="form-control" name="answer" id="answer">
 										<option value="">완료/미완료</option>
-										<option value="complete">완료</option>
-										<option value="incomplete">미완료</option>
+										<option value="complete">완료
+										<c:if test="${answer eq 'complete'}">selected</c:if>완료</option>
+										<option value="incomplete">미완료
+										<c:if test="${answer eq 'incomplete'}">selected</c:if>미완료</option>
 									</select>
 								</div>
 							</div>
@@ -54,12 +56,16 @@
 								<label for="category" class="col-sm-4 col-xs-3 control-label">카테고리
 									: </label>
 								<div class="col-sm-8 col-xs-9">
-									<select class="form-control" id="category">
+									<select class="form-control" name="category" id="category">
 										<option value="">전체</option>
-										<option value="bicycle">자전거</option>
-										<option value="walking">걷기</option>
-										<option value="cultural_sports">문화체육</option>
-										<option value="community">커뮤니티</option>
+										<option value="bicycle">자전거
+										<c:if test="${category eq 'bicycle'}">selected</c:if>자전거</option>
+										<option value="walking">걷기
+										<c:if test="${category eq 'walking'}">selected</c:if>걷기</option>
+										<option value="cultural_sports">문화체육
+										<c:if test="${category eq 'cultural_sports'}">selected</c:if>문화체육</option>
+										<option value="community">커뮤니티
+										<c:if test="${category eq 'community'}">selected</c:if>커뮤니티</option>
 									</select>
 								</div>
 							</div>

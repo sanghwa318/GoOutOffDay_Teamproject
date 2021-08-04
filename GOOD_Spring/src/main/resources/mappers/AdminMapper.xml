@@ -54,6 +54,15 @@
 		#{answer_detail],
 		now() );
 	</insert>
+	
+	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->
+   <select id="selectInquiryCountAll"
+      parameterType="study.spring.goodspring.model.Inquiry"
+      resultType="int">
+      SELECT COUNT(*) FROM inquiry_qna
+
+     
+   </select>
 
 
 </mapper>
