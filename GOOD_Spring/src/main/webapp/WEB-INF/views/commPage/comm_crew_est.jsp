@@ -69,6 +69,10 @@ button span {
 	bottom: 0px;
 }
 
+.crew_pp>#img__wrap{
+	margin-top: 30px;
+}
+
 /** 이미지 클릭 금지*/
 #img__wrap {
 	pointer-events: none;
@@ -169,10 +173,10 @@ margin-bottom: 5px;
 				</div>
 					
 					<div class="col-md-12">
-					<div class="col-sm-3">
+					<div class="col-sm-3 crew_pp">
 						<input type="image" id="img__wrap" name="crew_photo" id="crew_photo"
 							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
-							 width="50%" height="50%" style="border-radius: 100%" />
+							 width="50%" height="50%" style="border-radius: 100%; margin-top:30px;" />
 							<label for="img__preview" class=" btn btn-default" id="crew_insert"
 							style="font-size: 20px;">크루 사진 등록</label> <input type="file"
 							name="crew_photo" id="img__preview" class="hidden" />

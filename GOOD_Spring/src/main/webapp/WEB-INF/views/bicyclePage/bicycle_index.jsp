@@ -203,12 +203,6 @@ p {
 							<div class="menu_content"
 								style="height: 70px; overflow-y: scroll;">
 								<div id="select_result"></div>
-								<!-- <div class="menu_detail">
-									<button id="m_btn" class="btn btn-info pull-right"
-										type="submit">지도 보기</button>
-									<p class="detail_content1">강남구</p>
-									<p class="detail_content2">현재 이용 가능 대수: 1대</p>
-								</div> -->
 							</div>
 						</div>
 					</div>

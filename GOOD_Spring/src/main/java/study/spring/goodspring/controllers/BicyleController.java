@@ -32,21 +32,30 @@ public class BicyleController {
 	WebHelper webHelper;
 	@Autowired
 	BicycleUpload bicycleUpload;
-
+	
+	/**
+	 * 자전거 메인 페이지
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/bicyclePage/bicycle_index.do", method = RequestMethod.GET)
 	public ModelAndView bicycle_index(Model model, HttpServletResponse response) {
 		
 		return new ModelAndView("/bicyclePage/bicycle_index");
 
 	}
-
+	
+	/**
+	 * 자전거 대여소 검색
+	 * @param model
+	 * @param keyword
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/bicyclePage/bicycle_index_search.do", method = RequestMethod.GET)
 	public Map<String, Object> bicycle_index_search(Model model,
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
 
-//		Bicycle.rentBikeStatus rentBikeStatus = bicycle.new rentBikeStatus();
-//		rentBikeStatus.row input = rentBikeStatus.new row();
 		row input = new row();
 		input.setStationName(keyword);
 
@@ -65,6 +74,10 @@ public class BicyleController {
 
 	}
 	
+	/**
+	 * 실시간 자전거 현황 지도
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/bicyclePage/bicycle_index_map.do", method = RequestMethod.GET)
 	public Map<String, Object> bicycle_index_map() {

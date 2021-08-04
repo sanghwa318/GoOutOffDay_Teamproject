@@ -58,11 +58,11 @@ div.wrapper {
 					<h1 class="text-center">-회원정보-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-default col-xs-offset-2 col-xs-8"
-							onclick="location.href='<%=request.getContextPath()%>/adminPage/admin_inquiry.jsp'">1:1문의관리</button>
+							onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_inquiry.do'">1:1문의관리</button>
 					</div>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-primary col-xs-offset-2 col-xs-8"
-							onclick="location.href='<%=request.getContextPath()%>/adminPage/admin_member.jsp'">회원관리</button>
+							onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_member.do'">회원관리</button>
 					</div>
 				</div>
 				<!-- //회원정보 -->
@@ -71,7 +71,7 @@ div.wrapper {
 					<h1 class="text-center">-커뮤니티-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-success col-xs-offset-2 col-xs-8"
-							onclick="location.href='<%=request.getContextPath()%>/adminPage/admin_userCourse.jsp'">회원코스관리</button>
+							onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_userCourse.do'">회원코스관리</button>
 					</div>
 				</div>
 				<!-- //커뮤니티 -->
@@ -80,7 +80,7 @@ div.wrapper {
 					<h1 class="text-center">-통계-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-info col-xs-offset-2 col-xs-8"
-							onclick="location.href='<%=request.getContextPath()%>/adminPage/admin_stats.jsp'">회원로그</button>
+							onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_stats.do'">회원로그</button>
 					</div>
 				</div>
 				<!-- //통계 -->
@@ -89,7 +89,7 @@ div.wrapper {
 					<h1 class="text-center">-공지사항-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-warning col-xs-offset-2 col-xs-8"
-							onclick="location.href='<%=request.getContextPath()%>/adminPage/admin_notice.jsp'">공지사항관리</button>
+							onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_notice.do'">공지사항관리</button>
 					</div>
 				</div>
 				<!-- //공지사항 -->
