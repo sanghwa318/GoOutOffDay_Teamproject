@@ -108,7 +108,8 @@ form {
 					<h3 class="title-name">크루: ${postout2.crew_name}</h3>
 					<p>
 						크루 간단 소개: <br>${postout2.crew_sinto}</p>
-						<input type="hidden" name=crew_post_post_no id="post_no" value="${postout.post_no}">
+					<input type="hidden" name=crew_post_post_no id="post_no"
+						value="${postout.post_no}">
 				</div>
 			</div>
 			<!-- //사이드 영역 -->
@@ -117,15 +118,14 @@ form {
 
 			<div class="row row_a">
 				<div class="pull-left writer_profile">
-					<img style="border-radius: 25px"
-						src="${member.user_photo.fileUrl}" width="50px"
-						height="50px"></img>
+					<img style="border-radius: 25px" src="${member.user_photo.fileUrl}"
+						width="50px" height="50px"></img>
 				</div>
 				<div class="pull-left writer_info" style="margin-left: 15px;">
 					<h4>${postout3.getUser_name()}</h4>
 					<p class="pull-left">작성일자: ${postout.getPost_createdate()}</p>
-					<p class="pull-left" style="margin-left: 15px;">조회수
-						: ${postout.post_hits}</p>
+					<p class="pull-left" style="margin-left: 15px;">조회수 :
+						${postout.post_hits}</p>
 					<p>${postout.getPost_content()}</p>
 				</div>
 
@@ -140,7 +140,8 @@ form {
 				<div class="pull-right" style="margin-right: 15px">
 					<span class="heart"><i class="fa fa-heart-o"
 						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
-						class="fa fa-comment-o"></i></span> 댓글 28
+						class="fa fa-comment-o"></i></span> 댓글 ${total}
+
 				</div>
 			</div>
 
@@ -150,29 +151,29 @@ form {
 			<hr />
 
 			<!-- 댓글 영역 -->
-			<div id="cmt-list">
+			<div id="cmt-list"></div>
 
-			</div>
-			
 			<form>
 				<div class="form-group input-group">
 					<textarea class="form-control" id="comment_text"
 						style="height: 60px; resize: none;" placeholder="내용을 입력해주세요."></textarea>
 					<span class="input-group-btn"><button type="button"
-							class="btn btn-default" style="height: 60px;"  onclick="cmt_add()">댓글
+							class="btn btn-default" style="height: 60px;" onclick="cmt_add()">댓글
 							등록</button></span>
 				</div>
 			</form>
 			<hr>
-			
-		<form action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
-                  <input type="hidden" name="crew_no" value="${postout2.crew_no}" />
-                  <input type="hidden" id="crew_name" name="crew_name"
-                     value="${postout2.crew_name}" />
-                  <button type="submit" id="btn1" class="btn btn-default pull-left">목록</button>
-               </form>
-			
-			
+
+			<form
+				action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
+				method="GET">
+				<input type="hidden" name="crew_no" value="${postout2.crew_no}" />
+				<input type="hidden" id="crew_name" name="crew_name"
+					value="${postout2.crew_name}" />
+				<button type="submit" id="btn1" class="btn btn-default pull-left">목록</button>
+			</form>
+
+
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-warning wr_delete"
 					id="wr_delete">삭제</button>
@@ -189,9 +190,10 @@ form {
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 
-<!-- 댓글 js-->
-<script	src="${pageContext.request.contextPath}/assets/js/crewPost-js.js"></script>
-		 
+	<!-- 댓글 js-->
+	<script
+		src="${pageContext.request.contextPath}/assets/js/crewPost-js.js"></script>
+
 	<script>
 		$(".heart")
 				.on(

@@ -52,4 +52,10 @@ public interface CrewPostService {
 	 * 크루 게시물 조회수 증가
 	 */
 	public void updateHits(CrewPost input) throws Exception;
+	
+	
+	/*
+	 * 크루 댓글 수 조회
+	 */
+	public int upadateCmtHits(CrewPost input) throws Exception;
 }

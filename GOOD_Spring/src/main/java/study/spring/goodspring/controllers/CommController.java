@@ -390,10 +390,14 @@ public class CommController {
 		Member member =null;
 		Crew crew =null;
 		
+		int total = 0;
+		
 		try {
 			
 			//게시글 조회수 증가
 			crewPostService.updateHits(post);
+			//크루 댓글 수 조회
+			total = crewPostService.upadateCmtHits(post);
 			
 			// 데이터 조회하기
 			postout = crewPostService.selectCrewPost(post);
@@ -417,6 +421,7 @@ public class CommController {
 		model.addAttribute("postout3", postout3);
 		model.addAttribute("member", member);
 		model.addAttribute("crew", crew);
+		model.addAttribute("total", total);
 		return new ModelAndView("/commPage/comm_crew_post");
 	}
 

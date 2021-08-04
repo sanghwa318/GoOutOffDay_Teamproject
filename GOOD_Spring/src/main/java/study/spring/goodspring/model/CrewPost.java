@@ -48,6 +48,14 @@ public class CrewPost {
 	private String create_datetime;// (가입일자)
 	private String edit_datetime;// (수정일자)
 	
+	//CrewPostCmt 컬럼
+	private int comment_no; //댓글 번호
+	private String comment_create_datetime; // 댓글 생성일자
+	private String comment_text; // 댓글 내용
+	private int crew_post_post_no; // 게시물 번호
+	private String comment_usernick; // 작성자 닉네임
+	
+	
 	//2) 페이지 구현을 위한 static 변수
 	
 		//LIMIT절에서 사용할 조회 시작 위치

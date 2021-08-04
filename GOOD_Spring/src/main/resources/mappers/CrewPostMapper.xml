@@ -140,6 +140,12 @@
 		WHERE post_no = #{post_no};
 	</update>
 	
-	
+	<!-- 댓글 수 조회 -->
+		<select id="selectCountCmtAll"
+		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
+		UPDATE count(*) FROM crew_post cp
+		INNER JOIN crew_comment cr ON cr.crew_post_post_no = cp.post_no
+		WHERE cp.post_no = #{post_no};
+	</select>
 
 </mapper>
