@@ -50,6 +50,7 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	/**
+	 * [걷기코스]
 	 * [페이지네이션에 필요] 데이터가 저장되어있는 갯수 조회
 	 * 
 	 * @return int
@@ -97,6 +98,7 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	/**
+	 * [나만의 코스]
 	 * [페이지네이션에 필요] 데이터가 저장되어있는 갯수 조회
 	 * 
 	 * @return int
@@ -142,6 +144,26 @@ public class SearchServiceImpl implements SearchService {
 
 		return result;
 	}
+	/**
+	 * [크루]
+	 * [페이지네이션에 필요] 데이터가 저장되어있는 갯수 조회
+	 * 
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int getSearchCrewCount(Crew input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("SearchMapper.selectCrewCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
 
 	/**
 	 * 문화체육 목록 조회
@@ -162,6 +184,26 @@ public class SearchServiceImpl implements SearchService {
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
+	/**
+	 * [문화체육]
+	 * [페이지네이션에 필요] 데이터가 저장되어있는 갯수 조회
+	 * 
+	 * @return int
+	 * @throws Exception
+	 */
+	@Override
+	public int getSearchCASCount(CAS input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("SearchMapper.selectCASCountAll", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

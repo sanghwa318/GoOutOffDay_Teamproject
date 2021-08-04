@@ -219,7 +219,6 @@
 				OR mycourse_content LIKE concat('%', #{mycourse_content},
 				'%')
 			</if>
-
 		</where>
 	</select>
 	<!-- //나만의 코스 -->
@@ -249,6 +248,26 @@
 		FROM
 		crew
 
+		<where>
+			<if test="crew_name != null and crew_name != ''">
+				crew_name LIKE concat('%', #{crew_name}, '%')
+			</if>
+			<if test="crew_area != null and crew_area != ''">
+				OR crew_area LIKE concat('%', #{crew_area}, '%')
+			</if>
+
+			<if test="crew_sinto != null and crew_sinto != ''">
+				OR crew_sinto LIKE concat('%', #{crew_sinto}, '%')
+			</if>
+		</where>
+		<!-- 페이지네이션에 필요 -->
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount};
+		</if>
+	</select>
+	<select id="selectCrewCountAll"
+		parameterType="study.spring.goodspring.model.Crew" resultType="int">
+		SELECT COUNT(*) FROM crew
 		<where>
 			<if test="crew_name != null and crew_name != ''">
 				crew_name LIKE concat('%', #{crew_name}, '%')
@@ -300,6 +319,46 @@
 		FROM
 		CAS
 
+		<where>
+			<if test="MAXCLASSNM != null and MAXCLASSNM != ''">
+				MAXCLASSNM LIKE concat('%', #{MAXCLASSNM}, '%')
+			</if>
+			<if test="MINCLASSNM != null and MINCLASSNM != ''">
+				OR MINCLASSNM LIKE concat('%', #{MINCLASSNM}, '%')
+			</if>
+
+			<if test="SVCSTATNM != null and SVCSTATNM != ''">
+				OR SVCSTATNM LIKE concat('%', #{SVCSTATNM}, '%')
+			</if>
+			<if test="SVCNM != null and SVCNM != ''">
+				OR SVCNM LIKE concat('%', #{SVCNM}, '%')
+			</if>
+
+			<if test="PLACENM != null and PLACENM != ''">
+				OR PLACENM LIKE concat('%', #{PLACENM}, '%')
+			</if>
+			<if test="USETGTINFO != null and USETGTINFO != ''">
+				OR USETGTINFO LIKE concat('%', #{USETGTINFO}, '%')
+			</if>
+
+			<if test="AREANM != null and AREANM != ''">
+				OR PLACENM LIKE concat('%', #{PLACENM}, '%')
+			</if>
+			<if test="TELNO != null and TELNO != ''">
+				OR TELNO LIKE concat('%', #{TELNO}, '%')
+			</if>
+			<if test="SVCSTATNM != null and SVCSTATNM != ''">
+				OR SVCSTATNM LIKE concat('%', #{SVCSTATNM}, '%')
+			</if>
+		</where>
+		<!-- 페이지네이션에 필요 -->
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount};
+		</if>
+	</select>
+	<select id="selectCASCountAll"
+		parameterType="study.spring.goodspring.model.CAS" resultType="int">
+		SELECT COUNT(*) FROM CAS
 		<where>
 			<if test="MAXCLASSNM != null and MAXCLASSNM != ''">
 				MAXCLASSNM LIKE concat('%', #{MAXCLASSNM}, '%')

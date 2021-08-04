@@ -18,7 +18,7 @@ public interface SearchService {
 	public List<WalkCourse> getSearchWalkCourseList(WalkCourse input) throws Exception;
 	/**
 	 * [페이지네이션에 필요]
-	 * 데이터가 저장되어 있는 갯수 조회
+	 * [걷기코스] 데이터가 저장되어 있는 갯수 조회
 	 * @return int
 	 * @throws Exception
 	 */
@@ -33,11 +33,12 @@ public interface SearchService {
 	public List<MyCourses> getSearchMyCourseList(MyCourses input) throws Exception;
 	/**
 	 * [페이지네이션에 필요]
-	 * 데이터가 저장되어 있는 갯수 조회
+	 * [나만의 코스] 데이터가 저장되어 있는 갯수 조회
 	 * @return int
 	 * @throws Exception
 	 */
 	public int getSearchMyCourseCount(MyCourses input) throws Exception;
+	
 	/**
 	 * 크루 목록 조회
 	 * 
@@ -45,6 +46,13 @@ public interface SearchService {
 	 * @throws Exception
 	 */
 	public List<Crew> getSearchCrewList(Crew input) throws Exception;
+	/**
+	 * [페이지네이션에 필요]
+	 * [크루] 데이터가 저장되어 있는 갯수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getSearchCrewCount(Crew input) throws Exception;
 
 	/**
 	 * 문화체육 목록 조회
@@ -53,5 +61,12 @@ public interface SearchService {
 	 * @throws Exception
 	 */
 	public List<CAS> getSearchCASList(CAS input) throws Exception;
+	/**
+	 * [페이지네이션에 필요]
+	 * [문화체육] 데이터가 저장되어 있는 갯수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getSearchCASCount(CAS input) throws Exception;
 
 }
