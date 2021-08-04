@@ -36,7 +36,7 @@ body>div.container {
 			<form method="get"
 				action="${pageContext.request.contextPath }/mainPage/search.do"
 				class="form-group input-group">
-				<input type="search" name="keyword" id="search" class="form-control"
+				<input type="search" name="keyword" id="keyword" class="form-control"
 					placeholder="검색하기" value="${keyword }" /> <span
 					class="input-group-btn">
 					<button class="btn btn-blue" type="submit">
@@ -54,7 +54,7 @@ body>div.container {
 				<c:when
 					test="${keyword != null && keyword != '' && 
 				output_w != null && fn:length(output_w) != 0 }">
-					<h1>걷기목록</h1>
+					<h1> --- 걷기목록 검색결과 --- </h1>
 					<div id="listW">
 						<%-- 조회 결과에 따른 반복 처리 --%>
 						<c:forEach var="item_w" items="${output_w }" varStatus="status">
@@ -92,25 +92,67 @@ body>div.container {
 							<!-- 검색결과 리스트 표시 -->
 							<div onclick="location.href='${viewUrl }'"
 								style="cursor: pointer;'">
-								<h3>${COURSE_NAME}
-									> ${CPI_NAME } [생성날짜:${REG_DATE }] 코스난이도 - ${COURSE_LEVEL }
-								</h3>
-<!-- 								<p> -->
-<%-- 									코스유형: ${COURSE_CATEGORY_NM } | 지역 : (${SOUTH_NORTH_DIV_NM }) --%>
-<%-- 									${AREA_GU } | 거리 : ${DISTANCE } - 소요시간 : ${LEAD_TIME } <br /> --%>
-<%-- 									세부코스경로 : ${DETAIL_COURSE } --%>
-<%-- 									<c:if test="${RELATE_SUBWAY != null && RELATE_SUBWAY != ''}"> --%>
-<%-- 										<br /> 관련지하철 - ${RELATE_SUBWAY }  --%>
-<%-- 							</c:if> --%>
-<%-- 									<br /> 코스설명 : ${CONTENT } [포인트설명 : ${CPI_CONTENT }] --%>
+								<h3>${COURSE_NAME}> ${CPI_NAME } [생성날짜:${REG_DATE }] 코스난이도
+									- ${COURSE_LEVEL }</h3>
+								<p>
+									코스유형: ${COURSE_CATEGORY_NM } | 지역 : (${SOUTH_NORTH_DIV_NM })
+									${AREA_GU } | 거리 : ${DISTANCE } - 소요시간 : ${LEAD_TIME } <br />
+									세부코스경로 : ${DETAIL_COURSE } | 관련지하철 - ${RELATE_SUBWAY } <br />
+									코스설명 : ${CONTENT } [포인트설명 : ${CPI_CONTENT }]
 							</div>
 
 							<hr />
 						</c:forEach>
 					</div>
 					<!-- 전체 페이지 수가 2페이지 이상인 경우 "더보기"버튼 노출 -->
-					<c:if test="${pageData.totalPage > 1 }">
-						<button id="btnMore">[더보기]</button>
+					<c:if test="${pageDataW.totalPage > 1 }">
+						<button id="btnMoreW">걷기 더보기</button>
+					</c:if>
+				</c:when>
+
+				<%-- 조회 결과가 없는 경우 --%>
+				<c:otherwise>
+					<h1>조회 결과가 없습니다.</h1>
+				</c:otherwise>
+			</c:choose>
+			<!-- // 리스트 출력 부분 끝 -->
+			<!-- 리스트 출력 부분 시작 -->
+			<c:choose>
+				<%-- 걷기 목록에서 조회 결과가 경우 --%>
+				<c:when
+					test="${keyword != null && keyword != '' && 
+				output_m != null && fn:length(output_m) != 0 }">
+					<h1> --- 나만의 코스 목록 검색결과 --- </h1>
+					<div id="listM">
+						<%-- 조회 결과에 따른 반복 처리 --%>
+						<c:forEach var="item_m" items="${output_m }" varStatus="status">
+							<%-- 출력을 위해 준비한 파라미터들 --%>
+							<c:set var="mycourse_name" value="${item_m.mycourse_name }" />
+							<c:set var="mycourse_area" value="${item_m.mycourse_area }" />
+							<c:set var="mycourse_content" value="${item_m.mycourse_content }" />
+
+							<%-- 상세 페이지로 이동하기 위한 URL --%>
+							<c:url value="/commPage/comm_myCourseDetail.do" var="viewUrl">
+								<c:param name="mycourse_no" value="${item_m.mycourse_no }" />
+							</c:url>
+
+							<%-- 검색어가 있다면? --%>
+							<c:if test="${keyword != '' }">
+								<c:set var="mark" value="<mark>${keyword }</mark>" />
+							</c:if>
+
+							<!-- 검색결과 리스트 표시 -->
+							<div onclick="location.href='${viewUrl }'"
+								style="cursor: pointer;'">
+								<h3>${mycourse_name }</h3>
+							</div>
+
+							<hr />
+						</c:forEach>
+					</div>
+					<!-- 전체 페이지 수가 2페이지 이상인 경우 "더보기"버튼 노출 -->
+					<c:if test="${pageDataM.totalPage > 1 }">
+						<button id="btnMoreM">걷기 더보기</button>
 					</c:if>
 				</c:when>
 
@@ -125,10 +167,27 @@ body>div.container {
 	</div>
 	<!-- 하단영역 -->
 	<%@ include file="../inc/Footer.jsp"%>
+	<!-- (1) 걷기 템플릿 -->
 	<script id="listW-tmpl" type="text/x-handlebars-template">
 	{{#each item_w}}
-	<div>
+	<div onclick="location.href='${pageContext.request.contextPath }/walkPage/walk_detailCourse.do?CPI_IDX={{CPI_IDX}}'" 
+style="cursor: pointer;'">
 		<h3>{{COURSE_NAME}} > {{CPI_NAME}} [생성날짜:{{REG_DATE}}] 코스난이도 - {{COURSE_LEVEL}}</h3>
+		<p>
+			코스유형: {{COURSE_CATEGORY_NM}} | 지역 : ({{SOUTH_NORTH_DIV_NM}})
+			{{AREA_GU}} | 거리 : {{DISTANCE}} - 소요시간 : {{LEAD_TIME}} <br />
+			세부코스경로 : {{DETAIL_COURSE}} | 관련지하철 - {{RELATE_SUBWAY}} <br />
+			코스설명 : {{CONTENT}} [포인트설명 : {{CPI_CONTENT}}]
+	</div>
+	<hr/>
+	{{/each}}
+	</script>
+	<!-- (2) 나만의 코스 템플릿 -->
+	<script id="listM-tmpl" type="text/x-handlebars-template">
+	{{#each item_m}}
+	<div onclick="location.href='${pageContext.request.contextPath }/commPage/comm_myCourseDetail.do?mycourse_no={{mycourse_no}}'" 
+style="cursor: pointer;'">
+		<h3>{{mycourse_name}}</h3>	
 	</div>
 	<hr/>
 	{{/each}}
@@ -136,38 +195,58 @@ body>div.container {
 
 	<%@ include file="../inc/plugin.jsp"%>
 	<script>
-		let nowPage = 1;
-
+		let nowPageW = 1;
+		let keyword = $('#keyword').val();
+		
 		$(function() {
-			$("#btnMore")
-					.click(
-							function() {
-								nowPage++;
+			$("#btnMoreW").click(function() {
+				nowPageW++;
 
-								// GET 방식 요청
-								$
-										.ajax({
-											url : '${pageContext.request.contextPath }/mainPage/searchW',
-											method : 'get',
-											data : {
-												'page' : nowPage
-											},
-											dataType : 'json',
-											success : function(json) {
-												var source = $("#listW-tmpl")
-														.html(); // 템플릿 코드가져오기
-												var template = Handlebars
-														.compile(source); // 템플릿 코드 컴파일
-												var result = template(json); // 템플릿 컴파일 결과물에 req전달
-												$("#listW").append(result); // 최종 결과물을 #listW 요소에 추가
+				// GET 방식 요청
+				$.ajax({
+					url : '${pageContext.request.contextPath }/mainPage/searchW',
+					method : 'get',
+					data : {'keyword': keyword, 'page' : nowPageW},
+					dataType : 'json',
+					success : function(json) {
+					var source = $("#listW-tmpl").html(); // 템플릿 코드가져오기
+					var template = Handlebars.compile(source); // 템플릿 코드 컴파일
+					var result = template(json); // 템플릿 컴파일 결과물에 req전달
+					$("#listW").append(result); // 최종 결과물을 #listW 요소에 추가
 
-												// 현재 페이지 번호가 전체 페이지 수에 도달했다면 더보기 버튼 숨김
-												if (json.meta.totalPage <= nowPage) {
-													$("#btnMore").hide();
-												}
-											}
-										});
-							});
+						// 현재 페이지 번호가 전체 페이지 수에 도달했다면 더보기 버튼 숨김
+						if (json.meta.totalPage <= nowPageW) {
+							$("#btnMoreW").hide();
+						}
+					}
+				});
+			});
+		});
+		
+		let nowPageM = 1;
+		$(function() {
+			$("#btnMoreM").click(function() {
+				nowPageM++;
+
+				// GET 방식 요청
+				$.ajax({
+					url : '${pageContext.request.contextPath }/mainPage/searchM',
+					method : 'get',
+					data : {'keyword': keyword, 'page' : nowPageM},
+					dataType : 'json',
+					success : function(json) {
+					var source = $("#listM-tmpl").html(); // 템플릿 코드가져오기
+					var template = Handlebars.compile(source); // 템플릿 코드 컴파일
+					var result = template(json); // 템플릿 컴파일 결과물에 req전달
+					$("#listM").append(result); // 최종 결과물을 #listW 요소에 추가
+
+						// 현재 페이지 번호가 전체 페이지 수에 도달했다면 더보기 버튼 숨김
+						if (json.meta.totalPage <= nowPageM) {
+							$("#btnMoreM").hide();
+						}
+					}
+				});
+			});
 		});
 	</script>
 </body>

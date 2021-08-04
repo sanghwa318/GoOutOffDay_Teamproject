@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
+import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.service.SearchService;
 
@@ -178,7 +179,7 @@ public class MainController {
 //	}
 
 	/**
-	 * 통합검색 페이지
+	 * 통합검색 페이지 [걷기목록]
 	 * 
 	 * @return ModelAndView
 	 */
@@ -191,11 +192,13 @@ public class MainController {
 
 		/** 1) 페이지 구현에 필요한 변수값 생성 */
 		// [페이지네이션] 변수 추가
-		int totalCount = 0; // 전체 게시글 수
+		int totalCountW = 0; // 전체 게시글 수
+		int totalCountM = 0; // 전체 게시글 수
 		int listCount = 4; // 한페이지단 표시할 목록수
 		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
 		// [페이지네이션] 객체 추가
-		PageData pageData = null;
+		PageData pageDataW = null;
+		PageData pageDataM = null;
 		// [페이지네이션] 변수 추가 (종료)
 
 		/** 2) 데이터 조회하기 */
@@ -219,20 +222,34 @@ public class MainController {
 		input_w.setCPI_NAME(keyword);
 		input_w.setCPI_CONTENT(keyword);
 
+		// 나만의 코스
+		MyCourses input_m = new MyCourses();
+		input_m.setMycourse_name(keyword);
+		input_m.setMycourse_area(keyword);
+		input_m.setMycourse_content(keyword);
+		
 		// 조회 결과가 저장될 객체
 		List<WalkCourse> output_w = null;
+		List<MyCourses> output_m = null;
 
 		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-			totalCount = searchService.getSearchWalkCourseCount(input_w);
+			totalCountW = searchService.getSearchWalkCourseCount(input_w);
+			totalCountM = searchService.getSearchMyCourseCount(input_m);
 			// [페이지네이션] 페이지 번호 계산
-			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+			pageDataW = new PageData(nowPage, totalCountW, listCount, pageCount);
+			pageDataM = new PageData(nowPage, totalCountM, listCount, pageCount);
 
 			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-			WalkCourse.setOffset(pageData.getOffset());
-			WalkCourse.setListCount(pageData.getListCount());
+			WalkCourse.setOffset(pageDataW.getOffset());
+			WalkCourse.setListCount(pageDataW.getListCount());
+			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+			MyCourses.setOffset(pageDataM.getOffset());
+			MyCourses.setListCount(pageDataM.getListCount());
 			// 데이터 조회하기
 			output_w = searchService.getSearchWalkCourseList(input_w);
+			output_m = searchService.getSearchMyCourseList(input_m);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -240,8 +257,64 @@ public class MainController {
 		// View 처리
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("output_w", output_w);
-		model.addAttribute("pageData", pageData);
+		model.addAttribute("output_m", output_m);
+		model.addAttribute("pageDataW", pageDataW);
+		model.addAttribute("pageDataM", pageDataM);
 
+		return new ModelAndView("/mainPage/search");
+	}
+	/**
+	 * 통합검색 페이지 [나만의 코스]
+	 * 
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/mainPage/searchM.do", method = RequestMethod.GET)
+	public ModelAndView SearchM(Model model, HttpServletResponse response,
+			// 검색어
+			@RequestParam(value = "keyword", defaultValue = "") String keyword,
+			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+		
+		/** 1) 페이지 구현에 필요한 변수값 생성 */
+		// [페이지네이션] 변수 추가
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 4; // 한페이지단 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		// [페이지네이션] 객체 추가
+		PageData pageData = null;
+		// [페이지네이션] 변수 추가 (종료)
+		
+		/** 2) 데이터 조회하기 */
+		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
+		// 나만의 코스
+		MyCourses input_m = new MyCourses();
+		input_m.setMycourse_name(keyword);
+		input_m.setMycourse_area(keyword);
+		input_m.setMycourse_content(keyword);
+		
+		// 조회 결과가 저장될 객체
+		List<MyCourses> output_m = null;
+		
+		try {
+			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
+			totalCount = searchService.getSearchMyCourseCount(input_m);
+			// [페이지네이션] 페이지 번호 계산
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+			
+			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+			MyCourses.setOffset(pageData.getOffset());
+			MyCourses.setListCount(pageData.getListCount());
+			// 데이터 조회하기
+			output_m = searchService.getSearchMyCourseList(input_m);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// View 처리
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("output_m", output_m);
+		model.addAttribute("pageData", pageData);
+		
 		return new ModelAndView("/mainPage/search");
 	}
 }

@@ -45,15 +45,14 @@
 		CASE COURSE_LEVEL
 		WHEN "1" THEN "초급"
 		WHEN "2" THEN "중급"
-		WHEN "3" THEN "고급"
+		WHEN
+		"3" THEN "고급"
 		END AS COURSE_LEVEL,
 
 		RELATE_SUBWAY,
-		TRAFFIC_INFO,
 		CONTENT,
 
 		COURSE_NAME,
-		REG_DATE,
 		DETAIL_COURSE,
 
 		CPI_NAME,
@@ -88,18 +87,12 @@
 			<if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
 				OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY}, '%')
 			</if>
-			<if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
-				OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
-			</if>
 			<if test="CONTENT != null and CONTENT != ''">
 				OR CONTENT LIKE concat('%', #{CONTENT}, '%')
 			</if>
 
 			<if test="COURSE_NAME != null and COURSE_NAME != ''">
 				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
-			</if>
-			<if test="REG_DATE != null and REG_DATE != ''">
-				OR REG_DATE LIKE concat('%', #{REG_DATE}, '%')
 			</if>
 			<if test="DETAIL_COURSE != null and DETAIL_COURSE != ''">
 				OR DETAIL_COURSE LIKE concat('%', #{DETAIL_COURSE}, '%')
@@ -147,18 +140,12 @@
 			<if test="RELATE_SUBWAY != null and RELATE_SUBWAY != ''">
 				OR RELATE_SUBWAY LIKE concat('%', #{RELATE_SUBWAY}, '%')
 			</if>
-			<if test="TRAFFIC_INFO != null and TRAFFIC_INFO != ''">
-				OR TRAFFIC_INFO LIKE concat('%', #{TRAFFIC_INFO}, '%')
-			</if>
 			<if test="CONTENT != null and CONTENT != ''">
 				OR CONTENT LIKE concat('%', #{CONTENT}, '%')
 			</if>
 
 			<if test="COURSE_NAME != null and COURSE_NAME != ''">
 				OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
-			</if>
-			<if test="REG_DATE != null and REG_DATE != ''">
-				OR REG_DATE LIKE concat('%', #{REG_DATE}, '%')
 			</if>
 			<if test="DETAIL_COURSE != null and DETAIL_COURSE != ''">
 				OR DETAIL_COURSE LIKE concat('%', #{DETAIL_COURSE}, '%')
@@ -210,6 +197,29 @@
 				OR mycourse_content LIKE concat('%', #{mycourse_content},
 				'%')
 			</if>
+		</where>
+		<!-- 페이지네이션에 필요 -->
+		<if test="listCount > 0">
+			LIMIT #{offset}, #{listCount};
+		</if>
+	</select>
+	<select id="selectMyCourseCountAll"
+		parameterType="study.spring.goodspring.model.MyCourses"
+		resultType="int">
+		SELECT COUNT(*) FROM mycourse_post
+		<where>
+			<if test="mycourse_name != null and mycourse_name != ''">
+				mycourse_name LIKE concat('%', #{mycourse_name}, '%')
+			</if>
+			<if test="mycourse_area != null and mycourse_area != ''">
+				OR mycourse_area LIKE concat('%', #{mycourse_area}, '%')
+			</if>
+
+			<if test="mycourse_content != null and mycourse_content != ''">
+				OR mycourse_content LIKE concat('%', #{mycourse_content},
+				'%')
+			</if>
+
 		</where>
 	</select>
 	<!-- //나만의 코스 -->

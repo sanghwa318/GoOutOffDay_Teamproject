@@ -31,7 +31,13 @@ public interface SearchService {
 	 * @throws Exception
 	 */
 	public List<MyCourses> getSearchMyCourseList(MyCourses input) throws Exception;
-
+	/**
+	 * [페이지네이션에 필요]
+	 * 데이터가 저장되어 있는 갯수 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getSearchMyCourseCount(MyCourses input) throws Exception;
 	/**
 	 * 크루 목록 조회
 	 * 
