@@ -12,9 +12,6 @@
 <style type="text/css">
 .bookItem {
 	position: relative;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 0;
 	margin-bottom: 20px;
 	display: inline-block;
 }
@@ -25,7 +22,8 @@
 	vertical-align: middle;
 	float: left;
 	margin-bottom: 0;
-	border: 0;
+	border: 1px solid #ddd;
+	border-radius: 4px 0 0 4px;
 }
 
 .bookItem .thumbnail>img {
@@ -39,9 +37,12 @@
 	height: 180px;
 	padding: 15px 10px 15px 10px;
 	vertical-align: middle;
-	width: calc(100% - 208px);
+	width: calc(100% - 180px);
 	float: left;
-	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-radius: 0 4px 4px 0;
 }
 
 .caption p {
@@ -49,8 +50,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
+
 }
 
 .caption h4 {
@@ -58,14 +58,21 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
+
 }
 
-.bookItem .btn_container {
-	position: absolute;
-	top: 5px;
-	right: 5px;
+/*찜하기 버튼*/
+.heart {
+	z-index: 1000;
+	cursor: pointer;
+	background-color: rgb(255, 255, 255);
+	outline: none;
+	border: 0;
+}
+
+.fa-heart {
+	color: red;
+	cursor: pointer;
 }
 </style>
 
@@ -78,11 +85,11 @@
 		<!-- 상단영역 끝 -->
 		<div class="container">
 			<div class="header header_p text-center" style="margin-bottom: 50px;">
-				<h2>찜한 목록</h2>
+				<h2>나의 찜한 목록</h2>
 			</div>
 			<div class="row bookmark">
 				<c:forEach var="item" items="${output}">
-					<div class="col-xs-12 col-md-12 col-lg-9 bookItem">
+					<div class="col-xs-12 col-md-12 col-lg-6 bookItem">
 						<c:url value="/casPage/cas_detail.do" var="detailUrl">
 							<c:param name="SVCID" value="${item.SVCID }" />
 						</c:url>
@@ -91,19 +98,17 @@
 								onclick="location.href='${detailUrl}'" style="cursor: pointer;">
 						</div>
 						<div class="caption clearfix">
-							<p>카테고리 : ${item.category_id}</p>
+							<p>카테고리 : ${item.category_id}
+							<button class="heart liked pull-right" type="button"
+								value="${item.category_id}" data-value="${item.service_id}">
+								<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+							</button>
+							</p>
 							<h4>서비스이름 : ${item.SVCNM }</h4>
 							<p>장소 : ${item.AREANM}</p>
 							<p>이용시간 : ${item.VMIN }~${item.VMAX }</p>
-							<p class="pull-left">대상연령 : ${item.USETGTINFO }</p>
-							<p class="pull-right">이용요금 : ${item.PAYATNM }</p>
-						</div>
-						<div class="btn_container">
-							<button class="heart btn btn-warning liked" type="button"
-								style="width: 80px; font-size: 18px;">
-								<i class="fa fa-heart" aria-hidden="true" role="button"
-									style="padding-right: 5px; font-size: 18px;"></i>찜제거
-							</button>
+							<p class="pull-left" style="max-width: 60%;">대상연령 : ${item.USETGTINFO }</p>
+							<p class="pull-right" style="max-width: 40%;">이용요금 : ${item.PAYATNM }</p>
 						</div>
 					</div>
 				</c:forEach>

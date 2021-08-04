@@ -49,7 +49,14 @@ public class CasController {
 			@RequestParam(value = "keyword_exp", required = false, defaultValue = "문화") String keyword_exp,
 			@RequestParam(value = "keyword_imp", required = false, defaultValue = "교육") String keyword_imp,
 			@RequestParam(value = "keyword_sport", required = false, defaultValue = "체육") String keyword_sport,
-			@RequestParam(value = "keyword_borrow", required = false, defaultValue = "대관") String keyword_borrow) {
+			@RequestParam(value = "keyword_borrow", required = false, defaultValue = "대관") String keyword_borrow,
+			HttpServletRequest request, HttpServletResponse response) {
+		// 찜하기
+		BookMark bookinput = new BookMark();
+
+		BookMark bookUnique = new BookMark();
+
+		List<BookMark> outputUnique = null;
 
 		// 문화 창의 체험 시작
 		CAS input_exp = new CAS();
@@ -58,10 +65,31 @@ public class CasController {
 
 		List<CAS> output_exp = null;
 
-		try {
-			output_exp = CasService.getOtherList(input_exp);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
+		if (request.getSession().getAttribute("login_info") == null) {
+
+			try {
+				output_exp = CasService.getOtherList(input_exp);
+			} catch (Exception e) {
+				return WebHelper.redirect(null, e.getLocalizedMessage());
+			}
+		} else {
+			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
+
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+			// 조회
+			bookinput.setCategory_id(input_exp.getDIV_COL());
+			bookinput.setService_id(input_exp.getSVCID());
+
+			bookUnique.setUser_info_user_no(loginInfo.getUser_no());
+
+			// 저장
+			try {
+				output_exp = CasService.getOtherList(input_exp);
+				outputUnique = bookMarkService.BookMarkSelectList(bookUnique);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// 문화 창의 체험 끝
@@ -72,11 +100,31 @@ public class CasController {
 
 		List<CAS> output_imp = null;
 
-		try {
-			output_imp = CasService.getOtherList(input_imp);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
+		if (request.getSession().getAttribute("login_info") == null) {
+			try {
+				output_imp = CasService.getOtherList(input_imp);
+			} catch (Exception e) {
+				return WebHelper.redirect(null, e.getLocalizedMessage());
+			}
+		} else {
+			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
+
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+			// 조회
+			bookinput.setCategory_id(input_imp.getDIV_COL());
+			bookinput.setService_id(input_imp.getSVCID());
+
+			bookUnique.setUser_info_user_no(loginInfo.getUser_no());
+
+			// 저장
+			try {
+				output_imp = CasService.getOtherList(input_imp);
+				outputUnique = bookMarkService.BookMarkSelectList(bookUnique);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+
 		// 교육 자기계발 끝
 
 		// 체육시설 시작
@@ -85,11 +133,31 @@ public class CasController {
 
 		List<CAS> output_sprot = null;
 
-		try {
-			output_sprot = CasService.getOtherList(input_sport);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
+		if (request.getSession().getAttribute("login_info") == null) {
+			try {
+				output_sprot = CasService.getOtherList(input_sport);
+			} catch (Exception e) {
+				return WebHelper.redirect(null, e.getLocalizedMessage());
+			}
+		} else {
+			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
+
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+			// 조회
+			bookinput.setCategory_id(input_sport.getDIV_COL());
+			bookinput.setService_id(input_sport.getSVCID());
+
+			bookUnique.setUser_info_user_no(loginInfo.getUser_no());
+
+			// 저장
+			try {
+				output_sprot = CasService.getOtherList(input_sport);
+				outputUnique = bookMarkService.BookMarkSelectList(bookUnique);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+
 		// 체육시설 끝
 
 		// 시설대관 시작
@@ -98,11 +166,31 @@ public class CasController {
 
 		List<CAS> output_borrow = null;
 
-		try {
-			output_borrow = CasService.getOtherList(input_borrow);
-		} catch (Exception e) {
-			return WebHelper.redirect(null, e.getLocalizedMessage());
+		if (request.getSession().getAttribute("login_info") == null) {
+			try {
+				output_borrow = CasService.getOtherList(input_borrow);
+			} catch (Exception e) {
+				return WebHelper.redirect(null, e.getLocalizedMessage());
+			}
+		} else {
+			Member loginInfo = (Member) WebHelper.getSession("login_info", new Member());
+
+			bookinput.setUser_info_user_no(loginInfo.getUser_no());
+			// 조회
+			bookinput.setCategory_id(input_borrow.getDIV_COL());
+			bookinput.setService_id(input_borrow.getSVCID());
+
+			bookUnique.setUser_info_user_no(loginInfo.getUser_no());
+
+			// 저장
+			try {
+				output_borrow = CasService.getOtherList(input_borrow);
+				outputUnique = bookMarkService.BookMarkSelectList(bookUnique);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+
 		// 시설대관 끝
 
 		model.addAttribute("keyword_exp", keyword_exp);
@@ -114,6 +202,9 @@ public class CasController {
 		model.addAttribute("output_imp", output_imp);
 		model.addAttribute("output_sprot", output_sprot);
 		model.addAttribute("output_borrow", output_borrow);
+
+		// 찜목록 확인
+		model.addAttribute("outputUnique", outputUnique);
 		return new ModelAndView("casPage/cas_index");
 	}
 
@@ -137,7 +228,7 @@ public class CasController {
 		PageData pageData = null;
 		// [페이지네이션] 변수 추가 (종료)
 
-		// 시설대관 시작
+		// 카테고리 설정 시작
 		CAS input_theme = new CAS();
 		input_theme.setDIV_COL(cas);
 
@@ -145,7 +236,7 @@ public class CasController {
 
 		input_theme.setMINCLASSNM(order);
 
-		// 시설대관 끝
+		// 카테고리 설정 끝
 
 		if (cas == null || cas.equals("")) {
 			return new ModelAndView("casPage/cas_index");
@@ -181,11 +272,11 @@ public class CasController {
 
 		// 찜하기
 		BookMark bookinput = new BookMark();
-		
+
 		BookMark bookUnique = new BookMark();
-		
+
 		List<BookMark> outputUnique = null;
-		
+
 		if (request.getSession().getAttribute("login_info") == null) {
 
 			try {
@@ -202,21 +293,20 @@ public class CasController {
 			// 조회
 			bookinput.setCategory_id(input_theme.getDIV_COL());
 			bookinput.setService_id(input_theme.getSVCID());
-			
+
 			bookUnique.setUser_info_user_no(loginInfo.getUser_no());
-			
+
 			// 저장
 			try {
 				output_theme = CasService.getOtherCategoryList(input_theme);
 				outputUnique = bookMarkService.BookMarkSelectList(bookUnique);
-						
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
-		
+
 		// 파라미터 값을 View에게 전달
 		model.addAttribute("cas", cas);
 		model.addAttribute("result", result);
@@ -311,7 +401,6 @@ public class CasController {
 		input.setCategory_id(Info.getDIV_COL());
 		input.setService_id(Info.getSVCID());
 
-		
 		try {
 
 			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {

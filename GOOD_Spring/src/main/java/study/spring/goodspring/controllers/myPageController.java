@@ -436,7 +436,7 @@ public class myPageController {
 			HttpServletRequest request, HttpServletResponse response) {
 		// [페이지네이션] 변수 추가
 		int totalCount = 0; // 전체 게시글 수
-		int listCount = 3; // 한페이지단 표시할 목록수
+		int listCount = 6; // 한페이지단 표시할 목록수
 		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
 		// [페이지네이션] 객체 추가
 		PageData pageData = null;

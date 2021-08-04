@@ -343,19 +343,28 @@ html, body {
 								<div class="caption clearfix">
 									<p>
 										${item_theme.MAXCLASSNM }<span class="middel_dot"></span>${item_theme.MINCLASSNM}
-										<c:forEach var="book_Unique" items="${outputUnique}">
-											<c:if test="${book_Unique.service_id ne item_theme.SVCID }">
+										<c:set var="book_Unique" value="${outputUnique}" />
+										<c:choose>
+											<c:when
+												test="${fn:contains(book_Unique, item_theme.SVCID)}">
+												<button class="heart pull-right liked" type="button"
+													value="${item_theme.DIV_COL}"
+													data-value="${item_theme.SVCID}">
+													<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+												</button>
+											</c:when>
+											<c:otherwise>
 												<button class="heart pull-right" type="button"
 													value="${item_theme.DIV_COL}"
 													data-value="${item_theme.SVCID}">
 													<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
 												</button>
-											</c:if>
-										</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</p>
 									<h4 class="explan">${item_theme.SVCNM }</h4>
-									<p class="pull-left" style="max-width: 110px;">${item_theme.PLACENM}</p>
-									<p class="pull-right">${item_theme.SVCSTATNM}</p>
+									<p class="pull-left" style="max-width: 70%;">${item_theme.PLACENM}</p>
+									<p class="pull-right" style="max-width: 30%;">${item_theme.SVCSTATNM}</p>
 								</div>
 							</div>
 						</div>

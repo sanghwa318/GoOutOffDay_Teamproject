@@ -242,12 +242,10 @@ html, body {
 .heart {
 	z-index: 1000;
 	cursor: pointer;
-	width: 30px;
-	height: 30px;
-}
-
-.heart i {
-	margin-left: 8px;
+	width: 20px;
+	background-color: rgb(255, 255, 255);
+	outline: none;
+	border: 0;
 }
 
 .fa-heart-o {
@@ -321,17 +319,33 @@ html, body {
 									<c:param name="SVCID" value="${item_exp.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_exp.IMGURL }" alt="테스트이미지1" onclick="location.href='${detailUrl}'"
+									<img src="${item_exp.IMGURL }" alt="창의체험 썸네일 이미지"
+										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_exp.MAXCLASSNM }<span class="middel_dot"></span>${item_exp.MINCLASSNM}<span
-												class="heart pull-right"><i class="fa fa-heart-o"
-												aria-hidden="true" role="button"></i></span>
+											${item_exp.MAXCLASSNM }<span class="middel_dot"></span>${item_exp.MINCLASSNM}
+											<c:set var="book_Unique" value="${outputUnique}" />
+											<c:choose>
+												<c:when test="${fn:contains(book_Unique, item_exp.SVCID)}">
+													<button class="heart pull-right liked" type="button"
+														value="${item_exp.DIV_COL}"
+														data-value="${item_exp.SVCID}">
+														<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+													</button>
+												</c:when>
+												<c:otherwise>
+													<button class="heart pull-right" type="button"
+														value="${item_exp.DIV_COL}"
+														data-value="${item_exp.SVCID}">
+														<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+													</button>
+												</c:otherwise>
+											</c:choose>
 										</p>
 										<h4 class="explan">${item_exp.SVCNM }</h4>
-										<p class="pull-left" style="max-width: 110px;">${item_exp.PLACENM}</p>
-										<p class="pull-right">${item_exp.SVCSTATNM}</p>
+										<p class="pull-left" style="max-width: 70%;">${item_exp.PLACENM}</p>
+										<p class="pull-right" style="max-width: 30%;">${item_exp.SVCSTATNM}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -361,17 +375,33 @@ html, body {
 									<c:param name="SVCID" value="${item_imp.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_imp.IMGURL }" alt="테스트이미지1" onclick="location.href='${detailUrl}'"
+									<img src="${item_imp.IMGURL }" alt="자기계발 썸네일 이미지"
+										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_imp.MAXCLASSNM }<span class="middel_dot"></span>${item_imp.MINCLASSNM}<span
-												class="heart pull-right"><i class="fa fa-heart-o"
-												aria-hidden="true" role="button"></i></span>
+											${item_imp.MAXCLASSNM }<span class="middel_dot"></span>${item_imp.MINCLASSNM}
+											<c:set var="book_Unique" value="${outputUnique}" />
+											<c:choose>
+												<c:when test="${fn:contains(book_Unique, item_imp.SVCID)}">
+													<button class="heart pull-right liked" type="button"
+														value="${item_imp.DIV_COL}"
+														data-value="${item_imp.SVCID}">
+														<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+													</button>
+												</c:when>
+												<c:otherwise>
+													<button class="heart pull-right" type="button"
+														value="${item_imp.DIV_COL}"
+														data-value="${item_imp.SVCID}">
+														<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+													</button>
+												</c:otherwise>
+											</c:choose>
 										</p>
 										<h4 class="explan">${item_imp.SVCNM }</h4>
-										<p class="pull-left" style="max-width: 110px;">${item_imp.PLACENM}</p>
-										<p class="pull-right">${item_imp.SVCSTATNM}</p>
+										<p class="pull-left" style="max-width: 70%;">${item_imp.PLACENM}</p>
+										<p class="pull-right" style="max-width: 30%;">${item_imp.SVCSTATNM}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -401,17 +431,33 @@ html, body {
 									<c:param name="SVCID" value="${item_borrow.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_borrow.IMGURL }" alt="이미지" onclick="location.href='${detailUrl}'"
+									<img src="${item_borrow.IMGURL }" alt="장소대여 썸네일 이미지"
+										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_borrow.MAXCLASSNM }<span class="middel_dot"></span>${item_borrow.MINCLASSNM}<span
-												class="heart pull-right"><i class="fa fa-heart-o"
-												aria-hidden="true" role="button"></i></span>
+											${item_borrow.MAXCLASSNM }<span class="middel_dot"></span>${item_borrow.MINCLASSNM}
+											<c:set var="book_Unique" value="${outputUnique}" />
+											<c:choose>
+												<c:when test="${fn:contains(book_Unique, item_borrow.SVCID)}">
+													<button class="heart pull-right liked" type="button"
+														value="${item_borrow.DIV_COL}"
+														data-value="${item_borrow.SVCID}">
+														<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+													</button>
+												</c:when>
+												<c:otherwise>
+													<button class="heart pull-right" type="button"
+														value="${item_borrow.DIV_COL}"
+														data-value="${item_borrow.SVCID}">
+														<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+													</button>
+												</c:otherwise>
+											</c:choose>
 										</p>
 										<h4 class="explan">${item_borrow.SVCNM }</h4>
-										<p class="pull-left" style="max-width: 110px;">${item_borrow.PLACENM}</p>
-										<p class="pull-right">${item_borrow.SVCSTATNM}</p>
+										<p class="pull-left" style="max-width: 70%;">${item_borrow.PLACENM}</p>
+										<p class="pull-right" style="max-width: 30%;">${item_borrow.SVCSTATNM}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -441,17 +487,33 @@ html, body {
 									<c:param name="SVCID" value="${item_sprot.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_sprot.IMGURL }" alt="테스트이미지1" onclick="location.href='${detailUrl}'"
+									<img src="${item_sprot.IMGURL }" alt="체육시설 썸네일 이미지"
+										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>
-											${item_sprot.MAXCLASSNM }<span class="middel_dot"></span>${item_sprot.MINCLASSNM}<span
-												class="heart pull-right"><i class="fa fa-heart-o"
-												aria-hidden="true" role="button"></i></span>
+											${item_sprot.MAXCLASSNM }<span class="middel_dot"></span>${item_sprot.MINCLASSNM}
+											<c:set var="book_Unique" value="${outputUnique}" />
+											<c:choose>
+												<c:when test="${fn:contains(book_Unique, item_sprot.SVCID)}">
+													<button class="heart pull-right liked" type="button"
+														value="${item_sprot.DIV_COL}"
+														data-value="${item_sprot.SVCID}">
+														<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+													</button>
+												</c:when>
+												<c:otherwise>
+													<button class="heart pull-right" type="button"
+														value="${item_sprot.DIV_COL}"
+														data-value="${item_sprot.SVCID}">
+														<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+													</button>
+												</c:otherwise>
+											</c:choose>
 										</p>
 										<h4 class="explan">${item_sprot.SVCNM }</h4>
-										<p class="pull-left" style="max-width: 110px;">${item_sprot.PLACENM}</p>
-										<p class="pull-right">${item_sprot.SVCSTATNM}</p>
+										<p class="pull-left" style="max-width: 70%;">${item_sprot.PLACENM}</p>
+										<p class="pull-right" style="max-width: 30%;">${item_sprot.SVCSTATNM}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -497,23 +559,168 @@ html, body {
 						});
 	</script>
 	<!-- 찜하기 버튼 -->
-	<script>
-		$(".heart")
-				.on(
-						"click",
-						function() {
-							if ($(this).hasClass("liked")) {
-								$(this)
+	<!-- 찜버튼 스크립트 -->
+	<script type="text/javascript">
+	/**
+	 * 찜목록 추가제거 (김도운)
+	 */
+	// 하트
+	$(".heart")
+		.on(
+			"click",
+			function() {
+				if ($(this).hasClass("liked")) {
+					var catid = $(this).attr('value');
+					var svcid = $(this).data('value');
+					var heart = $(this);
+					swal({
+						title: '확인',
+						text: "찜목록에서 제거할까요?",
+						type: 'question',
+						confirmButtonText: '네',
+						showCancelButton: true,
+						cancelButtonText: '아니요',
+					})
+						.then(
+							function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+								if (result.value) { // 확인 버튼이 눌러진 경우
+									$.ajax({
+										cache: false,
+										url: getContextPath() + '/casPage/BookMark',
+										type: 'POST',
+										dataType: 'json',
+										data: { catid, svcid },
+										timeout: 10000,
+										success: function(req) {
+
+											console.log("삭제 성공 >> " + req);
+											heart
+												.html(
+														'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+											heart.removeClass("liked");
+											swal(
+												'성공',
+												'찜목록에서 제거되었습니다.',
+												'success'), {
+												buttons: {
+													confirm: {
+														text: '닫기',
+														value: true,
+														className: 'btn btn-outline-primary'
+													}
+												}
+											}
+											setTimeout(function() {
+											}, 1000);
+										},
+										error: function(error) {
+											console.log("에러 >> " + error.status);
+											swal('주의', '찜목록에 제거하기가 실패했습니다.', 'warning'), {
+												closeOnClickOutside: false,
+												closeOnEsc: false,
+												buttons: {
+													confirm: {
+														text: '닫기',
+														value: true,
+														className: 'btn btn-outline-primary'
+													}
+												}
+											}
+											heart
+												.html(
+														'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+											heart
+												.removeClass(
+													"liked");
+										}
+									})
+
+								} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+									heart
 										.html(
 												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
-								$(this).removeClass("liked");
-							} else {
-								$(this)
+									heart
+										.removeClass(
+											"liked");
+									swal(
+										'취소',
+										'제거가 취소되었습니다.',
+										'error');
+								}
+							});
+				} else {
+					var catid = $(this).attr('value');
+					var svcid = $(this).data('value');
+					var heart = $(this);
+					swal({
+						title: '확인',
+						text: "찜목록에 추가할까요?",
+						type: 'question',
+						confirmButtonText: '네',
+						showCancelButton: true,
+						cancelButtonText: '아니요',
+					})
+						.then(
+							function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+								if (result.value) { // 확인 버튼이 눌러진 경우
+									$.ajax({
+										cache: false,
+										url: getContextPath() + '/casPage/BookMark',
+										type: 'POST',
+										dataType: 'json',
+										data: { catid, svcid },
+										timeout: 10000,
+										success: function(req) {
+
+											console.log("성공 >> " + req);
+											heart
+											.html(
+													'<i class="fa fa-heart" aria-hidden="true"></i>');
+											heart.addClass("liked");
+											swal(
+												'성공',
+												'찜목록에 추가되었습니다.',
+												'success');
+											setTimeout(function() {
+											}, 1000);
+										},
+										error: function(error) {
+											console.log("에러 >> " + error.status);
+											swal('주의', '찜추가에 실패했습니다.', 'warning'), {
+												closeOnClickOutside: false,
+												closeOnEsc: false,
+												buttons: {
+													confirm: {
+														text: '닫기',
+														value: true,
+														className: 'btn btn-outline-primary'
+													}
+												}
+											}
+											heart
+											.html(
+													'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+											heart.removeClass("liked");
+										}
+									})
+
+								} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+									heart
 										.html(
-												'<i class="fa fa-heart" aria-hidden="true"></i>');
-								$(this).addClass("liked");
-							}
-						});
+												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+									heart
+										.removeClass(
+											"liked");
+									swal(
+										'취소',
+										'취소되었습니다.',
+										'error');
+								}
+							});
+				}
+
+			});
 	</script>
+	<!-- 찜버튼 스크립트 끝 -->
 </body>
 </html>
