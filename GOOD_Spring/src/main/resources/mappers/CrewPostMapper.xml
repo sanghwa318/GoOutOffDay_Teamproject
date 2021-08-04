@@ -143,9 +143,17 @@
 	<!-- 댓글 수 조회 -->
 		<select id="selectCountCmtAll"
 		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
-		UPDATE count(*) FROM crew_post cp
+		SELECT count(*) FROM crew_post cp
 		INNER JOIN crew_comment cr ON cr.crew_post_post_no = cp.post_no
 		WHERE cp.post_no = #{post_no};
 	</select>
+
+	<!-- 게시글 수정 -->
+		<update id="updateCrewPost"
+		parameterType="study.spring.goodspring.model.CrewPost">
+		UPDATE crew_post SET post_editdate = now(), post_title = #{post_title},
+		post_content = #{post_content}
+		WHERE post_no = #{post_no};
+	</update>
 
 </mapper>

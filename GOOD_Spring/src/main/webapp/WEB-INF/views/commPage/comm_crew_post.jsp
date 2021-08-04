@@ -129,9 +129,7 @@ form {
 					<p>${postout.getPost_content()}</p>
 				</div>
 
-
 			</div>
-
 
 
 			<div class="row row_a">
@@ -145,24 +143,26 @@ form {
 				</div>
 			</div>
 
-
-
-
 			<hr />
 
 			<!-- 댓글 영역 -->
 			<div id="cmt-list"></div>
 
-			<form>
-				<div class="form-group input-group">
-					<textarea class="form-control" id="comment_text"
-						style="height: 60px; resize: none;" placeholder="내용을 입력해주세요."></textarea>
-					<span class="input-group-btn"><button type="button"
-							class="btn btn-default" style="height: 60px;" onclick="cmt_add()">댓글
-							등록</button></span>
-				</div>
-			</form>
+			<div class="row " style="margin-left: -260px;">
+				<form>
+					<div class="form-group input-group col-md-6">
+						<textarea class="form-control" id="comment_text"
+							style="height: 60px; resize: none;"
+							placeholder="내용을 입력해주세요."></textarea>
+						<span class="input-group-btn"><button type="button"
+								class="btn btn-default" style="height: 60px;"
+								onclick="cmt_add()">댓글 등록</button></span>
+					</div>
+				</form>
+			</div>
 			<hr>
+
+
 
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
@@ -170,15 +170,22 @@ form {
 				<input type="hidden" name="crew_no" value="${postout2.crew_no}" />
 				<input type="hidden" id="crew_name" name="crew_name"
 					value="${postout2.crew_name}" />
-				<button type="submit" id="btn1" class="btn btn-default pull-left">목록</button>
+				<button type="submit" id="btn1" class="btn btn-default pull-left"
+					style="margin-left: -250px;">목록</button>
 			</form>
 
 
-			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-warning wr_delete"
-					id="wr_delete">삭제</button>
-				<button type="button" class="btn btn-primary wr_edit" id="wr_edit">수정</button>
-			</div>
+			<form
+				action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do"
+				method="GET">
+				<input type="hidden" name=post_no id="post_no"
+					value="${postout.post_no}">
+				<div class="btn-group pull-right">
+					<button type="button" class="btn btn-warning wr_delete"
+						id="wr_delete">삭제</button>
+					<button type="submit" class="btn btn-primary wr_edit" id="wr_edit">수정</button>
+				</div>
+			</form>
 
 		</div>
 
@@ -236,7 +243,7 @@ form {
 													if (result.value) { // 확인 버튼이 눌러진 경우
 														setTimeout(
 																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_postEdit.jsp';
+																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do';
 																}, 1000);
 
 													}
@@ -267,7 +274,7 @@ form {
 																'success');
 														setTimeout(
 																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_bbs.jsp';
+																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_bbs.do';
 																}, 1000);
 
 													}
@@ -296,7 +303,7 @@ form {
 																'success');
 														setTimeout(
 																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp';
+																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.do';
 																}, 1000);
 
 													}

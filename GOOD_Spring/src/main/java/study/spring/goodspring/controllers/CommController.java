@@ -429,11 +429,104 @@ public class CommController {
 	 * comm_crew_postEdit
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_postEdit.do", method = RequestMethod.GET)
-	public String crewPostEdit(Model model) {
+	public ModelAndView crewPostEdit(Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
 
-		return "commPage/comm_crew_postEdit";
+		Member login_info = (Member) webHelper.getSession("login_info");
+		
+		// 1) 현재 게시물 글 정보 조회
+		CrewPost post = new CrewPost();
+		post.setPost_no(post_no);
+		
+
+		CrewPost postout = null;
+		CrewPost postout2 = null;
+		CrewPost postout3 = null;
+		
+		Member member =null;
+		Crew crew =null;
+		
+		int total = 0;
+		
+		try {
+			//현재 게시물 데이터 조회하기
+			postout = crewPostService.selectCrewPost(post);
+			
+			if(login_info.getUser_no() != postout.getUser_info_user_no()) {
+				webHelper.redirect(null, "게시글 작성자만 수정가능합니다.");
+			}
+			
+			postout2 = crewPostService.getCrewNoPostCount(post);
+			postout3 = crewPostService.selectCrewUser(post);
+			
+			int userNo=postout.getUser_info_user_no();
+			member= memberService.selectItemByNo(userNo);
+			int crewNo = postout2.getCrew_no();
+			crew = crewService.getCrewItemByNo(crewNo);
+			
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+//			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		// 3) View 처리
+		model.addAttribute("post", post);
+		model.addAttribute("postout", postout);
+		model.addAttribute("postout2", postout2);
+		model.addAttribute("postout3", postout3);
+		model.addAttribute("member", member);
+		model.addAttribute("crew", crew);
+		model.addAttribute("total", total);
+		
+		
+		return new ModelAndView("/commPage/comm_crew_postEdit");
 	}
+	
+	/*
+	 * comm_crew_postEdit_ok
+	 */
+	@RequestMapping(value = "/commPage/comm_crew_postEdit_ok.do", method = RequestMethod.POST)
+	public ModelAndView crewPostEdit(Model model, HttpServletResponse response, HttpServletRequest request,
+			// 제목
+			@RequestParam(value = "post_title", defaultValue = "") String title,
+			// 내용
+			@RequestParam(value = "post_content", defaultValue = "") String content,
+			//게시물 번호
+			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
 
+		Member login_info = (Member) webHelper.getSession("login_info");
+		int userNo = login_info.getUser_no();
+
+		// 1) 데이터 저장
+		CrewPost input = new CrewPost();
+		input.setPost_title(title);
+		input.setPost_content(content);
+		input.setUser_info_user_no(userNo);
+		input.setPost_no(post_no);
+		
+		
+		CrewPost postout = null;
+
+		try {
+
+			// 데이터 수정
+			crewPostService.upadateCrewPost(input);
+			//변경된 게시물 데이터 조회하기
+			postout = crewPostService.selectCrewPost(input);
+			
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+		}
+
+		// 3) 결과를 확인하기 위한 페이지 이동
+
+		return webHelper.redirect(
+				contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no(),
+				"게시글이 수정되었습니다.");
+
+
+	}
+	
 	/*
 	 * comm_crew_postWrite 작성 폼 페이지
 	 */

@@ -56,6 +56,10 @@ input#title {
 .btn-group {
 	margin: 30px 0;
 }
+
+.cke_contents {
+	min-height: 500px;
+}
 </style>
 </head>
 
@@ -69,7 +73,7 @@ input#title {
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
 						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
@@ -78,15 +82,29 @@ input#title {
 			</div>
 			<h1 class="page-header">크루게시판</h1>
 			<h2>게시글 수정</h2>
-			<form action="comm_crew_post.jsp" method="post">
-				<input type="text" id="title" placeholder="제목을 입력해주세요." />
+			<form action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit_ok.do" method="post">
+				
 
-				<div id="editable"></div>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="post_title">제목</label> <input type="text"
+							id="post_title" name="post_title" class="form-control"
+							value="${postout.post_title}"
+							style="display: inline-block; width: 90%; margin-left: 10px">
+							<input type="hidden" name="post_no" value="${postout.post_no}" />
+					</div>
+				</div>
+				
+				<br/>
+				<textarea name="post_content" id="post_content" class="ckeditor"
+					style="font-size: 20px; resize: none">내용: ${postout.getPost_content()} </textarea>
+				<br/>
+
 
 				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-warning" id="btn_cancel"
+					<button type="reset" class="btn btn-warning" id="btn_cancel"
 						style="border: 0; outline: 0;">취소</button>
-					<button type="button" class="btn btn-primary" id="btn_ok"
+					<button type="submit" class="btn btn-primary" id="btn_ok"
 						style="border: 0; outline: 0;">수정완료</button>
 				</div>
 			</form>
@@ -98,12 +116,9 @@ input#title {
 	<!-- //공통 푸터 -->
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
 	<!-- // js -->
-	<script>
-		new FroalaEditor('#editable');
-	</script>
+
 
 	<script>
 		$(function() {
@@ -120,7 +135,7 @@ input#title {
 					if (result.value) { // 확인 버튼이 눌러진 경우
 						swal('수정', '게시글 수정이 완료되었습니다.', 'success');
 						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.jsp';
+							
 						}, 1000);
 
 					}

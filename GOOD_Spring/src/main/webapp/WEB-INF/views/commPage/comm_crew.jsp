@@ -12,24 +12,12 @@
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style>
 /* 폼 전체 박스 */
-.col-md-2 {
-	display: inline-block;
-	margin-left: 10px;
-	folat: left;
-}
-
-.col-md-4 {
-	margin-left: 20px;
-}
 
 .title-img>img {
 	width: 100px;
 	height: 100px;
 }
 
-.thumbnail {
-	padding: 0;
-}
 
 .main_header>h1 {
 	position: relative;
@@ -154,6 +142,9 @@
 				</div>
 			</form>
 			<!-- 본문상단 끝 -->
+			
+				<div class="crew_middle">
+				<div class="best">
 
 			<!-- 크루 본문영역 중단 -->
 			<c:choose>
@@ -204,6 +195,8 @@
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
+			</div>
+		</div>
 
 		</div>
 	</div>
