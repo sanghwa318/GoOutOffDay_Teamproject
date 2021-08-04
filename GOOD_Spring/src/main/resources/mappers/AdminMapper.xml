@@ -45,15 +45,14 @@
 	
 	
 	<!-- 1:1문의 답변 저장 기능 -->
-	<insert id="insertInquiryAdmin"
-		parameterType="study.spring.goodspring.model.Inquiry"
-		useGeneratedKeys="true" keyProperty="QnA_no">
-		INSERT INTO inquiry_qna
-		(answer_yn,ansewer_detail,answer_create_datetime)
-		VALUES ('Y', 
-		#{answer_detail],
-		now() );
-	</insert>
+	<update id="updateInquiryAdmin"
+		parameterType="study.spring.goodspring.model.Inquiry">
+		UPDATE inquiry_qna SET
+		answer_yn='Y',
+		answer_detail=#{answer_detail},
+		answer_create_datetime=now()
+		WHERE QnA_no=#{QnA_no};
+	</update> 
 	
 	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->
    <select id="selectInquiryCountAll"

@@ -86,32 +86,31 @@ public class AdminController {
 	      return new ModelAndView ("adminPage/admin_inquiry");
 	   }
 	
-	/**
-	 * 1:1문의 상세
-	 * @param model
-	 * @param QnA_no
-	 * @return
-	 */
-	@RequestMapping(value = "/adminPage/admin_inquiryDetail.do", method = RequestMethod.GET)
-	public ModelAndView adminInquiryDetail(Model model,
-			@RequestParam(value="QnA_no") int QnA_no) {
-		
-		/* 1) 데이터 조회하기 */
-		
-	      Inquiry input = new Inquiry();
-	      input.setQnA_no(QnA_no);
-	      Inquiry output = null;
-
-	      try {
-	         // 데이터 조회
-	         output = adminService.getInquiryItemAdmin(input);
-	      } catch (Exception e) {
-	         return webHelper.redirect(null, e.getLocalizedMessage());
-	      }
-	      // 3) View 처리
-	      model.addAttribute("output", output);
-	      return new ModelAndView("adminPage/admin_inquiryDetail");
-	}
+	   /**
+		 * 1:1문의 상세
+		 * @param model
+		 * @param QnA_no
+		 * @return
+		 */
+		@RequestMapping(value = "/adminPage/admin_inquiryDetail.do", method = RequestMethod.GET)
+		public ModelAndView adminInquiryDetail(Model model,
+				@RequestParam(value="QnA_no") int QnA_no) {
+			
+			/* 1) 데이터 조회하기 */
+			
+		      Inquiry input = new Inquiry();
+		      input.setQnA_no(QnA_no);
+		      Inquiry output = null;
+		      try {
+		         // 데이터 조회
+		         output = adminService.getInquiryItemAdmin(input);
+		      } catch (Exception e) {
+		         return webHelper.redirect(null, e.getLocalizedMessage());
+		      }
+		      // 3) View 처리
+		      model.addAttribute("output", output);
+		      return new ModelAndView("adminPage/admin_inquiryDetail");
+		}
 	
 	/**
 	 * 1:1 문의 답변을 위한 action 페이지
@@ -119,10 +118,15 @@ public class AdminController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/adminPage/admin_inquiryanswerOk.do", method = RequestMethod.POST)
-	public ModelAndView InquiryAnswerOk(Model model) {
+	public ModelAndView InquiryAnswerOk(Model model,
+			@RequestParam(value="QnA_no") int QnA_no,
+			@RequestParam(value="Answer_detail") String Answer_detail) {
+		
+		
 		
 		Inquiry input = new Inquiry();
-
+		input.setQnA_no(QnA_no);
+		input.setAnswer_detail(Answer_detail);
 		Inquiry output = null;
 
 		try {
@@ -131,8 +135,8 @@ public class AdminController {
 			e.printStackTrace();
 		}
 
-		return webHelper.redirect(contextPath + "/adminPage/admin_inquiryDetail.do" + "?QnA_no=" + output.getQnA_no(),
-				"작성되었습니다.");
+		return webHelper.redirect(contextPath + "/adminPage/admin_inquiryDetail.do" + "?QnA_no=" + QnA_no,
+				"답변이 작성되었습니다.");
 
 	}
 

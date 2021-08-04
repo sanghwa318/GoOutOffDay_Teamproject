@@ -81,8 +81,8 @@ public class AdminServiceImpl implements AdminService{
 		int result = 0;
 
 		try {
-			result = sqlSession.insert("AdminMapper.insertInquiryAdmin", input);
-			output = sqlSession.selectOne("IAdminMapper.selectInquiryItemAdmin", input);
+			result = sqlSession.update("AdminMapper.updateInquiryAdmin", input);
+			output = sqlSession.selectOne("AdminMapper.selectInquiryItemAdmin", input);
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}
