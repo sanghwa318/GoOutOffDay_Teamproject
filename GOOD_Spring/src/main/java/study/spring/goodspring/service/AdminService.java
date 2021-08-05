@@ -2,6 +2,7 @@ package study.spring.goodspring.service;
 
 import java.util.List;
 
+import study.spring.goodspring.model.AdminInquiry;
 import study.spring.goodspring.model.Inquiry;
 
 public interface AdminService {
@@ -13,6 +14,14 @@ public interface AdminService {
 	 * @throws Exception
 	 */
 	public List<Inquiry> getInquiryListAdmin(Inquiry input) throws Exception;
+	
+	/**
+	 * 문의 드롭박스 boolean형에 대한 서비스
+	 * @param input
+	 * @return
+	 * @throws Exception
+	 */
+	public List<AdminInquiry> getAdminInquiryList(AdminInquiry input) throws Exception;
 	
 	/**
 	    * 문의글 데이터 상세 조회
@@ -36,5 +45,5 @@ public interface AdminService {
 	    * @return int
 	    * @throws Exception
 	    */
-	   public int getInquiryListAdminCount(Inquiry input) throws Exception;
+	   public int getInquiryListAdminCount(AdminInquiry input) throws Exception;
 }

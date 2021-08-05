@@ -6,7 +6,6 @@
 <head>
 <%@ include file="../inc/head.jsp"%>
 <style type="text/css">
-
 .main_header>h1 {
 	position: relative;
 	text-align: center;
@@ -24,7 +23,7 @@
 		<!-- //공통 헤더 -->
 		<!-- 컨테이너 -->
 		<div class="container">
-		<!-- 대제목 -->
+			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
 					onclick="location.href='../adminPage/admin_index.jsp'"
@@ -44,11 +43,9 @@
 									: </label>
 								<div class="col-sm-8 col-xs-9">
 									<select class="form-control" name="answer" id="answer">
-										<option value="">완료/미완료</option>
-										<option value="complete">완료
-										<c:if test="${answer eq 'complete'}">selected</c:if>완료</option>
-										<option value="incomplete">미완료
-										<c:if test="${answer eq 'incomplete'}">selected</c:if>미완료</option>
+										<option value="">-- 상태 --</option>
+										<option value="N">답변 중</option>
+										<option value="Y">답변 완료</option>
 									</select>
 								</div>
 							</div>
@@ -57,15 +54,11 @@
 									: </label>
 								<div class="col-sm-8 col-xs-9">
 									<select class="form-control" name="category" id="category">
-										<option value="">전체</option>
-										<option value="bicycle">자전거
-										<c:if test="${category eq 'bicycle'}">selected</c:if>자전거</option>
-										<option value="walking">걷기
-										<c:if test="${category eq 'walking'}">selected</c:if>걷기</option>
-										<option value="cultural_sports">문화체육
-										<c:if test="${category eq 'cultural_sports'}">selected</c:if>문화체육</option>
-										<option value="community">커뮤니티
-										<c:if test="${category eq 'community'}">selected</c:if>커뮤니티</option>
+										<option value="">-- 선택 --</option>
+										<option value="자전거">자전거</option>
+										<option value="걷기">걷기</option>
+										<option value="문화체육">문화체육</option>
+										<option value="커뮤니티">커뮤니티</option>
 									</select>
 								</div>
 							</div>
@@ -110,12 +103,12 @@
 									<c:url value="/adminPage/admin_inquiryDetail.do" var="infoUrl">
 										<c:param name="QnA_no" value="${item.getQnA_no()}" />
 									</c:url>
-									<tr onclick="location.href='${infoUrl}'" style="cursor:pointer;">
+									<tr onclick="location.href='${infoUrl}'"
+										style="cursor: pointer;">
 										<td class="text-center">${status.count}</td>
 										<td class="text-center">
-											<c:if test="${item.answer_yn}">답변 완료</c:if>
-											<c:if test="${!item.answer_yn}">답변 중</c:if>
-										</td>
+										<c:if test="${item.answer_yn}">답변 완료</c:if>
+										<c:if test="${!item.answer_yn}">답변 중</c:if></td>
 										<td class="text-center">${item.getQnA_category()}</td>
 										<td class="text-center">${item.getQnA_title()}</td>
 									</tr>
@@ -126,15 +119,64 @@
 				</table>
 				<!-- 페이지네이션 -->
 				<div class="text-center">
+					<!-- 페이지 번호 구현 -->
 					<ul class="pagination">
-						<li class="page-item disabled"><a href="#">&laquo;</a></li>
-						<li class="page-item active"><span>1<span
-								class="sr-only">(current)</span></span></li>
-						<li class="page-item"><a href="#">2</a></li>
-						<li class="page-item"><a href="#">3</a></li>
-						<li class="page-item"><a href="#">4</a></li>
-						<li class="page-item"><a href="#">5</a></li>
-						<li class="page-item"><a href="#">&raquo;</a></li>
+						<%-- 이전 그룹에 대한 링크 --%>
+						<c:choose>
+							<%-- 이전 그룹으로 이동 가능하다면? --%>
+							<c:when test="${pageData.prevPage > 0}">
+								<%-- 이동할 URL 생성 --%>
+								<c:url value="${getList }" var="prevPageUrl">
+									<c:param name="page" value="${pageData.prevPage}" />
+									<c:param name="keyword" value="${keyword}" />
+									<c:param name="category" value="${category}" />
+									<c:param name="area" value="${area}" />
+									<c:param name="order" value="${order}" />
+								</c:url>
+								<li class="page-item"><a href="${prevPageUrl}">&laquo;</a></li>
+							</c:when>
+						</c:choose>
+
+						<%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
+						<c:forEach var="i" begin="${pageData.startPage}"
+							end="${pageData.endPage}" varStatus="status">
+							<%-- 이동할 URL 생성 --%>
+							<c:url value="${getList }" var="pageUrl">
+								<c:param name="page" value="${i}" />
+								<c:param name="keyword" value="${keyword}" />
+								<c:param name="category" value="${category}" />
+								<c:param name="area" value="${area}" />
+								<c:param name="order" value="${order}" />
+							</c:url>
+
+							<%-- 페이지 번호 출력 --%>
+							<c:choose>
+								<%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+								<c:when test="${pageData.nowPage == i}">
+									<li class="page-item active"><span style="color: #fff;">${i}<span
+											class="sr-only">(current)</span></span></li>
+								</c:when>
+								<%-- 나머지 페이지의 경우 링크 적용함 --%>
+								<c:otherwise>
+									<li class="page-item"><a href="${pageUrl}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<%-- 다음 그룹에 대한 링크 --%>
+						<c:choose>
+							<%-- 다음 그룹으로 이동 가능하다면? --%>
+							<c:when test="${pageData.nextPage > 0}">
+								<%-- 이동할 URL 생성 --%>
+								<c:url value="${getList }" var="nextPageUrl">
+									<c:param name="page" value="${pageData.nextPage}" />
+									<c:param name="keyword" value="${keyword}" />
+									<c:param name="category" value="${category}" />
+									<c:param name="area" value="${area}" />
+									<c:param name="order" value="${order}" />
+								</c:url>
+								<li class="page-item"><a href="${nextPageUrl}">&raquo;</a></li>
+							</c:when>
+						</c:choose>
 					</ul>
 				</div>
 				<!-- //페이지네이션 -->
