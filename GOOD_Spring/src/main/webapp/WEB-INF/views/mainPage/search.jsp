@@ -336,9 +336,9 @@ style="cursor: pointer;'">
 	<hr/>
 	<div onclick="location.href='${pageContext.request.contextPath }/casPage/cas_detail.do?SVCID={{SVCID}}'" 
 style="cursor: pointer;'">
-		<h3>카테고리 : ${MAXCLASSNM } > ${MINCLASSNM } / 서비스명 : ${SVCNM }</h3>
-		<p> 장소 : [${AREANM }]  ${PLACENM } (연락처: ${TELNO })
-		<br/> 서비스상태 : ${SVCSTATNM } | 대상연령 : ${USETGTINFO } <p>
+		<h3>카테고리 : {{MAXCLASSNM}} > {{MINCLASSNM}} / 서비스명 : {{SVCNM}}</h3>
+		<p> 장소 : [{{AREANM}}]  {{PLACENM}} (연락처: {{TELNO}})
+		<br/> 서비스상태 : {{SVCSTATNM}} | 대상연령 : {{USETGTINFO}} <p>
 	</div>
 	{{/each}}
 	</script>

@@ -327,15 +327,14 @@
 									</ul></li>
 							</ul>
 							<!-- 검색바 -->
-							<form class="navbar-form navbar-right" role="search"
+							<form method="get" action="${pageContext.request.contextPath }/mainPage/search.do" 
+							class="navbar-form navbar-right" role="search"
 								style="border-bottom: 0 !important;">
 								<div class="form-group input-group">
-									<input type="text" class="form-control" placeholder="검색">
-									<span class="input-group-btn"> <a class="btn btn-blue"
-										style="outline: 0;"
-										href="${pageContext.request.contextPath}/mainPage/search.do">
+									<input type="search" name="keyword" value="${keyword }" class="form-control" placeholder="검색">
+									<span class="input-group-btn"> <button class="btn btn-blue">
 											<i class="glyphicon glyphicon-search" style="color: #eeffff"></i>
-									</a>
+									</button>
 									</span>
 								</div>
 							</form>
