@@ -103,13 +103,13 @@
 			<h1 class="page-header">크루게시판</h1>
 
 			<!-- 본문 사이드 영역 -->
-			<div class="sidebar col-md-1 col-xs-1 col-sm-1">
+			<div class="sidebar col-md-2 col-xs-2 col-sm-2">
 				<div class="form-group">
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
-					<h3>가입된 회원 수 : ${postout2.crew_member}명</h3>
-					<h3 class="crew_name">${postout2.crew_name} 크루 소개</h3>
+					<h4>가입된 회원: ${postout2.crew_member}명</h4>
+					<h4 class="crew_name">${postout2.crew_name} 소개</h4>
                   <p style="font-size:25px;">${postout2.crew_sinto}</p>
 					<input type="hidden" name=crew_post_post_no id="post_no"
 						value="${postout.post_no}">
@@ -119,7 +119,7 @@
 
 
 <div class="article header">
-			<div class="row row_a col-xl-8 col-sm-10 col-xs-10" >
+			<div class="row row_a col-xl-8 col-sm-9 col-xs-10" >
 			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
 					<img style="border-radius: 25px; margin-right:15px; " src="${member.user_photo.fileUrl}"
@@ -151,10 +151,9 @@
 			<hr />
 
 			<!-- 댓글 영역 -->
-			<div class="container" style="margin-top:-30px"><h3 style="margin-left:180px">댓글<hr></h3>
+			<div class="container" style="margin-top:-30px"><h3 style="margin-left:180px">댓글<span class="comment"><i
+						class="fa fa-comment-o"></i></span> ${total}<hr></h3>
 			<div id="cmt-list"></div>
-			
-			
 			
 
 
