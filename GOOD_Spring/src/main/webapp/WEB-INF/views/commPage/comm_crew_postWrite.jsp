@@ -56,7 +56,7 @@
 
 				<br />
 				<textarea name="post_content" id="post_content" class="ckeditor"
-					style="font-size: 20px; resize: none">내용:</textarea>
+					style="font-size: 20px; resize: none"></textarea>
 				<br />
 
 				<div class="btn-group pull-right">
@@ -78,7 +78,6 @@
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
-
 	<!-- // js -->
 	<script>
 		new FroalaEditor('#editable');
@@ -104,7 +103,7 @@
 					}); // <-- 메시지 표시
 					return false; // <-- 실행 중단
 				}
-				var post_content_val = $("#post_content").val();
+				 var post_content_val = CKEDITOR.instances.post_content.getData();
 
 				if (!post_content_val) { // 입력되지 않았다면?
 					swal({
@@ -115,7 +114,7 @@
 						// 창이 닫히는 애니메이션의 시간이 있으므로,
 						// 0.1초의 딜레이 적용 후 포커스 이동
 						setTimeout(function() {
-							$("#post_content").focus(); // <-- 커서를 강제로 넣기
+							CKEDITOR.instances.focus(); // <-- 커서를 강제로 넣기
 						}, 100);
 					}); // <-- 메시지 표시
 					return false; // <-- 실행 중단

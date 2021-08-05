@@ -122,56 +122,58 @@ form {
 
 <div class="article header">
 			<div class="row row_a">
+			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
 					<img style="border-radius: 25px" src="${member.user_photo.fileUrl}"
 						width="50px" height="50px"></img>
 				</div>
 				
-				<div class="pull-left writer_info" style="margin-left: 15px;">
-					<h4>${postout3.getUser_name()}</h4>
-					<p class="pull-left">작성일자: ${postout.getPost_createdate()}</p>
-					<p  class="pull-left " style="margin-left: 15px;">조회수 :
+				<div class=" writer_info">
+					<h4 style="margin-left:45px; margin-top:15px" >${postout3.getUser_name()}</h4>
+					<p class="pull-left" style="margin-left:10px; color:#979797;" >작성일자: ${postout.getPost_createdate()}</p>
+					<p class="pull-left " style="margin-left: 15px; color:#979797;">조회수 :
 						${postout.post_hits}</p>
-						<p style="margin-top:100px">${postout.getPost_content()}</p>
-				</div>
-			
-				
-				</div>
-			</div>
-			
-			</div>
-				
-
-			<div class="row row_a">
-				<div class="col-md-2 col-lg-1 col-xs-2 text-center"
-					style="font-size: 20px"></div>
+						
 				<div class="pull-right" style="margin-right: 25px">
 					<span class="heart"><i class="fa fa-heart-o"
 						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
 						class="fa fa-comment-o"></i></span> 댓글 ${total}
-
+				</div>
+						<br>
+						<hr>
+						<p style="margin-top:100px">${postout.getPost_content()}</p>
+				</div>
 				</div>
 			</div>
+			
+			
+			</div>
+
 
 			<hr />
 
 			<!-- 댓글 영역 -->
+			<div class="container" style="margin-top:-30px"><h3 style="margin-left:180px">댓글<hr></h3>
 			<div id="cmt-list"></div>
+			
+			
+			
 
 
-		<div>
 				<form>
+				<div class="row" style="maring-left:-100px">
+					<h4>${login_info.user_nick}</h4>
 					<div class="form-group input-group col-md-12 col-sm-12">
 						<textarea class="form-control" id="comment_text"
-							style="height: 60px; width=100%; resize: none;"
+							style="height: 60px; resize: none;"
 							placeholder="내용을 입력해주세요."></textarea>
 						<span class="input-group-btn"><button type="button"
 								class="btn btn-default" style="height: 60px;"
 								onclick="cmt_add()">댓글 등록</button></span>
 					</div>
+					</div>
 				</form>
 			<hr>
-
 		<div class="container col-md-12 col-sm-12">
 		<div class="row pull-left">
 			<form
