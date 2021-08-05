@@ -44,6 +44,12 @@
 	left: 5px;
 	bottom: 0px;
 }
+
+.form-group img{
+	max-hieght: 100%;
+	min-width: 100%;
+	height: 180px;
+}
 </style>
 </head>
 <body>
@@ -74,15 +80,15 @@
 						<span class="title-img"><img
 							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
-						<h5>가입된 회원 수 : ${output.crew_member}</h5>
-						<h3 class="title-name">${output.crew_name} 크루 소개</h3>
-						<p>${output.crew_sinto}</p>
+						<h3>가입된 회원 수 : ${output.crew_member}</h3>
+						<h4 class="title-name">${output.crew_name} 크루 소개</h4>
+						<p style="font-size:20px">${output.crew_sinto}</p>
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->
 				<div class="col-md-8">
-					<h2>${output.crew_name} &nbsp 크루 정보</h2>
-					<p>${output.crew_dinto}</p>
+					<h2>${output.crew_name} &nbsp 크루 공지사항</h2>
+					<div style="border: 4px dotted #eeee; min-height:200px; min-width:500px"><p>${output.crew_dinto}</p></div>
 				</div>
 				<!-- 크루 상세 정보 끝 -->
 

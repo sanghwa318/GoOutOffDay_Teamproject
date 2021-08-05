@@ -127,19 +127,19 @@ margin-bottom: 5px;
 						<select class="form-control " id="crew_category" name="crew_category"
 								style="width: 75%; text-align-last: center; font-size: 20px; padding: 0;">
 								<option value="none">종류</option>
-								<option value="강남구">걷기/체육</option>
-								<option value="강동구">친목/모임</option>
-								<option value="강북구">문화/창작/예술</option>
+								<option value="걷기/체육">걷기/체육</option>
+								<option value="친목/모임">친목/모임</option>
+								<option value="문화/창작/예술">문화/창작/예술</option>
 							</select>
 						</div>
 					</div>
 					</div>
 					<div class="form-group">
 					<div class="col-md-4">
-						<label for="crew_location" class=" control-label"
+						<label for="crew_area" class=" control-label"
 							style="font-size: 20px;">지역</label>
 						<div>
-							<select class="form-control " id="crew_location" name="crew_area"
+							<select class="form-control " id="crew_area" name="crew_area"
 								style="width: 75%; text-align-last: center; font-size: 20px; padding: 0;">
 								<option value="none">지역</option>
 								<option value="강남구">강남구</option>
@@ -343,8 +343,8 @@ margin-bottom: 5px;
 								}
 
 								var crew_location_val = $(
-										"#crew_location option").index(
-										$("#crew_location option:selected"));
+										"#crew_area option").index(
+										$("#crew_area option:selected"));
 
 								if (!crew_location_val) { // 입력되지 않았다면?
 									swal({
@@ -355,7 +355,7 @@ margin-bottom: 5px;
 										// 창이 닫히는 애니메이션의 시간이 있으므로,
 										// 0.1초의 딜레이 적용 후 포커스 이동
 										setTimeout(function() {
-											$("#crew_location").focus(); // <-- 커서를 강제로 넣기
+											$("#crew_area").focus(); // <-- 커서를 강제로 넣기
 										}, 1);
 									}); // <-- 메시지 표시
 

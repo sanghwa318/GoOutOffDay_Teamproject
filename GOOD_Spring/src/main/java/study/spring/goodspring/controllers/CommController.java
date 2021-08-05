@@ -316,6 +316,8 @@ public class CommController {
 			@RequestParam(value = "crew_regeion", required = false) String region,
 			// 조건 버튼
 			@RequestParam(value = "order", defaultValue = "1") int order,
+			// 크루 종류
+			@RequestParam(value = "crew_category", required = false) String crew_category,
 			// 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
 		
@@ -331,6 +333,7 @@ public class CommController {
 		input.setCrew_name(keyword);
 		input.setCrew_sinto(keyword);
 		input.setCrew_area(region);
+		input.setCrew_category(crew_category);
 
 		List<Crew> output = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체

@@ -90,14 +90,14 @@
                      src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
                   </span>
                   <h3>가입된 회원 수 : ${output.crew_member} 명</h3>
-                  <h3 class="crew_name">${output.crew_name} 크루 소개</h3>
-                  <p>${output.crew_sinto}</p>
+                  <h4 class="crew_name">${output.crew_name} 크루 소개</h4>
+                  <p style="font-size:20px">${output.crew_sinto}</p>
                </div>
             </div>
             <!-- 크루 상세 정보  -->
             <div class="col-md-6">
                <h2>${output.crew_name} 크루 공지사항</h2>
-               <p>${output.crew_dinto}</p>
+               <div style="border: 4px dotted #eeee; min-height:200px; min-width:500px"><p>${output.crew_dinto}</p></div>
             </div>
             <!-- 크루 상세 정보 끝 -->
 
