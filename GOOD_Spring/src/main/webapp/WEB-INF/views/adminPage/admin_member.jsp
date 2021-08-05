@@ -22,7 +22,7 @@
 		<%@ include file="../inc/Header.jsp"%>
 		<!-- 본문영역 -->
 		<div class="container">
-		<!-- 대제목 -->
+			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
 					onclick="location.href='../adminPage/admin_index.jsp'"
@@ -47,53 +47,57 @@
 						<col width="150" />
 						<col width="100" />
 						<col width="100" />
-						<col width="50" />
 					</colgroup>
 					<thead>
 						<tr>
 							<th class='text-center'><input type="checkbox"
-								name="all_check" id="all_check" checked /></th>
+								name="all_check" id="all_check" /></th>
 							<th class='text-center'>#</th>
-							<th class='text-center'>이름</th>
 							<th class='text-center'>아이디</th>
-							<th class='text-center'>닉네임</th>
+							<th class='text-center'>닉네입</th>
+							<th class='text-center'>이름</th>
 							<th class='text-center'>성별</th>
 							<th class='text-center'>연락처</th>
 							<th class='text-center'>이메일</th>
 							<th class='text-center'>주소</th>
 							<th class='text-center'>방문수</th>
-							<th class='text-center'>가입일</th>
-							<th class='text-center'>수정</th>
+							<th class='text-center'>가입일시</th>
 						</tr>
 					</thead>
-					<tr class="member-item member-item-001">
-						<td class='text-center' rowspan="1"><input type='checkbox'
-							name='member_id[]' class="member_id" value="001" checked /></td>
-						<td class='text-center' rowspan="1"><a href="#"> 1 </a></td>
-						<td class='text-center' rowspan="1">회원이름 1</td>
-						<td class='text-center'>회원 ID</td>
-						<td class='text-center'><input type="text" class='nickname'
-							data-value="" value="닉네임" style="width: 100%"></td>
-						<td class='text-center'><select id="gender" class='gender'
-							style="height: 26px;">
-								<option value="M">남</option>
-								<option value="F">여</option>
-						</select></td>
-						<td class='text-center'><input type="text" class='tel'
-							data-value="" value="010-1234-5678" style="width: 100%"></td>
-						<td class='text-center'><input type="text" class='email'
-							data-value="" value="abc@def.ghi" style="width: 100%"></td>
-						<td class='text-center'><input type="text"
-							class='useraddress' data-value="" value="주소" style="width: 100%"></td>
-						<td class='text-center text-primary'><span class='visit'
-							data-value=""> 300</span></td>
-						<td class='text-center'><span class='regdate' data-value="">
-								2021-06-11</span></td>
-						<td class="text-center">
-							<button class="btn btn-update btn-default btn-xs"
-								data-member-id="001" data-member-name="회원이름 1">수정</button>
-						</td>
-					</tr>
+					<tbody>
+						<%-- 조회결과에 따른 반복 처리 --%>
+						<c:choose>
+							<%-- 조회 결과가 없는 경우 --%>
+							<c:when test="${output == null || fn:length(output) == 0 }">
+								<h1>조회결과가 없습니다.</h1>
+							</c:when>
+
+							<%-- 조회 결과가 있는 경우 --%>
+							<c:otherwise>
+								<c:forEach var="item" items="${output}">
+									<c:set var="i" value="${i+1}" />
+									<tr class="member-item member-item-001">
+										<td class='text-center' rowspan="1"><input
+											type='checkbox' name='member_id[]' class="member_id"
+											value="001" /></td>
+										<td class='text-center'>${i}</td>
+										<td class='text-center'>${item.user_id}</td>
+										<td class='text-center'>${item.user_nick}</td>
+										<td class='text-center'>${item.user_name}</td>
+										<td class='text-center'>
+										<c:if test="${item.gender eq 'M'}">남자</c:if> 
+										<c:if test="${!item.gender eq 'Y'}">여자</c:if></td>
+										<td class='text-center'>${fn:substring(item.tel, 0 ,3)}-${fn:substring(item.tel, 3 ,6)}-${fn:substring(item.tel, 6, 9)}</td>
+										<td class='text-center'>${item.email}</td>
+										<td class='text-center'>${item.address1} &nbsp; ${item.address2}</td>
+										<td class='text-center text-primary'><span class='visit'
+											data-value=""> 300</span></td>
+										<td class='text-center'>${item.create_datetime}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
 				</table>
 				<hr />
 				<div class="text-center">
