@@ -168,10 +168,4 @@ public class AdminController {
 		return new ModelAndView ("adminPage/admin_stats");
 	}
 	
-	@RequestMapping(value = "/adminPage/admin_notice.do", method = RequestMethod.GET)
-	public ModelAndView adminNotice(Model model) {
-		
-		return new ModelAndView ("adminPage/admin_notice");
-	}
-
 }
