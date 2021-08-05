@@ -54,14 +54,14 @@ public interface WalkLogService {
 	 * @return 조회된 데이터가 저장된 Beans
 	 * @throws Exception
 	 */
-	public List<WalkLog> getCoureName(WalkLog input) throws Exception;
+	public List<WalkLog> getCourseName(WalkLog input) throws Exception;
 
 	/**
 	 * DB에 있는 모든 코스 이름을 조회하여 리턴하는 메서드
 	 * @return 조회된 데이터가 저장된 Beans
 	 * @throws Exception
 	 */
-	public List<WalkLog> getCoureName() throws Exception;
+	public List<WalkLog> getCourseName() throws Exception;
 	
 	/**
 	 * 일련의 좌표데이터의 course_name을 설정해주기 위한 update 메서드
@@ -126,9 +126,13 @@ public interface WalkLogService {
     // radians을 decimal degrees로 바꾼다.
     public  double rad2deg(double rad);
     
-
-    
-    
-    
+	/**
+	 * 용자가 설정한 목표 기간내에서 코스 이름을 조회하는 메서드
+	 * 
+	 * @param WalkLog 조회할 사용자 번호 데이터가 담긴 Beans
+	 * @return 조회된 데이터가 저장된 Beans
+	 * @throws Exception
+	 */
+    public List<WalkLog> getCnInTerm (WalkLog input) throws Exception;
     
 }

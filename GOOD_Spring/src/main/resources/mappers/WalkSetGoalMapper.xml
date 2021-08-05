@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WalkSetGoalMapper">
+
+	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+	<resultMap type="study.spring.goodspring.model.WalkSetGoal"
+		id="WalkSetGoalMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="setgoal_no" column="setgoal_no" />
+		<result property="setgoal_date" column="setgoal_date" />
+		<result property="setgoal_time" column="setgoal_time" />
+		<result property="setgoal_distance" column="setgoal_distance" />
+		<result property="setgoal_create_datetime" column="setgoal_create_datetime" />
+		<result property="time_achieve" column="time_achieve" />
+		<result property="distance_achieve" column="distance_achieve" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+	</resultMap>
+
+	<insert id="insertSetGoal" parameterType="study.spring.goodspring.model.WalkSetGoal"
+	useGeneratedKeys="true" keyProperty="setgoal_no">
+		INSERT INTO walk_setgoal 
+		(setgoal_date, setgoal_time, 
+		setgoal_distance, setgoal_create_datetime, 
+		user_info_user_no) 
+		VALUES 
+		(date_add(now(), INTERVAL #{setgoal_day} DAY), #{setgoal_time}, 
+		#{setgoal_distance}, now(),  
+		#{user_info_user_no})
+	</insert>
+	
+	<select id="selectSetGoal" 
+	parameterType="study.spring.goodspring.model.WalkSetGoal" resultMap="WalkSetGoalMap">
+		SELECT
+		setgoal_no,
+		setgoal_date,
+		setgoal_time,
+		setgoal_distance,
+		setgoal_create_datetime,
+		time_achieve,
+		distance_achieve, 
+		user_info_user_no
+		FROM walk_setgoal
+		WHERE user_info_user_no=#{user_info_user_no}
+		ORDER BY setgoal_create_datetime DESC
+		LIMIT 0,1
+	</select>
+	<select id="selectSetGoalList" 
+	parameterType="study.spring.goodspring.model.WalkSetGoal" resultMap="WalkSetGoalMap">
+		SELECT
+		setgoal_no,
+		setgoal_date,
+		setgoal_time,
+		setgoal_distance,
+		setgoal_create_datetime,
+		time_achieve,
+		distance_achieve, 
+		user_info_user_no
+		FROM walk_setgoal
+		WHERE user_info_user_no=#{user_info_user_no}
+		ORDER BY setgoal_create_datetime ASC
+	</select>
+	<update id="updateAchieve" parameterType="study.spring.goodspring.model.WalkSetGoal">
+		UPDATE good.walk_setgoal 
+		SET time_achieve=#{time_achieve}, distance_achieve=#{distance_achieve}
+		WHERE 
+		user_info_user_no=#{user_info_user_no} 
+        AND 
+        setgoal_no=
+        (SELECT setgoal_no from 
+	        (SELECT setgoal_no FROM good.walk_setgoal 
+	        WHERE user_info_user_no=#{user_info_user_no} 
+	        AND 
+	        setgoal_create_datetime=
+		        (SELECT MAX(setgoal_create_datetime) 
+		        FROM good.walk_setgoal 
+		        WHERE user_info_user_no=#{user_info_user_no})
+		    )
+		AS temp)
+	</update>
+</mapper>

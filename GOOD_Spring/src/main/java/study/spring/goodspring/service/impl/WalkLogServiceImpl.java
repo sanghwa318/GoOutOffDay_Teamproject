@@ -18,12 +18,10 @@ public class WalkLogServiceImpl implements WalkLogService {
 
 	@Override
 	public void addWalkLog(WalkLog input) throws Exception {
-		// List<WalkLog> output=null;
 		int result = 0;
 
 		try {
 			result = sqlSession.insert("WalkLogMapper.insertWalkLog", input);
-			// output= sqlSession.selectList("WalkLogMapper.selectWalkLogList", input);
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}
@@ -123,7 +121,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 	}
 
 	@Override
-	public List<WalkLog> getCoureName(WalkLog input) throws Exception {
+	public List<WalkLog> getCourseName(WalkLog input) throws Exception {
 		List<WalkLog> result = null;
 		try {
 			result = sqlSession.selectList("WalkLogMapper.selectCourseNameList", input);
@@ -141,7 +139,7 @@ public class WalkLogServiceImpl implements WalkLogService {
 		return result;
 	}
 	@Override
-	public List<WalkLog> getCoureName() throws Exception {
+	public List<WalkLog> getCourseName() throws Exception {
 		List<WalkLog> result = null;
 		try {
 			result = sqlSession.selectList("WalkLogMapper.selectCourseNameAll");
@@ -301,6 +299,25 @@ public class WalkLogServiceImpl implements WalkLogService {
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		return output;
+	}
+
+	@Override
+	public List<WalkLog> getCnInTerm(WalkLog input) throws Exception {
+		List<WalkLog> result = null;
+		try {
+			result = sqlSession.selectList("WalkLogMapper.selectCnInTerm", input);
+			if (result == null) {
+				throw new NullPointerException("output=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
 	}
 
 }
