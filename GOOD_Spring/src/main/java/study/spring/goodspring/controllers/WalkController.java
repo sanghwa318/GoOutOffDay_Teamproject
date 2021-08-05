@@ -355,6 +355,11 @@ public class WalkController {
 		//사용자 정보조회
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		//조회된 값을 담을 객체 준비
 		List<WalkLog> walklog = null;
@@ -416,6 +421,11 @@ public class WalkController {
 		//사용자 정보조회
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		//조회된 값을 담을 객체 준비
 		List<WalkLog> walklog = null;
@@ -532,6 +542,11 @@ public class WalkController {
 	public ModelAndView walk_logSetGoal(Model model
 			) {
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		int userNo=loginInfo.getUser_no();
 		WalkSetGoal input = new WalkSetGoal();
 		input.setUser_info_user_no(userNo);
