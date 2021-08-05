@@ -22,10 +22,12 @@
 		INSERT INTO walk_setgoal 
 		(setgoal_date, setgoal_time, 
 		setgoal_distance, setgoal_create_datetime, 
+		time_achieve, distance_achieve
 		user_info_user_no) 
 		VALUES 
 		(date_add(now(), INTERVAL #{setgoal_day} DAY), #{setgoal_time}, 
-		#{setgoal_distance}, now(),  
+		#{setgoal_distance}, now(), 
+		0, 0, 
 		#{user_info_user_no})
 	</insert>
 	

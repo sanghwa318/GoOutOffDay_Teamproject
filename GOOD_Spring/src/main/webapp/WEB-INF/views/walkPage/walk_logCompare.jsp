@@ -86,7 +86,7 @@ var option2 = {
             }
         }
     },
-  responsive: false,
+  responsive: true,
   scales: {
     yAxes: [{
       stacked: true,
@@ -121,7 +121,7 @@ var option3 = {
             }
         }
     },
-  responsive: false,
+  responsive: true,
   scales: {
     yAxes: [{
       stacked: true,

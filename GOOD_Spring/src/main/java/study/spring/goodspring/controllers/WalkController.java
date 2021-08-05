@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
@@ -31,7 +30,6 @@ import study.spring.goodspring.service.WalkLogService;
 import study.spring.goodspring.service.WalkSetGoalService;
 
 @Controller
-@Slf4j
 public class WalkController {
 
 	/** Service 패턴 구현체 주입 */
@@ -603,13 +601,9 @@ public class WalkController {
 			// walk_setgoal 테이블의 성취율 업데이트
 			int setgoal_time=Integer.parseInt(output.getSetgoal_time())*60;
 			int setgoal_distance=Integer.parseInt(output.getSetgoal_distance())*1000;
-			log.debug("----------------setgoal_time >>>> "+setgoal_time +"/////// setgoal_distance : "+setgoal_distance);
-			log.debug("----------------time >>>> "+time +"/////// distance : "+distance);
-			log.debug("----------------time/setgoal_time >>>> "+time/setgoal_time +"/////// distance/setgoal_distance : "+distance/setgoal_distance);
 			
 			input.setTime_achieve((float)(time/setgoal_time));
 			input.setDistance_achieve((float) (distance/setgoal_distance));
-			log.debug("----------------input >>>> "+input.toString());
 			output = walkSetGoalService.editAchieve(input);
 			
 		} catch (Exception e) {
@@ -621,6 +615,8 @@ public class WalkController {
 		model.addAttribute("goalItem", output);
 		return new ModelAndView("walkPage/walk_logSetGoal");
 	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_logSetGoalOk.do", method = RequestMethod.POST)
 	public Map<String, Object> walk_logSetGoalOk(Model model,

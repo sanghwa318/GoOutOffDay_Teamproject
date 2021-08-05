@@ -21,14 +21,14 @@
 
 
 			<h2>내 기록</h2>
-			<div style="width: 330px; display: inline-block;">
-				<canvas id="myChart1" width="330" height="400"></canvas>
+			<div style="width: 30%; display: inline-block;">
+				<canvas id="myChart1" height="400"></canvas>
 			</div>
-			<div style="width: 330px; display: inline-block;">
-				<canvas id="myChart2" width="330" height="400"></canvas>
+			<div style="width: 30%; display: inline-block;">
+				<canvas id="myChart2"  height="400"></canvas>
 			</div>
-			<div style="width: 330px; display: inline-block;">
-				<canvas id="myChart3" width="330" height="400"></canvas>
+			<div style="width: 30%; display: inline-block;">
+				<canvas id="myChart3" height="400"></canvas>
 			</div>
 
 		</div>
@@ -47,7 +47,7 @@
 	                }
 	            }
 	        },
-		  responsive: false,
+		  responsive: true,
 		  scales: {
 		    yAxes: [{
 		      stacked: true,
@@ -70,7 +70,7 @@ var option2 = {
                 labels: {color:'rgba(54, 162, 235)'}
             }
         },
-	  responsive: false,
+	  responsive: true,
 	  scales: {
 	    yAxes: [{
 	      stacked: true,
@@ -93,7 +93,7 @@ var option3 = {
                 labels: {color: 'rgba(255, 206, 86)'}
             }
         },
-	  responsive: false,
+	  responsive: true,
 	  scales: {
 	    yAxes: [{
 	      stacked: true,
