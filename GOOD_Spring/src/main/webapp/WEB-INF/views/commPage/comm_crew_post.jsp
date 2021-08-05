@@ -62,12 +62,10 @@
 }
 
 .row_a {
-	margin-left: 25%;
+	margin-left: 50px;
 }
 
-form {
-	margin-left: 25%;
-}
+
 
 .title-img img {
 	width: 3rem;
@@ -105,7 +103,7 @@ form {
 			<h1 class="page-header">크루게시판</h1>
 
 			<!-- 본문 사이드 영역 -->
-			<div class="sidebar">
+			<div class="sidebar col-md-1 col-xs-1 col-sm-1">
 				<div class="form-group">
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
@@ -121,24 +119,24 @@ form {
 
 
 <div class="article header">
-			<div class="row row_a">
+			<div class="row row_a col-xl-8 col-sm-10 col-xs-10" >
 			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
-					<img style="border-radius: 25px" src="${member.user_photo.fileUrl}"
+					<img style="border-radius: 25px; margin-right:15px; " src="${member.user_photo.fileUrl}"
 						width="50px" height="50px"></img>
 				</div>
 				
-				<div class=" writer_info">
-					<h4 style="margin-left:45px; margin-top:15px" >${postout3.getUser_name()}</h4>
-					<p class="pull-left" style="margin-left:10px; color:#979797;" >작성일자: ${postout.getPost_createdate()}</p>
+				<div class="writer_info" >
+					<h4>${postout3.getUser_name()}</h4>
+					<p class="pull-left" style="color:#979797;" >작성일자: ${postout.getPost_createdate()}</p>
 					<p class="pull-left " style="margin-left: 15px; color:#979797;">조회수 :
 						${postout.post_hits}</p>
-						
 				<div class="pull-right" style="margin-right: 25px">
 					<span class="heart"><i class="fa fa-heart-o"
 						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
 						class="fa fa-comment-o"></i></span> 댓글 ${total}
 				</div>
+						<br>
 						<br>
 						<hr>
 						<p style="margin-top:100px">${postout.getPost_content()}</p>
@@ -161,9 +159,9 @@ form {
 
 
 				<form>
-				<div class="row" style="maring-left:-100px">
+				<div class="row" style="width:80%; margin-left:20%;">
 					<h4>${login_info.user_nick}</h4>
-					<div class="form-group input-group col-md-12 col-sm-12">
+					<div class="form-group input-group">
 						<textarea class="form-control" id="comment_text"
 							style="height: 60px; resize: none;"
 							placeholder="내용을 입력해주세요."></textarea>
