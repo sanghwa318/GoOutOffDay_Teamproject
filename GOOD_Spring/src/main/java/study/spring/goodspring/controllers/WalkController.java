@@ -599,8 +599,8 @@ public class WalkController {
 			}
 			
 			// walk_setgoal 테이블의 성취율 업데이트
-			int setgoal_time=Integer.parseInt(output.getSetgoal_time())*60;
-			int setgoal_distance=Integer.parseInt(output.getSetgoal_distance())*1000;
+			int setgoal_time=output.getSetgoal_time()*60;
+			int setgoal_distance=output.getSetgoal_distance()*1000;
 			
 			input.setTime_achieve((float)(time/setgoal_time));
 			input.setDistance_achieve((float) (distance/setgoal_distance));
@@ -621,17 +621,17 @@ public class WalkController {
 	@RequestMapping(value = "/walkPage/walk_logSetGoalOk.do", method = RequestMethod.POST)
 	public Map<String, Object> walk_logSetGoalOk(Model model,
 			@RequestParam(value="setgoal_day", defaultValue="0")int setgoal_day, //기간
-		@RequestParam(value="setgoal_distance")String setgoal_distance, //목표거리
-		@RequestParam(value="setgoal_time")String setgoal_time //목표시간
+		@RequestParam(value="setgoal_distance",defaultValue="0")int setgoal_distance, //목표거리
+		@RequestParam(value="setgoal_time",defaultValue="0")int setgoal_time //목표시간
 			) {
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 		if(setgoal_day==0) {
 			webHelper.redirect(null, "기간을 설정해주세요.");
 		}
-		if(setgoal_distance==null || setgoal_distance=="") {
+		if(setgoal_distance==0) {
 			webHelper.redirect(null, "목표 거리를 설정해주세요.");
 		}
-		if(setgoal_time==null || setgoal_time=="") {
+		if(setgoal_time==0) {
 			webHelper.redirect(null, "목표 시간을 설정해주세요.");
 		}
 		

@@ -9,7 +9,7 @@
 <div class="tab-content">
 	<form class="form-inline" role="form" id="goalAdd">
 		<fieldset style="margin-top: 30px; text-align: center;">
-			<select name="setgoal_day" class="form-control">
+			<select id="setgoal_day" name="setgoal_day" class="form-control">
 				<option value="">기간 선택
 				<option value="1">1일</option>
 				<option value="7">7일</option>
@@ -63,29 +63,49 @@
 
 </body>
 <script>
-
+var confirm = function(setgoal_day, setgoal_distance, setgoal_time){
+	swal({
+		title: '확인',
+		text: "목표를 설정할까요?",
+		type: 'question',
+		confirmButtonText: '네',
+		showCancelButton: true,
+		cancelButtonText: '아니요',
+	}).then(function(result){
+		if(result.value){
+			var setgoal_day =$('#setgoal_day option:selected').val();
+			var setgoal_distance = $('#setgoal_distance').val();
+			var setgoal_time = $('#setgoal_time').val();
+			
+			console.log(setgoal_day, setgoal_distance, setgoal_time)
+				$.ajax({
+					url: getContextPath() + '/walkPage/walk_logSetGoalOk.do',
+					type:'post',
+					data: {setgoal_day, setgoal_distance, setgoal_time},
+					success:function(){
+					swal('성공', '목표가 설정되었습니다.', "success")	
+					}
+				})
+		}else{
+			swal('취소', '목표설정을 취소하였습니다.', 'error')	
+				}
+			}
+		)
+	}
+	
 	$('#submitGoal').click(function(e){
 		e.preventDefault();
-		var setgoal_day =$('#setgoal_day option:selected').val();
-		var setgoal_distance = document.getElementById('setgoal_distance').value;
-		var setgoal_time = document.getElementById('setgoal_time').value;
-		swal({
-			title: '확인',
-			text: "목표를 설정할까요?",
-			type: 'question',
-			confirmButtonText: '네',
-			showCancelButton: true,
-			cancelButtonText: '아니요',
-		}).then(function(result){
-			$.ajax({
-				url: getContextPath() + '/walkPage/walk_logSetGoalOk.do',
-				type:'post',
-				data: {setgoal_day, setgoal_distance, setgoal_time},
-				success:function(){
-				swal('목표가 설정되었습니다.')	
-				}
-			})
-		})
+
+		
+
+		
+		if(setgoal_day==""){
+			swal('경고', '목표 기간을 선택하세요', 'error')	
+		}else if(setgoal_distance="" || setgoal_distance==null ||setgoal_distance.length<=0){
+			swal('경고', '목표 거리를 입력하세요', 'error')	
+		}else if(setgoal_time="" || setgoal_time==null||setgoal_time.length<=0){
+			swal('경고', '목표 시간을 입력하세요', 'error')	
+		}else{confirm()}
 		
 		
 	})
@@ -118,8 +138,6 @@
 	var timeSucRate=parseInt(timeSuccessCnt/(timeFailCnt+timeSuccessCnt)*100)
 	var timeFailRate=100-timeSucRate
 	
-	console.log(successTime)
-	console.log(failTime)
 	var distSuccessCnt=successDist.length
 	var distFailCnt=failDist.length
 	var distSucRate=parseInt(distSuccessCnt/(distFailCnt+distSuccessCnt)*100)

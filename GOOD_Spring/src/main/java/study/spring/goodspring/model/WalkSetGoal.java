@@ -8,8 +8,8 @@ public class WalkSetGoal {
 	private int setgoal_no;
 	private String setgoal_date;
 	private int setgoal_day;
-	private String setgoal_time;
-	private String setgoal_distance;
+	private int setgoal_time;
+	private int setgoal_distance;
 	private String setgoal_create_datetime;
 	private float time_achieve;
 	private float distance_achieve;
