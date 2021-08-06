@@ -164,25 +164,14 @@ public class AdminServiceImpl implements AdminService{
 			return result;
 		}
 
+
 	@Override
-	public int deleteMemberadmin(int input) throws Exception {
+	public int deleteMemberadmin(Member input) throws Exception {
 		int result = 0;
 
 		try {
-			sqlSession.update("BookMarkMapper.unsetbookmarkuserno", input);
-			sqlSession.update("CrewMapper.unsetcrewuserno", input);
-			sqlSession.update("CrewPostCmtMapper.unsetcrewpostcmtuserno", input);
-			sqlSession.update("CrewMemberMapper.unsetcrewmemberuserno", input);
-			sqlSession.update("CrewPostMapper.unsetcrewpostuserno", input);
-			sqlSession.update("InquiryMapper.unsetinquiryqnauserno", input);
-			sqlSession.update("MyCourseMapper.unsetmycoursepostuserno", input);
-			sqlSession.update("MyCourseCmtMapper.unsetmycoursecmtuserno", input);
-			sqlSession.update("WalkLogMapper.unsetwalkloguserno", input);
-			sqlSession.update("WalkSetGoalMapper.unsetwalksetgoaluserno", input);
-			
-			
-			
-			result = sqlSession.delete("MemberMapper.deleteUserno", input);
+				
+			result = sqlSession.update("MemberMapper.userOut", input);
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}

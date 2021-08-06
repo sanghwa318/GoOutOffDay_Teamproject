@@ -22,6 +22,7 @@
 		<result property="user_admin" column="user_admin" />
 		<result property="create_datetime" column="create_datetime" />
 		<result property="edit_datetime" column="edit_datetime" />
+		<result property="user_out" column="user_out" />
 	</resultMap>
 	<!-- 로그인을 위한 조회 기능 -->
 	<select id="login"
@@ -185,10 +186,10 @@
 		SELECT user_admin FROM user_info WHERE user_admin = 'Y';
 	</select>
 	
-	<!-- 관리자 페이지 회원 추방 -->
-	<delete id="deleteUserno"
+	<!-- 회원 추방 탈퇴 여부 확인 -->
+	<update id="userOut"
 		parameterType="study.spring.goodspring.model.Member">
-		DELETE FROM user_info WHERE user_no=#{user_no};
-	</delete>
-
+		UPDATE user_info SET user_out = 'Y'
+		WHERE user_no = #{user_no};
+	</update>
 </mapper>

@@ -58,10 +58,10 @@ public interface AdminService {
 		public Member getUserinfoadmin(Member input) throws Exception;
 		
 		/**
-		 * 회원  데이터 삭제하기
+		 * 회원 탈퇴 'Y'로 변환하기.
 		 * @param Member 삭제할 학과의 일련번호를 담고 있는 Beans
 		 * @return int
 		 * @throws Exception
 		 */
-		public int deleteMemberadmin(int input) throws Exception;
+		public int deleteMemberadmin(Member input) throws Exception;
 }
