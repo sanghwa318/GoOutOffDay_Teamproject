@@ -166,15 +166,15 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public int deleteMemberadmin(Member input) throws Exception {
-		int result = 0;
-
+	public void deleteMemberadmin(Member input) throws Exception {
+	
+	
 		try {
 				
-			result = sqlSession.update("MemberMapper.userOut", input);
-			if (result == 0) {
-				throw new NullPointerException("result=0");
-			}
+			sqlSession.update("MemberMapper.userOut", input);
+			sqlSession.update("CrewMemberMapper.crewOut", input);
+			
+			
 
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -183,7 +183,7 @@ public class AdminServiceImpl implements AdminService{
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 삭제에 실패했습니다.");
 		}
-		return result;
+	
 	}
 
 }

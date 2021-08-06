@@ -32,7 +32,7 @@
 		address1, address2, post, tel,
 		email, user_photo, user_admin,
 		create_datetime,
-		edit_datetime
+		edit_datetime, user_out
 		FROM user_info
 		WHERE user_id=#{user_id}
 		AND user_pw=MD5(#{user_pw})
@@ -72,7 +72,7 @@
 		address1, address2, post, tel,
 		email, user_photo, user_admin,
 		create_datetime,
-		edit_datetime
+		edit_datetime, user_out
 		FROM user_info
 		WHERE user_id=#{user_id};
 	</select>
@@ -91,7 +91,7 @@
 		address2, post,
 		tel,
 		email, user_photo, user_admin, create_datetime,
-		edit_datetime FROM
+		edit_datetime, user_out FROM
 		user_info
 		<where>
 			<if test="user_name !=null and user_name !=''">user_name LIKE concat ('%', #{user_name},'%')</if>
@@ -111,14 +111,14 @@
 		user_pw, user_name, user_nick, gender, address1, address2, post, tel,
 		email,
 		user_photo,
-		user_admin, create_datetime, edit_datetime) VALUES
+		user_admin, create_datetime, edit_datetime, user_out) VALUES
 		(#{user_id}, MD5(#{user_pw}),
 		#{user_name}, #{user_nick}, #{gender},
 		#{address1}, #{address2},
 		#{post}, #{tel},
 		#{email}, #{photoJson},
 		"N",
-		now(), now());
+		now(), now(), "N");
 	</insert>
 
 	<!-- 단일행 삭제를 위한 기능 정의 -->

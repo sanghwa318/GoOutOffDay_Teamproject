@@ -12,6 +12,7 @@
 			column="member_visit_datetime" />
 		<result property="user_info_user_no" column="user_info_user_no" />
 		<result property="crew_crew_no" column="crew_crew_no" />
+		<result property="crew_out" column="crew_out" />
 
 	</resultMap>
 
@@ -21,8 +22,8 @@
 		parameterType="study.spring.goodspring.model.CrewMember"
 		useGeneratedKeys="true" keyProperty="member_no">
 		INSERT INTO crew_member
-		(member_create_datetime, member_visit_datetime, user_info_user_no,crew_crew_no)
-		VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no} )
+		(member_create_datetime, member_visit_datetime, user_info_user_no,crew_crew_no, crew_out)
+		VALUES (now(), now(), #{user_info_user_no}, #{crew_crew_no}, "N" )
 	</insert>
 
 	<!-- Crew 와 CrewMember Join -->
@@ -30,7 +31,7 @@
 		parameterType="study.spring.goodspring.model.CrewMember"
 		resultMap="crewMemberMap">
 		SELECT member_no, member_create_datetime, member_visit_datetime,
-		cm.user_info_user_no, crew_crew_no, user_id , user_nick
+		cm.user_info_user_no, crew_crew_no,crew_out, user_id , user_nick
 		FROM
 		crew_member cm
 		INNER JOIN crew c
@@ -140,5 +141,12 @@
 	<!-- 참조해제 -->
 	<update id="unsetcrewmemberuserno" parameterType="study.spring.goodspring.model.CrewMember">
 	UPDATE crew_member SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
+	
+	<!-- 크루회원 추방 탈퇴 여부 확인 -->
+	<update id="crewOut"
+		parameterType="study.spring.goodspring.model.CrewMember">
+		UPDATE crew_member  SET crew_out = 'Y'
+		WHERE user_info_user_no = #{user_no};
 	</update>
 </mapper>

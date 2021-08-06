@@ -73,8 +73,10 @@
 
 							<%-- 조회 결과가 있는 경우 --%>
 							<c:otherwise>
+							
 								<c:forEach var="item" items="${output}">
 									<c:set var="i" value="${i+1}" />
+									<c:if test="${!item.user_out}">
 									<tr class="member-item member-item-001">
 										<td align="center"><input type='radio' data-userid="${item.user_id}"
 										data-useradmin="${item.user_admin}"
@@ -92,7 +94,9 @@
 										<td class='text-center'>${item.address2}</td>
 										<td class='text-center'>${item.create_datetime}</td>
 									</tr>
+								</c:if>
 								</c:forEach>
+							
 							</c:otherwise>
 						</c:choose>
 					</tbody>

@@ -13,6 +13,7 @@ public class CrewMember {
 	private String crew_name;
 	private String user_id;
 	private String user_nick;
+	private boolean crew_out;
 	
 	
 	//2) 페이지 구현을 위한 static 변수
