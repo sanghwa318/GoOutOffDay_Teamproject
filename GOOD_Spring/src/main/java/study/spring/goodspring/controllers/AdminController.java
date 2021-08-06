@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.AdminInquiry;
+import study.spring.goodspring.model.AdminMember;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.AdminService;
@@ -167,7 +168,40 @@ public class AdminController {
 	     
 	     return new ModelAndView ("adminPage/admin_member");
 		}
+	
+		/**
+		 * 관리자 회원 추방 및 관리자 추방 방지
+		 */
+	   @RequestMapping(value = "/adminPage/admin_member_delete", method = RequestMethod. GET)
+	   public ModelAndView delete(Model model,
+	         @RequestParam(value="user_id", defaultValue="") String user_id) {
+	      
+	      
+	         
+	      /** 조회삭제를 위한 select */
+	      Member input = new Member();
+	      input.setUser_id(user_id);
 
+	      Member output = null;
+
+	      try {
+	         output = adminService.getUserinfoadmin(input);
+	        		 
+	           if(output.isUser_admin()) {
+	        	  return webHelper.redirect(null, "관리자는 추방할 수 없습니다.");
+	         }
+	         else {
+	         adminService.deleteMemberadmin(input); // 데아터 삭제
+	         }
+	      } catch (Exception e) {
+	         return webHelper.redirect(null, e.getLocalizedMessage());
+	      }
+	      
+	      
+	      /** 3) 페이지 이동 */
+	      return webHelper.redirect(contextPath + "/adminPage/admin_member.do?user_id=" + input.getUser_id(), "회원이 추방되었습니다.");
+	   }
+	
 	/**
 	 * 회원코스관리 페이지
 	 */

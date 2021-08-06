@@ -76,7 +76,7 @@ div.wrapper {
 				</div>
 				<!-- //커뮤니티 -->
 				<!-- 통계 -->
-				<div class="col-md-4 line" style="padding-bottom: 20px;">
+				<div class="col-md-4 line1" style="padding-bottom: 20px;">
 					<h1 class="text-center">-통계-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-info col-xs-offset-2 col-xs-8"

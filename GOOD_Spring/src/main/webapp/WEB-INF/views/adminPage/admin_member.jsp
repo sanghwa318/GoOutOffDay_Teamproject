@@ -4,7 +4,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="../inc/head.jsp"%>
+<%@ include file="/WEB-INF/views/inc/head.jsp"%>
 
 <style type="text/css">
 .main_header>h1 {
@@ -25,7 +25,7 @@
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../adminPage/admin_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">관리자페이지 </span>
 				</h1>
@@ -50,17 +50,16 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th class='text-center'><input type="checkbox"
-								name="all_check" id="all_check" /></th>
-							<th class='text-center'>#</th>
+							<th class='text-center'>선택</th>
+							<th class='text-center'>회원번호</th>
 							<th class='text-center'>아이디</th>
 							<th class='text-center'>닉네입</th>
 							<th class='text-center'>이름</th>
 							<th class='text-center'>성별</th>
 							<th class='text-center'>연락처</th>
 							<th class='text-center'>이메일</th>
-							<th class='text-center'>주소</th>
-							<th class='text-center'>방문수</th>
+							<th class='text-center'>도로명주소</th>
+							<th class='text-center'>상세주소</th>
 							<th class='text-center'>가입일시</th>
 						</tr>
 					</thead>
@@ -77,9 +76,9 @@
 								<c:forEach var="item" items="${output}">
 									<c:set var="i" value="${i+1}" />
 									<tr class="member-item member-item-001">
-										<td class='text-center' rowspan="1"><input
-											type='checkbox' name='member_id[]' class="member_id"
-											value="001" /></td>
+										<td align="center"><input type='radio' data-userid="${item.user_id}"
+										data-useradmin="${item.user_admin}"
+								 name='member_id' class="member_id" id="member_id" value="001" /></td>
 										<td class='text-center'>${i}</td>
 										<td class='text-center'>${item.user_id}</td>
 										<td class='text-center'>${item.user_nick}</td>
@@ -89,9 +88,8 @@
 										<c:if test="${!item.gender eq 'Y'}">여자</c:if></td>
 										<td class='text-center'>${fn:substring(item.tel, 0 ,3)}-${fn:substring(item.tel, 3 ,6)}-${fn:substring(item.tel, 6, 9)}</td>
 										<td class='text-center'>${item.email}</td>
-										<td class='text-center'>${item.address1} &nbsp; ${item.address2}</td>
-										<td class='text-center text-primary'><span class='visit'
-											data-value=""> 300</span></td>
+										<td class='text-center'>${item.address1}</td>
+										<td class='text-center'>${item.address2}</td>
 										<td class='text-center'>${item.create_datetime}</td>
 									</tr>
 								</c:forEach>
@@ -116,68 +114,45 @@
 	<%@ include file="../inc/Footer.jsp"%>
 	<%@ include file="../inc/plugin.jsp"%>
 	<script type="text/javascript">
-	$(function() {
-		$(".btn-update").click(function(e) {
-	        e.preventDefault();
-	        const current = $(this);
-	        const memberId = current.data('member-id');
-	        const memberName = current.data('member-name');
-	
-	        swal({
-	            title: '확인',
-	            text: '정말 ' + memberName + '(을)를 수정하시겠습니까?',
-	            type: "question",
-	            showCancelButton: true
-	        }).then(function(result) {
-	            if (result.value) {
-	                $.delete(ROOT_URL + "", {
-	                    member_id: [memberId] // 배열로 묶어서 전송
-	                }, function(json) {
-	                    $('.member-item-' + memberId).remove();
-	                });
-	            }
-	        });
-	    });
-		$("#all_check").change(function() {
-	        $(".member_id").prop('checked', $(this).is(':checked'));
+	 function getContextPath() {
+	      var hostIndex = location.href.indexOf(location.host)
+	            + location.host.length;
+	      var contextPath = location.href.substring(hostIndex, location.href
+	            .indexOf('/', hostIndex + 1));
+	      return contextPath;
+	   }
+		$("#check-delete").click(function() {
+			const delcrew = [];
+			const obj = $(".member_id:checked");
+
+			if (obj.length < 1) {
+				swal('알림', '선택된 회원이 없습니다.');
+				setTimeout(function(){
+					
+				}, 1000);
+				return false;
+			}
+			// 확인, 취소버튼에 따른 후속 처리 구현
+			swal({
+				title : '확인', // 제목
+				text : "해당 회원을 추방 시키겠습니까?", // 내용
+				type : 'question', // 종류
+				confirmButtonText : '네', // 확인버튼 표시 문구
+				showCancelButton : true, // 취소버튼 표시 여부
+				cancelButtonText : '아니오', // 취소버튼 표시 문구
+			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+				if (result.value) { // 확인 버튼이 눌러진 경우
+					var ui = $("#member_id:checked").data("userid");
+				    var ua = $("#member_id:checked").data("useradmin")
+					
+					window.location.href=getContextPath() +"/adminPage/admin_member_delete?user_id=" + ui + "&user_admin=" + ua; 
+
+				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+					swal('취소', '추방이 취소되었습니다.', 'error');
+				}
+
+			});
 		});
-	        $("#check-delete").click(function() {
-	            const memberId = [];
-	            const obj = $(".member_id:checked");
-	
-	            if (obj.length < 1) {
-	                swal('알림', '선택된 항목이 없습니다.');
-	                return false;
-	            }
-	
-	            swal({
-	                title: '확인',
-	                text: '정말 ' + obj.length + '개의 항목을 삭제하시겠습니까?',
-	                type: "question",
-	                showCancelButton: true
-	            }).then(function(result) {
-	                if (result.value) {
-	                    obj.each(function(i, v) {
-	                    	memberId.push($(v).val());
-	                    });
-	
-	                    $.delete(ROOT_URL + "", {
-	                    	member_id: memberId
-	                    }, function(json) {
-	                        swal({
-	                            title: '확인',
-	                            text: '삭제되었습니다.'
-	                        }).then(function(result) {
-	                            obj.each(function(i, v) {
-	                                $('.member-item-' + $(v).val()).remove();
-	                            });
-	                            $('html, body').animate({scrollTop : 0}, 400);
-	                        });
-	                    });
-	                }
-	            });
-	        });
-	});
 
 	</script>
 </body>
