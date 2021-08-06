@@ -153,7 +153,6 @@ public class MainController {
 		MyCourses input_m = new MyCourses();
 		input_m.setMycourse_name(keyword);
 		input_m.setMycourse_area(keyword);
-		input_m.setMycourse_content(keyword);
 		
 		// 크루
 		Crew input_c = new Crew();

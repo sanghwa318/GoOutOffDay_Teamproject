@@ -140,7 +140,6 @@ body>div.container {
 							<%-- 출력을 위해 준비한 파라미터들 --%>
 							<c:set var="mycourse_name" value="${item_m.mycourse_name }" />
 							<c:set var="mycourse_area" value="${item_m.mycourse_area }" />
-							<c:set var="mycourse_content" value="${item_m.mycourse_content }" />
 
 							<%-- 상세 페이지로 이동하기 위한 URL --%>
 							<c:url value="/commPage/comm_myCourseDetail.do" var="viewUrl">
@@ -158,7 +157,7 @@ body>div.container {
 							<div onclick="location.href='${viewUrl }'"
 								style="cursor: pointer;'">
 								<h3>나만의 코스 이름 : ${mycourse_name }</h3>
-								<p> 지역 : ${mycourse_area } | 내용 : ${mycourse_content } <p>
+								<p> 지역 : ${mycourse_area }<p>
 							</div>
 						</c:forEach>
 					</div>
@@ -314,7 +313,7 @@ style="cursor: pointer;'">
 	<div onclick="location.href='${pageContext.request.contextPath }/commPage/comm_myCourseDetail.do?mycourse_no={{mycourse_no}}'" 
 style="cursor: pointer;'">
 		<h3>나만의 코스 이름 : {{mycourse_name}}</h3>
-		<p> 지역 : {{mycourse_area}} | 내용 : {{mycourse_content}} <p>
+		<p> 지역 : {{mycourse_area}}<p>
 	</div>
 	{{/each}}
 	</script>

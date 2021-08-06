@@ -181,7 +181,6 @@
 		mycourse_name,
 		mycourse_area,
 
-		mycourse_content
 		FROM
 		mycourse_post
 
@@ -191,11 +190,6 @@
 			</if>
 			<if test="mycourse_area != null and mycourse_area != ''">
 				OR mycourse_area LIKE concat('%', #{mycourse_area}, '%')
-			</if>
-
-			<if test="mycourse_content != null and mycourse_content != ''">
-				OR mycourse_content LIKE concat('%', #{mycourse_content},
-				'%')
 			</if>
 		</where>
 		<!-- 페이지네이션에 필요 -->
@@ -213,11 +207,6 @@
 			</if>
 			<if test="mycourse_area != null and mycourse_area != ''">
 				OR mycourse_area LIKE concat('%', #{mycourse_area}, '%')
-			</if>
-
-			<if test="mycourse_content != null and mycourse_content != ''">
-				OR mycourse_content LIKE concat('%', #{mycourse_content},
-				'%')
 			</if>
 		</where>
 	</select>

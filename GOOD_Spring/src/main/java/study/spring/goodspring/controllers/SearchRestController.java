@@ -115,7 +115,6 @@ public class SearchRestController {
 		MyCourses input_m = new MyCourses();
 		input_m.setMycourse_name(keyword);
 		input_m.setMycourse_area(keyword);
-		input_m.setMycourse_content(keyword);
 
 		// 조회 결과가 저장될 객체
 		List<MyCourses> output_m = null;
