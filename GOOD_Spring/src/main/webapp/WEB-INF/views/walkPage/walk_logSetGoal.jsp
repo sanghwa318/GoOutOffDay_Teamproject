@@ -33,7 +33,7 @@
 				aria-valuemax="${goalItem.setgoal_distance}"
 				style="text-align:left; width: ${goalItem.distance_achieve}%; font-size: 35px; line-height: 35px;">
 				<span class="sr-only">${goalItem.distance_achieve}% 완료</span>현재 목표치
-				${goalItem.setgoal_distance} 미터 중 ${goalItem.distance_achieve}% 달성
+				${goalItem.setgoal_distance} 미터 중 <c:if test="${goalItem.distance_achieve >=100}">100</c:if><c:if test="${goalItem.distance_achieve<100}">${goalItem.distance_achieve}</c:if>% 달성
 			</div>
 		</div>
 		<h2>목표 시간</h2>
