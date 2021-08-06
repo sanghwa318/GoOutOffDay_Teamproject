@@ -23,7 +23,7 @@ public interface MemberService {
 	public List<Member> getMemberList(Member input) throws Exception;
 
 	/**
-	 * 회원  데아터가 저장되어 있는 갯수 조회
+	 * 회원  데이터가 저장되어 있는 갯수 조회
 	 * @return int
 	 * @throws Exception
 	 */

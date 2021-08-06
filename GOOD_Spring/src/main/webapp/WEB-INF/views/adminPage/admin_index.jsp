@@ -54,7 +54,7 @@ div.wrapper {
 			</div>
 			<div class="row admin_row">
 				<!-- 회원정보 -->
-				<div class="col-md-3 line" style="padding-bottom: 20px;">
+				<div class="col-md-4 line" style="padding-bottom: 20px;">
 					<h1 class="text-center">-회원정보-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-default col-xs-offset-2 col-xs-8"
@@ -67,7 +67,7 @@ div.wrapper {
 				</div>
 				<!-- //회원정보 -->
 				<!-- 커뮤니티 -->
-				<div class="col-md-3 line" style="padding-bottom: 20px;">
+				<div class="col-md-4 line" style="padding-bottom: 20px;">
 					<h1 class="text-center">-커뮤니티-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-success col-xs-offset-2 col-xs-8"
@@ -76,7 +76,7 @@ div.wrapper {
 				</div>
 				<!-- //커뮤니티 -->
 				<!-- 통계 -->
-				<div class="col-md-3 line" style="padding-bottom: 20px;">
+				<div class="col-md-4 line1" style="padding-bottom: 20px;">
 					<h1 class="text-center">-통계-</h1>
 					<div class="row" style="padding: 10px;">
 						<button class="btn btn-lg btn-info col-xs-offset-2 col-xs-8"
@@ -84,15 +84,6 @@ div.wrapper {
 					</div>
 				</div>
 				<!-- //통계 -->
-				<!-- 공지사항 -->
-				<div class="col-md-3" style="padding-bottom: 20px;">
-					<h1 class="text-center">-공지사항-</h1>
-					<div class="row" style="padding: 10px;">
-						<button class="btn btn-lg btn-warning col-xs-offset-2 col-xs-8"
-							onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_notice.do'">공지사항관리</button>
-					</div>
-				</div>
-				<!-- //공지사항 -->
 			</div>
 
 		</div>

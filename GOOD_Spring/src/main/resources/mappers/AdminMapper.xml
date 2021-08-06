@@ -32,16 +32,52 @@
    </select>
 
 	<!-- 1:1 문의 다중행 조회 -->
-	<select id="selectInquiryListAdmin"
-		parameterType="study.spring.goodspring.model.Inquiry"
-		resultMap="AdminMap">
-		SELECT QnA_no, user_info_user_no, QnA_title, QnA_text,
-		QnA_category, answer_detail, answer_yn,
-		QnA_create_datetime,
-		answer_create_datetime
-		FROM inquiry_qna
-		ORDER BY QnA_no ASC;
-	</select>
+   <select id="selectInquiryListAdmin"
+      parameterType="study.spring.goodspring.model.Inquiry"
+      resultMap="AdminMap">
+      SELECT QnA_no, user_info_user_no, QnA_title, QnA_text,
+      QnA_category,
+      answer_detail, answer_yn,
+      QnA_create_datetime,
+      answer_create_datetime
+      FROM inquiry_qna
+      
+      <where>
+         <choose>
+            <!-- 답변상태와 카테고리 둘 다 있을 경우 -->
+            <when test="answer_yn != null and answer_yn != ''">
+               answer_yn Like #{answer_yn}
+               <if test="QnA_category != null and QnA_category != ''">
+               AND QnA_category LIKE #{QnA_category}
+               </if>
+            </when>
+            <!-- 답변상태만 있고 카테고리는 없을 경우 -->
+            <when test="answer_yn != null and answer_yn != ''">
+               answer_yn Like #{answer_yn}
+            </when>
+            <!-- 답변상태 없고 카테고리만 있을 경우 -->
+            <when test="QnA_category != null and QnA_category != ''">
+               QnA_category LIKE #{QnA_category}
+            </when>
+            <!-- 둘 다 없을 경우 -->
+            <otherwise>
+               <if test="answer_yn != null and answer_yn != ''">
+                  answer_yn Like #{answer_yn}
+               </if>
+               <if test="QnA_category != null and QnA_category != ''">
+                 OR QnA_category LIKE #{QnA_category}
+               </if>
+            </otherwise>
+         </choose>
+      </where>
+      
+      ORDER BY QnA_no ASC;
+      
+      <!-- 페이지네이션에 필요 -->
+      <if test="listCount > 0">
+         LIMIT #{offset}, #{listCount};
+      </if>
+   </select>
 	
 	
 	<!-- 1:1문의 답변 저장 기능 -->
@@ -56,12 +92,52 @@
 	
 	<!-- 페이지네이션에 필요한 데이터 수 조회 기능 정의 -->
    <select id="selectInquiryCountAll"
-      parameterType="study.spring.goodspring.model.Inquiry"
+      parameterType="study.spring.goodspring.model.AdminInquiry"
       resultType="int">
       SELECT COUNT(*) FROM inquiry_qna
-
-     
    </select>
-
-
+   
+   <select id="selectInquiryBooleanAdmin" 
+   parameterType="study.spring.goodspring.model.AdminInquiry" resultMap="AdminMap">
+  	  SELECT * FROM inquiry_qna
+      
+      <where>
+         <choose>
+            <!-- 답변상태와 카테고리 둘 다 있을 경우 -->
+            <when test="answer_yn != null and answer_yn != ''">
+               answer_yn Like #{answer_yn}
+               <if test="QnA_category != null and QnA_category != ''">
+               AND QnA_category LIKE #{QnA_category}
+               </if>
+            </when>
+            <!-- 답변상태만 있고 카테고리는 없을 경우 -->
+            <when test="answer_yn != null and answer_yn != ''">
+               answer_yn Like #{answer_yn}
+            </when>
+            <!-- 답변상태 없고 카테고리만 있을 경우 -->
+            <when test="QnA_category != null and QnA_category != ''">
+               QnA_category LIKE #{QnA_category}
+            </when>
+            <!-- 둘 다 없을 경우 -->
+            <otherwise>
+               <if test="answer_yn != null and answer_yn != ''">
+                  answer_yn Like #{answer_yn}
+               </if>
+               <if test="QnA_category != null and QnA_category != ''">
+                 OR QnA_category LIKE #{QnA_category}
+               </if>
+            </otherwise>
+         </choose>
+      </where>
+      
+      ORDER BY QnA_no ASC;
+      
+      <!-- 페이지네이션에 필요 -->
+      <if test="listCount > 0">
+         LIMIT #{offset}, #{listCount};
+      </if>
+   		
+   </select>
+	
+	
 </mapper>

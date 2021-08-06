@@ -23,12 +23,13 @@ import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.model.WalkLog;
+import study.spring.goodspring.model.WalkSetGoal;
 import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.WalkCourseService;
 import study.spring.goodspring.service.WalkLogService;
+import study.spring.goodspring.service.WalkSetGoalService;
 
 @Controller
-
 public class WalkController {
 
 	/** Service 패턴 구현체 주입 */
@@ -40,6 +41,8 @@ public class WalkController {
 	WebHelper webHelper;
 	@Autowired
 	WalkLogService walkLogService; // 걷기기록하기
+	@Autowired
+	WalkSetGoalService walkSetGoalService;
 	/** "/프로젝트이름"에 해당하는 ContextPath 변수 주입 */
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
@@ -72,9 +75,11 @@ public class WalkController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_record.do", method = RequestMethod.POST)
-	public Map<String, Object> walkRecord(@RequestParam(value = "wat_latitude") String wat_latitude,
+	public Map<String, Object> walkRecord(
+			@RequestParam(value = "wat_latitude") String wat_latitude,
 			@RequestParam(value = "wat_longitude") String wat_longitude,
-			@RequestParam(value = "wat_timestamp") long wat_timestamp, @RequestParam(value = "count") int count) {
+			@RequestParam(value = "wat_timestamp") long wat_timestamp, 
+			@RequestParam(value = "count") int count) {
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 
@@ -330,7 +335,12 @@ public class WalkController {
 	 */
 	@RequestMapping(value = "/walkPage/walk_log.do", method = RequestMethod.GET)
 	public ModelAndView walk_log(Model model) {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
 
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		return new ModelAndView("walkPage/walk_log");
 	}
 	
@@ -345,6 +355,11 @@ public class WalkController {
 		//사용자 정보조회
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		//조회된 값을 담을 객체 준비
 		List<WalkLog> walklog = null;
@@ -354,7 +369,7 @@ public class WalkController {
 		long time = 0;
 		try {
 			//사용자가 기록한 코스이름을 조회
-			walklog = walkLogService.getCoureName(input);
+			walklog = walkLogService.getCourseName(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -406,6 +421,11 @@ public class WalkController {
 		//사용자 정보조회
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		//조회된 값을 담을 객체 준비
 		List<WalkLog> walklog = null;
@@ -415,7 +435,7 @@ public class WalkController {
 		long time = 0;
 		try {
 			//사용자가 기록한 코스이름을 조회
-			walklog = walkLogService.getCoureName(input);
+			walklog = walkLogService.getCourseName(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -462,7 +482,7 @@ public class WalkController {
 		double dist_all=0;
 		long time_all=0;
 		try {
-			walklog_all=walkLogService.getCoureName();
+			walklog_all=walkLogService.getCourseName();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -503,8 +523,7 @@ public class WalkController {
 			try {
 				usercount = walkLogService.getUserNoList().size();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				webHelper.redirect(null, e.getLocalizedMessage());
 			}
 			//누적값을 기록하기 서비스를 이용한 회원 수로 나누어 평균을 구한다.
 			time_all = tmp_time/usercount;
@@ -520,8 +539,128 @@ public class WalkController {
 	}
 
 	@RequestMapping(value = "/walkPage/walk_logSetGoal.do", method = RequestMethod.GET)
-	public ModelAndView walk_logSetGoal(Model model) {
+	public ModelAndView walk_logSetGoal(Model model
+			) {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
 
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		int userNo=loginInfo.getUser_no();
+		WalkSetGoal input = new WalkSetGoal();
+		input.setUser_info_user_no(userNo);
+		
+		WalkSetGoal output = null;
+		List<WalkSetGoal> outputList = null;
+		
+		
+
+		
+		//사용자의 걸은 거리와 걸은 시간이 담길 변수
+		double distance = 0;
+		long time = 0;
+		
+		try {
+			//사용자 목표 데이터 중 가장 최근의 데이터를 조회
+			output = walkSetGoalService.getGoalItem(input);
+			
+			outputList = walkSetGoalService.getGoalList(input); //사용자가 추가한 목표 전체 리스트
+			
+			//사용자가 기록한 코스 중 목표 기간에 해당하는 데이터를 조회			
+			List<WalkLog> walkLog =null; //코스이름이 담길 list
+			List<WalkLog> locList = null; //거리계산을 위한 좌표값을 담을 List
+			WalkLog input_courseName = new WalkLog();
+			input_courseName.setUser_info_user_no(userNo);
+			
+			//코스이름 추출
+			walkLog = walkLogService.getCnInTerm(input_courseName);
+			
+			//받아온 코스이름에서 시간과 거리계산
+			if (walkLog != null) {
+				double tmp = 0;
+				//사용자가 기록한 코스 수 만큼, 거리와 시간 계산을 반복하고,
+				//거리와 시간을 누적시킨다.
+				for (int i = 0; i < walkLog.size(); i++) {
+					
+					String course_name = walkLog.get(i).getCourse_name();
+					input_courseName.setCourse_name(course_name);
+					
+					try {
+						WalkLog tmp_time=walkLogService.getTime(input_courseName);
+						time+=tmp_time.getTime();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
+					try {
+						locList = walkLogService.getLatLonList(input_courseName);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (locList != null) {
+						for (int j = 0; j < locList.size() - 1; j++) {
+							double fromlat = Double.parseDouble(locList.get(j).getLat());
+							double fromlon = Double.parseDouble(locList.get(j).getLon());
+							double tolat = Double.parseDouble(locList.get(j + 1).getLat());
+							double tolon = Double.parseDouble(locList.get(j + 1).getLon());
+
+							tmp += walkLogService.distance(fromlat, fromlon, tolat, tolon, "meter");
+						}
+					}
+
+				}
+				distance = tmp;
+			}
+			
+			// walk_setgoal 테이블의 성취율 업데이트
+			int setgoal_time=output.getSetgoal_time()*60;
+			int setgoal_distance=output.getSetgoal_distance()*1000;
+			
+			input.setTime_achieve((float)(time/setgoal_time));
+			input.setDistance_achieve((float) (distance/setgoal_distance));
+			output = walkSetGoalService.editAchieve(input);
+			
+		} catch (Exception e) {
+			webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		model.addAttribute("time", time);
+		model.addAttribute("distance", distance);
+		model.addAttribute("goalList", outputList);
+		model.addAttribute("goalItem", output);
 		return new ModelAndView("walkPage/walk_logSetGoal");
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/walkPage/walk_logSetGoalOk.do", method = RequestMethod.POST)
+	public Map<String, Object> walk_logSetGoalOk(Model model,
+			@RequestParam(value="setgoal_day", defaultValue="0")int setgoal_day, //기간
+		@RequestParam(value="setgoal_distance",defaultValue="0")int setgoal_distance, //목표거리
+		@RequestParam(value="setgoal_time",defaultValue="0")int setgoal_time //목표시간
+			) {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if(setgoal_day==0) {
+			webHelper.redirect(null, "기간을 설정해주세요.");
+		}
+		if(setgoal_distance==0) {
+			webHelper.redirect(null, "목표 거리를 설정해주세요.");
+		}
+		if(setgoal_time==0) {
+			webHelper.redirect(null, "목표 시간을 설정해주세요.");
+		}
+		
+		WalkSetGoal input = new WalkSetGoal();
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		input.setSetgoal_day(setgoal_day);
+		input.setSetgoal_distance(setgoal_distance);
+		input.setSetgoal_time(setgoal_time);
+		
+		try {
+			walkSetGoalService.addGoalItem(input);
+		} catch (Exception e) {
+			webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		return webHelper.getJsonData();
 	}
 }

@@ -91,18 +91,6 @@
 		DELETE FROM walk_log WHERE walk_log_no=#{walk_log_no};
 	</delete>
 
-
-	<!-- 데이터 수정 기능 -->
-	<update id="updateWalkLog"
-		parameterType="study.spring.goodspring.model.WalkLog">
-		UPDATE inquiry_qna SET
-		answer_detail=#{answer_detail},
-		answer_yn=#{answer_yn},
-		answer_create_datetime=now()
-		WHERE
-		QnA_no =
-		#{QnA_no};
-	</update>
 	<!-- 기록하기 종료 -->
 	<update id="endRecord"
 		parameterType="study.spring.goodspring.model.WalkLog">
@@ -158,8 +146,7 @@
 		resultMap="WalkLogMap">
 		SELECT course_name
 		FROM walk_log
-		where
-		user_info_user_no=#{user_info_user_no}
+		WHERE user_info_user_no=#{user_info_user_no}
 		GROUP BY course_name
 	</select>
 	<!-- 기록하기 중지 할때 , 현재 기록된 데이터에 코스 이름을 저장한다.-->
@@ -218,4 +205,16 @@
 		FROM walk_log 
 		group by user_info_user_no
 	</select>
+	
+	<!-- 사용자가 설정한 목표 기간내에서 코스 이름을 조회 -->
+	<select id="selectCnInTerm" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
+		SELECT course_name
+		FROM walk_log
+		where user_info_user_no=#{user_info_user_no} 
+			AND (walk_log_datetime between 
+			(SELECT setgoal_create_datetime FROM walk_setgoal WHERE user_info_user_no=#{user_info_user_no} ORDER BY setgoal_create_datetime DESC LIMIT 0,1) 
+	        AND (SELECT setgoal_date FROM walk_setgoal WHERE user_info_user_no=#{user_info_user_no} ORDER BY setgoal_create_datetime DESC LIMIT 0,1) 
+	        )
+			GROUP BY course_name
+			</select>
 </mapper>

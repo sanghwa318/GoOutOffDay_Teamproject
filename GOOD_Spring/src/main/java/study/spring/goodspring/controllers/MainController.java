@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
+import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CAS;
 import study.spring.goodspring.model.Crew;
+import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.service.SearchService;
@@ -25,7 +28,12 @@ public class MainController {
 	/** Service 패턴 구현체 주입 */
 	@Autowired
 	SearchService searchService;
-
+	// 웹헬퍼
+	@Autowired
+	WebHelper webHelper;
+	/** "/프로젝트이름"에 해당하는 ContextPath 변수 주입 */
+	@Value("#{servletContext.contextPath}")
+	String contextPath;
 	/**
 	 * introduce 메인 페이지
 	 * 
@@ -78,8 +86,14 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/myPage/myPage_index.do", method = RequestMethod.GET)
-	public String myPageIndex() {
-		return ("myPage/myPage_index");
+	public ModelAndView myPageIndex() {
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		return new ModelAndView("myPage/myPage_index");
 	}
 
 	@RequestMapping(value = "/mainPage/login_findPW.do", method = RequestMethod.GET)
@@ -94,9 +108,14 @@ public class MainController {
 	 * @return String
 	 */
 	@RequestMapping(value = "/myPage/myPage_accountEdit.do", method = RequestMethod.GET)
-	public String myPage_accountEdit() {
+	public ModelAndView myPage_accountEdit() {
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
 
-		return "myPage/myPage_accountEdit";
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		return new ModelAndView("myPage/myPage_accountEdit");
 	}
 
 

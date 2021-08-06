@@ -154,7 +154,11 @@ public class MyCourseController {
 	public ModelAndView mycourseEdit(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
 		/* 1) 코스 이름 조회하기 */
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
 
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		WalkLog input = new WalkLog();
 		input.setUser_info_user_no(loginInfo.getUser_no());
 
@@ -173,7 +177,7 @@ public class MyCourseController {
 				webHelper.redirect(null, "코스 작성자만 수정가능합니다.");
 			}
 			// 지도 정보를 위한 코스이름 데이터 조회
-			courseName = walkLogService.getCoureName(input);
+			courseName = walkLogService.getCourseName(input);
 
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
@@ -239,7 +243,7 @@ public class MyCourseController {
 		List<WalkLog> courseName = null;
 		try {
 			// 데이터 조회
-			courseName = walkLogService.getCoureName(input);
+			courseName = walkLogService.getCourseName(input);
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}

@@ -96,7 +96,7 @@
 						</div>
 					</div>
 					<div class="col-md-2 col-sm-3"  >
-						<select class="form-control" id="crew_regeion" name="crew_regeion">
+						<select class="form-control" id="crew_area" name="crew_area">
 							<option value="">지역</option>
 							<option value="all">전체</option>
 							<option value="강남구">강남구</option>
@@ -131,6 +131,14 @@
 							<option value="">조건</option>
 							<option value=1>최신순</option>
 							<option value=2>오래된순</option>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-3 ">
+						<select class="form-control" id="crew_category" name="crew_category">
+							<option value="">종류</option>
+							<option value="걷기/체육">걷기/체육</option>
+							<option value="친목/모임">친목/모임</option>
+							<option value="문화/창작/예술">문화/창작/예술</option>
 						</select>
 					</div>
 					<div class="col-md-2 col-sm-3 pull-right btn_se" >
@@ -183,11 +191,12 @@
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
 									onclick="location.href='${infoUrl}'" style="cursor: pointer;">
 								<div class="caption clearfix">
-									<p>
-										<a href="${infoUrl}">크루 이름: ${item.crew_name}</a>
-									</p>
+									<h4>
+										<a href="${infoUrl}"> ${item.crew_name}</a>
+									</h4>
 									<h4>크루 소개: ${item.crew_sinto}</h4>
-									<p class="pull-left">지역: ${item.crew_area}</p>
+									<h4 >지역: ${item.crew_area}</h4>
+									<h4 >종류: ${item.crew_category}</h4>
 								</div>
 
 							</div>

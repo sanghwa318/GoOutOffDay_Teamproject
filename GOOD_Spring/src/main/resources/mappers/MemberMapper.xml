@@ -178,4 +178,12 @@
         SELECT COUNT(*) FROM user_info WHERE email=#{email}
     </select>
 	
+	<!-- 관리자 검사 -->
+	<select id="selectadmin"
+		parameterType="study.spring.goodspring.model.Member"
+		resultMap="MemberMap">
+		SELECT user_admin FROM user_info WHERE user_admin = 'Y';
+	</select>
+	
+
 </mapper>

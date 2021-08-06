@@ -62,12 +62,10 @@
 }
 
 .row_a {
-	margin-left: 25%;
+	margin-left: 3%;
 }
 
-form {
-	margin-left: 25%;
-}
+
 
 .title-img img {
 	width: 3rem;
@@ -105,13 +103,13 @@ form {
 			<h1 class="page-header">크루게시판</h1>
 
 			<!-- 본문 사이드 영역 -->
-			<div class="sidebar">
+			<div class="sidebar col-md-2 col-xs-2 col-sm-2">
 				<div class="form-group">
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
-					<h3>가입된 회원 수 : ${postout2.crew_member}명</h3>
-					<h3 class="crew_name">${postout2.crew_name} 크루 소개</h3>
+					<h4>가입된 회원: ${postout2.crew_member}명</h4>
+					<h4 class="crew_name">${postout2.crew_name} 소개</h4>
                   <p style="font-size:25px;">${postout2.crew_sinto}</p>
 					<input type="hidden" name=crew_post_post_no id="post_no"
 						value="${postout.post_no}">
@@ -121,57 +119,58 @@ form {
 
 
 <div class="article header">
-			<div class="row row_a">
+			<div class="row row_a col-xl-8 col-sm-9 col-xs-10" >
+			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
-					<img style="border-radius: 25px" src="${member.user_photo.fileUrl}"
+					<img style="border-radius: 25px; margin-right:15px; " src="${member.user_photo.fileUrl}"
 						width="50px" height="50px"></img>
 				</div>
 				
-				<div class="pull-left writer_info" style="margin-left: 15px;">
+				<div class="writer_info" >
 					<h4>${postout3.getUser_name()}</h4>
-					<p class="pull-left">작성일자: ${postout.getPost_createdate()}</p>
-					<p  class="pull-left " style="margin-left: 15px;">조회수 :
+					<p class="pull-left" style="color:#979797;" >작성일자: ${postout.getPost_createdate()}</p>
+					<p class="pull-left " style="margin-left: 15px; color:#979797;">조회수 :
 						${postout.post_hits}</p>
-						<p style="margin-top:100px">${postout.getPost_content()}</p>
-				</div>
-			
-				
-				</div>
-			</div>
-			
-			</div>
-				
-
-			<div class="row row_a">
-				<div class="col-md-2 col-lg-1 col-xs-2 text-center"
-					style="font-size: 20px"></div>
 				<div class="pull-right" style="margin-right: 25px">
 					<span class="heart"><i class="fa fa-heart-o"
 						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
 						class="fa fa-comment-o"></i></span> 댓글 ${total}
-
+				</div>
+						<br>
+						<br>
+						<hr>
+						<p style="margin-top:100px">${postout.getPost_content()}</p>
+				</div>
 				</div>
 			</div>
+			
+			
+			</div>
+
 
 			<hr />
 
 			<!-- 댓글 영역 -->
+			<div class="container" style="margin-top:-30px"><h3 style="margin-left:15%">댓글<span class="comment"><i
+						class="fa fa-comment-o"></i></span> ${total}<hr></h3>
 			<div id="cmt-list"></div>
+			
 
 
-		<div>
 				<form>
-					<div class="form-group input-group col-md-12 col-sm-12">
+				<div class="row" style="width:80%; margin-left:20%;">
+					<h4>${login_info.user_nick}</h4>
+					<div class="form-group input-group">
 						<textarea class="form-control" id="comment_text"
-							style="height: 60px; width=100%; resize: none;"
+							style="height: 60px; resize: none;"
 							placeholder="내용을 입력해주세요."></textarea>
 						<span class="input-group-btn"><button type="button"
 								class="btn btn-default" style="height: 60px;"
 								onclick="cmt_add()">댓글 등록</button></span>
 					</div>
+					</div>
 				</form>
 			<hr>
-
 		<div class="container col-md-12 col-sm-12">
 		<div class="row pull-left">
 			<form

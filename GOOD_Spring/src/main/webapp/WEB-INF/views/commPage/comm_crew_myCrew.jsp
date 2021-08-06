@@ -119,11 +119,12 @@
 										<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
 											onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
 										<div class="caption clearfix">
-											<p>
-												<a href="${bbsUrl}">크루 이름: ${item.crew_name}</a>
-											</p>
+											<h4>
+												<a href="${bbsUrl}"> ${item.crew_name}</a>
+											</h4>
 											<h4>크루 소개: ${item.crew_sinto}</h4>
-											<p class="pull-left">지역: ${item.crew_area}</p>
+											<h4 >지역: ${item.crew_area}</h4>
+											<h4 >종류: ${item.crew_category}</h4>
 										</div>
 
 									</div>

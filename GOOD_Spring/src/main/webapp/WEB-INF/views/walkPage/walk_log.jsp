@@ -47,7 +47,7 @@ h2 {
 				<h1 class="page-header page-title" id="cas_header"
 					onclick="location.href='../walkPage/walk_index.jsp'"
 					style="cursor: pointer; color: #343a40;">
-					<span class="test01">걷기<img src="../icon_img/걷기 아이콘.png;"
+					<span class="test01">걷기<img src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png;"
 						style="width: 44px; height: 44px; position: relative; bottom: 5px;"></img>
 					</span>
 				</h1>
@@ -55,7 +55,7 @@ h2 {
 			<div class="page-header">
 				<h1>걷기Log</h1>
 			</div>
-			<!-- walk_log는 내용을 담기 위한 껍데기 역할 -->
+			<!-- walk_log 하위 페이지 목록 -->
 			<ul class="nav nav-pills" role="navigation">
 				<li class="tabmenu active" id="log_tab1"><a data-toggle="tab"
 					role="button">내 기록</a></li>
@@ -64,10 +64,8 @@ h2 {
 				<li class="tabmenu" id="log_tab3"><a data-toggle="tab"
 					role="button">목표 설정</a></li>
 			</ul>
-			<!-- log -->
+			<!-- 하위페이지 표시 영역 -->
 			<div id="result">
-				<!-- <div class="tab-content"> -->
-				<!-- myLog load -->
 			</div>
 		</div>
 
