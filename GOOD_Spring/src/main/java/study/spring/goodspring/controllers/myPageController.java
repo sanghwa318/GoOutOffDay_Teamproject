@@ -310,10 +310,10 @@ public class myPageController {
 
 		/** 2) 데이터 삭제하기 */
 		Member input = (Member) webHelper.getSession("login_info");
-		input.setUser_id(input.getUser_id());
-
+		
+		
 		try {
-			memberService.deleteMember(input); // 데이터 삭제
+			memberService.deleteMember(input.getUser_no()); // 데이터 삭제
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}

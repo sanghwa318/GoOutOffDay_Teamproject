@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.AdminInquiry;
-import study.spring.goodspring.model.AdminMember;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.AdminService;
@@ -166,11 +165,24 @@ public class AdminServiceImpl implements AdminService{
 		}
 
 	@Override
-	public int deleteMemberadmin(Member input) throws Exception {
+	public int deleteMemberadmin(int input) throws Exception {
 		int result = 0;
 
 		try {
-			result = sqlSession.delete("MemberMapper.deleteItem", input);
+			sqlSession.update("BookMarkMapper.unsetbookmarkuserno", input);
+			sqlSession.update("CrewMapper.unsetcrewuserno", input);
+			sqlSession.update("CrewPostCmtMapper.unsetcrewpostcmtuserno", input);
+			sqlSession.update("CrewMemberMapper.unsetcrewmemberuserno", input);
+			sqlSession.update("CrewPostMapper.unsetcrewpostuserno", input);
+			sqlSession.update("InquiryMapper.unsetinquiryqnauserno", input);
+			sqlSession.update("MyCourseMapper.unsetmycoursepostuserno", input);
+			sqlSession.update("MyCourseCmtMapper.unsetmycoursecmtuserno", input);
+			sqlSession.update("WalkLogMapper.unsetwalkloguserno", input);
+			sqlSession.update("WalkSetGoalMapper.unsetwalksetgoaluserno", input);
+			
+			
+			
+			result = sqlSession.delete("MemberMapper.deleteUserno", input);
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}

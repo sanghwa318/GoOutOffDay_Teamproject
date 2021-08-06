@@ -162,4 +162,8 @@
 	WHERE post_no = #{post_no};
 	</delete>
 
+	<!-- 참조해제 -->
+	<update id="unsetcrewpostuserno" parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE crew_post SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

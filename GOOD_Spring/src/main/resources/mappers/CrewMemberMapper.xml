@@ -136,4 +136,9 @@
         WHERE crew_crew_no = #{crew_crew_no} AND user_info_user_no = #{user_info_user_no}
         LIMIT 1;
 	</select>
+	
+	<!-- 참조해제 -->
+	<update id="unsetcrewmemberuserno" parameterType="study.spring.goodspring.model.CrewMember">
+	UPDATE crew_member SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

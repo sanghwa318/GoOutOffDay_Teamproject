@@ -64,11 +64,11 @@
 		WHERE comment_no = #{comment_no};
 	</update>
 
-	<!-- 데이터 수 조회를 위한 기능 정의 -->
+	<!-- 참조해제 -->
+	<update id="unsetmycoursecmtuserno" parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE mycourse_cmt SET user_no=null WHERE user_no=#{user_no};
+	</update>
 
-	<!-- <select id="selectCountAll"
-		parameterType="study.spring.goodspring.model.MyCourseCmt" resultType="int">
-		SELECT COUNT(*) FROM mycourse_cmt
-	</select> -->
 
+	
 </mapper>

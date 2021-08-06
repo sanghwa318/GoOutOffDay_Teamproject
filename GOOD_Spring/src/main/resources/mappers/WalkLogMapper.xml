@@ -217,4 +217,9 @@
 	        )
 			GROUP BY course_name
 			</select>
+			
+	<!-- 참조해제 -->
+	<update id="unsetwalkloguserno" parameterType="study.spring.goodspring.model.WalkLog">
+	UPDATE walk_log SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

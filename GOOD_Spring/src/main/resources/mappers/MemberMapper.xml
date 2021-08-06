@@ -185,5 +185,10 @@
 		SELECT user_admin FROM user_info WHERE user_admin = 'Y';
 	</select>
 	
+	<!-- 관리자 페이지 회원 추방 -->
+	<delete id="deleteUserno"
+		parameterType="study.spring.goodspring.model.Member">
+		DELETE FROM user_info WHERE user_no=#{user_no};
+	</delete>
 
 </mapper>

@@ -63,5 +63,5 @@ public interface AdminService {
 		 * @return int
 		 * @throws Exception
 		 */
-		public int deleteMemberadmin(Member input) throws Exception;
+		public int deleteMemberadmin(int input) throws Exception;
 }

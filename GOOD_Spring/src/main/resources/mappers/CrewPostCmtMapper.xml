@@ -50,7 +50,11 @@
 		WHERE comment_no=#{comment_no}
 		ORDER BY comment_no ASC
 	</select>
-
+	
+	<!-- 참조해제 -->
+	<update id="unsetcrewpostcmtuserno" parameterType="study.spring.goodspring.model.CrewPostCmt">
+	UPDATE crew_comment SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>
 
 
