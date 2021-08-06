@@ -62,7 +62,7 @@
 }
 
 .row_a {
-	margin-left: 50px;
+	margin-left: 3%;
 }
 
 
@@ -151,7 +151,7 @@
 			<hr />
 
 			<!-- 댓글 영역 -->
-			<div class="container" style="margin-top:-30px"><h3 style="margin-left:180px">댓글<span class="comment"><i
+			<div class="container" style="margin-top:-30px"><h3 style="margin-left:15%">댓글<span class="comment"><i
 						class="fa fa-comment-o"></i></span> ${total}<hr></h3>
 			<div id="cmt-list"></div>
 			

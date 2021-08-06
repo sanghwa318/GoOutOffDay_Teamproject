@@ -97,7 +97,8 @@
             <!-- 크루 상세 정보  -->
             <div class="col-md-6">
                <h2>${output.crew_name} 크루 공지사항</h2>
-               <div style="border: 4px dotted #eeee; min-height:200px; min-width:500px"><p>${output.crew_dinto}</p></div>
+               <div style="border: 4px dotted #eeee; min-height:200px; min-width:500px">
+               <p style="font-size:30px; margin:3% 0 0 3%">${output.crew_dinto}</p></div>
             </div>
             <!-- 크루 상세 정보 끝 -->
 
