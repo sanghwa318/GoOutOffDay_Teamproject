@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.AdminInquiry;
-import study.spring.goodspring.model.AdminMember;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.AdminService;

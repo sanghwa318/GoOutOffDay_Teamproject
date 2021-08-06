@@ -3,7 +3,6 @@ package study.spring.goodspring.service;
 import java.util.List;
 
 import study.spring.goodspring.model.AdminInquiry;
-import study.spring.goodspring.model.AdminMember;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
 
