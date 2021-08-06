@@ -62,7 +62,7 @@
 }
 
 .row_a {
-	margin-left: 3%;
+	margin-left: 8%;
 }
 
 
@@ -158,7 +158,7 @@
 
 
 				<form>
-				<div class="row" style="width:80%; margin-left:20%;">
+				<div class="row" style="margin-left:20%;">
 					<h4>${login_info.user_nick}</h4>
 					<div class="form-group input-group">
 						<textarea class="form-control" id="comment_text"
