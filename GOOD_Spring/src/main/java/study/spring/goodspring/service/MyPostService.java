@@ -24,4 +24,14 @@ public interface MyPostService {
 	public List<CrewPost> getCrewPost(int input) throws Exception;
 	
 	public List<Object> sortPost(List<MyCourses> mycourse, List<CrewPost> crewpost) throws Exception;
+
+
+
+	/**
+	 * 나만의코스 & 크루게시물 수 조회
+	 * @param MyCourse 코스이름이 담긴 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	int getMyPostAllCount(CrewPost crewpost) throws Exception;
 }

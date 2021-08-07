@@ -138,5 +138,20 @@ public class MyPostServiceImpl implements MyPostService {
 			return list;
 
 	}
+	
+	@Override
+	public int getMyPostAllCount(CrewPost crewpost) throws Exception {
+		
+		int result= 0;
+		
+		try {
+			result = sqlSession.selectOne("CrewPostMapper.selectMyPostAll", crewpost);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
 
 }

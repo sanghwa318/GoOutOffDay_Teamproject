@@ -313,7 +313,7 @@ public class CommController {
 			// 검색어
 			@RequestParam(value = "keyword", required = false) String keyword,
 			// 지역 버튼
-			@RequestParam(value = "crew_regeion", required = false) String region,
+			@RequestParam(value = "crew_area", required = false) String region,
 			// 조건 버튼
 			@RequestParam(value = "order", defaultValue = "1") int order,
 			// 크루 종류

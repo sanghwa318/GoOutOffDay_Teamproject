@@ -106,11 +106,14 @@
 		SELECT post_no, post_like,
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
-		post_img, post_hits
+		post_img, post_hits,
 		user_info_user_no 
 		FROM crew_post
 		WHERE user_info_user_no = #{user_info_user_no}
 		ORDER BY post_createdate ASC
+
+		
+		
 	</select>
 	
 	<!-- 크루게시물 수 조회를 위한 기능 정의 -->
@@ -161,5 +164,15 @@
 	DELETE FROM crew_post
 	WHERE post_no = #{post_no};
 	</delete>
+
+<!-- 내가쓴글 수 조회 -->
+	<select id="selectMyPostAll"
+		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
+		SELECT count(*) +(select count(*) from mycourse_post mc 
+		where mc.user_info_user_no = cp.user_info_user_no) count
+		FROM crew_post cp
+		WHERE cp.user_info_user_no= #{user_info_user_no}
+		
+</select>
 
 </mapper>

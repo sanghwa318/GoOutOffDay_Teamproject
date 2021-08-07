@@ -109,6 +109,8 @@
 		</div>
 		<!-- //본문영역 끝 -->
 	</div>
+
+	
 	<!-- 하단영역 -->
 	<%@ include file="../inc/Footer.jsp"%>
 	<%@ include file="../inc/plugin.jsp"%>

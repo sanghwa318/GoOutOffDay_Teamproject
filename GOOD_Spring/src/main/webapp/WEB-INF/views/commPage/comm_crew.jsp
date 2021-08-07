@@ -98,7 +98,6 @@
 					<div class="col-md-2 col-sm-3"  >
 						<select class="form-control" id="crew_area" name="crew_area">
 							<option value="">지역</option>
-							<option value="all">전체</option>
 							<option value="강남구">강남구</option>
 							<option value="강동구">강동구</option>
 							<option value="강북구">강북구</option>
