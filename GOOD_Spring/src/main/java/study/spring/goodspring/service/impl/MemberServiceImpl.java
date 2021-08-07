@@ -355,6 +355,7 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			sqlSession.selectOne("MemberMapper.selectItem", input);
 			sqlSession.update("MemberMapper.userOut", input);
+			sqlSession.update("CrewMemberMapper.crewOut", input);
 			
 		}catch(NullPointerException e) {
 			log.error(e.getLocalizedMessage());
