@@ -165,6 +165,7 @@
 	WHERE post_no = #{post_no};
 	</delete>
 
+<<<<<<< HEAD
 <!-- 내가쓴글 수 조회 -->
 	<select id="selectMyPostAll"
 		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
@@ -175,4 +176,10 @@
 		
 </select>
 
+=======
+	<!-- 참조해제 -->
+	<update id="unsetcrewpostuserno" parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE crew_post SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
+>>>>>>> b4484e633959c2217873851c02fc0cccb62ac0c7
 </mapper>

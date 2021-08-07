@@ -53,7 +53,7 @@ public interface MemberService {
 	 * @return int
 	 * @throws Exception
 	 */
-	public int deleteMember(Member input) throws Exception;
+	public int deleteMember(int input) throws Exception;
 	
 	/**
 	 * 로그인을 위한 데이터 조회 메서드
@@ -115,5 +115,7 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public Member selectItemByNo(int userNo) throws Exception;
+
+	
 	
 }

@@ -80,4 +80,9 @@
 		    )
 		AS temp)
 	</update>
+	
+	<!-- 참조해제 -->
+	<update id="unsetwalksetgoaluserno" parameterType="study.spring.goodspring.model.WalkSetGoal">
+	UPDATE walk_setgoal SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

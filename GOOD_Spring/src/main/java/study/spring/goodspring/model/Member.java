@@ -22,6 +22,7 @@ public class Member {
 	private boolean user_admin;// (관리자 권한)
 	private String create_datetime;// (가입일자)
 	private String edit_datetime;// (수정일자)
+	private boolean user_out; //(회원탈퇴 여부)
 	
     /** 프로필사진 정보{json=UploadItem}, IS NULL */
     public void setPhotoJson(String user_photo) {

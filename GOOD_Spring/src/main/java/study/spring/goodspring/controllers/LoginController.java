@@ -59,6 +59,9 @@ public class LoginController {
 
 		try {
 			output = memberService.login(input);
+			if(output.isUser_out()) {
+				 return webHelper.getJsonWarning("탈퇴된 회원입니다.");
+			}
 
 		} catch (Exception e) {
 			return webHelper.getJsonError(e.getLocalizedMessage());

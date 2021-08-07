@@ -152,7 +152,7 @@ public class MyCourseController {
 	 */
 	@RequestMapping(value = "/commPage/comm_myCourseEdit.do", method = RequestMethod.GET)
 	public ModelAndView mycourseEdit(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
-		/* 1) 코스 이름 조회하기 */
+		/* 1) 로그인 세션정보 검사 */
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 		if (loginInfo == null) {
 
@@ -163,8 +163,13 @@ public class MyCourseController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 
 		List<WalkLog> courseName = null;
-
-		/* 2) 현재 코스 글 정보 조회 */
+		/* 2) 사용자의 걷기로그 중 코스 이름이 없는 값을 지운다. */
+		try {
+			walkLogService.deleteNull(input);
+		} catch (Exception e1) {
+			return webHelper.redirect(null, e1.getLocalizedMessage());
+		}
+		/* 3) 현재 코스 글 정보 조회 */
 		MyCourses mycourseInput = new MyCourses();
 		mycourseInput.setMycourse_no(mycourse_no);
 		MyCourses output = null;

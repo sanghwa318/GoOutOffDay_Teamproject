@@ -74,6 +74,7 @@
 							<%-- 조회결과에 따른 반복 처리 --%>
 							<c:forEach var="item" items="${output}">
 							<c:set var="i" value="${i+1}" />
+							<c:if test="${!item.crew_out}">
 							<tr>
 								<td align="center"><input type='radio' data-memberno="${item.member_no}"
 								data-crewno="${item.crew_crew_no}" name='member_id' class="member_id"
@@ -84,6 +85,7 @@
 								<td align="center">${item.member_create_datetime}</td>
 								<td align="center">${item.member_visit_datetime}</td>
 							</tr>
+							</c:if>
 							</c:forEach>
 					</tbody>
 				</table>

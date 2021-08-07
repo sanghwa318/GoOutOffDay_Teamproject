@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.AdminInquiry;
-import study.spring.goodspring.model.AdminMember;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.AdminService;
@@ -165,15 +164,17 @@ public class AdminServiceImpl implements AdminService{
 			return result;
 		}
 
-	@Override
-	public int deleteMemberadmin(Member input) throws Exception {
-		int result = 0;
 
+	@Override
+	public void deleteMemberadmin(Member input) throws Exception {
+	
+	
 		try {
-			result = sqlSession.delete("MemberMapper.deleteItem", input);
-			if (result == 0) {
-				throw new NullPointerException("result=0");
-			}
+				
+			sqlSession.update("MemberMapper.userOut", input);
+			sqlSession.update("CrewMemberMapper.crewOut", input);
+			
+			
 
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -182,7 +183,7 @@ public class AdminServiceImpl implements AdminService{
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 삭제에 실패했습니다.");
 		}
-		return result;
+	
 	}
 
 }

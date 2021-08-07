@@ -546,10 +546,11 @@ carousel-title2 {
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 	<script type="text/javascript">
 	var loginInfo = "<%=session.getAttribute("login_info")%>"
+	var intervalString =null;
 	function Recording(){
 		
 		var num = 0;
-        setInterval(function() {
+        intervalString = setInterval(function() {
         	var colorcode =	'#F50057';
             var str =  [
             			'<span style="color:'+colorcode+'">기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>', 
@@ -600,12 +601,12 @@ carousel-title2 {
             num = ++num % str.length;
             $('#recording').html(str[num]);
         }, 100);
-        		
-		
-}
+	}
+	
 	function noRecording(){
+		clearInterval(intervalString);
 		$('#recording').html('');
-}
+	}
 		$(function() {
 			
 			$("#startRecord").click(function(event) {
@@ -624,7 +625,7 @@ carousel-title2 {
 			
 			$("#endRecord-btn").click(function(e) {
 				endRecord();
-				noRecording();
+				
 			});
 
 		});

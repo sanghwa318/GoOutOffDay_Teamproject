@@ -183,14 +183,16 @@ public class AdminController {
 
 	      Member output = null;
 
+	      
+
 	      try {
 	         output = adminService.getUserinfoadmin(input);
-	        		 
+	
 	           if(output.isUser_admin()) {
 	        	  return webHelper.redirect(null, "관리자는 추방할 수 없습니다.");
 	         }
 	         else {
-	         adminService.deleteMemberadmin(input); // 데아터 삭제
+	         adminService.deleteMemberadmin(output); // 데아터 삭제
 	         }
 	      } catch (Exception e) {
 	         return webHelper.redirect(null, e.getLocalizedMessage());
