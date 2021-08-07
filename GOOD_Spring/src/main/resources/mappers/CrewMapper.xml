@@ -199,15 +199,12 @@
 		SELECT * FROM crew
 		WHERE crew_no = #{crew_no};
 	</select>
-<<<<<<< HEAD
 
 
 
-=======
     
     <!-- 참조해제 -->
 	<update id="unsetcrewuserno" parameterType="study.spring.goodspring.model.Crew">
 	UPDATE crew SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
 	</update>
->>>>>>> b4484e633959c2217873851c02fc0cccb62ac0c7
 </mapper>
