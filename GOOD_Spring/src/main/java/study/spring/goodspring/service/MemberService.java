@@ -115,7 +115,10 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public Member selectItemByNo(int userNo) throws Exception;
-
 	
+	/**
+	 * 회원 탈퇴 'Y'로 변환하기
+	 */
+	public void userOutMember(Member input) throws Exception;
 	
 }

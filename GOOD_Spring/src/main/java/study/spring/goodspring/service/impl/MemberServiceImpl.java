@@ -345,5 +345,25 @@ public class MemberServiceImpl implements MemberService {
 	}
 		return result;
 	}
+	
+	/**회원이 스스로 탈퇴 시 Y로 변경
+	 * 
+	 */
+	@Override
+	public void userOutMember(Member input) throws Exception {
+		 
+		try {
+			sqlSession.selectOne("MemberMapper.selectItem", input);
+			sqlSession.update("MemberMapper.userOut", input);
+			
+		}catch(NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("삭제된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 삭제에 실패했습니다.");
+		}
+		
+	}
 
 }
