@@ -20,9 +20,11 @@ import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.MyCourseLike;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.model.WalkLog;
 import study.spring.goodspring.service.MemberService;
+import study.spring.goodspring.service.MyCourseLikeService;
 import study.spring.goodspring.service.MyCourseService;
 import study.spring.goodspring.service.MyPostService;
 import study.spring.goodspring.service.WalkLogService;
@@ -46,7 +48,8 @@ public class MyCourseController {
 	MemberService memberService;
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
-
+	@Autowired
+	MyCourseLikeService myCourseLikeService;
 	/*
 	 * comm_myCourse 나만의 코스 목록 페이지
 	 */
@@ -142,9 +145,97 @@ public class MyCourseController {
 			}
 		}
 		
+		
 		model.addAttribute("member", member);
 		model.addAttribute("output", output);
 		return new ModelAndView("commPage/comm_myCourseDetail");
+	}
+	/**
+	 * 좋아요 검사
+	 * @param mycourse_no
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value= "/commPage/comm_myCourseDetail/isLike.do", method = RequestMethod.POST)
+	public Map<String, Object> isLike(@RequestParam(value="mycourse_no", defaultValue="0")int mycourse_no){
+		Map<String, Object> map = new HashMap<String, Object>();
+		/** 1) 현재 글의 좋아요 수*/
+		try {
+			int count=myCourseLikeService.selectLike(mycourse_no);
+			map.put("count",count);
+		} catch (Exception e1) {
+			webHelper.getJsonWarning(e1.getLocalizedMessage());
+		}
+		/** 2)사용자가 좋아요를 했는지 검사*/
+		//로그인 세션정보가 있으면 세션정보의 user_no와 
+		//현재 mycourse_no로 좋아요 된 글인지 확인한다.
+		if(webHelper.getSession("login_info")!=null) {
+			Member loginInfo = (Member) webHelper.getSession("login_info");
+			int user_no = loginInfo.getUser_no();
+			MyCourseLike like=new MyCourseLike();
+			like.setMycourse_no(mycourse_no);
+			like.setUser_info_user_no(user_no);
+			int isLike =0;
+			
+			try {
+				isLike = myCourseLikeService.likeUniqueCheck(like);
+			} catch (Exception e) {
+				webHelper.getJsonWarning(e.getLocalizedMessage());
+			}
+			map.put("isLike", isLike );
+		}else {
+			map.put("isLike", 0);
+		}
+		
+		return webHelper.getJsonData(map);
+	}
+	
+	/*
+	 * 좋아요 추가
+	 * 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_myCourseDetail/addLike.do", method = RequestMethod.POST)
+	public Map<String, Object> addLike(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
+		
+		if(webHelper.getSession("login_info")==null) {
+			webHelper.getJsonWarning("로그인 정보 없음");
+		}else {
+			Member loginInfo=(Member)webHelper.getSession("login_info");
+			MyCourseLike input = new MyCourseLike();
+			input.setMycourse_no(mycourse_no);
+			input.setUser_info_user_no(loginInfo.getUser_no());
+			try {
+				myCourseLikeService.addLike(input);
+			} catch (Exception e) {
+				webHelper.getJsonWarning("좋아요 추가 실패");
+			}
+		}		
+		return webHelper.getJsonData();
+	}
+	
+	/*
+	 * 좋아요 취소
+	 * 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_myCourseDetail/deleteLike.do", method = RequestMethod.POST)
+	public Map<String, Object> deleteLike(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
+		
+		if(webHelper.getSession("login_info")==null) {
+			webHelper.getJsonWarning("로그인 정보 없음");
+		}else {
+			Member loginInfo=(Member)webHelper.getSession("login_info");
+			MyCourseLike input = new MyCourseLike();
+			input.setMycourse_no(mycourse_no);
+			input.setUser_info_user_no(loginInfo.getUser_no());
+			try {
+				myCourseLikeService.deleteLike(input);
+			} catch (Exception e) {
+				webHelper.getJsonWarning("좋아요 취소 실패");
+			}
+		}		
+		return webHelper.getJsonData();
 	}
 
 	/*

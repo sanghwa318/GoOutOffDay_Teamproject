@@ -98,6 +98,7 @@ body>div.container {
 		        	
 					else if(code == 4){
 						error_msg = "탈퇴된 회원입니다.\n"
+					} 
 							swal({
 								title : "에러",
 								text :error_msg,
@@ -110,7 +111,6 @@ body>div.container {
 								}, 100);
 							}); // <-- 메시지 표시
 							return false; // <-- 실행 중단
-					} 
 		        	
 		        },
 		        success: function(json) {

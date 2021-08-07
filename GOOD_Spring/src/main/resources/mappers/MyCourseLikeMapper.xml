@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MyCourseLikeMapper">
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다 -->
+	<resultMap type="study.spring.goodspring.model.MyCourseLike"
+		id="MyCourseLikeMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼을 연결한다. -->
+		<result property="like_no" column="like_no" />
+		<result property="mycourse_no" column="mycourse_no" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="like_create_datetime" column="like_create_datetime" />
+	</resultMap>
+	
+	<!-- 좋아요 추가 -->
+	<insert id="addLike" parameterType="study.spring.goodspring.model.MyCourseLike"
+		useGeneratedKeys="true" keyProperty="like_no">
+	INSERT INTO mycourse_like 
+	(mycourse_no, user_info_user_no, like_create_datetime) 
+	VALUES (#{mycourse_no}, #{user_info_user_no}, now())
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="deleteLike" parameterType="study.spring.goodspring.model.MyCourseLike">
+	DELETE FROM mycourse_like 
+	WHERE mycourse_no=#{mycourse_no}
+		AND user_info_user_no=#{user_info_user_no}
+	</delete>
+	
+	<!-- 중복검사를 위한 조회문 -->
+	<select id="selectLikeCount"
+		parameterType="study.spring.goodspring.model.MyCourseLike"
+		resultType="int">
+		SELECT count(*) FROM mycourse_like
+		WHERE user_info_user_no = #{user_info_user_no}
+			AND mycourse_no = #{mycourse_no}
+	</select>
+</mapper>

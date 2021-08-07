@@ -204,13 +204,13 @@ ul, li {
 			</div>
 			<hr>
 			<div class="row">
-			<img style="border-radius: 60px" src="${member.getUser_photo().getFileUrl()}" width="120px" height="120px">
+			<img style="border-radius: 60px" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="120px" height="120px">
 				<div class="col-md-2 col-lg-1 col-xs-2 text-center"
 					style="font-size: 20px"> 작성자 : ${output.user_nick} </div>
 				<div class="pull-right" style="margin-right: 15px">
-					조회수 ${output.mycourse_hits } <span
-						class="heart"><i class="fa fa-heart-o" aria-hidden="true"
-						role="button"></i> </span> 좋아요 ${output.like } <span class="comment"><i
+					조회수 ${output.mycourse_hits } 
+					<span class="heart">
+					</span> <span id="likeCount"></span><span class="comment"><i
 						class="fa fa-comment-o"></i></span> 댓글 28
 				</div>
 			</div>
