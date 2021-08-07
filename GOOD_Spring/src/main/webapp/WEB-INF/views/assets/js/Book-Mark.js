@@ -23,7 +23,7 @@ $(".heart")
 							} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 								$(".heart")
 									.html(
-										'<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜제거');
+										'<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜제거');
 								$(".heart")
 									.removeClass(
 										"liked");

@@ -5,6 +5,7 @@ import java.util.List;
 import study.spring.goodspring.model.AdminInquiry;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.MyCourses;
 
 public interface AdminService {
 	
@@ -64,4 +65,12 @@ public interface AdminService {
 		 * @throws Exception
 		 */
 		public void deleteMemberadmin(Member input) throws Exception;
+		
+		/**
+		 * [페이지네이션에 필요]
+		 * 데이터가 저장되어 있는 갯수 조회
+		 * @return int
+		 * @throws Exception
+		 */
+		public int getMemberCount(Member input) throws Exception;
 }

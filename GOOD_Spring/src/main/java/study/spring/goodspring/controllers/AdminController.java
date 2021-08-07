@@ -67,6 +67,7 @@ public class AdminController {
 		AdminInquiry input = new AdminInquiry();
 		input.setAnswer_yn(answer);
 		input.setQnA_category(category);
+		
 
 		/* 데이터 조회하기 */
 		List<AdminInquiry> output = null;
@@ -145,28 +146,56 @@ public class AdminController {
 				"답변이 작성되었습니다.");
 	}
 
-	/**
-	 * 관리자 회원관리 페이지
-	 */
-	@RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
-	public ModelAndView adminMember(Model model) {
- 
-	    Member input = new Member();
-	    
-	     /*  데이터 조회하기 */
-	     List<Member> output = null;
-	     
-	     try {
-	        // 데이터 조회
-	        output = memberService.getMemberList(input);
-	     } catch (Exception e) {
-	        return webHelper.redirect(null, e.getLocalizedMessage());
-	     }
-	     // View 처리
-	     model.addAttribute("output", output);
-	     
-	     return new ModelAndView ("adminPage/admin_member");
-		}
+		/**
+	    * 관리자 회원관리 페이지
+	    */
+	   @RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
+	   public ModelAndView adminMember(Model model,
+	         @RequestParam(value="keyword", required = false) String keyword,
+	         @RequestParam(value = "category", required = false) String category,
+	         @RequestParam(value = "page", defaultValue = "1") int nowPage) {
+	 
+	       Member input = new Member();
+	       input.setUser_name(keyword);
+	       input.setUser_nick(keyword);
+	       
+	       input.setUser_name(category);
+	       input.setUser_id(category);
+	       
+	       // [페이지네이션] 변수 추가
+	       int totalCount = 0; // 전체 게시글 수
+	       int listCount = 10; // 한페이지단 표시할 목록수
+	       int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+	       // [페이지네이션] 객체 추가
+	       PageData pageData = null;
+	       // [페이지네이션] 변수 추가 (종료)
+	       
+	       /*  데이터 조회하기 */
+	       List<Member> output = null;
+	        
+	       try {
+	           
+	          // [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
+	         totalCount = memberService.getMemberCount(input);
+	         // [페이지네이션] 페이지 번호 계산
+	         pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+	         // SQL의 LIMIT 절에서 사용될 값을 Beans의 static 변수에 저장
+	         Inquiry.setOffset(pageData.getOffset());
+	         Inquiry.setOffset(pageData.getListCount());
+	           // 데이터 조회
+	           output = memberService.getMemberList(input);
+	        } catch (Exception e) {
+	           return webHelper.redirect(null, e.getLocalizedMessage());
+	        }
+	        // View 처리
+	        model.addAttribute("output", output);
+	        model.addAttribute("category", category);
+	        model.addAttribute("keyword", keyword);
+	        model.addAttribute("pageData", pageData);
+	        
+	        return new ModelAndView ("adminPage/admin_member");
+	      }
 	
 		/**
 		 * 관리자 회원 추방 및 관리자 추방 방지
