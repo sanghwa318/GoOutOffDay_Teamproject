@@ -55,6 +55,16 @@ public class CrewPost {
 	private int crew_post_post_no; // 게시물 번호
 	private String comment_usernick; // 작성자 닉네임
 	
+	//MyCourse 컬럼
+	private int mycourse_no; // PRI 키, auto increment
+	private int like; // 좋아요 수
+	private String mycourse_name; // 코스 이름
+	private String mycourse_area; // 코스 지역
+	private String mycourse_content; // 코스 설명
+	private String mycourse_createdate; // 생성시간
+	private String mycourse_editdate; // 수정 시간
+	private int mycourse_hits; // 조회수
+	
 	
 	//2) 페이지 구현을 위한 static 변수
 	

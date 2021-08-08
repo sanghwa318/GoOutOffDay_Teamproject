@@ -351,6 +351,15 @@ public class WalkController {
 			String redirectUrl = contextPath + "/mainPage/login.do";
 			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
 		}
+		/* 1) 사용자의 걷기로그 중 코스 이름이 없는 값을 지운다. */
+		WalkLog input = new WalkLog();
+		input.setUser_info_user_no(loginInfo.getUser_no());
+		try {
+			walkLogService.deleteNull(input);
+		} catch (Exception e1) {
+			return webHelper.redirect(null, e1.getLocalizedMessage());
+		}
+		
 		return new ModelAndView("walkPage/walk_log");
 	}
 	

@@ -86,7 +86,7 @@
 
 					<div class="col-md-3 col-sm-2 col-md-offset-1" role="search">
 						<div class="form-group input-group">
-							<input type="text" class="form-control" placeholder="크루, 게시글 검색"
+							<input type="text" class="form-control" placeholder="크루를 검색해보세요."
 								id="keyword" name="keyword" value=""><span
 								class="input-group-btn">
 								<button class="btn btn-blue" type="submit">
@@ -98,7 +98,6 @@
 					<div class="col-md-2 col-sm-3"  >
 						<select class="form-control" id="crew_area" name="crew_area">
 							<option value="">지역</option>
-							<option value="all">전체</option>
 							<option value="강남구">강남구</option>
 							<option value="강동구">강동구</option>
 							<option value="강북구">강북구</option>

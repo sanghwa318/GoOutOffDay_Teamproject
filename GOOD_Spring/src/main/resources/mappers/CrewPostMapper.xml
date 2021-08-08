@@ -106,11 +106,14 @@
 		SELECT post_no, post_like,
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
-		post_img, post_hits
+		post_img, post_hits,
 		user_info_user_no 
 		FROM crew_post
 		WHERE user_info_user_no = #{user_info_user_no}
 		ORDER BY post_createdate ASC
+
+		
+		
 	</select>
 	
 	<!-- 크루게시물 수 조회를 위한 기능 정의 -->
@@ -162,4 +165,8 @@
 	WHERE post_no = #{post_no};
 	</delete>
 
+	<!-- 참조해제 -->
+	<update id="unsetcrewpostuserno" parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE crew_post SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

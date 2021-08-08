@@ -200,4 +200,9 @@
 		WHERE crew_no = #{crew_no};
 	</select>
 
+    
+    <!-- 참조해제 -->
+	<update id="unsetcrewuserno" parameterType="study.spring.goodspring.model.Crew">
+	UPDATE crew SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

@@ -309,11 +309,14 @@ public class myPageController {
 	public ModelAndView delete_ok() {
 
 		/** 2) 데이터 삭제하기 */
-		Member input = (Member) webHelper.getSession("login_info");
-		input.setUser_id(input.getUser_id());
-
+		 Member input = (Member) webHelper.getSession("login_info"); 
+			/* Member input = new Member(); */
+		
+		
 		try {
-			memberService.deleteMember(input); // 데이터 삭제
+			
+			memberService.userOutMember(input);
+			
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}

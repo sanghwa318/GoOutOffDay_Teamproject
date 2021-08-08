@@ -85,7 +85,10 @@
 		QnA_no = #{QnA_no};
 	</update>
 
-
-
+	<!-- 참조해제 -->
+	<update id="unsetinquiryqnauserno" parameterType="study.spring.goodspring.model.Inquiry">
+	UPDATE inquiry_qna SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
+	
 
 </mapper>

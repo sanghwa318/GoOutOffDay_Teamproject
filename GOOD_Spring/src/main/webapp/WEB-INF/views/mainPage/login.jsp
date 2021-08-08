@@ -95,18 +95,23 @@ body>div.container {
 		        	if (code == 5) 	{
 		                error_msg = "아이디나 비밀번호를 확인하세요.\n";
 		            }
-		        	swal({
-						title : "에러",
-						text :error_msg,
-						type : "error"
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
+		        	
+					else if(code == 4){
+						error_msg = "탈퇴된 회원입니다.\n"
+					} 
+							swal({
+								title : "에러",
+								text :error_msg,
+								type : "error"
+							}).then(function(result) {
+								// 창이 닫히는 애니메이션의 시간이 있으므로,
+								// 0.1초의 딜레이 적용 후 포커스 이동
+								setTimeout(function() {
 
-						}, 100);
-					}); // <-- 메시지 표시
-					return false; // <-- 실행 중단
+								}, 100);
+							}); // <-- 메시지 표시
+							return false; // <-- 실행 중단
+		        	
 		        },
 		        success: function(json) {
 		            window.location = "/goodspring/";

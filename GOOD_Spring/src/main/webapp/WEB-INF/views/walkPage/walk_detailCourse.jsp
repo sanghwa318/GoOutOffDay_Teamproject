@@ -324,7 +324,7 @@ ul, li {
                  }
                  $(".heart")
                     .html(
-                       '<i class="fa fa-heart-o" aria-hidden="true" style="padding-right:5px;"></i> 찜제거');
+                       '<i class="fa fa-heart" aria-hidden="true" style="padding-right:5px;"></i> 찜제거');
                  $(".heart")
                     .removeClass(
                        "liked");

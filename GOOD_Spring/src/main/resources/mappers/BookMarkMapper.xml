@@ -81,4 +81,9 @@
 			#{user_info_user_no}
 		</where>
 	</select>
+	
+	<!-- 참조해제 -->
+	<update id="unsetbookmarkuserno" parameterType="study.spring.goodspring.model.BookMark">
+	UPDATE bookmark SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	</update>
 </mapper>

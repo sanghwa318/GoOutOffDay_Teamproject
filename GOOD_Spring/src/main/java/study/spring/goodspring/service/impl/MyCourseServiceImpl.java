@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.MyCourseService;
 
@@ -221,4 +222,6 @@ public class MyCourseServiceImpl implements MyCourseService {
 		return true;
 	}
 
+
+	
 }

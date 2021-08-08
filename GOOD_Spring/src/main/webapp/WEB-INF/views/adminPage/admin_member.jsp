@@ -32,6 +32,31 @@
 			</div>
 			<!-- 제목영역 -->
 			<h1 class="page-header">회원 목록</h1>
+			<!-- 검색영역 -->
+         <form method="get"
+            action="${pageContext.request.contextPath }/adminPage/admin_member.do"
+            class="form-group input-group">
+            <div class="row">
+            <div class="form-group col-sm-5">
+                  <select class="form-control" name="category" id="category">
+                     <option value="">-- 이름/아이디 --</option>
+                     <option value="이름">이름</option>
+                     <option value="아이디">아이디</option>
+                  </select>
+               
+            <input type="search" name="keyword" id="keyword" class="form-control"
+               placeholder="검색" value="${keyword}" /> <span
+               class="input-group-btn">
+               <button class="btn btn-blue" type="submit">
+                  <span style="color: #0069a6;">검색 </span><i
+                     class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
+               </button>
+            </span>
+            </div>
+            </div>
+         </form>
+         <!-- //검색영역 -->
+			
 			<!-- 리스트영역-->
 			<form id="member-form" class="form-horizontal">
 				<table class='table'>
@@ -53,7 +78,7 @@
 							<th class='text-center'>선택</th>
 							<th class='text-center'>회원번호</th>
 							<th class='text-center'>아이디</th>
-							<th class='text-center'>닉네입</th>
+							<th class='text-center'>닉네임</th>
 							<th class='text-center'>이름</th>
 							<th class='text-center'>성별</th>
 							<th class='text-center'>연락처</th>
@@ -73,26 +98,30 @@
 
 							<%-- 조회 결과가 있는 경우 --%>
 							<c:otherwise>
+							
 								<c:forEach var="item" items="${output}">
 									<c:set var="i" value="${i+1}" />
+									<c:if test="${!item.user_out}">
 									<tr class="member-item member-item-001">
 										<td align="center"><input type='radio' data-userid="${item.user_id}"
 										data-useradmin="${item.user_admin}"
 								 name='member_id' class="member_id" id="member_id" value="001" /></td>
-										<td class='text-center'>${i}</td>
+										<td class='text-center'>${item.user_no}</td>
 										<td class='text-center'>${item.user_id}</td>
 										<td class='text-center'>${item.user_nick}</td>
 										<td class='text-center'>${item.user_name}</td>
 										<td class='text-center'>
 										<c:if test="${item.gender eq 'M'}">남자</c:if> 
 										<c:if test="${!item.gender eq 'Y'}">여자</c:if></td>
-										<td class='text-center'>${fn:substring(item.tel, 0 ,3)}-${fn:substring(item.tel, 3 ,6)}-${fn:substring(item.tel, 6, 9)}</td>
+										<td class='text-center'>${fn:substring(item.tel, 0 ,3)}-${fn:substring(item.tel, 3 ,7)}-${fn:substring(item.tel, 7, 10)}</td>
 										<td class='text-center'>${item.email}</td>
 										<td class='text-center'>${item.address1}</td>
 										<td class='text-center'>${item.address2}</td>
 										<td class='text-center'>${item.create_datetime}</td>
 									</tr>
+								</c:if>
 								</c:forEach>
+							
 							</c:otherwise>
 						</c:choose>
 					</tbody>
@@ -106,6 +135,70 @@
 			<!-- //리스트영역 끝-->
 			<!-- //미디어 아이템 끝 -->
 			<!-- //리스트영역 끝-->
+			 <!-- 페이지네이션 -->
+            <div class="text-center">
+               <!-- 페이지 번호 구현 -->
+               <ul class="pagination">
+                  <%-- 이전 그룹에 대한 링크 --%>
+                  <c:choose>
+                     <%-- 이전 그룹으로 이동 가능하다면? --%>
+                     <c:when test="${pageData.prevPage > 0}">
+                        <%-- 이동할 URL 생성 --%>
+                        <c:url value="${getList }" var="prevPageUrl">
+                           <c:param name="page" value="${pageData.prevPage}" />
+                           <c:param name="keyword" value="${keyword}" />
+                           <c:param name="category" value="${category}" />
+                           <c:param name="area" value="${area}" />
+                           <c:param name="order" value="${order}" />
+                        </c:url>
+                        <li class="page-item"><a href="${prevPageUrl}">&laquo;</a></li>
+                     </c:when>
+                  </c:choose>
+
+                  <%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
+                  <c:forEach var="i" begin="${pageData.startPage}"
+                     end="${pageData.endPage}" varStatus="status">
+                     <%-- 이동할 URL 생성 --%>
+                     <c:url value="${getList }" var="pageUrl">
+                        <c:param name="page" value="${i}" />
+                        <c:param name="keyword" value="${keyword}" />
+                        <c:param name="category" value="${category}" />
+                        <c:param name="area" value="${area}" />
+                        <c:param name="order" value="${order}" />
+                     </c:url>
+
+                     <%-- 페이지 번호 출력 --%>
+                     <c:choose>
+                        <%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+                        <c:when test="${pageData.nowPage == i}">
+                           <li class="page-item active"><span style="color: #fff;">${i}<span
+                                 class="sr-only">(current)</span></span></li>
+                        </c:when>
+                        <%-- 나머지 페이지의 경우 링크 적용함 --%>
+                        <c:otherwise>
+                           <li class="page-item"><a href="${pageUrl}">${i}</a></li>
+                        </c:otherwise>
+                     </c:choose>
+                  </c:forEach>
+                  <%-- 다음 그룹에 대한 링크 --%>
+                  <c:choose>
+                     <%-- 다음 그룹으로 이동 가능하다면? --%>
+                     <c:when test="${pageData.nextPage > 0}">
+                        <%-- 이동할 URL 생성 --%>
+                        <c:url value="${getList }" var="nextPageUrl">
+                           <c:param name="page" value="${pageData.nextPage}" />
+                           <c:param name="keyword" value="${keyword}" />
+                           <c:param name="category" value="${category}" />
+                           <c:param name="area" value="${area}" />
+                           <c:param name="order" value="${order}" />
+                        </c:url>
+                        <li class="page-item"><a href="${nextPageUrl}">&raquo;</a></li>
+                     </c:when>
+                  </c:choose>
+               </ul>
+            </div>
+            <!-- //페이지네이션 -->
+			
 		</div>
 		<!-- //본문영역 끝 -->
 	</div>

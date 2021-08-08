@@ -119,11 +119,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(Member input) throws Exception {
+	public int deleteMember(int input) throws Exception {
 		int result = 0;
 
 		try {
-			result = sqlSession.delete("MemberMapper.deleteItem", input);
+			sqlSession.update("BookMarkMapper.unsetbookmarkuserno", input);
+			sqlSession.update("CrewMapper.unsetcrewuserno", input);
+			sqlSession.update("CrewPostCmtMapper.unsetcrewpostcmtuserno", input);
+			sqlSession.update("CrewMemberMapper.unsetcrewmemberuserno", input);
+			sqlSession.update("CrewPostMapper.unsetcrewpostuserno", input);
+			sqlSession.update("InquiryMapper.unsetinquiryqnauserno", input);
+			sqlSession.update("MyCourseMapper.unsetmycoursepostuserno", input);
+			sqlSession.update("MyCourseCmtMapper.unsetmycoursecmtuserno", input);
+			sqlSession.update("WalkLogMapper.unsetwalkloguserno", input);
+			sqlSession.update("WalkSetGoalMapper.unsetwalksetgoaluserno", input);
+			
+			result = sqlSession.delete("MemberMapper.deleteUserno", input);
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}
@@ -333,6 +344,27 @@ public class MemberServiceImpl implements MemberService {
 		throw new Exception("데이터 조회에 실패했습니다.");
 	}
 		return result;
+	}
+	
+	/**회원이 스스로 탈퇴 시 Y로 변경
+	 * 
+	 */
+	@Override
+	public void userOutMember(Member input) throws Exception {
+		 
+		try {
+			sqlSession.selectOne("MemberMapper.selectItem", input);
+			sqlSession.update("MemberMapper.userOut", input);
+			sqlSession.update("CrewMemberMapper.crewOut", input);
+			
+		}catch(NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("삭제된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 삭제에 실패했습니다.");
+		}
+		
 	}
 
 }

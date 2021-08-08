@@ -65,7 +65,7 @@ $("#delete-btn").on("click",function() {
 					success: function(data) {
 						var str = [];
 						for(var i =0; i<data.cmtList.length; i++){
-						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 30px -15px 20%;">'
+						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 30px -25px 18%;">'
 							str[i]+='<div class="pull-left writer_profile">'
 							str[i]+='<a href="#"><img style="border-radius: 25px"'
 							str[i]+='onerror="this.src=\''+getContextPath()+'/assets/img/profile_default.png\'"'
@@ -76,7 +76,7 @@ $("#delete-btn").on("click",function() {
 							str[i]+='<p style="color:#979797;">'+data.cmtList[i].comment_create_datetime+'</p></div>'
 							str[i]+='<div class="pull-right">'
 							str[i]+='<button type="button" class="btn btn-link" style="padding: 0; margin-right: 0" onclick="cmt_delete('+data.cmtList[i].comment_no+')">댓글 삭제</button></div></div><div class="row">'
-							str[i]+='<div class="col-md-11 col-sm-11 col-xs-11" style="margin-left:20%; font-size:20px;">'+data.cmtList[i].comment_text+'</div>'
+							str[i]+='<div class="col-md-11 col-sm-11 col-xs-11" style="margin-left:18%; font-size:20px;">'+data.cmtList[i].comment_text+'</div>'
 							str[i]+='</div></div><hr width="85%" align="right">'
 						}
 					$('#cmt-list').html(str);

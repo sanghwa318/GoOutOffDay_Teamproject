@@ -66,12 +66,15 @@ if (watchId != null) {
 							swal("기록을 중지합니다.")
 							watchId = 0;
 							clearInterval(interval);
+							noRecording();
 								$.ajax({
 									url: getContextPath() + '/walkPage/walk_recordEnd.do',
 									type: 'post',
 									dataType: 'json',
 									data: {course_name},
-									success: function(data){}
+									success: function(data){
+										noRecording()
+									}
 								})
 						}else {
 							alert("이미 존재하는 코스 이름입니다. 다시 입력해주세요.")
