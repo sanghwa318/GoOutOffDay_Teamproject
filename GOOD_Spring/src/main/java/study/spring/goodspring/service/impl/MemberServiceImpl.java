@@ -123,16 +123,6 @@ public class MemberServiceImpl implements MemberService {
 		int result = 0;
 
 		try {
-			sqlSession.update("BookMarkMapper.unsetbookmarkuserno", input);
-			sqlSession.update("CrewMapper.unsetcrewuserno", input);
-			sqlSession.update("CrewPostCmtMapper.unsetcrewpostcmtuserno", input);
-			sqlSession.update("CrewMemberMapper.unsetcrewmemberuserno", input);
-			sqlSession.update("CrewPostMapper.unsetcrewpostuserno", input);
-			sqlSession.update("InquiryMapper.unsetinquiryqnauserno", input);
-			sqlSession.update("MyCourseMapper.unsetmycoursepostuserno", input);
-			sqlSession.update("MyCourseCmtMapper.unsetmycoursecmtuserno", input);
-			sqlSession.update("WalkLogMapper.unsetwalkloguserno", input);
-			sqlSession.update("WalkSetGoalMapper.unsetwalksetgoaluserno", input);
 			
 			result = sqlSession.delete("MemberMapper.deleteUserno", input);
 			if (result == 0) {
@@ -356,6 +346,7 @@ public class MemberServiceImpl implements MemberService {
 			sqlSession.selectOne("MemberMapper.selectItem", input);
 			sqlSession.update("MemberMapper.userOut", input);
 			sqlSession.update("CrewMemberMapper.crewOut", input);
+			sqlSession.update("CrewMapper.crewUserOut", input);
 			
 		}catch(NullPointerException e) {
 			log.error(e.getLocalizedMessage());

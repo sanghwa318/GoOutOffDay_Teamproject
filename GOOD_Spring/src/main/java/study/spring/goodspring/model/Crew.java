@@ -20,6 +20,7 @@ public class Crew {
 	private String crew_dinto;  //크루 소개
 	private int crew_member;  // 크루 인원
 	private int user_info_user_no; // 크루장 No
+	private boolean user_info_user_out; //회원 탈퇴&추방 여부 
 	
 	
 	/** 프로필사진 정보{json=UploadItem}, IS NULL */

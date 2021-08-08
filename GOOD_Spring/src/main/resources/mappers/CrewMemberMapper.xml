@@ -89,8 +89,17 @@
 			<if test="crew_crew_no != null and crew_crew_no != '' ">
 				OR crew_crew_no = #{crew_crew_no}
 			</if>
-		</where>
+		</where>		
 	</select>
+	
+	<!-- 크루 가입된 회원수 조회 -->
+	<select id="selectMemberCount"
+		parameterType="study.spring.goodspring.model.CrewMember"
+		resultType="int">
+		SELECT COUNT(*) FROM crew_member 
+		WHERE crew_crew_no = #{crew_crew_no} AND crew_out = "N";
+	</select>
+	
 
 	<!-- 크루멤버 추방을 위한 기능 정의 -->
 	<delete id="deleteCrewCrewMember"

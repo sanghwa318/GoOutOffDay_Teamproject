@@ -173,7 +173,7 @@ public class CrewMemberServiceImpl implements CrewMemberService {
 			int result = 0;
 			
 			try {
-				result = sqlSession.selectOne("CrewMemberMapper.selectCountAll", input);
+				result = sqlSession.selectOne("CrewMemberMapper.selectMemberCount", input);
 			} catch (Exception e) {
 				log.error(e.getLocalizedMessage());
 				throw new Exception("데이터 조회에 실패했습니다..");

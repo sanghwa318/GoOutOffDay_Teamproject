@@ -256,7 +256,7 @@ h4 {
 										<p>${item.crew_name}크루</p>
 										<h4 class="explan">${item.crew_sinto}</h4>
 										<p class="pull-left" style="max-width: 110px;">${item.crew_area}</p>
-										<p class="pull-right">회원수 ${item.crew_member}</p>
+										<p class="pull-right">회원수 ${item.crew_member}명</p>
 									</div>
 								</div>
 							</c:forEach>

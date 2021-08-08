@@ -185,6 +185,7 @@
 						</c:url>
 
 						<div class="col-xs-6 col-sm-4 col-md-3">
+						
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"

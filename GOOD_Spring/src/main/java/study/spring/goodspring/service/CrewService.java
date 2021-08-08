@@ -84,7 +84,7 @@ public interface CrewService {
 	 * @throws Exception
 	 */
 
-	int getJoinedCrewCount(Crew input) throws Exception;
+	public int getJoinedCrewCount(Crew input) throws Exception;
 
 
 	/**

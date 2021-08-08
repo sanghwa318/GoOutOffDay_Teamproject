@@ -117,6 +117,7 @@ public class CommController {
 		Crew output = null;
 		//크루 데이터 불러오기
 		output = crewService.getCrewItem(input);
+
 		
 
 		CrewPost crewpost = new CrewPost();
@@ -334,7 +335,7 @@ public class CommController {
 		input.setCrew_sinto(keyword);
 		input.setCrew_area(region);
 		input.setCrew_category(crew_category);
-
+		
 		List<Crew> output = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
 

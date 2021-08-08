@@ -17,6 +17,7 @@
 		<result property="crew_dinto" column="crew_dinto" />
 		<result property="crew_member" column="crew_member" />
 		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="user_info_user_out" column="user_info_user_out" />
 
 
 
@@ -36,7 +37,7 @@
 		SELECT crew_no, crew_name, crew_area, crew_sinto,
 		crew_createtime,
 		crew_category, crew_photo, crew_dinto, crew_member,
-		user_info_user_no
+		user_info_user_no, user_info_user_out
 		FROM crew
 		WHERE crew_no = #{crew_no}
 	</select>
@@ -50,8 +51,9 @@
 		user_info_user_no
 		FROM crew
 		<where>
+			user_info_user_out = "N"
 			<if test="crew_name != null and crew_name != '' ">
-				crew_name LIKE CONCAT('%', #{crew_name}, '%')
+				OR crew_name LIKE CONCAT('%', #{crew_name}, '%')
 			</if>
 
 			<if test="crew_category != null and crew_category != '' ">
@@ -64,7 +66,7 @@
 			<if test="crew_area != null and crew_area != '' ">
 				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
 			</if>
-
+			
 		</where>
 
 		<if test="order == 1 ">
@@ -82,18 +84,17 @@
 	</select>
 
 	<!-- 데이터 저장 기능 -->
-
 	<insert id="insertCrew"
 		parameterType="study.spring.goodspring.model.Crew"
 		useGeneratedKeys="true" keyProperty="crew_no">
 		INSERT INTO crew (crew_name,
 		crew_area, crew_sinto, crew_createtime,
 		crew_category, crew_photo,
-		crew_dinto, user_info_user_no)
+		crew_dinto, user_info_user_no, user_info_user_out)
 		VALUES (#{crew_name}, #{crew_area},
 		#{crew_sinto}, now(), #{crew_category},
 		#{photoJson}, #{crew_dinto},
-		#{user_info_user_no});
+		#{user_info_user_no}, "N");
 	</insert>
 
 	<!-- 데이터 삭제 기능 -->
@@ -140,7 +141,7 @@
 		parameterType="study.spring.goodspring.model.Crew">
 		update crew c set crew_member=(select count(member_no)
 		from crew_member
-		where crew_crew_no=c.crew_no) where crew_no
+		where crew_crew_no=c.crew_no AND crew_out ="N") where crew_no
 		=#{crew_no};
 	</update>
 
@@ -153,15 +154,13 @@
 		INNER JOIN user_info u ON cm.user_info_user_no =
 		u.user_no
 
-		WHERE u.user_no = #{user_info_user_no}
+		WHERE u.user_no = #{user_info_user_no}  AND user_info_user_out = "N"
 
 		ORDER BY crew_no DESC
 
 		<if test="listCount > 0">
 			LIMIT #{offset}, #{listCount}
 		</if>
-
-
 
 	</select>
 
@@ -193,16 +192,16 @@
         SELECT COUNT(*) FROM crew WHERE crew_name=#{crew_name}
     </select>
 	
-			<!-- crew_no를 통한 Crew 조회 -->
+	<!-- crew_no를 통한 Crew 조회 -->
 	<select id="selectCrewByno" resultMap="crewMap"
 		parameterType="study.spring.goodspring.model.Crew">
 		SELECT * FROM crew
 		WHERE crew_no = #{crew_no};
 	</select>
 
-    
-    <!-- 참조해제 -->
-	<update id="unsetcrewuserno" parameterType="study.spring.goodspring.model.Crew">
-	UPDATE crew SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	
+	<!-- 크루장 탈퇴 or 추방 user_info_user_out 'Y' update -->
+	<update id="crewUserOut" parameterType="study.spring.goodspring.model.Crew">
+	UPDATE crew SET user_info_user_out="Y" WHERE user_info_user_no=#{user_no};
 	</update>
 </mapper>

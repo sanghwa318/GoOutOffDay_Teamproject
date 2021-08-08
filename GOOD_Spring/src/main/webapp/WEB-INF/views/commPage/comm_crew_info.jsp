@@ -80,14 +80,14 @@
 						<span class="title-img"><img
 							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
-						<h3>가입된 회원 수 : ${output.crew_member}</h3>
-						<h4 class="title-name">${output.crew_name} 크루 소개</h4>
+						<h3>가입된 회원 수 : ${output.crew_member}명</h3>
+						<h4 class="title-name">간단 소개말</h4>
 						<p style="font-size:20px">${output.crew_sinto}</p>
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->
 				<div class="col-md-8">
-					<h2>${output.crew_name} &nbsp 크루 공지사항</h2>
+					<h2>크루 공지사항(설명)</h2>
 					<div style="border: 4px dotted #eeee; min-height:200px; min-width:500px"><p style="font-size:30px; margin:3% 0 0 3%">${output.crew_dinto}</p></div>
 				</div>
 				<!-- 크루 상세 정보 끝 -->
