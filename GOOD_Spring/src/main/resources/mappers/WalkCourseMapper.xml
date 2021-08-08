@@ -68,6 +68,24 @@
 		</where>
 	</select>
 
+	<select id="selectPath"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT COURSE_NAME, CPI_IDX, CPI_NAME
+		FROM
+		seoulgil_walk_course
+		WHERE
+		COURSE_NAME = (SELECT COURSE_NAME FROM
+		seoulgil_walk_course
+		<where>
+			<if test="CPI_IDX != null and CPI_IDX != ''">
+				CPI_IDX = #{CPI_IDX}
+			</if>
+		</where>
+		)
+		ORDER BY CPI_IDX ASC;
+	</select>
+
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectList"

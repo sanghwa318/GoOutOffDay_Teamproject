@@ -164,6 +164,12 @@ public class WalkController {
 		return "walkPage/walk_hallOfFame";
 	}
 
+	/**
+	 * 걷기(코스) 상세 페이지
+	 * 
+	 * @param CPI_IDX  코스목록 기본키
+	 * @return
+	 */
 	@RequestMapping(value = "/walkPage/walk_detailCourse.do", method = RequestMethod.GET)
 	public ModelAndView walk_detailCourse(Model model, HttpServletRequest request, HttpServletResponse response,
 			// 포인트 지점(기본키)
@@ -176,6 +182,7 @@ public class WalkController {
 		// 조회 결과를 저장할 객체 선언
 		WalkCourse output = null;
 		BookMark bookinput = new BookMark();
+		List<WalkCourse> output_path = null;
 		int outputcount = 0;
 
 		if (request.getSession().getAttribute("login_info") == null) {
@@ -185,6 +192,7 @@ public class WalkController {
 			bookinput.setService_id(stsvcid);
 			try {
 				output = walkCourseService.getWalkCourseItem(input);
+				output_path = walkCourseService.getWalkCoursePath(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -198,6 +206,7 @@ public class WalkController {
 			try {
 				output = walkCourseService.getWalkCourseItem(input);
 				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
+				output_path = walkCourseService.getWalkCoursePath(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -207,6 +216,7 @@ public class WalkController {
 		// view 처리
 		model.addAttribute("output", output);
 		model.addAttribute("outputcount", outputcount);
+		model.addAttribute("output_path", output_path);
 
 		// walkPage/walk_detailCourse.jsp파일을 View로 지정
 		return new ModelAndView("/walkPage/walk_detailCourse");

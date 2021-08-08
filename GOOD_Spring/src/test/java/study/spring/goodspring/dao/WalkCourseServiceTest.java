@@ -103,4 +103,24 @@ public class WalkCourseServiceTest {
 		}
 		
 	}
+	/* 다중행 조회 테스트 */
+	@Test
+	public void testE() {
+		WalkCourse input = new WalkCourse();
+		input.setCPI_IDX(1468);
+		
+		List<WalkCourse> output = null;
+		
+		try {
+			output = walkCourseService.getWalkCoursePath(input);
+			
+			for (WalkCourse item : output) {
+				log.debug(item.toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		
+	}
 }

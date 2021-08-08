@@ -46,6 +46,33 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 
 		return result;
 	}
+	
+	/**
+	 * 상세페이지에서 걷기코스 데이터 경로 조회
+	 * @param input 조회할 코스의 일련번호를 담고 있는 beans
+	 * @return 조회된 데이터가 저장된 beans
+	 * @throws Exception
+	 */
+	@Override
+	public List<WalkCourse> getWalkCoursePath(WalkCourse input) throws Exception {
+		List<WalkCourse> result = null;
+
+		try {
+			result = sqlSession.selectList("WalkCourseMapper.selectPath", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
 
 	/**
 	 * 코스 데이터 목록 조회
