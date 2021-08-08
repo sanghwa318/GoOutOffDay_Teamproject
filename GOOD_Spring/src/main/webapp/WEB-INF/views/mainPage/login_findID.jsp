@@ -124,9 +124,12 @@
 			        error: function(error){
 			        	var error_msg ='';
 			        	var code = parseInt(error.status / 100);
-			        	if (code != null) 	{
+			        	if (code == 5) 	{
 			                error_msg = "이름과 이메일을 확인하세요.\n";
 			            }
+			        	else if(code == 4){
+							error_msg = "탈퇴된 회원입니다.\n";
+						} 
 			        	swal({
 							title : "에러",
 							text :error_msg,

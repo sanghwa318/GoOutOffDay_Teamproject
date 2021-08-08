@@ -47,7 +47,7 @@
 		address1, address2, post, tel,
 		email, user_photo, user_admin,
 		create_datetime,
-		edit_datetime
+		edit_datetime, user_out
 		FROM user_info
 		WHERE
 		user_name=#{user_name} AND email=#{email}
@@ -60,7 +60,7 @@
 		address1, address2, post, tel,
 		email, user_photo, user_admin,
 		create_datetime,
-		edit_datetime
+		edit_datetime, user_out
 		FROM user_info
 		WHERE
 		user_name=#{user_name} AND email=#{email} AND user_id=#{user_id}
