@@ -41,9 +41,10 @@
 	<select id="selectMyCourseList"
 		parameterType="study.spring.goodspring.model.MyCourses" resultMap="MyCourseMap">
 		SELECT mycourse_no, `like`, mycourse_name, mycourse_area, mycourse_content, mycourse_createdate, mycourse_editdate, mycourse_hits,
-		user_info_user_no
+		user_info_user_no, user_id, user_name, user_nick, user_photo
 		
 		FROM mycourse_post
+		INNER JOIN user_info ON user_info_user_no=user_no
 		<where>
 			<if test="mycourse_name != null and mycourse_name != '' ">
 				mycourse_name LIKE CONCAT('%', #{mycourse_name}, '%')

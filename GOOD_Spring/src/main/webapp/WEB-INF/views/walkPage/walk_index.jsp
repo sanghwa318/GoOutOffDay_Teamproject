@@ -547,10 +547,17 @@ carousel-title2 {
 	<script type="text/javascript">
 	var loginInfo = "<%=session.getAttribute("login_info")%>"
 	var intervalString =null;
-	function Recording(){
-		
+	function Recording(startdate){
 		var num = 0;
         intervalString = setInterval(function() {
+        	var nowdate = new Date();
+        	var tmpdate = nowdate.getTime()-startdate.getTime();
+        	var date = new Date(tmpdate);
+        	console.log(date)
+        	var minute = date.getMinutes();
+        	var second = date.getSeconds();
+        	var hour = date.getHours()-9;
+    		
         	var colorcode =	'#F50057';
             var str =  [
             			'<span style="color:'+colorcode+'">기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>', 
@@ -599,7 +606,7 @@ carousel-title2 {
             			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다<span style="color:'+colorcode+'">.</span>'
             			];
             num = ++num % str.length;
-            $('#recording').html(str[num]);
+            $('#recording').html(str[num]+' '+hour+'시간 '+minute+'분 '+second+'초째 기록 중');
         }, 100);
 	}
 	
@@ -607,11 +614,18 @@ carousel-title2 {
 		clearInterval(intervalString);
 		$('#recording').html('');
 	}
-		$(function() {
-			
+	function printTime(startdate){
+		var nowdate = new Date();
+		timediff = nowdate - startdate;
+		return timediff;
+	}
+	$(function() {
 			$("#startRecord").click(function(event) {
 				if (loginInfo != "null") {
-					Recording();
+					var startdate= new Date();
+					
+					
+					Recording(startdate);
 					startRecord();
 					interval = setInterval(function() {
 						startRecord();

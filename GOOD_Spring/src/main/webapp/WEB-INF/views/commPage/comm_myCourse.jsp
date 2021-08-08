@@ -93,10 +93,10 @@
 									style="cursor: pointer;">
 									<div class="map" id="map${status.index}" style="height:180px"></div>
 									<div class="caption clearfix">
-										<p>${item.user_info_user_no}</p>
-										<h4>${item.mycourse_name }</h4>
-										<p class="pull-left">${item.mycourse_area}</p>
-										<p class="pull-right">${item.mycourse_content}</p>
+										<p>작성자: ${item.user_nick}</p>
+										<h4>코스이름: ${item.mycourse_name }</h4>
+										<p class="pull-left">지역: ${item.mycourse_area}</p>
+										<p class="pull-right">좋아요 ${item.like}</p>
 									</div>
 								</div>
 							</div>

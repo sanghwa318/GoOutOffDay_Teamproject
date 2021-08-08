@@ -67,27 +67,6 @@ $(function() {
 					map: map[j] // 마커를 표시할 지도 객체
 					})
         },async:false //반복문을 위한 비동기 처리.
-
-
-                /*// 지도 중심 좌표 변화 이벤트를 등록한다
-                kakao.maps.event.addListener(map[j], 'center_changed', function() {
-                	console.log('지도의 중심 좌표는 ' + map[j].getCenter().toString() + ' 입니다.');
-                });
-                map[j].setCenter(new kakao.maps.LatLng(lat[0], lon[0]));*/
-
-                /*		// 도형에 mouseover 이벤트를 등록한다
-						kakao.maps.event.addListener(polyline, 'mouseover', function() {
-							console.log('도형에 mouseover 이벤트가 발생했습니다!');
-						});
-						// 도형에 mouseout 이벤트를 등록한다
-						kakao.maps.event.addListener(polyline, 'mouseout', function() {
-							console.log('도형에 mouseout 이벤트가 발생했습니다!');
-						});
-						// 도형에 mousedown 이벤트를 등록한다
-						kakao.maps.event.addListener(polyline, 'mousedown', function() {
-							console.log('도형에 mousedown 이벤트가 발생했습니다!');
-								});*/
-                // 지도에 선을 표시한다
          });
     }
 })
