@@ -122,8 +122,7 @@
 			<div class="row row_a col-xl-8 col-sm-9 col-xs-10" >
 			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
-					<img style="border-radius: 25px; margin-right:15px; " src="${member.user_photo.fileUrl}"
-						width="50px" height="50px"></img>
+					<img style="border-radius: 25px; margin-right:15px;" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="120px" height="120px">
 				</div>
 				
 				<div class="writer_info" >
