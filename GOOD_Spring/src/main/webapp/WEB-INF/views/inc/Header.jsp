@@ -331,7 +331,7 @@
 							class="navbar-form navbar-right" role="search"
 								style="border-bottom: 0 !important;">
 								<div class="form-group input-group">
-									<input type="search" name="keyword" value="${keyword }" class="form-control" placeholder="검색">
+									<input type="search" name="keyword" class="form-control" placeholder="검색">
 									<span class="input-group-btn"> <button class="btn btn-blue">
 											<i class="glyphicon glyphicon-search" style="color: #eeffff"></i>
 									</button>
