@@ -121,4 +121,11 @@ public interface MemberService {
 	 */
 	public void userOutMember(Member input) throws Exception;
 	
+	/**
+	 * 회원 데이터 목록 조회 (관리자용)
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	public List<Member> getAdminMemberList(Member input) throws Exception;
+	
 }

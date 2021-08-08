@@ -194,31 +194,16 @@
 	</update>
 	
 	<!-- 관리자 회원관리 다중행 조회를 위한 기능 정의 -->
-	<select id="selecAdmintList"
+	<select id="selectAdminList"
 		parameterType="study.spring.goodspring.model.Member"
 		resultMap="MemberMap">
 		Select * FROM
 		user_info
 		<where>
-		<choose>
-            <!-- 이름만 있을 경우 -->
-            <when test="user_name !=null and user_name !=''">
-               user_name LIKE concat ('%', #{user_name},'%')
-            </when>
-            <!-- 아이디만 있을 경우 -->
-            <when test="user_nick !=null and user_nick !=''">
-               user_nick LIKE concat ('%', #{user_nick},'%')
-            </when>
-            <!-- 선택 안했을 경우 -->
-            <otherwise>
+            <!-- 이름으로 검색 할 경우 -->
                <if test="user_name !=null and user_name !=''">
                   user_name LIKE concat ('%', #{user_name},'%')
                </if>
-               <if test="user_nick !=null and user_nick !=''">
-                 OR user_nick LIKE concat ('%', #{user_nick},'%')
-               </if>
-            </otherwise>
-         </choose>
 		</where>
 		ORDER BY user_no ASC
 		<if test="listCount>0">

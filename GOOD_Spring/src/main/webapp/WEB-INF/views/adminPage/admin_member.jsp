@@ -32,30 +32,7 @@
 			</div>
 			<!-- 제목영역 -->
 			<h1 class="page-header">회원 목록</h1>
-			<!-- 검색영역 -->
-         <form method="get"
-            action="${pageContext.request.contextPath }/adminPage/admin_member.do"
-            class="form-group input-group">
-            <div class="row">
-            <div class="form-group col-sm-5">
-                  <select class="form-control" name="category" id="category">
-                     <option value="">-- 이름/아이디 --</option>
-                     <option value="이름">이름</option>
-                     <option value="아이디">아이디</option>
-                  </select>
-               
-            <input type="search" name="keyword" id="keyword" class="form-control"
-               placeholder="검색" value="${keyword}" /> <span
-               class="input-group-btn">
-               <button class="btn btn-blue" type="submit">
-                  <span style="color: #0069a6;">검색 </span><i
-                     class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
-               </button>
-            </span>
-            </div>
-            </div>
-         </form>
-         <!-- //검색영역 -->
+			
 			
 			<!-- 리스트영역-->
 			<form id="member-form" class="form-horizontal">
@@ -100,7 +77,11 @@
 							<c:otherwise>
 							
 								<c:forEach var="item" items="${output}">
-									<c:set var="i" value="${i+1}" />
+									<c:if test="${keyword != ''}">
+									<c:set var="mark" value="<mark>${keyword}</mark>" />
+									<%--출력을 위해 검색어와 일치하는 단어를 형광펜 효과 --%>
+									<c:set var="user_name" value="${fn:replace(user_name,keyword,mark)}" />
+									</c:if>
 									<c:if test="${!item.user_out}">
 									<tr class="member-item member-item-001">
 										<td align="center"><input type='radio' data-userid="${item.user_id}"
@@ -127,11 +108,27 @@
 					</tbody>
 				</table>
 				<hr />
+				
 				<div class="text-center">
 					<button type="button" class="btn btn-warning" id="check-delete">회원
 						탈퇴</button>
 				</div>
-			</form>
+				</form>
+				<!-- 검색영역 -->
+			         <form method="get"
+			            action="${pageContext.request.contextPath}/adminPage/admin_member.do"
+			            class="form-group pull-right">
+			            <div class="form-group input-group col-md-2 pull-right">
+			            <input type="search" name="keyword" id="keyword" class="form-control"
+			               placeholder="이름으로 검색" value="${keyword}" /> <span
+			               class="input-group-btn">
+			               <button class="btn btn-blue" type="submit">
+			                  <span style="color: #0069a6;"></span><i
+			                     class="glyphicon glyphicon-search" style="color: #eeffff;"></i>
+			               </button>
+			            </span>
+			            </div>
+			         </form>
 			<!-- //리스트영역 끝-->
 			<!-- //미디어 아이템 끝 -->
 			<!-- //리스트영역 끝-->
