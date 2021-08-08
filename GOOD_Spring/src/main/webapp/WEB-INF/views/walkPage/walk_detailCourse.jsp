@@ -232,8 +232,7 @@ ul, li {
 	// 찜 추가
 	function addBookMark(){
 	var catid = '${output.COURSE_CATEGORY_NM}';
-	var svcid = '${output.CPI_IDX}';
-	svcid = String(svcid);
+	var svcid = '${output.COURSE_NAME}';
 	
 	$.ajax({
 		catch:false,
@@ -279,8 +278,8 @@ ul, li {
 	// 찜삭제
 	function deleteBookMark() {
 		var catid = '${output.COURSE_CATEGORY_NM}';
-		var svcid = '${output.CPI_IDX}';
-		svcid = String(svcid);
+		var svcid = '${output.COURSE_NAME}';
+// 		svcid = String(svcid);
 
 		$.ajax({
 			catch:false,

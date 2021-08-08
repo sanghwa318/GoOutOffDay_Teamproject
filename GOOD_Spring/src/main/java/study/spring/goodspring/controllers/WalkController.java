@@ -187,9 +187,9 @@ public class WalkController {
 
 		if (request.getSession().getAttribute("login_info") == null) {
 
-			String stsvcid = Integer.toString(input.getCPI_IDX());
+//			String stsvcid = Integer.toString(input.getCPI_IDX());
 			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
-			bookinput.setService_id(stsvcid);
+			bookinput.setService_id(input.getCPI_NAME());
 			try {
 				output = walkCourseService.getWalkCourseItem(input);
 				output_path = walkCourseService.getWalkCoursePath(input);
@@ -200,9 +200,9 @@ public class WalkController {
 			Member loginInfo = (Member) webHelper.getSession("login_info");
 			bookinput.setUser_info_user_no(loginInfo.getUser_no());
 
-			String stsvcid = Integer.toString(input.getCPI_IDX());
+//			String stsvcid = Integer.toString(input.getCPI_IDX());
 			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
-			bookinput.setService_id(stsvcid);
+			bookinput.setService_id(input.getCPI_NAME());
 			try {
 				output = walkCourseService.getWalkCourseItem(input);
 				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
@@ -311,18 +311,18 @@ public class WalkController {
 	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
 			@RequestParam(value = "catid", required = false) String catid) throws Exception {
 
-		int intset = Integer.parseInt(svcid);
+//		int intset = Integer.parseInt(svcid);
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 
 		WalkCourse Info = new WalkCourse();
 		Info.setCOURSE_CATEGORY_NM(catid);
-		Info.setCPI_IDX(intset);
-		String stsvcid = Integer.toString(Info.getCPI_IDX());
+		Info.setCOURSE_NAME(svcid);
+//		String stsvcid = Integer.toString(Info.getCPI_IDX());
 
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setCategory_id(Info.getCOURSE_CATEGORY_NM());
-		input.setService_id(stsvcid);
+		input.setService_id(Info.getCOURSE_NAME());
 
 		try {
 			// 추가 삭제 구문
