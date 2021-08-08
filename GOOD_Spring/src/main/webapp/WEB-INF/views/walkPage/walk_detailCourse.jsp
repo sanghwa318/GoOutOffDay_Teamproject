@@ -190,7 +190,7 @@ ul, li {
 						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_search.do'"
 						class="btn btn-default"
 						style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
-						목록</button>
+						코스목록</button>
 				</div>
 			</div>
 		</div>

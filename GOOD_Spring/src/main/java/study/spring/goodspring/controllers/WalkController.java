@@ -187,11 +187,11 @@ public class WalkController {
 
 		if (request.getSession().getAttribute("login_info") == null) {
 
-//			String stsvcid = Integer.toString(input.getCPI_IDX());
-			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
-			bookinput.setService_id(input.getCPI_NAME());
+			
 			try {
 				output = walkCourseService.getWalkCourseItem(input);
+				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
+				bookinput.setService_id(output.getCOURSE_NAME());
 				output_path = walkCourseService.getWalkCoursePath(input);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -200,11 +200,10 @@ public class WalkController {
 			Member loginInfo = (Member) webHelper.getSession("login_info");
 			bookinput.setUser_info_user_no(loginInfo.getUser_no());
 
-//			String stsvcid = Integer.toString(input.getCPI_IDX());
-			bookinput.setCategory_id(input.getCOURSE_CATEGORY_NM());
-			bookinput.setService_id(input.getCPI_NAME());
 			try {
 				output = walkCourseService.getWalkCourseItem(input);
+				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
+				bookinput.setService_id(output.getCOURSE_NAME());
 				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
 				output_path = walkCourseService.getWalkCoursePath(input);
 			} catch (Exception e) {

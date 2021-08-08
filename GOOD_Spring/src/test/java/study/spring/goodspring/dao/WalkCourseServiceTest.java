@@ -2,7 +2,7 @@ package study.spring.goodspring.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
+//import org.apache.ibatis.session.SqlSession;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class WalkCourseServiceTest {
 	
 	/** MyBatis의 SQL세션 객체 주입 설정 */
 	@Autowired
-	private SqlSession sqlSession;
+//	private SqlSession sqlSession;
 	
 	/* 다중행 조회 테스트 */
 	@Test
