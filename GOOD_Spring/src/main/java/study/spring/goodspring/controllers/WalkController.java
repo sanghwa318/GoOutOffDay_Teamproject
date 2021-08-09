@@ -685,9 +685,12 @@ public class WalkController {
 	/**
 	 * 걷기 코스 지도
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_map.do", method = RequestMethod.GET)
-	public Map<String, Object> walk_map() {
+	public Map<String, Object> walk_map(
+			@RequestParam(value="courseName")String course_name) {
 		WalkCourse input = new WalkCourse();
+		input.setCOURSE_NAME(course_name);
 		List<WalkCourse> output = null;
 		
 		try {
