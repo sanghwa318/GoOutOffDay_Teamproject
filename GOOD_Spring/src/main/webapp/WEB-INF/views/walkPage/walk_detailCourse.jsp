@@ -64,6 +64,7 @@ ul, li {
 
 				<div class="row">
 					<div class="col-md-6 col-sm-12 col-xs-12">
+					<!-- 지도 영역 -->
 						<div class="detail_map">
 							<div class="map" id="map" style="width: 500px; height: 520px;"></div>
 
@@ -205,14 +206,130 @@ ul, li {
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<!-- 카카오 맵 -->
 	<script type="text/javascript">
+	function getContextPath() {
+		var hostIndex = location.href.indexOf(location.host)
+				+ location.host.length;
+		var contextPath = location.href.substring(hostIndex, location.href
+				.indexOf('/', hostIndex + 1));
+		return contextPath;
+	}
+	
+	$(window).load(function() {
+		$.ajax({
+					url : getContextPath()
+							+ "/bicyclePage/bicycle_index_map.do",
+					type : "GET",
+					data : "",
+					dataType : "json",
+					success : function(data) {
+						//요청에 성공하면 DB에서 꺼낸 데이터를 json 형식으로 응답 받는다.
+
+						//마커들을 저장할 변수
+						var markers = $(data.item).map(function(i, position) {
+											//마커를 하나 새로 만드는데, 위치값을 지정하고 클릭이 가능하게 설정함.
+											var marker = new kakao.maps.Marker({
+														position : new kakao.maps.LatLng(
+																position.x,
+																position.y),
+														clickable : true
+													});
+											
+											var geocoder = new kakao.maps.services.Geocoder(), // 좌표계 변환 객체를 생성합니다
+
+											// WTM 좌표를 WGS84 좌표계의 좌표로 변환합니다
+											geocoder.transCoord(position.x, position.y, transCoordCB, {
+											    input_coord: kakao.maps.services.Coords.WTM, // 변환을 위해 입력한 좌표계 입니다
+											    output_coord: kakao.maps.services.Coords.WGS84 // 변환 결과로 받을 좌표계 입니다 
+											});
+										     
+											polyline.getPath(); // 경로정보가 배열로 반환된다.
+										     
+											// 좌표 변환 결과를 받아서 처리할 콜백함수 입니다.
+											function transCoordCB(result, status) {
+										
+											    // 정상적으로 검색이 완료됐으면 
+											    if (status === kakao.maps.services.Status.OK) {
+										
+											        // 마커를 변환된 위치에 표시합니다
+											        var marker = new kakao.maps.Marker({
+											            position: new kakao.maps.LatLng(result[0].y, result[0].x), // 마커를 표시할 위치입니다
+											            map: map // 마커를 표시할 지도객체입니다
+											        })
+											        for 
+											        var polyline = new kakao.maps.Polyline({
+											            map: map,
+											            path: [
+											                new kakao.maps.LatLng(wtmX[i], wtmY[i]),
+											            ],
+											            strokeWeight: 2,
+											            strokeColor: '#FF00FF',
+											            strokeOpacity: 0.8,
+											            strokeStyle: 'dashed'
+											        });
+											    }
+											}
+
+											//띄울 인포윈도우 정의
+											/* var iwContent = '<div style="padding-left:5px; height:60px;">'
+													+ '<h5>'+ '<b>' +position.stationName + '</b>' + '</h5>'
+													// + '<br/>'
+													+ "이용 가능한 자전거 수 : "
+													+ position.parkingBikeTotCnt + "대"
+													+ '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+											iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+											// 인포윈도우를 생성합니다
+											var infowindow = new kakao.maps.InfoWindow({
+														content : iwContent
+													});
+
+											// 마커에 마우스오버 이벤트를 등록합니다
+											kakao.maps.event.addListener(marker,'mouseover',function() {
+																// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+																infowindow.open(map,marker);
+															});
+
+											// 마커에 마우스아웃 이벤트를 등록합니다
+											kakao.maps.event.addListener(marker,'mouseout',function() {
+																// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+																infowindow.close();
+															}); */
+
+											//생성된 마커를 반환합니다.
+											return marker;
+										});
+						// 클러스터러에 마커들을 추가합니다
+						clusterer.addMarkers(markers);
+					}
+
+				});
+
+	});
+	
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 		var options = { //지도를 생성할 때 필요한 기본 옵션
-			center : new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-			level : 3
-		//지도의 레벨(확대, 축소 정도)
+			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표 
+			level : 9
+		// 지도의 확대 레벨 
 		};
-
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		// 지도 중심좌표를 접속위치로 변경합니다
+		map.setCenter(position);
+		
+		// 지도에 표시할 선을 생성합니다
+		var polyline = new kakao.maps.Polyline({
+		    path: linePath, // 선을 구성하는 좌표배열 입니다
+		    strokeWeight: 5, // 선의 두께 입니다
+		    strokeColor: '#FFAE00', // 선의 색깔입니다
+		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid' // 선의 스타일입니다
+		});
+		
+		// 마커와 인포윈도우를 표시합니다
+		displayMarker(polyline);
+
+		// 지도에 선을 표시합니다 
+		polyline.setMap(map); 
 	</script>
 
 	<script type="text/javascript">

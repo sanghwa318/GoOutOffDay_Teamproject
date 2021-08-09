@@ -319,5 +319,12 @@
 			</choose>
 		</where>
 	</select>
+	
+	<!-- 다중행 조회를 위한 기능 정의 (지도용) -->
+	<select id="selectMapList"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT * FROM seoulgil_walk_course
+	</select>
 
 </mapper>
