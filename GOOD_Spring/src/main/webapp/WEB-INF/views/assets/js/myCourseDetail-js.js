@@ -193,8 +193,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	};
 var course_name = $('#mycourse_name').data('mycoursename');
 	var mycourse_no = $('#mycourse_name').data('mycourseno');
-	console.log(course_name)
-	console.log(mycourse_no)
+
 
 //
 

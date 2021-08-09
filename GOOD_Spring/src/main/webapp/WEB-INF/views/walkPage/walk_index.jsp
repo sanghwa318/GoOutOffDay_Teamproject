@@ -464,6 +464,7 @@ carousel-title2 {
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script>
+	//카카오맵 지도 정보
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		mapOption = {
 			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -478,6 +479,7 @@ carousel-title2 {
 			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
 			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다
 			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+			console.log("relayout 호출됨")
 			map.relayout();
 		}
 
@@ -503,7 +505,7 @@ carousel-title2 {
 				lon = position.coords.longitude; // 경도
 
 				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-				message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+				message = '<div style="padding:5px; padding-left:10px; font-size:18px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
 
 				// 마커와 인포윈도우를 표시합니다
 				displayMarker(locPosition, message);
@@ -516,28 +518,33 @@ carousel-title2 {
 
 			displayMarker(locPosition, message);
 		}
-
+		var marker=null;
+		var iwContent=null;
+		var infowindow=null;
 		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 		function displayMarker(locPosition, message) {
 
 			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
+			 marker = new kakao.maps.Marker({
 				map : map,
 				position : locPosition
 			});
 
-			var iwContent = message, // 인포윈도우에 표시할 내용
+			 iwContent = message, // 인포윈도우에 표시할 내용
 			iwRemoveable = true;
 
 			// 인포윈도우를 생성합니다
-			var infowindow = new kakao.maps.InfoWindow({
+			 infowindow = new kakao.maps.InfoWindow({
 				content : iwContent,
 				removable : iwRemoveable
 			});
 
 			// 인포윈도우를 마커위에 표시합니다 
 			infowindow.open(map, marker);
-
+			
+			kakao.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(map, marker);
+			});
 			// 지도 중심좌표를 접속위치로 변경합니다
 			map.setCenter(locPosition);
 		}
@@ -553,7 +560,6 @@ carousel-title2 {
         	var nowdate = new Date();
         	var tmpdate = nowdate.getTime()-startdate.getTime();
         	var date = new Date(tmpdate);
-        	console.log(date)
         	var minute = date.getMinutes();
         	var second = date.getSeconds();
         	var hour = date.getHours()-9;

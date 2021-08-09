@@ -6,7 +6,9 @@
 var watchId = null;
 var interval = null;
 var count = 0;
+var linepath=[];
 function startRecord() {
+	
 	if (navigator.geolocation) { // GPS를 지원하면
 		watchId = navigator.geolocation.watchPosition(function(position) {
 			var wat_latitude = String(position.coords.latitude); // 위도
@@ -16,7 +18,20 @@ function startRecord() {
 
 			map.setCenter(new kakao.maps.LatLng(wat_latitude, wat_longitude));
 			console.log("위도: " + wat_latitude + ", 경도: " + wat_longitude + ", 정확도: " + wat_accuracy + ", 타임스탬프: " + wat_timestamp+", count: "+count)
-
+			linepath.push(new kakao.maps.LatLng(wat_latitude, wat_longitude));
+						// 지도에 선을 표시한다 
+			var polyline = new kakao.maps.Polyline({
+				map: map, // 선을 표시할 지도 객체 
+				path: linepath,
+				strokeWeight: 1, // 선의 두께
+				strokeColor: '#FF0000', // 선 색
+				strokeOpacity: 0.8, // 선 투명도
+				strokeStyle: 'dotted' // 선 스타일
+			});
+			marker.setPosition(new kakao.maps.LatLng(wat_latitude, wat_longitude));
+			infowindow.setPosition(new kakao.maps.LatLng(wat_latitude, wat_longitude));
+			infowindow.setContent('<div style="padding:5px; padding-left:10px; font-size:18px;">당신의 현재 위치는...</div>')
+			
 			//  ajax로 로딩
 			$.ajax({
 				url: getContextPath() + '/walkPage/walk_record.do',
@@ -38,7 +53,7 @@ function startRecord() {
 		window.setTimeout(function() {
 			window.navigator.geolocation.clearWatch(watchId)
 		},
-			5000 //stop checking after 5 seconds
+			3000 //stop checking after 5 seconds
 		);
 	} else {
 		alert('GPS를 지원하지 않습니다');
