@@ -30,6 +30,14 @@ public interface WalkCourseService {
 	 */
 	public List<WalkCourse> getWalkCourseList(WalkCourse input) throws Exception;
 	
+	
+	/**
+	 * 걷기코스 COURSE_NAME 조회 (하나의 경로에 해당하는 포인트)
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	public List<WalkCourse> getWalkCourseCourseName(WalkCourse input) throws Exception;
+	
 	/**
 	 * 걷기코스 랜덤 목록 조회(걷기메인페이지)
 	 * @return 조회 결과에 대한 컬렉션

@@ -197,83 +197,152 @@ div#category_acco .accordian-toggle {
 
 						<%-- 조회 결과가 있는 경우 --%>
 						<c:otherwise>
-							<%-- 조회 결과에 따른 반복 처리 --%>
-							<c:forEach var="item" items="${output }" varStatus="status">
-								<%-- 출력을 위해 준비한 파라미터들 --%>
-								<c:set var="COURSE_CATEGORY_NM"
-									value="${item.COURSE_CATEGORY_NM }" />
-								<c:set var="SOUTH_NORTH_DIV_NM"
-									value="${item.SOUTH_NORTH_DIV_NM }" />
-								<c:set var="AREA_GU" value="${item.AREA_GU }" />
-								<c:set var="DISTANCE" value="${item.DISTANCE }" />
-								<c:set var="LEAD_TIME" value="${item.LEAD_TIME }" />
+							<button class="btn disabled"
+								style="cursor: default; margin-bottom: 20px;">총
+								${totalCount } 건의 목록이 있습니다.</button>
+							<table class="table table-hover table-responsive">
+								<thead>
+									<tr align="center">
+										<th><h3 class="text-center">유형</h3></th>
+										<th><h3 class="text-center">코스이름</h3></th>
+										<th><h3 class="text-center">내용</h3></th>
+										<th><h3 class="text-center">포인트</h3></th>
+									</tr>
+								</thead>
+								<tbody>
+									<%-- 조회 결과에 따른 반복 처리 --%>
+									<c:forEach var="item" items="${output }" varStatus="status">
+										<%-- 출력을 위해 준비한 파라미터들 --%>
+										<c:set var="COURSE_CATEGORY_NM"
+											value="${item.COURSE_CATEGORY_NM }" />
+										<c:set var="SOUTH_NORTH_DIV_NM"
+											value="${item.SOUTH_NORTH_DIV_NM }" />
+										<c:set var="AREA_GU" value="${item.AREA_GU }" />
+										<c:set var="DISTANCE" value="${item.DISTANCE }" />
+										<c:set var="LEAD_TIME" value="${item.LEAD_TIME }" />
 
-								<c:set var="COURSE_LEVEL" value="${item.COURSE_LEVEL }" />
-								<c:set var="VOTE_CNT" value="${item.VOTE_CNT }" />
-								<c:set var="RELATE_SUBWAY" value="${item.RELATE_SUBWAY }" />
-								<c:set var="TRAFFIC_INFO" value="${item.TRAFFIC_INFO }" />
-								<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
-								<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
+										<c:set var="COURSE_LEVEL" value="${item.COURSE_LEVEL }" />
+										<c:set var="VOTE_CNT" value="${item.VOTE_CNT }" />
+										<c:set var="RELATE_SUBWAY" value="${item.RELATE_SUBWAY }" />
+										<c:set var="TRAFFIC_INFO" value="${item.TRAFFIC_INFO }" />
+										<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
 
-								<%-- 상세 페이지로 이동하기 위한 URL --%>
-								<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
-									<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
-								</c:url>
+										<%-- 상세 페이지로 이동하기 위한 URL --%>
+										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
+											<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+										</c:url>
 
-								<div class="media">
-									<!-- 이미지 왼쪽 배치 -->
-									<!-- 									<a class="pull-left" href="#"><img class="media-object" -->
-									<!-- 										src="../img/profile_default.png" height="170" width="170" -->
-									<!-- 										alt="도심의 야경"></a> -->
-									<!-- 미디어 내용 영역 -->
-									<div class="media-body">
-										<div class="col-xs-2">
-											<h2>${COURSE_CATEGORY_NM }</h2>
-										</div>
-										<!-- 내용의 제목 -->
-										<div class="col-xs-8">
-											<h3 class="media-heading">
-												<a href="${viewUrl }">${COURSE_NAME} > ${CPI_NAME }</a>
-											</h3>
-											<div class="row" style="padding: 5px 20px;">
-												<div class="col-xs-3">
-													<h4 class="media-heading">
-														<a href="#">강남/강북 : ${SOUTH_NORTH_DIV_NM } </a>
-													</h4>
-													<h4 class="media-heading">
-														<a href="#">지역구 : ${AREA_GU } </a>
-													</h4>
-												</div>
-												<div class="col-xs-3">
-													<h4 class="media-heading">
-														<a href="#">거리 : ${DISTANCE } </a>
-													</h4>
-													<h4 class="media-heading">
-														<a href="#">소요시간 : ${LEAD_TIME } </a>
-													</h4>
-												</div>
-												<div class="col-xs-3">
-													<h4 class="media-heading">
-														<a href="#">난이도 : <c:choose>
-																<c:when test="${COURSE_LEVEL =='1'}">초급</c:when>
-																<c:when test="${COURSE_LEVEL =='2'}">중급</c:when>
-																<c:when test="${COURSE_LEVEL =='3'}">고급</c:when>
-															</c:choose>
-														</a>
-													</h4>
-													<h4 class="media-heading">
-														<a href="#">관련지하철 : ${RELATE_SUBWAY } </a>
-													</h4>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-2">
-											<p style="text-align: right;">추천수 : ${VOTE_CNT }</p>
-										</div>
-									</div>
-								</div>
-								<hr />
-							</c:forEach>
+										<tr>
+											<td align="center" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2></td>
+											<td align="center" valign="middle"><h2>${COURSE_NAME}</h2></td>
+											<td><table>
+													<tr>
+														<td><h4>강남/강북 : ${SOUTH_NORTH_DIV_NM }</h4></td>
+													</tr>
+													<tr>
+														<td><h4>지역구 : ${AREA_GU }</h4></td>
+													</tr>
+													<tr>
+														<td><h4>거리 : ${DISTANCE }</h4></td>
+													</tr>
+													<tr>
+														<td><h4>소요시간 : ${LEAD_TIME }</h4></td>
+													</tr>
+													<tr>
+														<td><h4>난이도 : ${COURSE_LEVEL }</h4></td>
+													</tr>
+													<tr>
+														<td><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
+													</tr>
+													<tr>
+														<td><h4>추천수 : ${VOTE_CNT }</h4></td>
+													</tr>
+												</table></td>
+											<c:choose>
+												<%-- 조회결과가 없는 경우 --%>
+												<c:when
+													test="${output_path_item==null || fn:length(output_path_item)==0 }">
+													<td align="center">경로가 존재하지 않습니다.</td>
+												</c:when>
+												<%-- 조회결과가 있는 경우 --%>
+												<c:otherwise>
+													<td>
+														<table>
+															<%-- 조회 결과에 따른 반복 처리 --%>
+															<c:forEach var="item" items="${output_path_item }"
+																varStatus="status">
+																<%-- 출력을 위해 준비한 변수 --%>
+																<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
+
+																<%-- 상세페이지로 이동하기 위한 URL --%>
+																<c:url value="/walkPage/walk_detailCourse.do"
+																	var="viewUrl">
+																	<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+																</c:url>
+
+																<tr>
+																	<td><h4>
+																			<a href="${viewUrl}"> ${CPI_NAME }</a>
+																		</h4></td>
+																</tr>
+
+															</c:forEach>
+														</table>
+													</td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+										<!-- 																		<div class="media"> -->
+										<!-- 																			<div class="media-body"> -->
+										<!-- 																				<div class="col-xs-2"> -->
+										<%-- 																					<h2>${COURSE_CATEGORY_NM }</h2> --%>
+										<!-- 																				</div> -->
+										<!-- 																				내용의 제목 -->
+										<!-- 																				<div class="col-xs-8"> -->
+										<!-- 											<h3 class="media-heading"> -->
+										<%-- 												<a href="${viewUrl }">${COURSE_NAME} > ${CPI_NAME }</a> --%>
+										<!-- 											</h3> -->
+										<!-- 											<div class="row" style="padding: 5px 20px;"> -->
+										<!-- 												<div class="col-xs-3"> -->
+										<!-- 													<h4 class="media-heading"> -->
+										<%-- 														<a href="#">강남/강북 : ${SOUTH_NORTH_DIV_NM } </a> --%>
+										<!-- 													</h4> -->
+										<!-- 													<h4 class="media-heading"> -->
+										<%-- 														<a href="#">지역구 : ${AREA_GU } </a> --%>
+										<!-- 													</h4> -->
+										<!-- 												</div> -->
+										<!-- 												<div class="col-xs-3"> -->
+										<!-- 													<h4 class="media-heading"> -->
+										<%-- 														<a href="#">거리 : ${DISTANCE } </a> --%>
+										<!-- 													</h4> -->
+										<!-- 													<h4 class="media-heading"> -->
+										<%-- 														<a href="#">소요시간 : ${LEAD_TIME } </a> --%>
+										<!-- 													</h4> -->
+										<!-- 												</div> -->
+										<!-- 												<div class="col-xs-3"> -->
+										<!-- 													<h4 class="media-heading"> -->
+										<%-- 														<a href="#">난이도 : <c:choose> --%>
+										<%-- 																<c:when test="${COURSE_LEVEL =='1'}">초급</c:when> --%>
+										<%-- 																<c:when test="${COURSE_LEVEL =='2'}">중급</c:when> --%>
+										<%-- 																<c:when test="${COURSE_LEVEL =='3'}">고급</c:when> --%>
+										<%-- 															</c:choose> --%>
+										<!-- 														</a> -->
+										<!-- 													</h4> -->
+										<!-- 													<h4 class="media-heading"> -->
+										<%-- 														<a href="#">관련지하철 : ${RELATE_SUBWAY } </a> --%>
+										<!-- 													</h4> -->
+										<!-- 												</div> -->
+										<!-- 											</div> -->
+										<!-- 										</div> -->
+										<!-- 										<div class="col-xs-2"> -->
+										<%-- 											<p style="text-align: right;">추천수 : ${VOTE_CNT }</p> --%>
+										<!-- 										</div> -->
+										<!-- 									</div> -->
+										<!-- 								</div> -->
+										<!-- 								<hr /> -->
+									</c:forEach>
+								</tbody>
+							</table>
 							<!-- 페이지네이션 -->
 							<div class="text-center">
 								<!-- 페이지 번호 구현 -->

@@ -100,6 +100,32 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 
 		return result;
 	}
+	
+	/**
+	 * 걷기코스 COURSE_NAME 조회 (하나의 경로에 해당하는 포인트)
+	 * @return 조회 결과에 대한 컬렉션
+	 * @throws Exception
+	 */
+	@Override
+	public List<WalkCourse> getWalkCourseCourseName(WalkCourse input) throws Exception {
+		List<WalkCourse> result = null;
+
+		try {
+			result = sqlSession.selectList("WalkCourseMapper.selectCourseName", input);
+			
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("조회된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
 
 	/**
 	 * 걷기코스 랜덤 목록 조회(걷기메인페이지)

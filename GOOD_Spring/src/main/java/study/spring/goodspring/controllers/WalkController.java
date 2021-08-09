@@ -1,5 +1,6 @@
 package study.spring.goodspring.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -251,7 +252,7 @@ public class WalkController {
 		// [페이지네이션] 객체 추가
 		PageData pageData = null;
 		// [페이지네이션] 변수 추가 (종료)
-
+		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
 		input.setSOUTH_NORTH_DIV_NM(keyword);
@@ -271,12 +272,15 @@ public class WalkController {
 		input.setOrder(order);
 
 		List<WalkCourse> output = null; // 조회 결과가 저장될 객체
+		List<WalkCourse> output_path = new ArrayList<WalkCourse>(); // 조회 결과가 저장될 객체
+		List<WalkCourse> output_path_item = null; // 조회 결과가 저장될 객체
 
 		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
 			totalCount = walkCourseService.getWalkCourseCount(input);
 			// [페이지네이션] 페이지 번호 계산
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+			
 
 			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
 			WalkCourse.setOffset(pageData.getOffset());
@@ -284,16 +288,26 @@ public class WalkController {
 
 			// 데이터 조회하기
 			output = walkCourseService.getWalkCourseList(input);
+			output_path = walkCourseService.getWalkCourseList(input);
+			for (int i=0; i<output.size(); i++) {
+				String input_path = output_path.get(i).getCOURSE_NAME();
+				WalkCourse item = new WalkCourse();
+				item.setCOURSE_NAME(input_path);
+				output_path_item = walkCourseService.getWalkCourseCourseName(item);
+				// rowspan을 하기위한 포인트 개수
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		// View 처리
 		model.addAttribute("output", output);
+		model.addAttribute("output_path_item", output_path_item);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);
 		model.addAttribute("area", area);
 		model.addAttribute("order", order);
+		model.addAttribute("totalCount", totalCount);
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		// walkPage/walk_search.jsp파일을 View로 지정

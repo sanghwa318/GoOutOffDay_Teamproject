@@ -68,6 +68,7 @@
 		</where>
 	</select>
 
+	<!-- 경로에 속하는 포인트 들을 조회하기 위한 다중행 조회 기능 정의 -->
 	<select id="selectPath"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
@@ -86,23 +87,41 @@
 		ORDER BY CPI_IDX ASC;
 	</select>
 
+	<!-- 경로에 속하는 포인트 들을 조회하기 위한 다중행 조회 기능 정의 -->
+	<select id="selectCourseName"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT CPI_IDX, CPI_NAME
+		FROM
+		seoulgil_walk_course
+		<where>
+			<if test="COURSE_NAME != null and COURSE_NAME != ''">
+				COURSE_NAME = #{COURSE_NAME}
+			</if>
+		</where>
+		ORDER BY CPI_IDX ASC;
+	</select>
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectList"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT COURSE_CATEGORY_NM,
+		SELECT DISTINCT COURSE_CATEGORY_NM,
 		SOUTH_NORTH_DIV_NM,
 		AREA_GU,
 		DISTANCE,
 		LEAD_TIME,
-		COURSE_LEVEL,
+		CASE COURSE_LEVEL
+		WHEN "1" THEN "초급"
+		WHEN "2" THEN
+		"중급"
+		WHEN
+		"3" THEN "고급"
+		END AS COURSE_LEVEL,
 		VOTE_CNT,
 		RELATE_SUBWAY,
 		TRAFFIC_INFO,
-		COURSE_NAME,
-		CPI_NAME,
-		CPI_IDX
+		COURSE_NAME
 		FROM seoulgil_walk_course
 
 		<where>
@@ -128,9 +147,13 @@
 					</if>
 					<if test="COURSE_NAME != null and COURSE_NAME != ''">
 						OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
+
 					</if>
 					<if test="CPI_NAME != null and CPI_NAME != ''">
-						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
+						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+						OR
+						COURSE_NAME IN (SELECT COURSE_NAME FROM seoulgil_walk_course WHERE
+						CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')))
 					</if>
 					<if test="AREA_GU != null and AREA_GU != ''">
 						AND (AREA_GU LIKE concat('%', #{AREA_GU}, '%'))
@@ -159,7 +182,10 @@
 						OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
 					</if>
 					<if test="CPI_NAME != null and CPI_NAME != ''">
-						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
+						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+						OR
+						COURSE_NAME IN (SELECT COURSE_NAME FROM seoulgil_walk_course WHERE
+						CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')))
 					</if>
 				</when>
 				<!-- 카테고리 없고, 지역구 없고, 검색어 있음 -->
@@ -184,6 +210,9 @@
 					</if>
 					<if test="CPI_NAME != null and CPI_NAME != ''">
 						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+						OR
+						COURSE_NAME IN (SELECT COURSE_NAME FROM seoulgil_walk_course WHERE
+						CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
 					</if>
 				</otherwise>
 			</choose>
@@ -203,9 +232,9 @@
 		<if test="order == 'level'">
 			ORDER BY COURSE_LEVEL ASC
 		</if>
-		<if test="order == null or order == ''">
-			ORDER BY REG_DATE DESC
-		</if>
+		<!-- <if test="order == null or order == ''"> -->
+		<!-- ORDER BY REG_DATE DESC -->
+		<!-- </if> -->
 		<!-- 페이지네이션에 필요 -->
 		<if test="listCount > 0">
 			LIMIT #{offset}, #{listCount};
@@ -233,7 +262,16 @@
 	<select id="selectCountAll"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultType="int">
-		SELECT COUNT(*) FROM seoulgil_walk_course
+		SELECT COUNT(DISTINCT COURSE_CATEGORY_NM,
+		SOUTH_NORTH_DIV_NM,
+		AREA_GU,
+		DISTANCE,
+		LEAD_TIME,
+		COURSE_LEVEL,
+		VOTE_CNT,
+		RELATE_SUBWAY,
+		TRAFFIC_INFO,
+		COURSE_NAME) FROM seoulgil_walk_course
 
 		<where>
 			<choose>
@@ -260,7 +298,10 @@
 						OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
 					</if>
 					<if test="CPI_NAME != null and CPI_NAME != ''">
-						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
+						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+						OR
+						COURSE_NAME IN (SELECT COURSE_NAME FROM seoulgil_walk_course WHERE
+						CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')))
 					</if>
 					<if test="AREA_GU != null and AREA_GU != ''">
 						AND (AREA_GU LIKE concat('%', #{AREA_GU}, '%'))
@@ -289,7 +330,10 @@
 						OR COURSE_NAME LIKE concat('%', #{COURSE_NAME}, '%')
 					</if>
 					<if test="CPI_NAME != null and CPI_NAME != ''">
-						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
+						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+						OR
+						COURSE_NAME IN (SELECT COURSE_NAME FROM seoulgil_walk_course WHERE
+						CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')))
 					</if>
 				</when>
 				<!-- 카테고리 없고, 지역구 없고, 검색어 있음 -->
@@ -314,12 +358,15 @@
 					</if>
 					<if test="CPI_NAME != null and CPI_NAME != ''">
 						OR CPI_NAME LIKE concat('%', #{CPI_NAME}, '%')
+						OR
+						COURSE_NAME IN (SELECT COURSE_NAME FROM seoulgil_walk_course WHERE
+						CPI_NAME LIKE concat('%', #{CPI_NAME}, '%'))
 					</if>
 				</otherwise>
 			</choose>
 		</where>
 	</select>
-	
+
 	<!-- 다중행 조회를 위한 기능 정의 (지도용) -->
 	<select id="selectMapList"
 		parameterType="study.spring.goodspring.model.WalkCourse"
