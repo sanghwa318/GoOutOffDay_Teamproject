@@ -18,8 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.CAS;
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.CasService;
+import study.spring.goodspring.service.CrewService;
 
 /**
  * Handles requests for the application home page.
@@ -38,6 +40,9 @@ public class HomeController {
 	CasService CasService;
 	@Autowired
 	WebHelper webHelper;
+	/** 크루서비스 선언 **/
+	@Autowired
+	CrewService crewService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model,
@@ -93,6 +98,18 @@ public class HomeController {
 		}
 		// 시설대관 끝
 
+		// 크루 시작
+		List<Crew> crew = null;
+
+		try {
+			// 데이터 조회하기
+			crew = crewService.getCrewList(null);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// 크루 끝
+
+		// 문화체육 모델객체 주입 
 		model.addAttribute("keyword_exp", keyword_exp);
 		model.addAttribute("keyword_imp", keyword_imp);
 		model.addAttribute("keyword_borrow", keyword_borrow);
@@ -101,7 +118,10 @@ public class HomeController {
 		model.addAttribute("output_imp", output_imp);
 		model.addAttribute("output_borrow", output_borrow);
 		model.addAttribute("serverTime", formattedDate);
-
+		
+		// 크루 모델객체 주입
+		model.addAttribute("crew", crew);
+		
 		return new ModelAndView("index");
 	}
 

@@ -559,7 +559,7 @@ h4 {
 				<!-- 창의 체험 캐러셀 영역 -->
 				<div class="row exp_item">
 					<!--  캐러셀 시작 -->
-					<div class="owl-carousel owl-theme" id="owl-walk">
+					<div class="owl-carousel owl-theme" id="owl-exp">
 						<c:forEach var="item_exp" items="${output_exp }">
 							<c:url value="/casPage/cas_detail.do" var="detailUrl">
 								<c:param name="SVCID" value="${item_exp.SVCID }"></c:param>
@@ -575,8 +575,8 @@ h4 {
 											aria-hidden="true" role="button"></i></span>
 									</p>
 									<h4 class="explan">${item_exp.SVCNM }</h4>
-									<p class="pull-left" style="max-width: 110px;">${item_exp.PLACENM}</p>
-									<p class="pull-right">${item_exp.SVCSTATNM}</p>
+									<p class="pull-left" style="max-width: 70%;">${item_exp.PLACENM}</p>
+									<p class="pull-right" style="max-width: 30%;">${item_exp.SVCSTATNM}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -595,7 +595,7 @@ h4 {
 				<!-- 교육 자기계발 캐러셀 영역 -->
 				<div class="row adu_item">
 					<!--  캐러셀 시작 -->
-					<div class="owl-carousel owl-theme" id="owl-walk">
+					<div class="owl-carousel owl-theme" id="owl-imp">
 						<c:forEach var="item_imp" items="${output_imp }">
 							<c:url value="/casPage/cas_detail.do" var="detailUrl">
 								<c:param name="SVCID" value="${item_imp.SVCID }"></c:param>
@@ -611,8 +611,8 @@ h4 {
 											aria-hidden="true" role="button"></i></span>
 									</p>
 									<h4 class="explan">${item_imp.SVCNM }</h4>
-									<p class="pull-left" style="max-width: 110px;">${item_imp.PLACENM}</p>
-									<p class="pull-right">${item_imp.SVCSTATNM}</p>
+									<p class="pull-left" style="max-width: 70%;">${item_imp.PLACENM}</p>
+									<p class="pull-right" style="max-width: 30%;">${item_imp.SVCSTATNM}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -631,7 +631,7 @@ h4 {
 				<!-- 장소대여 캐러셀 영역 -->
 				<div class="row show_item">
 					<!--  캐러셀 시작 -->
-					<div class="owl-carousel owl-theme" id="owl-walk">
+					<div class="owl-carousel owl-theme" id="owl-borrow">
 						<c:forEach var="item_borrow" items="${output_borrow }">
 							<c:url value="/casPage/cas_detail.do" var="detailUrl">
 								<c:param name="SVCID" value="${item_borrow.SVCID }"></c:param>
@@ -647,8 +647,8 @@ h4 {
 											aria-hidden="true" role="button"></i></span>
 									</p>
 									<h4 class="explan">${item_borrow.SVCNM }</h4>
-									<p class="pull-left" style="max-width: 110px;">${item_borrow.PLACENM}</p>
-									<p class="pull-right">${item_borrow.SVCSTATNM}</p>
+									<p class="pull-left" style="max-width: 70%;">${item_borrow.PLACENM}</p>
+									<p class="pull-right" style="max-width: 30%;">${item_borrow.SVCSTATNM}</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -667,135 +667,23 @@ h4 {
 				<!-- 크루 캐러셀 영역 -->
 				<div class="row crew_item">
 					<!--  캐러셀 시작 -->
-					<div class="owl-carousel owl-theme" id="owl-walk">
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지1" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
+					<div class="owl-carousel owl-theme" id="owl-crew">
+						<c:forEach var="item" items="${crew}" varStatus="status">
+							<c:url value="/commPage/comm_crew_info.do" var="detailUrl">
+								<c:param name="crew_no" value="${item.crew_no}"></c:param>
+							</c:url>
+							<div class="thumbnail item">
+								<img src="${item.crew_photo.fileUrl}" alt="크루 이미지"
+									onclick="location.href='${detailUrl}'"
+									style="max-height: 100%; max-width: 100%; cursor: pointer;">
+								<div class="caption clearfix">
+									<p>${item.crew_name}크루</p>
+									<h4 class="explan">${item.crew_sinto}</h4>
+									<p class="pull-left" style="max-width: 70%;">${item.crew_area}</p>
+									<p class="pull-right" style="max-width: 30%;">회원수 ${item.crew_member}명</p>
+								</div>
 							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지2" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지3" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지4" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지5" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지6" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지7" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지8" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-							<div class="wishlist">
-								<span class=heart><i class="fa fa-heart-o"
-									aria-hidden="true" role="button"></i> </span>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지9" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-							<div class="wishlist">
-								<span class=heart><i class="fa fa-heart-o"
-									aria-hidden="true" role="button"></i> </span>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지10" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									크루 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>크루 이름</h4>
-								<p>크루 간단 소개</p>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -822,7 +710,9 @@ h4 {
 		}(document, 'script', 'weatherwidget-io-js');
 	</script>
 	<script>
-		$('.owl-carousel').owlCarousel({
+		$('.owl-carousel')
+				.owlCarousel(
+						{
 							loop : false,
 							margin : 10,
 							nav : true,

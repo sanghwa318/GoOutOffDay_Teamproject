@@ -173,6 +173,7 @@ h4 {
 .main_header {
 	border-bottom: 1px solid rgba(102, 109, 117, 0.32);
 }
+
 .page-header>img {
 	width: 3rem;
 	height: 3rem;
@@ -181,7 +182,14 @@ h4 {
 	bottom: 0px;
 }
 
+/** 영역 조정 **/
 .owl-theme .item .map {
+	height: 180px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.owl-theme .item img {
 	height: 180px;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
@@ -198,7 +206,8 @@ h4 {
 		<!-- 본문 컨테이터 -->
 		<div class="container" id="content">
 			<h1 class="page-header page-title text-center">
-				커뮤니티<img src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png" />
+				커뮤니티<img
+					src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png" />
 			</h1>
 			<!-- 본문영역 시작 -->
 			<div class="comm_index_middle">
@@ -208,27 +217,32 @@ h4 {
 					<div class="header clearfix">
 						<h2 class="pull-left">나만의 코스</h2>
 						<div class="pull-right">
-							<a href="${pageContext.request.contextPath}/commPage/comm_myCourse.do">더 보기 &gt;</a>
+							<a
+								href="${pageContext.request.contextPath}/commPage/comm_myCourse.do">더
+								보기 &gt;</a>
 						</div>
 					</div>
 					<!-- 나만의 코스 캐러셀 영역 -->
-					<div class="row exp_item"  id="item-box" data-length="${fn:length(mycourses)}">
+					<div class="row exp_item" id="item-box"
+						data-length="${fn:length(mycourses)}">
 						<!--  캐러셀 시작 -->
 						<div class="owl-carousel owl-theme" id="owl-walk">
 							<c:forEach var="item" items="${mycourses}" varStatus="status">
 								<c:url value="/commPage/comm_myCourseDetail.do" var="detailUrl">
 									<c:param name="mycourse_no" value="${item.mycourse_no}"></c:param>
 								</c:url>
-								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}' 
-								onclick="location.href='${detailUrl}'">
+								<div class="thumbnail item" id="item${status.index}"
+									data-mycourseno='${item.mycourse_no}'
+									onclick="location.href='${detailUrl}'">
 									<div class="map" id="map${status.index}"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									</div>
 									<div class="caption clearfix">
 										<p>나만의 코스</p>
 										<h4 class="explan">${item.mycourse_name}</h4>
-										<p class="pull-left" style="max-width: 110px;">${item.mycourse_area}</p>
-										<p class="pull-right">좋아요 ${item.like}</p>
+										<p class="pull-left" style="max-width: 70%;">${item.mycourse_area}</p>
+										<p class="pull-right" style="max-width: 30%;">좋아요
+											${item.like}</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -244,7 +258,9 @@ h4 {
 					<div class="header clearfix">
 						<h2 class="pull-left">크루</h2>
 						<div class="pull-right">
-							<a href="${pageContext.request.contextPath}/commPage/comm_crew.do">더 보기 &gt;</a>
+							<a
+								href="${pageContext.request.contextPath}/commPage/comm_crew.do">더
+								보기 &gt;</a>
 						</div>
 					</div>
 					<!-- 크루 캐러셀 영역 -->
@@ -256,13 +272,15 @@ h4 {
 									<c:param name="crew_no" value="${item.crew_no}"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item.crew_photo.fileUrl}" alt="크루 이미지" onclick="location.href='${detailUrl}'"
-										style="height: 180px; width: 263px; cursor: pointer;">
+									<img src="${item.crew_photo.fileUrl}" alt="크루 이미지"
+										onclick="location.href='${detailUrl}'"
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
 										<p>${item.crew_name}크루</p>
 										<h4 class="explan">${item.crew_sinto}</h4>
-										<p class="pull-left" style="max-width: 110px;">${item.crew_area}</p>
-										<p class="pull-right">회원수 ${item.crew_member}명</p>
+										<p class="pull-left" style="max-width: 70%;">${item.crew_area}</p>
+										<p class="pull-right" style="max-width: 30%;">회원수
+											${item.crew_member}명</p>
 									</div>
 								</div>
 							</c:forEach>
@@ -310,8 +328,11 @@ h4 {
 	</script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing">
+		
 	</script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js">
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js">
+		
 	</script>
 </body>
 </html>
