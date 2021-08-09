@@ -681,4 +681,23 @@ public class WalkController {
 		}
 		return webHelper.getJsonData();
 	}
+	
+	/**
+	 * 걷기 코스 지도
+	 */
+	@RequestMapping(value = "/walkPage/walk_map.do", method = RequestMethod.GET)
+	public Map<String, Object> walk_map() {
+		WalkCourse input = new WalkCourse();
+		List<WalkCourse> output = null;
+		
+		try {
+			output = walkCourseService.getWalkCourseMapList(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("item", output);
+		return webHelper.getJsonData(data);
+	}
 }
