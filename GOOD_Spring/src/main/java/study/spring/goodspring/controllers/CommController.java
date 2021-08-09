@@ -336,6 +336,8 @@ public class CommController {
 		input.setCrew_area(region);
 		input.setCrew_category(crew_category);
 		
+		Member login_info = (Member) webHelper.getSession("login_info");
+		
 		List<Crew> output = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
 
@@ -356,16 +358,19 @@ public class CommController {
 
 			// 데이터 조회하기
 			output = crewService.getCrewList(input);
+			
 
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
+		
 
 		// 3) View 처리
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("region", region);
 		model.addAttribute("output", output);
 		model.addAttribute("pageData", pageData);
+		model.addAttribute("login_info", login_info);
 
 		return new ModelAndView("commPage/comm_crew");
 	}
@@ -635,10 +640,12 @@ public ModelAndView crewPostDelete(Model model,
 		// 로그인한 사용자와 작성자 정보가 같은 경우 삭제
 		output = crewPostService.selectCrewPost(input);
 		
-		if(login_info.getUser_no() != output.getUser_info_user_no()) {
-			return webHelper.redirect(null, "작성자만 삭제가능합니다.");
-		}else
+		if(login_info.getUser_no() == output.getUser_info_user_no() || login_info.isUser_admin() == true) {
 			crewPostService.deleteCrewPost(input);
+		}else {
+			return webHelper.redirect(null, "작성자만 삭제가능합니다.");
+		}
+		
 		
 	} catch (Exception e) {
 		webHelper.redirect(null, e.getLocalizedMessage());
