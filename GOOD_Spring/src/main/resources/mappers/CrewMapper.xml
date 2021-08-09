@@ -50,24 +50,23 @@
 		crew_category, crew_photo, crew_dinto, crew_member,
 		user_info_user_no
 		FROM crew
-		<where>
-			user_info_user_out = "N"
-			<if test="crew_name != null and crew_name != '' ">
-				OR crew_name LIKE CONCAT('%', #{crew_name}, '%')
-			</if>
+      <where>
+         <if test="crew_name != null and crew_name != '' ">
+            OR crew_name LIKE CONCAT('%', #{crew_name}, '%')
+         </if>
 
-			<if test="crew_category != null and crew_category != '' ">
-				OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
-			</if>
+         <if test="crew_category != null and crew_category != '' ">
+            OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
+         </if>
 
-			<if test="crew_sinto != null and crew_sinto != '' ">
-				OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
-			</if>
-			<if test="crew_area != null and crew_area != '' ">
-				OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
-			</if>
-			
-		</where>
+         <if test="crew_sinto != null and crew_sinto != '' ">
+            OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+         </if>
+         <if test="crew_area != null and crew_area != '' ">
+            OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
+         </if>
+         AND   user_info_user_out = "N" 
+      </where>
 
 		<if test="order == 1 ">
 			ORDER BY crew_no DESC
