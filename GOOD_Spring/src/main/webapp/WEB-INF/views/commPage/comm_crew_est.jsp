@@ -185,7 +185,7 @@ margin-bottom: 5px;
 					<div class="col-md-9">
 						<h3 class="header">크루 간단 소개</h3>
 						<textarea class="form-control" rows="5" id="crew_sinto"
-							name="crew_dinto"
+							name="crew_sinto"
 							style="font-size: 20px; resize: none"
 							placeholder="자신의 크루를 간단하게 소개해주세요."></textarea>
 					</div>
@@ -194,7 +194,7 @@ margin-bottom: 5px;
 					<div class="col-sm-12">
 						<h3 class="header">크루 설명</h3>
 						<textarea class="form-control" rows="5" id="crew_dinto"
-							name="crew_sinto"
+							name="crew_dinto"
 							style="font-size: 15px; resize: none"
 							placeholder="해당 크루에 대한 설명 혹은 공지사항을 적어주세요."></textarea>
 					
