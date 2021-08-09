@@ -180,6 +180,12 @@ h4 {
 	left: 5px;
 	bottom: 0px;
 }
+
+.owl-theme .item .map {
+	height: 180px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
 </style>
 </head>
 
@@ -216,7 +222,7 @@ h4 {
 								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}' 
 								onclick="location.href='${detailUrl}'">
 									<div class="map" id="map${status.index}"
-										style="height: 180px; width: 263px; cursor: pointer;">
+										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									</div>
 									<div class="caption clearfix">
 										<p>나만의 코스</p>

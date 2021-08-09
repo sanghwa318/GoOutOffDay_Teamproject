@@ -74,6 +74,19 @@
 	color: red;
 	cursor: pointer;
 }
+
+/** 호버 CSS **/
+.bookItem {
+	position: relative;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+	padding: 0;
+}
+
+.bookItem:hover {
+	transform: translate(0, -2px);
+	box-shadow: 0 2px 4px rgba(102, 109, 117, 0.4);
+}
 </style>
 
 </head>
