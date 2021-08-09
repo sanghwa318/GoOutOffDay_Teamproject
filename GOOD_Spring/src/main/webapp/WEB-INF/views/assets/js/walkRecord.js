@@ -7,6 +7,31 @@ var watchId = null;
 var interval = null;
 var count = 0;
 var linepath=[];
+var latitude=[];
+var longitude=[];
+var walkDistance=0;
+function distance(lat1, lon1, lat2, lon2,unit){
+	var theta = lon1 -lon2;
+	var dist =	Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2))
+				+ Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+	dist = Math.acos(dist);
+		dist = rad2deg(dist);
+		dist = dist * 60 * 1.1515;
+
+		if (unit == "kilometer") {
+			dist = dist * 1.609344;
+		} else if (unit == "meter") {
+			dist = dist * 1609.344;
+		}
+
+		return dist;
+}
+function deg2rad(deg){
+	return (deg* Math.PI / 180.0);
+}
+function rad2deg(rad){
+	return (rad * 180 / Math.PI);
+}
 function startRecord() {
 	
 	if (navigator.geolocation) { // GPS를 지원하면
@@ -16,10 +41,21 @@ function startRecord() {
 			var wat_accuracy = position.coords.accuracy; //정확도
 			var wat_timestamp = position.timestamp; // 시간
 
+			latitude.push(wat_latitude);
+			longitude.push(wat_longitude);
+			if(latitude.length>1){
+				walkDistance=0;
+				for(var i=0; i<latitude.length-1; i++){
+					walkDistance+=distance(latitude[i], longitude[i], latitude[i+1], longitude[i+1], 'meter');
+				}
+			}
+
+
 			map.setCenter(new kakao.maps.LatLng(wat_latitude, wat_longitude));
 			console.log("위도: " + wat_latitude + ", 경도: " + wat_longitude + ", 정확도: " + wat_accuracy + ", 타임스탬프: " + wat_timestamp+", count: "+count)
 			linepath.push(new kakao.maps.LatLng(wat_latitude, wat_longitude));
-						// 지도에 선을 표시한다 
+			
+			// 지도에 선을 표시한다 
 			var polyline = new kakao.maps.Polyline({
 				map: map, // 선을 표시할 지도 객체 
 				path: linepath,
@@ -89,16 +125,32 @@ if (watchId != null) {
 									data: {course_name},
 									success: function(data){
 										noRecording()
-									}
-								})
-						}else {
-							alert("이미 존재하는 코스 이름입니다. 다시 입력해주세요.")
+								}
+							})
 						}
-				 }
-			});
+				 },error: function(error){
+					var error_msg ='';
+		        	var code = parseInt(error.status / 100);
+		        	if (code == 5) 	{
+		                error_msg = "코스이름 저장에 실패했습니다. 다시 시도해주세요.\n";
+		            }else if(code == 4){
+						error_msg = "중복된 코스이름입니다. 다시 입력해주세요.\n"
+					} 
+					swal({
+								title : "에러",
+								text :error_msg,
+								type : "error"
+							}).then(function(result) {
+								// 창이 닫히는 애니메이션의 시간이 있으므로,
+								// 0.1초의 딜레이 적용 후 포커스 이동
+								setTimeout(function() {
 
+								}, 100);
+							}); // <-- 메시지 표시
+							return false; // <-- 실행 중단
+									}
+					});
 		}
-		
 	} else {
 		swal("기록하기를 눌러 기록을 시작해주세요.")
 	}

@@ -612,7 +612,7 @@ carousel-title2 {
             			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다<span style="color:'+colorcode+'">.</span>'
             			];
             num = ++num % str.length;
-            $('#recording').html(str[num]+' '+hour+'시간 '+minute+'분 '+second+'초째 기록 중');
+            $('#recording').html(str[num]+' '+hour+'시간 '+minute+'분 '+second+'초 '+parseInt(walkDistance)+'Meter 기록 중');
         }, 100);
 	}
 	

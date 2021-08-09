@@ -146,13 +146,13 @@ public class WalkController {
 		input.setCourse_name(course_name);
 		Map<String, Object> map = new HashMap<String, Object>();
 		String result = "true";
-
 		try {
-			walkLogService.courseNameUniqueCheck(input);
+			int count=walkLogService.courseNameUniqueCheck(input);
+			if(count>0) {
+				return webHelper.getJsonWarning("중복된 코스이름입니다. 다시 입력해주세요.");				
+			}
 		} catch (Exception e) {
-			result = "false";
-			map.put("result", result);
-			return webHelper.getJsonData(map);
+			return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 		map.put("result", result);
 		return webHelper.getJsonData(map);

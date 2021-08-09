@@ -75,9 +75,10 @@ public interface WalkLogService {
 	 * 코스네임 중복 검사
 	 * 
 	 * @param WalkLog 조회할 데이터가 담긴 Beans
+	 * @return 
 	 * @throws Exception
 	 */
-	public void courseNameUniqueCheck(WalkLog input) throws Exception;
+	public int courseNameUniqueCheck(WalkLog input) throws Exception;
 	/**
 	 * 코스이름이 없는 좌표값(비정상 기록)을 지운다.
 	 * @param WalkLog 지울 사용자의 일련번호가 담긴 Beans
