@@ -182,7 +182,7 @@
 			</form>
 		</div>
 			
-			<c:if test="${postout.user_info_user_no==login_info.user_no}">
+			<c:if test="${postout.user_info_user_no==login_info.user_no || login_info.user_admin =='true'}">
 			<div class="row">
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do"

@@ -183,9 +183,9 @@
 							<c:param name="crew_no" value="${item.crew_no}" />
 							<c:param name="crew_name" value="${item.crew_name}" />
 						</c:url>
-
-						<div class="col-xs-6 col-sm-4 col-md-3">
 						
+						<c:if test="${login_info.user_admin =='false'}">
+						<div class="col-xs-6 col-sm-4 col-md-3">
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
@@ -201,6 +201,31 @@
 
 							</div>
 						</div>
+						</c:if>
+						
+						<!-- 관리자 권한으로 들어갔을땐, info를 거치지않고 바로 bbs로 들어가기 -->
+						<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">
+							<c:param name="crew_no" value="${item.crew_no}" />
+							<c:param name="crew_name" value="${item.crew_name}" />
+						</c:url>
+					<c:if test="${login_info.user_admin =='true'}">
+						<%-- 관리자 권한으로 들어갔을땐, bbs상세페이지로 이동하기위한 URL --%>
+						<div class="col-xs-6 col-sm-4 col-md-3">
+							<div class="thumbnail item" onclick="location.href='${bbsUrl}'"
+								style="cursor: pointer;">
+								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
+									onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
+								<div class="caption clearfix">
+									<h4>
+										<a href="${bbsUrl}"> ${item.crew_name}</a>
+									</h4>
+									<h4>크루 소개: ${item.crew_sinto}</h4>
+									<h4 >지역: ${item.crew_area}</h4>
+									<h4 >종류: ${item.crew_category}</h4>
+								</div>
+							</div>
+						</div>
+						</c:if>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
