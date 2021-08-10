@@ -95,27 +95,6 @@ public class bookmarkServiceImpl implements BookMarkService {
 
 	}
 
-	/** 나의 찜목록 다중조회 (문화체육) **/
-	@Override
-	public List<BookMark> myBookMarkCasList(BookMark input) throws Exception {
-		List<BookMark> result = null;
-
-		try {
-			result = sqlSession.selectList("BookMarkMapper.CASListBookMark", input);
-
-			if (result == null) {
-				throw new NullPointerException("result=null");
-			}
-		} catch (NullPointerException e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("저장된 데이터가 없습니다.");
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
-		}
-		return result;
-	}
-
 	/** 찜목록 페이지네이션을위한 갯수조회 **/
 	@Override
 	public int getBookMarkCount(BookMark input) throws Exception {
@@ -123,6 +102,27 @@ public class bookmarkServiceImpl implements BookMarkService {
 
 		try {
 			result = sqlSession.selectOne("BookMarkMapper.BookMark_selectCountAll", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	/** 나의 모든찜목록 불러오기 **/
+	@Override
+	public List<BookMark> myBookMarkAllList(BookMark input) throws Exception {
+		List<BookMark> result = null;
+
+		try {
+			result = sqlSession.selectList("BookMarkMapper.MyListBookMark", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("저장된 데이터가 없습니다.");
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

@@ -309,14 +309,13 @@ public class myPageController {
 	public ModelAndView delete_ok() {
 
 		/** 2) 데이터 삭제하기 */
-		 Member input = (Member) webHelper.getSession("login_info"); 
-			/* Member input = new Member(); */
-		
-		
+		Member input = (Member) webHelper.getSession("login_info");
+		/* Member input = new Member(); */
+
 		try {
-			
+
 			memberService.userOutMember(input);
-			
+
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
@@ -462,13 +461,12 @@ public class myPageController {
 			BookMark.setOffset(pageData.getOffset());
 			BookMark.setListCount(pageData.getListCount());
 
-			output = bookMarkService.myBookMarkCasList(input_cas);
+			output = bookMarkService.myBookMarkAllList(input_cas);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 
-		
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		model.addAttribute("output", output);

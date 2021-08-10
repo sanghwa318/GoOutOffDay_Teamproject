@@ -7,16 +7,53 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="/WEB-INF/views/inc/head.jsp"%>
-<link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css" />
+<%@ include file="../inc/head.jsp"%>
 <style type="text/css">
+/** 공통 영역 **/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	padding-bottom: 60px;
+	min-height: auto;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+.body a {
+	text-decoration: none;
+}
+
+.body p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.body .row {
+	padding-bottom: 20px;
+	width: auto;
+	margin: auto;
+}
+
+.text-center {
+	padding-top: 30px;
+}
+
 .bookItem {
 	position: relative;
 	margin-bottom: 20px;
 	display: inline-block;
 }
 
-.bookItem .thumbnail {
+.bookItem .thumbnail img {
+	max-height: 100%;
+	min-height: 100%;
 	height: 180px;
 	width: 180px;
 	vertical-align: middle;
@@ -26,11 +63,8 @@
 	border-radius: 4px 0 0 4px;
 }
 
-.bookItem .thumbnail>img {
-	max-height: 100%;
-	max-width: 100%;
-	min-height: 100%;
-	min-width: 100%;
+.thumbnail {
+	border: 0;
 }
 
 .bookItem .caption {
@@ -50,7 +84,6 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-
 }
 
 .caption h4 {
@@ -58,7 +91,6 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-
 }
 
 /*찜하기 버튼*/
@@ -76,14 +108,15 @@
 }
 
 /** 호버 CSS **/
-.bookItem {
+.item {
 	position: relative;
 	transition: all 0.3s ease;
 	transform: translateY(0);
 	padding: 0;
+	overflow: auto;
 }
 
-.bookItem:hover {
+.item:hover {
 	transform: translate(0, -2px);
 	box-shadow: 0 2px 4px rgba(102, 109, 117, 0.4);
 }
@@ -102,26 +135,58 @@
 			</div>
 			<div class="row bookmark">
 				<c:forEach var="item" items="${output}">
+					<c:url value="/casPage/cas_detail.do" var="CasDetailUrl">
+						<c:param name="SVCID" value="${item.SVCID }" />
+					</c:url>
+					<c:url value="/walkPage/walk_detailCourse.do" var="WalkDetailUrl">
+						<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+					</c:url>
 					<div class="col-xs-12 col-md-12 col-lg-6 bookItem">
-						<c:url value="/casPage/cas_detail.do" var="detailUrl">
-							<c:param name="SVCID" value="${item.SVCID }" />
-						</c:url>
-						<div class="thumbnail">
-							<img alt="썸네일 이미지" src="${item.IMGURL}"
-								onclick="location.href='${detailUrl}'" style="cursor: pointer;">
-						</div>
-						<div class="caption clearfix">
-							<p>카테고리 : ${item.category_id}
-							<button class="heart liked pull-right" type="button"
-								value="${item.category_id}" data-value="${item.service_id}">
-								<i class="fa fa-heart" aria-hidden="true" role="button"></i>
-							</button>
-							</p>
-							<h4>서비스이름 : ${item.SVCNM }</h4>
-							<p>장소 : ${item.AREANM}</p>
-							<p>이용시간 : ${item.VMIN }~${item.VMAX }</p>
-							<p class="pull-left" style="max-width: 60%;">대상연령 : ${item.USETGTINFO }</p>
-							<p class="pull-right" style="max-width: 40%;">이용요금 : ${item.PAYATNM }</p>
+						<div class="thumbnail item">
+							<c:choose>
+								<c:when test="${fn:contains(item.category_id, '길') }">
+									<img alt="썸네일 이미지" src="${item.IMGURL}"
+										onclick="location.href='${WalkDetailUrl}'"
+										style="cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											카테고리 : ${item.category_id}
+											<button class="heart liked pull-right" type="button"
+												value="${item.category_id}" data-value="${item.service_id}">
+												<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+											</button>
+										</p>
+										<h4>코스이름 : ${item.COURSE_NAME }</h4>
+										<p>장소 : ${item.AREA_GU}</p>
+										<p>코스거리 : ${item.DISTANCE }</p>
+										<p class="pull-left" style="max-width: 60%;">소요시간 :
+											${item.LEAD_TIME }</p>
+										<p class="pull-right" style="max-width: 40%;">코스레벨 :
+											${item.COURSE_LEVEL }</p>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<img alt="썸네일 이미지" src="${item.IMGURL}"
+										onclick="location.href='${CasDetailUrl}'"
+										style="cursor: pointer;">
+									<div class="caption clearfix">
+										<p>
+											카테고리 : ${item.category_id}
+											<button class="heart liked pull-right" type="button"
+												value="${item.category_id}" data-value="${item.service_id}">
+												<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+											</button>
+										</p>
+										<h4>서비스이름 : ${item.SVCNM }</h4>
+										<p>장소 : ${item.AREANM}</p>
+										<p>이용시간 : ${item.VMIN } ~ ${item.VMAX }</p>
+										<p class="pull-left" style="max-width: 60%;">대상연령 :
+											${item.USETGTINFO }</p>
+										<p class="pull-right" style="max-width: 40%;">이용요금 :
+											${item.PAYATNM }</p>
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</c:forEach>

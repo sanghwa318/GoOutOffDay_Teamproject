@@ -15,6 +15,8 @@ public class BookMark {
 	private int user_info_user_no;
 	/** 사용자 번호 **/
 
+	/** 문화체육부분 DB조인을위한 구문 **/
+
 	private String DIV_COL;
 	/** 예약구분 **/
 	private String SERVICE;
@@ -58,6 +60,16 @@ public class BookMark {
 	private String editDate;
 	/** 데이터수정일자 **/
 
+	/** 걷기부분 DB 조인을위한 구문 **/
+	private String COURSE_CATEGORY_NM; // 코스카테고리명
+	private String AREA_GU; // 자치구
+	private String DISTANCE; // 거리
+	private String LEAD_TIME; // 소요시간
+	private String COURSE_LEVEL; // 코스레벨
+	private String COURSE_NAME; // 코스명
+	private String SOUTH_NORTH_DIV_NM; // 지역구
+	private int CPI_IDX; // 포인트순번 (기본키)
+
 	/** [페이지 네이션] (static) */
 	private static int offset;
 	private static int listCount;
@@ -77,5 +89,5 @@ public class BookMark {
 	public static void setListCount(int listCount) {
 		BookMark.listCount = listCount;
 	}
-// [페이지 네이션] 종료
+	// [페이지 네이션] 종료
 }

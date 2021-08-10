@@ -53,12 +53,32 @@
 		user_info_user_no=#{user_info_user_no};
 	</delete>
 
-	<!-- 나의 찜목록을 불러오기 위한 조회문 -->
-	<select id="CASListBookMark"
+	<!-- 나의 모든 찜목록을 불러오기 위한 조회문 -->
+	<select id="MyListBookMark"
 		parameterType="study.spring.goodspring.model.BookMark"
 		resultMap="BookMarkMap">
-		SELECT * FROM bookmark b
-		INNER JOIN cas c ON b.service_id = c.SVCID
+		WITH unique_course AS (
+		SELECT ANY_VALUE(CPI_IDX) as CPI_IDX,
+		COURSE_NAME, COURSE_CATEGORY_NM, SOUTH_NORTH_DIV_NM, AREA_GU,
+		LEAD_TIME, DISTANCE,
+		CASE COURSE_LEVEL
+		WHEN "1" THEN "초급"
+		WHEN "2" THEN
+		"중급"
+		WHEN
+		"3" THEN "고급"
+		END AS COURSE_LEVEL
+		FROM seoulgil_walk_course
+		GROUP BY
+		COURSE_NAME, COURSE_CATEGORY_NM, SOUTH_NORTH_DIV_NM, AREA_GU,
+		LEAD_TIME, DISTANCE, COURSE_LEVEL)
+
+		SELECT *
+		FROM bookmark b
+		LEFT JOIN
+		unique_course u ON b.service_id = u.COURSE_NAME
+		LEFT JOIN cas c ON
+		b.service_id = c.SVCID
 		<where>
 			user_info_user_no =
 			#{user_info_user_no}
@@ -69,21 +89,23 @@
 		</where>
 	</select>
 
-	<!-- 찜목록 데이터 수 조회하기 -->
+
+	<!-- 찜목록 전체 데이터 수 조회하기 -->
 	<select id="BookMark_selectCountAll"
 		parameterType="study.spring.goodspring.model.BookMark"
 		resultType="int">
 		SELECT COUNT(*)
 		FROM bookmark b
-		INNER JOIN cas c ON b.service_id = c.SVCID
 		<where>
 			user_info_user_no =
 			#{user_info_user_no}
 		</where>
 	</select>
-	
+
 	<!-- 참조해제 -->
-	<update id="unsetbookmarkuserno" parameterType="study.spring.goodspring.model.BookMark">
-	UPDATE bookmark SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
+	<update id="unsetbookmarkuserno"
+		parameterType="study.spring.goodspring.model.BookMark">
+		UPDATE bookmark SET user_info_user_no=null WHERE
+		user_info_user_no=#{user_info_user_no};
 	</update>
 </mapper>
