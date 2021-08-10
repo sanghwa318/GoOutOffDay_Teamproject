@@ -272,8 +272,7 @@ public class WalkController {
 		input.setOrder(order);
 
 		List<WalkCourse> output = null; // 조회 결과가 저장될 객체
-		List<WalkCourse> output_path = new ArrayList<WalkCourse>(); // 조회 결과가 저장될 객체
-		List<WalkCourse> output_path_item = null; // 조회 결과가 저장될 객체
+		List<List<WalkCourse>> output_path_item = new ArrayList<List<WalkCourse>>(); // 조회 결과가 저장될 객체
 
 		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
@@ -288,12 +287,12 @@ public class WalkController {
 
 			// 데이터 조회하기
 			output = walkCourseService.getWalkCourseList(input);
-			output_path = walkCourseService.getWalkCourseList(input);
 			for (int i=0; i<output.size(); i++) {
-				String input_path = output_path.get(i).getCOURSE_NAME();
+				String input_path = output.get(i).getCOURSE_NAME();
 				WalkCourse item = new WalkCourse();
 				item.setCOURSE_NAME(input_path);
-				output_path_item = walkCourseService.getWalkCourseCourseName(item);
+				List<WalkCourse> input_list = walkCourseService.getWalkCourseCourseName(item);
+				output_path_item.add(input_list);
 				// rowspan을 하기위한 포인트 개수
 			}
 		} catch (Exception e) {

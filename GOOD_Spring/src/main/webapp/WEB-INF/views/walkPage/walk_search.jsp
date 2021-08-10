@@ -211,7 +211,7 @@ div#category_acco .accordian-toggle {
 								</thead>
 								<tbody>
 									<%-- 조회 결과에 따른 반복 처리 --%>
-									<c:forEach var="item" items="${output }" varStatus="status">
+									<c:forEach var="item" items="${output }" varStatus="status1">
 										<%-- 출력을 위해 준비한 파라미터들 --%>
 										<c:set var="COURSE_CATEGORY_NM"
 											value="${item.COURSE_CATEGORY_NM }" />
@@ -269,20 +269,20 @@ div#category_acco .accordian-toggle {
 													<td>
 														<table>
 															<%-- 조회 결과에 따른 반복 처리 --%>
-															<c:forEach var="item" items="${output_path_item }"
-																varStatus="status">
+															<c:forEach var="item2" items="${output_path_item[status1.index] }"
+																varStatus="status2">
 																<%-- 출력을 위해 준비한 변수 --%>
-																<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
+																<c:set var="CPI_NAME" value="${item2.CPI_NAME }" />
 
 																<%-- 상세페이지로 이동하기 위한 URL --%>
 																<c:url value="/walkPage/walk_detailCourse.do"
 																	var="viewUrl">
-																	<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+																	<c:param name="CPI_IDX" value="${item2.CPI_IDX }" />
 																</c:url>
 
 																<tr>
 																	<td><h4>
-																			<a href="${viewUrl}"> ${CPI_NAME }</a>
+																			${status2.index + 1 }. <a href="${viewUrl}"> ${CPI_NAME }</a>
 																		</h4></td>
 																</tr>
 
