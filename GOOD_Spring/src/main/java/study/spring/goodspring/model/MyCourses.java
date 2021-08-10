@@ -64,6 +64,14 @@ public class MyCourses {
 	private String create_datetime;// (가입일자)
 	private String edit_datetime;// (수정일자)
 	
+	
+	///// JOIN MyCourseCmt 테이블
+	private int comment_no; //코멘트번호
+	private String comment_user_nick; // 유저닉네임
+	private String comment_create_datetime; // 작성날짜
+	private String comment_edit_datetime; // 수정날짜
+	private String comment_text; // 댓글내용
+	
 
     /** 프로필사진 정보{json=UploadItem}, IS NULL */
     public void setPhotoJson(String user_photo) {

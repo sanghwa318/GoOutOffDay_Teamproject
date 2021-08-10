@@ -108,9 +108,9 @@
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
-					<h4>가입된 회원: ${postout2.crew_member}명</h4>
+					<h3>가입된 회원: ${postout2.crew_member}명</h3>
 					<h4 class="crew_name">${postout2.crew_name} 소개</h4>
-                  <p style="font-size:25px;">${postout2.crew_sinto}</p>
+                  <h4 >${postout2.crew_sinto}</h4>
 					<input type="hidden" name=crew_post_post_no id="post_no"
 						value="${postout.post_no}">
 				</div>

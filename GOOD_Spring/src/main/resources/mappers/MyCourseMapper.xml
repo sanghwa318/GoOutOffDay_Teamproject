@@ -155,6 +155,14 @@
 	WHERE mycourse_name=#{mycourse_name}
 	</select>
 	
+	<!-- 마이코스의 댓글 수 조회-->
+	<select id="updateMyPostCmt"
+		parameterType="study.spring.goodspring.model.MyCourses" resultType="int">
+	SELECT count(*) FROM mycourse_post mp
+	INNER JOIN mycourse_cmt mc ON mp.mycourse_no = mc.mycourse_no
+	WHERE mp.mycourse_no = #{mycourse_no};
+	</select>
+	
 	<!-- 참조해제 -->
 	<update id="unsetmycoursepostuserno" parameterType="study.spring.goodspring.model.MyCourses">
 	UPDATE mycourse_post SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};

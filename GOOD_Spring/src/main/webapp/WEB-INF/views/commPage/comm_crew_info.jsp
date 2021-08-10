@@ -81,8 +81,8 @@
 							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
 						<h3>가입된 회원 수 : ${output.crew_member}명</h3>
-						<h4 class="title-name">간단 소개말</h4>
-						<p style="font-size:20px">${output.crew_sinto}</p>
+						<h3 class="title-name">간단 소개말</h3>
+						<h4 >${output.crew_sinto}</h4>
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->

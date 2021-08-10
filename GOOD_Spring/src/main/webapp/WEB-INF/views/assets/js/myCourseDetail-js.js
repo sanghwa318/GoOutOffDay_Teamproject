@@ -144,12 +144,12 @@ $("#delete-btn").on("click",function() {
 							str[i]+='onerror="this.src=\''+getContextPath()+'/assets/img/profile_default.png\'"'
 							str[i]+='src="${sessionScope.principal.userProfile}" width="50px"'
 							str[i]+='height="50px"></img></a></div>'
-							str[i]+='<div class="pull-left writer_info" style="margin-left: 15px;">'
+							str[i]+='<div class="pull-left writer_info"  style="margin-left: 10px; margin-top:-8px;">'
 							str[i]+='<h4>'+data.cmtList[i].comment_user_nick+'</h4>'
-							str[i]+='<p>'+data.cmtList[i].comment_create_datetime+'</p></div>'
+							str[i]+='<p style="color:#979797;">'+data.cmtList[i].comment_create_datetime+'</p></div>'
 							str[i]+='<div class="pull-right">'
 							str[i]+='<button type="button" class="btn btn-link" style="padding: 0; margin-right: 0" onclick="cmt_delete('+data.cmtList[i].comment_no+')">댓글 삭제</button></div></div><div class="row">'
-							str[i]+='<div class="col-md-offset-1 col-md-11" style="margin-left: 10px;">'+data.cmtList[i].comment_text+'</div>'
+							str[i]+='<div class="col-md-offset-1 col-md-11" style="margin-left:2%; font-size:20px;">'+data.cmtList[i].comment_text+'</div>'
 							str[i]+='</div></div><hr>'
 						}
 					$('#cmt-list').html(str);

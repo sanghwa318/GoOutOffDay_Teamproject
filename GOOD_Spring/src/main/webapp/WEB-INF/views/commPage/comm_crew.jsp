@@ -184,7 +184,6 @@
 							<c:param name="crew_name" value="${item.crew_name}" />
 						</c:url>
 						
-						<c:if test="${login_info.user_admin =='false'}">
 						<div class="col-xs-6 col-sm-4 col-md-3">
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
@@ -201,7 +200,6 @@
 
 							</div>
 						</div>
-						</c:if>
 						
 						<!-- 관리자 권한으로 들어갔을땐, info를 거치지않고 바로 bbs로 들어가기 -->
 						<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">

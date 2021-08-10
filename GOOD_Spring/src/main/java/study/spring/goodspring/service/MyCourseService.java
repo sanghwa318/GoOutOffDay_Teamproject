@@ -81,5 +81,12 @@ public interface MyCourseService {
 	 * @throws Exception
 	 */
 	public boolean courseUniqueChk(MyCourses input) throws Exception;
-
+	
+	/**
+	 * 나만의 코스 댓글 수 조회
+	 * @param MyCourse 코스이름이 담긴 Beans
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getMyCourseCmtCount(MyCourses input) throws Exception;
 }

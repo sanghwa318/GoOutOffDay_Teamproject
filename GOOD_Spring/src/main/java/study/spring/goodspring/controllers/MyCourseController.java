@@ -117,6 +117,10 @@ public class MyCourseController {
 
 		MyCourses output = null;
 		Member member =null;
+		
+		//댓글 수 조회를 담기위한 Beans
+		int total = 0;
+		
 		try {
 			// 조회수 증가
 			myCourseService.updateHits(input);
@@ -125,6 +129,9 @@ public class MyCourseController {
 			
 			int userNo=output.getUser_info_user_no();
 			member= memberService.selectItemByNo(userNo);
+			
+			// 마이포스트 댓글 수 조회
+			total = myCourseService.getMyCourseCmtCount(input);
 			
 		} catch (Exception e) {
 			webHelper.redirect(null, e.getLocalizedMessage());
@@ -148,6 +155,7 @@ public class MyCourseController {
 		
 		model.addAttribute("member", member);
 		model.addAttribute("output", output);
+		model.addAttribute("total", total);
 		return new ModelAndView("commPage/comm_myCourseDetail");
 	}
 	/**
