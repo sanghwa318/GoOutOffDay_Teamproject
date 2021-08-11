@@ -65,7 +65,7 @@ $("#delete-btn").on("click",function() {
 					success: function(data) {
 						var str = [];
 						for(var i =0; i<data.cmtList.length; i++){
-							var photo=data.cmtList[i].user_photo;
+							var photo=data.cmtList[i].user_photo.fileUrl;
 							if(data.cmtList[i].user_photo==null){
 								photo=getContextPath()+'/assets/img/profile_default.png'
 								}
