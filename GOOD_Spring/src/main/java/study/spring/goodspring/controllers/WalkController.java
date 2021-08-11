@@ -174,11 +174,11 @@ public class WalkController {
 	@RequestMapping(value = "/walkPage/walk_detailCourse.do", method = RequestMethod.GET)
 	public ModelAndView walk_detailCourse(Model model, HttpServletRequest request, HttpServletResponse response,
 			// 포인트 지점(기본키)
-			@RequestParam(value = "CPI_IDX") int CPI_IDX) {
+			@RequestParam(value = "COURSE_NAME") String COURSE_NAME) {
 
 		// 데이터 조회에 필요한 값을 beans에 전달
 		WalkCourse input = new WalkCourse();
-		input.setCPI_IDX(CPI_IDX);
+		input.setCOURSE_NAME(COURSE_NAME);
 
 		// 조회 결과를 저장할 객체 선언
 		WalkCourse output = null;
@@ -193,7 +193,8 @@ public class WalkController {
 				output = walkCourseService.getWalkCourseItem(input);
 				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
 				bookinput.setService_id(output.getCOURSE_NAME());
-				output_path = walkCourseService.getWalkCoursePath(input);
+//				output_path = walkCourseService.getWalkCoursePath(input);
+				output_path = walkCourseService.getWalkCourseCourseName(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -206,7 +207,8 @@ public class WalkController {
 				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
 				bookinput.setService_id(output.getCOURSE_NAME());
 				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
-				output_path = walkCourseService.getWalkCoursePath(input);
+//				output_path = walkCourseService.getWalkCoursePath(input);
+				output_path = walkCourseService.getWalkCourseCourseName(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -229,13 +229,20 @@ div#category_acco .accordian-toggle {
 
 										<%-- 상세 페이지로 이동하기 위한 URL --%>
 										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
-											<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+											<c:param name="COURSE_NAME" value="${item.COURSE_NAME }" />
 										</c:url>
 
-										<tr>
-											<td align="center" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2></td>
-											<td align="center" valign="middle"><h2>${COURSE_NAME}</h2></td>
+										<tr onclick="location.href='${viewUrl}'" style="cursor: pointer;">
+											<td align="center" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2>
+											<td align="center" valign="middle"><h2>${COURSE_NAME}</h2>
+												<button class="btn btn-blue btn-lg disabled" style="cursor: default; margin-top: 20px;">
+													찜한 개수 : ${VOTE_CNT } 개
+												</button></td>
+											</td>
 											<td><table>
+													<!-- 													<tr> -->
+													<!-- 														<td></td> -->
+													<!-- 													</tr> -->
 													<tr>
 														<td><h4>강남/강북 : ${SOUTH_NORTH_DIV_NM }</h4></td>
 													</tr>
@@ -254,9 +261,6 @@ div#category_acco .accordian-toggle {
 													<tr>
 														<td><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
 													</tr>
-													<tr>
-														<td><h4>추천수 : ${VOTE_CNT }</h4></td>
-													</tr>
 												</table></td>
 											<c:choose>
 												<%-- 조회결과가 없는 경우 --%>
@@ -269,20 +273,18 @@ div#category_acco .accordian-toggle {
 													<td>
 														<table>
 															<%-- 조회 결과에 따른 반복 처리 --%>
-															<c:forEach var="item2" items="${output_path_item[status1.index] }"
+															<c:forEach var="item2"
+																items="${output_path_item[status1.index] }"
 																varStatus="status2">
 																<%-- 출력을 위해 준비한 변수 --%>
 																<c:set var="CPI_NAME" value="${item2.CPI_NAME }" />
 
-																<%-- 상세페이지로 이동하기 위한 URL --%>
-																<c:url value="/walkPage/walk_detailCourse.do"
-																	var="viewUrl">
-																	<c:param name="CPI_IDX" value="${item2.CPI_IDX }" />
-																</c:url>
+																
 
 																<tr>
 																	<td><h4>
-																			${status2.index + 1 }. <a href="${viewUrl}"> ${CPI_NAME }</a>
+																			${status2.index + 1 }.
+																				${CPI_NAME }
 																		</h4></td>
 																</tr>
 
@@ -292,54 +294,6 @@ div#category_acco .accordian-toggle {
 												</c:otherwise>
 											</c:choose>
 										</tr>
-										<!-- 																		<div class="media"> -->
-										<!-- 																			<div class="media-body"> -->
-										<!-- 																				<div class="col-xs-2"> -->
-										<%-- 																					<h2>${COURSE_CATEGORY_NM }</h2> --%>
-										<!-- 																				</div> -->
-										<!-- 																				내용의 제목 -->
-										<!-- 																				<div class="col-xs-8"> -->
-										<!-- 											<h3 class="media-heading"> -->
-										<%-- 												<a href="${viewUrl }">${COURSE_NAME} > ${CPI_NAME }</a> --%>
-										<!-- 											</h3> -->
-										<!-- 											<div class="row" style="padding: 5px 20px;"> -->
-										<!-- 												<div class="col-xs-3"> -->
-										<!-- 													<h4 class="media-heading"> -->
-										<%-- 														<a href="#">강남/강북 : ${SOUTH_NORTH_DIV_NM } </a> --%>
-										<!-- 													</h4> -->
-										<!-- 													<h4 class="media-heading"> -->
-										<%-- 														<a href="#">지역구 : ${AREA_GU } </a> --%>
-										<!-- 													</h4> -->
-										<!-- 												</div> -->
-										<!-- 												<div class="col-xs-3"> -->
-										<!-- 													<h4 class="media-heading"> -->
-										<%-- 														<a href="#">거리 : ${DISTANCE } </a> --%>
-										<!-- 													</h4> -->
-										<!-- 													<h4 class="media-heading"> -->
-										<%-- 														<a href="#">소요시간 : ${LEAD_TIME } </a> --%>
-										<!-- 													</h4> -->
-										<!-- 												</div> -->
-										<!-- 												<div class="col-xs-3"> -->
-										<!-- 													<h4 class="media-heading"> -->
-										<%-- 														<a href="#">난이도 : <c:choose> --%>
-										<%-- 																<c:when test="${COURSE_LEVEL =='1'}">초급</c:when> --%>
-										<%-- 																<c:when test="${COURSE_LEVEL =='2'}">중급</c:when> --%>
-										<%-- 																<c:when test="${COURSE_LEVEL =='3'}">고급</c:when> --%>
-										<%-- 															</c:choose> --%>
-										<!-- 														</a> -->
-										<!-- 													</h4> -->
-										<!-- 													<h4 class="media-heading"> -->
-										<%-- 														<a href="#">관련지하철 : ${RELATE_SUBWAY } </a> --%>
-										<!-- 													</h4> -->
-										<!-- 												</div> -->
-										<!-- 											</div> -->
-										<!-- 										</div> -->
-										<!-- 										<div class="col-xs-2"> -->
-										<%-- 											<p style="text-align: right;">추천수 : ${VOTE_CNT }</p> --%>
-										<!-- 										</div> -->
-										<!-- 									</div> -->
-										<!-- 								</div> -->
-										<!-- 								<hr /> -->
 									</c:forEach>
 								</tbody>
 							</table>

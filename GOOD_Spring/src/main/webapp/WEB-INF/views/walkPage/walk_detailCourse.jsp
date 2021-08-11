@@ -60,8 +60,7 @@ ul, li {
 		<div class="row">
 			<div class="container" style="margin-bottom: 10px;">
 				<div class="header" style="margin-bottom: 50px;">
-					<h1 style="text-align: center;">${output.COURSE_NAME}>
-						${output.CPI_NAME }</h1>
+					<h1 style="text-align: center;">< ${output.COURSE_NAME} ></h1>
 					<h3 style="text-align: right;">추천수: ${output.VOTE_CNT}</h3>
 				</div>
 
@@ -105,9 +104,6 @@ ul, li {
 					<!-- 포인트 상세 설명 -->
 					<div class="col-md-6 col-sm-12 col-xs-12 main_info">
 						<ul class="info">
-							<li class="infoItem"><strong class="infoLabel">포인트
-									설명 :</strong>
-								<p class="infoText">${output.CPI_CONTENT }</p></li>
 							<li class="infoItem"><strong class="infoLabel">지역 :</strong>
 								<p class="infoText">${output.AREA_GU }</p></li>
 							<li class="infoItem"><strong class="infoLabel">거리 :
@@ -142,12 +138,12 @@ ul, li {
 					<!-- // 포인트 상세 설명 -->
 					<!-- 코스 전체 포인트 테이블 -->
 					<h2>- ${output.COURSE_NAME} 의 세부경로 포인트- </h2>
-					<table class="table table-bordered table-responsive">
+					<table class="table table-hover table-condensed table-responsive">
 						<thead>
 							<tr>
-								<th>번호</th>
-								<th>코스포인트</th>
-								<th>코스이름</th>
+								<th class="col-xs-1"><h4>번호</h4></th>
+								<th class="col-xs-3"><h4>코스포인트</h4></th>
+								<th class="col-xs-8"><h4>포인트 설명</h4></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -166,19 +162,18 @@ ul, li {
 										<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
 										
 										<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
+										<c:set var="CPI_CONTENT" value="${item.CPI_CONTENT }" />
 										
-										<%-- 상세페이지로 이동하기 위한 URL --%>
-										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
-											<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
-										</c:url>
+<%-- 										상세페이지로 이동하기 위한 URL --%>
+<%-- 										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
+<%-- 											<c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
+<%-- 										</c:url> --%>
 										
 										<tr>
-											<td>${status.index +1 }</td>
-											<td <c:if test="${CPI_NAME  == output.CPI_NAME }">class="warning"</c:if>>
-											<a href="${viewUrl}">
-												${CPI_NAME }</a>
+											<td><h4>${status.index +1 }</h4></td>
+											<td><h4>${CPI_NAME }</h4>
 											</td>
-											<td>${COURSE_NAME }</td>
+											<td><h4>${CPI_CONTENT }</h4></td>
 										</tr>
 										
 									</c:forEach>

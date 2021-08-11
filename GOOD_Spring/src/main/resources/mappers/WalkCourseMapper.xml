@@ -51,7 +51,6 @@
 		RELATE_SUBWAY,
 		TRAFFIC_INFO,
 		CONTENT,
-		PDF_FILE_PATH,
 		COURSE_NAME,
 		REG_DATE,
 		DETAIL_COURSE,
@@ -62,25 +61,24 @@
 		CPI_IDX
 		FROM seoulgil_walk_course
 		<where>
-			<if test="CPI_IDX != null and CPI_IDX != ''">
-				CPI_IDX = #{CPI_IDX}
+			<if test="COURSE_NAME != null and COURSE_NAME != ''">
+				COURSE_NAME = #{COURSE_NAME}
 			</if>
 		</where>
+		LIMIT 1;
 	</select>
 
 	<!-- 경로에 속하는 포인트 들을 조회하기 위한 다중행 조회 기능 정의 -->
 	<select id="selectPath"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT COURSE_NAME, CPI_IDX, CPI_NAME
+		SELECT COURSE_NAME, CPI_IDX, CPI_NAME, CPI_CONTENT
 		FROM
 		seoulgil_walk_course
 		WHERE
-		COURSE_NAME = (SELECT COURSE_NAME FROM
-		seoulgil_walk_course
 		<where>
-			<if test="CPI_IDX != null and CPI_IDX != ''">
-				CPI_IDX = #{CPI_IDX}
+			<if test="COURSE_NAME != null and COURSE_NAME != ''">
+				COURSE_NAME = #{COURSE_NAME}
 			</if>
 		</where>
 		)
@@ -91,7 +89,7 @@
 	<select id="selectCourseName"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT CPI_IDX, CPI_NAME
+		SELECT COURSE_NAME, CPI_IDX, CPI_NAME, CPI_CONTENT
 		FROM
 		seoulgil_walk_course
 		<where>

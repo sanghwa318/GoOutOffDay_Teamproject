@@ -179,7 +179,7 @@
 		resultMap="MyCourseMap">
 		SELECT mycourse_no,
 		mycourse_name,
-		mycourse_area,
+		mycourse_area
 
 		FROM
 		mycourse_post
