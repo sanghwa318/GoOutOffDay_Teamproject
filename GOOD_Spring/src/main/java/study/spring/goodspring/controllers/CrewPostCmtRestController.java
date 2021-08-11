@@ -15,6 +15,7 @@ import study.spring.goodspring.model.CrewPostCmt;
 import study.spring.goodspring.model.Member;
 
 import study.spring.goodspring.service.CrewPostCmtService;
+import study.spring.goodspring.service.MemberService;
 
 @RestController
 public class CrewPostCmtRestController {
@@ -26,6 +27,10 @@ public class CrewPostCmtRestController {
 	/** Service 패턴 구현체 주입 */
 	@Autowired
 	CrewPostCmtService crewPostCmtService;
+	
+	/** Service 패턴 구현체 주입 */
+	@Autowired
+	MemberService memberService;
 	
 	/**
 	 * 댓글 추가를 위한 Rest Controller 메서드
@@ -56,6 +61,7 @@ public class CrewPostCmtRestController {
 		int result =0;
 		try {
 			result = crewPostCmtService.addCmt(input);
+			
 		} catch (Exception e) {
 			webHelper.getJsonError(e.getLocalizedMessage());
 		}
@@ -77,9 +83,10 @@ public class CrewPostCmtRestController {
 		input.setCrew_post_post_no(crew_post_post_no);
 		
 		List<CrewPostCmt> list = null;
-
+		
 		try {
 			list = crewPostCmtService.getCmtList(input);
+			
 		} catch (Exception e) {
 			webHelper.getJsonError(e.getLocalizedMessage());
 		}

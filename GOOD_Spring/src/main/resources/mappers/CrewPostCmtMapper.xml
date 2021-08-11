@@ -32,6 +32,7 @@
 		parameterType="study.spring.goodspring.model.CrewPostCmt" resultMap="CrewPostCmtMap">
 		SELECT *
 		FROM crew_comment
+		INNER JOIN user_info ON user_no = user_info_user_no
 		WHERE crew_post_post_no=#{crew_post_post_no}
 		ORDER BY crew_post_post_no ASC
 	</select>
@@ -49,6 +50,14 @@
 		FROM crew_comment
 		WHERE comment_no=#{comment_no}
 		ORDER BY comment_no ASC
+	</select>
+	
+	<!-- 댓글 작성자의 이미지 불러오기 -->
+	 	<select id="selectCrewPostCmtWriter" resultMap="CrewPostCmtMap"
+		parameterType="study.spring.goodspring.model.CrewPostCmt">
+		SELECT * FROM crew_comment cm
+		INNER JOIN user_info u ON u.user_no = cm.user_info_user_no
+		WHERE cm.user_info_user_no = #{user_info_user_no};
 	</select>
 	
 	<!-- 참조해제 -->

@@ -37,4 +37,11 @@ public interface CrewPostCmtService {
 	 */
 	public CrewPostCmt getCmtItem(CrewPostCmt input) throws Exception;
 
+	/**
+	 * 크루게시글 댓글 작성자의 이미지 불러오기
+	 * @return
+	 * @throws Exception
+	 */
+	CrewPostCmt getCmtWriterImage(CrewPostCmt input) throws Exception;
+
 }

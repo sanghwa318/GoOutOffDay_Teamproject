@@ -81,6 +81,9 @@ public class CrewPostCmtServiceImpl implements CrewPostCmtService{
 	}
 
 
+	/*
+	 * 댓글 불러오기 위한 단일행 조회
+	 */
 	@Override
 	public CrewPostCmt getCmtItem(CrewPostCmt input) throws Exception {
 		CrewPostCmt result = null;
@@ -97,7 +100,24 @@ public class CrewPostCmtServiceImpl implements CrewPostCmtService{
 		return result;
 	}
 	
-	
+	/*
+	 * 댓글에 작성자 이미지 불러오기
+	 */
+	@Override
+	public CrewPostCmt getCmtWriterImage(CrewPostCmt input) throws Exception {
+		CrewPostCmt result = null;
+		try {
+			result = sqlSession.selectOne("CrewPostCmtMapper.selectCrewPostCmtWriter", input);
+			
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("이미지 불러오기 실패.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("이미지 불러오기 실패.");
+		}
+		return result;
+	}
 	
 	
 
