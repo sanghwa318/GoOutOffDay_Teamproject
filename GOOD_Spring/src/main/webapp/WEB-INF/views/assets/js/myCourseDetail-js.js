@@ -138,11 +138,13 @@ $("#delete-btn").on("click",function() {
 					success: function(data) {
 						var str = [];
 						for(var i =0; i<data.cmtList.length; i++){
-							var photo=data.cmtList[i].user_photo.fileUrl;
+							var photo='';
 							if(data.cmtList[i].user_photo==null){
 								photo=getContextPath()+'/assets/img/profile_default.png'
+								}else{
+							photo=data.cmtList[i].user_photo.fileUrl;									
 								}
-						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 0px 0 15px;">'
+						 	str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 0px 0 15px;">'
 							str[i]+='<div class="pull-left writer_profile">'
 							str[i]+='<a href="#"><img style="border-radius: 25px"'
 							str[i]+='src=\''+photo+'\' width="50px"'
