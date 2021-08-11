@@ -18,77 +18,70 @@
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'page_in', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'page_in', #{user_info_user_no})
 	</insert>
 	
 	<insert id="pageOut" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'page_out', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'page_out', #{user_info_user_no})
 	</insert>
 	
 	<insert id="enterBrowser" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
 	</insert>
 	
 	<insert id="addBookmark" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'addBookmark', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'addBookmark', #{user_info_user_no})
 	</insert>
 	
 	<insert id="removeBookmark" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
-	</insert>
-	
-	<insert id="enterBrowser" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
 	</insert>
 	
 	<insert id="walkRecord" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'walkRecord', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'walkRecord', #{user_info_user_no})
 	</insert>
 	
 	<insert id="casExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'casExLink', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'casExLink', #{user_info_user_no})
 	</insert>
 	
 	<insert id="walkExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'walkExLink', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'walkExLink', #{user_info_user_no})
 	</insert>
 	
 	<insert id="userLogin" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'userLogin', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'userLogin', #{user_info_user_no})
 	</insert>
 	
 	<insert id="userLogout" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	SET (now(), #{log_category}, 'userLogout', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'userLogout', #{user_info_user_no})
 	</insert>
 	
 </mapper>

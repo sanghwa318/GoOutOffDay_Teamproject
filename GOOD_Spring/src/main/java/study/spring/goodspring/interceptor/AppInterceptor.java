@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.UserTrafficLog;
+import study.spring.goodspring.service.UserTrafficLogService;
 import uap_clj.java.api.Browser;
 import uap_clj.java.api.Device;
 import uap_clj.java.api.OS;
@@ -22,7 +25,8 @@ public class AppInterceptor implements HandlerInterceptor {
 	/** WebHelper 객체 주입 */
 	@Autowired
 	WebHelper webHelper;
-
+	@Autowired
+	UserTrafficLogService userTrafficLogService;
 	/**
 	 * Controller 실행 요청 전에 수행되는 메서드 클라이언트의 요청을 컨트롤러에 전달 하기 전에 호출된다. return 값으로
 	 * boolean 값을 전달하는데 false 인 경우 controller를 실행 시키지 않고 요청을 종료한다. 보통 이곳에서 각종 체크작업과
@@ -43,17 +47,18 @@ public class AppInterceptor implements HandlerInterceptor {
 
 		/** 1) 클라이언트의 요청 정보 확인하기 */
 		// 현재 URL 획득
-		String url = request.getRequestURL().toString();
+		String url_tmp = request.getRequestURL().toString();
 
 		// GET방식인지, POST방식인지 조회한다.
 		String methodName = request.getMethod();
 
 		// URL에서 "?"이후에 전달되는 GET파라미터 문자열을 모두 가져온다.
 		String queryString = request.getQueryString();
-
+		
+		String url =null;
 		// 가져온 값이 있다면 URL과 결합하여 완전한 URL을 구성한다.
 		if (queryString != null) {
-			url = url + "?" + queryString;
+			url = url_tmp + "?" + queryString;
 		}
 
 		// 획득한 정보를 로그로 표시한다.
@@ -102,11 +107,24 @@ public class AppInterceptor implements HandlerInterceptor {
 		log.debug(browserStr);
 		log.debug(osStr);
 		log.debug(deviceStr);
+		log.debug("url_tmp>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url_tmp);
+		log.debug("url_tmp>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url_tmp.indexOf("goodspring"));
+		log.debug("url_tmp>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url_tmp.indexOf(".do"));
 		
-		/** 5) 로그인된 사용자가 컨트롤러로 요청을 보낸 정보를 UserTrafficLog 테이블에 인서트*/
+		/** 5) 로그인 되어있다면 사용자가 컨트롤러로 요청을 보낸 url과 사용자번호를 
+		 * 	UserTrafficLog 테이블에 log_content='page_in'으로 추가*/
 		
-		
+		 if(((Member)webHelper.getSession("login_info"))!=null) {
+		  url_tmp.indexOf("goodspring");
+		  
+		  url_tmp.substring(url_tmp.indexOf("goodspring"),url_tmp.lastIndexOf(".do"));
+		UserTrafficLog input = new UserTrafficLog();
+		  input.setUser_info_user_no(((Member)webHelper.getSession("login_info")).
+		  getUser_no()); input.setLog_category(url_tmp);
+		  userTrafficLogService.pageIn(input); }
+		 
 		return HandlerInterceptor.super.preHandle(request, response, handler);
+		
 	}
 
 	/**
