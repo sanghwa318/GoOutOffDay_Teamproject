@@ -229,7 +229,7 @@ ul, li {
 	
 	
 		<!-- geoJson 파일 불러와서 카카오 맵에 표시 -->
-		//지천길 선형정보
+		/* 지천길 선형정보 */
 		$.getJSON(getContextPath()+"/assets/map/jichun_line.geojson", function(geojson){
 			
 	    var data = geojson.features;
@@ -244,7 +244,7 @@ ul, li {
 	        displayLine(coordinates, name, color);
 	    	})
 		})
-		//지천길 점형 정보
+		/* 지천길 점형 정보 */
 		$.getJSON(getContextPath()+"/assets/map/jichun_point.geojson", function(geojson_p){
 			var data_p = geojson_p.features;
 			var coordinates_p = [];
@@ -257,7 +257,7 @@ ul, li {
 		        displayPoint(coordinates_p, name_p);
 			})
 		})
-		//자락길 선형정보
+		/* 자락길 선형정보 */
 		$.getJSON(getContextPath()+"/assets/map/jarak_line.geojson", function(geojson){
 			
 	    var data = geojson.features;
@@ -271,7 +271,7 @@ ul, li {
 	        displayLine(coordinates, name, color);
 	    	})
 		})
-		//자락길 점형정보
+		/* 자락길 점형정보 */
 		$.getJSON(getContextPath()+"/assets/map/jarak_point.geojson", function(geojson_p){
 			var data_p = geojson_p.features;
 			var coordinates_p = [];
@@ -286,6 +286,96 @@ ul, li {
 			})
 			
 		})
+		
+		/* 서울둘레길 선형정보 */
+      $.getJSON(getContextPath()+"/assets/map/doolrea_line.geojson", function(geojson){
+         
+       var data = geojson.features;
+       var coordinates = [];    //좌표 저장할 배열
+       var name = '';            //코스 이름
+       
+       $.each(data, function(index, val) {
+    
+           coordinates = val.geometry.coordinates;
+           name = val.properties.CONTS_NAME;
+           displayLine(coordinates, name, '#228B22');
+          })
+      })
+      
+		/* 서울둘레길 점형정보 */
+      $.getJSON(getContextPath()+"/assets/map/doolrea_line.geojson", function(geojson){
+         
+       var data = geojson.features;
+       var coordinates = [];    //좌표 저장할 배열
+       var name = '';            //코스 이름
+       
+       $.each(data, function(index, val) {
+    
+           coordinates = val.geometry.coordinates;
+           name = val.properties.NAME;
+           displayPoint(coordinates, name, '#96A5FF');
+          })
+      })
+      
+      /* 한양도성길 선형정보 */
+      $.getJSON(getContextPath()+"/assets/map/hanyang_line.geojson", function(geojson){
+         
+       var data = geojson.features;
+       var coordinates = [];    //좌표 저장할 배열
+       var name = '';            //코스 이름
+       
+       $.each(data, function(index, val) {
+    
+           coordinates = val.geometry.coordinates;
+           name = val.properties.NAME;
+           displayLine(coordinates, name, '#FF5675');
+          })
+      })
+      
+      /* 한양도성길 점형정보 */
+      $.getJSON(getContextPath()+"/assets/map/hanyang_point.geojson", function(geojson){
+         
+       var data = geojson.features;
+       var coordinates = [];    //좌표 저장할 배열
+       var name = '';            //코스 이름
+       
+       $.each(data, function(index, val) {
+    
+           coordinates = val.geometry.coordinates;
+           name = val.properties.NAME;
+           displayPoint(coordinates, name, '#96A5FF');
+          })
+      })
+      
+      /* 생태문화길 선형정보 */
+      $.getJSON(getContextPath()+"/assets/map/moonhwa_line.geojson", function(geojson){
+         
+       var data = geojson.features;
+       var coordinates = [];    //좌표 저장할 배열
+       var name = '';            //코스 이름
+       
+       $.each(data, function(index, val) {
+    
+           coordinates = val.geometry.coordinates;
+           name = val.properties.NAME;
+           displayLine(coordinates, name, '#FFA500');
+          })
+      })
+      
+      /* 생태문화길 점형정보 */
+      $.getJSON(getContextPath()+"/assets/map/moonhwa_point.geojson", function(geojson){
+         
+       var data = geojson.features;
+       var coordinates = [];    //좌표 저장할 배열
+       var name = '';            //코스 이름
+       
+       $.each(data, function(index, val) {
+    
+           coordinates = val.geometry.coordinates;
+           name = val.properties.NAME;
+           displayPoint(coordinates, name, '#96A5FF');
+          })
+      })
 		
 		
 		function displayPoint(coordinates, name){
