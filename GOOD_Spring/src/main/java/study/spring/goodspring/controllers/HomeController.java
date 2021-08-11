@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
@@ -123,6 +124,56 @@ public class HomeController {
 		model.addAttribute("crew", crew);
 		
 		return new ModelAndView("index");
+	}
+	
+	/**
+	 * 서울 둘레길
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/index/index_doolrea.do", method = RequestMethod.GET)
+	public ModelAndView doolrea(Model model) {
+		
+		return new ModelAndView("index/index_doolrea");
+	}
+	
+	/**
+	 * 서울 둘레길
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/index/index_moonhwa.do", method = RequestMethod.GET)
+	public ModelAndView moonhwa(Model model) {
+		
+		return new ModelAndView("index/index_moonhwa");
+	}
+	
+	/**
+	 * 서울 둘레길
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/index/index_jichun.do", method = RequestMethod.GET)
+	public ModelAndView jichun(Model model) {
+		
+		return new ModelAndView("index/index_jichun");
+	}
+	
+	/**
+	 * 서울 둘레길
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/index/index_jarak.do", method = RequestMethod.GET)
+	public ModelAndView jarak(Model model) {
+		
+		return new ModelAndView("index/index_jarak");
+	}
+	
+	/**
+	 * 서울 둘레길
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/index/index_hanyang.do", method = RequestMethod.GET)
+	public ModelAndView hanyang(Model model) {
+		
+		return new ModelAndView("index/index_hanyang");
 	}
 
 }

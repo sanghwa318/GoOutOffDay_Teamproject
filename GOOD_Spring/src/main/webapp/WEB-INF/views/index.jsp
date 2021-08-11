@@ -418,133 +418,22 @@ h4 {
 			<!-- 본문 중단 걷기코스 영역 -->
 			<div class="row walking_list">
 				<div class="header">
-					<h2>걷기코스</h2>
+					<h2>서울 두드림길</h2>
+					<ul class="nav nav-pills" role="navigation">
+					<li class="tabmenu active" id="doolrea"><a data-toggle="tab"
+						role="button">서울둘레길</a></li>
+					<li class="tabmenu" id="moonhwa"><a data-toggle="tab"
+						role="button">생태문화길</a></li>
+					<li class="tabmenu" id="jichun"><a data-toggle="tab"
+						role="button">한강지천길/계절길</a></li>
+					<li class="tabmenu" id="jarak"><a data-toggle="tab"
+					role="button">근교산자락길</a></li>
+					<li class="tabmenu" id="hanyang"><a data-toggle="tab"
+					role="button">한양도성길</a></li>
+					</ul>
 				</div>
 				<!-- 걷기 캐러셀 영역 -->
-				<div class="row walking_item">
-					<!--  캐러셀 시작 -->
-					<div class="owl-carousel owl-theme" id="owl-walk">
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지1" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지2" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지3" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지4" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지5" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지6" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지7" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지8" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지9" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-						<div class="thumbnail item">
-							<img src="#" alt="테스트이미지10" height="166" width="250"
-								style="cursor: pointer;" onclick="location.href='#'">
-							<div class="caption">
-								<p>
-									걷기코스 태그<span class="heart pull-right"><i
-										class="fa fa-heart-o" aria-hidden="true" role="button"></i></span>
-								</p>
-								<h4>걷기코스 제목 AND 경로 간단설명</h4>
-								<p>장소</p>
-							</div>
-						</div>
-					</div>
+				<div class="row walking_item" id="map_container">
 				</div>
 			</div>
 			<!-- // 걷기코드 영역 끝 -->
@@ -698,6 +587,69 @@ h4 {
 
 	<%@ include file="inc/plugin.jsp"%>
 	<!-- // 본문 JS시작 -->
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+	<!-- 카카오 맵 -->
+	<script type="text/javascript">
+	function getContextPath() {
+		var hostIndex = location.href.indexOf(location.host)
+				+ location.host.length;
+		var contextPath = location.href.substring(hostIndex, location.href
+				.indexOf('/', hostIndex + 1));
+		return contextPath;
+	}
+	<!-- 서울 두드림길 지도 -->	
+	$(function() {
+		$.get(getContextPath()+'/index/index_doolrea.do', function(req) {
+
+			$('#map_container').html(req);
+		}, 'html');
+		
+		$("#doolrea").click(function(e) {
+			// e.preventDefault();
+
+			$.get(getContextPath()+'/index/index_doolrea.do', function(req) {
+
+				$('#map_container').html(req);
+			}, 'html');
+		});
+		$("#moonhwa").click(function(e) {
+			// e.preventDefault();
+
+			$.get(getContextPath()+'/index/index_moonhwa.do', function(req) {
+
+				$('#map_container').html(req);
+			}, 'html');
+		});
+		$("#jichun").click(function(e) {
+			// e.preventDefault();
+
+			$.get(getContextPath()+'/index/index_jichun.do', function(req) {
+
+				$('#map_container').html(req);
+			}, 'html');
+		});
+		$("#jarak").click(function(e) {
+			// e.preventDefault();
+
+			$.get(getContextPath()+'/index/index_jarak.do', function(req) {
+
+				$('#map_container').html(req);
+			}, 'html');
+		});
+		$("#hanyang").click(function(e) {
+			// e.preventDefault();
+
+			$.get(getContextPath()+'/index/index_hanyang.do', function(req) {
+
+				$('#map_container').html(req);
+			}, 'html');
+		});
+
+	});
+	
+		<!-- //geoJson 파일 불러와서 카카오 맵에 표시 -->
+	</script>
 	<script>
 		!function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
