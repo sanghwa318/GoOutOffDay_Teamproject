@@ -67,7 +67,7 @@ public class AppInterceptor implements HandlerInterceptor {
 		 if(loginInfo!=null) {
 			 if(url_tmp.lastIndexOf(".do")!=-1) {
 				 
-				 String url2=url_tmp.substring(url_tmp.indexOf("goodspring"),url_tmp.lastIndexOf(".do"));
+				 String url2=url_tmp.substring(url_tmp.indexOf("goodspring")+11,url_tmp.lastIndexOf(".do"));
 				 log.debug("url2-1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
 				 UserTrafficLog input = new UserTrafficLog();
 				 input.setUser_info_user_no(loginInfo.getUser_no());
