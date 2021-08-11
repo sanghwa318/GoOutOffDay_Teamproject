@@ -1,5 +1,7 @@
 package study.spring.goodspring.model;
 
+import com.google.gson.Gson;
+
 import lombok.Data;
 import study.spring.goodspring.helper.UploadItem;
 
@@ -30,5 +32,25 @@ public class CrewPostCmt {
 	private boolean user_admin;// (관리자 권한)
 	private String create_datetime;// (가입일자)
 	private String edit_datetime;// (수정일자)
+	private String user_out;
 	
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public void setPhotoJson(String user_photo) {
+        this.user_photo = new Gson().fromJson(user_photo, UploadItem.class);
+    }
+
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public void setUser_photo(UploadItem user_photo) {
+        this.user_photo = user_photo;
+    }
+
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public UploadItem getUser_photo() {
+        return this.user_photo;
+    }
+
+    /** 프로필사진 정보{json=UploadItem}, IS NULL */
+    public String getPhotoJson() {
+        return new Gson().toJson(this.user_photo);
+    }
 }

@@ -93,9 +93,7 @@
 		FROM
 		seoulgil_walk_course
 		<where>
-			<if test="COURSE_NAME != null and COURSE_NAME != ''">
 				COURSE_NAME = #{COURSE_NAME}
-			</if>
 		</where>
 		ORDER BY CPI_IDX ASC;
 	</select>

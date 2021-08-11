@@ -189,7 +189,7 @@
 	<!-- 회원 추방 탈퇴 여부 확인 -->
 	<update id="userOut"
 		parameterType="study.spring.goodspring.model.Member">
-		UPDATE user_info SET user_out = 'Y'
+		UPDATE user_info SET user_out = 'Y', edit_datetime = now()
 		WHERE user_no = #{user_no};
 	</update>
 	

@@ -65,11 +65,16 @@ $("#delete-btn").on("click",function() {
 					success: function(data) {
 						var str = [];
 						for(var i =0; i<data.cmtList.length; i++){
+							var photo='';
+							if(data.cmtList[i].user_photo==null){
+								photo=getContextPath()+'/assets/img/profile_default.png'
+								}else{
+							photo=data.cmtList[i].user_photo.fileUrl;									
+								}
 						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 30px -25px 18%;">'
 							str[i]+='<div class="pull-left writer_profile">'
 							str[i]+='<a href="#"><img style="border-radius: 25px"'
-							str[i]+='onerror="this.src=\''+getContextPath()+'/assets/img/profile_default.png\'"'
-							str[i]+='src="${sessionScope.principal.userProfile}" width="50px"'
+							str[i]+='src=\''+photo+'\' width="50px"'
 							str[i]+='height="50px"></img></a></div>'
 							str[i]+='<div class="pull-left writer_info" style="margin-left: 10px; margin-top:-8px;">'
 							str[i]+='<h4>'+data.cmtList[i].comment_usernick+'</h4>'

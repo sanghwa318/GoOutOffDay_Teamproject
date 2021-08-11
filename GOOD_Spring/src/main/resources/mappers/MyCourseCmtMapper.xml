@@ -14,6 +14,7 @@
 		<result property="comment_create_datetime" column="comment_create_datetime" />
 		<result property="comment_edit_datetime" column="comment_edit_datetime" />
 		<result property="comment_text" column="comment_text" />
+		<result property="photoJson" column="user_photo" />
 	</resultMap>
 
 	<!-- 단일행 조회 (댓글 수정 삭제) -->
@@ -29,8 +30,9 @@
 	<select id="selectCmtList"
 		parameterType="study.spring.goodspring.model.MyCourseCmt" resultMap="MyCourseCmtMap">
 		SELECT *
-		FROM mycourse_cmt
-		WHERE mycourse_no=#{mycourse_no}
+		FROM mycourse_cmt mc
+		INNER JOIN user_info u ON mc.user_no = u.user_no
+		WHERE mc.mycourse_no=#{mycourse_no}
 		ORDER BY comment_no ASC
 <!-- 
 		<if test="listCount > 0">

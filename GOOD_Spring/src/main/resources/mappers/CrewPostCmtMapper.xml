@@ -14,6 +14,23 @@
 		<result property="user_info_user_no" column="user_info_user_no" />
 		<result property="crew_post_post_no" column="crew_post_post_no" />
 		<result property="comment_usernick" column="comment_usernick" />
+		
+		<result property="user_no" column="user_no" />
+		<result property="user_id" column="user_id" />
+		<result property="user_name" column="user_name" />
+		<result property="user_nick" column="user_nick" />
+		<result property="user_pw" column="user_pw" />
+		<result property="gender" column="gender" />
+		<result property="address1" column="address1" />
+		<result property="address2" column="address2" />
+		<result property="post" column="post" />
+		<result property="tel" column="tel" />
+		<result property="email" column="email" />
+		<result property="photoJson" column="user_photo" />
+		<result property="user_admin" column="user_admin" />
+		<result property="create_datetime" column="create_datetime" />
+		<result property="edit_datetime" column="edit_datetime" />
+		<result property="user_out" column="user_out" />
 	</resultMap>
 
 
@@ -32,6 +49,7 @@
 		parameterType="study.spring.goodspring.model.CrewPostCmt" resultMap="CrewPostCmtMap">
 		SELECT *
 		FROM crew_comment
+		INNER JOIN user_info ON user_no = user_info_user_no
 		WHERE crew_post_post_no=#{crew_post_post_no}
 		ORDER BY crew_post_post_no ASC
 	</select>
@@ -49,6 +67,14 @@
 		FROM crew_comment
 		WHERE comment_no=#{comment_no}
 		ORDER BY comment_no ASC
+	</select>
+	
+	<!-- 댓글 작성자의 이미지 불러오기 -->
+	 	<select id="selectCrewPostCmtWriter" resultMap="CrewPostCmtMap"
+		parameterType="study.spring.goodspring.model.CrewPostCmt">
+		SELECT * FROM crew_comment cm
+		INNER JOIN user_info u ON u.user_no = cm.user_info_user_no
+		WHERE cm.user_info_user_no = #{user_info_user_no};
 	</select>
 	
 	<!-- 참조해제 -->

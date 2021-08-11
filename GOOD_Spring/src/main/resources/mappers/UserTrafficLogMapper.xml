@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserTrafficLogMapper">
+
+	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+	<resultMap type="study.spring.goodspring.model.UserTrafficLog"
+		id="UserTrafficLogMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="log_no" column="log_no" />
+		<result property="log_datetime" column="log_datetime" />
+		<result property="log_category" column="log_category" />
+		<result property="log_content" column="log_content" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+	</resultMap>
+	
+	<insert id="pageIn" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'page_in', #{user_info_user_no})
+	</insert>
+	
+	<insert id="pageOut" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'page_out', #{user_info_user_no})
+	</insert>
+	
+	<insert id="enterBrowser" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
+	</insert>
+	
+	<insert id="addBookmark" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'addBookmark', #{user_info_user_no})
+	</insert>
+	
+	<insert id="removeBookmark" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
+	</insert>
+	
+	<insert id="walkRecord" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'walkRecord', #{user_info_user_no})
+	</insert>
+	
+	<insert id="casExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'casExLink', #{user_info_user_no})
+	</insert>
+	
+	<insert id="walkExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'walkExLink', #{user_info_user_no})
+	</insert>
+	
+	<insert id="userLogin" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'userLogin', #{user_info_user_no})
+	</insert>
+	
+	<insert id="userLogout" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'userLogout', #{user_info_user_no})
+	</insert>
+	
+</mapper>

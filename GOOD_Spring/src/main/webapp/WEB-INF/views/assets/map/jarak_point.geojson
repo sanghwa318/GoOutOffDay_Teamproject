@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "jarak_point",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "CONTS_NAME": "샘터근린공원", "IMG_URL": "/smgis/ucimgs/conts/100304/i_3000_255_1_0.jpg", "ADDR_OLD": "강동구 고덕동 287", "ADDR_NEW": null, "COORD_DATA": null, "COORD_X": "127.159682000", "COORD_Y": "37.561718600", "TEL_NO": null, "CONTS_DETL": null, "CONTS_STAT": "1", "EX_DATA_01": null, "EX_DATA_02": "http://gil.seoul.go.kr/", "NAME_01": "개요", "VALUE_01": "강동구 고덕동에 위치한 근린공원으로 다양한 활동시설들이 배치되어 다양한 활동이 가능한 공원이다.", "NAME_02": "자료출처", "VALUE_02": "서울두드림길 (서울시 자연생태과)", "NAME_03": null, "VALUE_03": null, "NAME_04": null, "VALUE_04": null, "NAME_05": null, "VALUE_05": null, "NAME_06": null, "VALUE_06": null, "NAME_07": null, "VALUE_07": null, "NAME_08": null, "VALUE_08": null, "NAME_09": null, "VALUE_09": null, "NAME_10": null, "VALUE_10": null, "NAME_11": null, "VALUE_11": null, "NAME_12": null, "VALUE_12": null, "NAME_13": null, "VALUE_13": null, "NAME_14": null, "VALUE_14": null, "NAME_15": null, "VALUE_15": null, "NAME_16": null, "VALUE_16": null, "NAME_17": null, "VALUE_17": null, "NAME_18": null, "VALUE_18": null, "NAME_19": null, "VALUE_19": null, "NAME_20": null, "VALUE_20": null, "COORD_TYPE": "1", "LN_PATTERN": null, "LN_COLOR": "#0000FF", "LN_WEIGHT": null, "MOVIE_URL": null, "VOICE_URL": null, "BASE_AREA": "05219", "POINT_NUM": null, "LAN_TYPE": "KOR", "KEYWORD": null, "SUB_ID": null }, "geometry": { "type": "Point", "coordinates": [ 127.159682, 37.5617186 ] } }
+]
+}
