@@ -33,8 +33,8 @@
 	     max = Math.floor(max);
 	     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
 	 }
-	 var color = '#'+colors[getRandomInt(1, 17)] + colors[getRandomInt(1, 17)] + colors[getRandomInt(1, 17)] +
-	 colors[getRandomInt(1, 17)] + colors[getRandomInt(1, 17)] + colors[getRandomInt(1, 17)]
+	 var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
+	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)]
 	// 버튼이 클릭되면 호출되는 함수입니다
 	        
 	    	/* 서울둘레길 선형정보 */
@@ -45,7 +45,7 @@
 	         var name = '';            //코스 이름
 	         
 	         $.each(data, function(index, val) {
-	      
+	      		console.log('color = '+color)
 	             coordinates = val.geometry.coordinates;
 	             name = val.properties.CONTS_NAME;
 	             displayLine(coordinates, name, color);
@@ -120,7 +120,7 @@
 				strokeColor: color, // 선 색
 				strokeOpacity: 0.9, // 선 투명도
 			});
-		
+			console.log('options = '+options.toString())
 			// 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
 		    // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
 		    kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
