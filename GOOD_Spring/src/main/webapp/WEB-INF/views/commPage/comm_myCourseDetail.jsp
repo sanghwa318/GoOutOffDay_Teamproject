@@ -155,6 +155,13 @@ ul, li {
 .main_info .info p {
 	color: #495056;
 }
+#c_fa{
+paddig:0;
+margin:0;
+margin-top:1%;
+
+}
+
 </style>
 <body>
 	<!-- 푸터빼고 감싸주세요 -->
@@ -183,19 +190,7 @@ ul, li {
 					style="height: 250px; width: 250px"></div>
 				<div class="col-md-7 col-sm-6 col-xs-12 main_info" id="mycourse">
 				
-			<div class="row">
-			<div class="row col-md-3 col-lg-2 col-xs-3" style="margin-left:3%; margin-bottom:2%">
-			<img style="border-radius: 60px" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="100px" height="100px">
-				</div>
-				<div class="col-md-3 col-lg-3 col-xs-10 "
-					style="font-size: 20px; margin:6% 0 0 1%;"> 작성자 : ${output.user_name} </div>
-				<div class="pull-right" style=" margin:6% 0 0 0">
-					조회수 ${output.mycourse_hits } 
-					<span class="heart">
-					</span> <span id="likeCount"></span><span class="comment"><i
-						class="fa fa-comment-o"></i></span> 댓글 ${total}
-				</div>
-			</div>
+			
 			
 					<ul class="info">
 						<li class="infoItem"><strong class="infoLabel">코스 이름
@@ -221,13 +216,27 @@ ul, li {
 
 
 			<!-- 댓글 영역 -->
-			<div class='page-header' style="margin-top:-20px;"><h3>댓글<span class="comment"><i
-						class="fa fa-comment-o"></i></span> ${total}<hr></h3>
+			<div class='page-header' style="margin-top:-20px;"><h3>댓글<span class="comment" style="height:80px"><i
+						class="fa fa-comment-o" ></i></span> ${total} 
+						<span class="heart pull-right" style="margin-top:1px">
+					</span> <span class="pull-right" id="likeCount" style="margin-top:1%"></span><span class="pull-right" id="c_fa" style="margin-right:2%; color:#979797;">조회수 ${output.mycourse_hits }</span><hr>	
+					
+				</h3>
+			
+						
 			<div id="cmt-list">
 
 			</div>
+			
 			<form>
-			<h4>${login_info.user_nick}</h4>
+			
+			
+			<div class="clear-fix" style="margin-left:1.5%; margin-bottom:1%">
+			<img class="pull-left" style="border-radius: 60px" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="50px" height="50px">
+				<h4 style="padding-top:15px; margin-left:60px;">${login_info.user_nick}</h4>
+				</div>
+				<br>
+			
 				<div class="form-group input-group">
 					<textarea class="form-control" id="comment_text"
 						style="height: 60px; resize: none;" placeholder="내용을 입력해주세요."></textarea>

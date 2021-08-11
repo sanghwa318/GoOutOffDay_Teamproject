@@ -125,7 +125,7 @@ $("#delete-btn").on("click",function() {
 						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
 					}
 		});
-		
+		var comment_text=$('#comment_text').val('');
 	}
 	
 		/**댓글 목록 불러오기 ajax */
