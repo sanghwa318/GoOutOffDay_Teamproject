@@ -102,7 +102,10 @@ public class AppInterceptor implements HandlerInterceptor {
 		log.debug(browserStr);
 		log.debug(osStr);
 		log.debug(deviceStr);
-
+		
+		/** 5) 로그인된 사용자가 컨트롤러로 요청을 보낸 정보를 UserTrafficLog 테이블에 인서트*/
+		
+		
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
 
