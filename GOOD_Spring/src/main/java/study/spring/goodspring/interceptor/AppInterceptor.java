@@ -60,7 +60,32 @@ public class AppInterceptor implements HandlerInterceptor {
 		if (queryString != null) {
 			url = url_tmp + "?" + queryString;
 		}
-
+		/**  로그인 되어있다면 사용자가 컨트롤러로 요청을 보낸 url과 사용자번호를 
+		 * 	UserTrafficLog 테이블에 log_content='page_in'으로 추가*/
+		log.debug("url2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		Member loginInfo =(Member)webHelper.getSession("login_info");
+		 if(loginInfo!=null) {
+			 if(url_tmp.lastIndexOf(".do")!=-1) {
+				 
+				 String url2=url_tmp.substring(url_tmp.indexOf("goodspring"),url_tmp.lastIndexOf(".do"));
+				 log.debug("url2-1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
+				 UserTrafficLog input = new UserTrafficLog();
+				 input.setUser_info_user_no(loginInfo.getUser_no());
+						 input.setLog_category(url2);
+						 userTrafficLogService.pageIn(input); 
+			 }else{
+			  String url2=url_tmp.substring(url_tmp.indexOf("goodspring")+11);
+			  log.debug("url2-2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
+			  
+			  if(url2=="" || url2=="/" || url2=="goodspring/") {
+					 url2="index";
+					 UserTrafficLog input = new UserTrafficLog();
+					 input.setUser_info_user_no(((Member)webHelper.getSession("login_info")).
+							 getUser_no()); input.setLog_category(url2);
+							 userTrafficLogService.pageIn(input); 
+			  }
+			 }
+		  }
 		// 획득한 정보를 로그로 표시한다.
 		log.debug(String.format("[%s] %s", methodName, url));
 
@@ -102,37 +127,13 @@ public class AppInterceptor implements HandlerInterceptor {
 
 		String deviceStr = String.format("- Device: {family=%s, model=%s, brand=%s}", device.get("family"),
 				device.get("model"), device.get("brand"));
-
+		
 		// 로그 저장
 		log.debug(browserStr);
 		log.debug(osStr);
 		log.debug(deviceStr);
 		
-		/** 5) 로그인 되어있다면 사용자가 컨트롤러로 요청을 보낸 url과 사용자번호를 
-		 * 	UserTrafficLog 테이블에 log_content='page_in'으로 추가*/
 		
-		 if(((Member)webHelper.getSession("login_info"))!=null) {
-			 if(url_tmp.lastIndexOf(".do")!=-1) {
-				 
-				 String url2=url_tmp.substring(url_tmp.indexOf("goodspring"),url_tmp.lastIndexOf(".do"));
-				 log.debug("url2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
-				 UserTrafficLog input = new UserTrafficLog();
-				 input.setUser_info_user_no(((Member)webHelper.getSession("login_info")).
-						 getUser_no()); input.setLog_category(url2);
-						 userTrafficLogService.pageIn(input); 
-			 }
-		  }else{
-			  String url2=url_tmp.substring(url_tmp.indexOf("goodspring"));
-			  
-			  if(url2=="" || url2=="/") {
-					 log.debug("url2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
-					 url2="index.do";
-					 UserTrafficLog input = new UserTrafficLog();
-					 input.setUser_info_user_no(((Member)webHelper.getSession("login_info")).
-							 getUser_no()); input.setLog_category(url2);
-							 userTrafficLogService.pageIn(input); 
-			  }
-		  }
 		 
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 		
