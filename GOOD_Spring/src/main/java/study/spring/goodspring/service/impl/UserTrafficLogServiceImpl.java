@@ -19,7 +19,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void pageIn(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.pageIn", input);
+		sqlSession.insert("UserTrafficLogMapper.pageIn", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -34,7 +34,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void pageOut(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.pageOut", input);
+		sqlSession.insert("UserTrafficLogMapper.pageOut", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -49,7 +49,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void enterBrowser(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.enterBrowser", input);
+		sqlSession.insert("UserTrafficLogMapper.enterBrowser", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -64,7 +64,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void addBookmark(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.addBookmark", input);
+		sqlSession.insert("UserTrafficLogMapper.addBookmark", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -79,7 +79,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void removeBookmark(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.removeBookmark", input);
+		sqlSession.insert("UserTrafficLogMapper.removeBookmark", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -94,7 +94,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void walkRecord(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.walkRecord", input);
+		sqlSession.insert("UserTrafficLogMapper.walkRecord", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -109,7 +109,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void casExLink(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.casExLink", input);
+		sqlSession.insert("UserTrafficLogMapper.casExLink", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -124,7 +124,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void walkExLink(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.walkExLink", input);
+		sqlSession.insert("UserTrafficLogMapper.walkExLink", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -139,7 +139,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void userLogin(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.userLogin", input);
+		sqlSession.insert("UserTrafficLogMapper.userLogin", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
@@ -154,7 +154,7 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService{
 	public void userLogout(UserTrafficLog input) throws Exception {
 		try {
 			
-		sqlSession.insert("UserTrafficLogServiceImpl.userLogout", input);
+		sqlSession.insert("UserTrafficLogMapper.userLogout", input);
 		
 		}catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
