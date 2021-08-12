@@ -60,7 +60,7 @@ ul, li {
 		<div class="row">
 			<div class="container" style="margin-bottom: 10px;">
 				<div class="header" style="margin-bottom: 50px;">
-					<h1 style="text-align: center;">< ${output.COURSE_NAME} ></h1>
+					<h1 style="text-align: center;">&lt; ${output.COURSE_NAME} &gt;</h1>
 					<h3 style="text-align: right;">추천수: ${output.VOTE_CNT}</h3>
 				</div>
 
@@ -216,31 +216,72 @@ ul, li {
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표 
-		level : 9
+		level : 6
 	// 지도의 확대 레벨 
 	};
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-	var courseName='${output.COURSE_NAME}'
+	var bounds = new kakao.maps.LatLngBounds();  
+	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+	var mapTypeControl = new kakao.maps.MapTypeControl();
+
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
+	
+	
+	var courseName='${output.COURSE_NAME}'
+	console.log(courseName)
+	courseName=courseName.replace(" ","").replace(" ","").replace("ㆍ","").replace(" ","")
+	console.log(courseName)
+	if(courseName.indexOf("(")>-1){
+	courseName=courseName.substring(0, courseName.indexOf("(")-1)
+	console.log(courseName)
+	}
+	if(courseName=="인왕산구간"){courseName="인왕구간"}
+	if(courseName=="불광천길"){courseName="불광천긴"}
+	if(courseName=="성동광진구한강길"){courseName="성동광진한강길"}
+	
+	var courseCategoryNM='${output.COURSE_CATEGORY_NM}'.replace(" ","");
+	var colors = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	
+	function getRandomInt(min, max) {
+	     min = Math.ceil(min);
+	     max = Math.floor(max);
+	     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
+	 }
+	 var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
+	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)]
+	 var color2 = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
+	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)]
 	
 		<!-- geoJson 파일 불러와서 카카오 맵에 표시 -->
+		if(courseCategoryNM=='한강지천길/계절길'){
 		/* 지천길 선형정보 */
 		$.getJSON(getContextPath()+"/assets/map/jichun_line.geojson", function(geojson){
 			
 	    var data = geojson.features;
 	    var coordinates = [];    //좌표 저장할 배열
 	    var name = '';            //코스 이름
-	 	var color = '#004c80'
 	    $.each(data, function(index, val) {
 	 
 	        coordinates = val.geometry.coordinates;
-	        name = val.properties.NAME;
-	        color
-	        displayLine(coordinates, name, color);
+	        name_trim = (val.properties.NAME).replace(" ","");
+	        name = val.properties.NAME
+	           if(name_trim.indexOf(courseName)!=-1){
+		           displayLine(coordinates, name, color);
+		           map.setDraggable(false);
+		           map.setZoomable(false); 
+	           	}         	
 	    	})
 		})
+		
 		/* 지천길 점형 정보 */
-		$.getJSON(getContextPath()+"/assets/map/jichun_point.geojson", function(geojson_p){
+		/* $.getJSON(getContextPath()+"/assets/map/jichun_point.geojson", function(geojson_p){
 			var data_p = geojson_p.features;
 			var coordinates_p = [];
 			var name_p= '';
@@ -251,19 +292,25 @@ ul, li {
 		        name_p = val.properties.NAME;
 		        displayPoint(coordinates_p, name_p);
 			})
-		})
+		}) */
+		}
+		if(courseCategoryNM=='근교산자락길'){
 		/* 자락길 선형정보 */
 		$.getJSON(getContextPath()+"/assets/map/jarak_line.geojson", function(geojson){
 			
 	    var data = geojson.features;
 	    var coordinates = [];    //좌표 저장할 배열
 	    var name = '';            //코스 이름
-	    var color = '#FF6666'
 	    $.each(data, function(index, val) {
 	 
 	        coordinates = val.geometry.coordinates;
-	        name = val.properties.CONTS_NAME;
-	        displayLine(coordinates, name, color);
+	        name_trim = (val.properties.CONTS_NAME).replace(" ","");
+	        name = val.properties.CONTS_NAME
+	           if(name_trim.indexOf(courseName)!=-1){
+		           displayLine(coordinates, name, color);
+		           map.setDraggable(false);
+		           map.setZoomable(false); 
+	           	} 
 	    	})
 		})
 		/* 자락길 점형정보 */
@@ -281,8 +328,11 @@ ul, li {
 			})
 			
 		})
+			
+		}
 		
 		/* 서울둘레길 선형정보 */
+		if(courseCategoryNM=='서울둘레길'){
       $.getJSON(getContextPath()+"/assets/map/doolrea_line.geojson", function(geojson){
          
        var data = geojson.features;
@@ -292,13 +342,18 @@ ul, li {
        $.each(data, function(index, val) {
     
            coordinates = val.geometry.coordinates;
-           name = val.properties.CONTS_NAME;
-           displayLine(coordinates, name, '#228B22');
+           name_trim = (val.properties.CONTS_NAME).replace(" ","");
+           name = val.properties.CONTS_NAME
+           if(name_trim.indexOf(courseName)!=-1){
+	           displayLine(coordinates, name, color);
+	           map.setDraggable(false);
+	           map.setZoomable(false); 
+           	} 	 
           })
       })
       
 		/* 서울둘레길 점형정보 */
-      $.getJSON(getContextPath()+"/assets/map/doolrea_line.geojson", function(geojson){
+      $.getJSON(getContextPath()+"/assets/map/doolrea_point.geojson", function(geojson){
          
        var data = geojson.features;
        var coordinates = [];    //좌표 저장할 배열
@@ -306,12 +361,14 @@ ul, li {
        
        $.each(data, function(index, val) {
     
-           coordinates = val.geometry.coordinates;
-           name = val.properties.NAME;
-           displayPoint(coordinates, name, '#96A5FF');
+    	   coordinates_p = val.geometry.coordinates;
+           name_p = val.properties.NAME;
+           displayPoint(coordinates_p, name_p);
           })
       })
-      
+		}
+		
+		if(courseCategoryNM=='한양도성길'){
       /* 한양도성길 선형정보 */
       $.getJSON(getContextPath()+"/assets/map/hanyang_line.geojson", function(geojson){
          
@@ -322,8 +379,13 @@ ul, li {
        $.each(data, function(index, val) {
     
            coordinates = val.geometry.coordinates;
-           name = val.properties.NAME;
-           displayLine(coordinates, name, '#FF5675');
+           name_trim = (val.properties.NAME).replace(" ","");
+           name=val.properties.NAME;
+	           if(name_trim.indexOf(courseName)!=-1){
+	           displayLine(coordinates, name, color);
+	           map.setDraggable(false);
+	           map.setZoomable(false); 
+           	} 
           })
       })
       
@@ -336,29 +398,37 @@ ul, li {
        
        $.each(data, function(index, val) {
     
-           coordinates = val.geometry.coordinates;
-           name = val.properties.NAME;
-           displayPoint(coordinates, name, '#96A5FF');
+    	   coordinates_p = val.geometry.coordinates;
+           name_p = val.properties.NAME;
+           displayPoint(coordinates_p, name_p);
           })
       })
-      
+		}
+		
+      if(courseCategoryNM=='생태문화길'){
       /* 생태문화길 선형정보 */
       $.getJSON(getContextPath()+"/assets/map/moonhwa_line.geojson", function(geojson){
          
        var data = geojson.features;
        var coordinates = [];    //좌표 저장할 배열
        var name = '';            //코스 이름
-       
+
        $.each(data, function(index, val) {
     
            coordinates = val.geometry.coordinates;
+           name_trim = (val.properties.NAME).replace(" ","").replace(" ","");
            name = val.properties.NAME;
-           displayLine(coordinates, name, '#FFA500');
+	        folderpath_trim = (val.properties.FOLDERPATH).replace(" ","").replace(" ","");
+	           if(name_trim==courseName||folderpath_trim.indexOf(courseName)!=-1){
+	           displayLine(coordinates, name, color);
+	           map.setDraggable(false);
+	           map.setZoomable(false); 
+           	} 
           })
       })
       
       /* 생태문화길 점형정보 */
-      $.getJSON(getContextPath()+"/assets/map/moonhwa_point.geojson", function(geojson){
+     /*  $.getJSON(getContextPath()+"/assets/map/moonhwa_point.geojson", function(geojson){
          
        var data = geojson.features;
        var coordinates = [];    //좌표 저장할 배열
@@ -366,22 +436,22 @@ ul, li {
        
        $.each(data, function(index, val) {
     
-           coordinates = val.geometry.coordinates;
-           name = val.properties.NAME;
-           displayPoint(coordinates, name, '#96A5FF');
+           coordinates_p = val.geometry.coordinates;
+           name_p = val.properties.NAME;
+           displayPoint(coordinates_p, name_p);
           })
-      })
-		
+      }) */
+      }
 		
 		function displayPoint(coordinates, name){
 			var point=null;
 				point=new kakao.maps.LatLng(coordinates[1], coordinates[0]);
 				// 지도에 마커를 생성하고 표시한다
 				var marker = new kakao.maps.Marker({
-					opacity:0.001,
+					opacity:1,
 					position: point, // 마커의 좌표
 					map: map, // 마커를 표시할 지도 객체
-					zIndex:300
+					zIndex:99
 				});
 				
 			     var infowindow = new kakao.maps.InfoWindow({
@@ -390,12 +460,10 @@ ul, li {
 			     
 			    kakao.maps.event.addListener(marker, 'mouseover', function(mouseEvent) { 
 			    	infowindow.open(map,marker);
-			    	marker.setOpacity(1);
 				});
 			    
 			    kakao.maps.event.addListener(marker, 'mouseout', function(mouseEvent) {  
 					     infowindow.close();
-					     marker.setOpacity(0.01);
 				    });  
 		}
 		
@@ -407,15 +475,18 @@ ul, li {
 		        map: map,
 		        content:'',
 		        removable:true,
-		        disableAutoPan:true
+		        disableAutoPan:true,
+		        zIndex:100
 		});
 
 	
 		function displayLine(coordinates, name, color){
 			var path = []; 
+
 		$.each(coordinates[0], function(index, coordinate){
 			//라인 그려줄 path
 			path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
+			bounds.extend(path[index]);
 		})
 			// 지도에 선을 표시한다 
 			var polyline  = new kakao.maps.Polyline({
@@ -426,21 +497,22 @@ ul, li {
 				strokeOpacity: 0.9, // 선 투명도
 			});
 		
-			// 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
-		    // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
+			//폴리라인 마우스 오버 이벤트
 		    kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
 			    polyline.setOptions({
-			    strokeColor: '#4aed64'
+			    strokeColor: color2
 			    })
 			});
+			//폴리라인 마우스 아웃 이벤트
 		    kakao.maps.event.addListener(polyline, 'mouseout', function(mouseEvent) {
 			    polyline.setOptions({
 				    strokeColor: color
 				    })
 			    });
+			//폴리라인 클릭이벤트
 		    kakao.maps.event.addListener(polyline, 'click', function(mouseEvent) {
 				    polyline.setOptions({
-				    strokeColor: '#4aed64'
+				    strokeColor: color2
 		        })
 				    var loc = mouseEvent.latLng;
 				    var length=Math.ceil(polyline.getLength());
@@ -449,6 +521,8 @@ ul, li {
 				    infowindow.setPosition(loc);
 				    infowindow.setContent(content);
 		    })
+		    map.setBounds(bounds);
+		    
 	}
 		<!-- //geoJson 파일 불러와서 카카오 맵에 표시 -->
 	</script>

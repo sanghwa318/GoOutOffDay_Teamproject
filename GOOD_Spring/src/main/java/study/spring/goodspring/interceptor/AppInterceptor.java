@@ -62,20 +62,17 @@ public class AppInterceptor implements HandlerInterceptor {
 		}
 		/**  로그인 되어있다면 사용자가 컨트롤러로 요청을 보낸 url과 사용자번호를 
 		 * 	UserTrafficLog 테이블에 log_content='page_in'으로 추가*/
-		log.debug("url2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		Member loginInfo =(Member)webHelper.getSession("login_info");
 		 if(loginInfo!=null) {
 			 if(url_tmp.lastIndexOf(".do")!=-1) {
 				 
 				 String url2=url_tmp.substring(url_tmp.indexOf("goodspring")+11,url_tmp.lastIndexOf(".do"));
-				 log.debug("url2-1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
 				 UserTrafficLog input = new UserTrafficLog();
 				 input.setUser_info_user_no(loginInfo.getUser_no());
 						 input.setLog_category(url2);
 						 userTrafficLogService.pageIn(input); 
 			 }else{
 			  String url2=url_tmp.substring(url_tmp.indexOf("goodspring")+11);
-			  log.debug("url2-2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+url2);
 			  
 			  if(url2=="" || url2=="/" || url2=="goodspring/") {
 					 url2="index";
