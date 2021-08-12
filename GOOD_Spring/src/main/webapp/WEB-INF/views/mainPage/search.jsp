@@ -86,7 +86,7 @@ body>div.container {
 
 							<%-- 상세 페이지로 이동하기 위한 URL --%>
 							<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
-								<c:param name="CPI_IDX" value="${item_w.CPI_IDX }" />
+								<c:param name="COURSE_NAME" value="${item_w.COURSE_NAME }" />
 							</c:url>
 
 							<%-- 검색어가 있다면? --%>

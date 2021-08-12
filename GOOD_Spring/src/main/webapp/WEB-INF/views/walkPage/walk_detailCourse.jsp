@@ -12,17 +12,17 @@
 <style>
 /*찜하기 버튼*/
 .fa-heart-o {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 
 .fa-heart {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 
 #heart_button {
-   	margin-bottom: 30px
+	margin-bottom: 30px
 }
 
 .detail_map {
@@ -51,6 +51,9 @@ ul, li {
 .info strong {
 	font-size: 25px;
 }
+.btn-bookmark {
+	background-color: #ffdedd;
+}
 </style>
 </head>
 <body>
@@ -59,15 +62,19 @@ ul, li {
 
 		<div class="row">
 			<div class="container" style="margin-bottom: 10px;">
-				<div class="header" style="margin-bottom: 50px;">
-					<h1 style="text-align: center;">&lt; ${output.COURSE_NAME} &gt;</h1>
-					<h3 style="text-align: right;">추천수: ${output.VOTE_CNT}</h3>
+				<div class="header clearfix" style="margin-bottom: 50px;">
+					<h1 style="text-align: center;">&lt; ${output.COURSE_NAME}
+						&gt;</h1>
+					<button class="btn btn-blue disabled pull-right"
+						style="cursor: default; padding-top: 0; padding-bottom: 0;">
+						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
+					</button>
 				</div>
 
 
 				<div class="row">
 					<div class="col-md-6 col-sm-12 col-xs-12">
-					<!-- 지도 영역 -->
+						<!-- 지도 영역 -->
 						<div class="detail_map">
 							<div class="map" id="map" style="width: 500px; height: 520px;"></div>
 
@@ -75,26 +82,26 @@ ul, li {
 
 						<!-- 버튼 -->
 						<div class="btn_container"
-							style="text-align: center; margin-left: -50px;">
+							style="text-align: center; margin-left: -50px; margin-top: 30px;">
 
-							<button class="btn btn-info" type="submit"
-								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
-								<span style="font-size: 20px;"><i
-									class="glyphicon glyphicon-arrow-right"
-									style="padding-right: 5px;"></i> 위치 안내</span>
-							</button>
+							<!-- 							<button class="btn btn-info" type="submit" -->
+							<!-- 								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;"> -->
+							<!-- 								<span style="font-size: 20px;"><i -->
+							<!-- 									class="glyphicon glyphicon-arrow-right" -->
+							<!-- 									style="padding-right: 5px;"></i> 위치 안내</span> -->
+							<!-- 							</button> -->
 							<c:if test="${outputcount eq 1}">
-								<button class="heart btn btn-warning liked" id="heart_button" type="button"
-									style="width: 140px; font-size: 18px;">
+								<button class="heart btn btn-bookmark liked" id="heart_button"
+									type="button" style="width: 140px; font-size: 18px;">
 									<i class="fa fa-heart" aria-hidden="true" role="button"
 										style="padding-right: 5px; font-size: 18px;"></i>찜제거
 								</button>
 							</c:if>
 							<c:if test="${outputcount eq 0}">
-								<button class="heart btn btn-warning" id="heart_button" type="button"
-									style="width: 140px; font-size: 18px;">
+								<button class="heart btn btn-bookmark" id="heart_button"
+									type="button" style="width: 140px; font-size: 18px;">
 									<i class="fa fa-heart-o" aria-hidden="true" role="button"
-										style="padding-right: 5px; font-size: 18px;"></i>찜하기
+										style="padding-right: 5px; font-size: 18px;"></i> 찜하기
 								</button>
 							</c:if>
 						</div>
@@ -128,7 +135,7 @@ ul, li {
 									: </strong>
 								<p class="infoText">${output.TRAFFIC_INFO }</p>
 								<h3 class="infoText">[관련지하철 - ${output.RELATE_SUBWAY }]</h3></li>
-							<li class="infoItem">	
+							<li class="infoItem">
 								<h2 style="text-align: center;">- ${output.COURSE_NAME} -</h2>
 								<p class="infoText">${output.CONTENT }</p>
 								<h3 class="infoText">[추가날짜:${output.REG_DATE }]</h3>
@@ -137,7 +144,7 @@ ul, li {
 					</div>
 					<!-- // 포인트 상세 설명 -->
 					<!-- 코스 전체 포인트 테이블 -->
-					<h2>- ${output.COURSE_NAME} 의 세부경로 포인트- </h2>
+					<h2>- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
 					<table class="table table-hover table-condensed table-responsive">
 						<thead>
 							<tr>
@@ -149,7 +156,8 @@ ul, li {
 						<tbody>
 							<c:choose>
 								<%-- 조회결과가 없는 경우 --%>
-								<c:when test="${output_path==null || fn:length(output_path)==0 }">
+								<c:when
+									test="${output_path==null || fn:length(output_path)==0 }">
 									<tr>
 										<td align="center">경로가 존재하지 않습니다.</td>
 									</tr>
@@ -157,25 +165,25 @@ ul, li {
 								<%-- 조회결과가 있는 경우 --%>
 								<c:otherwise>
 									<%-- 조회 결과에 따른 반복 처리 --%>
-									<c:forEach var="item" items="${output_path }" varStatus="status">
+									<c:forEach var="item" items="${output_path }"
+										varStatus="status">
 										<%-- 출력을 위해 준비한 변수 --%>
 										<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
-										
+
 										<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
 										<c:set var="CPI_CONTENT" value="${item.CPI_CONTENT }" />
-										
-<%-- 										상세페이지로 이동하기 위한 URL --%>
-<%-- 										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
-<%-- 											<c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
-<%-- 										</c:url> --%>
-										
+
+										<%-- 										상세페이지로 이동하기 위한 URL --%>
+										<%-- 										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
+										<%-- 											<c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
+										<%-- 										</c:url> --%>
+
 										<tr>
 											<td><h4>${status.index +1 }</h4></td>
-											<td><h4>${CPI_NAME }</h4>
-											</td>
+											<td><h4>${CPI_NAME }</h4></td>
 											<td><h4>${CPI_CONTENT }</h4></td>
 										</tr>
-										
+
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>

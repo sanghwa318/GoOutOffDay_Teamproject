@@ -173,6 +173,24 @@ public class WalkCourseServiceImpl implements WalkCourseService {
 
 		return result;
 	}
+	
+	/**
+	 * 북마크에 있는 걷기 목록 몇개인지 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getWalkCourseCountBookMark(WalkCourse input) throws Exception{
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("WalkCourseMapper.selectCountBookMark", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+
+		return result;
+	}
 
 	@Override
 	public List<WalkCourse> getWalkCourseMapList(WalkCourse input) throws Exception {

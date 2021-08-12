@@ -29,6 +29,7 @@ public class WalkCourse {
 	private String Y; // Y좌표
 
 	private String CPI_CONTENT; // 포인트설명
+	private String COUNT_BM; // 북마크된 개수
 	
 	// 정렬에 필요한 변수 정의
 	private String order;

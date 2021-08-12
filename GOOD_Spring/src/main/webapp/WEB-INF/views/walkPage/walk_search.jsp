@@ -226,6 +226,7 @@ div#category_acco .accordian-toggle {
 										<c:set var="RELATE_SUBWAY" value="${item.RELATE_SUBWAY }" />
 										<c:set var="TRAFFIC_INFO" value="${item.TRAFFIC_INFO }" />
 										<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
+										<c:set var="COUNT_BM" value="${item.COUNT_BM }" />
 
 										<%-- 상세 페이지로 이동하기 위한 URL --%>
 										<c:url value="/walkPage/walk_detailCourse.do" var="viewUrl">
@@ -235,8 +236,8 @@ div#category_acco .accordian-toggle {
 										<tr onclick="location.href='${viewUrl}'" style="cursor: pointer;">
 											<td align="center" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2>
 											<td align="center" valign="middle"><h2>${COURSE_NAME}</h2>
-												<button class="btn btn-blue btn-lg disabled" style="cursor: default; margin-top: 20px;">
-													찜한 개수 : ${VOTE_CNT } 개
+												<button class="btn btn-blue btn-lg disabled" style="cursor: pointer; margin-top: 20px;">
+													${COUNT_BM } 명의 사용자가 찜한 코스입니다!
 												</button></td>
 											</td>
 											<td><table>

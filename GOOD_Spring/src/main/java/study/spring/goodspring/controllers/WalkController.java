@@ -255,6 +255,7 @@ public class WalkController {
 		PageData pageData = null;
 		// [페이지네이션] 변수 추가 (종료)
 		
+		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();
 		input.setSOUTH_NORTH_DIV_NM(keyword);

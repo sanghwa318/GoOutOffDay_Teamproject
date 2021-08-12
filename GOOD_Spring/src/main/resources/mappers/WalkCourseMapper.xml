@@ -32,6 +32,7 @@
 		<result property="Y" column="Y" />
 
 		<result property="CPI_CONTENT" column="CPI_CONTENT" />
+		<result property="COUNT_BM" column="COUNT_BM" />
 
 		<!-- 정렬에 필요한 변수 빈즈 클래스에서 가져오기 -->
 		<result property="order" column="order" />
@@ -58,7 +59,10 @@
 		X,
 		Y,
 		CPI_CONTENT,
-		CPI_IDX
+		CPI_IDX,
+		(SELECT COUNT(service_id) FROM bookmark
+		WHERE service_id = COURSE_NAME
+		) AS COUNT_BM
 		FROM seoulgil_walk_course
 		<where>
 			<if test="COURSE_NAME != null and COURSE_NAME != ''">
@@ -93,7 +97,7 @@
 		FROM
 		seoulgil_walk_course
 		<where>
-				COURSE_NAME = #{COURSE_NAME}
+			COURSE_NAME = #{COURSE_NAME}
 		</where>
 		ORDER BY CPI_IDX ASC;
 	</select>
@@ -117,7 +121,10 @@
 		VOTE_CNT,
 		RELATE_SUBWAY,
 		TRAFFIC_INFO,
-		COURSE_NAME
+		COURSE_NAME,
+		(SELECT COUNT(service_id) FROM bookmark
+		WHERE service_id = COURSE_NAME
+		) AS COUNT_BM
 		FROM seoulgil_walk_course
 
 		<where>
@@ -363,11 +370,20 @@
 		</where>
 	</select>
 
+	<select id="selectCountBookMark"
+		parameterType="study.spring.goodspring.model.WalkCourse"
+		resultMap="WalkCourseMap">
+		SELECT COUNT(service_id) FROM bookmark
+		WHERE service_id =
+		"#{COURSE_NAME}";
+	</select>
+
 	<!-- 다중행 조회를 위한 기능 정의 (지도용) -->
 	<select id="selectMapList"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT * FROM good.seoulgil_walk_course WHERE COURSE_NAME=#{COURSE_NAME} ORDER BY CPI_IDX ASC
+		SELECT * FROM good.seoulgil_walk_course WHERE
+		COURSE_NAME=#{COURSE_NAME} ORDER BY CPI_IDX ASC
 	</select>
 
 </mapper>

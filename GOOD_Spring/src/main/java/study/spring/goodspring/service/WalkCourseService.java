@@ -55,6 +55,13 @@ public interface WalkCourseService {
 	public int getWalkCourseCount(WalkCourse input) throws Exception;
 	
 	/**
+	 * 북마크에 있는 걷기 목록 몇개인지 조회
+	 * @return int
+	 * @throws Exception
+	 */
+	public int getWalkCourseCountBookMark(WalkCourse input) throws Exception;
+	
+	/**
 	 * 걷기코스 목록 조회(지도용)
 	 * @return 조회 결과에 대한 컬렉션
 	 * @throws Exception
