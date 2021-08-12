@@ -22,10 +22,15 @@ import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.model.WalkLog;
 import study.spring.goodspring.model.WalkSetGoal;
 import study.spring.goodspring.service.BookMarkService;
+import study.spring.goodspring.service.MemberService;
+import study.spring.goodspring.service.MyCourseLikeService;
+import study.spring.goodspring.service.MyCourseService;
+import study.spring.goodspring.service.MyPostService;
 import study.spring.goodspring.service.WalkCourseService;
 import study.spring.goodspring.service.WalkLogService;
 import study.spring.goodspring.service.WalkSetGoalService;
@@ -47,22 +52,47 @@ public class WalkController {
 	/** "/프로젝트이름"에 해당하는 ContextPath 변수 주입 */
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
-
+	
+	@Autowired
+	MyCourseService myCourseService;
+	@Autowired
+	MyPostService myPostService;
+	@Autowired
+	MemberService memberService;
+	@Autowired
+	MyCourseLikeService myCourseLikeService;
+	
 	/**
 	 * 걷기페이지 메인 메서드
 	 */
 	@RequestMapping(value = "/walkPage/walk_index.do", method = RequestMethod.GET)
-	public ModelAndView walk_index(Model model, HttpServletResponse response) {
-
+	public ModelAndView walk_index(Model model, HttpServletResponse response, // 검색어
+			@RequestParam(value = "keyword", required = false) String keyword) {
+		
 		List<WalkCourse> output = null;
+		
+		/** 명예의 전당 관련 소스코드 **/
+		MyCourses input = new MyCourses();
+
+		input.setMycourse_name(keyword);
+		input.setMycourse_content(keyword);
+		input.setMycourse_area(keyword);
+
+		
+		List<MyCourses> Rankoutput = null; // 조회결과가 저장될 객체
+		
 
 		try {
 			output = walkCourseService.getWalkCourseRandomList(null);
+			
+			// 데이터 조회하기
+			Rankoutput = myCourseService.getRankMyCourseList(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		model.addAttribute("output", output);
+		model.addAttribute("Rankoutput", Rankoutput);
 		// walkPage/walk_index.jsp파일을 View로 지정
 		return new ModelAndView("walkPage/walk_index");
 	}
@@ -174,11 +204,11 @@ public class WalkController {
 	@RequestMapping(value = "/walkPage/walk_detailCourse.do", method = RequestMethod.GET)
 	public ModelAndView walk_detailCourse(Model model, HttpServletRequest request, HttpServletResponse response,
 			// 포인트 지점(기본키)
-			@RequestParam(value = "COURSE_NAME") String COURSE_NAME) {
+			@RequestParam(value = "CPI_IDX") int CPI_IDX) {
 
 		// 데이터 조회에 필요한 값을 beans에 전달
 		WalkCourse input = new WalkCourse();
-		input.setCOURSE_NAME(COURSE_NAME);
+		input.setCPI_IDX(CPI_IDX);
 
 		// 조회 결과를 저장할 객체 선언
 		WalkCourse output = null;
@@ -193,8 +223,7 @@ public class WalkController {
 				output = walkCourseService.getWalkCourseItem(input);
 				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
 				bookinput.setService_id(output.getCOURSE_NAME());
-//				output_path = walkCourseService.getWalkCoursePath(input);
-				output_path = walkCourseService.getWalkCourseCourseName(input);
+				output_path = walkCourseService.getWalkCoursePath(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -207,8 +236,7 @@ public class WalkController {
 				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
 				bookinput.setService_id(output.getCOURSE_NAME());
 				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
-//				output_path = walkCourseService.getWalkCoursePath(input);
-				output_path = walkCourseService.getWalkCourseCourseName(input);
+				output_path = walkCourseService.getWalkCoursePath(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -254,7 +282,6 @@ public class WalkController {
 		// [페이지네이션] 객체 추가
 		PageData pageData = null;
 		// [페이지네이션] 변수 추가 (종료)
-		
 		
 		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
 		WalkCourse input = new WalkCourse();

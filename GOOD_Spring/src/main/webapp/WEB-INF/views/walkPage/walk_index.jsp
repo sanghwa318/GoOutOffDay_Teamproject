@@ -13,6 +13,11 @@
 	margin-bottom: 30px;
 }
 
+p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 /** 캐러셀 영역 CSS **/
 .item {
 	transition: all 0.3s ease;
@@ -187,9 +192,8 @@ carousel-title2 {
 			</h1>
 
 		</div>
-		<div id="recording" class="pull-left" style="font-size:18px; color:#EA80FC">
-		
-		</div>
+		<div id="recording" class="pull-left"
+			style="font-size: 18px; color: #EA80FC"></div>
 		<div class="pull-right">
 			<div class="wk_log" id="wk_log">
 				<button type="button" class="btn btn-primary"
@@ -231,135 +235,48 @@ carousel-title2 {
 			</div>
 		</div>
 
-		<!-- 캐러셀 영역 -->
+		<!-- 명예의전당 캐러셀 영역 -->
 
 		<div class="row good_item wk_row">
 			<!--  캐러셀 시작 -->
-			<div class="owl-carousel owl-theme" id="owl-GOOD">
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지1" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당1</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지2" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당2</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지3" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당3</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지4" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당4</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지5" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당5</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지6" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당6</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지7" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당7</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지8" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당8</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지9" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당9</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
-				<div class="thumbnail item" onclick="location.href='#'"
-					style="cursor: pointer;">
-					<img src="#" alt="테스트이미지10" height="200" width="250">
-					<div class="caption">
-						<h4>명예의 전당10</h4>
-						<p>여기 가봐라</p>
-					</div>
-					<div class="wishlist">
-						<span class=heart><i class="fa fa-heart-o"
-							aria-hidden="true" role="button"></i> </span>
-					</div>
-				</div>
+			<div class="owl-carousel owl-theme" id="item-box"
+				data-length="${fn:length(Rankoutput)}">
+				<c:choose>
+					<%--조회결과가 없는 경우 --%>
+					<c:when test="${Rankoutput==null || fn:length(Rankoutput) == 0} ">
+						<div class="null">
+							<div align="center">조회결과가 없습니다.</div>
+						</div>
+					</c:when>
+					<%--조회결과가 있는 경우  --%>
+					<c:otherwise>
+						<%-- 조회 결과에 따른 반복 처리 --%>
+						<c:forEach var="item" items="${Rankoutput}" varStatus="status">
+							<%-- 출력을 위해 준비한 코스이름 변수  --%>
+							<c:set var="mycourse_name" value="${item.mycourse_name}" />
+
+							<%-- 상세페이지로 이동하기위한 URL --%>
+							<c:url value="/commPage/comm_myCourseDetail.do" var="infoUrl">
+								<c:param name="mycourse_no" value="${item.mycourse_no}" />
+							</c:url>
+							<div class="thumbnail item" id="item${status.index}"
+								data-mycourseno='${item.mycourse_no}'
+								onclick="location.href='${infoUrl}'" style="cursor: pointer;">
+								<div class="map" id="map${status.index}" style="height: 180px"></div>
+								<div class="caption clearfix">
+									<p>작성자 : ${item.user_nick}</p>
+									<h4>코스이름 : ${item.mycourse_name }</h4>
+									<p class="pull-left">지역 : ${item.mycourse_area}</p>
+									<p class="pull-right">좋아요 ${item.like}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 		</div>
-		<!-- 케러셀 영역 끝 -->
+		<!-- 명예의전당 케러셀 영역 끝 -->
 
 		<!-- 캐러셀 영역 코스 목록-->
 
@@ -460,7 +377,10 @@ carousel-title2 {
 
 
 	<%@ include file="../inc/plugin.jsp"%>
-
+	<!-- 명에의전당 관련 소스코드 -->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js"></script>
+	<!-- // 명예의전당 관련 소스코드 끝 -->
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script>
@@ -552,100 +472,105 @@ carousel-title2 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 	<script type="text/javascript">
-	var loginInfo = "<%=session.getAttribute("login_info")%>"
-	var intervalString =null;
-	function Recording(startdate){
-		var num = 0;
-        intervalString = setInterval(function() {
-        	var nowdate = new Date();
-        	var tmpdate = nowdate.getTime()-startdate.getTime();
-        	var date = new Date(tmpdate);
-        	var minute = date.getMinutes();
-        	var second = date.getSeconds();
-        	var hour = date.getHours()-9;
-    		
-        	var colorcode =	'#F50057';
-            var str =  [
-            			'<span style="color:'+colorcode+'">기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>', 
-            			'기<span style="color:'+colorcode+'">록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>', 
-            			'기록<span style="color:'+colorcode+'">하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하<span style="color:'+colorcode+'">기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 <span style="color:'+colorcode+'">기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기<span style="color:'+colorcode+'">능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 <span style="color:'+colorcode+'">동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동<span style="color:'+colorcode+'">작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 <span style="color:'+colorcode+'">중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중<span style="color:'+colorcode+'">... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중.<span style="color:'+colorcode+'">.. 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중..<span style="color:'+colorcode+'">. 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... <span style="color:'+colorcode+'">기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기<span style="color:'+colorcode+'">록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 <span style="color:'+colorcode+'">중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중<span style="color:'+colorcode+'">지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지<span style="color:'+colorcode+'">를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 <span style="color:'+colorcode+'">누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누<span style="color:'+colorcode+'">르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르<span style="color:'+colorcode+'">지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지<span style="color:'+colorcode+'">않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않<span style="color:'+colorcode+'">고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 <span style="color:'+colorcode+'">창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창<span style="color:'+colorcode+'">을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 <span style="color:'+colorcode+'">닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫<span style="color:'+colorcode+'">거나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거<span style="color:'+colorcode+'">나 페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 <span style="color:'+colorcode+'">페이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페<span style="color:'+colorcode+'">이지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이<span style="color:'+colorcode+'">지를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지<span style="color:'+colorcode+'">를 이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 <span style="color:'+colorcode+'">이동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이<span style="color:'+colorcode+'">동하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동<span style="color:'+colorcode+'">하면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하<span style="color:'+colorcode+'">면 기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 <span style="color:'+colorcode+'">기록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기<span style="color:'+colorcode+'">록이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록<span style="color:'+colorcode+'">이 사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 <span style="color:'+colorcode+'">사라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사<span style="color:'+colorcode+'">라집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라<span style="color:'+colorcode+'">집니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집<span style="color:'+colorcode+'">니다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니<span style="color:'+colorcode+'">다.</span>',
-            			'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다<span style="color:'+colorcode+'">.</span>'
-            			];
-            num = ++num % str.length;
-            $('#recording').html(str[num]+' '+hour+'시간 '+minute+'분 '+second+'초 '+parseInt(walkDistance)+'Meter 기록 중');
-        }, 100);
-	}
-	
-	function noRecording(){
-		clearInterval(intervalString);
-		$('#recording').html('');
-	}
-	function printTime(startdate){
-		var nowdate = new Date();
-		timediff = nowdate - startdate;
-		return timediff;
-	}
-	$(function() {
+	var loginInfo = "<%=session.getAttribute("login_info")%>
+		"
+		var intervalString = null;
+		function Recording(startdate) {
+			var num = 0;
+			intervalString = setInterval(
+					function() {
+						var nowdate = new Date();
+						var tmpdate = nowdate.getTime() - startdate.getTime();
+						var date = new Date(tmpdate);
+						var minute = date.getMinutes();
+						var second = date.getSeconds();
+						var hour = date.getHours() - 9;
+
+						var colorcode = '#F50057';
+						var str = [
+								'<span style="color:'+colorcode+'">기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기<span style="color:'+colorcode+'">록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록<span style="color:'+colorcode+'">하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하<span style="color:'+colorcode+'">기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 <span style="color:'+colorcode+'">기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기<span style="color:'+colorcode+'">능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 <span style="color:'+colorcode+'">동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동<span style="color:'+colorcode+'">작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 <span style="color:'+colorcode+'">중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중<span style="color:'+colorcode+'">... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중.<span style="color:'+colorcode+'">.. 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중..<span style="color:'+colorcode+'">. 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... <span style="color:'+colorcode+'">기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기<span style="color:'+colorcode+'">록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 <span style="color:'+colorcode+'">중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중<span style="color:'+colorcode+'">지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지<span style="color:'+colorcode+'">를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 <span style="color:'+colorcode+'">누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누<span style="color:'+colorcode+'">르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르<span style="color:'+colorcode+'">지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지<span style="color:'+colorcode+'">않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않<span style="color:'+colorcode+'">고 창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 <span style="color:'+colorcode+'">창을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창<span style="color:'+colorcode+'">을 닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 <span style="color:'+colorcode+'">닫거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫<span style="color:'+colorcode+'">거나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거<span style="color:'+colorcode+'">나 페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 <span style="color:'+colorcode+'">페이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페<span style="color:'+colorcode+'">이지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이<span style="color:'+colorcode+'">지를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지<span style="color:'+colorcode+'">를 이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 <span style="color:'+colorcode+'">이동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이<span style="color:'+colorcode+'">동하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동<span style="color:'+colorcode+'">하면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하<span style="color:'+colorcode+'">면 기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 <span style="color:'+colorcode+'">기록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기<span style="color:'+colorcode+'">록이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록<span style="color:'+colorcode+'">이 사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 <span style="color:'+colorcode+'">사라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사<span style="color:'+colorcode+'">라집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라<span style="color:'+colorcode+'">집니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집<span style="color:'+colorcode+'">니다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니<span style="color:'+colorcode+'">다.</span>',
+								'기록하기 기능 동작 중... 기록 중지를 누르지않고 창을 닫거나 페이지를 이동하면 기록이 사라집니다<span style="color:'+colorcode+'">.</span>' ];
+						num = ++num % str.length;
+						$('#recording')
+								.html(
+										str[num] + ' ' + hour + '시간 ' + minute
+												+ '분 ' + second + '초 '
+												+ parseInt(walkDistance)
+												+ 'Meter 기록 중');
+					}, 100);
+		}
+
+		function noRecording() {
+			clearInterval(intervalString);
+			$('#recording').html('');
+		}
+		function printTime(startdate) {
+			var nowdate = new Date();
+			timediff = nowdate - startdate;
+			return timediff;
+		}
+		$(function() {
 			$("#startRecord").click(function(event) {
 				if (loginInfo != "null") {
-					var startdate= new Date();
-					
-					
+					var startdate = new Date();
+
 					Recording(startdate);
 					startRecord();
 					interval = setInterval(function() {
 						startRecord();
-						
+
 					}, 15000 //check every 15 seconds
 					);
 				} else {
 					alert("로그인이 필요한 서비스입니다. 로그인하고 진행해주세요.");
 				}
 			});
-			
+
 			$("#endRecord-btn").click(function(e) {
 				endRecord();
-				
+
 			});
 
 		});
