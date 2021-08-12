@@ -169,4 +169,19 @@
 	<update id="unsetcrewpostuserno" parameterType="study.spring.goodspring.model.CrewPost">
 	UPDATE crew_post SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
 	</update>
+	
+	<!-- 좋아요 수 업데이트 기능 -->
+	<update id="updateLike"
+	parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE crew_post 
+	SET `post_like`=(SELECT count(*) FROM crew_post_like WHERE post_no=#{post_no})
+	WHERE post_no = #{post_no};
+	</update>
+	
+	<!-- 좋아요 수 조회 -->
+	<select id="selectLikeCount"
+	parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
+	SELECT `post_like` FROM crew_post WHERE post_no = #{post_no};
+	</select>
+	
 </mapper>

@@ -4,16 +4,116 @@
 /**
  * 
  */
-//찜하기 아이콘
+ 
+
+//좋아요 기능
+$(function(){
+    isLike();
+   
+})
+
+var post_no =$('#post_no').val();
+function isLike() {
+
+	$.ajax({
+				url: getContextPath() + '/commPage/comm_crew_post/isLike.do',
+				type: 'POST',
+				dataType: 'json',
+				data: {"post_no":post_no},
+				error: function(error){
+				},
+				success: function(json){
+					console.log("json.isLike :"+json.isLike);
+					$('#likeCount').html("좋아요 "+json.count);
+					$('#likeCount2').html("좋아요 "+json.count);
+					var str ="";
+					if(json.isLike>0){
+						$('.heart').addClass("liked");
+						str ='<i class="fa fa-heart" aria-hidden="true" role="button" id="like-btn"></i>'
+						$('.heart').html(str);
+					}else{
+						$('.heart').removeClass("liked");
+						str ='<i class="fa fa-heart-o" aria-hidden="true" role="button" id="like-btn"></i>'
+						$('.heart').html(str);
+					}
+				}
+	})
+
+}
 $(".heart").on("click",function() {
+	var post_no =$('#post_no').val();
+	console.log("좋아요 버튼 클릭");
 	 if($(this).hasClass("liked")) {
-		$(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-		$(this).removeClass("liked");
+		$.ajax({
+				url: getContextPath() + '/commPage/comm_crew_post/deleteLike.do',
+				type: 'POST',
+				dataType: 'json',
+				data: {"post_no":post_no},
+				error: function(error){
+		        	var error_msg ='';
+		        	var code = parseInt(error.status / 100);
+		        	if (code == 4) 	{
+		                error_msg = "로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.\n";
+							swal({
+								title : "에러",
+								text :error_msg,
+								type : "error"
+							}).then(function(result) {
+								// 창이 닫히는 애니메이션의 시간이 있으므로,
+								// 0.1초의 딜레이 적용 후 포커스 이동
+								setTimeout(function() {
+
+								}, 100);
+							}); // <-- 메시지 표시
+							//window.location = getContextPath()+"/mainPage/login.do";
+		            }
+					/*else if(code == 4){
+						error_msg = "탈퇴된 회원입니다.\n"
+					}*/ 	
+		        },
+		        success: function(json) {
+				console.log("좋아요 취소 완료");
+		        isLike();
+		        }
+		})
+		
 	} else {
-		$(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-		$(this).addClass("liked");
+	var post_no =$('#post_no').val();
+		$.ajax({
+				url: getContextPath() + '/commPage/comm_crew_post/addLike.do',
+				type: 'POST',
+				dataType: 'json',
+				data: { "post_no":post_no },
+				error: function(error){
+		        	var error_msg ='';
+		        	var code = parseInt(error.status / 100);
+		        	if (code == 4) 	{
+		                error_msg = "로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.\n";
+							swal({
+								title : "에러",
+								text :error_msg,
+								type : "error"
+							}).then(function(result) {
+								// 창이 닫히는 애니메이션의 시간이 있으므로,
+								// 0.1초의 딜레이 적용 후 포커스 이동
+								setTimeout(function() {
+
+								}, 100);
+							}); // <-- 메시지 표시
+							//window.location = getContextPath()+"/mainPage/login.do";
+		            }
+					/*else if(code == 4){
+						error_msg = "탈퇴된 회원입니다.\n"
+					}*/ 
+		        },
+		        success: function(json) {
+				console.log("좋아요 추가 완료");
+				isLike();
+		        }
+		})
 	}
 });
+//====좋아요 기능 끝
 
 $(function(){
     cmt_list();

@@ -10,7 +10,7 @@ public class CrewPost {
 
 	//기본컬럼
 	private int post_no; //게시물 번호
-	private String post_like; // 게시물 좋아요 수
+	private int post_like; // 게시물 좋아요 수
 	private String post_crew; // 크루 이름
 	private String post_createdate; // 게시물 생성일자
 	private String post_editdate; // 게시물 수정 일자

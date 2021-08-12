@@ -1,7 +1,9 @@
 package study.spring.goodspring.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.PageData;
@@ -21,9 +24,12 @@ import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.CrewPost;
+import study.spring.goodspring.model.CrewPostLike;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.MyCourseLike;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.CrewMemberService;
+import study.spring.goodspring.service.CrewPostLikeService;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
 import study.spring.goodspring.service.MemberService;
@@ -52,6 +58,9 @@ public class CommController {
 	
 	@Autowired
 	MyCourseService myCourseService;
+	
+	@Autowired
+	CrewPostLikeService crewPostLikeService;
 	
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
@@ -654,11 +663,95 @@ public ModelAndView crewPostDelete(Model model,
 	
 	return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_no() + "&crew_name=" + input.getCrew_name(),null);
 	
-	
-	
-
-
-	
 }
+
+/**
+ * 좋아요 검사
+ * @param post_no
+ * @return
+ */
+@ResponseBody
+@RequestMapping(value= "/commPage/comm_crew_post/isLike.do", method = RequestMethod.POST)
+public Map<String, Object> isLike(@RequestParam(value="post_no", defaultValue="0")int post_no){
+	Map<String, Object> map = new HashMap<String, Object>();
+	/** 1) 현재 글의 좋아요 수*/
+	try {
+		int count=crewPostLikeService.selectLike(post_no);
+		map.put("count",count);
+	} catch (Exception e1) {
+		webHelper.getJsonWarning(e1.getLocalizedMessage());
+	}
+	/** 2)사용자가 좋아요를 했는지 검사*/
+	//로그인 세션정보가 있으면 세션정보의 user_no와 
+	//현재 post_no로 좋아요 된 글인지 확인한다.
+	if(webHelper.getSession("login_info")!=null) {
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		int user_no = loginInfo.getUser_no();
+		CrewPostLike like=new CrewPostLike();
+		like.setPost_no(post_no);
+		like.setUser_no(user_no);
+		int isLike =0;
+		
+		try {
+			isLike = crewPostLikeService.likeUniqueCheck(like);
+		} catch (Exception e) {
+			webHelper.getJsonWarning(e.getLocalizedMessage());
+		}
+		map.put("isLike", isLike );
+	}else {
+		map.put("isLike", 0);
+	}
+	
+	return webHelper.getJsonData(map);
+}
+
+/*
+ * 좋아요 추가
+ * 
+ */
+@ResponseBody
+@RequestMapping(value = "/commPage/comm_crew_post/addLike.do", method = RequestMethod.POST)
+public Map<String, Object> addLike(Model model, @RequestParam(value = "post_no") int post_no) {
+	
+	if(webHelper.getSession("login_info")==null) {
+		webHelper.getJsonWarning("로그인 정보 없음");
+	}else {
+		Member loginInfo=(Member)webHelper.getSession("login_info");
+		CrewPostLike input = new CrewPostLike();
+		input.setPost_no(post_no);
+		input.setUser_no(loginInfo.getUser_no());
+		try {
+			crewPostLikeService.addLike(input);
+		} catch (Exception e) {
+			webHelper.getJsonWarning("좋아요 추가 실패");
+		}
+	}		
+	return webHelper.getJsonData();
+}
+
+/*
+ * 좋아요 취소
+ * 
+ */
+@ResponseBody
+@RequestMapping(value = "/commPage/comm_crew_post/deleteLike.do", method = RequestMethod.POST)
+public Map<String, Object> deleteLike(Model model, @RequestParam(value = "post_no") int post_no) {
+	
+	if(webHelper.getSession("login_info")==null) {
+		webHelper.getJsonWarning("로그인 정보 없음");
+	}else {
+		Member loginInfo=(Member)webHelper.getSession("login_info");
+		CrewPostLike input = new CrewPostLike();
+		input.setPost_no(post_no);
+		input.setUser_no(loginInfo.getUser_no());
+		try {
+			crewPostLikeService.deleteLike(input);
+		} catch (Exception e) {
+			webHelper.getJsonWarning("좋아요 취소 실패");
+		}
+	}		
+	return webHelper.getJsonData();
+}
+
 
 }

@@ -7,7 +7,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="/WEB-INF/views/inc/head.jsp"%>
+<%@ include file="../inc/head.jsp"%>
 
 <style>
 .main_header>h1 {
@@ -130,11 +130,13 @@
 					<p class="pull-left" style="color:#979797;" >작성일자: ${postout.getPost_createdate()}</p>
 					<p class="pull-left " style="margin-left: 15px; color:#979797;">조회수 :
 						${postout.post_hits}</p>
-				<div class="pull-right" style="margin-right: 25px">
-					<span class="heart"><i class="fa fa-heart-o"
-						aria-hidden="true" role="button"></i> </span> 좋아요 4 <span class="comment"><i
-						class="fa fa-comment-o"></i></span> 댓글 ${total}
+						
+				<div class="row pull-right" style="margin-right: 25px">
+						<span class="" id="likeCount" style="margin-top:1%"></span>
+						<span class="heart " style="margin-top:1px; margin-left: -5px;  pointer-events: none;"></span> 
+						 <span class="comment"><i class="fa fa-comment-o"></i></span> 댓글 ${total}
 				</div>
+				
 						<br>
 						<br>
 						<hr>
@@ -151,14 +153,21 @@
 
 			<!-- 댓글 영역 -->
 			<div class="container" style="margin-top:-30px"><h3 style="margin-left:15%">댓글<span class="comment"><i
-						class="fa fa-comment-o"></i></span> ${total}<hr></h3>
+						class="fa fa-comment-o"></i></span> ${total}
+						<span class="heart pull-right" style="margin-top:1px"></span>
+						<span class="pull-right" id="likeCount2" style="margin-top:1%"></span>
+						 
+						<hr>
+						</h3>
 			<div id="cmt-list"></div>
 			
 
 
 				<form>
-				<div class="row" style="margin-left:20%;">
-					<h4>${login_info.user_nick}</h4>
+				<div class="row" style="margin-left:18%;">
+				<img class="pull-left" style="border-radius: 60px" src="<c:if test='${login_info.getUser_photo().getFileUrl()==null || login_info.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${login_info.getUser_photo().getFileUrl()}" width="50px" height="50px">
+					<h4 style="padding-top:6px; margin-left:60px;">${login_info.user_nick}</h4>
+					<br>
 					<div class="form-group input-group">
 						<textarea class="form-control" id="comment_text"
 							style="height: 60px; resize: none;"
@@ -181,14 +190,14 @@
 				<button type="submit" id="btn1" class="btn btn-default" style="margin-left:30px">목록</button>
 			</form>
 		</div>
-			
+			<input type="hidden" name=post_no id="post_no"
+					value="${postout.post_no}">
 			<c:if test="${postout.user_info_user_no==login_info.user_no || login_info.user_admin =='true'}">
 			<div class="row">
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do"
 				method="GET">
-				<input type="hidden" name=post_no id="post_no"
-					value="${postout.post_no}">
+				
 				<div class="btn-group pull-right">
 					<button type="submit" class="btn btn-primary wr_edit" id="wr_edit">수정</button>
 				</div>
@@ -212,7 +221,7 @@
 
 	<!-- //컨테이너 -->
 	<!-- 공용 푸터 -->
-	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
+	<%@ include file="../inc/Footer.jsp"%>
 	<!-- //공통 푸터 -->
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
@@ -221,25 +230,6 @@
 	<script
 		src="${pageContext.request.contextPath}/assets/js/crewPost-js.js"></script>
 
-	<script>
-		$(".heart")
-				.on(
-						"click",
-						function() {
-							if ($(this).hasClass("liked")) {
-								$(this)
-										.html(
-												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
-								$(this).removeClass("liked");
-							} else {
-								$(this)
-										.html(
-												'<i class="fa fa-heart" aria-hidden="true"></i>');
-								$(this).addClass("liked");
-							}
-						});
-	</script>
-	<!-- //js -->
 
 	<!--버튼  -->
 	<script>
