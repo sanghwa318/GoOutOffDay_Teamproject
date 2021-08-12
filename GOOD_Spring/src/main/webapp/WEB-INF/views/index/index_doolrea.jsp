@@ -33,8 +33,8 @@
 	     max = Math.floor(max);
 	     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
 	 }
-	 var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
-	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)]
+  		 
+
 	// 버튼이 클릭되면 호출되는 함수입니다
 	        
 	    	/* 서울둘레길 선형정보 */
@@ -45,10 +45,16 @@
 	         var name = '';            //코스 이름
 	         
 	         $.each(data, function(index, val) {
-	      		console.log('color = '+color)
+	        	 var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
+	    	  	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)];
+	        	 console.log('name = '+name)
+	      		 console.log('color = '+ color)
 	             coordinates = val.geometry.coordinates;
 	             name = val.properties.CONTS_NAME;
 	             displayLine(coordinates, name, color);
+	            
+				
+	             
 	            })
 	        })
 	        

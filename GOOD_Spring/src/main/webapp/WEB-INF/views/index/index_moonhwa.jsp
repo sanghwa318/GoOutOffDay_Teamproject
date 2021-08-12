@@ -25,8 +25,16 @@
 	};
 	<!-- geoJson 파일 불러와서 카카오 맵에 표시 -->
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	var courseName='${output.COURSE_NAME}'
+	var colors = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
 	
+	function getRandomInt(min, max) {
+	     min = Math.ceil(min);
+	     max = Math.floor(max);
+	     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
+	 }
+		
 	
 	        
 	    	/* 생태문화길 선형정보 */
@@ -37,10 +45,12 @@
 	         var name = '';            //코스 이름
 	         
 	         $.each(data, function(index, val) {
-	      
+	        	 var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
+	        	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)];
+	        	 console.log('color = '+color)
 	             coordinates = val.geometry.coordinates;
 	             name = val.properties.NAME;
-	             displayLine(coordinates, name, '#FFA500');
+	             displayLine(coordinates, name, color);
 	            })
 	        })
 	        
