@@ -249,12 +249,12 @@ html, body {
 }
 
 .fa-heart-o {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 
 .fa-heart {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 

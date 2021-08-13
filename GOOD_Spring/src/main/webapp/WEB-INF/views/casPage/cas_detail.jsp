@@ -119,12 +119,12 @@ ul, li {
 
 /*찜하기 버튼*/
 .fa-heart-o {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 
 .fa-heart {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 
@@ -136,6 +136,10 @@ ul, li {
 	margin-bottom: 10px;
 	margin-left: 5px;
 	margin-right: 5px;
+}
+
+.btn-bookmark {
+	background-color: #ffdedd;
 }
 
 /** 대분류 소분류 사이의 중간점 **/
@@ -181,19 +185,19 @@ ul, li {
 						</div>
 						<!-- 버튼 -->
 						<div class="btn_container" style="text-align: center;">
-							<button class="btn btn-primary" type="button"
+							<button class="btn btn-blue" type="button"
 								onclick="location.href='${output.SVCURL}'" style="width: 140px;">
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
 							<c:if test="${outputcount >= 1}">
-								<button class="heart btn btn-warning liked" type="button"
+								<button class="heart btn btn-bookmark liked" type="button"
 									style="width: 140px; font-size: 18px;">
 									<i class="fa fa-heart" aria-hidden="true" role="button"
 										style="padding-right: 5px; font-size: 18px;"></i>찜제거
 								</button>
 							</c:if>
 							<c:if test="${outputcount == 0}">
-								<button class="heart btn btn-warning" type="button"
+								<button class="heart btn btn-bookmark" type="button"
 									style="width: 140px; font-size: 18px;">
 									<i class="fa fa-heart-o" aria-hidden="true" role="button"
 										style="padding-right: 5px; font-size: 18px;"></i>찜하기

@@ -103,7 +103,7 @@ html, body {
 }
 
 .fa-heart {
-	color: red;
+	color: #FF685F;
 	cursor: pointer;
 }
 
