@@ -204,11 +204,11 @@ public class WalkController {
 	@RequestMapping(value = "/walkPage/walk_detailCourse.do", method = RequestMethod.GET)
 	public ModelAndView walk_detailCourse(Model model, HttpServletRequest request, HttpServletResponse response,
 			// 포인트 지점(기본키)
-			@RequestParam(value = "CPI_IDX") int CPI_IDX) {
+			@RequestParam(value = "COURSE_NAME") String COURSE_NAME) {
 
 		// 데이터 조회에 필요한 값을 beans에 전달
 		WalkCourse input = new WalkCourse();
-		input.setCPI_IDX(CPI_IDX);
+		input.setCOURSE_NAME(COURSE_NAME);
 
 		// 조회 결과를 저장할 객체 선언
 		WalkCourse output = null;
@@ -223,7 +223,8 @@ public class WalkController {
 				output = walkCourseService.getWalkCourseItem(input);
 				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
 				bookinput.setService_id(output.getCOURSE_NAME());
-				output_path = walkCourseService.getWalkCoursePath(input);
+//				output_path = walkCourseService.getWalkCoursePath(input);
+				output_path = walkCourseService.getWalkCourseCourseName(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -236,7 +237,8 @@ public class WalkController {
 				bookinput.setCategory_id(output.getCOURSE_CATEGORY_NM());
 				bookinput.setService_id(output.getCOURSE_NAME());
 				outputcount = bookmarkService.BookMarkUniqueCheck(bookinput);
-				output_path = walkCourseService.getWalkCoursePath(input);
+//				output_path = walkCourseService.getWalkCoursePath(input);
+				output_path = walkCourseService.getWalkCourseCourseName(input);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -252,96 +254,98 @@ public class WalkController {
 		return new ModelAndView("/walkPage/walk_detailCourse");
 	}
 
-	/**
-	 * 걷기(코스) 목록 페이지
-	 * 
-	 * @param keyword  검색어
-	 * @param category 코스분류 카테고리
-	 * @param area     지역구 카테고리
-	 * @param order    정렬 카테고리
-	 * @param nowPage  페이지네이션
-	 * @return
-	 */
-	@RequestMapping(value = "/walkPage/walk_search.do", method = RequestMethod.GET)
-	public ModelAndView walk_search(Model model, HttpServletResponse response,
-			// 검색어
-			@RequestParam(value = "keyword", required = false) String keyword,
-			// 유형별(코스카테고리별)
-			@RequestParam(value = "category", required = false) String category,
-			// 지역별(코스카테고리별)
-			@RequestParam(value = "area", required = false) String area,
-			// 정렬(코스카테고리별)
-			@RequestParam(value = "order", required = false) String order,
-			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
-			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+		/**
+		 * 걷기(코스) 목록 페이지
+		 * 
+		 * @param keyword  검색어
+		 * @param category 코스분류 카테고리
+		 * @param area     지역구 카테고리
+		 * @param order    정렬 카테고리
+		 * @param nowPage  페이지네이션
+		 * @return
+		 */
+		@RequestMapping(value = "/walkPage/walk_search.do", method = RequestMethod.GET)
+		public ModelAndView walk_search(Model model, HttpServletResponse response,
+				// 검색어
+				@RequestParam(value = "keyword", required = false) String keyword,
+				// 유형별(코스카테고리별)
+				@RequestParam(value = "category", required = false) String category,
+				// 지역별(코스카테고리별)
+				@RequestParam(value = "area", required = false) String area,
+				// 정렬(코스카테고리별)
+				@RequestParam(value = "order", required = false) String order,
+				// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
+				@RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
-		// [페이지네이션] 변수 추가
-		int totalCount = 0; // 전체 게시글 수
-		int listCount = 10; // 한페이지단 표시할 목록수
-		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
-		// [페이지네이션] 객체 추가
-		PageData pageData = null;
-		// [페이지네이션] 변수 추가 (종료)
-		
-		// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
-		WalkCourse input = new WalkCourse();
-		input.setSOUTH_NORTH_DIV_NM(keyword);
-		input.setLEAD_TIME(keyword);
-		input.setCOURSE_LEVEL(keyword);
-		input.setRELATE_SUBWAY(keyword);
-		input.setCOURSE_NAME(keyword);
-		input.setCPI_NAME(keyword);
-//		input.setDISTANCE(keyword);
-//		input.setTRAFFIC_INFO(keyword);
-
-		// 유형별(코스카테고리별)
-		input.setCOURSE_CATEGORY_NM(category);
-		// 지역별(코스카테고리별)
-		input.setAREA_GU(area);
-		// 정렬(코스카테고리별)
-		input.setOrder(order);
-
-		List<WalkCourse> output = null; // 조회 결과가 저장될 객체
-		List<List<WalkCourse>> output_path_item = new ArrayList<List<WalkCourse>>(); // 조회 결과가 저장될 객체
-
-		try {
-			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-			totalCount = walkCourseService.getWalkCourseCount(input);
-			// [페이지네이션] 페이지 번호 계산
-			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+			// [페이지네이션] 변수 추가
+			int totalCount = 0; // 전체 게시글 수
+			int listCount = 10; // 한페이지단 표시할 목록수
+			int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+			// [페이지네이션] 객체 추가
+			PageData pageData = null;
+			// [페이지네이션] 변수 추가 (종료)
 			
+			
+			// 조회에 필요한 조건값(검색어)를 Beans에 담는다.
+			WalkCourse input = new WalkCourse();
+			input.setSOUTH_NORTH_DIV_NM(keyword);
+			input.setLEAD_TIME(keyword);
+			input.setCOURSE_LEVEL(keyword);
+			input.setRELATE_SUBWAY(keyword);
+			input.setCOURSE_NAME(keyword);
+			input.setCPI_NAME(keyword);
+//			input.setDISTANCE(keyword);
+//			input.setTRAFFIC_INFO(keyword);
 
-			// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-			WalkCourse.setOffset(pageData.getOffset());
-			WalkCourse.setListCount(pageData.getListCount());
+			// 유형별(코스카테고리별)
+			input.setCOURSE_CATEGORY_NM(category);
+			// 지역별(코스카테고리별)
+			input.setAREA_GU(area);
+			// 정렬(코스카테고리별)
+			input.setOrder(order);
 
-			// 데이터 조회하기
-			output = walkCourseService.getWalkCourseList(input);
-			for (int i=0; i<output.size(); i++) {
-				String input_path = output.get(i).getCOURSE_NAME();
-				WalkCourse item = new WalkCourse();
-				item.setCOURSE_NAME(input_path);
-				List<WalkCourse> input_list = walkCourseService.getWalkCourseCourseName(item);
-				output_path_item.add(input_list);
-				// rowspan을 하기위한 포인트 개수
+			List<WalkCourse> output = null; // 조회 결과가 저장될 객체
+			List<List<WalkCourse>> output_path_item = new ArrayList<List<WalkCourse>>(); // 조회 결과가 저장될 객체
+
+			try {
+				// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
+				totalCount = walkCourseService.getWalkCourseCount(input);
+				// [페이지네이션] 페이지 번호 계산
+				pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+				
+
+				// [페이지네이션] SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+				WalkCourse.setOffset(pageData.getOffset());
+				WalkCourse.setListCount(pageData.getListCount());
+
+				// 데이터 조회하기
+				output = walkCourseService.getWalkCourseList(input);
+				for (int i=0; i<output.size(); i++) {
+					String input_path = output.get(i).getCOURSE_NAME();
+					WalkCourse item = new WalkCourse();
+					item.setCOURSE_NAME(input_path);
+					List<WalkCourse> input_list = walkCourseService.getWalkCourseCourseName(item);
+					output_path_item.add(input_list);
+					// rowspan을 하기위한 포인트 개수
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+
+			// View 처리
+			model.addAttribute("output", output);
+			model.addAttribute("output_path_item", output_path_item);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("category", category);
+			model.addAttribute("area", area);
+			model.addAttribute("order", order);
+			model.addAttribute("totalCount", totalCount);
+			// [페이지네이션]
+			model.addAttribute("pageData", pageData);
+			// walkPage/walk_search.jsp파일을 View로 지정
+			return new ModelAndView("walkPage/walk_search");
 		}
 
-		// View 처리
-		model.addAttribute("output", output);
-		model.addAttribute("output_path_item", output_path_item);
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("category", category);
-		model.addAttribute("area", area);
-		model.addAttribute("order", order);
-		model.addAttribute("totalCount", totalCount);
-		// [페이지네이션]
-		model.addAttribute("pageData", pageData);
-		// walkPage/walk_search.jsp파일을 View로 지정
-		return new ModelAndView("walkPage/walk_search");
-	}
 
 	/**
 	 * 코스상세 아이템 찜하기
