@@ -116,19 +116,16 @@
 	        
 	    	/* 서울둘레길 선형정보 */
 	        $.getJSON(getContextPath()+"/assets/map/doolrea_line.geojson", function(geojson){
-	           
+	         
 	         var data = geojson.features;
 	         var coordinates = [];    //좌표 저장할 배열
 	         var name = '';            //코스 이름
-	       
-	         
 	         $.each(data, function(index, val) {
 	        	 var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
 	    	  	 colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)];
 	        	 
 	             coordinates = val.geometry.coordinates;
 	             name = val.properties.CONTS_NAME;
-	             
 	             displayLine(coordinates, data[index], color);
 	            })
 	        })
@@ -175,7 +172,6 @@
 		    			strokeOpacity: 0.1
 		    		});
 		    	}
-			console.log('options = '+options.toString())
 			// 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
 		    // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
 		    kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
@@ -213,7 +209,7 @@
 		            '</div>' + 
 		            '</div>' +    
 		            '</div>' +
-	            '</div>';
+	            	'</div>';
 				    var loc = mouseEvent.latLng;
 				    
 				    
