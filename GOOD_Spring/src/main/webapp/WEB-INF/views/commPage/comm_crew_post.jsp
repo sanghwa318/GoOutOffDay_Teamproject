@@ -133,8 +133,9 @@
 						
 				<div class="row pull-right" style="margin-right: 25px">
 						<span class="" id="likeCount" style="margin-top:1%"></span>
-						<span class="heart " style="margin-top:1px; margin-left: -5px;  pointer-events: none;"></span> 
-						 <span class="comment"><i class="fa fa-comment-o"></i></span> 댓글 ${total}
+						<span class="heart " style="margin-top:1px; margin-left: -5px; margin-right:5px;  pointer-events: none;"></span>
+						<span class="comment"style="margin-top:1px; margin-left: 5px; padding-right:0px">댓글<i class="fa fa-comment-o"></i></span>
+						 <span class="" id="CommentCount" ></span>
 				</div>
 				
 						<br>
@@ -153,10 +154,10 @@
 
 			<!-- 댓글 영역 -->
 			<div class="container" style="margin-top:-30px"><h3 style="margin-left:15%">댓글<span class="comment"><i
-						class="fa fa-comment-o"></i></span> ${total}
+						class="fa fa-comment-o"></i></span>
 						<span class="heart pull-right" style="margin-top:1px"></span>
 						<span class="pull-right" id="likeCount2" style="margin-top:1%"></span>
-						 
+						 <span class="" id="CommentCount2" style="margin-top:1%"></span>
 						<hr>
 						</h3>
 			<div id="cmt-list"></div>

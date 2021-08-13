@@ -24,7 +24,8 @@ public class CrewPostCmtServiceImpl implements CrewPostCmtService{
 	public int addCmt(CrewPostCmt input) throws Exception {
 		int result = 0;
 		try {
-			result = sqlSession.insert("CrewPostCmtMapper.insertCrewPostCmt", input);
+			sqlSession.insert("CrewPostCmtMapper.insertCrewPostCmt", input);
+			result=sqlSession.update("CrewPostMapper.updateCmt", input.getCrew_post_post_no());
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}
@@ -66,7 +67,8 @@ public class CrewPostCmtServiceImpl implements CrewPostCmtService{
 	public int deleteCmt(CrewPostCmt input) throws Exception {
 		int result = 0;
 		try {
-			result = sqlSession.delete("CrewPostCmtMapper.deleteCrewPostCmt", input);
+			sqlSession.delete("CrewPostCmtMapper.deleteCrewPostCmt", input);
+			result=sqlSession.update("CrewPostMapper.updateCmt", input.getCrew_post_post_no());
 			if (result == 0) {
 				throw new NullPointerException("result=0");
 			}

@@ -17,6 +17,7 @@
 		<result property="post_img" column="post_img" />
 		<result property="post_hits" column="post_hits" />
 		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="comment" column="comment" />
 
 	</resultMap>
 
@@ -29,12 +30,12 @@
 		INSERT INTO crew_post (post_like,
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
-		post_img,
+		post_img,comment
 		user_info_user_no)
 		VALUES (#{post_like}, #{post_crew},
 		now(), now(), #{post_title},
 		#{post_content}, #{post_img},
-		#{user_info_user_no});
+		#{user_info_user_no},#{comment});
 	</insert>
 
 
@@ -107,7 +108,7 @@
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
 		post_img, post_hits,
-		user_info_user_no 
+		user_info_user_no,comment
 		FROM crew_post
 		WHERE user_info_user_no = #{user_info_user_no}
 		ORDER BY post_createdate ASC
@@ -143,13 +144,23 @@
 		WHERE post_no = #{post_no};
 	</update>
 	
-	<!-- 댓글 수 조회 -->
+	<!-- 해당 게시물의 댓글 수 조회 -->
 		<select id="selectCountCmtAll"
 		parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
 		SELECT count(*) FROM crew_post cp
 		INNER JOIN crew_comment cr ON cr.crew_post_post_no = cp.post_no
 		WHERE cp.post_no = #{post_no};
 	</select>
+
+		<!-- 댓글 수 업데이트 기능 -->
+	<update id="updateCmt"
+	parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE crew_post 
+	SET `comment`=(SELECT count(*) FROM crew_comment WHERE crew_post_post_no=#{post_no})
+	WHERE post_no = #{post_no};
+	</update>
+
+
 
 	<!-- 게시글 수정 -->
 		<update id="updateCrewPost"

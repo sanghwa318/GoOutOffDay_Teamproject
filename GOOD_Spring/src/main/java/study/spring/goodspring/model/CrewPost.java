@@ -19,6 +19,7 @@ public class CrewPost {
 	private String post_img; // 게시물 사진
 	private String post_hits; // 게시물 조회수
 	private int user_info_user_no; // 게시물 작성자No
+	private int comment; //해당 게시물의 댓글 수
 	
 	//Crew 컬럼
 	private int crew_no; //크루번호

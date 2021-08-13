@@ -34,6 +34,18 @@ public class CrewPostCmt {
 	private String edit_datetime;// (수정일자)
 	private String user_out;
 	
+	//Join CrewPost컬럼
+	private int post_no; //게시물 번호
+	private int post_like; // 게시물 좋아요 수
+	private String post_crew; // 크루 이름
+	private String post_createdate; // 게시물 생성일자
+	private String post_editdate; // 게시물 수정 일자
+	private String post_title; // 게시물 제목
+	private String post_content; // 게시물 내용
+	private String post_img; // 게시물 사진
+	private String post_hits; // 게시물 조회수
+	private int comment; //해당 게시물의 댓글 수
+	
     /** 프로필사진 정보{json=UploadItem}, IS NULL */
     public void setPhotoJson(String user_photo) {
         this.user_photo = new Gson().fromJson(user_photo, UploadItem.class);

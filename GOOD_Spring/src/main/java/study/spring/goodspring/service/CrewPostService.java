@@ -57,10 +57,11 @@ public interface CrewPostService {
 	/*
 	 * 크루 댓글 수 조회
 	 */
-	public int upadateCmtHits(CrewPost input) throws Exception;
+	public int upadateCmtHits(int input) throws Exception;
 	
 	/*
 	 * 크루 포스트 수정
 	 */
 	public int upadateCrewPost(CrewPost input) throws Exception;
+
 }

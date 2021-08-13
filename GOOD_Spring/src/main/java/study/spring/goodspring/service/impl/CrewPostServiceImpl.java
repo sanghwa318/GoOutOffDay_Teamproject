@@ -223,7 +223,7 @@ public class CrewPostServiceImpl implements CrewPostService {
 	 * 크루 게시글에 대한 댓글 수 조회 
 	 */
 	@Override
-	public int upadateCmtHits(CrewPost input) throws Exception {
+	public int upadateCmtHits(int input) throws Exception {
 		int result= 0;
 		
 		try {
@@ -255,5 +255,8 @@ public class CrewPostServiceImpl implements CrewPostService {
 		
 		return result;
 	}
-	
+
+
+
+
 }

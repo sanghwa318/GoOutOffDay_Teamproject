@@ -15,6 +15,7 @@ import study.spring.goodspring.model.CrewPostCmt;
 import study.spring.goodspring.model.Member;
 
 import study.spring.goodspring.service.CrewPostCmtService;
+import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.MemberService;
 
 @RestController
@@ -28,6 +29,9 @@ public class CrewPostCmtRestController {
 	@Autowired
 	CrewPostCmtService crewPostCmtService;
 	
+	@Autowired
+	CrewPostService crewPostService;
+	
 	/** Service 패턴 구현체 주입 */
 	@Autowired
 	MemberService memberService;
@@ -37,7 +41,7 @@ public class CrewPostCmtRestController {
 	 * @param post_no
 	 * @return
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_post/comment", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_crew_post/addCmt.do", method = RequestMethod.POST)
 	public Map<String, Object> addCmt(
 			@RequestParam(value = "crew_post_post_no") int crew_post_post_no,
 			@RequestParam(value = "comment_text") String comment_text
@@ -60,7 +64,7 @@ public class CrewPostCmtRestController {
 		
 		int result =0;
 		try {
-			result = crewPostCmtService.addCmt(input);
+		 result=crewPostCmtService.addCmt(input);
 			
 		} catch (Exception e) {
 			webHelper.getJsonError(e.getLocalizedMessage());
@@ -75,12 +79,24 @@ public class CrewPostCmtRestController {
 	 * 크루 게시물 댓글 목록을 불러오기 위한 Rest Controller 메서드
 	 * @param post_no
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_post/comment", method = RequestMethod.GET)
 	public Map<String, Object> getCmtList(
-			@RequestParam(value = "crew_post_post_no") int crew_post_post_no) {
+			@RequestParam(value = "crew_post_post_no") int crew_post_post_no) throws Exception {
+		
 		CrewPostCmt input = new CrewPostCmt();
 		input.setCrew_post_post_no(crew_post_post_no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//댓글 수 
+		try {
+			int count=crewPostService.upadateCmtHits(crew_post_post_no);
+			map.put("count",count);
+		} catch (Exception e) {
+			webHelper.getJsonWarning(e.getLocalizedMessage());
+		}
+		
 		
 		List<CrewPostCmt> list = null;
 		
@@ -91,7 +107,6 @@ public class CrewPostCmtRestController {
 			webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
-		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cmtList", list);
 		return webHelper.getJsonData(map);
 	}
@@ -101,11 +116,14 @@ public class CrewPostCmtRestController {
 	 * @param comment_no
 	 * @return
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_post/comment", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/commPage/comm_crew_post/deleteLike.do", method = RequestMethod.DELETE)
 	public Map<String, Object> deleteCmt(
-			@RequestParam(value = "comment_no") int comment_no) {
+			@RequestParam(value = "comment_no") int comment_no,
+			@RequestParam(value = "crew_post_post_no") int crew_post_post_no) {
 		CrewPostCmt input = new CrewPostCmt();
 		input.setComment_no(comment_no);
+		input.setCrew_post_post_no(crew_post_post_no);
+		
 		int result = 0;
 		
 		// 사용자 정보 유효성 검사를 위해 세션값 받아오기
@@ -119,7 +137,7 @@ public class CrewPostCmtRestController {
 				return webHelper.getJsonError("잘못된 요청입니다. 로그인 정보를 확인하세요.");
 			}else {
 			//사용자 정보가 맞으면, 삭제 진행
-			result = crewPostCmtService.deleteCmt(input);
+			result=crewPostCmtService.deleteCmt(input);
 			}
 		} catch (Exception e) {
 			return webHelper.getJsonError(e.getLocalizedMessage());

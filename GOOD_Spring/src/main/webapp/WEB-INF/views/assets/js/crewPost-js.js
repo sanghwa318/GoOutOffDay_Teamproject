@@ -138,10 +138,10 @@ $("#delete-btn").on("click",function() {
 		
 		var comment_text=$('#comment_text').val();
 		$.ajax({
-					url: getContextPath() + '/commPage/comm_crew_post/comment',
+					url: getContextPath() + '/commPage/comm_crew_post/addCmt.do',
 					type: 'POST',
 					dataType: 'json',
-					data: { crew_post_post_no, comment_text },
+					data: { crew_post_post_no:crew_post_post_no, comment_text:comment_text },
 					success: function(data) { 
 						cmt_list();
 					},error:function(request,status,error){
@@ -156,13 +156,16 @@ $("#delete-btn").on("click",function() {
 	function cmt_list(){
 		
 				var crew_post_post_no =$('#post_no').val();
-				
+		
 				$.ajax({
 					url: getContextPath() + '/commPage/comm_crew_post/comment',
 					type: 'GET',
 					dataType: 'json',
-					data: { crew_post_post_no },
+					data: { "crew_post_post_no":crew_post_post_no },
 					success: function(data) {
+						console.log("data.cmtList :"+data.cmtList);
+						$('#CommentCount').html(data.count);
+						$('#CommentCount2').html(data.count);
 						var str = [];
 						for(var i =0; i<data.cmtList.length; i++){
 							var photo='';
@@ -191,20 +194,19 @@ $("#delete-btn").on("click",function() {
 		
 		/**댓글 삭제 ajax*/
 		function cmt_delete(comment_no){
-
+		var crew_post_post_no =$('#post_no').val();
+		
 			if (confirm("정말 삭제하시겠습니까?")){
-			
 				console.log(comment_no)
 			$.ajax({
-					url: getContextPath() + '/commPage/comm_crew_post/comment',
+					url: getContextPath() + '/commPage/comm_crew_post/deleteLike.do',
 					type: 'DELETE',
 					dataType: 'json',
-					data: {comment_no},
+					data: {comment_no:comment_no, crew_post_post_no:crew_post_post_no},
 					success: function(data) {
 						if(data.rt)
 						alert("삭제되었습니다.")
 						cmt_list()
-						
 						
 				 },error:function(request,status,error){
 						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")

@@ -222,6 +222,7 @@ margin-top:1%;
 					</span> <span class="pull-right" id="likeCount" style="margin-top:1%"></span><span class="pull-right" id="c_fa" style="margin-right:2%; color:#979797;">조회수 ${output.mycourse_hits }</span><hr>	
 					
 				</h3>
+
 			
 						
 			<div id="cmt-list">
@@ -235,6 +236,7 @@ margin-top:1%;
 			<img class="pull-left" style="border-radius: 60px" src="<c:if test='${login_info.getUser_photo().getFileUrl()==null || login_info.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${login_info.getUser_photo().getFileUrl()}" width="50px" height="50px">
 				<h4 style="padding-top:15px; margin-left:60px;">${login_info.user_nick}</h4>
 				</div>
+				<br>
 				<br>
 			
 				<div class="form-group input-group">
