@@ -46,10 +46,7 @@ public class HomeController {
 	CrewService crewService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model,
-			@RequestParam(value = "keyword_exp", required = false, defaultValue = "문화") String keyword_exp,
-			@RequestParam(value = "keyword_imp", required = false, defaultValue = "교육") String keyword_imp,
-			@RequestParam(value = "keyword_borrow", required = false, defaultValue = "대관") String keyword_borrow) {
+	public ModelAndView home(Locale locale, Model model) {
 
 		/** 홈컨트롤러 기본값 **/
 		log.debug("HomeController 실행됨");
@@ -58,6 +55,10 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		/** 홈컨트롤러 기본값 끝 **/
 
+		String keyword_exp="문화";
+		String keyword_imp="교육";
+		String keyword_borrow="대관";
+		
 		// 문화 창의 체험 시작
 		CAS input_exp = new CAS();
 

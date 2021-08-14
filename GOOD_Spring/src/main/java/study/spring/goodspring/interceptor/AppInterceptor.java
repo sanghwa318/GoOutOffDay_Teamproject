@@ -1,5 +1,6 @@
 package study.spring.goodspring.interceptor;
 
+import java.net.URLDecoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ public class AppInterceptor implements HandlerInterceptor {
 	WebHelper webHelper;
 	@Autowired
 	UserTrafficLogService userTrafficLogService;
+
 	/**
 	 * Controller 실행 요청 전에 수행되는 메서드 클라이언트의 요청을 컨트롤러에 전달 하기 전에 호출된다. return 값으로
 	 * boolean 값을 전달하는데 false 인 경우 controller를 실행 시키지 않고 요청을 종료한다. 보통 이곳에서 각종 체크작업과
@@ -54,35 +56,92 @@ public class AppInterceptor implements HandlerInterceptor {
 
 		// URL에서 "?"이후에 전달되는 GET파라미터 문자열을 모두 가져온다.
 		String queryString = request.getQueryString();
+
+		// 완전한url 값을 저장할 변수
+		String url = null;
 		
-		String url =null;
+		/** UserTrafficLog 이벤트 추가 (page_in || keyword)  */
+		
+		// 사용자의 세션정보를 미리 담아둔다.
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		boolean isKeyword=false;
 		// 가져온 값이 있다면 URL과 결합하여 완전한 URL을 구성한다.
 		if (queryString != null) {
 			url = url_tmp + "?" + queryString;
+
+			// 만약 사용자가 로그인된 상태이고, queryString에 keyword 파라미터가 있으면,
+			// log_category='keyword'를 log_content='keyword의 값'을 넣는다.
+			if (loginInfo != null) {
+				
+				if (url.contains("keyword")) {
+					String keyword_str = ""; // 검색어 값을 담을 변수
+					String keyword_url = ""; // 검색이 발생한 페이지의 경로
+					// keyword뒤에 추가로 붙는 파라미터가 없으면 'keyword='뒤에 붙는 값을 모두 keyword변수에 담는다.
+					if (!queryString.contains("&")) {
+						keyword_str = queryString.substring(queryString.indexOf("keyword") + 8);
+						
+					}else {
+						
+						// keyword뒤에 추가로 파라미터가 있으면
+						// 'keyword='의 바로 뒤 부터 첫번째 '&'까지의 값을 keyword 변수에 담는다.
+						String queryStirng_tmp = queryString.substring(queryString.indexOf("keyword") + 8);
+						keyword_str = queryStirng_tmp.substring(0, queryStirng_tmp.indexOf("&"));
+					}
+					//.do로 끝나는 페이지와 그렇지 않은 페이지의 경로를 구분하여 kewword_Url에 담는다.
+					if (url_tmp.lastIndexOf(".do") != -1) {
+
+						keyword_url = url_tmp.substring(url_tmp.indexOf("goodspring") + 11, url_tmp.lastIndexOf(".do"));
+					} else {
+						keyword_url = url_tmp.substring(url_tmp.indexOf("goodspring") + 11, url.indexOf("?"));
+
+						if (keyword_url == "" || keyword_url == "/") {
+							keyword_url = "index";
+						}
+					}
+					//검색어가 한글인 경우를 위해 keyword_str는 utf-8 decoding 필요.
+					keyword_str= URLDecoder.decode(keyword_str, "utf-8");
+					
+					//파싱된 keyword와 kewword_Url을 합쳐서 addKeyword 메서드에 전달.
+					String keyword= keyword_url+"?keyword="+keyword_str;
+					
+					UserTrafficLog input = new UserTrafficLog();
+					input.setUser_info_user_no(loginInfo.getUser_no());
+					
+
+					input.setLog_category(keyword);
+					userTrafficLogService.addKeyword(input);
+					isKeyword=true;
+				}
+			}
+
 		}
-		/**  로그인 되어있다면 사용자가 컨트롤러로 요청을 보낸 url과 사용자번호를 
-		 * 	UserTrafficLog 테이블에 log_content='page_in'으로 추가*/
-		Member loginInfo =(Member)webHelper.getSession("login_info");
-		 if(loginInfo!=null) {
-			 if(url_tmp.lastIndexOf(".do")!=-1) {
-				 
-				 String url2=url_tmp.substring(url_tmp.indexOf("goodspring")+11,url_tmp.lastIndexOf(".do"));
-				 UserTrafficLog input = new UserTrafficLog();
-				 input.setUser_info_user_no(loginInfo.getUser_no());
-						 input.setLog_category(url2);
-						 userTrafficLogService.pageIn(input); 
-			 }else{
-			  String url2=url_tmp.substring(url_tmp.indexOf("goodspring")+11);
-			  
-			  if(url2=="" || url2=="/" || url2=="goodspring/") {
-					 url2="index";
-					 UserTrafficLog input = new UserTrafficLog();
-					 input.setUser_info_user_no(((Member)webHelper.getSession("login_info")).
-							 getUser_no()); input.setLog_category(url2);
-							 userTrafficLogService.pageIn(input); 
-			  }
-			 }
-		  }
+		/**
+		 * 로그인 되어있고, keyword값을 db에 추가하지 않았다면(isKeyword==false), 사용자가 컨트롤러로 요청을 보낸 url과 사용자번호를 UserTrafficLog 테이블에
+		 * log_content='page_in'으로 추가
+		 */
+
+		if (loginInfo != null && isKeyword==false) {
+			if (url_tmp.lastIndexOf(".do") != -1) {
+
+				String url2 = url_tmp.substring(url_tmp.indexOf("goodspring") + 11, url_tmp.lastIndexOf(".do"));
+				UserTrafficLog input = new UserTrafficLog();
+				input.setUser_info_user_no(loginInfo.getUser_no());
+				input.setLog_category(url2);
+				userTrafficLogService.pageIn(input);
+			} else {
+				String url2 = url_tmp.substring(url_tmp.indexOf("goodspring") + 11);
+
+				if (url2 == "" || url2 == "/") {
+					url2 = "index";
+					UserTrafficLog input = new UserTrafficLog();
+					input.setUser_info_user_no(((Member) webHelper.getSession("login_info")).getUser_no());
+					input.setLog_category(url2);
+					userTrafficLogService.pageIn(input);
+				}
+			}
+		}
+		/** UserTrafficLog 이벤트 추가 끝(page_in || keyword)  */
+		
 		// 획득한 정보를 로그로 표시한다.
 		log.debug(String.format("[%s] %s", methodName, url));
 
@@ -124,16 +183,14 @@ public class AppInterceptor implements HandlerInterceptor {
 
 		String deviceStr = String.format("- Device: {family=%s, model=%s, brand=%s}", device.get("family"),
 				device.get("model"), device.get("brand"));
-		
+
 		// 로그 저장
 		log.debug(browserStr);
 		log.debug(osStr);
 		log.debug(deviceStr);
-		
-		
-		 
+
 		return HandlerInterceptor.super.preHandle(request, response, handler);
-		
+
 	}
 
 	/**

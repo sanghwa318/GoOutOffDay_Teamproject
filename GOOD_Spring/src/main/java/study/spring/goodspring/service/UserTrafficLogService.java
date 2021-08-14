@@ -24,6 +24,6 @@ public interface UserTrafficLogService {
 	
 	public void userLogout(UserTrafficLog input) throws Exception;
 	
-	
+	public void addKeyword(UserTrafficLog input) throws Exception;
 	
 }

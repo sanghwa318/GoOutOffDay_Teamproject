@@ -84,4 +84,10 @@
 	VALUES (now(), #{log_category}, 'userLogout', #{user_info_user_no})
 	</insert>
 	
+	<insert id="keyword" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'keyword', #{user_info_user_no})
+	</insert>
 </mapper>
