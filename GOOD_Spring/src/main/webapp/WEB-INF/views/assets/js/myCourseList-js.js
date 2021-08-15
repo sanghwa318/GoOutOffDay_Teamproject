@@ -30,7 +30,6 @@ $(function() {
         var mycourse_no = mycourse_noId.dataset.mycourseno;
 		map[j] = null;
 
-        console.log(mapContainer[j])
        
 
         //지도 띄우기 ajax 처리
@@ -42,7 +41,6 @@ $(function() {
 
                 for (var i = 0; i < data.courseName.length; i++) {
                     linepathLength = data.courseName.length;
-                    console.log(data.courseName.length)
 
                     lat[i] = parseFloat(data.courseName[i].lat);
                     lon[i] = parseFloat(data.courseName[i].lon);

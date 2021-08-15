@@ -139,10 +139,13 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 
 	@Override
 	public void userLogin(UserTrafficLog input) throws Exception {
+		int result = 0;
 		try {
 
-			sqlSession.insert("UserTrafficLogMapper.userLogin", input);
-
+			result=sqlSession.insert("UserTrafficLogMapper.userLogin", input);
+			if (result == 0) {
+				throw new NullPointerException("result=0");
+			}
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("저장된 데이터가 없습니다.");
@@ -154,10 +157,13 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 
 	@Override
 	public void userLogout(UserTrafficLog input) throws Exception {
+		int result = 0;
 		try {
 
-			sqlSession.insert("UserTrafficLogMapper.userLogout", input);
-
+			result=sqlSession.insert("UserTrafficLogMapper.userLogout", input);
+			if (result == 0) {
+				throw new NullPointerException("result=0");
+			}
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("저장된 데이터가 없습니다.");

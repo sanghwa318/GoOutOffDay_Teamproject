@@ -16,7 +16,9 @@ import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.UploadItem;
 import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.MemberService;
+import study.spring.goodspring.service.UserTrafficLogService;
 
 @RestController
 public class LoginController {
@@ -29,12 +31,14 @@ public class LoginController {
 	RegexHelper regexHelper;
 	@Autowired
 	MailHelper mailHelper;
-
+	@Autowired
+	UserTrafficLogService userTrafficLogService;
+	
 	/** "/프로젝트이름"에 해당하는 ContextPath 변수 주입 */
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
 	
-	/** RESTFUL 로그인 */
+	/** ajax 로그인 */
 	@RequestMapping(value = "/mainPage/login_ok.do", method = RequestMethod.POST)
 	public Map<String, Object> loginOk(@RequestParam(value = "user_id", required = false) String user_id,
 			@RequestParam(value = "user_pw", required = false) String user_pw) {
@@ -78,12 +82,21 @@ public class LoginController {
 				photo.setFileUrl(webHelper.getUploadUrl(photo.getFilePath()));
 				photo.setThumbnailUrl(webHelper.getUploadUrl(thumbPath));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-		/** 5) 세션 생성 및 결과 표시 */
+		
+		/** 5) UserTrafficLog 로그인 DB 추가*/
+		UserTrafficLog userTrafficLog = new UserTrafficLog();
+		userTrafficLog.setUser_info_user_no(output.getUser_no());
+		userTrafficLog.setLog_category("mainPage/login");
+		try {
+			userTrafficLogService.userLogin(userTrafficLog);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		/** 6) 세션 생성 및 결과 표시 */
 		webHelper.setSession("login_info", output);
 		return webHelper.getJsonData();
 	}
@@ -95,6 +108,15 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/mainPage/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout() {
+		/** UserTrafficLog 로그아웃 DB 추가*/
+		UserTrafficLog userTrafficLog = new UserTrafficLog();
+		userTrafficLog.setUser_info_user_no(((Member)webHelper.getSession("login_info")).getUser_no());
+		userTrafficLog.setLog_category("mainPage/logout");
+		try {
+			userTrafficLogService.userLogout(userTrafficLog);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		webHelper.removeSession("login_info");
 		return webHelper.redirect(contextPath, null);
 	}

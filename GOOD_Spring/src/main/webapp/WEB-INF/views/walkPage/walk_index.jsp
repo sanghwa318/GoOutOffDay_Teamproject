@@ -399,7 +399,6 @@ carousel-title2 {
 			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
 			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다
 			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-			console.log("relayout 호출됨")
 			map.relayout();
 		}
 
@@ -472,8 +471,7 @@ carousel-title2 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/walkRecord.js"></script>
 	<script type="text/javascript">
-	var loginInfo = "<%=session.getAttribute("login_info")%>
-		"
+	var loginInfo = '<%=session.getAttribute("login_info")%>'
 		var intervalString = null;
 		function Recording(startdate) {
 			var num = 0;
@@ -545,6 +543,7 @@ carousel-title2 {
 		function noRecording() {
 			clearInterval(intervalString);
 			$('#recording').html('');
+			$(window).off("beforeunload");
 		}
 		function printTime(startdate) {
 			var nowdate = new Date();
@@ -563,6 +562,11 @@ carousel-title2 {
 
 					}, 15000 //check every 15 seconds
 					);
+					$(window).on("beforeunload", function() {
+
+						return "기록 중입니다. 저장하지 않은 정보는 없어집니다."
+
+					});
 				} else {
 					alert("로그인이 필요한 서비스입니다. 로그인하고 진행해주세요.");
 				}
