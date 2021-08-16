@@ -70,15 +70,20 @@ public class CrewController {
 	//작성 폼에대한 action 페이지
 	@RequestMapping(value = "/commPage/comm_crew_est_ok", method = RequestMethod.POST) 
 	public ModelAndView addOk(Model model,
-			@RequestParam(value = "crew_name", defaultValue="") String crew_name,
-			@RequestParam(value = "crew_category", defaultValue="") String crew_category,
-			@RequestParam(value = "crew_area", defaultValue="") String crew_area,
-			@RequestParam(value="crew_photo", defaultValue="") MultipartFile crew_photo,
-			@RequestParam(value = "crew_sinto", defaultValue="") String crew_sinto,
-			@RequestParam(value = "crew_dinto", defaultValue="") String crew_dinto) {
+			@RequestParam(value = "crew_name") String crew_name,
+			@RequestParam(value = "crew_category") String crew_category,
+			@RequestParam(value = "crew_area") String crew_area,
+			@RequestParam(value="crew_photo") MultipartFile crew_photo,
+			@RequestParam(value = "crew_sinto") String crew_sinto,
+			@RequestParam(value = "crew_dinto") String crew_dinto) {
 		
 
-		
+		if(crew_name==null||crew_name=="") {webHelper.redirect(null, "크루명을 입력해주세요.");}
+		if(crew_category==null||crew_category=="") {webHelper.redirect(null, "크루종류를 선택해 주세요.");}
+		if(crew_area==null||crew_area=="") {webHelper.redirect(null, "지역을 선택해 주세요.");}
+		if(crew_photo==null) {webHelper.redirect(null, "크루 사진을 등록해주세요.");}
+		if(crew_sinto==null||crew_sinto=="") {webHelper.redirect(null, "크루 간단소개를 입력해 주세요.");}
+		if(crew_dinto==null||crew_dinto=="") {webHelper.redirect(null, "크루 설명을 입력해 주세요.");}
 		
 		Member login_info = (Member) webHelper.getSession("login_info");
 		int userNo = login_info.getUser_no();

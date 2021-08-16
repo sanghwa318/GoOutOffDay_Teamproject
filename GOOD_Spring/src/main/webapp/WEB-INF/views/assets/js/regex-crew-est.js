@@ -178,7 +178,7 @@ $(function(){
 
 								var crew_sinto_val = $("#crew_sinto").val();
 
-								if (!crew_sinto_val) { // 입력되지 않았다면?
+								if (!crew_sinto_val||crew_sinto_val=="") { // 입력되지 않았다면?
 									swal({
 										title : "에러",
 										text : "크루 간단소개를 입력해 주세요.",
@@ -197,7 +197,7 @@ $(function(){
 
 								var crew_dinto_val = $("#crew_dinto").val();
 
-								if (!crew_dinto_val) { // 입력되지 않았다면?
+								if (!crew_dinto_val||crew_dinto_val=="") { // 입력되지 않았다면?
 									swal({
 										title : "에러",
 										text : "크루 설명을 입력해 주세요.",
