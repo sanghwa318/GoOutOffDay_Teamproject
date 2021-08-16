@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.RetrofitHelper;
@@ -23,9 +24,12 @@ import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.CAS;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.CasService;
+import study.spring.goodspring.service.UserTrafficLogService;
 
+@Slf4j
 @Controller
 public class CasController {
 	@Autowired
@@ -42,6 +46,9 @@ public class CasController {
 
 	@Autowired
 	BookMarkService bookMarkService;
+	
+	@Autowired
+	UserTrafficLogService userTrafficLogService;
 
 	/** 문화체육 메인페이지 메서드 **/
 	@RequestMapping(value = "/casPage/cas_index.do", method = RequestMethod.GET)
@@ -388,7 +395,9 @@ public class CasController {
 	@ResponseBody
 	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
-			@RequestParam(value = "catid", required = false) String catid) throws Exception {
+			@RequestParam(value = "catid", required = false) String catid, HttpServletRequest request,
+			HttpServletResponse response, Object handler,
+			@RequestParam(value = "URL", required = false) String URL) throws Exception {
 
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
@@ -401,12 +410,26 @@ public class CasController {
 		input.setCategory_id(Info.getDIV_COL());
 		input.setService_id(Info.getSVCID());
 
+		/** 로그 저장을 위한 구문 **/	
+		// 로그 모델
+		UserTrafficLog loginput = new UserTrafficLog();
+		
 		try {
 
 			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {
 				bookMarkService.deleteBookMark(input);
+				
+				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+				loginput.setUser_info_user_no(loginInfo.getUser_no());
+				loginput.setLog_category(url2);
+				userTrafficLogService.removeBookmark(loginput);
 			} else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
 				bookMarkService.addBookMark(input);
+				
+				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+				loginput.setUser_info_user_no(loginInfo.getUser_no());
+				loginput.setLog_category(url2);
+				userTrafficLogService.addBookmark(loginput);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

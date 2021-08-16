@@ -573,6 +573,7 @@ html, body {
 					var catid = $(this).attr('value');
 					var svcid = $(this).data('value');
 					var heart = $(this);
+					var URL = window.location.href;
 					swal({
 						title: '확인',
 						text: "찜목록에서 제거할까요?",
@@ -589,7 +590,7 @@ html, body {
 										url: getContextPath() + '/casPage/BookMark',
 										type: 'POST',
 										dataType: 'json',
-										data: { catid, svcid },
+										data: { catid, svcid, URL},
 										timeout: 10000,
 										success: function(req) {
 
@@ -652,6 +653,7 @@ html, body {
 					var catid = $(this).attr('value');
 					var svcid = $(this).data('value');
 					var heart = $(this);
+					var URL = window.location.href;
 					swal({
 						title: '확인',
 						text: "찜목록에 추가할까요?",
@@ -668,7 +670,7 @@ html, body {
 										url: getContextPath() + '/casPage/BookMark',
 										type: 'POST',
 										dataType: 'json',
-										data: { catid, svcid },
+										data: { catid, svcid, URL},
 										timeout: 10000,
 										success: function(req) {
 

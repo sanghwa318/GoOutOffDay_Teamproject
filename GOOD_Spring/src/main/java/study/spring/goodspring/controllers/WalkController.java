@@ -23,6 +23,7 @@ import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.MyCourses;
+import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.model.WalkLog;
 import study.spring.goodspring.model.WalkSetGoal;
@@ -31,6 +32,7 @@ import study.spring.goodspring.service.MemberService;
 import study.spring.goodspring.service.MyCourseLikeService;
 import study.spring.goodspring.service.MyCourseService;
 import study.spring.goodspring.service.MyPostService;
+import study.spring.goodspring.service.UserTrafficLogService;
 import study.spring.goodspring.service.WalkCourseService;
 import study.spring.goodspring.service.WalkLogService;
 import study.spring.goodspring.service.WalkSetGoalService;
@@ -61,6 +63,9 @@ public class WalkController {
 	MemberService memberService;
 	@Autowired
 	MyCourseLikeService myCourseLikeService;
+	
+	@Autowired
+	UserTrafficLogService userTrafficLogService;
 	
 	/**
 	 * 걷기페이지 메인 메서드
@@ -353,7 +358,9 @@ public class WalkController {
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
-			@RequestParam(value = "catid", required = false) String catid) throws Exception {
+			@RequestParam(value = "catid", required = false) String catid, HttpServletRequest request,
+			HttpServletResponse response, Object handler,
+			@RequestParam(value = "URL", required = false) String URL) throws Exception {
 
 //		int intset = Integer.parseInt(svcid);
 		BookMark input = new BookMark();
@@ -367,13 +374,27 @@ public class WalkController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setCategory_id(Info.getCOURSE_CATEGORY_NM());
 		input.setService_id(Info.getCOURSE_NAME());
-
+		
+		/** 로그 저장을 위한 구문 **/	
+		// 로그 모델
+		UserTrafficLog loginput = new UserTrafficLog();
+		
 		try {
 			// 추가 삭제 구문
 			if (bookmarkService.BookMarkUniqueCheck(input) == 1) {
 				bookmarkService.deleteBookMark(input);
+				
+				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+				loginput.setUser_info_user_no(loginInfo.getUser_no());
+				loginput.setLog_category(url2);
+				userTrafficLogService.removeBookmark(loginput);
 			} else if (bookmarkService.BookMarkUniqueCheck(input) == 0) {
 				bookmarkService.addBookMark(input);
+				
+				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+				loginput.setUser_info_user_no(loginInfo.getUser_no());
+				loginput.setLog_category(url2);
+				userTrafficLogService.addBookmark(loginput);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

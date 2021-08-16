@@ -663,13 +663,14 @@ ul, li {
    function addBookMark(){
    var catid = '${output.COURSE_CATEGORY_NM}';
    var svcid = '${output.COURSE_NAME}';
+   var URL = window.location.href;
    
    $.ajax({
       catch:false,
       url: getContextPath()+'/walkPage/BookMark',
       type: 'post',
       dataType : 'json',
-      data : {catid, svcid},
+      data: { catid, svcid, URL},
       timeout : 10000,
       success: function(req){
          console.log("성공 : " + req);
@@ -709,6 +710,8 @@ ul, li {
    function deleteBookMark() {
       var catid = '${output.COURSE_CATEGORY_NM}';
       var svcid = '${output.COURSE_NAME}';
+	  var URL = window.location.href;
+
 //       svcid = String(svcid);
 
       $.ajax({
@@ -716,7 +719,7 @@ ul, li {
          url: getContextPath()+'/walkPage/BookMark',
          type: 'post',
          dataType : 'json',
-         data : {catid, svcid},
+         data: { catid, svcid, URL},
          timeout : 10000,
          success: function(req){
             console.log("삭제 : " + req);

@@ -254,12 +254,13 @@ ul, li {
 	function addBookMark() {
 		var catid = '${output.DIV_COL}';
 		var svcid = '${output.SVCID}';
+		var URL = window.location.href;
 		$.ajax({
 			cache: false,
 			url: getContextPath() + '/casPage/BookMark',
 			type: 'POST',
 			dataType: 'json',
-			data: { catid, svcid },
+			data: { catid, svcid, URL},
 			timeout: 10000,
 			success: function(req) {
 
@@ -303,12 +304,13 @@ ul, li {
 	function deleteBookMark() {
 		var catid = '${output.DIV_COL}';
 		var svcid = '${output.SVCID}';
+		var URL = window.location.href;
 		$.ajax({
 			cache: false,
 			url: getContextPath() + '/casPage/BookMark',
 			type: 'POST',
 			dataType: 'json',
-			data: { catid, svcid },
+			data: { catid, svcid, URL},
 			timeout: 10000,
 			success: function(req) {
 
