@@ -80,11 +80,11 @@
          <h1 class="page-header">${output.crew_name} 크루</h1>
 
          <!-- 본문 상단 영역 -->
-         <div class="crew_bbs_header col-md-12 "></div>
+         <div class="crew_bbs_header "></div>
          <!-- //본문 상단 영역 -->
          <!-- 본문 중단1 영역 -->
          <div class="crew_ibbs_middle1">
-            <div class="col-md-3" id="crew_middle">
+            <div id="crew_middle" class="col-md-3 col-xs-4 col-sm-4">
                <div class="form-group">
                   <span class="title-img"><img
                      src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
@@ -95,20 +95,19 @@
                </div>
             </div>
             <!-- 크루 상세 정보  -->
-            <div class="col-md-6">
-               <h2>크루 공지사항(설명)</h2>
-               <div style="border: 4px dotted #eeee; min-height:200px; min-width:500px">
-               <p style="font-size:30px; margin:3% 0 0 3%">${output.crew_dinto}</p></div>
-            </div>
+            <div class="col-md-6 col-sm-5 col-xs-5 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" style="margin-top:-4%">
+					<h2>크루 공지사항(설명)</h2>
+					<div class="col-md-3 col-sm-4" style="border: 4px dotted #eeee; min-height:150px; min-width:130%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
+				</div>
             <!-- 크루 상세 정보 끝 -->
 
          </div>
          <!--// 본문 중단1 영역 -->
          <!-- 본문 중단2 영역 -->
          <div class="crew_bbs_middle2">
-            <h1 class="col-md-12">자유게시판</h1>
+            <h1 class="col-md-12 col-sm-12 col-xs-12">자유게시판</h1>
             <table
-               class="table table-striped table-bordered table-hover col-md-12">
+               class="table table-striped table-bordered table-hover col-md-12 col-sm-12 col-xs-12">
                <thead>
                   <tr class="active">
                      <th class="text-center">게시글 번호</th>
@@ -169,15 +168,16 @@
                   </c:choose>
                </tbody>
             </table>
+            <div class="clearfix">
             <c:if test="${output.user_info_user_no == login_info.getUser_no()}">
-            <div>
+            <div class="pull-left">
             <input type="hidden" id="crew-del" name="crew-del" value="${output.crew_no}" />
             <button type='submit' id="crew_del" class="btn btn-danger pull-left">크루해체</button>
             </div>
             </c:if>
-            <div class="form-group">
+            <div class="form-group" >
             <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
-               <div class="col-md-4 col-sm-4 col-xs-4" role="search">
+               <div class="col-md-7 col-sm-4 col-xs-3 col-md-offset-2 col-sm-offset-3 col-xs-offset-2" role="search">
                   <div class="form-group input-group">
                      <input type="hidden" id="crew_no" name="crew_no"
                      value="${output.crew_no}" />
@@ -192,7 +192,7 @@
                </div>
 				</form>
 				
-               <form
+               <form 
                   action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
                   method="GET">
                   <input type="hidden" name="post_crew" value="${output.crew_name}" />
@@ -202,19 +202,20 @@
                   <button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
                </form>
                 <c:if test="${output.user_info_user_no == login_info.getUser_no()}">
-               <form
+               <form 
                   action="${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do"
                   method="GET">
                   <input type="hidden" name="crew_crew_no" value="${output.crew_no}" />
-                  <button type="submit" id="btn2" class="btn btn-primary pull-right">크루관리</button>
+                  <button type="submit" id="btn2" class="btn btn-primary pull-right" style="margin-right:0.5%">크루관리</button>
                </form>
                </c:if>
                <!-- 탈퇴버튼 -->
-               <div>
+               <div >
                   <input type="hidden" id="crew_no" name="crew_no"
                      value="${output.crew_no}" />
-                  <button type='submit' id="out" class="btn btn-danger pull-right">탈퇴하기</button>
+                  <button type='submit' id="out" class="btn btn-danger pull-right" style="margin-right:0.5%">탈퇴하기</button>
                </div>
+            </div>
             </div>
          </div>
       </div>
