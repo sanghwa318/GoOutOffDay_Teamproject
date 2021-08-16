@@ -319,7 +319,7 @@
                               function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
                                  if (result.value) { // 확인 버튼이 눌러진 경우
 
-                                    window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok.do?crew_no="+ ${output.crew_no};
+                                    window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok?crew_no="+ ${output.crew_no};
 
                                  } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
                                     swal('취소', '탈퇴가 취소되었습니다.',

@@ -105,11 +105,10 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_record.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_record", method = RequestMethod.POST)
 	public Map<String, Object> walkRecord(
 			@RequestParam(value = "wat_latitude") String wat_latitude,
 			@RequestParam(value = "wat_longitude") String wat_longitude,
-			@RequestParam(value = "wat_timestamp") long wat_timestamp, 
 			@RequestParam(value = "count") int count) {
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
@@ -117,7 +116,6 @@ public class WalkController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setLat(wat_latitude);
 		input.setLon(wat_longitude);
-		input.setWalking_time(wat_timestamp);
 
 		try {
 			if (count == 0) {
@@ -137,7 +135,7 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_recordEnd.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_recordEnd", method = RequestMethod.POST)
 	public Map<String, Object> walkRecordEnd(@RequestParam(value = "course_name") String course_name) {
 		if (course_name != null) {
 			WalkLog input = new WalkLog();
@@ -167,7 +165,7 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck", method = RequestMethod.POST)
 	public Map<String, Object> courseNameUniqueCheck(@RequestParam(value = "course_name") String course_name) {
 
 		WalkLog input = new WalkLog();

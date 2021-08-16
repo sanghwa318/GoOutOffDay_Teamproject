@@ -30,12 +30,12 @@
 		INSERT INTO crew_post (post_like,
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
-		post_img,comment
+		post_img,comment,
 		user_info_user_no)
 		VALUES (#{post_like}, #{post_crew},
 		now(), now(), #{post_title},
-		#{post_content}, #{post_img},
-		#{user_info_user_no},#{comment});
+		#{post_content}, #{post_img},#{comment},
+		#{user_info_user_no});
 	</insert>
 
 
@@ -108,7 +108,7 @@
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
 		post_img, post_hits,
-		user_info_user_no,comment
+		user_info_user_no,comment,
 		FROM crew_post
 		WHERE user_info_user_no = #{user_info_user_no}
 		ORDER BY post_createdate ASC

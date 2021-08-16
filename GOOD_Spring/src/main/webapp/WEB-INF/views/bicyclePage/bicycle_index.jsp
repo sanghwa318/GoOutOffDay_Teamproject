@@ -188,21 +188,22 @@ p {
 				<div class="body_header clearfix">
 					<div class="map_menu ">
 						<!-- 자전거 실시간 현황 지도 -->
-						<div id="map1" style="height: 528px; margin: auto"></div>
+						<div id="map1" style="height: 530px; margin: auto"></div>
 						<div id="m_menu">
-							<div class="menu_header">
+							<div class="menu_header clear-fix" style="height:40px;">
 								<form id="mapSearch"
 									action="${pageContext.request.contextPath }/bicyclePage/bicycle_index_search.do">
-									<label for="keyword">대여소 : </label> <input type="search"
+									<label for="keyword" class="pull-left" style="margin-left:10px;" >대여소 : </label> <input type="search" class="col-md-9 col-sm-8 col-xs-7 pull-right" 
 										name="keyword" id="keyword" />
-									<button type="submit" class="btn btn-default"
+									<button type="submit" class="col-xs-12"
 										id="mapSearch-btn">검색</button>
 								</form>
 							</div>
+							<br>
 							<!-- 지역별 자전거 이용 현황 -->
 							<div class="menu_content"
-								style="height: 70px; overflow-y: scroll;">
-								<div id="select_result"></div>
+								style="height:150px; overflow-y: scroll;">
+								<div id="select_result" ></div>
 							</div>
 						</div>
 					</div>
@@ -487,7 +488,7 @@ p {
 	$(window).load(function() {
 						$.ajax({
 									url : getContextPath()
-											+ "/bicyclePage/bicycle_index_map.do",
+											+ "/bicyclePage/bicycle_index_map",
 									type : "GET",
 									data : "",
 									dataType : "json",

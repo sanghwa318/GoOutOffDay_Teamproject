@@ -16,7 +16,7 @@ var post_no =$('#post_no').val();
 function isLike() {
 
 	$.ajax({
-				url: getContextPath() + '/commPage/comm_crew_post/isLike.do',
+				url: getContextPath() + '/commPage/comm_crew_post/isLike',
 				type: 'POST',
 				dataType: 'json',
 				data: {"post_no":post_no},
@@ -45,7 +45,7 @@ $(".heart").on("click",function() {
 	console.log("좋아요 버튼 클릭");
 	 if($(this).hasClass("liked")) {
 		$.ajax({
-				url: getContextPath() + '/commPage/comm_crew_post/deleteLike.do',
+				url: getContextPath() + '/commPage/comm_crew_post/deleteLike',
 				type: 'POST',
 				dataType: 'json',
 				data: {"post_no":post_no},
@@ -80,7 +80,7 @@ $(".heart").on("click",function() {
 	} else {
 	var post_no =$('#post_no').val();
 		$.ajax({
-				url: getContextPath() + '/commPage/comm_crew_post/addLike.do',
+				url: getContextPath() + '/commPage/comm_crew_post/addLike',
 				type: 'POST',
 				dataType: 'json',
 				data: { "post_no":post_no },
@@ -120,16 +120,6 @@ $(function(){
    
 })
 
-
-//글삭제
-$("#delete-btn").on("click",function() {
-		if(confirm("삭제하시겠습니까?")){
-		location.href = getContextPath()+"/commPage/comm_crew_postDeleteOk.do?post_no="+post_no;
-		return true;
-	}else{
-		return false;
-	}
-})
 	
 	/**댓글 등록하기 ajax */
 	function cmt_add(){
@@ -138,7 +128,7 @@ $("#delete-btn").on("click",function() {
 		
 		var comment_text=$('#comment_text').val();
 		$.ajax({
-					url: getContextPath() + '/commPage/comm_crew_post/addCmt.do',
+					url: getContextPath() + '/commPage/comm_crew_post/comment',
 					type: 'POST',
 					dataType: 'json',
 					data: { crew_post_post_no:crew_post_post_no, comment_text:comment_text },
@@ -174,7 +164,7 @@ $("#delete-btn").on("click",function() {
 								}else{
 							photo=data.cmtList[i].user_photo.fileUrl;									
 								}
-						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 30px -25px 18%;">'
+						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 30px 0 18%;">'
 							str[i]+='<div class="pull-left writer_profile">'
 							str[i]+='<a href="#"><img style="border-radius: 25px"'
 							str[i]+='src=\''+photo+'\' width="50px"'
@@ -184,7 +174,7 @@ $("#delete-btn").on("click",function() {
 							str[i]+='<p style="color:#979797;">'+data.cmtList[i].comment_create_datetime+'</p></div>'
 							str[i]+='<div class="pull-right">'
 							str[i]+='<button type="button" class="btn btn-link" style="padding: 0; margin-right: 0" onclick="cmt_delete('+data.cmtList[i].comment_no+')">댓글 삭제</button></div></div><div class="row">'
-							str[i]+='<div class="col-md-11 col-sm-11 col-xs-11" style="margin-left:18%; font-size:20px;">'+data.cmtList[i].comment_text+'</div>'
+							str[i]+='<div class="col-md-11 col-sm-11 col-xs-11" style="margin-left:18%; font-size:20px; margin-bottom:-20px;">'+data.cmtList[i].comment_text+'</div>'
 							str[i]+='</div></div><hr width="85%" align="right">'
 						}
 					$('#cmt-list').html(str);
@@ -199,7 +189,7 @@ $("#delete-btn").on("click",function() {
 			if (confirm("정말 삭제하시겠습니까?")){
 				console.log(comment_no)
 			$.ajax({
-					url: getContextPath() + '/commPage/comm_crew_post/deleteLike.do',
+					url: getContextPath() + '/commPage/comm_crew_post/comment',
 					type: 'DELETE',
 					dataType: 'json',
 					data: {comment_no:comment_no, crew_post_post_no:crew_post_post_no},

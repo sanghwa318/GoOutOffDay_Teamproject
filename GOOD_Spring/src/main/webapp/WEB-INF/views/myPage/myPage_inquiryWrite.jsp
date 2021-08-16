@@ -25,7 +25,7 @@
 		<div class="container">
 			<h1 class="page-header">1:1 문의</h1>
 			<form class="form-group col-md-10 col-md-offset-1"
-				action="${pageContext.request.contextPath}/myPage/myPage_inquiryWriteOk.do"
+				action="${pageContext.request.contextPath}/myPage/myPage_inquiryWrite_ok"
 				method="post">
 				<div class="row">
 					<div class="col-md-8">

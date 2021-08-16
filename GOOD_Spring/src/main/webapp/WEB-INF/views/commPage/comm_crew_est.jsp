@@ -109,7 +109,7 @@ margin-bottom: 5px;
 			
 			<!-- 개설 폼 시작 -->
 			<form role="form" class="form-crew" method="post" id='est_form'	enctype="multipart/form-data"
-				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok.do">
+				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok">
 					<div class="form-group">
 					<div class="col-md-4">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> 

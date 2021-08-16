@@ -44,7 +44,7 @@ $(function() {
 		map = null;
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 		$.ajax({
-			url: getContextPath() + '/commPage/comm_myCourseGetLoc.do',
+			url: getContextPath() + '/commPage/comm_myCourseGetLoc',
 			type: 'post',
 			data: { course_name },
 			success: function(data) {

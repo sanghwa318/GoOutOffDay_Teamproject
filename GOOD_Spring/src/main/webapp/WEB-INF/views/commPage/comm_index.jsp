@@ -194,6 +194,11 @@ h4 {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 }
+.thumbnail img {
+	max-hieght: 100%;
+	min-width: 100%;
+	height: 180px;
+}
 </style>
 </head>
 
@@ -274,7 +279,7 @@ h4 {
 								<div class="thumbnail item">
 									<img src="${item.crew_photo.fileUrl}" alt="크루 이미지"
 										onclick="location.href='${detailUrl}'"
-										style="max-height: 100%; max-width: 100%; cursor: pointer;">
+										style="cursor: pointer;">
 									<div class="caption clearfix">
 										<p>${item.crew_name}크루</p>
 										<h4 class="explan">${item.crew_sinto}</h4>

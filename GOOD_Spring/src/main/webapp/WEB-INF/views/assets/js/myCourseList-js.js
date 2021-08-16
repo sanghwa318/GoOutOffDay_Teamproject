@@ -34,7 +34,7 @@ $(function() {
 
         //지도 띄우기 ajax 처리
         $.ajax({
-            url: getContextPath() + '/commPage/comm_myCourseListGetLoc.do',
+            url: getContextPath() + '/commPage/comm_myCourseListGetLoc',
             type: 'post',
             data: { mycourse_no },
             success: function(data) {

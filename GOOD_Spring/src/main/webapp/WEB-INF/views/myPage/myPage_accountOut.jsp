@@ -97,7 +97,7 @@
                 <!-- //상세주소 -->	     
 		</form>
 		<div class="form-group1 text-center">
-			<button class="btn btn-danger" id="del" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_accountOut_delete_ok.do?user_id=${login_info.getUser_id()}/'">탈퇴하기</button>
+			<button class="btn btn-danger" id="del" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_accountOut_delete_ok?user_id=${login_info.getUser_id()}/'">탈퇴하기</button>
 			<button class="btn btn-default" id ="cancel"onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
 		</div>
 		</div>
