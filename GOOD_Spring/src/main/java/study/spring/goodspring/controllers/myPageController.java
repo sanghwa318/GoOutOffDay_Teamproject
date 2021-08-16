@@ -235,7 +235,9 @@ public class myPageController {
 		if (!regexHelper.isCellPhone(tel) && !regexHelper.isTel(tel)) {
 			return webHelper.getJsonWarning("연락처가 잘못되었습니다.");
 		}
-
+		if(addr1!=null && (addr2==null || addr2=="")) {
+			return webHelper.getJsonWarning("나머지 주소를 입력해 주세요.");			
+		}
 
 		/** 2) 데이터 저장 */
 		Member input = new Member();
