@@ -34,8 +34,8 @@
 		user_info_user_no)
 		VALUES (#{post_like}, #{post_crew},
 		now(), now(), #{post_title},
-		#{post_content}, #{post_img},
-		#{user_info_user_no},#{comment});
+		#{post_content}, #{post_img},#{comment}
+		#{user_info_user_no});
 	</insert>
 
 

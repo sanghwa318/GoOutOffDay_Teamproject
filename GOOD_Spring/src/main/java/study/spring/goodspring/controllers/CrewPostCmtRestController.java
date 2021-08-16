@@ -41,7 +41,7 @@ public class CrewPostCmtRestController {
 	 * @param post_no
 	 * @return
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_post/addCmt.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_crew_post/comment", method = RequestMethod.POST)
 	public Map<String, Object> addCmt(
 			@RequestParam(value = "crew_post_post_no") int crew_post_post_no,
 			@RequestParam(value = "comment_text") String comment_text
@@ -116,7 +116,7 @@ public class CrewPostCmtRestController {
 	 * @param comment_no
 	 * @return
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_post/deleteLike.do", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/commPage/comm_crew_post/comment", method = RequestMethod.DELETE)
 	public Map<String, Object> deleteCmt(
 			@RequestParam(value = "comment_no") int comment_no,
 			@RequestParam(value = "crew_post_post_no") int crew_post_post_no) {
