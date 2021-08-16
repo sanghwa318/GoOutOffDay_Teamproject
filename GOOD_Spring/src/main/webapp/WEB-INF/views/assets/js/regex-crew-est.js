@@ -17,7 +17,7 @@ $(function(){
         }
 		else{
 			$.ajax({
-				url:getContextPath() + '/commPage/comm_crew_est_ok.do/crewname_unique_check',
+				url:getContextPath() + '/commPage/comm_crew_est_ok/crewname_unique_check',
 				type: 'post',
 				dateType: 'json',
 				data: {crew_name: crewName},

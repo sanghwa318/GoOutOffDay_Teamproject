@@ -106,7 +106,7 @@ public class LoginController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/mainPage/logout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage/logout", method = RequestMethod.GET)
 	public ModelAndView logout() {
 		/** UserTrafficLog 로그아웃 DB 추가*/
 		UserTrafficLog userTrafficLog = new UserTrafficLog();
@@ -127,7 +127,7 @@ public class LoginController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/mainPage/login_findID_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mainPage/login_findID_ok", method = RequestMethod.POST)
 	public Map<String, Object> loginFindId_ok(
 			@RequestParam(value = "email_search", required = false) String email_search,
 			@RequestParam(value = "name_search", required = false) String name_search) {
@@ -170,7 +170,7 @@ public class LoginController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/mainPage/login_findPW_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mainPage/login_findPW_ok", method = RequestMethod.POST)
 	public Map<String, Object> loginFindPw_ok(
 			@RequestParam(value = "id_search", required = false) String id_search,
 			@RequestParam(value = "email_search", required = false) String email_search,

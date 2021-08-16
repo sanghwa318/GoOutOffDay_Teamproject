@@ -93,10 +93,24 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 	}
 
 	@Override
-	public void walkRecord(UserTrafficLog input) throws Exception {
+	public void walkRecordStart(UserTrafficLog input) throws Exception {
 		try {
 
-			sqlSession.insert("UserTrafficLogMapper.walkRecord", input);
+			sqlSession.insert("UserTrafficLogMapper.walkRecordStart", input);
+
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("저장된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 등록에 실패했습니다.");
+		}
+	}
+	@Override
+	public void walkRecordEnd(UserTrafficLog input) throws Exception {
+		try {
+
+			sqlSession.insert("UserTrafficLogMapper.walkRecordEnd", input);
 
 		} catch (NullPointerException e) {
 			log.error(e.getLocalizedMessage());

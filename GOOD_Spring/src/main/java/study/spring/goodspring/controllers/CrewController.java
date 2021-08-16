@@ -68,7 +68,7 @@ public class CrewController {
 	}
 	
 	//작성 폼에대한 action 페이지
-	@RequestMapping(value = "/commPage/comm_crew_est_ok.do", method = RequestMethod.POST) 
+	@RequestMapping(value = "/commPage/comm_crew_est_ok", method = RequestMethod.POST) 
 	public ModelAndView addOk(Model model,
 			@RequestParam(value = "crew_name", defaultValue="") String crew_name,
 			@RequestParam(value = "crew_category", defaultValue="") String crew_category,
@@ -147,7 +147,7 @@ public class CrewController {
 		
 	/** 크루이름 중복검사 */
 	@ResponseBody
-    @RequestMapping(value = "/commPage/comm_crew_est_ok.do/crewname_unique_check", method = RequestMethod.POST)
+    @RequestMapping(value = "/commPage/comm_crew_est_ok/crewname_unique_check", method = RequestMethod.POST)
     public Map<String, Object> crewNameUinqueCheck(
             // 아이디
             @RequestParam(value = "crew_name", required = false) String crew_name) {

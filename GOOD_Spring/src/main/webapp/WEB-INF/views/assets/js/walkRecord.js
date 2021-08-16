@@ -32,7 +32,7 @@ function deg2rad(deg) {
 function rad2deg(rad) {
 	return (rad * 180 / Math.PI);
 }
-
+var URL = window.location.href;
 
 
 
@@ -73,10 +73,10 @@ function startRecord() {
 
 			//  ajax로 로딩
 			$.ajax({
-				url: getContextPath() + '/walkPage/walk_record.do',
+				url: getContextPath() + '/walkPage/walk_record',
 				type: 'post',
 				dataType: 'json',
-				data: { wat_latitude, wat_longitude, wat_timestamp, count },
+				data: { wat_latitude, wat_longitude, count, URL},
 				success: function(data) { }
 			});
 
@@ -109,7 +109,7 @@ function endRecord() {
 		} else {
 
 			$.ajax({
-				url: getContextPath() + '/walkPage/walk_courseNameUniqueCheck.do',
+				url: getContextPath() + '/walkPage/walk_courseNameUniqueCheck',
 				type: 'post',
 				dataType: 'json',
 				data: { course_name },
@@ -121,10 +121,10 @@ function endRecord() {
 						clearInterval(interval);
 						noRecording();
 						$.ajax({
-							url: getContextPath() + '/walkPage/walk_recordEnd.do',
+							url: getContextPath() + '/walkPage/walk_recordEnd',
 							type: 'post',
 							dataType: 'json',
-							data: { course_name },
+							data: { course_name, URL },
 							success: function(data) {
 								noRecording()
 							}

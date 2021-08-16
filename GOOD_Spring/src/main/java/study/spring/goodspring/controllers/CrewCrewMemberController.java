@@ -104,7 +104,7 @@ public class CrewCrewMemberController {
    }
    
    /** 크루탈퇴 */
-   @RequestMapping(value = "/commPage/comm_crew_bbs_delete_ok.do", method = RequestMethod.GET)
+   @RequestMapping(value = "/commPage/comm_crew_bbs_delete_ok", method = RequestMethod.GET)
    public ModelAndView delete_ok(Model model, HttpServletResponse response,
          @RequestParam(value="crew_no", defaultValue = "0") int crew_crew_no)
          {

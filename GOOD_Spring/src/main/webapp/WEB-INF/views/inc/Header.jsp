@@ -18,7 +18,7 @@
 						<a href="<%=request.getContextPath()%>/"
 							style="position: relative; z-index: 999999;"><img
 							src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
-							style="width: 250px; height: 53px;"></a>
+							style="width: 250px; height: 53px; display:block; margin:auto;"></a>
 					</div>
 				</div>
 				<div class="col-md-9">
@@ -36,12 +36,12 @@
 											<i class="glyphicon glyphicon-log-in"></i> <strong>
 												로그인</strong>
 										</button>
-										<button class="btn btn-link"
-											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"
-											onclick="location.href='${pageContext.request.contextPath}/mainPage/join.do'">
-											<i class="glyphicon glyphicon-link"></i> <strong>
-												회원가입</strong>
-										</button>
+<!-- 										<button class="btn btn-link" -->
+<!-- 											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;" -->
+<%-- 											onclick="location.href='${pageContext.request.contextPath}/mainPage/join.do'"> --%>
+<!-- 											<i class="glyphicon glyphicon-link"></i> <strong> -->
+<!-- 												회원가입</strong> -->
+<!-- 										</button> -->
 									</div>
 								</div>
 							</div>
@@ -396,7 +396,7 @@
 		$('.logout-btn').click(function(e) {
 			$.ajax({
 				//결과를 읽어올 url
-				url : getContextPath() + '/mainPage/logout.do',
+				url : getContextPath() + '/mainPage/logout',
 				method : 'get',
 				data : {},
 				dataType : 'html',

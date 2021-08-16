@@ -164,7 +164,7 @@ public class MyCourseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value= "/commPage/comm_myCourseDetail/isLike.do", method = RequestMethod.POST)
+	@RequestMapping(value= "/commPage/comm_myCourseDetail/isLike", method = RequestMethod.POST)
 	public Map<String, Object> isLike(@RequestParam(value="mycourse_no", defaultValue="0")int mycourse_no){
 		Map<String, Object> map = new HashMap<String, Object>();
 		/** 1) 현재 글의 좋아요 수*/
@@ -203,7 +203,7 @@ public class MyCourseController {
 	 * 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commPage/comm_myCourseDetail/addLike.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseDetail/addLike", method = RequestMethod.POST)
 	public Map<String, Object> addLike(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
 		
 		if(webHelper.getSession("login_info")==null) {
@@ -227,7 +227,7 @@ public class MyCourseController {
 	 * 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commPage/comm_myCourseDetail/deleteLike.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseDetail/deleteLike", method = RequestMethod.POST)
 	public Map<String, Object> deleteLike(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
 		
 		if(webHelper.getSession("login_info")==null) {
@@ -295,7 +295,7 @@ public class MyCourseController {
 	/*
 	 * 나만의코스 수정 action 페이지.
 	 */
-	@RequestMapping(value = "/commPage/comm_myCourseEditOk.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseEditOk", method = RequestMethod.POST)
 	public ModelAndView mycourseEditOk(Model model, @RequestParam(value = "mycourse_name") String mycourse_name,
 			@RequestParam(value = "mycourse_area") String mycourse_area,
 			@RequestParam(value = "mycourse_content") String mycourse_content) {
@@ -359,7 +359,7 @@ public class MyCourseController {
 	/*
 	 * 나만의코스 작성 action 페이지.
 	 */
-	@RequestMapping(value = "/commPage/comm_myCourseWriteOk.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseWriteOk", method = RequestMethod.POST)
 	public ModelAndView mycourseWriteOk(Model model, @RequestParam(value = "mycourse_name") String mycourse_name,
 			@RequestParam(value = "mycourse_area") String mycourse_area,
 			@RequestParam(value = "mycourse_content") String mycourse_content) {
@@ -401,7 +401,7 @@ public class MyCourseController {
 	 * 나만의코스 작성을 위한 List형태의 좌표값을 json으로 전달한다.
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commPage/comm_myCourseGetLoc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseGetLoc", method = RequestMethod.POST)
 	public Map<String, Object> mycourseGetLoc(@RequestParam(value = "course_name") String course_name) {
 		/* 1) 코스 이름 조회하기 */
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
@@ -427,7 +427,7 @@ public class MyCourseController {
 	 * 나만의코스 상세페이지를 위한 List형태의 좌표값을 json으로 전달한다.
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commPage/comm_myCourseDetailGetLoc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseDetailGetLoc", method = RequestMethod.POST)
 	public Map<String, Object> mycourseDetailGetLoc(@RequestParam(value = "course_name") String course_name) {
 		/* 1) 코스 이름으로 좌표값 조회하기 */
 		WalkLog input = new WalkLog();
@@ -451,7 +451,7 @@ public class MyCourseController {
 	 * 나만의코스 리스트페이지를 위한 List형태의 좌표값을 json으로 전달한다.
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commPage/comm_myCourseListGetLoc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseListGetLoc", method = RequestMethod.POST)
 	public Map<String, Object> mycourseListGetLoc(@RequestParam(value = "mycourse_no") int mycourse_no) {
 
 		/* 1) 코스 번호로 작성자번호와 코스 이름을 가져오기 위해 객체 생성. */
@@ -495,7 +495,7 @@ public class MyCourseController {
 	 * @param mycourse_no 나만의코스 글번호
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value = "/commPage/comm_myCourseDeleteOk.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_myCourseDeleteOk", method = RequestMethod.GET)
 	public ModelAndView mycourseDeleteOk(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
 		// 삭제처리를 위한 객체 준비
 		MyCourses input = new MyCourses();

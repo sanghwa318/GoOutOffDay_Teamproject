@@ -16,7 +16,7 @@ var post_no =$('#post_no').val();
 function isLike() {
 
 	$.ajax({
-				url: getContextPath() + '/commPage/comm_crew_post/isLike.do',
+				url: getContextPath() + '/commPage/comm_crew_post/isLike',
 				type: 'POST',
 				dataType: 'json',
 				data: {"post_no":post_no},
@@ -45,7 +45,7 @@ $(".heart").on("click",function() {
 	console.log("좋아요 버튼 클릭");
 	 if($(this).hasClass("liked")) {
 		$.ajax({
-				url: getContextPath() + '/commPage/comm_crew_post/deleteLike.do',
+				url: getContextPath() + '/commPage/comm_crew_post/deleteLike',
 				type: 'POST',
 				dataType: 'json',
 				data: {"post_no":post_no},
@@ -80,7 +80,7 @@ $(".heart").on("click",function() {
 	} else {
 	var post_no =$('#post_no').val();
 		$.ajax({
-				url: getContextPath() + '/commPage/comm_crew_post/addLike.do',
+				url: getContextPath() + '/commPage/comm_crew_post/addLike',
 				type: 'POST',
 				dataType: 'json',
 				data: { "post_no":post_no },
@@ -120,16 +120,6 @@ $(function(){
    
 })
 
-
-//글삭제
-$("#delete-btn").on("click",function() {
-		if(confirm("삭제하시겠습니까?")){
-		location.href = getContextPath()+"/commPage/comm_crew_postDeleteOk.do?post_no="+post_no;
-		return true;
-	}else{
-		return false;
-	}
-})
 	
 	/**댓글 등록하기 ajax */
 	function cmt_add(){

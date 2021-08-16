@@ -10,7 +10,6 @@
 		<result property="walk_log_no" column="walk_log_no" />
 		<result property="user_info_user_no" column="user_info_user_no" />
 		<result property="walk_log_datetime" column="walk_log_datetime" />
-		<result property="walking_time" column="walking_time" />
 		<result property="walking_distance" column="walking_distance" />
 		<result property="lon" column="lon" />
 		<result property="lat" column="lat" />
@@ -31,7 +30,7 @@
 	<!-- 중복 데이터 삭제를 위한 단일행 조회 -->
 	<select id="selectSamePosition" resultMap="WalkLogMap"
 		parameterType="study.spring.goodspring.model.WalkLog">
-		SELECT walk_log_no, walk_log_datetime, walking_time,
+		SELECT walk_log_no, walk_log_datetime,
 		walking_distance, lon,
 		lat, event_name
 		FROM walk_log where
@@ -57,12 +56,11 @@
 		useGeneratedKeys="true" keyProperty="walk_log_no">
 		INSERT INTO walk_log
 		(user_info_user_no, walk_log_datetime,
-		walking_time, walking_distance,
+		 walking_distance,
 		lon,
 		lat, event_name)
 		VALUES (#{user_info_user_no},
 		now(),
-		#{walking_time},
 		null,
 		#{lon},
 		#{lat},
@@ -73,12 +71,11 @@
 		useGeneratedKeys="true" keyProperty="walk_log_no">
 		INSERT INTO walk_log
 		(user_info_user_no, walk_log_datetime,
-		walking_time, walking_distance,
+		walking_distance,
 		lon,
 		lat, event_name)
 		VALUES (#{user_info_user_no},
 		now(),
-		#{walking_time},
 		null,
 		#{lon},
 		#{lat},
@@ -167,7 +164,7 @@
     <select id="courseNameUniqueCheck" parameterType="study.spring.goodspring.model.WalkLog" resultType="int">
         SELECT COUNT(*) 
         FROM walk_log 
-        WHERE course_name=#{course_name} and user_info_user_no=#{user_info_user_no}
+        WHERE course_name=#{course_name}
     </select>
     	<!-- 나만의 코스 작성 페이지 진입 시 코스이름이 없는 워크 로그를 지운다. -->
     <delete id="deleteNull" parameterType="study.spring.goodspring.model.WalkLog">

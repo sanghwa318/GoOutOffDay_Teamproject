@@ -58,7 +58,7 @@ public class myPageController {
 	 * @param photo   이미지 파일 정보
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value = "/myPage/myPage_index_imageOk.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/myPage/myPage_index_image_ok.do", method = RequestMethod.POST)
 	public ModelAndView myPageIndexImageOk(HttpServletRequest request,
 			@RequestParam(value = "user_photo", required = false) MultipartFile photo) {
 		/** 1) 업로드 처리 */
@@ -305,7 +305,7 @@ public class myPageController {
 	}
 
 	/** 삭제처리 */
-	@RequestMapping(value = "/myPage/myPage_accountOut_delete_ok.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPage/myPage_accountOut_delete_ok", method = RequestMethod.GET)
 	public ModelAndView delete_ok() {
 
 		/** 2) 데이터 삭제하기 */
@@ -399,7 +399,7 @@ public class myPageController {
 	 * 
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value = "/myPage/myPage_inquiryWriteOk.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/myPage/myPage_inquiryWrite_ok", method = RequestMethod.POST)
 	public ModelAndView InquiryWriteOk(Model model, @RequestParam(value = "QnA_title") String QnA_title,
 			@RequestParam(value = "QnA_category") String QnA_category,
 			@RequestParam(value = "QnA_text") String QnA_text) {

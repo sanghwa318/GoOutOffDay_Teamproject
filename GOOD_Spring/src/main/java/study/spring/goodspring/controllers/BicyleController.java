@@ -79,7 +79,7 @@ public class BicyleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/bicyclePage/bicycle_index_map.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/bicyclePage/bicycle_index_map", method = RequestMethod.GET)
 	public Map<String, Object> bicycle_index_map() {
 		row input = new row();
 		List<row> output = null;

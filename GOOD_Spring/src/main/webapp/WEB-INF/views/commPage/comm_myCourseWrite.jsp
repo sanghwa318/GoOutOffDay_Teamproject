@@ -89,7 +89,7 @@ input#title {
 				<h1 style="color: #343a40; padding-left: 32px">코스 작성</h1>
 			</div>
 			<form
-				action="${pageContext.request.contextPath}/commPage/comm_myCourseWriteOk.do"
+				action="${pageContext.request.contextPath}/commPage/comm_myCourseWriteOk"
 				method="post">
 				<div class="row">
 					<div class="col-md-6">

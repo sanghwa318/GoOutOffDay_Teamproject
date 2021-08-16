@@ -4,7 +4,7 @@
 //좋아요 기능
 function isLike() {
 	$.ajax({
-				url: getContextPath() + '/commPage/comm_myCourseDetail/isLike.do',
+				url: getContextPath() + '/commPage/comm_myCourseDetail/isLike',
 				type: 'POST',
 				dataType: 'json',
 				data: { mycourse_no },
@@ -31,7 +31,7 @@ $(".heart").on("click",function() {
 	console.log("좋아요 버튼 클릭");
 	 if($(this).hasClass("liked")) {
 		$.ajax({
-				url: getContextPath() + '/commPage/comm_myCourseDetail/deleteLike.do',
+				url: getContextPath() + '/commPage/comm_myCourseDetail/deleteLike',
 				type: 'POST',
 				dataType: 'json',
 				data: { mycourse_no },
@@ -65,7 +65,7 @@ $(".heart").on("click",function() {
 		
 	} else {
 		$.ajax({
-				url: getContextPath() + '/commPage/comm_myCourseDetail/addLike.do',
+				url: getContextPath() + '/commPage/comm_myCourseDetail/addLike',
 				type: 'POST',
 				dataType: 'json',
 				data: { mycourse_no },
@@ -103,7 +103,7 @@ $(".heart").on("click",function() {
 //글삭제
 $("#delete-btn").on("click",function() {
 		if(confirm("삭제하시겠습니까?")){
-		location.href = getContextPath()+"/commPage/comm_myCourseDeleteOk.do?mycourse_no="+mycourse_no;
+		location.href = getContextPath()+"/commPage/comm_myCourseDeleteOk?mycourse_no="+mycourse_no;
 		return true;
 	}else{
 		return false;
@@ -208,7 +208,7 @@ $(function() {
 	map = null;
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	$.ajax({
-		url: getContextPath() + '/commPage/comm_myCourseDetailGetLoc.do',
+		url: getContextPath() + '/commPage/comm_myCourseDetailGetLoc',
 		type: 'post',
 		data: { course_name },
 		success: function(data) {

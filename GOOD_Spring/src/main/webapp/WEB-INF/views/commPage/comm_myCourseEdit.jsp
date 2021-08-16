@@ -85,7 +85,7 @@ input#title {
 				<h1 style="color: #343a40; padding-left: 32px">코스 수정</h1>
 			</div>
 			<form
-				action="${pageContext.request.contextPath}/commPage/comm_myCourseEditOk.do"
+				action="${pageContext.request.contextPath}/commPage/comm_myCourseEditOk"
 				method="post">
 				<div class="row">
 					<div class="col-md-6">

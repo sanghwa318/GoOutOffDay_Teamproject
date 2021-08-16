@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -12,47 +12,48 @@
 <style>
 /*찜하기 버튼*/
 .fa-heart-o {
-   color: #FF685F;
-   cursor: pointer;
+	color: #FF685F;
+	cursor: pointer;
 }
 
 .fa-heart {
-   color: #FF685F;
-   cursor: pointer;
+	color: #FF685F;
+	cursor: pointer;
 }
 
 #heart_button {
-   margin-bottom: 30px
+	margin-bottom: 30px
 }
 
 .detail_map {
-   padding-left: 20px;
+	padding-left: 20px;
 }
 
 .admin_content {
-   padding-left: 20px;
+	padding-left: 20px;
 }
 
 ul, li {
-   list-style: none;
+	list-style: none;
 }
 
 .info li {
-   border: 1px solid #eee;
-   padding: 17px 20px 20px 10px;
-   border-bottom: 1px solid #ddd;
+	border: 1px solid #eee;
+	padding: 17px 20px 20px 10px;
+	border-bottom: 1px solid #ddd;
 }
 
 .info p {
-   font-size: 25px;
-   display: inline;
+	font-size: 25px;
+	display: inline;
 }
 
 .info strong {
-   font-size: 25px;
+	font-size: 25px;
 }
+
 .btn-bookmark {
-   background-color: #ffdedd;
+	background-color: #ffdedd;
 }
 /* 지도 오버레이 */
 .wrap {
@@ -68,10 +69,12 @@ ul, li {
 	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
 	line-height: 1.5;
 }
+
 .wrap * {
 	padding: 0;
 	margin: 0;
 }
+
 .wrap .info {
 	height: 120px;
 	border-radius: 5px;
@@ -79,10 +82,12 @@ ul, li {
 	border-right: 1px solid #ccc;
 	background: #fff;
 }
+
 .wrap .info:nth-child(1) {
 	border: 0;
 	box-shadow: 0px 1px 2px #888;
 }
+
 .info .title {
 	padding: 5px 0 0 10px;
 	height: 30px;
@@ -91,9 +96,11 @@ ul, li {
 	font-size: 18px;
 	font-weight: bold;
 }
+
 .container {
 	padding: 10px;
 }
+
 .info .close {
 	position: absolute;
 	top: 10px;
@@ -101,33 +108,42 @@ ul, li {
 	color: #888;
 	width: 17px;
 	height: 17px;
-	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
 }
+
 .info .close:hover {
 	cursor: pointer;
 }
+
 .info .body {
-	position: relative;overflow: hidden;
+	position: relative;
+	overflow: hidden;
 }
+
 .info:after {
-    content: '';
-    position: absolute;
-    margin-left: -12px;
-    left: 50%;
-    bottom: 0;
-    width: 22px;
-    height: 12px;
-    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png);
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: 0;
+	width: 22px;
+	height: 12px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png);
 }
+
 .desc .ellipsis {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
 .desc .jibun {
 	font-size: 11px;
 	color: #888;
 	margin-top: -2px;
 }
+
 .main_header>h1 {
 	position: relative;
 	text-align: center;
@@ -141,173 +157,190 @@ ul, li {
 </style>
 </head>
 <body>
-   <div class="wrapper">
-      <%@ include file="../inc/Header.jsp"%>
+	<div class="wrapper">
+		<%@ include file="../inc/Header.jsp"%>
 
-      <div class="row">
-         <div class="container" style="margin-bottom: 10px;">
-         <!-- 대제목 -->
-			<div class="row main_header">
-				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.jsp'"
-					style="cursor: pointer; color: #343a40;">
-					<span class="test01">걷기<img
-						src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png;"
-						style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
-					</span>
-				</h1>
+		<div class="row">
+			<div class="container" style="margin-bottom: 10px;">
+				<!-- 대제목 -->
+				<div class="row main_header">
+					<h1 class="page-header page-title" id="cas_header"
+						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.jsp'"
+						style="cursor: pointer; color: #343a40;">
+						<span class="test01">걷기<img
+							src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png;"
+							style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
+						</span>
+					</h1>
+				</div>
+				<div class="header clearfix" style="margin-bottom: 50px;">
+					<h1 style="text-align: center;">&lt; ${output.COURSE_NAME}
+						&gt;</h1>
+					<button class="btn btn-blue disabled pull-right"
+						style="cursor: default; padding-top: 0; padding-bottom: 0;">
+						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
+					</button>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<!-- 지도 영역 -->
+						<div class="detail_map">
+							<div class="map" id="map" style="width: 500px; height: 520px;"></div>
+
+						</div>
+
+						<!-- 버튼 -->
+						<div class="btn_container"
+							style="text-align: center; margin-left: -50px; margin-top: 30px;">
+
+							<a class="btn btn-info" type="submit" id="location"
+								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
+								<span style="font-size: 20px;"><i
+									class="glyphicon glyphicon-arrow-right"
+									style="padding-right: 5px;"></i> 위치 안내</span>
+							</a>
+							<c:if test="${outputcount eq 1}">
+								<button class="heart btn btn-bookmark liked" id="heart_button"
+									type="button" style="width: 140px; font-size: 18px;">
+									<i class="fa fa-heart" aria-hidden="true" role="button"
+										style="padding-right: 5px; font-size: 18px;"></i>찜제거
+								</button>
+							</c:if>
+							<c:if test="${outputcount eq 0}">
+								<button class="heart btn btn-bookmark" id="heart_button"
+									type="button" style="width: 140px; font-size: 18px;">
+									<i class="fa fa-heart-o" aria-hidden="true" role="button"
+										style="padding-right: 5px; font-size: 18px;"></i> 찜하기
+								</button>
+							</c:if>
+						</div>
+					</div>
+
+
+					<!-- 포인트 상세 설명 -->
+					<div class="col-md-6 col-sm-12 col-xs-12 main_info">
+						<ul class="info">
+							<li class="infoItem"><strong class="infoLabel">지역 :</strong>
+								<p class="infoText">${output.AREA_GU }</p></li>
+							<li class="infoItem"><strong class="infoLabel">거리 :
+							</strong>
+								<p class="infoText">${output.DISTANCE }</p></li>
+							<li class="infoItem"><strong class="infoLabel">소요시간
+									: </strong>
+								<p class="infoText">${output.LEAD_TIME }</p></li>
+							<li class="infoItem"><strong class="infoLabel">난이도
+									: </strong>
+								<p class="infoText">
+									<c:choose>
+										<c:when test="${output.COURSE_LEVEL =='1'}">초급</c:when>
+										<c:when test="${output.COURSE_LEVEL =='2'}">중급</c:when>
+										<c:when test="${output.COURSE_LEVEL =='3'}">고급</c:when>
+									</c:choose>
+								</p></li>
+							<li class="infoItem"><strong class="infoLabel">세부코스
+									: </strong>
+								<p class="infoText">${output.DETAIL_COURSE }</p></li>
+							<li class="infoItem"><strong class="infoLabel">교통편
+									: </strong>
+								<p class="infoText">${output.TRAFFIC_INFO }</p>
+								<h3 class="infoText">[관련지하철 - ${output.RELATE_SUBWAY }]</h3></li>
+							<li class="infoItem">
+								<h2 style="text-align: center;">- ${output.COURSE_NAME} -</h2>
+								<p class="infoText">${output.CONTENT }</p>
+								<h3 class="infoText">[추가날짜:${output.REG_DATE }]</h3>
+							</li>
+						</ul>
+					</div>
+					<!-- // 포인트 상세 설명 -->
+					<!-- 코스 전체 포인트 테이블 -->
+					<h2>- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
+					<table class="table table-hover table-condensed table-responsive">
+						<thead>
+							<tr>
+								<th class="col-xs-1"><h4>번호</h4></th>
+								<th class="col-xs-3"><h4>코스포인트</h4></th>
+								<th class="col-xs-8"><h4>포인트 설명</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<%-- 조회결과가 없는 경우 --%>
+								<c:when
+									test="${output_path==null || fn:length(output_path)==0 }">
+									<tr>
+										<td align="center">경로가 존재하지 않습니다.</td>
+									</tr>
+								</c:when>
+								<%-- 조회결과가 있는 경우 --%>
+								<c:otherwise>
+									<%-- 조회 결과에 따른 반복 처리 --%>
+									<c:forEach var="item" items="${output_path }"
+										varStatus="status">
+										<%-- 출력을 위해 준비한 변수 --%>
+										<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
+
+										<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
+										<c:set var="CPI_CONTENT" value="${item.CPI_CONTENT }" />
+
+										<%--                               상세페이지로 이동하기 위한 URL --%>
+										<%--                               <c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
+										<%--                                  <c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
+										<%--                               </c:url> --%>
+
+										<tr>
+											<td><h4>${status.index +1 }</h4></td>
+											<td><h4>${CPI_NAME }</h4></td>
+											<td><h4>${CPI_CONTENT }</h4></td>
+										</tr>
+
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+					<!-- //코스 전체 포인트 테이블 -->
+
+
+				</div>
+				<div class="text-center">
+					<button
+						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_search.do'"
+						class="btn btn-default"
+						style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
+						코스목록</button>
+				</div>
 			</div>
-            <div class="header clearfix" style="margin-bottom: 50px;">
-               <h1 style="text-align: center;">&lt; ${output.COURSE_NAME}
-                  &gt;</h1>
-               <button class="btn btn-blue disabled pull-right"
-                  style="cursor: default; padding-top: 0; padding-bottom: 0;">
-                  <h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
-               </button>
-            </div>
-
-
-            <div class="row">
-               <div class="col-md-6 col-sm-12 col-xs-12">
-                  <!-- 지도 영역 -->
-                  <div class="detail_map">
-                     <div class="map" id="map" style="width: 500px; height: 520px;"></div>
-
-                  </div>
-
-                  <!-- 버튼 -->
-                  <div class="btn_container"
-                     style="text-align: center; margin-left: -50px; margin-top: 30px;">
-
-                     <!--                      <button class="btn btn-info" type="submit" -->
-                     <!--                         style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;"> -->
-                     <!--                         <span style="font-size: 20px;"><i -->
-                     <!--                            class="glyphicon glyphicon-arrow-right" -->
-                     <!--                            style="padding-right: 5px;"></i> 위치 안내</span> -->
-                     <!--                      </button> -->
-                     <c:if test="${outputcount eq 1}">
-                        <button class="heart btn btn-bookmark liked" id="heart_button"
-                           type="button" style="width: 140px; font-size: 18px;">
-                           <i class="fa fa-heart" aria-hidden="true" role="button"
-                              style="padding-right: 5px; font-size: 18px;"></i>찜제거
-                        </button>
-                     </c:if>
-                     <c:if test="${outputcount eq 0}">
-                        <button class="heart btn btn-bookmark" id="heart_button"
-                           type="button" style="width: 140px; font-size: 18px;">
-                           <i class="fa fa-heart-o" aria-hidden="true" role="button"
-                              style="padding-right: 5px; font-size: 18px;"></i> 찜하기
-                        </button>
-                     </c:if>
-                  </div>
-               </div>
-
-
-               <!-- 포인트 상세 설명 -->
-               <div class="col-md-6 col-sm-12 col-xs-12 main_info">
-                  <ul class="info">
-                     <li class="infoItem"><strong class="infoLabel">지역 :</strong>
-                        <p class="infoText">${output.AREA_GU }</p></li>
-                     <li class="infoItem"><strong class="infoLabel">거리 :
-                     </strong>
-                        <p class="infoText">${output.DISTANCE }</p></li>
-                     <li class="infoItem"><strong class="infoLabel">소요시간
-                           : </strong>
-                        <p class="infoText">${output.LEAD_TIME }</p></li>
-                     <li class="infoItem"><strong class="infoLabel">난이도
-                           : </strong>
-                        <p class="infoText">
-                           <c:choose>
-                              <c:when test="${output.COURSE_LEVEL =='1'}">초급</c:when>
-                              <c:when test="${output.COURSE_LEVEL =='2'}">중급</c:when>
-                              <c:when test="${output.COURSE_LEVEL =='3'}">고급</c:when>
-                           </c:choose>
-                        </p></li>
-                     <li class="infoItem"><strong class="infoLabel">세부코스
-                           : </strong>
-                        <p class="infoText">${output.DETAIL_COURSE }</p></li>
-                     <li class="infoItem"><strong class="infoLabel">교통편
-                           : </strong>
-                        <p class="infoText">${output.TRAFFIC_INFO }</p>
-                        <h3 class="infoText">[관련지하철 - ${output.RELATE_SUBWAY }]</h3></li>
-                     <li class="infoItem">
-                        <h2 style="text-align: center;">- ${output.COURSE_NAME} -</h2>
-                        <p class="infoText">${output.CONTENT }</p>
-                        <h3 class="infoText">[추가날짜:${output.REG_DATE }]</h3>
-                     </li>
-                  </ul>
-               </div>
-               <!-- // 포인트 상세 설명 -->
-               <!-- 코스 전체 포인트 테이블 -->
-               <h2>- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
-               <table class="table table-hover table-condensed table-responsive">
-                  <thead>
-                     <tr>
-                        <th class="col-xs-1"><h4>번호</h4></th>
-                        <th class="col-xs-3"><h4>코스포인트</h4></th>
-                        <th class="col-xs-8"><h4>포인트 설명</h4></th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <c:choose>
-                        <%-- 조회결과가 없는 경우 --%>
-                        <c:when
-                           test="${output_path==null || fn:length(output_path)==0 }">
-                           <tr>
-                              <td align="center">경로가 존재하지 않습니다.</td>
-                           </tr>
-                        </c:when>
-                        <%-- 조회결과가 있는 경우 --%>
-                        <c:otherwise>
-                           <%-- 조회 결과에 따른 반복 처리 --%>
-                           <c:forEach var="item" items="${output_path }"
-                              varStatus="status">
-                              <%-- 출력을 위해 준비한 변수 --%>
-                              <c:set var="CPI_NAME" value="${item.CPI_NAME }" />
-
-                              <c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
-                              <c:set var="CPI_CONTENT" value="${item.CPI_CONTENT }" />
-
-                              <%--                               상세페이지로 이동하기 위한 URL --%>
-                              <%--                               <c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
-                              <%--                                  <c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
-                              <%--                               </c:url> --%>
-
-                              <tr>
-                                 <td><h4>${status.index +1 }</h4></td>
-                                 <td><h4>${CPI_NAME }</h4></td>
-                                 <td><h4>${CPI_CONTENT }</h4></td>
-                              </tr>
-
-                           </c:forEach>
-                        </c:otherwise>
-                     </c:choose>
-                  </tbody>
-               </table>
-               <!-- //코스 전체 포인트 테이블 -->
-
-
-            </div>
-            <div class="text-center">
-               <button
-                  onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_search.do'"
-                  class="btn btn-default"
-                  style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
-                  코스목록</button>
-            </div>
-         </div>
-      </div>
-   </div>
+		</div>
+	</div>
 
 
 
-   <%@ include file="../inc/Footer.jsp"%>
+	<%@ include file="../inc/Footer.jsp"%>
 
-   <%@ include file="../inc/plugin.jsp"%>
-   <script type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
-   <!-- 카카오 맵 -->
-   <script type="text/javascript">
+	<%@ include file="../inc/plugin.jsp"%>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+	<!-- 카카오 맵 -->
+	<script type="text/javascript">
+	var CPI_NAME = '${output.CPI_NAME}';
+	var geocoder = new kakao.maps.services.Geocoder(),
+    wtmX = '${output.x}',
+    wtmY = '${output.y}';
+
+	var callback = function(result, status) {
+    	if (status === kakao.maps.services.Status.OK) {
+			$('#location').attr('href',"https://map.kakao.com/link/to/"+ CPI_NAME +","+result[0].y+","+result[0].x)
+    	}
+	};
+
+	// WTM 좌표를 WGS84 좌표계의 좌표로 변환한다
+	geocoder.transCoord(wtmX, wtmY, callback, {
+    	input_coord: kakao.maps.services.Coords.WTM,
+    	output_coord: kakao.maps.services.Coords.WGS84
+	});
+
    var hours = '${output.LEAD_TIME}';
    var distence = '${output.DISTANCE}';
    var thema = '${output.COURSE_CATEGORY_NM}';
@@ -613,7 +646,7 @@ ul, li {
       <!-- //geoJson 파일 불러와서 카카오 맵에 표시 -->
    </script>
 
-   <script type="text/javascript">
+	<script type="text/javascript">
    $(function(){
       $(".btn-default").click(function(){
          location.href="${pageContext.request.contextPath}/walkPage/walk_search.jsp";
@@ -622,21 +655,22 @@ ul, li {
 
       });
    </script>
-   <script type="text/javascript"
-      src="${pageContext.request.contextPath }/assets/js/Book-Mark.js">
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/Book-Mark.js">
    </script>
-   <script>
+	<script>
    // 찜 추가
    function addBookMark(){
    var catid = '${output.COURSE_CATEGORY_NM}';
    var svcid = '${output.COURSE_NAME}';
+   var URL = window.location.href;
    
    $.ajax({
       catch:false,
       url: getContextPath()+'/walkPage/BookMark',
       type: 'post',
       dataType : 'json',
-      data : {catid, svcid},
+      data: { catid, svcid, URL},
       timeout : 10000,
       success: function(req){
          console.log("성공 : " + req);
@@ -676,6 +710,8 @@ ul, li {
    function deleteBookMark() {
       var catid = '${output.COURSE_CATEGORY_NM}';
       var svcid = '${output.COURSE_NAME}';
+	  var URL = window.location.href;
+
 //       svcid = String(svcid);
 
       $.ajax({
@@ -683,7 +719,7 @@ ul, li {
          url: getContextPath()+'/walkPage/BookMark',
          type: 'post',
          dataType : 'json',
-         data : {catid, svcid},
+         data: { catid, svcid, URL},
          timeout : 10000,
          success: function(req){
             console.log("삭제 : " + req);

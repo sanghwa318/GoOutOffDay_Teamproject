@@ -23,6 +23,7 @@ import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.BookMark;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.MyCourses;
+import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.model.WalkCourse;
 import study.spring.goodspring.model.WalkLog;
 import study.spring.goodspring.model.WalkSetGoal;
@@ -31,6 +32,7 @@ import study.spring.goodspring.service.MemberService;
 import study.spring.goodspring.service.MyCourseLikeService;
 import study.spring.goodspring.service.MyCourseService;
 import study.spring.goodspring.service.MyPostService;
+import study.spring.goodspring.service.UserTrafficLogService;
 import study.spring.goodspring.service.WalkCourseService;
 import study.spring.goodspring.service.WalkLogService;
 import study.spring.goodspring.service.WalkSetGoalService;
@@ -61,6 +63,9 @@ public class WalkController {
 	MemberService memberService;
 	@Autowired
 	MyCourseLikeService myCourseLikeService;
+	
+	@Autowired
+	UserTrafficLogService userTrafficLogService;
 	
 	/**
 	 * 걷기페이지 메인 메서드
@@ -105,23 +110,26 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_record.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_record", method = RequestMethod.POST)
 	public Map<String, Object> walkRecord(
 			@RequestParam(value = "wat_latitude") String wat_latitude,
 			@RequestParam(value = "wat_longitude") String wat_longitude,
-			@RequestParam(value = "wat_timestamp") long wat_timestamp, 
-			@RequestParam(value = "count") int count) {
+			@RequestParam(value = "count") int count,
+			@RequestParam(value = "URL") String URL) {
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setLat(wat_latitude);
 		input.setLon(wat_longitude);
-		input.setWalking_time(wat_timestamp);
-
+		UserTrafficLog utl =new UserTrafficLog();
+		utl.setLog_category(URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do")));
+		utl.setUser_info_user_no(loginInfo.getUser_no());
 		try {
 			if (count == 0) {
-				walkLogService.startRecord(input);
+				walkLogService.startRecord(input);				
+				//사용자 이벤트 로그 추가
+				userTrafficLogService.walkRecordStart(utl);
 			} else if (count != 0) {
 				walkLogService.addWalkLog(input);
 			}
@@ -131,22 +139,29 @@ public class WalkController {
 		return webHelper.getJsonData();
 	}
 
+
 	/**
 	 * 걷기 기록하기를 중지를 위한 가상의 페이지. 가장 마지막 로그의 event_name을 종료로 바꾼다.
 	 * 
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_recordEnd.do", method = RequestMethod.POST)
-	public Map<String, Object> walkRecordEnd(@RequestParam(value = "course_name") String course_name) {
+	@RequestMapping(value = "/walkPage/walk_recordEnd", method = RequestMethod.POST)
+	public Map<String, Object> walkRecordEnd(@RequestParam(value = "course_name") String course_name,
+			@RequestParam(value = "URL") String URL) {
 		if (course_name != null) {
 			WalkLog input = new WalkLog();
 			Member loginInfo = (Member) webHelper.getSession("login_info");
 
 			input.setUser_info_user_no(loginInfo.getUser_no());
 			input.setCourse_name(course_name);
+			UserTrafficLog utl =new UserTrafficLog();
+			utl.setLog_category(URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do")));
+			utl.setUser_info_user_no(loginInfo.getUser_no());
 			try {
 				walkLogService.endRecord(input);
+				//사용자 이벤트 로그 추가
+				userTrafficLogService.walkRecordEnd(utl);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -161,13 +176,14 @@ public class WalkController {
 		return webHelper.getJsonData();
 	}
 
+
 	/**
 	 * 코스 이름 중복검사
 	 * 
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck", method = RequestMethod.POST)
 	public Map<String, Object> courseNameUniqueCheck(@RequestParam(value = "course_name") String course_name) {
 
 		WalkLog input = new WalkLog();
@@ -355,7 +371,9 @@ public class WalkController {
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
-			@RequestParam(value = "catid", required = false) String catid) throws Exception {
+			@RequestParam(value = "catid", required = false) String catid, HttpServletRequest request,
+			HttpServletResponse response, Object handler,
+			@RequestParam(value = "URL", required = false) String URL) throws Exception {
 
 //		int intset = Integer.parseInt(svcid);
 		BookMark input = new BookMark();
@@ -369,13 +387,27 @@ public class WalkController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setCategory_id(Info.getCOURSE_CATEGORY_NM());
 		input.setService_id(Info.getCOURSE_NAME());
-
+		
+		/** 로그 저장을 위한 구문 **/	
+		// 로그 모델
+		UserTrafficLog loginput = new UserTrafficLog();
+		
 		try {
 			// 추가 삭제 구문
 			if (bookmarkService.BookMarkUniqueCheck(input) == 1) {
 				bookmarkService.deleteBookMark(input);
+				
+				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+				loginput.setUser_info_user_no(loginInfo.getUser_no());
+				loginput.setLog_category(url2);
+				userTrafficLogService.removeBookmark(loginput);
 			} else if (bookmarkService.BookMarkUniqueCheck(input) == 0) {
 				bookmarkService.addBookMark(input);
+				
+				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+				loginput.setUser_info_user_no(loginInfo.getUser_no());
+				loginput.setLog_category(url2);
+				userTrafficLogService.addBookmark(loginput);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
