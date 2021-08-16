@@ -82,7 +82,7 @@ input#title {
 			</div>
 			<h1 class="page-header">크루게시판</h1>
 			<h2>게시글 수정</h2>
-			<form action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit_ok.do" method="post" id="re_ok">
+			<form action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit_ok" method="post" id="re_ok">
 				
 
 				<div class="row">

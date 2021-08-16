@@ -499,7 +499,7 @@ public class CommController {
 	/*
 	 * comm_crew_postEdit_ok
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_postEdit_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_crew_postEdit_ok", method = RequestMethod.POST)
 	public ModelAndView crewPostEdit(Model model, HttpServletResponse response, HttpServletRequest request,
 			// 제목
 			@RequestParam(value = "post_title", defaultValue = "") String title,
@@ -573,7 +573,7 @@ public class CommController {
 	/*
 	 * comm_crew_postWrite_ok 작성 폼에 대한 action 페이지
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_postWrite_ok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_crew_postWrite_ok", method = RequestMethod.POST)
 	public void crewPostWrite(Model model, HttpServletResponse response, HttpServletRequest request,
 			// 제목
 			@RequestParam(value = "post_title", defaultValue = "") String title,
@@ -667,7 +667,7 @@ public ModelAndView crewPostDelete(Model model,
  * @return
  */
 @ResponseBody
-@RequestMapping(value= "/commPage/comm_crew_post/isLike.do", method = RequestMethod.POST)
+@RequestMapping(value= "/commPage/comm_crew_post/isLike", method = RequestMethod.POST)
 public Map<String, Object> isLike(@RequestParam(value="post_no", defaultValue="0")int post_no){
 	Map<String, Object> map = new HashMap<String, Object>();
 	/** 1) 현재 글의 좋아요 수*/
@@ -706,7 +706,7 @@ public Map<String, Object> isLike(@RequestParam(value="post_no", defaultValue="0
  * 
  */
 @ResponseBody
-@RequestMapping(value = "/commPage/comm_crew_post/addLike.do", method = RequestMethod.POST)
+@RequestMapping(value = "/commPage/comm_crew_post/addLike", method = RequestMethod.POST)
 public Map<String, Object> addLike(Model model, @RequestParam(value = "post_no") int post_no) {
 	
 	if(webHelper.getSession("login_info")==null) {
@@ -730,7 +730,7 @@ public Map<String, Object> addLike(Model model, @RequestParam(value = "post_no")
  * 
  */
 @ResponseBody
-@RequestMapping(value = "/commPage/comm_crew_post/deleteLike.do", method = RequestMethod.POST)
+@RequestMapping(value = "/commPage/comm_crew_post/deleteLike", method = RequestMethod.POST)
 public Map<String, Object> deleteLike(Model model, @RequestParam(value = "post_no") int post_no) {
 	
 	if(webHelper.getSession("login_info")==null) {

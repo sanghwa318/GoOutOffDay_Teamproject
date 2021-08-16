@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="col-md-3 col-md-offset-1 profileimage"
 					style="width: 230px">
-					<form action="${pageContext.request.contextPath }/myPage/myPage_index_imageOk.do" method="post" encType="multipart/form-data" >
+					<form action="${pageContext.request.contextPath }/myPage/myPage_index_image_ok.do" method="post" encType="multipart/form-data" >
 						<div class="form-group">
 							<img id="img__wrap"
 								onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"

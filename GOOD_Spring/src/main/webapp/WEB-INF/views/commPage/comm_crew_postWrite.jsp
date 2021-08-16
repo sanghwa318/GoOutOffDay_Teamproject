@@ -42,7 +42,7 @@
 
 
 			<form role="form" method="POST" id='post_form'
-				action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite_ok.do">
+				action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite_ok">
 				<input type="hidden" name="post_crew" value="${output.crew_name}" />
 				<input type="hidden" name="crew_no" value="${output.crew_no}" />
 				<div class="row">

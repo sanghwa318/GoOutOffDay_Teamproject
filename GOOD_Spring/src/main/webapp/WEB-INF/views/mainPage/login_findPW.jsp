@@ -59,7 +59,7 @@
 
 		<div class="container">
 			<form class="form-horizontal" role="form"
-				action="${pageContext.request.contextPath}/mainPage/login_findPW_ok.do"
+				action="${pageContext.request.contextPath}/mainPage/login_findPW_ok"
 				method="post" id="search_pw_form">
 				<fieldset>
 					<h1 class="page-header">PW 찾기</h1>

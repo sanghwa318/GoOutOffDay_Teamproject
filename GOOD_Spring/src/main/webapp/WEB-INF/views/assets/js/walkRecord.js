@@ -76,7 +76,7 @@ function startRecord() {
 				url: getContextPath() + '/walkPage/walk_record',
 				type: 'post',
 				dataType: 'json',
-				data: { wat_latitude, wat_longitude, wat_timestamp, count },
+				data: { wat_latitude, wat_longitude, count },
 				success: function(data) { }
 			});
 

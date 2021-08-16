@@ -63,7 +63,7 @@
 
 		<div class="container">
 			<form class="form-horizontal" role="form"
-				action="${pageContext.request.contextPath}/mainPage/login_findID_ok.do"
+				action="${pageContext.request.contextPath}/mainPage/login_findID_ok"
 				method="post" id="search_id_form">
 				<fieldset>
 					<h1 class="page-header">ID 찾기</h1>

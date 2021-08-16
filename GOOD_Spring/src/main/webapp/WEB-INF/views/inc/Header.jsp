@@ -396,7 +396,7 @@
 		$('.logout-btn').click(function(e) {
 			$.ajax({
 				//결과를 읽어올 url
-				url : getContextPath() + '/mainPage/logout.do',
+				url : getContextPath() + '/mainPage/logout',
 				method : 'get',
 				data : {},
 				dataType : 'html',
