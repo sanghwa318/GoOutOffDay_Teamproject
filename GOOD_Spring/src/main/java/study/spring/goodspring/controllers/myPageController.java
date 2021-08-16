@@ -58,6 +58,7 @@ public class myPageController {
 	 * @param photo   이미지 파일 정보
 	 * @return ModelAndView
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/myPage/myPage_index_image_ok.do", method = RequestMethod.POST)
 	public ModelAndView myPageIndexImageOk(HttpServletRequest request,
 			@RequestParam(value = "user_photo", required = false) MultipartFile photo) {
@@ -185,7 +186,6 @@ public class myPageController {
 		} catch (IOException e) {
 		}
 	}
-
 	/** 회원정보수정 */
 	@RequestMapping(value = "/myPage/myPage_accountEdit_ok", method = RequestMethod.POST)
 	public Map<String, Object> editMember(@RequestParam(value = "user_id", required = false) String userId,
@@ -202,52 +202,40 @@ public class myPageController {
 		/** 1) 유효성 검증 */
 		// POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
 		// REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다.
-
-		if (!regexHelper.isValue(userNick)) {
-			return webHelper.getJsonWarning("닉네임을 입력하세요.");
-		}
-		if (!regexHelper.isEngNum(userNick)) {
-			return webHelper.getJsonWarning("닉네임은 영어,숫자만 입력 가능합니다.");
-		}
-		if (userNick.length() < 4 || userNick.length() > 30) {
-			return webHelper.getJsonWarning("닉네임은 4~30글자로 입력 가능합니다.");
+		if(userNick!=null) {
+			if (!regexHelper.isEngNum(userNick)) {
+				return webHelper.getJsonWarning("닉네임은 영어,숫자만 입력 가능합니다.");
+			}
+			if (userNick.length() < 4 || userNick.length() > 30) {
+				return webHelper.getJsonWarning("닉네임은 4~30글자로 입력 가능합니다.");
+			}
 		}
 
-		if (!regexHelper.isValue(userPw)) {
-			return webHelper.getJsonWarning("비밀번호를 입력하세요.");
-		}
-		if (userPw.length() < 4 || userPw.length() > 30) {
-			return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다.");
-		}
-		if (!userPw.equals(userPwRe)) {
-			return webHelper.getJsonWarning("비밀번호는 확인이 잘못되었습니다.");
+		if (regexHelper.isValue(userPw)) {
+			if (userPw.length() < 4 || userPw.length() > 30) {
+				return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다.");
+			}
+			if (!userPw.equals(userPwRe)) {
+				return webHelper.getJsonWarning("비밀번호 확인이 잘못되었습니다.");
+			}
 		}
 
-		if (!regexHelper.isValue(userName)) {
-			return webHelper.getJsonWarning("이름 입력하세요.");
-		}
-		if (!regexHelper.isKor(userName)) {
-			return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다.");
-		}
-		if (userName.length() > 30) {
-			return webHelper.getJsonWarning("이름은 최대 30글자로 입력 가능합니다.");
+		if (regexHelper.isValue(userName)) {
+			if (!regexHelper.isKor(userName)) {
+				return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다.");
+			}
+			if (userName.length() > 30) {
+				return webHelper.getJsonWarning("이름은 최대 30글자로 입력 가능합니다.");
+			}
 		}
 
 		if (!regexHelper.isEmail(email)) {
-			return webHelper.getJsonWarning("이메일이 잘못되었습니다.");
+			return webHelper.getJsonWarning("이메일 형식이 잘못되었습니다.");
 		}
 		if (!regexHelper.isCellPhone(tel) && !regexHelper.isTel(tel)) {
 			return webHelper.getJsonWarning("연락처가 잘못되었습니다.");
 		}
-		if (!regexHelper.isValue(postcode)) {
-			return webHelper.getJsonWarning("우편번호를 입력하세요.");
-		}
-		if (!regexHelper.isValue(addr1)) {
-			return webHelper.getJsonWarning("도로명주소를 입력하세요.");
-		}
-		if (!regexHelper.isValue(addr2)) {
-			return webHelper.getJsonWarning("나머지주소를 입력하세요.");
-		}
+
 
 		/** 2) 데이터 저장 */
 		Member input = new Member();

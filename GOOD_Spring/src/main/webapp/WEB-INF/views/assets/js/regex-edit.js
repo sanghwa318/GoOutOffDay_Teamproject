@@ -124,7 +124,7 @@ $(function(){
 		
 		$('#edit_form').ajaxForm({
         // submit 전에 호출된다.
-        beforeSubmit: function(arr, form, options) {
+        beforeSubmit: function(arr, form, option) {
             // validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
             // 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
             return $(form).valid();
@@ -133,8 +133,16 @@ $(function(){
             swal('알림', '정보수정이 완료되었습니다.', 'success').then(function(result) {
                 window.location = getContextPath() + '/myPage/myPage_index.do';
             });
-        }
-       
+        },error: function(data, status, error){
+			var error_msg =data.responseJSON.rt
+				swal({
+					title : "에러",
+					text :error_msg,
+					type : "error"
+					}).then(function(result) {
+				}); // <-- 메시지 표시
+			return false; // <-- 실행 중단
+		}
     }); // end ajaxForm
 
 
@@ -167,8 +175,4 @@ $(function(){
             swal('확인', '사용가능한 이메일 입니다.', 'success');
         });
     });
-});
-
-
-
-
+})

@@ -142,7 +142,7 @@ public class AppInterceptor implements HandlerInterceptor {
 		/** UserTrafficLog 이벤트 추가 끝(page_in || keyword)  */
 		
 		// 획득한 정보를 로그로 표시한다.
-		log.debug(String.format("[%s] %s", methodName, url));
+		log.debug(String.format("[%s] %s", methodName, url_tmp));
 
 		/** 2) 클라이언트가 전달한 모든 파라미터 확인하기 */
 		Map<String, String[]> params = request.getParameterMap();
@@ -187,7 +187,6 @@ public class AppInterceptor implements HandlerInterceptor {
 		log.debug(browserStr);
 		log.debug(osStr);
 		log.debug(deviceStr);
-		log.debug("url>>>>>>>>>>>>>>>>>>>>>>"+request.getRequestURL());
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 
 	}
