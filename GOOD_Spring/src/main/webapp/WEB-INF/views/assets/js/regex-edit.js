@@ -139,8 +139,7 @@ $(function(){
 					title : "에러",
 					text :error_msg,
 					type : "error"
-					}).then(function(result) {
-				}); // <-- 메시지 표시
+					})
 			return false; // <-- 실행 중단
 		}
     }); // end ajaxForm
