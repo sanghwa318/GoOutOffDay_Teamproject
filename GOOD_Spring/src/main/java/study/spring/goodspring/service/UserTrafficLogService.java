@@ -14,7 +14,9 @@ public interface UserTrafficLogService {
 	
 	public void removeBookmark(UserTrafficLog input) throws Exception;
 	
-	public void walkRecord(UserTrafficLog input) throws Exception;
+	public void walkRecordStart(UserTrafficLog input) throws Exception;
+
+	public void walkRecordEnd(UserTrafficLog input) throws Exception;
 	
 	public void casExLink(UserTrafficLog input) throws Exception;
 	

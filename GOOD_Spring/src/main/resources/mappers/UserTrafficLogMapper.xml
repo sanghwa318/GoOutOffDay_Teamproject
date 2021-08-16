@@ -49,11 +49,18 @@
 	VALUES (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
 	</insert>
 	
-	<insert id="walkRecord" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	<insert id="walkRecordStart" parameterType="study.spring.goodspring.model.UserTrafficLog" 
 	useGeneratedKeys="true" keyProperty="log_no">
 	INSERT INTO user_traffic_log 
 	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'walkRecord', #{user_info_user_no})
+	VALUES (now(), #{log_category}, 'walkRecordStart', #{user_info_user_no})
+	</insert>
+	
+	<insert id="walkRecordEnd" parameterType="study.spring.goodspring.model.UserTrafficLog" 
+	useGeneratedKeys="true" keyProperty="log_no">
+	INSERT INTO user_traffic_log 
+	(log_datetime, log_category, log_content, user_info_user_no) 
+	VALUES (now(), #{log_category}, 'walkRecordEnd', #{user_info_user_no})
 	</insert>
 	
 	<insert id="casExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 

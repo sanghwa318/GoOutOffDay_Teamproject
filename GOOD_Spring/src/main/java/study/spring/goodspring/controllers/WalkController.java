@@ -114,17 +114,22 @@ public class WalkController {
 	public Map<String, Object> walkRecord(
 			@RequestParam(value = "wat_latitude") String wat_latitude,
 			@RequestParam(value = "wat_longitude") String wat_longitude,
-			@RequestParam(value = "count") int count) {
+			@RequestParam(value = "count") int count,
+			@RequestParam(value = "URL") String URL) {
 		WalkLog input = new WalkLog();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
 
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		input.setLat(wat_latitude);
 		input.setLon(wat_longitude);
-
+		UserTrafficLog utl =new UserTrafficLog();
+		utl.setLog_category(URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do")));
+		utl.setUser_info_user_no(loginInfo.getUser_no());
 		try {
 			if (count == 0) {
-				walkLogService.startRecord(input);
+				walkLogService.startRecord(input);				
+				//사용자 이벤트 로그 추가
+				userTrafficLogService.walkRecordStart(utl);
 			} else if (count != 0) {
 				walkLogService.addWalkLog(input);
 			}
@@ -134,6 +139,7 @@ public class WalkController {
 		return webHelper.getJsonData();
 	}
 
+
 	/**
 	 * 걷기 기록하기를 중지를 위한 가상의 페이지. 가장 마지막 로그의 event_name을 종료로 바꾼다.
 	 * 
@@ -141,15 +147,21 @@ public class WalkController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/walkPage/walk_recordEnd", method = RequestMethod.POST)
-	public Map<String, Object> walkRecordEnd(@RequestParam(value = "course_name") String course_name) {
+	public Map<String, Object> walkRecordEnd(@RequestParam(value = "course_name") String course_name,
+			@RequestParam(value = "URL") String URL) {
 		if (course_name != null) {
 			WalkLog input = new WalkLog();
 			Member loginInfo = (Member) webHelper.getSession("login_info");
 
 			input.setUser_info_user_no(loginInfo.getUser_no());
 			input.setCourse_name(course_name);
+			UserTrafficLog utl =new UserTrafficLog();
+			utl.setLog_category(URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do")));
+			utl.setUser_info_user_no(loginInfo.getUser_no());
 			try {
 				walkLogService.endRecord(input);
+				//사용자 이벤트 로그 추가
+				userTrafficLogService.walkRecordEnd(utl);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -163,6 +175,7 @@ public class WalkController {
 		}
 		return webHelper.getJsonData();
 	}
+
 
 	/**
 	 * 코스 이름 중복검사

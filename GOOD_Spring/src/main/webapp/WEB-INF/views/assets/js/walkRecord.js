@@ -32,7 +32,7 @@ function deg2rad(deg) {
 function rad2deg(rad) {
 	return (rad * 180 / Math.PI);
 }
-
+var URL = window.location.href;
 
 
 
@@ -76,7 +76,7 @@ function startRecord() {
 				url: getContextPath() + '/walkPage/walk_record',
 				type: 'post',
 				dataType: 'json',
-				data: { wat_latitude, wat_longitude, count },
+				data: { wat_latitude, wat_longitude, count, URL},
 				success: function(data) { }
 			});
 
@@ -124,7 +124,7 @@ function endRecord() {
 							url: getContextPath() + '/walkPage/walk_recordEnd',
 							type: 'post',
 							dataType: 'json',
-							data: { course_name },
+							data: { course_name, URL },
 							success: function(data) {
 								noRecording()
 							}
