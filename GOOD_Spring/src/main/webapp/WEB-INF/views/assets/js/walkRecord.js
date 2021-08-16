@@ -73,7 +73,7 @@ function startRecord() {
 
 			//  ajax로 로딩
 			$.ajax({
-				url: getContextPath() + '/walkPage/walk_record.do',
+				url: getContextPath() + '/walkPage/walk_record',
 				type: 'post',
 				dataType: 'json',
 				data: { wat_latitude, wat_longitude, wat_timestamp, count },
@@ -109,7 +109,7 @@ function endRecord() {
 		} else {
 
 			$.ajax({
-				url: getContextPath() + '/walkPage/walk_courseNameUniqueCheck.do',
+				url: getContextPath() + '/walkPage/walk_courseNameUniqueCheck',
 				type: 'post',
 				dataType: 'json',
 				data: { course_name },
@@ -121,7 +121,7 @@ function endRecord() {
 						clearInterval(interval);
 						noRecording();
 						$.ajax({
-							url: getContextPath() + '/walkPage/walk_recordEnd.do',
+							url: getContextPath() + '/walkPage/walk_recordEnd',
 							type: 'post',
 							dataType: 'json',
 							data: { course_name },

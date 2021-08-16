@@ -105,7 +105,7 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_record.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_record", method = RequestMethod.POST)
 	public Map<String, Object> walkRecord(
 			@RequestParam(value = "wat_latitude") String wat_latitude,
 			@RequestParam(value = "wat_longitude") String wat_longitude,
@@ -137,7 +137,7 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_recordEnd.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_recordEnd", method = RequestMethod.POST)
 	public Map<String, Object> walkRecordEnd(@RequestParam(value = "course_name") String course_name) {
 		if (course_name != null) {
 			WalkLog input = new WalkLog();
@@ -167,7 +167,7 @@ public class WalkController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/walkPage/walk_courseNameUniqueCheck", method = RequestMethod.POST)
 	public Map<String, Object> courseNameUniqueCheck(@RequestParam(value = "course_name") String course_name) {
 
 		WalkLog input = new WalkLog();

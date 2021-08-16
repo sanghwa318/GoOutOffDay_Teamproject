@@ -488,7 +488,7 @@ p {
 	$(window).load(function() {
 						$.ajax({
 									url : getContextPath()
-											+ "/bicyclePage/bicycle_index_map.do",
+											+ "/bicyclePage/bicycle_index_map",
 									type : "GET",
 									data : "",
 									dataType : "json",

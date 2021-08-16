@@ -39,7 +39,6 @@ public class AppInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// log.debug("AppInterceptor.preHandle 실행됨");
-
 		// WebHelper의 초기화는 모든 컨트롤러마다 개별적으로 호출되어야 한다.
 		// Interceptor에서 이 작업을 수행하면 모든 메서드마다 수행하는 동일 작업을 일괄처리할 수 있다.
 		webHelper.init(request, response);
@@ -188,7 +187,7 @@ public class AppInterceptor implements HandlerInterceptor {
 		log.debug(browserStr);
 		log.debug(osStr);
 		log.debug(deviceStr);
-
+		log.debug("url>>>>>>>>>>>>>>>>>>>>>>"+request.getRequestURL());
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 
 	}

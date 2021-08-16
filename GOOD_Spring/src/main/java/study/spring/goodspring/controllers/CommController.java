@@ -215,7 +215,7 @@ public class CommController {
 	/*
 	 * comm_crew_info_ok.do
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_info_ok.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/commPage/comm_crew_info_ok", method = RequestMethod.GET)
 	public ModelAndView crewinfoOk(Model model,
 			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
 			@RequestParam(value = "crew_name", defaultValue = "") String crew_name)
