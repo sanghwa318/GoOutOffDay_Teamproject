@@ -68,6 +68,10 @@ public class BookMark {
 	private String COURSE_LEVEL; // 코스레벨
 	private String COURSE_NAME; // 코스명
 	private String SOUTH_NORTH_DIV_NM; // 지역구
+	private String CPI_NAME; // 포인트명칭
+	private String X; // X좌표
+	private String Y; // Y좌표
+
 	private int CPI_IDX; // 포인트순번 (기본키)
 
 	/** [페이지 네이션] (static) */

@@ -228,11 +228,6 @@ carousel-title2 {
 					src="${pageContext.request.contextPath}/assets/icon_img/명예의 전당_아이콘.png"
 					style="width: 44px; height: 44px; position: relative; bottom: 5px;"></img></strong>
 			</h2>
-			<div class="pull-right">
-				<a
-					href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.do"
-					style="text-decoration: none;">더 보기 &gt;</a>
-			</div>
 		</div>
 
 		<!-- 명예의전당 캐러셀 영역 -->

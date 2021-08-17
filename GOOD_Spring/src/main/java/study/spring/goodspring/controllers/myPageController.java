@@ -326,15 +326,16 @@ public class myPageController {
 		// [페이지네이션] 변수 추가 (종료)
 
 		Member loginInfo = (Member) webHelper.getSession("login_info", new Member());
-		BookMark input_cas = new BookMark();
+		BookMark input = new BookMark();
 
-		input_cas.setUser_info_user_no(loginInfo.getUser_no());
+		input.setUser_info_user_no(loginInfo.getUser_no());
 
 		List<BookMark> output = null;
+		List<BookMark> outputMAP = null;
 
 		try {
 			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-			totalCount = bookMarkService.getBookMarkCount(input_cas);
+			totalCount = bookMarkService.getBookMarkCount(input);
 			// [페이지네이션] 페이지 번호 계산
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
 
@@ -342,7 +343,8 @@ public class myPageController {
 			BookMark.setOffset(pageData.getOffset());
 			BookMark.setListCount(pageData.getListCount());
 
-			output = bookMarkService.myBookMarkAllList(input_cas);
+			output = bookMarkService.myBookMarkAllList(input);
+			outputMAP = bookMarkService.myBookMarkAllListMap(input);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return webHelper.redirect(null, e.getLocalizedMessage());
@@ -351,6 +353,7 @@ public class myPageController {
 		// [페이지네이션]
 		model.addAttribute("pageData", pageData);
 		model.addAttribute("output", output);
+		model.addAttribute("outputMAP", outputMAP);
 
 		return new ModelAndView("myPage/myPage_bookmark");
 	}

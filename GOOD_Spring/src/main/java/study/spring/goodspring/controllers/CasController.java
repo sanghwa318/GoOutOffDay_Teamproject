@@ -44,7 +44,7 @@ public class CasController {
 
 	@Autowired
 	BookMarkService bookMarkService;
-	
+
 	@Autowired
 	UserTrafficLogService userTrafficLogService;
 
@@ -394,8 +394,8 @@ public class CasController {
 	@RequestMapping(value = "/casPage/BookMark", method = RequestMethod.POST)
 	public Map<String, Object> eddBookMark(@RequestParam(value = "svcid", required = false) String svcid,
 			@RequestParam(value = "catid", required = false) String catid, HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			@RequestParam(value = "URL", required = false) String URL) throws Exception {
+			HttpServletResponse response, Object handler, @RequestParam(value = "URL", required = false) String URL)
+			throws Exception {
 
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
@@ -408,27 +408,55 @@ public class CasController {
 		input.setCategory_id(Info.getDIV_COL());
 		input.setService_id(Info.getSVCID());
 
-		/** 로그 저장을 위한 구문 **/	
+		/** 로그 저장을 위한 구문 **/
 		// 로그 모델
 		UserTrafficLog loginput = new UserTrafficLog();
-		
+
 		try {
 
 			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {
 				bookMarkService.deleteBookMark(input);
-				
+
 				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
 				loginput.setUser_info_user_no(loginInfo.getUser_no());
 				loginput.setLog_category(url2);
 				userTrafficLogService.removeBookmark(loginput);
 			} else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
 				bookMarkService.addBookMark(input);
-				
+
 				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
 				loginput.setUser_info_user_no(loginInfo.getUser_no());
 				loginput.setLog_category(url2);
 				userTrafficLogService.addBookmark(loginput);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return WebHelper.getJsonData();
+	}
+
+	/**
+	 * 문화체육 예약페이지 외부링크로 이동 로그
+	 * 
+	 * @throws Exception
+	 **/
+	@ResponseBody
+	@RequestMapping(value = "/casPage/casExLink", method = RequestMethod.POST)
+	public Map<String, Object> casExLink(HttpServletRequest request, HttpServletResponse response, Object handler,
+			@RequestParam(value = "URL", required = false) String URL) throws Exception {
+
+		Member loginInfo = (Member) WebHelper.getSession("login_info");
+		/** 로그 저장을 위한 구문 **/
+		// 로그 모델
+		UserTrafficLog loginput = new UserTrafficLog();
+
+		try {
+
+			String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+			loginput.setUser_info_user_no(loginInfo.getUser_no());
+			loginput.setLog_category(url2);
+			userTrafficLogService.casExLink(loginput);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

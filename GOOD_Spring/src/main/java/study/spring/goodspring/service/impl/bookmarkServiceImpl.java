@@ -129,4 +129,25 @@ public class bookmarkServiceImpl implements BookMarkService {
 		}
 		return result;
 	}
+	
+	/** 나의 찜목록속 지도정보를 불러오기 **/
+	@Override
+	public List<BookMark> myBookMarkAllListMap(BookMark input) throws Exception {
+		List<BookMark> result = null;
+
+		try {
+			result = sqlSession.selectList("BookMarkMapper.MyListBookMarkMap", input);
+
+			if (result == null) {
+				throw new NullPointerException("result=null");
+			}
+		} catch (NullPointerException e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("저장된 데이터가 없습니다.");
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
 }

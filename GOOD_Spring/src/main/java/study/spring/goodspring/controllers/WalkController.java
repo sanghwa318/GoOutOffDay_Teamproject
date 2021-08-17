@@ -416,6 +416,35 @@ public class WalkController {
 		return webHelper.getJsonData();
 
 	}
+	
+	
+	/**
+	 * 걷기 길안내 외부링크로 이동 로그
+	 * 
+	 * @throws Exception
+	 **/
+	@ResponseBody
+	@RequestMapping(value = "/walkPage/walkExLink", method = RequestMethod.POST)
+	public Map<String, Object> walkExLink(HttpServletRequest request, HttpServletResponse response, Object handler,
+			@RequestParam(value = "URL", required = false) String URL) throws Exception {
+
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		/** 로그 저장을 위한 구문 **/
+		// 로그 모델
+		UserTrafficLog loginput = new UserTrafficLog();
+
+		try {
+
+			String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+			loginput.setUser_info_user_no(loginInfo.getUser_no());
+			loginput.setLog_category(url2);
+			userTrafficLogService.walkExLink(loginput);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return webHelper.getJsonData();
+	}
 
 	/**
 	 * 걷기 Log 페이지

@@ -89,6 +89,40 @@
 		</where>
 	</select>
 
+	<!-- 나의 찜목록속 지도정보를 불러오기위한 조회문 -->
+	<select id="MyListBookMarkMap"
+		parameterType="study.spring.goodspring.model.BookMark"
+		resultMap="BookMarkMap">
+		WITH unique_course AS (
+		SELECT ANY_VALUE(CPI_IDX) as CPI_IDX,
+		COURSE_NAME, COURSE_CATEGORY_NM, SOUTH_NORTH_DIV_NM, AREA_GU,
+		LEAD_TIME, DISTANCE,
+		CASE COURSE_LEVEL
+		WHEN "1" THEN "초급"
+		WHEN "2" THEN
+		"중급"
+		WHEN
+		"3" THEN "고급"
+		END AS COURSE_LEVEL, x, y, CPI_NAME
+		FROM
+		seoulgil_walk_course
+		GROUP BY
+		COURSE_NAME, COURSE_CATEGORY_NM,
+		SOUTH_NORTH_DIV_NM, AREA_GU,
+		LEAD_TIME, DISTANCE, COURSE_LEVEL, x, y,
+		CPI_NAME)
+
+		SELECT *
+		FROM bookmark b
+		INNER JOIN
+		unique_course u ON
+		b.service_id = u.COURSE_NAME
+		WHERE
+		user_info_user_no =
+		#{user_info_user_no}
+		ORDER BY bookmark_no DESC,
+		CPI_IDX ASC;
+	</select>
 
 	<!-- 찜목록 전체 데이터 수 조회하기 -->
 	<select id="BookMark_selectCountAll"

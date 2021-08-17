@@ -185,7 +185,7 @@ ul, li {
 						</div>
 						<!-- 버튼 -->
 						<div class="btn_container" style="text-align: center;">
-							<button class="btn btn-blue" type="button"
+							<button class="btn btn-blue" id="casExlink" type="button"
 								onclick="location.href='${output.SVCURL}'" style="width: 140px;">
 								<span style="font-size: 18px;">예약 사이트 바로가기</span>
 							</button>
@@ -358,6 +358,20 @@ ul, li {
 	}
 	</script>
 	<!-- //하트 -->
+	<script>
+		$('#casExlink').on("click", function () {
+			var URL = window.location.href;
+			$.ajax({
+				cache: false,
+				url: getContextPath() + '/casPage/casExLink',
+				type: 'POST',
+				dataType: 'json',
+				data: {URL},
+				timeout: 10000,
+				success: function() {}
+				})
+		})
+	</script>
 	<!-- // js -->
 
 </body>

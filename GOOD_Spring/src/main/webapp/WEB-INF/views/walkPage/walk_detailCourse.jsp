@@ -322,6 +322,21 @@ ul, li {
 	<%@ include file="../inc/plugin.jsp"%>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+	<!-- 길안내 바로가기 클릭이벤트 로그 -->
+	<script>
+		$('#location').on("click", function () {
+			var URL = window.location.href;
+			$.ajax({
+				cache: false,
+				url: getContextPath() + '/walkPage/walkExLink',
+				type: 'POST',
+				dataType: 'json',
+				data: {URL},
+				timeout: 10000,
+				success: function() {}
+				})
+		})
+	</script>
 	<!-- 카카오 맵 -->
 	<script type="text/javascript">
 	var CPI_NAME = '${output.CPI_NAME}';

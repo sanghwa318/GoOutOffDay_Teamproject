@@ -62,6 +62,17 @@ html, body {
 	border: 1px solid #ddd;
 	border-radius: 4px 0 0 4px;
 }
+.bookItem .thumbnail .map {
+	max-height: 100%;
+	min-height: 100%;
+	height: 180px;
+	width: 180px;
+	vertical-align: middle;
+	float: left;
+	margin-bottom: 0;
+	border: 1px solid #ddd;
+	border-radius: 4px 0 0 4px;
+}
 
 .thumbnail {
 	border: 0;
@@ -139,15 +150,14 @@ html, body {
 						<c:param name="SVCID" value="${item.SVCID }" />
 					</c:url>
 					<c:url value="/walkPage/walk_detailCourse.do" var="WalkDetailUrl">
-						<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+						<c:param name="CPI_IDX" value="${item.COURSE_NAME }" />
 					</c:url>
 					<div class="col-xs-12 col-md-12 col-lg-6 bookItem">
 						<div class="thumbnail item">
 							<c:choose>
 								<c:when test="${fn:contains(item.category_id, '길') }">
-									<img alt="썸네일 이미지" src="${item.IMGURL}"
-										onclick="location.href='${WalkDetailUrl}'"
-										style="cursor: pointer;">
+									<div class="map" id="map"
+										onclick="location.href='${WalkDetailUrl}'" ></div>
 									<div class="caption clearfix">
 										<p>
 											카테고리 : ${item.category_id}
