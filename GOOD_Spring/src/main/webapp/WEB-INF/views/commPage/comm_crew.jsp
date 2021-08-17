@@ -79,23 +79,23 @@
 
 			<!-- 크루 본문영역 상단 -->
 
-			<form class="form-horizontal" name="crew_header" id="crew_header"
+			<form class="form-horizontal" name="crew_header" id="crew_header" 
 				role="form" method="get"
 				action="${pageContext.request.contextPath}/commPage/comm_crew.do">
 				<div class="form-group">
 
-					<div class="col-md-2 col-sm-3 col-xs-3 col-md-offset-1" role="search">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2 col-md-offset-1 col-xs-offset-1 " role="search"  style="width:20% !important;">
 						<div class="form-group input-group">
-							<input type="text" class="form-control" placeholder="크루를 검색해보세요."
-								id="keyword" name="keyword" value=""><span
+							<input type="text" class="form-control" placeholder="크루를 검색해보세요." style="white-space:nowrap; text-overflow: ellipsis; overflow: hidden;"
+								id="keyword" name="keyword" value=""><span 
 								class="input-group-btn">
-								<button class="btn btn-blue" type="submit">
-									<i class="glyphicon glyphicon-search"></i>
+								<button class="btn btn-blue" type="submit" style="margin-left:-5px;">
+									<i class="glyphicon glyphicon-search" ></i>
 								</button>
 							</span>
 						</div>
 					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2"  >
+					<div class="col-lg-2 col-xl-3 col-md-2 col-sm-3 col-xs-2 "  style="width:15% !important; margin-left:5%;">
 						<select class="form-control" id="crew_area" name="crew_area">
 							<option value="">지역</option>
 							<option value="강남구">강남구</option>
@@ -125,14 +125,14 @@
 							<option value="중랑구">중랑구</option>
 						</select>
 					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2 ">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 "style="width:15% !important;">
 						<select class="form-control" id="crew_condition" name="order">
 							<option value="">조건</option>
 							<option value=1>최신순</option>
 							<option value=2>오래된순</option>
 						</select>
 					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"style="width:15% !important;">
 						<select class="form-control" id="crew_category" name="crew_category">
 							<option value="">종류</option>
 							<option value="걷기/체육">걷기/체육</option>
@@ -140,7 +140,7 @@
 							<option value="문화/창작/예술">문화/창작/예술</option>
 						</select>
 					</div>
-					<div class="col-md-2 col-sm-3 col-xs-3 pull-right btn_se" >
+					<div class="col-md-2 col-sm-2 col-xs-2 pull-right btn_se" style="margin-left:-5%">
 						<button type='reset' class="btn btn-primary" id="btn"
 							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
 						<button type="reset" class="btn btn-primary" id="btn"

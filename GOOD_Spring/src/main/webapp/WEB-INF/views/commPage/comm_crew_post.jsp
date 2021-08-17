@@ -89,7 +89,7 @@
 		<!-- //공통 헤더 -->
 		<!-- 컨테이너 -->
 
-		<div class="container crew_container">
+		<div class="container crew_container ">
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
@@ -118,32 +118,27 @@
 			<!-- //사이드 영역 -->
 
 
-<div class="article header">
-			<div class="row row_a col-xl-8 col-sm-9 col-xs-10" >
+<div class="article header col-xl-8 col-sm-8 col-xs-8 " style="margin-left:2%;" >
 			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
-					<img style="border-radius: 25px; margin-right:15px;" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="120px" height="120px">
+					<img style="border-radius: 25px; margin-right:0.5%;" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="50px" height="50px">
 				</div>
 				
-				<div class="writer_info" >
-					<h4>${postout3.getUser_name()}</h4>
-					<p class="pull-left" style="color:#979797;" >작성일자: ${postout.getPost_createdate()}</p>
-					<p class="pull-left " style="margin-left: 15px; color:#979797;">조회수 :
+					<h4 style="margin-left:12%;">${postout3.getUser_name()}</h4>
+					<p class="pull-left" style="color:#979797; font-size:12px; margin-left:1%;" >작성일자: ${postout.getPost_createdate()}</p>
+					<p class="pull-left " style="margin-left: 15px; color:#979797; font-size:12px;">조회수 :
 						${postout.post_hits}</p>
 						
-				<div class="row pull-right" style="margin-right: 25px">
+				<div class="row pull-right " style="margin-left:0.5%; font-size:13px;">
 						<span class="" id="likeCount" style="margin-top:1%"></span>
-						<span class="heart " style="margin-top:1px; margin-left: -5px; margin-right:5px;  pointer-events: none;"></span>
+						<span class="heart pull-left" style="margin-top:1px; margin-left: -5px; margin-right:5px;  pointer-events: none;"></span>
 						<span class="comment"style="margin-top:1px; margin-left: 5px; padding-right:0px">댓글<i class="fa fa-comment-o"></i></span>
 						 <span class="" id="CommentCount" ></span>
 				</div>
 				
 						<br>
-						<br>
 						<hr>
 						<p style="margin-top:100px">${postout.getPost_content()}</p>
-				</div>
-				</div>
 			</div>
 			
 			
