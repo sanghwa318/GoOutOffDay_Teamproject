@@ -1,6 +1,5 @@
 package study.spring.goodspring.controllers;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 

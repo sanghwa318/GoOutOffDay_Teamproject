@@ -344,7 +344,7 @@ html, body {
 	    var length = $('#item-box').data('length');
 
 		//지도에서 사용될 변수들의 초기 선언.
-	    var map = [];
+	    
 	    var container = [];
 
 
@@ -362,14 +362,14 @@ html, body {
 	        if(courseName != null && courseName != 'undefined') {
 	        	courseName=courseName.replace(" ","")
 	        	 // 카카오 지도
-		        container[j] = document.getElementById('map'+ j); //지도를 담을 영역의 DOM 레퍼런스
+		        container = document.getElementById('map'+ j); //지도를 담을 영역의 DOM 레퍼런스
 		        var options = { 
 		           //지도를 생성할 때 필요한 기본 옵션
 		           center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표 
-		           level : 6,  // 지도의 확대 레벨 
-		           mapTypeId: kakao.maps.MapTypeId.ROADMAP
+		           level : 5,  // 지도의 확대 레벨 
 		        };
-		        map[j] = new kakao.maps.Map(container[j], options); //지도 생성 및 객체 리턴
+		        let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		        let bounds = new kakao.maps.LatLngBounds();  
 		        
 		        courseName=courseName.replace(" ","").replace(" ","").replace("ㆍ","").replace(" ","")
 		        if(courseName.indexOf("(")>-1){
@@ -388,16 +388,7 @@ html, body {
 		        if(courseName=="성동광진구한강길"){courseName="성동광진한강길";}
 		        
 
-		        var colors = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
-		        function getRandomInt(min, max) {
-		             min = Math.ceil(min);
-		             max = Math.floor(max);
-		             return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
-		         }
-		         var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
-		         colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)]
-		         var color2 = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
-		         colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)]
+		        
 		         
 
 		           <!-- geoJson 파일 불러와서 카카오 맵에 표시 -->
@@ -415,7 +406,8 @@ html, body {
 		                name_trim = (val.properties.NAME).replace(" ","");
 		                name = val.properties.NAME
 		                   if(name_trim.indexOf(courseName)!=-1){
-			                      displayLine(coordinates, data[index], color, map[j]);
+		                	   console.log("displayLine함수 map?"+ map)
+			                      displayLine(coordinates, data[index], map);
 		                      }            
 		               })
 		           })
@@ -432,7 +424,8 @@ html, body {
 		                name_trim = (val.properties.CONTS_NAME).replace(" ","");
 		                name = val.properties.CONTS_NAME
 		                   if(name_trim.indexOf(courseName)!=-1){
-		                      displayLine(coordinates, data[index], color, map[j]);
+		                	   console.log("displayLine함수 map?"+ map)
+		                      displayLine(coordinates, data[index], map);
 		                      } 
 		               })
 		           })
@@ -453,7 +446,8 @@ html, body {
 		                name_trim = (val.properties.CONTS_NAME).replace(" ","");
 		                name = val.properties.CONTS_NAME
 		                if(name_trim.indexOf(courseName)!=-1){
-		                      displayLine(coordinates, data[index], color, map[j]);
+		                	 console.log("displayLine함수 map?"+ map)
+		                      displayLine(coordinates, data[index], map);
 		                   }     
 		               })
 		           })
@@ -473,7 +467,8 @@ html, body {
 		                name_trim = (val.properties.NAME).replace(" ","");
 		                name=val.properties.NAME;
 		                   if(name_trim.indexOf(courseName)!=-1){
-			                      displayLine(coordinates, data[index], color, map[j]);
+		                	   console.log("displayLine함수 map?"+ map)
+			                      displayLine(coordinates, data[index], map);
 		                   } 
 		               })
 		           })
@@ -495,7 +490,7 @@ html, body {
 		                name = val.properties.NAME;
 		                folderpath_trim = (val.properties.FOLDERPATH).replace(" ","").replace(" ","");
 		                   if(name_trim==courseName||folderpath_trim.indexOf(courseName)!=-1){
-			                      displayLine(coordinates, data[index], color, map[j]);
+			                      displayLine(coordinates, data[index], map);
 		                   } 
 		               })
 		           })
@@ -505,16 +500,25 @@ html, body {
 		           var polylines=[];
 		           
 			        
-		           function displayLine(coordinates, data, color, map){
+		           function displayLine(coordinates, data, map){
 		             var name = data.properties.CONTS_NAME;
 		             if(data.properties.CONTS_NAME == null || data.properties.CONTS_NAME == ''){
 		                name = data.properties.NAME;
 		             }
 		              var path = []; 
-
+		              var colors = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+				        function getRandomInt(min, max) {
+				             min = Math.ceil(min);
+				             max = Math.floor(max);
+				             return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
+				         }
+				         var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
+				         colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)];
+				         
 		           $.each(coordinates[0], function(index, coordinate){
 		              //라인 그려줄 path
 		              path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
+		              bounds.extend(path[index]);
 		           })
 		              // 지도에 선을 표시한다 
 		              var polyline  = new kakao.maps.Polyline({
@@ -554,7 +558,7 @@ html, body {
 		                     var loc = mouseEvent.latLng;
 		                     var length=Math.ceil(polyline.getLength());
 		               })
-		         map.setCenter(path[0])     
+		               map.setBounds(bounds);   
 		        }
 		      }
 	       }
