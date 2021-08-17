@@ -165,7 +165,7 @@ ul, li {
 				<!-- 대제목 -->
 				<div class="row main_header">
 					<h1 class="page-header page-title" id="cas_header"
-						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.jsp'"
+						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
 						style="cursor: pointer; color: #343a40;">
 						<span class="test01">걷기<img
 							src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png;"

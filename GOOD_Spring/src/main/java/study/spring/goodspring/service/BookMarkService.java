@@ -20,9 +20,6 @@ public interface BookMarkService {
 	/** 나의 모든찜목록 불러오기 **/
 	public List<BookMark> myBookMarkAllList(BookMark input) throws Exception;
 	
-	/** 나의 찜목록속 지도정보를 불러오기 **/
-	public List<BookMark> myBookMarkAllListMap(BookMark input) throws Exception;
-
 	/**
 	 * 총 데이터 갯수 조회
 	 * 
