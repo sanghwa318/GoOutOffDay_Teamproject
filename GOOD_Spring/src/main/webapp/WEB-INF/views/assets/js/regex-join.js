@@ -5,25 +5,61 @@
             .indexOf('/', hostIndex + 1));
       return contextPath;
    }
+		function execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var roadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 참고 항목 변수
+
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('postcode').value = data.zonecode;
+							document.getElementById("addr1").value = roadAddr;
+
+
+							
+
+							
+						}
+					}).open();
+		}
 $(function(){
 	
 		/**유효성 검사 추가 함수 */
 	$.validator.addMethod("kor", function(value, element){
-		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
+		return this.optional(element) 
+		|| /^[가-힣]*$/i.test(value);
 	});
 	
 	$.validator.addMethod("phone", function(value, element){
-		return this.optional(element) || /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/i.test(value) ||
-		/^\d{2,3}\d{3,4}\d{4}$/i.test(value);
-	});
-	$.validator.addMethod("address", function(value, element){
-		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) ||
-		/[~!@#$%^&*()_+|<>?:{}]/i.test(value) || /[0-9]/i.test(value) || /^[a-zA-Z]*$/i.test(value) ;
+		return this.optional(element) 
+		|| /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/i.test(value) 
+		|| /^\d{2,3}\d{3,4}\d{4}$/i.test(value);
 	});
 	$.validator.addMethod("nick", function(value, element){
-		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value) ||
-		/^[a-zA-Z]*$/i.test(value) || /^[0-9]*$/i.test(value) ;
+		return this.optional(element) 
+		|| /^[ㄱ-ㅎ가-힣a-zA-Z0-9~!@#$%^&*()-_+|<>?:{}]*$/i.test(value);
 	});
 	
 	/** form태그에 부여한 id속성에 대한 유효성 검사 함수 호출 */
@@ -33,7 +69,7 @@ $(function(){
 				//[아이디] 필수 + 알파벳, 숫자 조합만 허용
 				user_id: {required: true, alphanumeric: true, minlength: 4, maxlength: 30,
                 remote : {
-                    url : getContextPath() + '/mainPage/join/id_unique_check_jquery',
+                    url : getContextPath() + '/mainPage/join/id_unique_check',
                     type : 'post',
                     data : {
                         user_id : function() {
@@ -42,10 +78,10 @@ $(function(){
                     }
                 }
             },
-				//[닉네임] 필수 + 알파벳, 숫자 조합
+				//[닉네임] 필수 + 알파벳, 숫자, 한글, 특수문자 조합
 				user_nick: {required: true, nick: true, minlength: 1, maxlength: 30,
                 remote : {
-                    url : getContextPath() + '/mainPage/join/nickname_unique_check_jquery',
+                    url : getContextPath() + '/mainPage/join/nickname_unique_check',
                     type : 'post',
                     data : {
                         user_nick : function() {
@@ -56,31 +92,31 @@ $(function(){
             },
 				//[비밀번호] 필수 + 글자수 길이 제한
 				user_pw: {required: true, minlength: 4, maxlength: 30},
-				//[비밀번호 확인] 필수 + 특정 항목과 일치 (id로 연결)
+				//[비밀번호 확인] 필수 + 특정 항목과 일치 (user_pw로 연결)
 				user_pw_re: {required: true, equalTo: "#user_pw"},
-				//[이름] 필수
+				//[이름] 필수 + 한글만 허용
 				user_name:{required: true, kor: true, maxlength: 30},
 				//[이메일] 필수 + 이메일 형식 일치 필요
 				email: {
                 required: true, email: true, maxlength: 255,
                 remote : {
-                    url : getContextPath() + '/mainPage/join/email_unique_check_jquery',
+                    url : getContextPath() + '/mainPage/join/email_unique_check',
                     type : 'post',
                     data : {
                         email : function() {
                             return $("#email").val();
-                        }
-                    }
-                }
-            },
+	                        }
+	                    }
+	                }
+	            },
 				//[연락처] 필수
 				tel: {required: true, minlength: 9, maxlength: 11},
 				//[우편번호] 필수
 				postcode: {required: true},
-				// [도로명주소] 우편번호가 입력된 경우만 필수
+				// [도로명주소] 필수
      		    addr1: 'required',           		
-				//[나머지주소] 필수 + 한글, 숫자, 특수문자 조합만 허용
-				addr2: {required: true, address: true },
+				//[나머지주소] 필수
+				addr2: {required: true},
 				//[성별] 필수
 				gender: "required"
 			},
@@ -95,7 +131,7 @@ $(function(){
 				},
 				user_nick: {
 					required: "닉네임을 입력하세요.",
-					nick: "닉네임은 한글, 영어, 숫자만 입력 가능합니다.",
+					nick: "닉네임은 한글, 영어, 숫자, 특수문자만 입력 가능합니다.",
 					minlength: "닉네임은 최소 {0}글자 이상 입력하셔야 합니다.",
                     maxlength: '닉네임은 최대 {0}글자까지 가능합니다.',
                     remote: '이미 사용중인 닉네임 입니다.'
@@ -136,7 +172,6 @@ $(function(){
 				
 				addr2:{
 					required: '나머지 주소를 입력하세요.',
-					address: '나머지 주소는 한글, 영어, 숫자, 특수문자만 가능합니다.'
 				},
 				gender: {
 					required: '성별을 선택하세요.'
@@ -155,56 +190,17 @@ $(function(){
             swal('알림', '회원가입이 완료되었습니다. 로그인 해 주세요.', 'success').then(function(result) {
                 window.location = getContextPath() + '/mainPage/login.do';
             });
-        }
+        },error: function(data, status, error){
+			var error_msg =data.responseJSON.rt
+				swal({
+					title : "에러",
+					text :error_msg,
+					type : "error"
+					})
+			return false; // <-- 실행 중단
+		}
        
     }); // end ajaxForm
-
-    $("#id_unique_check").click(function(e) {
-        const userId = $("#user_id").val();
-
-        if (!userId) {
-            swal('알림', '아이디를 입력하세요.', 'warning');
-            return;
-        }
-
-        $.post(getContextPath() + '/mainPage/join/id_unique_check_jquery', {
-            user_id: userId
-        }, function(json) {
-			
-            swal('확인', '사용가능한 아이디 입니다.', 'success');
-		
-        });
-    });
-
-	$("#nickname_unique_check").click(function(e) {
-        const userNick = $("#user_nick").val();
-
-        if (!userNick) {
-            swal('알림', '닉네임을 입력하세요.', 'warning');
-            return;
-        }
-
-        $.post(getContextPath() + '/mainPage/join/nickname_unique_check_jquery', {
-            user_nick: userNick
-        }, function(json) {
-            swal('확인', '사용가능한 닉네임 입니다.', 'success');
-        });
-    });
-
-    $("#email_unique_check").click(function(e) {
-        const email = $("#email").val();
-
-        if (!email) {
-            swal('알림', '이메일을 입력하세요.', 'warning');
-            return;
-        }
-
-        $.post(getContextPath() + '/mainPage/join/email_unique_check_jquery', {
-            email: email
-        }, function(json) {
-            swal('확인', '사용가능한 이메일 입니다.', 'success');
-        });
-    });
 });
 
 

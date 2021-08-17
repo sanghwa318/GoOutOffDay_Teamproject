@@ -89,103 +89,6 @@ public class myPageController {
 		return webHelper.redirect("/goodspring/myPage/myPage_index.do", "프로필 사진을 변경했습니다.");
 	}
 
-	/** 닉네임 중복검사 */
-	@RequestMapping(value = "/myPage/myPage_accountEdit/nickname_unique_check", method = RequestMethod.POST)
-	public Map<String, Object> nickUniqueCheck(
-			// 닉네임
-			@RequestParam(value = "user_nick", required = false) String userNick) {
-
-		if (!regexHelper.isValue(userNick)) {
-			return webHelper.getJsonWarning("닉네임을 입력하세요.");
-		}
-
-		Member input = new Member();
-		input.setUser_nick(userNick);
-
-		try {
-			memberService.nickUniqueCheck(input);
-		} catch (Exception e) {
-			return webHelper.getJsonError(e.getLocalizedMessage());
-		}
-
-		return webHelper.getJsonData();
-	}
-
-	/** 닉네임 중복검사 (jQuery Form Validate 플러그인용) */
-	// controller에서 out 객체의 출력결과를 웹브라우저에게 전달할 수 있게 하는 옵션
-	@ResponseBody
-	@RequestMapping(value = "/myPage/myPage_accountEdit/nickname_unique_check_jquery", method = RequestMethod.POST)
-	public void nickUniqueCheckjQuery(HttpServletResponse response,
-			// 닉네임
-			@RequestParam(value = "user_nick", required = false) String userNick) {
-
-		Member input = new Member();
-		input.setUser_nick(userNick);
-		String result = "true";
-
-		try {
-			memberService.nickUniqueCheck(input);
-		} catch (Exception e) {
-			result = "false";
-		}
-
-		// out객체를 생성하여 문자열을 직접 출력함
-		try {
-			response.getWriter().print(result);
-		} catch (IOException e) {
-		}
-	}
-
-	/** 이메일 중복검사 */
-	@RequestMapping(value = "/myPage/myPage_accountEdit/email_unique_check", method = RequestMethod.POST)
-	public Map<String, Object> emailUniqueCheck(
-			// 아이디
-			@RequestParam(value = "email", required = false) String email) {
-
-		if (!regexHelper.isValue(email)) {
-			return webHelper.getJsonWarning("이메일 주소를 입력하세요.");
-		}
-
-		if (!regexHelper.isEmail(email)) {
-			return webHelper.getJsonWarning("이메일 주소가 잘못되었습니다.");
-		}
-
-		Member input = new Member();
-		input.setEmail(email);
-
-		try {
-			memberService.emailUniqueCheck(input);
-		} catch (Exception e) {
-			return webHelper.getJsonError(e.getLocalizedMessage());
-		}
-
-		return webHelper.getJsonData();
-	}
-
-	/** 이메일 중복검사 (jQuery Form Validate 플러그인용) */
-	// controller에서 out 객체의 출력결과를 웹브라우저에게 전달할 수 있게 하는 옵션
-	@ResponseBody
-	@RequestMapping(value = "/myPage/myPage_accountEdit/email_unique_check_jquery", method = RequestMethod.POST)
-	public void emailUniqueCheckjQuery(HttpServletResponse response,
-			// 아이디
-			@RequestParam(value = "email", required = false) String email) {
-
-		Member input = new Member();
-		input.setEmail(email);
-		String result = "true";
-
-		try {
-			memberService.emailUniqueCheck(input);
-		} catch (Exception e) {
-			result = "false";
-		}
-
-		// out객체를 생성하여 문자열을 직접 출력함
-		try {
-			response.getWriter().print(result);
-		} catch (IOException e) {
-		}
-	}
 	/** 회원정보수정 */
 	@RequestMapping(value = "/myPage/myPage_accountEdit_ok", method = RequestMethod.POST)
 	public Map<String, Object> editMember(@RequestParam(value = "user_id", required = false) String userId,
@@ -228,14 +131,17 @@ public class myPageController {
 				return webHelper.getJsonWarning("이름은 최대 30글자로 입력 가능합니다.");
 			}
 		}
-
-		if (!regexHelper.isEmail(email)) {
-			return webHelper.getJsonWarning("이메일 형식이 잘못되었습니다.");
+		if (regexHelper.isValue(email)) {
+			if (!regexHelper.isEmail(email)) {
+				return webHelper.getJsonWarning("이메일 형식이 잘못되었습니다.");
+			}
 		}
-		if (!regexHelper.isCellPhone(tel) && !regexHelper.isTel(tel)) {
-			return webHelper.getJsonWarning("연락처가 잘못되었습니다.");
+		if (regexHelper.isValue(tel)) {
+			if (!regexHelper.isCellPhone(tel) && !regexHelper.isTel(tel)) {
+				return webHelper.getJsonWarning("연락처가 잘못되었습니다.");
+			}
 		}
-		if(addr1!=null && (addr2==null || addr2=="")) {
+		if(regexHelper.isValue(addr1) && !regexHelper.isValue(addr2)) {
 			return webHelper.getJsonWarning("나머지 주소를 입력해 주세요.");			
 		}
 
@@ -265,21 +171,6 @@ public class myPageController {
 
 		} catch (Exception e) {
 			return webHelper.getJsonError(e.getLocalizedMessage());
-		}
-
-		UploadItem photo = output.getUser_photo();
-
-		if (photo != null) {
-			try {
-				String thumbPath = webHelper.createThumbnail(photo.getFilePath(), 150, 150, true);
-
-				// 웹 상에서 접근할 수 있는 URL정보 등록
-				photo.setFileUrl(webHelper.getUploadUrl(photo.getFilePath()));
-				photo.setThumbnailUrl(webHelper.getUploadUrl(thumbPath));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 
 		/** 4) 결과 표시 */

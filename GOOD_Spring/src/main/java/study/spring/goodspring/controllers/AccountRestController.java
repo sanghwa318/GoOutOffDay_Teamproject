@@ -33,32 +33,11 @@ public class AccountRestController {
     @Autowired
     MemberService memberService;
 
-    /** 아이디 중복검사 */
-    @RequestMapping(value = "/mainPage/join/id_unique_check", method = RequestMethod.POST)
-    public Map<String, Object> idUniqueCheck(
-            // 아이디
-            @RequestParam(value = "user_id", required = false) String userId) {
-
-        if (!regexHelper.isValue(userId)) {
-            return webHelper.getJsonWarning("아이디를 입력하세요.");
-        }
-        
-        Member input = new Member();
-        input.setUser_id(userId);
-        
-        try {
-            memberService.idUniqueCheck(input);
-        } catch (Exception e) {
-            return webHelper.getJsonError(e.getLocalizedMessage());
-        }
-
-        return webHelper.getJsonData();
-    }
     
     /** 아이디 중복검사 (jQuery Form Validate 플러그인용) */
     // controller에서 out 객체의 출력결과를 웹브라우저에게 전달할 수 있게 하는 옵션
     @ResponseBody
-    @RequestMapping(value = "/mainPage/join/id_unique_check_jquery", method = RequestMethod.POST)
+    @RequestMapping(value = "/mainPage/join/id_unique_check", method = RequestMethod.POST)
     public void idUniqueCheckjQuery(HttpServletResponse response,
             // 아이디
             @RequestParam(value = "user_id", required = false) String userId) {
@@ -78,33 +57,12 @@ public class AccountRestController {
             response.getWriter().print(result);
         } catch (IOException e) {}
     }
-    
-    /** 닉네임 중복검사 */
-    @RequestMapping(value = "/mainPage/join/nickname_unique_check", method = RequestMethod.POST)
-    public Map<String, Object> nickUniqueCheck(
-            // 닉네임
-            @RequestParam(value = "user_nick", required = false) String userNick) {
 
-        if (!regexHelper.isValue(userNick)) {
-            return webHelper.getJsonWarning("닉네임을 입력하세요.");
-        }
-        
-        Member input = new Member();
-        input.setUser_nick(userNick);
-        
-        try {
-            memberService.nickUniqueCheck(input);
-        } catch (Exception e) {
-            return webHelper.getJsonError(e.getLocalizedMessage());
-        }
-
-        return webHelper.getJsonData();
-    }
     
     /** 닉네임 중복검사 (jQuery Form Validate 플러그인용) */
     // controller에서 out 객체의 출력결과를 웹브라우저에게 전달할 수 있게 하는 옵션
     @ResponseBody
-    @RequestMapping(value = "/mainPage/join/nickname_unique_check_jquery", method = RequestMethod.POST)
+    @RequestMapping(value = "/mainPage/join/nickname_unique_check", method = RequestMethod.POST)
     public void nickUniqueCheckjQuery(HttpServletResponse response,
             // 닉네임
             @RequestParam(value = "user_nick", required = false) String userNick) {
@@ -125,36 +83,11 @@ public class AccountRestController {
         } catch (IOException e) {}
     }
 
-    /** 이메일 중복검사 */
-    @RequestMapping(value = "/mainPage/join/email_unique_check", method = RequestMethod.POST)
-    public Map<String, Object> emailUniqueCheck(
-            // 아이디
-            @RequestParam(value = "email", required = false) String email) {
-
-        if (!regexHelper.isValue(email)) {
-            return webHelper.getJsonWarning("이메일 주소를 입력하세요.");
-        }
-        
-        if (!regexHelper.isEmail(email)) {
-            return webHelper.getJsonWarning("이메일 주소가 잘못되었습니다.");
-        }
-        
-        Member input = new Member();
-        input.setEmail(email);
-        
-        try {
-            memberService.emailUniqueCheck(input);
-        } catch (Exception e) {
-            return webHelper.getJsonError(e.getLocalizedMessage());
-        }
-
-        return webHelper.getJsonData();
-    }
     
     /** 이메일 중복검사 (jQuery Form Validate 플러그인용) */
     // controller에서 out 객체의 출력결과를 웹브라우저에게 전달할 수 있게 하는 옵션
     @ResponseBody
-    @RequestMapping(value = "/mainPage/join/email_unique_check_jquery", method = RequestMethod.POST)
+    @RequestMapping(value = "/mainPage/join/email_unique_check", method = RequestMethod.POST)
     public void emailUniqueCheckjQuery(HttpServletResponse response,
             // 아이디
             @RequestParam(value = "email", required = false) String email) {
@@ -178,17 +111,17 @@ public class AccountRestController {
     /** 회원가입 */
     @RequestMapping(value = "/mainPage/join", method = RequestMethod.POST)
     public Map<String, Object> join(
-            @RequestParam(value = "user_id",        required = false) String userId,
-            @RequestParam(value = "user_nick",      required = false) String userNick,
-            @RequestParam(value = "user_pw",        required = false) String userPw,
-            @RequestParam(value = "user_pw_re",		required = false) String userPwRe,
-            @RequestParam(value = "user_name",      required = false) String userName,
-            @RequestParam(value = "email",          required = false) String email,
-            @RequestParam(value = "tel",            required = false) String tel,
-            @RequestParam(value = "postcode",       required = false) String postcode,
-            @RequestParam(value = "addr1",      	required = false) String addr1,
-            @RequestParam(value = "addr2", 			required = false) String addr2,
-            @RequestParam(value = "gender",         required = false) String gender) {
+            @RequestParam(value = "user_id") String userId,
+            @RequestParam(value = "user_nick") String userNick,
+            @RequestParam(value = "user_pw") String userPw,
+            @RequestParam(value = "user_pw_re") String userPwRe,
+            @RequestParam(value = "user_name") String userName,
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "tel") String tel,
+            @RequestParam(value = "postcode") String postcode,
+            @RequestParam(value = "addr1") String addr1,
+            @RequestParam(value = "addr2") String addr2,
+            @RequestParam(value = "gender") String gender) {
 
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
@@ -198,23 +131,24 @@ public class AccountRestController {
         if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
         
         if (!regexHelper.isValue(userNick)) { return webHelper.getJsonWarning("닉네임을 입력하세요."); }
-        if (!regexHelper.isNick(userNick)) { return webHelper.getJsonWarning("닉네임은 한글,영어,숫자만 입력 가능합니다."); }
+        if (!regexHelper.isNick(userNick)) { return webHelper.getJsonWarning("닉네임은 한글,영어,숫자,특수문자만 입력 가능합니다."); }
         if (userNick.length() < 1 || userNick.length() > 30) { return webHelper.getJsonWarning("닉네임은 1~30글자로 입력 가능합니다."); }
         
         if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
         if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
-        if (!userPw.equals(userPwRe)) { return webHelper.getJsonWarning("비밀번호는 확인이 잘못되었습니다."); }
+        if (!userPw.equals(userPwRe)) { return webHelper.getJsonWarning("비밀번호 확인이 잘못되었습니다."); }
         
-        if (!regexHelper.isValue(userName)) { return webHelper.getJsonWarning("이름 입력하세요."); }
+        if (!regexHelper.isValue(userName)) { return webHelper.getJsonWarning("이름을 입력하세요."); }
         if (!regexHelper.isKor(userName)) { return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다."); }
         if (userName.length() > 30) { return webHelper.getJsonWarning("이름은 최대 30글자로 입력 가능합니다."); }
         
+        if (!regexHelper.isValue(email)) { return webHelper.getJsonWarning("이메일을 입력하세요."); }
         if (!regexHelper.isEmail(email)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
+        if (!regexHelper.isValue(tel)) { return webHelper.getJsonWarning("연락처를 입력하세요."); }
         if (!regexHelper.isCellPhone(tel) && !regexHelper.isTel(tel)) { return webHelper.getJsonWarning("연락처가 잘못되었습니다."); }
         if (!regexHelper.isValue(postcode)) { return webHelper.getJsonWarning("우편번호를 입력하세요."); }
         if (!regexHelper.isValue(addr1)) { return webHelper.getJsonWarning("도로명주소를 입력하세요."); }
         if (!regexHelper.isValue(addr2)) { return webHelper.getJsonWarning("나머지주소를 입력하세요."); }
-        if (!regexHelper.isAddr2(addr2)) { return webHelper.getJsonWarning("나머지주소는 한글,영어,숫자만 입력 가능합니다.."); }
         if (!regexHelper.isValue(gender)) { return webHelper.getJsonWarning("성별을 선택하세요."); }
         
        

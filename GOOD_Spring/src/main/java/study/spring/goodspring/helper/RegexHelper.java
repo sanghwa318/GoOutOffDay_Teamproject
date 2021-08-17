@@ -164,7 +164,7 @@ public class RegexHelper {
 	public boolean isNick(String str) {
 		boolean result = false;
 		if(isValue(str)) {
-			result=Pattern.matches("^[ㄱ-ㅎ가-힣a-zA-Z0-9]*$", str);
+			result=Pattern.matches("^[ㄱ-ㅎ가-힣a-zA-Z0-9~!@#$%^&*()-_+|<>?:{}]*$", str);
 		}  if(result) {
 			log.debug(String.format("(regex) -> `%s`)(은)는 닉네임 형식이 맞습니다.", str));
 		}else {
@@ -172,19 +172,5 @@ public class RegexHelper {
 		}
 		return result;
 	}
-	
-	/**
-	 * 나머지주소에 대한 형식 검사
-	 */
-	public boolean isAddr2(String str) {
-		boolean result = false;
-		if(isValue(str)) {
-			result=Pattern.matches("^[ㄱ-ㅎ가-힣a-zA-Z0-9]*$", str);
-		}  if(result) {
-			log.debug(String.format("(regex) -> `%s`)(은)는 나머지주소에 대한 형식이 맞습니다.", str));
-		}else {
-			log.debug(String.format("(regex) -> `%s`)(은)는 나머지주소에 대한 형식이 아닙니다.", str));
-		}
-		return result;
-	}
+
 }

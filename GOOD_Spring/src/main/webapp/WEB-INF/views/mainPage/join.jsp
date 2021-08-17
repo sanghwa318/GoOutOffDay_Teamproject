@@ -8,13 +8,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.all.min.js" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.js" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Joinlayout.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js" />
 </head>
 <body>
    <div class="wrapper">
@@ -161,11 +154,6 @@
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
 <%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script	src="${pageContext.request.contextPath}/assets/js/post-join.js"></script>
 <script	src="${pageContext.request.contextPath}/assets/js/regex-join.js"></script>
-<script src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
-
-
-	
 </body>
 </html>

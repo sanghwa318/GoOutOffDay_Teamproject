@@ -33,4 +33,5 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/TooltipMenu/css/component.css" />
 <script src="${pageContext.request.contextPath}/assets/plugins/TooltipMenu/js/modernizr.custom.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Header_Footer.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Joinlayout.css" />
 
