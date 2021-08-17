@@ -367,6 +367,9 @@ html, body {
 		           //지도를 생성할 때 필요한 기본 옵션
 		           center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표 
 		           level : 5,  // 지도의 확대 레벨 
+		           scrollwheel : false,
+		           draggable : false,
+		           tileAnimation : false
 		        };
 		        let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 		        let bounds = new kakao.maps.LatLngBounds();  
@@ -506,14 +509,6 @@ html, body {
 		                name = data.properties.NAME;
 		             }
 		              var path = []; 
-		              var colors = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
-				        function getRandomInt(min, max) {
-				             min = Math.ceil(min);
-				             max = Math.floor(max);
-				             return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
-				         }
-				         var color = '#'+colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] +
-				         colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)] + colors[getRandomInt(0, 16)];
 				         
 		           $.each(coordinates[0], function(index, coordinate){
 		              //라인 그려줄 path
@@ -524,8 +519,8 @@ html, body {
 		              var polyline  = new kakao.maps.Polyline({
 		                 map: map, // 선을 표시할 지도 객체 
 		                 path: path,
-		                 strokeWeight: 4, // 선의 두께
-		                 strokeColor: color, // 선 색
+		                 strokeWeight: 3, // 선의 두께
+		                 strokeColor: '#FF685F', // 선 색
 		                 strokeOpacity: 0.9, // 선 투명도
 		              });
 		              var length=Math.ceil(polyline.getLength());
@@ -536,28 +531,6 @@ html, body {
 		                });
 		             }
 		           
-		              //폴리라인 마우스 오버 이벤트
-		               kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
-		                  polyline.setOptions({
-		                  strokeColor: color2
-		                  })
-		              });
-		              //폴리라인 마우스 아웃 이벤트
-		               kakao.maps.event.addListener(polyline, 'mouseout', function(mouseEvent) {
-		                  polyline.setOptions({
-		                     strokeColor: color
-		                     })
-		                  });
-		              //폴리라인 클릭이벤트
-		               kakao.maps.event.addListener(polyline, 'click', function(mouseEvent) {
-		                     polyline.setOptions({
-		                     strokeColor: color2
-		                   })
-		                   
-
-		                     var loc = mouseEvent.latLng;
-		                     var length=Math.ceil(polyline.getLength());
-		               })
 		               map.setBounds(bounds);   
 		        }
 		      }
