@@ -5,7 +5,6 @@ import java.util.List;
 import study.spring.goodspring.model.AdminInquiry;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
-import study.spring.goodspring.model.MyCourses;
 
 public interface AdminService {
 	

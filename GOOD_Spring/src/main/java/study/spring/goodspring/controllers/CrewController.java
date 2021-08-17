@@ -1,12 +1,8 @@
 package study.spring.goodspring.controllers;
 
-import java.io.File;
-import java.io.IOException;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +59,6 @@ public class CrewController {
 			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
 		}
 
-		int userNo = login_info.getUser_no();
 		return new ModelAndView("commPage/comm_crew_est");
 	}
 	

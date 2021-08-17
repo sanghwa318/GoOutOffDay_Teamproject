@@ -1,6 +1,5 @@
 package study.spring.goodspring.service;
 
-import java.util.List;
 
 import study.spring.goodspring.model.MyCourseLike;
 

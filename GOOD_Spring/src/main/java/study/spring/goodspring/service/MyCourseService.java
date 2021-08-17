@@ -2,7 +2,6 @@ package study.spring.goodspring.service;
 
 import java.util.List;
 
-import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.MyCourses;
 
 //나만의 코스 데이터 관리 기능을 제공하기위한 Service

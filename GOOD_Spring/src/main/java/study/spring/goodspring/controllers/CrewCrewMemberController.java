@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
-import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.CrewMemberService;
@@ -49,7 +47,6 @@ public class CrewCrewMemberController {
    @RequestMapping(value = "/commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
    public ModelAndView crewmemberjoin(Model model, HttpServletResponse response,
       @RequestParam(value = "crew_crew_no", defaultValue = "0") int crew_no) {
-      int count = 0;
       //1)데이터 저장
       CrewMember input = new CrewMember();
       input.setCrew_crew_no(crew_no);

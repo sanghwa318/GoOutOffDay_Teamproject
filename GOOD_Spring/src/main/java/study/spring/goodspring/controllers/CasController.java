@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.RetrofitHelper;
@@ -29,7 +28,6 @@ import study.spring.goodspring.service.BookMarkService;
 import study.spring.goodspring.service.CasService;
 import study.spring.goodspring.service.UserTrafficLogService;
 
-@Slf4j
 @Controller
 public class CasController {
 	@Autowired

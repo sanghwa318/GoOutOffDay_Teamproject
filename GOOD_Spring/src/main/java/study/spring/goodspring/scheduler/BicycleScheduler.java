@@ -14,7 +14,6 @@ import retrofit2.Retrofit;
 import study.spring.goodspring.APIservice.BicycleService;
 import study.spring.goodspring.helper.RetrofitHelper;
 import study.spring.goodspring.model.Bicycle;
-import study.spring.goodspring.model.Bicycle.rentBikeStatus;
 import study.spring.goodspring.model.Bicycle.rentBikeStatus.row;
 import study.spring.goodspring.uploadservice.BicycleUpload;
 

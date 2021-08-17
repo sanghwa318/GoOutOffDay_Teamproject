@@ -26,7 +26,6 @@ import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.CrewPostLike;
 import study.spring.goodspring.model.Member;
-import study.spring.goodspring.model.MyCourseLike;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.CrewMemberService;
 import study.spring.goodspring.service.CrewPostLikeService;
@@ -519,6 +518,7 @@ public class CommController {
 		input.setPost_no(post_no);
 		
 		
+		@SuppressWarnings("unused")
 		CrewPost postout = null;
 
 		try {
@@ -631,7 +631,6 @@ public ModelAndView crewPostDelete(Model model,
 	
 	// 삭제 가능한 사용자 정보
 	Member login_info = (Member) webHelper.getSession("login_info");
-	int userNo = login_info.getUser_no();
 		
 	// 1) 삭제하는 게시물
 	CrewPost input = new CrewPost();

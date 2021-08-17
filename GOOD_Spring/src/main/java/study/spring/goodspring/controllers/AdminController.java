@@ -134,6 +134,7 @@ public class AdminController {
 		Inquiry input = new Inquiry();
 		input.setQnA_no(QnA_no);
 		input.setAnswer_detail(Answer_detail);
+		@SuppressWarnings("unused")
 		Inquiry output = null;
 
 		try {
