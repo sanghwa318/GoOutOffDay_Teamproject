@@ -186,9 +186,9 @@ margin-top:1%;
 				<h1 style="color: #343a40;">나만의 코스</h1>
 			</div>
 			<div class="row">
-				<div class="map col-md-4" id="map"
+				<div class="map col-md-4 col-sm-5 col-xs-4 " id="map"
 					style="height: 250px; width: 250px"></div>
-				<div class="col-md-7 col-sm-6 col-xs-12 main_info" id="mycourse">
+				<div class="col-md-7 col-sm-6 col-xs-6 main_info" id="mycourse">
 				
 			
 			

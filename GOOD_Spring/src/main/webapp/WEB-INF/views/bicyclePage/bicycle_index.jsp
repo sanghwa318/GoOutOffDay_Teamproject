@@ -190,7 +190,7 @@ p {
 						<!-- 자전거 실시간 현황 지도 -->
 						<div id="map1" style="height: 530px; margin: auto"></div>
 						<div id="m_menu">
-							<div class="menu_header clear-fix" style="height:40px;">
+							<div class="menu_header clear-fix" style="height:40px; ">
 								<form id="mapSearch"
 									action="${pageContext.request.contextPath }/bicyclePage/bicycle_index_search.do">
 									<label for="keyword" class="pull-left" style="margin-left:10px;" >대여소 : </label> <input type="search" class="col-md-9 col-sm-8 col-xs-7 pull-right" 
