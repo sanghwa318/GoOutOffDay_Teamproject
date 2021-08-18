@@ -527,7 +527,7 @@ html, body {
 		             length = (length / 1000).toFixed(1);
 		             if(length < 2){
 		                polyline.setOptions({
-		                   strokeOpacity: 0.1
+		                   strokeOpacity: 0.9
 		                });
 		             }
 		           

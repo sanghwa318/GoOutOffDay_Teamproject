@@ -16,8 +16,10 @@ import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.AdminInquiry;
 import study.spring.goodspring.model.Inquiry;
 import study.spring.goodspring.model.Member;
+import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.AdminService;
 import study.spring.goodspring.service.MemberService;
+import study.spring.goodspring.service.UserTrafficLogService;
 
 @Controller
 public class AdminController {
@@ -32,6 +34,9 @@ public class AdminController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	UserTrafficLogService userTrafficLogService;
 
 	/**
 	 * 관리자 메인페이지
@@ -241,7 +246,19 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
-
+		UserTrafficLog input = new UserTrafficLog();
+		
+		int output_count = 0;
+		
+		try {
+			output_count = userTrafficLogService.login_count(input);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("output_count", output_count);
+		
 		return new ModelAndView("adminPage/admin_stats");
 	}
 
