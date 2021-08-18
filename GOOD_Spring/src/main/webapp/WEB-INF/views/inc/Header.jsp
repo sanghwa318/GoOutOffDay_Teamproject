@@ -8,10 +8,10 @@
 <header>
 	<div class="navbar navbar-default clearfix" role="navigation"
 		id="header"
-		style="background: #ffffff !important; min-height: 70px; border-color: #ffffff !important;">
-		<div class="container clearfix">
+		style="background: #ffffff !important; min-height: 50px; border-color: #ffffff !important;">
+		<div class="container clearfix" style="padding: 0;">
 			<div class="row clearfix" style="padding-bottom: 0 !important">
-				<div class="col-md-3" id="logo">
+				<div class="col-md-3" id="h_logo">
 					<a href="<%=request.getContextPath()%>/"
 						style="position: relative; z-index: 999999;"> <img
 						id="logo_img"
@@ -22,14 +22,12 @@
 					<%--로그인 회원가입 프로필--%>
 					<c:choose>
 						<c:when test="${login_info == null }">
-							<div class="row clearfix"
-								style="padding-top: 30px; padding-bottom: 5px;"
-								id="login_join_box">
+							<div class="row clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
 									<button class="btn btn-link"
-										style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
+										style="color: #0098ed; font-size: 1em; padding-top: 0; padding-bottom: 0; margin-right: 15px; text-decoration: none; border: 0; outline: 0;"
 										onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
-										<i class="glyphicon glyphicon-log-in"></i> <strong>
+										<i class="glyphicon glyphicon-thumbs-up"></i> <strong>
 											로그인</strong>
 									</button>
 									<!-- 										<button class="btn btn-link" -->
@@ -43,11 +41,10 @@
 						</c:when>
 						<c:when
 							test="${login_info.getUser_id() != null && login_info.isUser_admin()==false}">
-							<div class="row clearfix"
-								style="padding-top: 30px; padding-bottom: 5px;"
+							<div class="row clearfix" style="padding-top: 10px;"
 								id="login_join_box">
 								<div class="pull-right" id="login_join">
-									<div class="pull-right" style="padding: 0 15px 0 10px;">
+									<div class="pull-right" style="padding: 0 22px 0 10px;">
 										<div>
 											<a id="account" href="#" role="button"><img
 												style="border-radius: 20px"
@@ -100,23 +97,18 @@
 						<%--//로그인 회원가입 프로필--%>
 						<c:when
 							test="${login_info.getUser_id() != null && login_info.isUser_admin()==true}">
-							<div class="row clearfix"
-								style="padding-top: 30px; padding-bottom: 5px;"
-								id="login_join_box">
+							<div class="row clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
-									<div class="pull-left">
-										<button class="btn btn-link"
-											style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
-											onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'">
-											<i class="glyphicon glyphicon-log-in"></i> <strong>
-												관리자페이지</strong>
-										</button>
-										<button class="btn btn-link logout-btn"
-											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;">
-											<i class="glyphicon glyphicon-link"></i> <strong>
-												로그아웃</strong>
-										</button>
-									</div>
+									<button class="btn btn-link"
+										style="color: #0098ed; font-size: 1em; margin-right: 12px; padding-top: 0; padding-bottom: 0; text-decoration: none; border: 0; outline: 0;"
+										onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'">
+										<i class="glyphicon glyphicon-cog"></i> <strong> 관리자</strong>
+									</button>
+									<!-- 										<button class="btn btn-link logout-btn" -->
+									<!-- 											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;"> -->
+									<!-- 											<i class="glyphicon glyphicon-link"></i> <strong> -->
+									<!-- 												로그아웃</strong> -->
+									<!-- 										</button> -->
 								</div>
 							</div>
 						</c:when>
@@ -128,7 +120,7 @@
 						<!-- 반응형 햄버거 -->
 						<div class="navbar-header ">
 							<button type="button" class="navbar-toggle pull-left"
-								id="navbar-toggle" style="margin-left: 15px;"
+								id="navbar-toggle" style="margin-left: 25px;"
 								data-toggle="collapse" data-target="#navi_search">
 								<span class="sr-only">메뉴열기</span> <span class="icon-bar"></span>
 								<span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -136,7 +128,8 @@
 						</div>
 						<!-- //반응형 햄버거 -->
 						<!-- 네비게이션(서브메뉴) -->
-						<div class="collapse navbar-collapse clearfix " id="navi_search">
+						<div class="collapse navbar-collapse clearfix " id="navi_search"
+							style="padding: 0 22px;">
 							<!-- 반응형 햄버거 아코디언 -->
 							<div class="panel-group visible-xs" id="accodian"
 								style="border-bottom: 0; margin-bottom: 0 !important; margin-top: 10px; font-size: 20px">

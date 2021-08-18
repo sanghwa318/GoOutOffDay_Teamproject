@@ -11,10 +11,9 @@
 		height: 240px;
 		border-right: 2px solid #eee;
 	}
-	.wrapper>.container>.admin_row{
-	margin-top:80px}
-	
-
+	.wrapper>.container>.admin_row {
+		margin-top: 80px
+	}
 }
 
 @media ( max-width :992px) {
@@ -51,6 +50,12 @@ div.wrapper {
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">관리자페이지 </span>
 				</h1>
+			</div>
+			<div class="clearfix">
+				<button class="btn btn-danger logout-btn pull-right"
+					style="text-decoration: none; border: 0; outline: 0; margin-bottom: 15px; font-size: 1.2em;">
+					<i class="glyphicon glyphicon-refresh"></i> <strong> 로그아웃</strong>
+				</button>
 			</div>
 			<div class="row admin_row">
 				<!-- 회원정보 -->
@@ -96,5 +101,25 @@ div.wrapper {
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
+	<script type="text/javascript">
+
+	$(function() {
+		//로그아웃 ajax
+		$('.logout-btn').click(function(e) {
+			$.ajax({
+				//결과를 읽어올 url
+				url : getContextPath() + '/mainPage/logout',
+				method : 'get',
+				data : {},
+				dataType : 'html',
+				success : function(req) {
+					//페이지 새로고침
+					window.location.href = getContextPath()
+				}
+
+			})
+		});
+	});
+</script>
 </body>
 </html>
