@@ -55,23 +55,21 @@ public class myPageController {
 	 * 
 	 * @param request 세션 정보를 받아오기 위해 전달받는 HttpServletRequest 객체
 	 * @param photo   이미지 파일 정보
-	 * @return ModelAndView
+	 * @return Map
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/myPage/myPage_index_image_ok.do", method = RequestMethod.POST)
-	public ModelAndView myPageIndexImageOk(HttpServletRequest request,
+	public Map<String, Object> myPageIndexImageOk(HttpServletRequest request,
 			@RequestParam(value = "user_photo", required = false) MultipartFile photo) {
 		/** 1) 업로드 처리 */
 		UploadItem item = null;
 		try {
 			item = webHelper.saveMultipartFile(photo);
 		} catch (NullPointerException e) {
-			// 업로드 된 파일이 없는 경우
-			e.printStackTrace();
-			photo = null;
+			return webHelper.getJsonError("업로드된 파일이 없습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return webHelper.redirect(null, "업로드에 실패했습니다.");
+			return webHelper.getJsonError("업로드에 실패했습니다.");
 		}
 		/** 2) 데이터 저장 */
 		Member loginInfo = (Member) webHelper.getSession("login_info");
@@ -81,11 +79,11 @@ public class myPageController {
 		try {
 			memberService.editPhoto(loginInfo);
 		} catch (Exception e) {
-			return webHelper.redirect(null, e.getLocalizedMessage());
+			return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
 		/** 3) 결과 표시 */
-		return webHelper.redirect("/goodspring/myPage/myPage_index.do", "프로필 사진을 변경했습니다.");
+		return webHelper.getJsonData();
 	}
 
 	/** 회원정보수정 */
@@ -185,25 +183,25 @@ public class myPageController {
 	}
 
 	/** 삭제처리 */
+	@ResponseBody
 	@RequestMapping(value = "/myPage/myPage_accountOut_delete_ok", method = RequestMethod.GET)
-	public ModelAndView delete_ok() {
+	public Map<String, Object> delete_ok() {
 
 		/** 2) 데이터 삭제하기 */
 		Member input = (Member) webHelper.getSession("login_info");
-		/* Member input = new Member(); */
 
 		try {
 
 			memberService.userOutMember(input);
 
 		} catch (Exception e) {
-			return webHelper.redirect(null, e.getLocalizedMessage());
+			return webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
 		/** 3) 페이지 이동 */
 		// 확인할 대상이 삭제된 상태이므로 메인 페이지로 이동
 		webHelper.removeAllSession();
-		return webHelper.redirect(contextPath + "/", "탈퇴되었습니다.");
+		return webHelper.getJsonData();
 
 	}
 

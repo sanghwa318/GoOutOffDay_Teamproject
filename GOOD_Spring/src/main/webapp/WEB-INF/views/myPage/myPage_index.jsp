@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="col-md-3 col-md-offset-1 profileimage"
 					style="width: 230px">
-					<form action="${pageContext.request.contextPath }/myPage/myPage_index_image_ok.do" method="post" encType="multipart/form-data" >
+					<form id="uploadForm">
 						<div class="form-group">
 							<img id="img__wrap"
 								onerror="this.src='${pageContext.request.contextPath}/assets/img/profile_default.png'"
@@ -87,21 +87,16 @@
 
 	<script type="text/javascript">
 		$('#user_photo').on("change", function(e) {
-			console.log(e.target.files);
-
-			console.log(e.target.files[0].type.match("image*"));
-			console.log(e.target.files[0].type.includes("image"));
-
 			var f = e.target.files[0];
 
 			if (!f.type.match("image*")) {
-				alert("이미지만 첨부할 수 있습니다.");
+				swal('에러',"이미지만 첨부할 수 있습니다.",'error');
 				$("#user_photo").val('');
 				return;
 			}
 
 			if (f.size > 1024 * 1024 * 2) {
-				alert("이미지는 2MB 이하만 가능합니다.");
+				swal('에러',"이미지는 2MB 이하만 가능합니다.",'error');
 				$('#user_photo').val('');
 				return;
 			}
@@ -113,6 +108,36 @@
 			reader.readAsDataURL(f);
 		});
 		
+		$(function(){
+			$('#userProfile_apply').on('click', function(e){
+				e.preventDefault();
+				var form= $('#uploadForm')[0];
+				var formData=new FormData(form);
+			    $.ajax({
+			        url : getContextPath()+'/myPage/myPage_index_image_ok.do',
+			        type : 'POST',
+			        data : formData,
+			        contentType : false,
+			        processData : false,
+			        success:function(data){
+			        	swal({
+							title: "성공",
+							text: '프로필 사진이 변경되었습니다',
+							type: "success"
+						}).then(function(){
+							window.location.reload();
+						})
+			        },error:function(data,status,error){
+						swal({
+							title: "에러",
+							text: data.responseJSON.rt,
+							type: "error"
+						})
+						return false; // <-- 실행 중단
+			        }
+			    })
+			})
+		})
 		
 	</script>
 </body>

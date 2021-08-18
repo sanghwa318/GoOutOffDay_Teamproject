@@ -104,7 +104,7 @@ function endRecord() {
 
 		var course_name = $("#course_name").val();
 		if (course_name == null || course_name == "") {
-			alert("코스 이름을 입력해주세요.")
+			swal("실패","코스 이름을 입력해주세요.","warning")
 
 		} else {
 
@@ -116,7 +116,7 @@ function endRecord() {
 				success: function(result) {
 					if (result.result == 'true') {
 						navigator.geolocation.clearWatch(watchId);
-						swal("기록을 중지합니다.")
+						swal("중지","기록을 중지합니다.", "info")
 						watchId = 0;
 						clearInterval(interval);
 						noRecording();
@@ -154,7 +154,7 @@ function endRecord() {
 			});
 		}
 	} else {
-		swal("기록하기를 눌러 기록을 시작해주세요.")
+		swal("잠깐","기록하기를 눌러 기록을 시작해주세요.","warning")
 	}
 }
 

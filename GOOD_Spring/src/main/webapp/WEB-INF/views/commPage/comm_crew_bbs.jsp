@@ -297,10 +297,7 @@
 <script>
 	let crew_no='${output.crew_no}';
 	let crew_name='${crew_name}'
-   $("#out")
-         .click(
-               function() {
-
+   $("#out").click( function(event) {
                   event.preventDefault();
                   // 확인, 취소버튼에 따른 후속 처리 구현
                   swal({
@@ -310,20 +307,14 @@
                      confirmButtonText : '네', // 확인버튼 표시 문구
                      showCancelButton : true, // 취소버튼 표시 여부
                      cancelButtonText : '아니오', // 취소버튼 표시 문구
-                  })
-                        .then(
-                              function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-                                 if (result.value) { // 확인 버튼이 눌러진 경우
-
-                                    window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok?crew_no="+ ${output.crew_no};
-
-                                 } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
-                                    swal('취소', '탈퇴가 취소되었습니다.',
-                                          'error');
-                                 }
-
-                              });
+                  }).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+                     if (result.value) { // 확인 버튼이 눌러진 경우
+                    window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok?crew_no="+ ${output.crew_no};
+                   } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+                     swal('취소', '탈퇴가 취소되었습니다.','error');
+                     }
                });
+          });
 </script>
 <script>
 

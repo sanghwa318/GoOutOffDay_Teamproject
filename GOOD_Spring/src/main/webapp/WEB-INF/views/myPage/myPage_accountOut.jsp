@@ -97,8 +97,8 @@
                 <!-- //상세주소 -->	     
 		</form>
 		<div class="form-group1 text-center">
-			<button class="btn btn-danger" id="del" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_accountOut_delete_ok?user_id=${login_info.getUser_id()}/'">탈퇴하기</button>
-			<button class="btn btn-default" id ="cancel"onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
+			<button class="btn btn-danger" id="del">탈퇴하기</button>
+			<button class="btn btn-default" id ="cancel" onClick="location.href='${pageContext.request.contextPath}/myPage/myPage_index.do'">취소하기</button>
 		</div>
 		</div>
 	</div>
@@ -114,5 +114,46 @@
 
 
 <%@ include file="/WEB-INF/views/inc/plugin.jsp"%>
+<script type="text/javascript">
+		
+		$(function(){
+			$('#del').on('click', function(e){
+                e.preventDefault();
+                // 확인, 취소버튼에 따른 후속 처리 구현
+                swal({
+                   title : '확인', // 제목
+                   text : "정말 탈퇴 하시겠습니까?", // 내용
+                   type : 'question', // 종류   
+                   confirmButtonText : '네', // 확인버튼 표시 문구
+                   showCancelButton : true, // 취소버튼 표시 여부
+                   cancelButtonText : '아니오', // 취소버튼 표시 문구
+                }).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+                   if (result.value) { // 확인 버튼이 눌러진 경우
+                 		
+                	   $.ajax({
+                		url: getContextPath()+'/myPage/myPage_accountOut_delete_ok'
+                		,method:'get'
+                		,data: {}
+                		,success:function(){
+                			swal('성공','탈퇴되었습니다.', 'success').then(function(){
+                				location.href=getContextPath()+"/";
+                			})
+                		},error:function(){
+                			swal('에러', '탈퇴에 실패했습니다.', 'error');
+                		}
+                		
+                	   })
+                	   
+                	} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+                   		swal('취소', '탈퇴가 취소되었습니다.','error');
+                   	}
+            	 });			
+         	 })
+		})
+		
+		
+		
+</script>
 </body>
 </html>
+                	  

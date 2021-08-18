@@ -132,7 +132,7 @@ $(function(){
 					success: function(data) { 
 						cmt_list();
 					},error:function(request,status,error){
-						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
+						swal("실패","잘못된 요청입니다. 로그인 정보를 확인하세요.","error")
 					}
 		});
 		var comment_text=$('#comment_text').val('');
@@ -181,25 +181,37 @@ $(function(){
 		/**댓글 삭제 ajax*/
 		function cmt_delete(comment_no){
 		var crew_post_post_no =$('#post_no').val();
+					
 		
-			if (confirm("정말 삭제하시겠습니까?")){
-			$.ajax({
-					url: getContextPath() + '/commPage/comm_crew_post/comment',
-					type: 'DELETE',
-					dataType: 'json',
-					data: {comment_no:comment_no, crew_post_post_no:crew_post_post_no},
-					success: function(data) {
-						if(data.rt)
-						alert("삭제되었습니다.")
-						cmt_list()
-						
-				 },error:function(request,status,error){
-						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
+						swal({
+						title : '확인', // 제목
+						text : "정말 삭제하시겠습니까?", // 내용
+						type : 'warning', // 종류
+						confirmButtonText : '네', // 확인버튼 표시 문구
+						showCancelButton : true, // 취소버튼 표시 여부
+						cancelButtonText : '아니오', // 취소버튼 표시 문구
+					}).then(
+						function(result){
+							if (result.value) { // 확인 버튼이 눌러진 경우
+						$.ajax({
+							url: getContextPath() + '/commPage/comm_crew_post/comment',
+							type: 'DELETE',
+							dataType: 'json',
+							data: {comment_no,crew_post_post_no},
+							success: function(data) {
+								if(data.rt)
+								swal("성공", "삭제되었습니다.", "success")
+								cmt_list()
+							},error:function(request,status,error){
+								swal("에러","잘못된 요청입니다. 로그인 정보를 확인하세요.","error"
+								).then(function(){
+								location.href=getContextPath()+"/mainPage/login.do"	
+								})
+							}
+						});
 					}
-			});
+				});
 			}
-			
-		}
 		
 
 

@@ -329,6 +329,12 @@ carousel-title2 {
 						<strong>걷기 기록</strong>
 					</h3>
 				</div>
+				<div class="modal-body" style="background-color: rgba( 235, 235, 235, 0.4 );">
+				<h3>페이지를 이동하거나 브라우저를 끄지 마세요. 기록이 저장되지 않습니다.</h3>
+				<h3>기록하고 싶은 코스 기록이 끝나면 기록 중지를 눌러 저장하세요.</h3>
+				<h4>* 걷기Log-목표설정에서 미리 목표를 설정하면 목표대비 달성치를 확인할 수 있습니다.</h4>
+				<h4>* 나만의 코스에서 내가 저장한 기록을 글로 남겨 공유할 수 있습니다.</h4>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal"
 						style="width: 150px;">닫기</button>
@@ -347,14 +353,18 @@ carousel-title2 {
 
 				<div class="modal-header">
 					<h3>
-						<strong>걷기 기록</strong>
+						<strong>기록 중지</strong>
 					</h3>
+				</div>
+				<div class="modal-body" style="background-color: rgba( 235, 235, 235, 0.4 );">
+				<h3>지금까지의 코스를 저장하시려면, 코스 이름을 입력해주세요.</h3>
 				</div>
 				<div class="modal-footer">
 					<form>
 						<label for="course-name">코스 이름: </label> <input type="text"
-							name="course_name" id="course_name" placeholder="코스 이름을 입력해주세요."
+							name="course_name" id="course_name" placeholder=""
 							style="display: inline-block; height: 30px; width: 80%; margin-bottom: 3px">
+						<br>
 						<br>
 						<button type="button" class="btn btn-warning" data-dismiss="modal"
 							style="width: 150px;">닫기</button>
