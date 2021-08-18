@@ -250,14 +250,18 @@ public class AdminController {
 		
 		int output_count = 0;
 		
+		List<UserTrafficLog> output_Hour_Count = null;
+		
 		try {
 			output_count = userTrafficLogService.login_count(input);
+			output_Hour_Count = userTrafficLogService.loginHourCount(input);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		model.addAttribute("output_count", output_count);
+		model.addAttribute("output_Hour_Count", output_Hour_Count);
 		
 		return new ModelAndView("adminPage/admin_stats");
 	}

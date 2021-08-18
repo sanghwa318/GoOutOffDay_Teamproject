@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -50,8 +53,13 @@ h3 {
 					</div>
 				</div>
 				<h2 class="text-primary">
-					<em>일일 접속 인원 : ${output_count }</em>
+					<em>일일 접속 총 인원 : ${output_count }</em>
+					<c:forEach var="LoginLogItem" items="${output_Hour_Count}" >
+						<em>일일 접속 시간 : ${LoginLogItem.log_hour }</em>
+						<em>일일 접속 시간별 인원 : ${LoginLogItem.log_cnt }</em>
+					</c:forEach>
 				</h2>
+
 				<h3>주간/월 접속 인원 그래프</h3>
 				<canvas id="myChart1" width="10" height="3"></canvas>
 			</div>
@@ -65,8 +73,7 @@ h3 {
 							<option value="">일별</option>
 							<option value="1">주간별</option>
 							<option value="2">월별</option>
-						</select>
-						<select class="form-control">
+						</select> <select class="form-control">
 							<option value="">연령</option>
 							<option value="1">성별</option>
 							<option value="2">혼인여부</option>
@@ -147,29 +154,34 @@ h3 {
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
 	<script>
+		var loginHour = [];
+		var loginCnt = [];
+		
+		<c:forEach var="LoginLogItem" items="${output_Hour_Count}" >
+			loginHour.push(${LoginLogItem.log_hour});
+			loginCnt.push(${LoginLogItem.log_cnt});
+		</c:forEach>
+		
 		const ctx1 = document.getElementById('myChart1').getContext('2d');
-		const myChart1 = new Chart(ctx1,
-				{
-					type : 'bar',
-					data : {
-						labels : [ '거리', '시간', '평균 페이스' ],
-						datasets : [ {
-							axis : 'y',
-							label : '# 내 기록',
-							data : [ 12, 19, 13 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)', ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)', ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						indexAxis : 'y',
-					}
-				});
+		const myChart1 = new Chart(ctx1, {
+			type : 'bar',
+			data : {
+				labels : loginHour,
+				datasets : [ {
+					axis : 'x',
+					label : '시간',
+					data : loginCnt,
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				indexAxis : 'x',
+			}
+		});
 
 		const ctx2 = document.getElementById('myChart2').getContext('2d');
 		const myChart2 = new Chart(ctx2,

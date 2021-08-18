@@ -1,5 +1,7 @@
 package study.spring.goodspring.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -209,7 +211,20 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 		int result = 0;
 
 		try {
-			result = sqlSession.selectOne("UserTrafficLogMapper.logincount", 0);
+			result = sqlSession.selectOne("UserTrafficLogMapper.logincount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<UserTrafficLog> loginHourCount(UserTrafficLog input) throws Exception {
+		List<UserTrafficLog> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.loginHourCount", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

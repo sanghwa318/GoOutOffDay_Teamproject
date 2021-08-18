@@ -22,7 +22,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'page_in', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'page_in', #{user_info_user_no})
 	</insert>
 
 	<insert id="pageOut"
@@ -30,7 +31,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'page_out', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'page_out', #{user_info_user_no})
 	</insert>
 
 	<insert id="enterBrowser"
@@ -38,7 +40,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'enter_browser', #{user_info_user_no})
 	</insert>
 
 	<insert id="addBookmark"
@@ -46,7 +49,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'addBookmark', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'addBookmark', #{user_info_user_no})
 	</insert>
 
 	<insert id="removeBookmark"
@@ -54,7 +58,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
 	</insert>
 
 	<insert id="walkRecordStart"
@@ -62,7 +67,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'walkRecordStart', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'walkRecordStart', #{user_info_user_no})
 	</insert>
 
 	<insert id="walkRecordEnd"
@@ -70,7 +76,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'walkRecordEnd', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'walkRecordEnd', #{user_info_user_no})
 	</insert>
 
 	<insert id="casExLink"
@@ -78,7 +85,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'casExLink', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'casExLink', #{user_info_user_no})
 	</insert>
 
 	<insert id="walkExLink"
@@ -86,7 +94,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'walkExLink', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'walkExLink', #{user_info_user_no})
 	</insert>
 
 	<insert id="userLogin"
@@ -94,7 +103,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'Login', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'Login', #{user_info_user_no})
 	</insert>
 
 	<insert id="userLogout"
@@ -102,7 +112,8 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'Logout', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'Logout', #{user_info_user_no})
 	</insert>
 
 	<insert id="keyword"
@@ -110,15 +121,33 @@
 		useGeneratedKeys="true" keyProperty="log_no">
 		INSERT INTO user_traffic_log
 		(log_datetime, log_category, log_content, user_info_user_no)
-		VALUES (now(), #{log_category}, 'keyword', #{user_info_user_no})
+		VALUES
+		(now(), #{log_category}, 'keyword', #{user_info_user_no})
 	</insert>
 
 	<select id="logincount"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
-		resultMap="UserTrafficLogMap" resultType="int">
+		resultType="int">
 		SELECT count(*) as log_cnt
 		FROM user_traffic_log
-		WHERE log_content LIKE 'page_in'
-		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
+		WHERE
+		log_content LIKE 'Login'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
+		CURDATE();
+	</select>
+
+	<select id="loginHourCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		WITH login_value AS (
+		SELECT hour(log_datetime) as log_hour, count(log_datetime) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content LIKE 'Login'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1)
+
+		SELECT *
+		FROM login_value;
 	</select>
 </mapper>
