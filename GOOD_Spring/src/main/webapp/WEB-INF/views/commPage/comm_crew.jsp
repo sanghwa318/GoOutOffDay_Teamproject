@@ -184,7 +184,7 @@
 							<c:param name="crew_name" value="${item.crew_name}" />
 						</c:url>
 						
-						<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="col-xs-4 col-sm-4 col-md-4">
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
@@ -208,7 +208,7 @@
 						</c:url>
 					<c:if test="${login_info.user_admin =='true'}">
 						<%-- 관리자 권한으로 들어갔을땐, bbs상세페이지로 이동하기위한 URL --%>
-						<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="col-xs-4 col-sm-4 col-md-4">
 							<div class="thumbnail item" onclick="location.href='${bbsUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"

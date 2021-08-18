@@ -138,7 +138,7 @@
 				
 						<br>
 						<hr>
-						<p style="margin-top:100px">${postout.getPost_content()}</p>
+						<p style="margin-top:3%">${postout.getPost_content()}</p>
 			</div>
 			
 			

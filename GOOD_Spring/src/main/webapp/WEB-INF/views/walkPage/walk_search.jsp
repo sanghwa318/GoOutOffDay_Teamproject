@@ -91,7 +91,7 @@ div#category_acco .accordian-toggle {
 									<!-- 									class="form-horizontal" role="form" id="dropdown"> -->
 									<fieldset>
 										<div class="form-group">
-											<div class="col-xs-3">
+											<div class="col-xs-4">
 												<select class="form-control" name="category" id="category">
 													<option value="">유형별</option>
 													<option value="생태문화길"
@@ -106,7 +106,7 @@ div#category_acco .accordian-toggle {
 														<c:if test="${category eq '한강지천길/계절길'}">selected</c:if>>한강지천길/계절길</option>
 												</select>
 											</div>
-											<div class="col-xs-3">
+											<div class="col-xs-4">
 												<select class="form-control" name="area" id="area">
 													<option value="">지역</option>
 													<option value="강남구"
@@ -161,7 +161,7 @@ div#category_acco .accordian-toggle {
 														<c:if test="${area eq '중랑구'}">selected</c:if>>중랑구</option>
 												</select>
 											</div>
-											<div class="col-sm-2 col-xs-3 pull-right">
+											<div class="col-sm-3 col-xs-4 pull-right">
 												<select class="form-control" name="order" id="order">
 													<option value="">정렬</option>
 													<option value="distance"
@@ -206,7 +206,7 @@ div#category_acco .accordian-toggle {
 										<th><h3 class="text-center">유형</h3></th>
 										<th><h3 class="text-center">코스이름</h3></th>
 										<th><h3 class="text-center">내용</h3></th>
-										<th><h3 class="text-center">포인트</h3></th>
+										<th><h3 class="text-center hidden-xs">포인트</h3></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -240,12 +240,12 @@ div#category_acco .accordian-toggle {
 													${COUNT_BM } 명의 사용자가 찜한 코스입니다!
 												</button></td>
 											</td>
-											<td><table>
+											<td ><table>
 													<!-- 													<tr> -->
 													<!-- 														<td></td> -->
 													<!-- 													</tr> -->
 													<tr>
-														<td><h4>강남/강북 : ${SOUTH_NORTH_DIV_NM }</h4></td>
+														<td class="hidden-xs"><h4>강남/강북 : ${SOUTH_NORTH_DIV_NM }</h4></td>
 													</tr>
 													<tr>
 														<td><h4>지역구 : ${AREA_GU }</h4></td>
@@ -260,7 +260,7 @@ div#category_acco .accordian-toggle {
 														<td><h4>난이도 : ${COURSE_LEVEL }</h4></td>
 													</tr>
 													<tr>
-														<td><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
+														<td class="hidden-xs">><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
 													</tr>
 												</table></td>
 											<c:choose>
@@ -271,7 +271,7 @@ div#category_acco .accordian-toggle {
 												</c:when>
 												<%-- 조회결과가 있는 경우 --%>
 												<c:otherwise>
-													<td>
+													<td class="hidden-xs">
 														<table>
 															<%-- 조회 결과에 따른 반복 처리 --%>
 															<c:forEach var="item2"

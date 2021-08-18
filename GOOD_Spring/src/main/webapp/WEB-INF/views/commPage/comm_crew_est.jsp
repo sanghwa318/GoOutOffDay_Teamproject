@@ -167,7 +167,7 @@ margin-bottom: 5px;
 				</div>
 					
 					<div class="col-xs-12 col-sm-12 col-md-12">
-					<div class="col-sm-5 crew_pp col-md-4 col-xs-5">
+					<div class="col-sm-4 crew_pp col-md-4 col-xs-5">
 						<input type="image" id="img__wrap" name="crew_photo" id="crew_photo"
 							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
 							 width="50%" height="50%" style="border-radius: 100%; margin-top:30px;" />

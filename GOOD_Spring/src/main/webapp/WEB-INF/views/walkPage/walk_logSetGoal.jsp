@@ -7,17 +7,17 @@
 <!doctype html>
 
 <div class="tab-content">
-	<form class="form" role="form" id="goalAdd">
+	<form class="form-inline" role="form" id="goalAdd" >
 		<fieldset style="margin-top: 30px; text-align: center;">
-			<select id="setgoal_day" name="setgoal_day" class="form-control">
+			<select id="setgoal_day" name="setgoal_day" class="form-control" style="display:inline; width:20%" >
 				<option value="">기간 선택
 				<option value="1">1일</option>
 				<option value="7">7일</option>
 				<option value="30">30일</option>
-			</select> &nbsp;동안&nbsp;<input type="text" style="width: 50px;"
+			</select> &nbsp;동안&nbsp;<input type="text" style="width: 50px; display:inline;"
 				id="setgoal_distance" name="setgoal_distance" placeholder="거리"
 				class="form-control">&nbsp; km,&nbsp;<input type="text"
-				style="width: 50px;" id="setgoal_time" name="setgoal_time"
+				style="width: 50px; display:inline;" id="setgoal_time" name="setgoal_time"
 				placeholder="시간" class="form-control">&nbsp;시간을 걸을래 &nbsp;
 			<button type="submit" class="btn btn-info" id="submitGoal"
 				style="outline: none">설정하기</button>
