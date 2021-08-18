@@ -23,7 +23,6 @@ function isLike() {
 				error: function(error){
 				},
 				success: function(json){
-					console.log("json.isLike :"+json.isLike);
 					$('#likeCount').html("좋아요 "+json.count);
 					$('#likeCount2').html("좋아요 "+json.count);
 					var str ="";
@@ -72,7 +71,6 @@ $(".heart").on("click",function() {
 					}*/ 	
 		        },
 		        success: function(json) {
-				console.log("좋아요 취소 완료");
 		        isLike();
 		        }
 		})
@@ -107,7 +105,6 @@ $(".heart").on("click",function() {
 					}*/ 
 		        },
 		        success: function(json) {
-				console.log("좋아요 추가 완료");
 				isLike();
 		        }
 		})
@@ -153,7 +150,6 @@ $(function(){
 					dataType: 'json',
 					data: { "crew_post_post_no":crew_post_post_no },
 					success: function(data) {
-						console.log("data.cmtList :"+data.cmtList);
 						$('#CommentCount').html(data.count);
 						$('#CommentCount2').html(data.count);
 						var str = [];
@@ -187,7 +183,6 @@ $(function(){
 		var crew_post_post_no =$('#post_no').val();
 		
 			if (confirm("정말 삭제하시겠습니까?")){
-				console.log(comment_no)
 			$.ajax({
 					url: getContextPath() + '/commPage/comm_crew_post/comment',
 					type: 'DELETE',

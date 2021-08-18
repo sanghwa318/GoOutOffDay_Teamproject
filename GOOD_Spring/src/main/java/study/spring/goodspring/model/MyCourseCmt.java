@@ -14,6 +14,7 @@ public class MyCourseCmt {
 	private String comment_create_datetime;
 	private String comment_edit_datetime;
 	private String comment_text;
+	private int cmtCnt;
 	
 	//Join Member Table
 	private String user_id;// (사용자 ID)

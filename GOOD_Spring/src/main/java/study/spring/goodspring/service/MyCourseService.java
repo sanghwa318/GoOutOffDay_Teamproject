@@ -43,7 +43,7 @@ public interface MyCourseService {
 	/*
 	 * 나만의코스 데이터 수정
 	 * @param MyCourse 수정할 정보를 담고 있는 Beans
-	 * @return int 
+	 * @return MyCourses 
 	 * @throws Exception
 	 */
 	public void editMyCourse(MyCourses input) throws Exception;

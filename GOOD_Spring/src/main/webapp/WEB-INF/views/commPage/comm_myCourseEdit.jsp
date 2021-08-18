@@ -84,9 +84,7 @@ input#title {
 			<div class="header">
 				<h1 style="color: #343a40; padding-left: 32px">코스 수정</h1>
 			</div>
-			<form
-				action="${pageContext.request.contextPath}/commPage/comm_myCourseEditOk"
-				method="post">
+			<form>
 				<div class="row">
 					<div class="col-md-6">
 						<label for="mycourse_name" class="control-label categorydiv">코스 선택</label> 
@@ -171,18 +169,12 @@ input#title {
 									confirmButtonText : '네', // 확인버튼 표시 문구
 									showCancelButton : true, // 취소버튼 표시 여부
 									cancelButtonText : '아니오', // 취소버튼 표시 문구
-								})
-										.then(
-												function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-													if (result.value) { // 확인 버튼이 눌러진 경우
-														swal(
-																'취소',
-																'나만의 코스 수정이 취소되었습니다.',
-																'success');
-														setTimeout(
-																function() {
-																	location.href = '/WEB-INF/VIEWS/commPage/comm_myCourseDetail.do?mycourse_no=';
-																}, 1000);
+								}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+								if (result.value) { // 확인 버튼이 눌러진 경우
+								swal('취소','나만의 코스 수정이 취소되었습니다.','success');
+								setTimeout(function() {
+								location.href = getContextPath()+'/commPage/comm_myCourseDetail.do?mycourse_no=${output.mycourse_no}';
+								}, 1000);
 
 					}
 				});

@@ -88,9 +88,7 @@ input#title {
 			<div class="header">
 				<h1 style="color: #343a40; padding-left: 32px">코스 작성</h1>
 			</div>
-			<form
-				action="${pageContext.request.contextPath}/commPage/comm_myCourseWriteOk"
-				method="post">
+			<form id="mc_write_form">
 				<div class="row">
 					<div class="col-md-6">
 						<label for="mycourse_name" class="control-label categorydiv">코스
@@ -146,9 +144,8 @@ input#title {
 
 				<div class="btn-group pull-right">
 					<a id="btn_cancel" type="button"
-						href="${pageContext.request.contextPath}/commPage/comm_myCourse.do"
 						class="btn btn-warning">취소</a>
-					<input type="submit" value="작성완료" class="btn btn-primary"/>
+					<input type="button" id="write-btn" value="작성완료" class="btn btn-primary"/>
 				</div>
 			</form>
 		</div>
@@ -161,7 +158,7 @@ input#title {
 	<%@ include file="../inc/plugin.jsp"%>
 	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script
 		src="${pageContext.request.contextPath}/assets/js/myCourseWrite-js.js"></script>
 

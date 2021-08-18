@@ -295,12 +295,19 @@ public class MyCourseController {
 	/*
 	 * 나만의코스 수정 action 페이지.
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_myCourseEditOk", method = RequestMethod.POST)
-	public ModelAndView mycourseEditOk(Model model, @RequestParam(value = "mycourse_name") String mycourse_name,
+	public Map<String, Object> mycourseEditOk(Model model, 
+			@RequestParam(value = "mycourse_name") String mycourse_name,
 			@RequestParam(value = "mycourse_area") String mycourse_area,
 			@RequestParam(value = "mycourse_content") String mycourse_content) {
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
-
+		if (mycourse_area == null || mycourse_area == "") {
+			return webHelper.getJsonWarning("지역을 선택해주세요.");
+		}
+		if (mycourse_content == null || mycourse_content == "") {
+			return webHelper.getJsonWarning("내용을 입력해주세요.");
+		}
 		MyCourses input = new MyCourses();
 		input.setMycourse_name(mycourse_name);
 		input.setMycourse_area(mycourse_area);
@@ -313,12 +320,12 @@ public class MyCourseController {
 			myCourseService.editMyCourse(input);
 			output = myCourseService.getMyCoursePost(input);
 		} catch (Exception e) {
-			webHelper.redirect(null, e.getLocalizedMessage());
+			webHelper.getJsonError(e.getLocalizedMessage());
 		}
 
-		return webHelper.redirect(
-				contextPath + "/commPage/comm_myCourseDetail.do" + "?mycourse_no=" + output.getMycourse_no(),
-				"수정되었습니다.");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("output", output);
+		return webHelper.getJsonData(map);
 
 	}
 
@@ -359,18 +366,20 @@ public class MyCourseController {
 	/*
 	 * 나만의코스 작성 action 페이지.
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_myCourseWriteOk", method = RequestMethod.POST)
-	public ModelAndView mycourseWriteOk(Model model, @RequestParam(value = "mycourse_name") String mycourse_name,
+	public Map<String, Object> mycourseWriteOk(Model model, 
+			@RequestParam(value = "mycourse_name") String mycourse_name,
 			@RequestParam(value = "mycourse_area") String mycourse_area,
 			@RequestParam(value = "mycourse_content") String mycourse_content) {
 		if (mycourse_name == null || mycourse_name == "") {
-			return webHelper.redirect(null, "코스를 선택해주세요.");
+			return webHelper.getJsonWarning("코스를 선택해주세요.");
 		}
 		if (mycourse_area == null || mycourse_area == "") {
-			return webHelper.redirect(null, "지역을 선택해주세요.");
+			return webHelper.getJsonWarning("지역을 선택해주세요.");
 		}
 		if (mycourse_content == null || mycourse_content == "") {
-			return webHelper.redirect(null, "내용을 입력해주세요.");
+			return webHelper.getJsonWarning("내용을 입력해주세요.");
 		}
 
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
@@ -382,19 +391,20 @@ public class MyCourseController {
 		input.setUser_info_user_no(loginInfo.getUser_no());
 		MyCourses output = null;
 		
+		boolean isUnique;
 		try {
-			if(myCourseService.courseUniqueChk(input)) {
-				return webHelper.redirect(null, "이미 작성된 코스입니다. 다른 코스를 선택해주세요.");
+			isUnique=myCourseService.courseUniqueChk(input);
+			if(isUnique) {
+				return webHelper.getJsonError("이미 작성된 코스입니다. 다른 코스를 선택해주세요.");
 			}
 			// 데이터 추가하기
 			output = myCourseService.addMyCourse(input);
 					} catch (Exception e) {
-			webHelper.redirect(null, e.getLocalizedMessage());
+			return webHelper.getJsonError(e.getLocalizedMessage());
 		}
-
-		return webHelper.redirect(
-				contextPath + "/commPage/comm_myCourseDetail.do" + "?mycourse_no=" + output.getMycourse_no(),
-				"작성되었습니다.");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("output", output);
+		return webHelper.getJsonData(map);
 	}
 
 	/*
@@ -495,8 +505,9 @@ public class MyCourseController {
 	 * @param mycourse_no 나만의코스 글번호
 	 * @return ModelAndView
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_myCourseDeleteOk", method = RequestMethod.GET)
-	public ModelAndView mycourseDeleteOk(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
+	public Map<String, Object> mycourseDeleteOk(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
 		// 삭제처리를 위한 객체 준비
 		MyCourses input = new MyCourses();
 		input.setMycourse_no(mycourse_no);
@@ -508,7 +519,7 @@ public class MyCourseController {
 			// 로그인된 사용자의 정보와 코스 작성자가 같을 경우만 연결시킨다.
 			output = myCourseService.getMyCourseItem(input);
 			if (loginInfo.getUser_no() != output.getUser_info_user_no()) {
-				return webHelper.redirect(null, "코스 작성자만 삭제가능합니다.");
+				return webHelper.getJsonWarning("코스 작성자만 삭제가능합니다.");
 			} else {
 				// 삭제처리
 				myCourseService.deleteMyCourse(input);
@@ -516,12 +527,12 @@ public class MyCourseController {
 		} catch (Exception e) {
 			webHelper.redirect(null, e.getLocalizedMessage());
 		}
-		return webHelper.redirect(contextPath + "/commPage/comm_myCourse.do", "삭제되었습니다.");
+		return webHelper.getJsonData();
 
 	}
 
 	/*
-	 * comm_myPost
+	 * comm_myPost 내가 쓴 글 페이지
 	 */
 	@RequestMapping(value = "/commPage/comm_myPost.do", method = RequestMethod.GET)
 	public ModelAndView myPost(Model model) {

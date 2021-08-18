@@ -102,18 +102,43 @@ $(".heart").on("click",function() {
 
 //글삭제
 $("#delete-btn").on("click",function() {
-		if(confirm("삭제하시겠습니까?")){
-		location.href = getContextPath()+"/commPage/comm_myCourseDeleteOk?mycourse_no="+mycourse_no;
-		return true;
-	}else{
-		return false;
-	}
+	swal({
+		title : '확인', // 제목
+		text : "정말 삭제하시겠습니까?", // 내용
+		type : 'warning', // 종류
+		confirmButtonText : '네', // 확인버튼 표시 문구
+		showCancelButton : true, // 취소버튼 표시 여부
+		cancelButtonText : '아니오', // 취소버튼 표시 문구
+		}).then(function(result){
+			if (result.value) { // 확인 버튼이 눌러진 경우
+					$.ajax({
+					url: getContextPath()+"/commPage/comm_myCourseDeleteOk?mycourse_no="+mycourse_no,
+					dataType: 'json',
+					data: {},
+					success: function(data) {
+						if(data.rt)
+						swal("성공", "삭제되었습니다.", "success").then(function(){
+							location.href= getContextPath()+"/commPage/comm_myCourse.do"
+						})
+					},error:function(request,status,error){
+						swal("에러","잘못된 요청입니다. 로그인 정보를 확인하세요.","error"
+						).then(function(result){
+						location.href=getContextPath()+"/mainPage/login.do"	
+						})
+					}
+					});
+				}	
+			});
 })
 	
+		
 	/**댓글 등록하기 ajax */
 	function cmt_add(){
 
 		var comment_text=$('#comment_text').val();
+		if (!comment_text){
+			swal('실패', '내용을 입력하세요', 'warning');
+		}else{
 		$.ajax({
 					url: getContextPath() + '/commPage/comm_myCourseDetail/comment',
 					type: 'POST',
@@ -122,10 +147,13 @@ $("#delete-btn").on("click",function() {
 					success: function(data) { 
 						cmt_list();
 					},error:function(request,status,error){
-						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
+						swal("에러","잘못된 요청입니다. 로그인 정보를 확인하세요.","error"
+						).then(function(){
+						location.href=getContextPath()+"/mainPage/login.do"	
+						})
 					}
-		});
-		var comment_text=$('#comment_text').val('');
+			});
+		}
 	}
 	
 		/**댓글 목록 불러오기 ajax */
@@ -136,6 +164,9 @@ $("#delete-btn").on("click",function() {
 					dataType: 'json',
 					data: { mycourse_no },
 					success: function(data) {
+						$('#CommentCount').html(data.cmtCnt);
+						$('#CommentCount2').html(data.cmtCnt);
+						
 						var str = [];
 						for(var i =0; i<data.cmtList.length; i++){
 							var photo='';
@@ -164,29 +195,35 @@ $("#delete-btn").on("click",function() {
 		
 		/**댓글 삭제 ajax*/
 		function cmt_delete(comment_no){
-
-			
-			if (confirm("정말 삭제하시겠습니까?")){
-			
-				console.log(comment_no)
-			$.ajax({
-					url: getContextPath() + '/commPage/comm_myCourseDetail/comment',
-					type: 'DELETE',
-					dataType: 'json',
-					data: {comment_no},
-					success: function(data) {
-						if(data.rt)
-						alert("삭제되었습니다.")
-						cmt_list()
-						
-						
-				 },error:function(request,status,error){
-						alert("잘못된 요청입니다. 로그인 정보를 확인하세요.")
-					}
+			swal({
+						title : '확인', // 제목
+						text : "정말 삭제하시겠습니까?", // 내용
+						type : 'warning', // 종류
+						confirmButtonText : '네', // 확인버튼 표시 문구
+						showCancelButton : true, // 취소버튼 표시 여부
+						cancelButtonText : '아니오', // 취소버튼 표시 문구
+					}).then(
+						function(result){
+							if (result.value) { // 확인 버튼이 눌러진 경우
+						$.ajax({
+						url: getContextPath() + '/commPage/comm_myCourseDetail/comment',
+						type: 'DELETE',
+						dataType: 'json',
+						data: {comment_no},
+						success: function(data) {
+							if(data.rt)
+							swal("성공", "삭제되었습니다.", "success")
+							cmt_list()
+						},error:function(request,status,error){
+							swal("에러","잘못된 요청입니다. 로그인 정보를 확인하세요.","error"
+							).then(function(){
+							location.href=getContextPath()+"/mainPage/login.do"	
+							})
+						}
+					});
+				}
 			});
-			}
-			
-		}
+		};
 		
 		
 //카카오맵 지도 정보
@@ -196,8 +233,8 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		level: 4, // 지도의 확대 레벨
 		mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
 	};
-var course_name = $('#mycourse_name').data('mycoursename');
-	var mycourse_no = $('#mycourse_name').data('mycourseno');
+let course_name = $('#mycourse_name').data('mycoursename');
+	let mycourse_no = $('#mycourse_name').data('mycourseno');
 
 
 //
@@ -227,7 +264,7 @@ $(function() {
 				path: linepath,
 				strokeWeight: 2, // 선의 두께
 				strokeColor: '#FF0000', // 선 색
-				strokeOpacity: 1, // 선 투명도
+				strokeOpacity: 0.9, // 선 투명도
 				strokeStyle: 'solid' // 선 스타일
 			});
 			// 지도에 마커를 생성하고 표시한다
@@ -235,26 +272,8 @@ $(function() {
 				position: new kakao.maps.LatLng(lat[0], lon[0]), // 마커의 좌표
 				map: map // 마커를 표시할 지도 객체
 			});
-			// 지도 중심 좌표 변화 이벤트를 등록한다
-			kakao.maps.event.addListener(map, 'center_changed', function() {
-				console.log('지도의 중심 좌표는 ' + map.getCenter().toString() + ' 입니다.');
-			});
 			map.setCenter(new kakao.maps.LatLng(lat[0], lon[0]));
 
-			// 도형에 mouseover 이벤트를 등록한다 
-			kakao.maps.event.addListener(polyline, 'mouseover', function() {
-				console.log('도형에 mouseover 이벤트가 발생했습니다!');
-			});
-
-			// 도형에 mouseout 이벤트를 등록한다 
-			kakao.maps.event.addListener(polyline, 'mouseout', function() {
-				console.log('도형에 mouseout 이벤트가 발생했습니다!');
-			});
-
-			// 도형에 mousedown 이벤트를 등록한다
-			kakao.maps.event.addListener(polyline, 'mousedown', function() {
-				console.log('도형에 mousedown 이벤트가 발생했습니다!');
-			});
 		}
 	});
 	/**지도 불러오기 끝*/

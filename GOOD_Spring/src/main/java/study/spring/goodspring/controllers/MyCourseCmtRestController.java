@@ -36,15 +36,16 @@ public class MyCourseCmtRestController {
 		MyCourseCmt input = new MyCourseCmt();
 		input.setMycourse_no(mycourse_no);
 		List<MyCourseCmt> list = null;
-
+		int cmtCnt=0;//댓글개수
 		try {
 			list = myCourseCmtService.getCmtList(input);
+			cmtCnt=myCourseCmtService.getCmtCnt(input);
 		} catch (Exception e) {
 			webHelper.getJsonError(e.getLocalizedMessage());
 		}
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cmtList", list);
+		map.put("cmtCnt", cmtCnt);
 		return webHelper.getJsonData(map);
 	}
 	

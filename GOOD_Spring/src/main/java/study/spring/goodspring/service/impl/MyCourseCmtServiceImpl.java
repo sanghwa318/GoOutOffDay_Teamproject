@@ -108,4 +108,18 @@ public class MyCourseCmtServiceImpl implements MyCourseCmtService {
 
 	}
 
+
+
+	@Override
+	public int getCmtCnt(MyCourseCmt input) throws Exception {
+		MyCourseCmt result=null;
+		try {
+			result = sqlSession.selectOne("MyCourseCmtMapper.selectCmtCnt", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result.getCmtCnt();
+	}
+
 }

@@ -99,7 +99,7 @@ public class MyCourseServiceImpl implements MyCourseService {
 	/*
 	 * 데이터 등록
 	 * @param MyCourses 저장할 정보를 담고 있는 Beans
-	 * @return int
+	 * @return MyCourses
 	 * @throws Exception
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class MyCourseServiceImpl implements MyCourseService {
 	/*
 	 * 데이터 수정
 	 * @param MyCourses 수정할 정보를 담고 있는 Beans
-	 * @return int
+	 * @return void
 	 * @throws Exception
 	 */
 	@Override

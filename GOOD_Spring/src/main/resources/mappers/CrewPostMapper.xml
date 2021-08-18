@@ -100,7 +100,7 @@
 		post_crew, post_createdate, post_editdate,
 		post_title, post_content,
 		post_img, post_hits,
-		user_info_user_no,comment,
+		user_info_user_no,comment
 		FROM crew_post
 		WHERE user_info_user_no = #{user_info_user_no}
 		ORDER BY post_createdate ASC

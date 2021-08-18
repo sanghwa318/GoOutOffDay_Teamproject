@@ -218,7 +218,7 @@ margin-top:1%;
 
 			<!-- 댓글 영역 -->
 			<div class='page-header' style="margin-top:-20px;"><h3>댓글<span class="comment" style="height:80px"><i
-						class="fa fa-comment-o" ></i></span> ${total} 
+						class="fa fa-comment-o" ></i></span> <span id="CommentCount2"></span>
 						<span class="heart pull-right" style="margin-top:1px">
 					</span> <span class="pull-right" id="likeCount" style="margin-top:1%"></span><span class="pull-right" id="c_fa" style="margin-right:2%; color:#979797;">조회수 ${output.mycourse_hits }</span><hr>	
 					

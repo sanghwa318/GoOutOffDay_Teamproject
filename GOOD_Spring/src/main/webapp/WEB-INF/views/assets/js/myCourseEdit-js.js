@@ -52,32 +52,44 @@ $(function() {
 					position: new kakao.maps.LatLng(lat[0], lon[0]), // 마커의 좌표
 					map: map // 마커를 표시할 지도 객체
 				});
-				// 지도 중심 좌표 변화 이벤트를 등록한다
-				kakao.maps.event.addListener(map, 'center_changed', function() {
-					console.log('지도의 중심 좌표는 ' + map.getCenter().toString() + ' 입니다.');
-				});
+
 				map.setCenter(new kakao.maps.LatLng(lat[0], lon[0]));
 
-				// 도형에 mouseover 이벤트를 등록한다 
-				kakao.maps.event.addListener(polyline, 'mouseover', function() {
-					console.log('도형에 mouseover 이벤트가 발생했습니다!');
-				});
-
-				// 도형에 mouseout 이벤트를 등록한다 
-				kakao.maps.event.addListener(polyline, 'mouseout', function() {
-					console.log('도형에 mouseout 이벤트가 발생했습니다!');
-				});
-
-				// 도형에 mousedown 이벤트를 등록한다
-				kakao.maps.event.addListener(polyline, 'mousedown', function() {
-					console.log('도형에 mousedown 이벤트가 발생했습니다!');
-				});
 			}
 		});
 		
 		$('#submit-btn').click(function(e){
 			$("#course_name").removeAttr('disabled');
-		})
+	
+			let mycourse_name=$('#course_name option:selected').val();
+			let mycourse_area=$('#mycourse_area option:selected').val();
+			let mycourse_content=CKEDITOR.instances['mycourse_content'].getData()
+			e.preventDefault();
+			console.log(mycourse_name, mycourse_area, mycourse_content)
+				$.ajax({
+						url: getContextPath()+"/commPage/comm_myCourseEditOk",
+						dataType: 'json',
+						method:'post',
+						data: {mycourse_name, mycourse_area, mycourse_content},
+						success: function(data) {
+							swal("성공", "나만의 코스가 수정되었습니다.", "success").then(function(){
+								window.location.href= getContextPath()+"/commPage/comm_myCourseDetail.do"
+								+ "?mycourse_no=" + data.output.mycourse_no;
+							})
+						},error: function(data, status, error){
+							console.log(data)
+								var error_msg =data.responseJSON.rt
+									swal({
+										title : "에러",
+										text :error_msg,
+										type : "error"
+										})
+								return false; // <-- 실행 중단
+						}
+				})
+			})
+			
+		
 	});
 
 

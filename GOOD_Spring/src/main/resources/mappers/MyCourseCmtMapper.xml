@@ -15,6 +15,7 @@
 		<result property="comment_edit_datetime" column="comment_edit_datetime" />
 		<result property="comment_text" column="comment_text" />
 		<result property="photoJson" column="user_photo" />
+		<result property="cmtCnt" column="count(comment_no)" />
 	</resultMap>
 
 	<!-- 단일행 조회 (댓글 수정 삭제) -->
@@ -71,6 +72,13 @@
 	UPDATE mycourse_cmt SET user_no=null WHERE user_no=#{user_no};
 	</update>
 
+	<select id="selectCmtCnt"
+		parameterType="study.spring.goodspring.model.MyCourseCmt" resultMap="MyCourseCmtMap">
+		SELECT count(comment_no)
+		FROM mycourse_cmt
+		INNER JOIN mycourse_post ON mycourse_post.mycourse_no=mycourse_cmt.mycourse_no
+		WHERE mycourse_cmt.mycourse_no=#{mycourse_no}
+	</select>
 
 	
 </mapper>

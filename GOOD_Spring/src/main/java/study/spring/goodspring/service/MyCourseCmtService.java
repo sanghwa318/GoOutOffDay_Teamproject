@@ -43,4 +43,8 @@ public interface MyCourseCmtService {
 	 */
 	public int deleteCmt(MyCourseCmt input) throws Exception;
 
+	/**
+	 * 댓글 개수 조회
+	 */
+	public int getCmtCnt(MyCourseCmt input) throws Exception;
 }
