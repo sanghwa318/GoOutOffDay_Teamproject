@@ -215,7 +215,7 @@ h4 {
 					src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png" />
 			</h1>
 			<!-- 본문영역 시작 -->
-			<div class="comm_index_middle">
+			<div class="comm_index_middle" >
 
 				<!-- 본문 나만의 코스 -->
 				<div class="row show_list">

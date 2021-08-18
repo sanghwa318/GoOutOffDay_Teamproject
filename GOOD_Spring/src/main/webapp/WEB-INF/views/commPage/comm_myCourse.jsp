@@ -60,7 +60,7 @@
 			</h1>
 		</div>
 		<!-- 본문 게시판 시작 -->
-		<div class="row cas_list">
+		<div class="row cas_list" style="padding:5%;">
 			<!-- 커뮤니티 최상단 제목 -->
 			<div class="header">
 				<h1 style="color: #343a40;">나만의 코스</h1>
@@ -87,7 +87,7 @@
 								<c:param name="mycourse_no" value="${item.mycourse_no}" />
 							</c:url>
 
-							<div class="col-xs-6 col-sm-4 col-md-3">
+							<div class="col-xs-4 col-sm-4 col-md-3">
 								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}'
 									onclick="location.href='${infoUrl}'"
 									style="cursor: pointer;">
@@ -107,7 +107,7 @@
 
 			<!-- //리스트영역 끝-->
 			<div style="height: 70px;">
-				<form class="searchform col-md-4 col-md-offset-4 col-xs-9"
+				<form class="searchform col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4 col-sm-offset-4"
 					role="search" style="padding-top: 15px;" action="${pageContext.request.contextPath}/commPage/comm_myCourse.do?keyword=${keyword}" >
 					<div class="form-group input-group">
 						<input type="text" class="form-control" name="keyword" placeholder="검색">

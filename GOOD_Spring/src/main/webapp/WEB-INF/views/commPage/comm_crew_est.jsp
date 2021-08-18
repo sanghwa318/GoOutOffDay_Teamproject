@@ -110,18 +110,16 @@ margin-bottom: 5px;
 			<!-- 개설 폼 시작 -->
 			<form role="form" class="form-crew" method="post" id='est_form'	enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok">
-					<div class="form-group">
-					<div class="col-md-4">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="col-md-4 col-xs-5 col-sm-4 ">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> 
-						<input type="text" id="crew_name" class="form-control crew_input"
+						<input type="text" id="crew_name" class="form-control crew_input pull-left"
 							placeholder="한글로 입력하세요." name="crew_name" value="${crew_name}"
 							style="width: 75%; text-align-last: center; font-size: 20px;" />
 							<input type="hidden" name="crewname_unique_check" value="" />
-						<button type="button" id="crewname_unique_check" class="btn btn-default">중복확인</button>
+						<button type="button" id="crewname_unique_check" class="btn btn-default" style="padding:6px; margin:0; margin-top:-1px;">중복확인</button>
 						</div>
-					</div>
-					<div class="form-group">
-					<div class="col-md-4">
+					<div class="col-md-4 col-xs-3 col-sm-4">
 						<label for="crew_category" style="font-size: 20px;">크루 종류</label>
 						<div>
 						<select class="form-control " id="crew_category" name="crew_category"
@@ -133,12 +131,9 @@ margin-bottom: 5px;
 							</select>
 						</div>
 					</div>
-					</div>
-					<div class="form-group">
-					<div class="col-md-4">
+					<div class="col-md-4 col-xs-3 col-sm-4">
 						<label for="crew_area" class=" control-label"
 							style="font-size: 20px;">지역</label>
-						<div>
 							<select class="form-control " id="crew_area" name="crew_area"
 								style="width: 75%; text-align-last: center; font-size: 20px; padding: 0;">
 								<option value="none">지역</option>
@@ -168,12 +163,11 @@ margin-bottom: 5px;
 								<option value="중구">중구</option>
 								<option value="중랑구">중랑구</option>
 							</select>
-						</div>
-					</div>
+				</div>
 				</div>
 					
-					<div class="col-md-12">
-					<div class="col-sm-3 crew_pp">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="col-sm-5 crew_pp col-md-4 col-xs-5">
 						<input type="image" id="img__wrap" name="crew_photo" id="crew_photo"
 							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
 							 width="50%" height="50%" style="border-radius: 100%; margin-top:30px;" />
@@ -182,7 +176,7 @@ margin-bottom: 5px;
 							name="crew_photo" id="img__preview" class="hidden" />
 					</div>
 					
-					<div class="col-md-9">
+					<div class="col-md-7 col-sm-8 col-xs-7">
 						<h3 class="header">크루 간단 소개</h3>
 						<textarea class="form-control" rows="5" id="crew_sinto"
 							name="crew_sinto"
@@ -191,7 +185,7 @@ margin-bottom: 5px;
 					</div>
 					
 					</div>
-					<div class="col-sm-12">
+					<div class="col-sm-12 col-xs-12 col-md-12">
 						<h3 class="header">크루 설명</h3>
 						<textarea class="form-control" rows="5" id="crew_dinto"
 							name="crew_dinto"
@@ -199,7 +193,7 @@ margin-bottom: 5px;
 							placeholder="해당 크루에 대한 설명 혹은 공지사항을 적어주세요."></textarea>
 					
 					</div>	
-					<div class="col-sm-12">
+					<div class="col-sm-12 col-xs-12 col-md-12">
 					<div class="text-center btn_container" >
 						<button type="submit" class="btn btn-primary" id="btn_ok">
 							<span>개설 완료</span>

@@ -300,8 +300,8 @@ carousel-title2 {
 						style="cursor: pointer;">
 						<img src="#" alt="테스트이미지1" height="200" width="250">
 						<div class="caption">
-							<h4>${item.COURSE_NAME}>${item.CPI_NAME }</h4>
-							<p>${item.CPI_CONTENT }</p>
+							<h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.COURSE_NAME}>${item.CPI_NAME }</h4>
+							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.CPI_CONTENT }</p>
 						</div>
 						<div class="wishlist">
 							<span class="heart"><i class="fa fa-heart-o"
