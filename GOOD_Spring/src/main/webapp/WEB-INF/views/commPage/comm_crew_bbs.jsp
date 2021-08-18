@@ -121,15 +121,7 @@
                   <!-- 크루 게시물 영역 -->
                   <c:choose>
                      <%--조회결과가 없는 경우 --%>
-                     <c:when
-                        test="${crewpostoutput == null || fn:length(crewpostoutput) == 0 })">
-                        <tr>
-                           <td class="text-center">등록된 게시글이 없습니다.</td>
-                        </tr>
-                     </c:when>
-
-                     <%--조회결과가 있는 경우 --%>
-                     <c:otherwise>
+                     <c:when test="${crewpostoutput != null && fn:length(crewpostoutput) != 0 }">
                         <!--조회 결과에 따른 반복 처리 -->
                         <c:forEach var="item" items="${crewpostoutput}"
                            varStatus="status">
@@ -160,8 +152,14 @@
                            </tr>
 
                         </c:forEach>
+                       
+                     </c:when>
 
-
+                     <%--조회결과가 없는 경우 --%>
+                     <c:otherwise>
+						 <tr>
+                           <td class="text-center" colspan="5">등록된 게시글이 없습니다.</td>
+                        </tr>
                      </c:otherwise>
 
 
@@ -179,10 +177,12 @@
             <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
                <div class="col-md-7 col-sm-4 col-xs-3 col-md-offset-2 col-sm-offset-3 col-xs-offset-2" role="search">
                   <div class="form-group input-group">
-                     <input type="hidden" id="crew_no" name="crew_no"
-                     value="${output.crew_no}" />
                         <input type="text" class="form-control" name="keyword"
                            placeholder="게시글 검색"> <span class="input-group-btn">
+                     <input type="hidden" id="crew_no" name="crew_no"
+                     value="${output.crew_no}" />
+                     <input type="hidden" id="crew_name" name="crew_name"
+                     value="${output.crew_name}" />
                            <button class="btn btn-blue" type="submit">
                               <i class="glyphicon glyphicon-search"></i>
                            </button>
@@ -295,13 +295,8 @@
 
 </body>
 <script>
-   function getContextPath() {
-      var hostIndex = location.href.indexOf(location.host)
-            + location.host.length;
-      var contextPath = location.href.substring(hostIndex, location.href
-            .indexOf('/', hostIndex + 1));
-      return contextPath;
-   }
+	let crew_no='${output.crew_no}';
+	let crew_name='${crew_name}'
    $("#out")
          .click(
                function() {
@@ -331,13 +326,7 @@
                });
 </script>
 <script>
-   function getContextPath() {
-       var hostIndex = location.href.indexOf(location.host)
-             + location.host.length;
-       var contextPath = location.href.substring(hostIndex, location.href
-             .indexOf('/', hostIndex + 1));
-       return contextPath;
-    }
+
       $("#crew_del").click(function() {
 
          event.preventDefault();      
@@ -351,8 +340,25 @@
             cancelButtonText : '아니오', // 취소버튼 표시 문구
          }).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
             if (result.value) { // 확인 버튼이 눌러진 경우
-
-               window.location.href=getContextPath() +"/commPage/comm_crew_bbs_deletecrew.do?crew_no=" + ${output.crew_no} ;
+            	$.ajax({
+					url: getContextPath() +"/commPage/comm_crew_bbs_deletecrew.do?crew_no="+ crew_no,
+					method:'post',
+					data: {crew_no},
+					success:function(json){
+						swal('성공', crew_name+' 크루가 해체 되었습니다.', 'success' 
+							).then(function(result){
+							window.location.href=getContextPath()+"/commPage/comm_crew.do"
+						});
+					},error:function(data, status, error){
+						var error_msg =data.responseJSON.rt
+						swal({
+							title : "에러",
+							text :error_msg,
+							type : "error"
+							})
+					return false; // <-- 실행 중단
+					}
+				});
 
             } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
                swal('취소', '해체가 취소되었습니다.', 'error');

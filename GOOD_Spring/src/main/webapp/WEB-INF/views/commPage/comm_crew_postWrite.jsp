@@ -41,8 +41,7 @@
 			<br />
 
 
-			<form role="form" method="POST" id='post_form'
-				action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite_ok">
+			<form role="form" id="post_form">
 				<input type="hidden" name="post_crew" value="${output.crew_name}" />
 				<input type="hidden" name="crew_no" value="${output.crew_no}" />
 				<div class="row">
@@ -80,16 +79,15 @@
 	<script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
 	<!-- // js -->
 	<script>
-		new FroalaEditor('#editable');
-	</script>
-	<script>
+	let crew_no="${output.crew_no}"
+	let post_crew="${output.crew_name}"
 		$(function() {
 			$('#wr_ok').click(function(e) {
 				e.preventDefault();
 
-				var post_title_val = $("#post_title").val();
-
-				if (!post_title_val) { // 입력되지 않았다면?
+				var	post_title=document.getElementById('post_title').value;
+				var post_content= CKEDITOR.instances['post_content'].getData()
+				if (post_title==null||post_title=="") { // 입력되지 않았다면?
 					swal({
 						title : "에러",
 						text : "제목을 입력해주세요.",
@@ -103,53 +101,59 @@
 					}); // <-- 메시지 표시
 					return false; // <-- 실행 중단
 				}
-				 var post_content_val = CKEDITOR.instances.post_content.getData();
 
-				if (!post_content_val) { // 입력되지 않았다면?
+				if (post_content==null||post_content=="") { // 입력되지 않았다면?
 					swal({
 						title : "에러",
 						text : "내용을 입력해주세요.",
 						type : "error"
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						setTimeout(function() {
-							CKEDITOR.instances.focus(); // <-- 커서를 강제로 넣기
-						}, 100);
-					}); // <-- 메시지 표시
+					})
 					return false; // <-- 실행 중단
 				} else {
-					swal({
-						title : '확인', // 제목
-						text : "게시글 작성이 완료되었습니다.", // 내용
-						type : 'success', // 종류
-					}).then(function(result) {
-						// 창이 닫히는 애니메이션의 시간이 있으므로,
-						// 0.1초의 딜레이 적용 후 포커스 이동
-						$('#post_form').submit();
+					$.ajax({
+						url:getContextPath()+"/commPage/comm_crew_postWrite_ok",
+						method:'post',
+						data:{post_title,post_content,post_crew,crew_no},
+						success:function(data){
+							var post_no=data.input.post_no
+							swal({
+								title : '성공', // 제목
+								text : "게시글 작성이 완료되었습니다.", // 내용
+								type : 'success', // 종류
+							}).then(function(result) {
+								window.location = getContextPath() + "/commPage/comm_crew_post.do?post_no="+post_no
+							})
+						},error:function(data, status, error){
+							var error_msg =data.responseJSON.rt
+							swal({
+								title : "에러",
+								text :error_msg,
+								type : "error"
+								})
+						return false; // <-- 실행 중단
+						}
 					})
 				}
-
 			});
+			
 			$("#wr_cancel").click(function() {
 				// 확인, 취소버튼에 따른 후속 처리 구현
 				swal({
 					title : '확인', // 제목
-					text : "정말 취소를 하시겠습니까?", // 내용
+					text : "정말 취소 하시겠습니까?", // 내용
 					type : 'warning', // 종류
 					confirmButtonText : '네', // 확인버튼 표시 문구
 					showCancelButton : true, // 취소버튼 표시 여부
 					cancelButtonText : '아니오', // 취소버튼 표시 문구
 				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('삭제', '게시글 작성이 취소되었습니다.', 'success');
-						
-
+						swal('삭제', '게시글 작성이 취소되었습니다.', 'success').then(function(result){
+							window.location = getContextPath() + "/commPage/comm_crew_bbs.do?crew_no=" 
+							+ crew_no + "&crew_name=" + post_crew;
+						});
 					}
-
 				});
 			});
-
 		});
 	</script>
 </body>

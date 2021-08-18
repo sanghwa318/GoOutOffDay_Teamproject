@@ -1,6 +1,5 @@
 package study.spring.goodspring.controllers;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +105,11 @@ public class CommController {
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) throws Exception {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
+		if (login_info == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		int userNo = login_info.getUser_no();
 
 		// 1) 페이지 구현에 필요한 변수값 생성
@@ -140,8 +144,6 @@ public class CommController {
 		try {
 			// 전체 게시글 수 조회
 			totalCount = crewPostService.getCrewPostCount(crewpost);
-			// 전체 게시글 수 조회
-			crewpostoutput = crewPostService.selectCrewPostList(crewpost);
 
 			// 페이지 번호 계산 --> 계산 결과를 로그로 출력
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
@@ -181,9 +183,9 @@ public class CommController {
 			String redirectUrl = contextPath + "/mainPage/login.do";
 			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
 		}
-
+		
 		int userNo = login_info.getUser_no();
-
+		
 		// 1) 유효성 검사
 		if (crew_no == 0) {
 			return webHelper.redirect(null, "조회된 크루가 없습니다.");
@@ -205,7 +207,23 @@ public class CommController {
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
+		// 이미 가입된 회원인지 검사
+		CrewMember crewMember = new CrewMember();
+		crewMember.setCrew_crew_no(output.getCrew_no());
+		crewMember.setUser_info_user_no(userNo);
+		boolean isMember=false;
+		try {
+			isMember = crewMemberService.RegexCrewMemberList(crewMember);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		if(isMember) {
+			//가입된 회원이면 bbs페이지로 이동
+			return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + output.getCrew_no() + "&crew_name=" + output.getCrew_name(), null);
+		}
 
+		
+		
 		// 3) View 처리
 		model.addAttribute("output", output);
 		return new ModelAndView("commPage/comm_crew_info");
@@ -214,8 +232,9 @@ public class CommController {
 	/*
 	 * comm_crew_info_ok.do
 	 */
-	@RequestMapping(value = "/commPage/comm_crew_info_ok", method = RequestMethod.GET)
-	public ModelAndView crewinfoOk(Model model,
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_crew_info_ok", method = RequestMethod.POST)
+	public Map<String, Object> crewinfoOk(Model model,
 			@RequestParam(value = "crew_no", defaultValue = "0") int crew_no,
 			@RequestParam(value = "crew_name", defaultValue = "") String crew_name)
 	{
@@ -235,7 +254,7 @@ public class CommController {
 		
 		try {
 			if(crewMemberService.RegexCrewMemberList(input)) {
-				return webHelper.redirect(null, "이미 가입된 크루입니다.");
+				return webHelper.getJsonWarning("이미 가입된 크루입니다.");
 			}
 			// 데이터 저장
 			// 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 pk값이 저장
@@ -247,7 +266,7 @@ public class CommController {
 			e.getLocalizedMessage();
 		}
 
-		return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + input.getCrew_crew_no() + "&crew_name=" + input.getCrew_name(), "가입되었습니다.");
+		return webHelper.getJsonData();
 	}
 
 	/*
@@ -391,6 +410,11 @@ public class CommController {
 			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
+		if (login_info == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		int user_no = login_info.getUser_no();
 		
 
@@ -401,8 +425,6 @@ public class CommController {
 		post.setUser_info_user_no(user_no);
 
 		CrewPost postout = null;
-		CrewPost postout2 = null;
-		CrewPost postout3 = null;
 		
 		Member member =null;
 		Crew crew =null;
@@ -414,13 +436,11 @@ public class CommController {
 			crewPostService.updateHits(post);
 			
 			// 데이터 조회하기
-			postout = crewPostService.selectCrewPost(post);
-			postout2 = crewPostService.getCrewNoPostCount(post);
-			postout3 = crewPostService.selectCrewUser(post);
+			postout = crewPostService.getCrewNoPostCount(post);
 			
 			int userNo=postout.getUser_info_user_no();
 			member= memberService.selectItemByNo(userNo);
-			int crewNo = postout2.getCrew_no();
+			int crewNo = postout.getCrew_no();
 			crew = crewService.getCrewItemByNo(crewNo);
 			
 		} catch (Exception e) {
@@ -429,10 +449,7 @@ public class CommController {
 		}
 
 		// 3) View 처리
-		model.addAttribute("post", post);
 		model.addAttribute("postout", postout);
-		model.addAttribute("postout2", postout2);
-		model.addAttribute("postout3", postout3);
 		model.addAttribute("member", member);
 		model.addAttribute("crew", crew);
 		return new ModelAndView("/commPage/comm_crew_post");
@@ -443,18 +460,21 @@ public class CommController {
 	 */
 	@RequestMapping(value = "/commPage/comm_crew_postEdit.do", method = RequestMethod.GET)
 	public ModelAndView crewPostEdit(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "post_no", defaultValue = "") int post_no) {
+			@RequestParam(value = "post_no", defaultValue = "") String post_no_str) {
 
 		Member login_info = (Member) webHelper.getSession("login_info");
-		
+		if (login_info == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		// 1) 현재 게시물 글 정보 조회
+		int post_no=Integer.parseInt(post_no_str);
 		CrewPost post = new CrewPost();
 		post.setPost_no(post_no);
 		
 
 		CrewPost postout = null;
-		CrewPost postout2 = null;
-		CrewPost postout3 = null;
 		
 		Member member =null;
 		Crew crew =null;
@@ -463,30 +483,23 @@ public class CommController {
 		
 		try {
 			//현재 게시물 데이터 조회하기
-			postout = crewPostService.selectCrewPost(post);
-			
+			postout = crewPostService.getCrewNoPostCount(post);
 			if(login_info.getUser_no() != postout.getUser_info_user_no()) {
 				webHelper.redirect(null, "게시글 작성자만 수정가능합니다.");
 			}
 			
-			postout2 = crewPostService.getCrewNoPostCount(post);
-			postout3 = crewPostService.selectCrewUser(post);
 			
 			int userNo=postout.getUser_info_user_no();
 			member= memberService.selectItemByNo(userNo);
-			int crewNo = postout2.getCrew_no();
+			int crewNo = postout.getCrew_no();
 			crew = crewService.getCrewItemByNo(crewNo);
 			
 		} catch (Exception e) {
-			e.getLocalizedMessage();
-//			return webHelper.redirect(null, e.getLocalizedMessage());
+			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 
 		// 3) View 처리
-		model.addAttribute("post", post);
 		model.addAttribute("postout", postout);
-		model.addAttribute("postout2", postout2);
-		model.addAttribute("postout3", postout3);
 		model.addAttribute("member", member);
 		model.addAttribute("crew", crew);
 		model.addAttribute("total", total);
@@ -498,8 +511,9 @@ public class CommController {
 	/*
 	 * comm_crew_postEdit_ok
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_crew_postEdit_ok", method = RequestMethod.POST)
-	public ModelAndView crewPostEdit(Model model, HttpServletResponse response, HttpServletRequest request,
+	public Map<String, Object> crewPostEdit(Model model, HttpServletResponse response, HttpServletRequest request,
 			// 제목
 			@RequestParam(value = "post_title", defaultValue = "") String title,
 			// 내용
@@ -518,7 +532,6 @@ public class CommController {
 		input.setPost_no(post_no);
 		
 		
-		@SuppressWarnings("unused")
 		CrewPost postout = null;
 
 		try {
@@ -529,14 +542,13 @@ public class CommController {
 			postout = crewPostService.selectCrewPost(input);
 			
 		} catch (Exception e) {
-			e.getLocalizedMessage();
+			return webHelper.getJsonError("게시글 수정에 실패했습니다.");
 		}
 
 		// 3) 결과를 확인하기 위한 페이지 이동
-
-		return webHelper.redirect(
-				contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no(),
-				"게시글이 수정되었습니다.");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("postout", postout);
+		return webHelper.getJsonData(map);
 
 
 	}
@@ -548,7 +560,12 @@ public class CommController {
 	public ModelAndView crewPostWrite(Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "post_crew", defaultValue = "") String post_crew,
 			@RequestParam(value = "crew_no", defaultValue = "") int crew_no) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		if (login_info == null) {
 
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		// 2) 데이터 조회하기
 		// 조회에 필요한 조건값을 Beans에 담는다
 		Crew input = new Crew();
@@ -573,8 +590,9 @@ public class CommController {
 	/*
 	 * comm_crew_postWrite_ok 작성 폼에 대한 action 페이지
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_crew_postWrite_ok", method = RequestMethod.POST)
-	public void crewPostWrite(Model model, HttpServletResponse response, HttpServletRequest request,
+	public Map<String, Object> crewPostWrite(Model model, HttpServletResponse response, HttpServletRequest request,
 			// 제목
 			@RequestParam(value = "post_title", defaultValue = "") String title,
 			// 내용
@@ -603,18 +621,11 @@ public class CommController {
 			crewPostService.insertCrewPost(input);
 			output = crewService.getCrewItem(output);
 		} catch (Exception e) {
-			e.getLocalizedMessage();
+			return webHelper.getJsonError("글쓰기에 실패했습니다.");
 		}
-
-		// 2) 결과를 확인하기 위한 페이지 이동
-		String redirectUrl = contextPath + "/commPage/comm_crew_post.do?post_no=" + input.getPost_no();
-
-		try {
-			response.sendRedirect(redirectUrl);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("input",input);
+		return webHelper.getJsonData(map);
 	}
 	
 	/*

@@ -108,9 +108,9 @@
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 					</span>
-					<h3>가입된 회원: ${postout2.crew_member}명</h3>
-					<h4 class="crew_name">${postout2.crew_name} 소개</h4>
-                  <h4 >${postout2.crew_sinto}</h4>
+					<h3>가입된 회원: ${postout.crew_member}명</h3>
+					<h4 class="crew_name">${postout.crew_name} 소개</h4>
+                  <h4 >${postout.crew_sinto}</h4>
 					<input type="hidden" name=crew_post_post_no id="post_no"
 						value="${postout.post_no}">
 				</div>
@@ -124,7 +124,7 @@
 					<img style="border-radius: 25px; margin-right:0.5%;" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="50px" height="50px">
 				</div>
 				
-					<h4 style="margin-left:12%;">${postout3.getUser_name()}</h4>
+					<h4 style="margin-left:12%;">${postout.getUser_name()}</h4>
 					<p class="pull-left" style="color:#979797; font-size:12px; margin-left:1%;" >작성일자: ${postout.getPost_createdate()}</p>
 					<p class="pull-left " style="margin-left: 15px; color:#979797; font-size:12px;">조회수 :
 						${postout.post_hits}</p>
@@ -180,9 +180,9 @@
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do"
 				method="GET" >
-				<input type="hidden" name="crew_no" value="${postout2.crew_no}" />
+				<input type="hidden" name="crew_no" value="${postout.crew_no}" />
 				<input type="hidden" id="crew_name" name="crew_name"
-					value="${postout2.crew_name}" />
+					value="${postout.crew_name}" />
 				<button type="submit" id="btn1" class="btn btn-default" style="margin-left:30px">목록</button>
 			</form>
 		</div>
@@ -190,20 +190,18 @@
 					value="${postout.post_no}">
 			<c:if test="${postout.user_info_user_no==login_info.user_no || login_info.user_admin =='true'}">
 			<div class="row">
-			<form
-				action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do"
-				method="GET">
+			<form>
 				
 				<div class="btn-group pull-right">
-					<button type="submit" class="btn btn-primary wr_edit" id="wr_edit">수정</button>
+					<button type="button" class="btn btn-primary wr_edit" id="wr_edit">수정</button>
 				</div>
 			</form>
 			<form
 				action="${pageContext.request.contextPath}/commPage/comm_crew_postDelete_ok.do"
 				method="GET" id="delete_ok">
 				<input type="hidden" name=post_no id="post_no"value="${postout.post_no}">
-				<input type="hidden" name=crew_no id="name=crew_no"value="${postout2.crew_no}">
-				<input type="hidden" name=crew_name id="crew_name"value="${postout2.crew_name}">
+				<input type="hidden" name=crew_no id="name=crew_no"value="${postout.crew_no}">
+				<input type="hidden" name=crew_name id="crew_name"value="${postout.crew_name}">
 				<div class="btn-group pull-right">
 					<button type="submit" class="btn btn-warning wr_delete" id="wr_delete">삭제</button>
 				</div>
@@ -229,86 +227,53 @@
 
 	<!--버튼  -->
 	<script>
+
 		$(function() {
-			$('#wr_edit')
-					.click(
-							function(e) {
+			let post_no= "${postout.post_no}"
+			console.log(post_no)
+			$('#wr_edit').click(function(e) {
+			// 창이 닫히는 애니메이션의 시간이 있으므로,
+			// 0.1초의 딜레이 적용 후 포커스 이동
+				window.location.href = getContextPath()+'/commPage/comm_crew_postEdit.do?post_no='+post_no;
+			});
 
-								swal({
-									title : '확인', // 제목
-									text : "게시글을 수정하시겠습니까?", // 내용
-									type : 'warning', // 종류
-									confirmButtonText : '네', // 확인버튼 표시 문구
-									showCancelButton : true, // 취소버튼 표시 여부
-									cancelButtonText : '아니오', // 취소버튼 표시 문구
-								})
-										.then(
-												function(result) {
-													// 창이 닫히는 애니메이션의 시간이 있으므로,
-													// 0.1초의 딜레이 적용 후 포커스 이동
-													if (result.value) { // 확인 버튼이 눌러진 경우
-														setTimeout(
-																function() {
-																	location.href = '${pageContext.request.contextPath}/commPage/comm_crew_postEdit.do';
-																}, 1000);
+			$('#wr_delete').click(
+				function(e) {
+				e.preventDefault();
+				swal({
+					title : '확인', // 제목
+					text : "정말 게시글을 삭제하시겠습니까?", // 내용
+					type : 'warning', // 종류
+					confirmButtonText : '네', // 확인버튼 표시 문구
+					showCancelButton : true, // 취소버튼 표시 여부
+					cancelButtonText : '아니오', // 취소버튼 표시 문구
+				}).then(
+					function(result) {
+					// 창이 닫히는 애니메이션의 시간이 있으므로,
+					// 0.1초의 딜레이 적용 후 포커스 이동
+					if (result.value) { // 확인 버튼이 눌러진 경우
+					swal('삭제','게시글이 삭제되었습니다.','success');
+					document.getElementById("delete_ok").submit();   // 재 submit
+					}
+				});
+			});
 
-													}
-												}); // <-- 메시지 표시
-
-							});
-
-			$('#wr_delete')
-					.click(
-							function(e) {
-								e.preventDefault();
-								swal({
-									title : '확인', // 제목
-									text : "정말 게시글을 삭제하시겠습니까?", // 내용
-									type : 'warning', // 종류
-									confirmButtonText : '네', // 확인버튼 표시 문구
-									showCancelButton : true, // 취소버튼 표시 여부
-									cancelButtonText : '아니오', // 취소버튼 표시 문구
-								})
-										.then(
-												function(result) {
-													// 창이 닫히는 애니메이션의 시간이 있으므로,
-													// 0.1초의 딜레이 적용 후 포커스 이동
-													if (result.value) { // 확인 버튼이 눌러진 경우
-														swal(
-																'삭제',
-																'게시글이 삭제되었습니다..',
-																'success');
-														document.getElementById("delete_ok").submit();   // 재 submit
-
-													}
-												});
-							});
-
-			$('#d_delete')
-					.click(
-							function(e) {
-								swal({
-									title : '확인', // 제목
-									text : "정말 게시글을 삭제하시겠습니까?", // 내용
-									type : 'warning', // 종류
-									confirmButtonText : '네', // 확인버튼 표시 문구
-									showCancelButton : true, // 취소버튼 표시 여부
-									cancelButtonText : '아니오', // 취소버튼 표시 문구
-								})
-										.then(
-												function(result) {
-													// 창이 닫히는 애니메이션의 시간이 있으므로,
-													// 0.1초의 딜레이 적용 후 포커스 이동
-													if (result.value) { // 확인 버튼이 눌러진 경우
-														swal('삭제',
-																'댓글이 삭제되었습니다.',
-																'success');
-														
-
-													}
-												});
-							});
-
+			$('#d_delete').click(function(e) {
+				swal({
+					title : '확인', // 제목
+					text : "정말 게시글을 삭제하시겠습니까?", // 내용
+					type : 'warning', // 종류
+					confirmButtonText : '네', // 확인버튼 표시 문구
+					showCancelButton : true, // 취소버튼 표시 여부
+					cancelButtonText : '아니오', // 취소버튼 표시 문구
+				}).then(function(result) {
+					// 창이 닫히는 애니메이션의 시간이 있으므로,
+					// 0.1초의 딜레이 적용 후 포커스 이동
+					if (result.value) { // 확인 버튼이 눌러진 경우
+						swal('삭제','댓글이 삭제되었습니다.','success');
+						}
+					});
+				});
 		});
 	</script>
 

@@ -10,5 +10,6 @@ public class UserTrafficLog {
 	private String log_category; // 이벤트가 발생한 페이지의 위치 혹은 검색어
 	private String log_content; // 발생한 이벤트의 종류
 	private int user_info_user_no; //사용자 유저No
-
+	private int log_hour;
+	private int log_cnt;
 }

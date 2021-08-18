@@ -204,4 +204,17 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 		}
 	}
 
+	@Override
+	public int login_count(UserTrafficLog input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("UserTrafficLogMapper.logincount", 0);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
 }

@@ -28,4 +28,5 @@ public interface UserTrafficLogService {
 	
 	public void addKeyword(UserTrafficLog input) throws Exception;
 	
+	public int login_count(UserTrafficLog input) throws Exception;
 }

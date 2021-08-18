@@ -218,7 +218,11 @@ public class myPageController {
 		// 현재 사용자의 정보를 받아오기 위한 session을 받아와서
 		// Member타입의 객체에 담는다.
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
 
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		Inquiry input = new Inquiry();
 		// 사용자 정보에서 user_no를 input에 설정
 		input.setUser_info_user_no(loginInfo.getUser_no());
@@ -244,6 +248,12 @@ public class myPageController {
 	 */
 	@RequestMapping(value = "/myPage/myPage_inquiryDetail.do", method = RequestMethod.GET)
 	public ModelAndView InquiryDetail(Model model, @RequestParam(value = "QnA_no") int QnA_no) {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		/* 1) 데이터 조회하기 */
 
 		Inquiry input = new Inquiry();
@@ -269,7 +279,12 @@ public class myPageController {
 	 */
 	@RequestMapping(value = "/myPage/myPage_inquiryWrite.do", method = RequestMethod.GET)
 	public ModelAndView InquiryWrite() {
+		Member loginInfo = ((Member) webHelper.getSession("login_info"));
+		if (loginInfo == null) {
 
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		return new ModelAndView("myPage/myPage_inquiryWrite");
 
 	}
@@ -324,7 +339,12 @@ public class myPageController {
 		PageData pageData = null;
 		// [페이지네이션] 변수 추가 (종료)
 
-		Member loginInfo = (Member) webHelper.getSession("login_info", new Member());
+		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+
+			String redirectUrl = contextPath + "/mainPage/login.do";
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
 		BookMark input = new BookMark();
 
 		input.setUser_info_user_no(loginInfo.getUser_no());

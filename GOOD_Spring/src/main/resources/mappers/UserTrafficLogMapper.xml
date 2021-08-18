@@ -4,7 +4,8 @@
 <mapper namespace="UserTrafficLogMapper">
 
 	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
-	<resultMap type="study.spring.goodspring.model.UserTrafficLog"
+	<resultMap
+		type="study.spring.goodspring.model.UserTrafficLog"
 		id="UserTrafficLogMap">
 		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
 		<result property="log_no" column="log_no" />
@@ -12,89 +13,112 @@
 		<result property="log_category" column="log_category" />
 		<result property="log_content" column="log_content" />
 		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="log_hour" column="log_hour" />
+		<result property="log_cnt" column="log_cnt" />
 	</resultMap>
-	
-	<insert id="pageIn" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'page_in', #{user_info_user_no})
+
+	<insert id="pageIn"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'page_in', #{user_info_user_no})
 	</insert>
-	
-	<insert id="pageOut" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'page_out', #{user_info_user_no})
+
+	<insert id="pageOut"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'page_out', #{user_info_user_no})
 	</insert>
-	
-	<insert id="enterBrowser" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
+
+	<insert id="enterBrowser"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'enter_browser', #{user_info_user_no})
 	</insert>
-	
-	<insert id="addBookmark" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'addBookmark', #{user_info_user_no})
+
+	<insert id="addBookmark"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'addBookmark', #{user_info_user_no})
 	</insert>
-	
-	<insert id="removeBookmark" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
+
+	<insert id="removeBookmark"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'removeBookmark', #{user_info_user_no})
 	</insert>
-	
-	<insert id="walkRecordStart" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'walkRecordStart', #{user_info_user_no})
+
+	<insert id="walkRecordStart"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'walkRecordStart', #{user_info_user_no})
 	</insert>
-	
-	<insert id="walkRecordEnd" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'walkRecordEnd', #{user_info_user_no})
+
+	<insert id="walkRecordEnd"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'walkRecordEnd', #{user_info_user_no})
 	</insert>
-	
-	<insert id="casExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'casExLink', #{user_info_user_no})
+
+	<insert id="casExLink"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'casExLink', #{user_info_user_no})
 	</insert>
-	
-	<insert id="walkExLink" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'walkExLink', #{user_info_user_no})
+
+	<insert id="walkExLink"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'walkExLink', #{user_info_user_no})
 	</insert>
-	
-	<insert id="userLogin" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'Login', #{user_info_user_no})
+
+	<insert id="userLogin"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'Login', #{user_info_user_no})
 	</insert>
-	
-	<insert id="userLogout" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'Logout', #{user_info_user_no})
+
+	<insert id="userLogout"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'Logout', #{user_info_user_no})
 	</insert>
-	
-	<insert id="keyword" parameterType="study.spring.goodspring.model.UserTrafficLog" 
-	useGeneratedKeys="true" keyProperty="log_no">
-	INSERT INTO user_traffic_log 
-	(log_datetime, log_category, log_content, user_info_user_no) 
-	VALUES (now(), #{log_category}, 'keyword', #{user_info_user_no})
+
+	<insert id="keyword"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		useGeneratedKeys="true" keyProperty="log_no">
+		INSERT INTO user_traffic_log
+		(log_datetime, log_category, log_content, user_info_user_no)
+		VALUES (now(), #{log_category}, 'keyword', #{user_info_user_no})
 	</insert>
+
+	<select id="logincount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap" resultType="int">
+		SELECT count(*) as log_cnt
+		FROM user_traffic_log
+		WHERE log_content LIKE 'page_in'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
+	</select>
 </mapper>

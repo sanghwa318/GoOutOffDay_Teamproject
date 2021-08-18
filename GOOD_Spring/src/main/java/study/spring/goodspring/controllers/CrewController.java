@@ -130,19 +130,20 @@ public class CrewController {
 	}
 	
 	/**크루 삭제 */
-	@RequestMapping(value = "/commPage/comm_crew_bbs_deletecrew.do", method = RequestMethod.GET)
-	public ModelAndView deletecrew(Model model, HttpServletResponse response,
+	@ResponseBody
+	@RequestMapping(value = "/commPage/comm_crew_bbs_deletecrew.do", method = RequestMethod.POST)
+	public Map<String, Object> deletecrew(Model model, HttpServletResponse response,
 			@RequestParam(value="crew_no") int crew_no) {
 		
 		try {
 			crewService.deleteCrew(crew_no);
 		}catch(Exception e) {
-			e.printStackTrace();
+			return webHelper.getJsonError("크루 해체에 실패했습니다.");
 		}
 		
 		/** 3) 페이지 이동 */
 		// 확인할 대상이 삭제된 상태이므로 크루 페이지로 이동
-		return webHelper.redirect(contextPath + "/commPage/comm_crew.do", "크루가 해체 되었습니다.");
+		return webHelper.getJsonData();
 	}
 		
 	/** 크루이름 중복검사 */
