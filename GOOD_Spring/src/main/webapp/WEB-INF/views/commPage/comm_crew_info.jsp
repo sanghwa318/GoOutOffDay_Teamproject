@@ -86,9 +86,9 @@
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->
-				<div class="col-md-6 col-sm-4 col-xs-5 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" style="margin-top:-4%">
+				<div class="col-md-6 col-sm-4 col-xs-5 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" style="margin-top:-2%">
 					<h2>크루 공지사항(설명)</h2>
-					<div class="col-md-3 col-sm-4" style="border: 4px dotted #eeee; min-height:150px; min-width:130%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
+					<div class="col-md-3 col-sm-4" style="border: 4px dotted #eeee; min-height:130px; min-width:130%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
 				</div>
 				<!-- 크루 상세 정보 끝 -->
 

@@ -7,8 +7,8 @@
 <!doctype html>
 
 <div class="tab-content">
-	<form class="form-inline" role="form" id="goalAdd">
-		<fieldset style="margin-top: 30px; text-align: center;" class="col-md-12 col-sm-12 col-xs-12">
+	<form class="form" role="form" id="goalAdd">
+		<fieldset style="margin-top: 30px; text-align: center;">
 			<select id="setgoal_day" name="setgoal_day" class="form-control">
 				<option value="">기간 선택
 				<option value="1">1일</option>
