@@ -102,10 +102,10 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="text-center">
 						<form class="form-horizontal" role="form" class="form-crew" id='crew_form'
-							method="get"
+							method="post"
 							action="${pageContext.request.contextPath}/commPage/comm_crew_info_ok">
-							<input type="hidden" name="crew_no" value="${output.crew_no}">
-							<input type="hidden" name="crew_name" value="${output.crew_name}">
+							<input type="hidden" id="crew_no" name="crew_no" value="${output.crew_no}">
+							<input type="hidden" id="crew_name" name="crew_name" value="${output.crew_name}">
 							<button type='submit' id="join" class="btn btn-primary">가입하기</button>
 							<button type="reset" class="btn btn-info"
 								onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.do'">목록</button>
@@ -124,6 +124,8 @@
 	<%@ include file="../inc/plugin.jsp"%>
 
 	<script>
+	let crew_no = $('#crew_no').val();
+	let crew_name = $('#crew_name').val();
 	$().ready(function(){
 		
 		$("#join").click(function() {
@@ -132,7 +134,7 @@
 			// 확인, 취소버튼에 따른 후속 처리 구현
 			swal({
 				title : '확인', // 제목
-				text : "해당 크루에 가입을 하시겠습니까?", // 내용
+				text : "해당 크루에 가입 하시겠습니까?", // 내용
 				type : 'question', // 종류
 				confirmButtonText : '네', // 확인버튼 표시 문구
 				showCancelButton : true, // 취소버튼 표시 여부
@@ -140,7 +142,26 @@
 				
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 				if (result.value) { // 확인 버튼이 눌러진 경우
-					$('#crew_form').submit();
+					$.ajax({
+						url: getContextPath()+'/commPage/comm_crew_info_ok',
+						method:'post',
+						data: {crew_no, crew_name},
+						success:function(json){
+							swal('성공', crew_name+' 크루에 가입되었습니다.', 'success' 
+								).then(function(result){
+							window.location = getContextPath() + "/commPage/comm_crew_bbs.do?crew_no=" 
+													+ crew_no + "&crew_name=" + crew_name;
+							});
+						},error:function(data, status, error){
+							var error_msg =data.responseJSON.rt
+							swal({
+								title : "에러",
+								text :error_msg,
+								type : "error"
+								})
+						return false; // <-- 실행 중단
+						}
+					});
 				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 					swal('취소', '가입이 취소되었습니다.', 'error');
 				}

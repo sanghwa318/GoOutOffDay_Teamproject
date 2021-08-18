@@ -187,20 +187,6 @@ public class CrewPostServiceImpl implements CrewPostService {
 
 
 
-	@Override
-	public CrewPost selectCrewUser(CrewPost input) throws Exception {
-		
-		CrewPost result= null;
-		
-		try {
-			result = sqlSession.selectOne("CrewPostMapper.selectCrewUser", input);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
-		}
-		
-		return result;
-	}
 	
 	
 	/*
@@ -247,7 +233,7 @@ public class CrewPostServiceImpl implements CrewPostService {
 		int result= 0;
 		
 		try {
-			result = sqlSession.selectOne("CrewPostMapper.updateCrewPost", input);
+			result = sqlSession.update("CrewPostMapper.updateCrewPost", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

@@ -43,12 +43,6 @@ public interface CrewPostService {
 	
 	
 	/*
-	 * 유저 닉네임 조회
-	 */
-	public CrewPost selectCrewUser (CrewPost input) throws Exception;
-	
-	
-	/*
 	 * 크루 게시물 조회수 증가
 	 */
 	public void updateHits(CrewPost input) throws Exception;

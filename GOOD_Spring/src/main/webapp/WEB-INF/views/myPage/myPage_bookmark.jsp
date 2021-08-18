@@ -147,6 +147,11 @@ html, body {
 			</div>
 			<div class="row bookmark" id="item-box"
 				data-length="${fn:length(output) }">
+								<c:if test="${fn:length(output)==0}">
+				<h2 class="nooutput" style="text-align: center;">
+				현재 찜한 페이지가 없습니다
+				</h2>
+				</c:if>
 				<c:forEach var="item" items="${output}" varStatus="status">
 					<c:url value="/casPage/cas_detail.do" var="CasDetailUrl">
 						<c:param name="SVCID" value="${item.SVCID }" />

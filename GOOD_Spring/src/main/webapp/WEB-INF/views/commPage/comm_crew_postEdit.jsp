@@ -82,7 +82,7 @@ input#title {
 			</div>
 			<h1 class="page-header">크루게시판</h1>
 			<h2>게시글 수정</h2>
-			<form action="${pageContext.request.contextPath}/commPage/comm_crew_postEdit_ok" method="post" id="re_ok">
+			<form id="re_ok">
 				
 
 				<div class="row">
@@ -97,7 +97,7 @@ input#title {
 				
 				<br/>
 				<textarea name="post_content" id="post_content" class="ckeditor"
-					style="font-size: 20px; resize: none">내용: ${postout.getPost_content()} </textarea>
+					style="font-size: 20px; resize: none">${postout.getPost_content()} </textarea>
 				<br/>
 
 
@@ -121,9 +121,16 @@ input#title {
 
 
 	<script>
+	let crew_no="${postout.crew_no}"
+	let post_crew="${postout.crew_name}"
+	let post_no="${postout.post_no}"
 		$(function() {
+			$("#btn_ok").click(function(e) {
 			e.preventDefault();
-			$("#btn_ok").click(function() {
+				var	post_title=document.getElementById('post_title').value;
+				var post_content= CKEDITOR.instances['post_content'].getData()
+			
+				e.preventDefault();
 				// 확인, 취소버튼에 따른 후속 처리 구현
 				swal({
 					title : '확인', // 제목
@@ -134,14 +141,36 @@ input#title {
 					cancelButtonText : '아니오', // 취소버튼 표시 문구
 				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 					if (result.value) { // 확인 버튼이 눌러진 경우
+						$.ajax({
+							url:getContextPath()+"/commPage/comm_crew_postEdit_ok",
+							method:'post',
+							data:{post_title,post_content,post_no},
+							success:function(data){
+								swal({
+									title : '성공', // 제목
+									text : "게시글 수정이 완료되었습니다.", // 내용
+									type : 'success', // 종류
+								}).then(function(result) {
+									window.location = getContextPath() + "/commPage/comm_crew_post.do?post_no="+post_no
+								})
+							},error:function(data, status, error){
+								console.log(data);
+								var error_msg =data.responseJSON.rt
+								swal({
+									title : "에러",
+									text :error_msg,
+									type : "error"
+									})
+							return false; // <-- 실행 중단
+							}
+						})
 						swal('수정', '게시글 수정이 완료되었습니다.', 'success');
-						document.getElementById("re_ok").submit();   // 재 submit
 
 					}
 
 				});
 			});
-
+			
 			$("#btn_cancel").click(function() {
 				// 확인, 취소버튼에 따른 후속 처리 구현
 				swal({
@@ -153,10 +182,10 @@ input#title {
 					cancelButtonText : '아니오', // 취소버튼 표시 문구
 				}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 					if (result.value) { // 확인 버튼이 눌러진 경우
-						swal('삭제', '게시글 수정이 취소되었습니다.', 'success');
-						setTimeout(function() {
-							location.href = '${pageContext.request.contextPath}/commPage/comm_crew_post.do';
-						}, 1000);
+						swal('취소', '게시글 작성이 취소되었습니다.', 'success').then(function(result){
+							window.location = getContextPath() + "/commPage/comm_crew_bbs.do?crew_no=" 
+							+ crew_no + "&crew_name=" + post_crew;
+						});
 
 					}
 
