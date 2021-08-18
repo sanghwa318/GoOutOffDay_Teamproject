@@ -8,18 +8,15 @@
 <header>
 	<div class="navbar navbar-default clearfix" role="navigation"
 		id="header"
-		style="background: #ffffff !important; min-height: 80px; border-color: #ffffff !important;">
+		style="background: #ffffff !important; min-height: 70px; border-color: #ffffff !important;">
 		<div class="container clearfix">
 			<div class="row clearfix" style="padding-bottom: 0 !important">
-				<div class="col-md-3 col-xs-3 pull-left">
-					<div
-						style="padding: 30px 10px; padding-left: 0; padding-bottom: 0;"
-						id="logo">
-						<a href="<%=request.getContextPath()%>/"
-							style="position: relative; z-index: 999999;"><img
-							src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
-							style="width: 250px; height: 53px; display:block; margin:auto;"></a>
-					</div>
+				<div class="col-md-3" id="logo">
+					<a href="<%=request.getContextPath()%>/"
+						style="position: relative; z-index: 999999;"> <img
+						id="logo_img"
+						src="${pageContext.request.contextPath }/assets/icon_img/logo.png" />
+					</a>
 				</div>
 				<div class="col-md-9">
 					<%--로그인 회원가입 프로필--%>
@@ -29,20 +26,18 @@
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">
 								<div class="pull-right" id="login_join">
-									<div class="pull-left">
-										<button class="btn btn-link"
-											style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
-											onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
-											<i class="glyphicon glyphicon-log-in"></i> <strong>
-												로그인</strong>
-										</button>
-<!-- 										<button class="btn btn-link" -->
-<!-- 											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;" -->
-<%-- 											onclick="location.href='${pageContext.request.contextPath}/mainPage/join.do'"> --%>
-<!-- 											<i class="glyphicon glyphicon-link"></i> <strong> -->
-<!-- 												회원가입</strong> -->
-<!-- 										</button> -->
-									</div>
+									<button class="btn btn-link"
+										style="color: #0098ed; text-decoration: none; border: 0; outline: 0;"
+										onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
+										<i class="glyphicon glyphicon-log-in"></i> <strong>
+											로그인</strong>
+									</button>
+									<!-- 										<button class="btn btn-link" -->
+									<!-- 											style="color: #0069a6; text-decoration: none; border: 0; outline: 0;" -->
+									<%-- 											onclick="location.href='${pageContext.request.contextPath}/mainPage/join.do'"> --%>
+									<!-- 											<i class="glyphicon glyphicon-link"></i> <strong> -->
+									<!-- 												회원가입</strong> -->
+									<!-- 										</button> -->
 								</div>
 							</div>
 						</c:when>
@@ -52,13 +47,13 @@
 								style="padding-top: 30px; padding-bottom: 5px;"
 								id="login_join_box">
 								<div class="pull-right" id="login_join">
-									<div class="pull-right" style="padding: 0 10px 0 10px;">
+									<div class="pull-right" style="padding: 0 15px 0 10px;">
 										<div>
 											<a id="account" href="#" role="button"><img
 												style="border-radius: 20px"
 												onerror="this.src='<%=request.getContextPath()%>/assets/img/profile_default.png'"
 												src="${login_info.getUser_photo().getFileUrl()}"
-												width="30px" height="30px"></img><span class="hidden">myPage</span></a>
+												width="40px" height="40px"></img><span class="hidden">myPage</span></a>
 										</div>
 									</div>
 									<%-- 계정 정보 모달 --%>
@@ -128,10 +123,12 @@
 					</c:choose>
 
 					<!--네비게이션, 검색바-->
-					<div class="row" style="padding-bottom: 0 !important;">
+					<div class="row clearfix" style="padding-bottom: 0 !important;"
+						id="navbar">
 						<!-- 반응형 햄버거 -->
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle"
+						<div class="navbar-header ">
+							<button type="button" class="navbar-toggle pull-left"
+								id="navbar-toggle" style="margin-left: 15px;"
 								data-toggle="collapse" data-target="#navi_search">
 								<span class="sr-only">메뉴열기</span> <span class="icon-bar"></span>
 								<span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -327,14 +324,16 @@
 									</ul></li>
 							</ul>
 							<!-- 검색바 -->
-							<form method="get" action="${pageContext.request.contextPath }/mainPage/search.do" 
-							class="navbar-form navbar-right" role="search"
+							<form method="get"
+								action="${pageContext.request.contextPath }/mainPage/search.do"
+								class="navbar-form navbar-right" role="search"
 								style="border-bottom: 0 !important;">
 								<div class="form-group input-group">
-									<input type="search" name="keyword" class="form-control" placeholder="검색">
-									<span class="input-group-btn"> <button class="btn btn-blue">
+									<input type="search" name="keyword" class="form-control"
+										placeholder="검색"> <span class="input-group-btn">
+										<button class="btn btn-blue">
 											<i class="glyphicon glyphicon-search" style="color: #eeffff"></i>
-									</button>
+										</button>
 									</span>
 								</div>
 							</form>
@@ -357,6 +356,30 @@
 				.indexOf('/', hostIndex + 1));
 		return contextPath;
 	}
+
+	// 	$(function(){
+	// 		$(window).resize(
+	// 			function(e) {
+	// 				if ($(window).width() > 992) {
+	// 					$("#logo_img").attr({"src":"${pageContext.request.contextPath }/assets/icon_img/logo.png",
+	// 						"style":"width: 250px; height: 53px;"});
+	// 				}
+	// 			}
+	// 		)
+	// 	});
+	// 	jQuery(document).ready(function($){
+
+	// 		$(window).on('resize', function() {
+	// 		if($(window).width() > 767) {
+	// 			$("#logo_img").attr({"src":"${pageContext.request.contextPath }/assets/icon_img/logo.png",
+	// 				"style":"width: 250px; height: 53px;"});
+	// 		} else {
+	// 			$("#logo_img").attr({"src":"${pageContext.request.contextPath }/assets/icon_img/logo.png",
+	// 				"style":"width: 0; height: 0;"});
+	// 		}
+	// 		}).resize();
+	// 		});
+
 	$(function() {
 		//계정정보버튼 누르면-->모달 on,off  모바일 환경에서 회색창 생김.
 		$("#account").click(function() {
@@ -402,7 +425,7 @@
 				dataType : 'html',
 				success : function(req) {
 					//페이지 새로고침
-					window.location.href=getContextPath()
+					window.location.href = getContextPath()
 				}
 
 			})

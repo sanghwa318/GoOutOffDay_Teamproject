@@ -55,27 +55,60 @@ html, body {
 
 /* 헤더 */
 @media ( max-width : 767px) {
-	div#header #logo {
+	div#header #logo img {
 		position: absolute;
-		margin-top: 20px;
-		margin-left: -10px;
+		margin-top: 25px !important;
+		margin-right: auto !important;
+		margin-left: auto !important;
+		width: 150px;
+		height: 33px;
+		left: 51%;
+		transform: translate(-50%, -50%);
+	}
+	div#header #logo {
+		padding: 0 important!;
 	}
 	div#header #login_join_box {
-		padding-top: 20px !important;
-		padding-bottom: 10px !important;
+		padding-top: 5px !important;
+/* 		padding-top: 20px !important; */
+/* 		padding-bottom: 10px !important; */
+		position: relative ! important;
+		/* 		display: inline-block; */
+		float: right;
+	}
+	div#header #navbar-toggle {
+		position: relative ! important;
+	}
+	div#header #navbar {
+/* 		position: relative ! important; */
 	}
 	div#header button.btn-link {
-		padding-right: 4px !important;
 		padding-left: 4px !important;
 	}
 	div#header form.navbar-form {
 		margin-bottom: 0 !important;
+	}
+	div#header #logo>a {
+		display: block;
 	}
 }
 
 @media ( min-width :992px) and (max-width:1200px) {
 	ul#cbp-tm-menu {
 		margin-left: 30px;
+	}
+}
+
+@media ( min-width :767px) {
+	div#header #logo img {
+		width: 250px;
+		height: 53px;
+	}
+	div#header #logo {
+		float: left;
+		padding: 30px 10px;
+		padding-left: 0;
+		padding-bottom: 0;
 	}
 }
 
@@ -134,10 +167,16 @@ html, body {
 	z-index: 1000000;
 }
 
-@media ( max-width :991px) {
+@media ( min-width : 767px) and ( max-width :991px) {
+	.account_modal {
+		transform: translateX(-50%);
+		background-color: #ccc;
+	}
+}
+@media ( max-width :767px) {
 	.account_modal {
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translateX(-103%);
 		background-color: #ccc;
 	}
 }
@@ -145,7 +184,7 @@ html, body {
 @media ( min-width : 992px) and (max-width : 1440px) {
 	.account_modal {
 		right: -190px;
-	}
+		transform: translateX(-50%);}
 }
 
 .account-info {
