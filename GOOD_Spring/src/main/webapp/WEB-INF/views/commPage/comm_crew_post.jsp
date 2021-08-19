@@ -172,7 +172,7 @@
 							style="height: 60px; resize: none; margin-left:2%;"
 							placeholder="내용을 입력해주세요."></textarea>
 						<span class="input-group-btn"><button type="button"
-								class="btn btn-default" style="height: 60px;"
+								class="btn btn-default" style="height: 60px; margin-left:2%;"
 								onclick="cmt_add()">댓글 등록</button></span>
 					</div>
 					</div>
