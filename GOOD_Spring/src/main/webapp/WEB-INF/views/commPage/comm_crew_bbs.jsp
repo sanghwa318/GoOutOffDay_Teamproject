@@ -210,11 +210,13 @@
                </form>
                </c:if>
                <!-- 탈퇴버튼 -->
+               <c:if test="${output.user_info_user_no != login_info.getUser_no()}">
                <div >
                   <input type="hidden" id="crew_no" name="crew_no"
                      value="${output.crew_no}" />
                   <button type='submit' id="out" class="btn btn-danger pull-right" style="margin-right:0.5%">탈퇴하기</button>
                </div>
+               </c:if>
             </div>
             </div>
          </div>
