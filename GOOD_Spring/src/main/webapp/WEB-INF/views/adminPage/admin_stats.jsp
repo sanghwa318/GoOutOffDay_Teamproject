@@ -46,21 +46,16 @@ h3 {
 				<div class="parent">
 					<div class="form-group pull-right">
 						<select class="form-control">
-							<option value="">일별</option>
-							<option value="1">주간별</option>
-							<option value="2">월별</option>
+							<option value="today">당일</option>
+							<option value="week">주간</option>
+							<option value="month">한달</option>
 						</select>
 					</div>
 				</div>
 				<h2 class="text-primary">
-					<em>일일 접속 총 인원 : ${output_count }</em>
-					<c:forEach var="LoginLogItem" items="${output_Hour_Count}" >
-						<em>일일 접속 시간 : ${LoginLogItem.log_hour }</em>
-						<em>일일 접속 시간별 인원 : ${LoginLogItem.log_cnt }</em>
-					</c:forEach>
+					<em>Total : ${output_count }</em>
 				</h2>
-
-				<h3>주간/월 접속 인원 그래프</h3>
+				<h3>접속인원</h3>
 				<canvas id="myChart1" width="10" height="3"></canvas>
 			</div>
 			<hr />
@@ -164,18 +159,18 @@ h3 {
 		
 		const ctx1 = document.getElementById('myChart1').getContext('2d');
 		const myChart1 = new Chart(ctx1, {
-			type : 'bar',
+			type : 'line',
 			data : {
 				labels : loginHour,
 				datasets : [ {
 					axis : 'x',
-					label : '시간',
+					label : '접속인원',
 					data : loginCnt,
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)' ],
-					borderColor : [ 'rgba(255, 99, 132, 1)',
-							'rgba(54, 162, 235, 1)' ],
-					borderWidth : 1
+					backgroundColor : [ 
+						'rgba(54, 162, 235, 0.2)' ],
+				borderColor : [
+						'rgba(54, 162, 235, 1)' ],
+				borderWidth : 1
 				} ]
 			},
 			options : {
