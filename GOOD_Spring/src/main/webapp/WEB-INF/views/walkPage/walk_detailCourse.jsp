@@ -176,7 +176,15 @@ ul, li {
 				<div class="header clearfix" style="margin-bottom: 50px;">
 					<h1 style="text-align: center;">&lt; ${output.COURSE_NAME}
 						&gt;</h1>
-					<button class="btn btn-blue disabled pull-right"
+					<button class="btn btn-blue disabled pull-right col-md-3  hidden-xs hidden-sm" 
+						style="cursor: default; padding-top: 0; padding-bottom: 0;">
+						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
+					</button>
+					<button class="btn btn-blue disabled  col-xs-8 col-xs-offset-2 visible-xs" 
+						style="cursor: default; padding-top: 0; padding-bottom: 0;">
+						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
+					</button>
+					<button class="btn btn-blue disabled  col-sm-6 col-sm-offset-3 visible-sm" 
 						style="cursor: default; padding-top: 0; padding-bottom: 0;">
 						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
 					</button>
@@ -184,16 +192,17 @@ ul, li {
 
 
 				<div class="row">
-					<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="col-md-6 col-sm-12 col-xs-11" >
 						<!-- 지도 영역 -->
-						<div class="detail_map">
-							<div class="map" id="map" style="width: 500px; height: 520px;"></div>
-
+						<div class="detail_map" style="margin-right:-15px">
+							<div class="map" id="map" style="width: 100%; min-height: 520px;" ></div>
 						</div>
+						
+						
 
 						<!-- 버튼 -->
-						<div class="btn_container"
-							style="text-align: center; margin-left: -50px; margin-top: 30px;">
+						<div class="btn_container col-xs-12 col-xs-offset-1"
+							style="text-align: center; margin-left:3%; margin-top: 0%;">
 
 							<a class="btn btn-info" type="submit" id="location"
 								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
@@ -220,7 +229,7 @@ ul, li {
 
 
 					<!-- 포인트 상세 설명 -->
-					<div class="col-md-6 col-sm-12 col-xs-12 main_info">
+					<div class="col-md-6 col-sm-12 col-xs-11 main_info">
 						<ul class="info">
 							<li class="infoItem"><strong class="infoLabel">지역 :</strong>
 								<p class="infoText">${output.AREA_GU }</p></li>
@@ -255,7 +264,9 @@ ul, li {
 					</div>
 					<!-- // 포인트 상세 설명 -->
 					<!-- 코스 전체 포인트 테이블 -->
-					<h2>- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
+					<div class="col-md-12 col-sm-12 col-xs-11" style="margin:4% 3% 0 3%;">
+					<h2 class="hidden-xs">- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
+					<h3 class="visible-xs">- ${output.COURSE_NAME} 의 세부경로 포인트-</h3>
 					<table class="table table-hover table-condensed table-responsive">
 						<thead>
 							<tr>
@@ -300,6 +311,7 @@ ul, li {
 							</c:choose>
 						</tbody>
 					</table>
+					</div>
 					<!-- //코스 전체 포인트 테이블 -->
 
 
