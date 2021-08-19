@@ -357,7 +357,7 @@ carousel-title2 {
 						<strong>기록 중지</strong>
 					</h3>
 				</div>
-				<div class="modal-body" style="background-color: rgba( 235, 235, 235, 0.4 );">
+				<div class="modal-body" style="background-color: rgba( 235, 235, 235, 0.4 ); text-align:center;">
 				<h3>지금까지의 코스를 저장하시려면, 코스 이름을 입력해주세요.</h3>
 				</div>
 				<div class="modal-footer">
