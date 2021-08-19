@@ -178,17 +178,7 @@ footer .container {
 		min-height: 150px;
 		padding-top: 80px;
 	}
-	div#b_map1{
-		width:100% !important;
-		height: 400px !important;
-	}
-	div#m_menu{
-		width:100% !important;
-		margin-top: 2px;
-	}
-	div#m_menu>.menu_content{
-		min-height:300px !important;
-	}
+	
 }
 
 @media ( min-width :992px) and (max-width:1200px) {

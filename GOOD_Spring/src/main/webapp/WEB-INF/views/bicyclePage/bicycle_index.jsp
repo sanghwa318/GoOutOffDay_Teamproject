@@ -178,6 +178,19 @@ p {
    left: 5px;
    bottom: 5px;
 }
+@media ( max-width : 767px) {
+div#map1{
+		width:100% !important;
+		height: 400px !important;
+	}
+	div#m_menu{
+		width:100% !important;
+		margin-top: 2px;
+	}
+	div#m_menu>.menu_content{
+		min-height:300px !important;
+	}
+	}
 </style>
 
 </head>
