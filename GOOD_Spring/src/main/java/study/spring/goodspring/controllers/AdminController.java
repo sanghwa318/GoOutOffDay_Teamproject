@@ -239,24 +239,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
 		
-		/** 크루생성현황과 생성된크루의 종류 **/
-		Crew input_crew = new Crew();
-		int output_count_MakeCrew = 0;
-		List<Crew> output_Hour_Count_MakrCrew = null;
-		List<Crew> output_CrewCategory = null;
-		
-		try {
-			output_count_MakeCrew = userTrafficLogService.MakeCrewCount(input_crew);
-
-			output_Hour_Count_MakrCrew = userTrafficLogService.MakeCrewHourCount(input_crew);
-			output_CrewCategory = userTrafficLogService.CrewCategoryCount(input_crew);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAttribute("output_count_MakeCrew", output_count_MakeCrew);
-		model.addAttribute("output_Hour_Count_MakrCrew", output_Hour_Count_MakrCrew);
-		model.addAttribute("output_CrewCategory", output_CrewCategory);
+	
 
 		return new ModelAndView("adminPage/admin_stats");
 	}

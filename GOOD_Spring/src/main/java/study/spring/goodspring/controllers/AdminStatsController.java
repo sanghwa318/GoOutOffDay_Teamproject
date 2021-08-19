@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.AdminService;
 import study.spring.goodspring.service.MemberService;
@@ -169,6 +170,36 @@ public class AdminStatsController {
 
 		map.put("output_count_MakMap", output_count_MakMap);
 		map.put("output_Hour_Count_MakMap", output_Hour_Count_MakMap);
+		
+		return webHelper.getJsonData(map);
+	}
+	
+	@RequestMapping(value="adminPage/admin_stats_crew", method=RequestMethod.GET)
+	public Map<String, Object> crewStats(
+			@RequestParam(value="interval", defaultValue="day")String interval) {
+		
+		/** 크루생성현황과 생성된크루의 종류 **/
+		Crew input_crew = new Crew();
+		input_crew.setInterval(interval);
+		
+		int output_count_MakeCrew = 0;
+		List<Crew> output_Hour_Count_MakeCrew = null;
+		List<Crew> output_CrewCategory = null;
+		
+		try {
+			output_count_MakeCrew = userTrafficLogService.MakeCrewCount(input_crew);
+			output_Hour_Count_MakeCrew = userTrafficLogService.MakeCrewHourCount(input_crew);
+			output_CrewCategory = userTrafficLogService.CrewCategoryCount(input_crew);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+		
+		
+
+		Map<String, Object> map =new HashMap<String, Object>();
+		map.put("output_count_MakeCrew", output_count_MakeCrew);
+		map.put("output_Hour_Count_MakeCrew", output_Hour_Count_MakeCrew);
+		map.put("output_CrewCategory", output_CrewCategory);
 		
 		return webHelper.getJsonData(map);
 	}
