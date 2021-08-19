@@ -138,7 +138,7 @@
 									<div class="panel-heading" style="background: #fff;">
 										<div class="panel-title">
 											<button class="accordian-toggle btn btn-link btn-block"
-												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;"
+												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;"
 												onclick="location.href='${pageContext.request.contextPath}/bicyclePage/bicycle_index.do'">
 												<img
 													src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
@@ -153,7 +153,7 @@
 											<button class="accordian-toggle btn btn-link btn-block"
 												data-toggle="collapse" data-parent="#accordion"
 												data-target="#collapseOne"
-												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
+												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;">
 												<img
 													src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />걷기
@@ -182,7 +182,7 @@
 											<button class="accordian-toggle btn btn-link btn-block"
 												data-toggle="collapse" data-parent="#accordion"
 												data-target="#collapseTwo"
-												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
+												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;">
 												<img
 													src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />문화체육
@@ -221,7 +221,7 @@
 											<button class="accordian-toggle btn btn-link btn-block"
 												data-toggle="collapse" data-parent="#accordion"
 												data-target="#collapseThree"
-												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: left;">
+												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;">
 												<img
 													src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티
