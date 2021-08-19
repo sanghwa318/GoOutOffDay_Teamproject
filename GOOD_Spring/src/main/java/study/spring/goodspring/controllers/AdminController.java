@@ -30,10 +30,10 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
-	
+
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	UserTrafficLogService userTrafficLogService;
 
@@ -48,6 +48,7 @@ public class AdminController {
 
 	/**
 	 * 1:1 문의 조회 (관리자)
+	 * 
 	 * @param model
 	 * @return
 	 */
@@ -71,7 +72,6 @@ public class AdminController {
 		AdminInquiry input = new AdminInquiry();
 		input.setAnswer_yn(answer);
 		input.setQnA_category(category);
-		
 
 		/* 데이터 조회하기 */
 		List<AdminInquiry> output = null;
@@ -151,86 +151,79 @@ public class AdminController {
 				"답변이 작성되었습니다.");
 	}
 
-		/**
-	    * 관리자 회원관리 페이지
-	    */
-	   @RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
-	   public ModelAndView adminMember(Model model,
-	         @RequestParam(value="keyword", required = false) String keyword,
-	         @RequestParam(value = "page", defaultValue = "1") int nowPage) {
-	 
-	       Member input = new Member();
-	       input.setUser_name(keyword);
-	       
-	       // [페이지네이션] 변수 추가
-	       int totalCount = 0; // 전체 게시글 수
-	       int listCount = 20; // 한페이지단 표시할 목록수
-	       int pageCount = 5; // 한그룹당 표시할 페이지 번호수
-	       // [페이지네이션] 객체 추가
-	       PageData pageData = null;
-	       // [페이지네이션] 변수 추가 (종료)
-	       
-	       /*  데이터 조회하기 */
-	       List<Member> output = null;
-	        
-	       try {
-	           
-	          // [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
-	         totalCount = memberService.getMemberCount(input);
-	         // [페이지네이션] 페이지 번호 계산
-	         pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+	/**
+	 * 관리자 회원관리 페이지
+	 */
+	@RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
+	public ModelAndView adminMember(Model model, @RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
-	         // SQL의 LIMIT 절에서 사용될 값을 Beans의 static 변수에 저장
-	         Member.setOffset(pageData.getOffset());
-	         Member.setOffset(pageData.getListCount());
-	           // 데이터 조회
-	           output = memberService.getAdminMemberList(input);
-	        } catch (Exception e) {
-	           return webHelper.redirect(null, e.getLocalizedMessage());
-	        }
-	        // View 처리
-	        model.addAttribute("output", output);
-	        model.addAttribute("keyword", keyword);
-	        model.addAttribute("pageData", pageData);
-	        
-	        return new ModelAndView ("adminPage/admin_member");
-	      }
-	
-		/**
-		 * 관리자 회원 추방 및 관리자 추방 방지
-		 */
-	   @RequestMapping(value = "/adminPage/admin_member_delete", method = RequestMethod. GET)
-	   public ModelAndView delete(Model model,
-	         @RequestParam(value="user_id", defaultValue="") String user_id) {
-	      
-	      
-	         
-	      /** 조회삭제를 위한 select */
-	      Member input = new Member();
-	      input.setUser_id(user_id);
+		Member input = new Member();
+		input.setUser_name(keyword);
 
-	      Member output = null;
+		// [페이지네이션] 변수 추가
+		int totalCount = 0; // 전체 게시글 수
+		int listCount = 20; // 한페이지단 표시할 목록수
+		int pageCount = 5; // 한그룹당 표시할 페이지 번호수
+		// [페이지네이션] 객체 추가
+		PageData pageData = null;
+		// [페이지네이션] 변수 추가 (종료)
 
-	      
+		/* 데이터 조회하기 */
+		List<Member> output = null;
 
-	      try {
-	         output = adminService.getUserinfoadmin(input);
-	
-	           if(output.isUser_admin()) {
-	        	  return webHelper.redirect(null, "관리자는 추방할 수 없습니다.");
-	         }
-	         else {
-	         adminService.deleteMemberadmin(output); // 데아터 삭제
-	         }
-	      } catch (Exception e) {
-	         return webHelper.redirect(null, e.getLocalizedMessage());
-	      }
-	      
-	      
-	      /** 3) 페이지 이동 */
-	      return webHelper.redirect(contextPath + "/adminPage/admin_member.do?user_id=" + input.getUser_id(), "회원이 추방되었습니다.");
-	   }
-	
+		try {
+
+			// [페이지네이션] 전체 게시글 수 조회 (객체 바꿔넣기)
+			totalCount = memberService.getMemberCount(input);
+			// [페이지네이션] 페이지 번호 계산
+			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
+
+			// SQL의 LIMIT 절에서 사용될 값을 Beans의 static 변수에 저장
+			Member.setOffset(pageData.getOffset());
+			Member.setOffset(pageData.getListCount());
+			// 데이터 조회
+			output = memberService.getAdminMemberList(input);
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+		// View 처리
+		model.addAttribute("output", output);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pageData", pageData);
+
+		return new ModelAndView("adminPage/admin_member");
+	}
+
+	/**
+	 * 관리자 회원 추방 및 관리자 추방 방지
+	 */
+	@RequestMapping(value = "/adminPage/admin_member_delete", method = RequestMethod.GET)
+	public ModelAndView delete(Model model, @RequestParam(value = "user_id", defaultValue = "") String user_id) {
+
+		/** 조회삭제를 위한 select */
+		Member input = new Member();
+		input.setUser_id(user_id);
+
+		Member output = null;
+
+		try {
+			output = adminService.getUserinfoadmin(input);
+
+			if (output.isUser_admin()) {
+				return webHelper.redirect(null, "관리자는 추방할 수 없습니다.");
+			} else {
+				adminService.deleteMemberadmin(output); // 데아터 삭제
+			}
+		} catch (Exception e) {
+			return webHelper.redirect(null, e.getLocalizedMessage());
+		}
+
+		/** 3) 페이지 이동 */
+		return webHelper.redirect(contextPath + "/adminPage/admin_member.do?user_id=" + input.getUser_id(),
+				"회원이 추방되었습니다.");
+	}
+
 	/**
 	 * 회원코스관리 페이지
 	 */
@@ -245,8 +238,30 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
-		
-	
+		/** 기간별 걷기 기록이용과 나만의코스 생성현황 회원수 **/
+		int output_count_WalkRecord = 0;
+		List<UserTrafficLog> output_Hour_Count_WalkRecord = null;
+
+		int output_count_MakMap = 0;
+		List<UserTrafficLog> output_Hour_Count_MakMap = null;
+
+		try {
+			output_count_WalkRecord = userTrafficLogService.RecordCount(input);
+			output_Hour_Count_WalkRecord = userTrafficLogService.RecordHourCount(input);
+
+			output_count_MakMap = userTrafficLogService.MakeLogMapCount(input);
+			output_Hour_Count_MakMap = userTrafficLogService.MakeLogMapHourCount(input);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		model.addAttribute("output_count_WalkRecord", output_count_WalkRecord);
+		model.addAttribute("output_Hour_Count_WalkRecord", output_Hour_Count_WalkRecord);
+
+		model.addAttribute("output_count_MakMap", output_count_MakMap);
+		model.addAttribute("output_Hour_Count_MakMap", output_Hour_Count_MakMap);
+
 		return new ModelAndView("adminPage/admin_stats");
 	}
 

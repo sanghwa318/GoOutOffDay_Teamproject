@@ -154,19 +154,25 @@ h3 {
 			</div>
 			<hr />
 			<div class="jumbotron">
-				<h2>기간별 걷기기록이용내역과 나만의코스생성률</h2>
+				<h2>기간별 걷기기록이용현황과 나만의코스생성 전환률</h2>
 				<div class="parent clearfix">
 					<div class="form-group pull-right">
 						<select class="form-control">
-							<option value="">일별</option>
-							<option value="1">주간별</option>
-							<option value="2">월별</option>
+							<option value="today">당일</option>
+							<option value="week">주간</option>
+							<option value="month">한달</option>
 						</select>
 					</div>
 				</div>
-				<h3>조건별 컨텐츠 통계 분석</h3>
-				<div class="canvas">
+				<h2 class="text-primary">
+					<em>WalkRecord Total : ${output_count_WalkRecord }</em> <br /> 
+					<em>MakMap Total : ${output_count_MakMap }</em>
+				</h2>
+				<div class="canvas" style="width: 49%; display: inline-block;">
 					<canvas id="myChart5" width="10" height="3"></canvas>
+				</div>
+				<div class="canvas" style="width: 49%; display: inline-block;">
+					<canvas id="myChart55" width="10" height="3"></canvas>
 				</div>
 			</div>
 			<hr />
@@ -680,38 +686,78 @@ h3 {
 			}
 			});
 		})
+		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 끝 **/
 		
 		
+		/** 걷기기록을 이용한 시간별 인원과 그중 나만의코스를 생성한 사람의 시간별인원 **/
+		var RecordHour = [];
+		var RecordCnt = [];
 		
+		<c:forEach var="RecordLogItem" items="${output_Hour_Count_WalkRecord}">
+			RecordHour.push(${RecordLogItem.log_hour});
+			RecordCnt.push(${RecordLogItem.log_cnt});
+		</c:forEach>
 		
+		var MakeMapHour = [];
+		var MakeMapCnt = [];
 		
-		
-		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 **/
-		
+		<c:forEach var="MakeMapLogItem" items="${output_Hour_Count_MakMap}">
+			MakeMapHour.push(${MakeMapLogItem.log_hour});
+			MakeMapCnt.push(${MakeMapLogItem.log_cnt});
+		</c:forEach>
 		
 		const ctx5 = document.getElementById('myChart5').getContext('2d');
-		const myChart5 = new Chart(ctx5,
-				{
-					type : 'bar',
-					data : {
-						labels : [ '거리', '시간', '평균 페이스' ],
-						datasets : [ {
-							axis : 'y',
-							label : '# 내 기록',
-							data : [ 12, 19, 13 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)', ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)', ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						indexAxis : 'y',
-					}
-				});
+		const myChart5 = new Chart(ctx5,{
+			data : {
+				labels : RecordHour,
+				datasets : [ {
+						axis : 'x',
+						type : 'bar',
+						label : '걷기기록이용 인원',
+						data : RecordCnt,
+						backgroundColor : [ 
+							'rgba(255, 99, 132, 0.5)' ],
+					borderColor : [
+						'rgba(255, 99, 132, 1)' ],
+					borderWidth : 1
+					
+				}]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+			}
+		});
+		const ctx55 = document.getElementById('myChart55').getContext('2d');
+		const myChart55 = new Chart(ctx55,{
+			data : {
+				labels : MakeMapHour,
+				datasets : [ {
+						axis : 'x',
+						type : 'bar',
+						label : '나만의코스생성 인원',
+						data : MakeMapCnt,
+						backgroundColor : [ 
+							'rgba(54, 162, 235, 0.5)' ],
+							borderColor : [ 
+							'rgba(54, 162, 235, 1)' ],
+					borderWidth : 1
+					
+				}]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+				scales: {
+				    xAxes: [{ stacked: true }],
+				    yAxes: [{ stacked: true }]
+				  }
+			}
+		});
+		
+		/** 걷기기록을 이용한 시간별 인원과 그중 나만의코스를 생성한 사람의 시간별인원  끝 **/
+		
+		
 		const ctx6 = document.getElementById('myChart6').getContext('2d');
 		const myChart6 = new Chart(ctx6,
 				{

@@ -53,4 +53,12 @@ public interface UserTrafficLogService {
 	
 	public List<UserTrafficLog> ExLinkHourCount(UserTrafficLog input) throws Exception;
 	
+	public int RecordCount(UserTrafficLog input) throws Exception;
+	
+	public List<UserTrafficLog> RecordHourCount(UserTrafficLog input) throws Exception;
+	
+	public int MakeLogMapCount(UserTrafficLog input) throws Exception;
+	
+	public List<UserTrafficLog> MakeLogMapHourCount(UserTrafficLog input) throws Exception;
+
 }
