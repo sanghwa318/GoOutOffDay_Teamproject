@@ -108,7 +108,8 @@ p {
 }
 
 #m_menu {
-   background-color: #258fff;
+/*    background-color: #258fff; */
+   background-color: #b7dffc;
 }
 
 .menu_header {
@@ -121,8 +122,8 @@ p {
 }
 
 .menu_content {
-   background-color: #eeeeee;
-   min-height: 470px;
+   background-color: #fff;
+   min-height: 456px;
    position: relative;
    overflow-x: hidden;
    overflow-y: auto;
@@ -194,24 +195,25 @@ p {
                </h1>
             </div>
             <!-- 본문 상단 메뉴 부분 -->
-            <div class="body_header clearfix">
+            <div class="body_header clearfix" style="width: 100%;">
                <div class="map_menu ">
                   <!-- 자전거 실시간 현황 지도 -->
                   <div id="map1" style="height: 530px; margin: auto"></div>
                   <div id="m_menu">
-                     <div class="menu_header clear-fix" style="height:40px; ">
+                     <div class="menu_header clear-fix" style="height:54px; ">
                         <form id="mapSearch"
                            action="${pageContext.request.contextPath }/bicyclePage/bicycle_index_search.do">
-                           <label for="keyword" class="rental pull-left" >대여소 : </label> <input type="search" class="search col-md-9 col-sm-8 col-xs-6 pull-right" 
-                              name="keyword" id="keyword" />
-                           <button type="submit" class="col-xs-12"
-                              id="mapSearch-btn">검색</button>
+                           <label for="keyword" class="rental pull-left" style="margin-left: 10px;" ><span style="font-size: 14px;">대여소 : </span></label> <input type="search" class="search col-md-8 col-sm-7 col-xs-10 pull-right" 
+                              name="keyword" id="keyword" style="margin-right: 4px; border: 1px solid #eee;"/>
+                           <button type="submit" class="btn btn-sm btn-blue" 
+                              id="mapSearch-btn" style="width: 95%; border: 2px solid #fff;"><span style="font-size: 16px;">검색 </span><i
+														class="glyphicon glyphicon-search" style="font-size: 15px; top: 3px;"></i></button>
                         </form>
                      </div>
                      <br>
                      <!-- 지역별 자전거 이용 현황 -->
                      <div class="menu_content"
-                        style="height:150px; overflow-y: scroll;">
+                        style="height:150px; overflow-y: scroll; border: 1px solid #ccc;">
                         <div id="select_result" ></div>
                      </div>
                   </div>
