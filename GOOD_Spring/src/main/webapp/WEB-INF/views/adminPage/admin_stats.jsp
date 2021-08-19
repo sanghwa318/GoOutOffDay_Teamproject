@@ -48,12 +48,18 @@ h3 {
 						<div class="form-group pull-right">
 							<select class="form-control" id="login-interval">
 								<option value="day">당일</option>
-								<option value="week">주간</option>
+								<option value="week">한주</option>
 								<option value="month">한달</option>
 							</select>
 						</div>
 					</div>
-					<div id="canvas-container1"></div>
+					<div id="canvas-container1">
+							<h2 class="text-primary" >
+							<em id="loginCnt"></em>
+							</h2>
+							<h3>접속인원</h3>
+							<canvas id="loginChart" width="10" height="3"></canvas>
+					</div>
 				</div>
 			</div>
 			<hr />
@@ -62,20 +68,22 @@ h3 {
 				<h2>기간별 회원가입 현황</h2>
 				<div class="parent clearfix">
 					<div class="form-group pull-right">
-						<select class="form-control">
-							<option value="">일별</option>
-							<option value="1">주간별</option>
-							<option value="2">월별</option>
-						</select> <select class="form-control">
-							<option value="">연령</option>
-							<option value="1">성별</option>
-							<option value="2">혼인여부</option>
-						</select>
+						<select class="form-control"id="join-interval">
+							<option value="day">당일</option>
+							<option value="week">한주</option>
+							<option value="month">한달</option>
+						</select> 
 					</div>
 				</div>
 				<h3>조건별 가입 현황 그래프</h3>
-				<canvas id="myChart2" width="10" height="3"></canvas>
-			</div>
+				<div id="canvas-container2">
+					<h2 class="text-primary">
+						<em id="joinCnt"></em>
+						</h2>
+						<h3>접속인원</h3>
+						<canvas id="joinChart" width="10" height="3"></canvas>
+					</div>
+				</div>
 			<hr />
 			<div class="jumbotron">
 				<h2>기간별 인기검색어</h2>
@@ -147,68 +155,193 @@ h3 {
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
 	<script>
-	/** 로그인 현황 **/
-		var loginHour = [];
-		var loginCnt = [];
-		
-		<c:forEach var="LoginLogItem" items="${output_Hour_Count}" >
-			loginHour.push(${LoginLogItem.log_hour});
-			loginCnt.push(${LoginLogItem.log_cnt});
-		</c:forEach>
 		
 		$(function(){
+			/** 로그인 현황 **/
 			$.ajax({
 				url:getContextPath()+'/adminPage/admin_stats_login',
 				method:'get',
 				data:{},
-				dataType:'html',
-				success:function(req){
-					$('#canvas-container1').html(req);
+				dataType:'json',
+				success:function(data){
+					var loginDateHour = [];
+					var loginCnt = [];
+					var loginOutput=data.loginOutput
+					
+						for(var i=0;i<loginOutput.length; i++){
+							if(data.loginOutput[i].log_hour!=null){
+								loginDateHour.push(data.loginOutput[i].log_hour)
+							}else{
+								loginDateHour.push(data.loginOutput[i].log_date)
+							}
+							loginCnt.push(data.loginOutput[i].log_cnt)
+						}
+					
+					const ctx1 = document.getElementById('loginChart').getContext('2d');
+					const loginChart = new Chart(ctx1, {
+						type : 'line',
+						data : {
+							labels : loginDateHour,
+							datasets : [ {
+								axis : 'x',
+								label : '접속인원',
+								data : loginCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.2)' ],
+							borderColor : [
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+							} ]
+						},
+						options : {
+							indexAxis : 'x',
+						}
+					});
+					
+					$("#loginCnt").html("Total : "+data.loginCnt)
 				}
 			})
 			$('#login-interval').on('change', function(){
+				$('#loginChart').remove();
+				$('#canvas-container1').append('<canvas id="loginChart" width="10" height="3"><canvas>')
 				var interval=$('#login-interval option:selected').val()
 				$.ajax({
-					url:getContextPath()+'/adminPage/admin_stats_login',
-					method:'get',
-					data:{interval},
-					dataType:'html',
-					success:function(req){
-						$('#canvas-container1').html(req);
-					}
-				})
+				url:getContextPath()+'/adminPage/admin_stats_login',
+				method:'get',
+				data:{interval},
+				dataType:'json',
+				success:function(data){
+					var loginDateHour = [];
+					var loginCnt = [];
+					var loginOutput=data.loginOutput
+					console.log(loginOutput)
+					
+						for(var i=0;i<loginOutput.length; i++){
+							if(data.loginOutput[i].log_date!=null){
+								loginDateHour.push(data.loginOutput[i].log_date)
+							}else{
+								loginDateHour.push(data.loginOutput[i].log_hour)
+							}
+							loginCnt.push(data.loginOutput[i].log_cnt)
+						}
+					const ctx1 = document.getElementById('loginChart').getContext('2d');
+					const loginChart = new Chart(ctx1, {
+						type : 'line',
+						data : {
+							labels : loginDateHour,
+							datasets : [ {
+								axis : 'x',
+								label : '접속인원',
+								data : loginCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.2)' ],
+							borderColor : [
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+							} ]
+						},
+						options : {
+							indexAxis : 'x',
+						}
+					});
+					$("#loginCnt").html("Total : "+data.loginCnt)
+				}
+			})
+			})
+			/**로그인 현황 끝 **/
+		
+			/** 회원가입 현황 **/		
+			$.ajax({
+				url:getContextPath()+'/adminPage/admin_stats_join',
+				method:'get',
+				data:{},
+				dataType:'json',
+				success:function(data){
+					var joinDateHour = [];
+					var joinCnt = [];
+					var joinOutput=data.joinOutput
+					
+						for(var i=0;i<joinOutput.length; i++){
+							if(data.joinOutput[i].log_hour!=null){
+								joinDateHour.push(data.joinOutput[i].log_hour)
+							}else{
+								joinDateHour.push(data.joinOutput[i].log_date)
+							}
+							joinCnt.push(data.joinOutput[i].log_cnt)
+						}
+					
+					const ctx1 = document.getElementById('joinChart').getContext('2d');
+					const joinChart = new Chart(ctx1, {
+						type : 'line',
+						data : {
+							labels : joinDateHour,
+							datasets : [ {
+								axis : 'x',
+								label : '접속인원',
+								data : joinCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.2)' ],
+							borderColor : [
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+							} ]
+						},
+						options : {
+							indexAxis : 'x',
+						}
+					});
+					
+					$("#joinCnt").html("Total : "+data.joinCnt)
+				}
+			})
+			$('#join-interval').on('change', function(){
+				$('#joinChart').remove();
+				$('#canvas-container2').append('<canvas id="joinChart" width="10" height="3"><canvas>')
+				var interval=$('#join-interval option:selected').val()
+				$.ajax({
+				url:getContextPath()+'/adminPage/admin_stats_join',
+				method:'get',
+				data:{interval},
+				dataType:'json',
+				success:function(data){
+					var joinDateHour = [];
+					var joinCnt = [];
+					var joinOutput=data.joinOutput
+					console.log(joinOutput)
+					
+						for(var i=0;i<joinOutput.length; i++){
+							if(data.joinOutput[i].log_date!=null){
+								joinDateHour.push(data.joinOutput[i].log_date)
+							}else{
+								joinDateHour.push(data.joinOutput[i].log_hour)
+							}
+							joinCnt.push(data.joinOutput[i].log_cnt)
+						}
+					const ctx1 = document.getElementById('joinChart').getContext('2d');
+					const joinChart = new Chart(ctx1, {
+						type : 'line',
+						data : {
+							labels : joinDateHour,
+							datasets : [ {
+								axis : 'x',
+								label : '신규 회원 수',
+								data : joinCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.2)' ],
+							borderColor : [
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+							} ]
+						},
+						options : {
+							indexAxis : 'x',
+						}
+					});
+					$("#joinCnt").html("Total : "+data.joinCnt)
+				}
+			})
 			})
 		})
-	/**로그인 현황 끝 **/
-		
-	/** 회원가입 현황 **/		
-		var joinHour = [];
-		var joinCnt = [];
-		
-		<c:forEach var="joinLogItem" items="${output_Hour_Count_join}" >
-			joinHour.push(${joinLogItem.log_hour});
-			joinCnt.push(${joinLogItem.log_cnt});
-		</c:forEach>
-		const ctx2 = document.getElementById('myChart2').getContext('2d');
-		const myChart2 = new Chart(ctx2, {
-			type : 'line',
-			data : {
-				labels : joinHour,
-				datasets : [ {
-					axis : 'x',
-					label : '접속인원',
-					data : joinCnt,
-					backgroundColor : [ 
-						'rgba(255, 99, 132, 0.2)' ],
-				borderColor : [
-					'rgba(255, 99, 132, 1)' ],
-				borderWidth : 1
-				} ]
-			},
-			options : {
-				indexAxis : 'x',
-			}
-		});
 		/** 회원가입 현황 끝 **/
 
 		const ctx3 = document.getElementById('myChart3').getContext('2d');

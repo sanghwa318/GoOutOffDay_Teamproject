@@ -216,9 +216,8 @@
 			GROUP BY 1
 			ORDER BY 1 ASC;
 		</if>
-
-
 	</select>
+	
 	<!-- 기간별 회원가입 총 인원수 -->
 	<select id="joincount"
 		parameterType="study.spring.goodspring.model.Member" resultType="int">
@@ -230,8 +229,9 @@
 
 	<!-- 기간별 회원가입 기간과 인원수 -->
 	<select id="joinHourCount"
-		parameterType="study.spring.goodspring.model.Member"
-		resultMap="MemberMap">
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		<if test="interval=='day'">
 		WITH join_value AS (
 		SELECT hour(create_datetime) as
 		log_hour, count(create_datetime) as log_cnt
@@ -245,5 +245,34 @@
 
 		SELECT *
 		FROM join_value;
+		</if>
+		<if test="interval=='week'">
+		WITH join_value AS (
+			SELECT date(create_datetime) as
+			log_date, count(create_datetime) as log_cnt
+			FROM user_info
+			WHERE
+			create_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			week) AND NOW()
+			GROUP BY 1
+			ORDER BY 1 ASC)
+
+		SELECT *
+		FROM join_value;
+		</if>
+		<if test="interval=='month'">
+		WITH join_value AS (
+			SELECT date(create_datetime) as
+			log_date, count(create_datetime) as log_cnt
+			FROM user_info
+			WHERE
+			create_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			month) AND NOW()
+			GROUP BY 1
+			ORDER BY 1 ASC)
+
+		SELECT *
+		FROM join_value;
+		</if>
 	</select>
 </mapper>

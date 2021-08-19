@@ -16,8 +16,8 @@
 			<c:when test="${pageData.prevPage > 0}">
 				<%-- 이동할 URL 생성 --%>
 				<c:url value="${getList }" var="prevPageUrl">
-					<c:param name="page" value="${pageData.prevPage}" />
 					<c:param name="keyword" value="${keyword}" />
+					<c:param name="page" value="${pageData.prevPage}" />
 				</c:url>
 				<li class="page-item"><a href="${prevPageUrl}">&laquo;</a></li>
 			</c:when>

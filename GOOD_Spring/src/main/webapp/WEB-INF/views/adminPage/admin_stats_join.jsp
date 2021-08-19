@@ -7,38 +7,39 @@
 		<h2 class="text-primary">
 		<em>Total : ${cnt}</em>
 		</h2>
-		<h3>접속인원</h3>
-		<canvas id="loginChart" width="10" height="3"></canvas>
+		<h3>조건별 가입 현황 그래프</h3>
+		<canvas id="joinChart" width="10" height="3"></canvas>
 
 </body>
 <script type="text/javascript">
-var loginDateHour = [];
-var loginCnt = [];
-<c:forEach var="output" items="${output}" >
+var joinDateHour = [];
+var joinCnt = [];
+<c:forEach var="joinLogItem" items="${output_Hour_Count_join}" >
 	<c:choose>
-		<c:when test="${output.log_date!=null}">
-			loginDateHour.push("${output.log_date}");
+		<c:when test="${joinLogItem.log_date!=null}">
+			loginDateHour.push("${joinLogItem.log_date}");
 		</c:when>
 		<c:otherwise>
-			loginDateHour.push("${output.log_hour}");
+			loginDateHour.push("${joinLogItem.log_hour}");
 		</c:otherwise>
 	</c:choose>
-	loginCnt.push(${output.log_cnt});
+		joinCnt.push(${joinLogItem.log_cnt});
 </c:forEach>
-
-const ctx1 = document.getElementById('loginChart').getContext('2d');
-const loginChart = new Chart(ctx1, {
+console.log(joinHour)
+console.log(joinCnt)
+const ctx2 = $('#joinChart').getContext('2d');
+const joinChart = new Chart(ctx2, {
 	type : 'line',
 	data : {
-		labels : loginDateHour,
+		labels : joinDateHour,
 		datasets : [ {
 			axis : 'x',
-			label : '접속인원',
-			data : loginCnt,
+			label : '회원가입인원',
+			data : joinCnt,
 			backgroundColor : [ 
-				'rgba(54, 162, 235, 0.2)' ],
+				'rgba(255, 99, 132, 0.2)' ],
 		borderColor : [
-				'rgba(54, 162, 235, 1)' ],
+			'rgba(255, 99, 132, 1)' ],
 		borderWidth : 1
 		} ]
 	},
@@ -46,4 +47,5 @@ const loginChart = new Chart(ctx1, {
 		indexAxis : 'x',
 	}
 });
+
 </script>

@@ -261,8 +261,8 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 	}
 
 	@Override
-	public List<Member> joinHourCount(Member input) throws Exception {
-		List<Member> result = null;
+	public List<UserTrafficLog> joinHourCount(UserTrafficLog input) throws Exception {
+		List<UserTrafficLog> result = null;
 
 		try {
 			result = sqlSession.selectList("UserTrafficLogMapper.joinHourCount", input);

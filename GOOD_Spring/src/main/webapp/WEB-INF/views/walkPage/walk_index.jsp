@@ -291,7 +291,7 @@ carousel-title2 {
 		<!-- 코스목록 캐러셀 영역 -->
 		<div class="row good_item wk_row">
 			<!--  캐러셀 시작 -->
-			<div class="owl-carousel owl-theme" id="owl-GOOD item-box" data-length="${fn:length(output) }">
+			<div class="owl-carousel owl-theme" id="owl-GOOD" data-length="${fn:length(output) }">
 				<c:forEach var="item" items="${output }" varStatus="status">
 					<c:url value="/walkPage/walk_detailCourse.do" var="detailUrl">
 						<c:param name="COURSE_NAME" value="${item.COURSE_NAME }" />
@@ -637,13 +637,13 @@ carousel-title2 {
 	<!-- //하트 -->
 	</script>
 	<script type="text/javascript">
-    var length = $('#item-box').data('length');
-
+    var length2 = $('#owl-GOOD').data('length');
+	console.log(length2)
 	//지도에서 사용될 변수들의 초기 선언.
     var container = [];
-
+	
 	//리스트 하나당 반복문 한번.
-    for (var j = 0; j < length; j++) {
+    for (var j = 0; j < length2; j++) {
 	//반복문이 한번 실행될때마다 지도와 선, 마커 등의 객체를 초기화해준다.
 		var polyline=null;
 		var marker=null;

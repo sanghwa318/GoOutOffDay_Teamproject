@@ -40,6 +40,6 @@ public interface UserTrafficLogService {
 	public int join_count(Member input) throws Exception;
 
 
-	public List<Member> joinHourCount(Member input) throws Exception;
+	public List<UserTrafficLog> joinHourCount(UserTrafficLog input) throws Exception;
 	
 }
