@@ -32,6 +32,7 @@ h2 {
 .main_header>h1:hover {
 	transform: translate(0, -10px);
 }
+
 </style>
 
 <body>

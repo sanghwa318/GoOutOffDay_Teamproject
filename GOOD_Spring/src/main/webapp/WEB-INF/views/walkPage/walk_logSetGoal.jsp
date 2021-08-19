@@ -49,10 +49,10 @@
 		<br>
 		<h2>목표 달성률</h2>
 		<div style="width: 45%; display: inline-block">
-			<canvas id="myChart1"></canvas>
+			<canvas id="myChart7"></canvas>
 		</div>
 		<div style="width: 45%; display: inline-block">
-			<canvas id="myChart2"></canvas>
+			<canvas id="myChart8"></canvas>
 		</div>
 	</div>
 </div>
@@ -156,7 +156,7 @@ var confirm = function(setgoal_day, setgoal_distance, setgoal_time){
 	                }
 	            }
 	        },
-		  responsive: true,
+		  responsive: false,
 	        layout: {
 	            padding: 20
 	        }
@@ -175,13 +175,13 @@ var confirm = function(setgoal_day, setgoal_distance, setgoal_time){
 	                }
 	            }
 	        },
-		  responsive: true,
+		  responsive: false,
 	        layout: {
 	            padding: 20
 	        }
 		};
 	//차트 js그래프
-	const ctx1 = document.getElementById('myChart1').getContext('2d');
+	const ctx1 = document.getElementById('myChart7').getContext('2d');
 	const myChart1 = new Chart(ctx1,
 			{
 				type : 'pie',
@@ -201,7 +201,7 @@ var confirm = function(setgoal_day, setgoal_distance, setgoal_time){
 				options:option5
 			});
 	
-	const ctx2 = document.getElementById('myChart2').getContext('2d');
+	const ctx2 = document.getElementById('myChart8').getContext('2d');
 	const myChart2 = new Chart(ctx2,
 			{
 				type : 'pie',

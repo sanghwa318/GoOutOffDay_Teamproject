@@ -1,7 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<!doctype html>
+<html>
+<head>
 
+</head>
+<style>
+
+@media (max-width: 380px){
+#myChart4,
+#myChart5,
+#myChart6 {
+	width : 80vw;
+	height : 40vh;
+}
+}
+@media (min-width: 400px) and (max-width: 1200px){
+#myChart4,
+#myChart5,
+#myChart6 {
+	width : 200vw;
+	height : 200vh;
+}
+}
+
+</style>
 <!-- logCompaer -->
 <div class="jumbotron" style="background-color: #fefbfe">
 	<div class="tab-content">
@@ -10,13 +34,13 @@
 	</div>
 	<h2>회원들과의 비교</h2>
 	<div style="width: 100%; height: 300px; display: inline-block;">
-		<canvas id="myChart1" width="1000" height="300"></canvas>
+		<canvas id="myChart4"></canvas>
 	</div>
 	<div style="width: 100%; height: 300px; display: inline-block;">
-		<canvas id="myChart2" width="1000" height="300"></canvas>
+		<canvas id="myChart5"></canvas>
 	</div>
 	<div style="width: 100%; height: 300px; display: inline-block;">
-		<canvas id="myChart3" width="1000" height="300"></canvas>
+		<canvas id="myChart6"></canvas>
 	</div>
 
 </div>
@@ -41,7 +65,7 @@ var option1 = {
                 
             }
         },
-	  responsive: true,
+	  responsive: false,
 	  scales: {
 	    yAxes: [{
 	      stacked: true,
@@ -77,7 +101,7 @@ var option2 = {
             }
         }
     },
-  responsive: true,
+  responsive: false,
   scales: {
     yAxes: [{
       stacked: true,
@@ -112,7 +136,7 @@ var option3 = {
             }
         }
     },
-  responsive: true,
+  responsive: false,
   scales: {
     yAxes: [{
       stacked: true,
@@ -129,7 +153,7 @@ var option3 = {
   }
 };
 
-	const ctx1 = document.getElementById('myChart1').getContext('2d');
+	const ctx1 = document.getElementById('myChart4').getContext('2d');
 	const myChart1 = new Chart(ctx1,
 			{
 				type : 'bar',
@@ -151,7 +175,7 @@ var option3 = {
 				},
 				options : option1
 			});
-	const ctx2 = document.getElementById('myChart2').getContext('2d');
+	const ctx2 = document.getElementById('myChart5').getContext('2d');
 	const myChart2 = new Chart(ctx2,
 			{
 				type : 'bar',
@@ -174,7 +198,7 @@ var option3 = {
 
 			});
 	
-	const ctx3 = document.getElementById('myChart3').getContext('2d');
+	const ctx3 = document.getElementById('myChart6').getContext('2d');
 	const myChart3 = new Chart(ctx3,
 			{
 				type : 'bar',
