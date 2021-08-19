@@ -281,10 +281,7 @@ font-size: 1.5rem;
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/myCourseDetail-js.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/myCourseDetail-js.js"></script>
 <script type="text/javascript">
 
 
