@@ -17,7 +17,7 @@
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">1:1 문의</h1>
-			<div class="col-md-12 col-md-offset-1">
+			<div class="col-md-12">
 				<h2>문의글 목록</h2>
 				<table class="table table-bordered table-hover">
 					<thead>
