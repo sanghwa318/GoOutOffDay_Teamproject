@@ -29,10 +29,8 @@ div#category_acco .accordian-toggle {
 .main_header>h1:hover {
 	transform: translate(0, -10px);
 }
-@media ( max-width :400px) {
-#dropbox{
-	width: 500%;
-}
+
+
 </style>
 </head>
 
@@ -78,10 +76,10 @@ div#category_acco .accordian-toggle {
 								<!-- 검색 하기 창 -->
 								<form method="get"
 									action="${pageContext.request.contextPath }/walkPage/walk_search.do"
-									class="form-group input-group">
+									class="form-group input-group" id=dropbox>
 									<input type="search" name="keyword" id="course_search"
-										class="form-control " placeholder="검색하기" value="${keyword }" />
-									<span class="input-group-btn ">
+										class="form-control" placeholder="검색하기" value="${keyword }" />
+									<span class="input-group-btn">
 										<button class="btn btn-blue" type="submit">
 											<span style="color: #0069a6;">검색 </span><i
 												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
@@ -96,7 +94,7 @@ div#category_acco .accordian-toggle {
 									<fieldset>
 										<div class="form-group">
 											<div class="col-xs-4">
-												<select class="form-control" name="category" id="category dropbox">
+												<select class="form-control" name="category" id="category">
 													<option value="">유형별</option>
 													<option value="생태문화길"
 														<c:if test="${category eq '생태문화길'}">selected</c:if>>생태문화길</option>
@@ -111,7 +109,7 @@ div#category_acco .accordian-toggle {
 												</select>
 											</div>
 											<div class="col-xs-4">
-												<select class="form-control" name="area" id="area dropbox">
+												<select class="form-control" name="area" id="area">
 													<option value="">지역</option>
 													<option value="강남구"
 														<c:if test="${area eq '강남구'}">selected</c:if>>강남구</option>
@@ -166,7 +164,7 @@ div#category_acco .accordian-toggle {
 												</select>
 											</div>
 											<div class="col-sm-3 col-xs-4 pull-right">
-												<select class="form-control" name="order" id="order dropbox">
+												<select class="form-control" name="order" id="order">
 													<option value="">정렬</option>
 													<option value="distance"
 														<c:if test="${order eq 'distance'}">selected</c:if>>거리순</option>
@@ -396,5 +394,7 @@ div#category_acco .accordian-toggle {
 	<!-- js -->
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
+
+	
 </body>
 </html>
