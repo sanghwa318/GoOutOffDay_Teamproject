@@ -41,6 +41,7 @@
 		<result property="user_info_user_no" column="user_info_user_no" />
 		<result property="log_hour" column="log_hour" />
 		<result property="log_cnt" column="log_cnt" />
+		<result property="search_keyword" column="search_keyword" />
 	</resultMap>
 
 	<insert id="pageIn"
@@ -179,18 +180,20 @@
 		SELECT *
 		FROM login_value;
 	</select>
-		<!-- 기간별 로그인 카운트 조회 -->
+	<!-- 기간별 로그인 카운트 조회 -->
 	<select id="loginCountInterval"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		<if test="interval=='day'">
 			WITH login_value AS (
-			SELECT hour(log_datetime) as log_hour,
+			SELECT hour(log_datetime) as
+			log_hour,
 			count(log_datetime) as log_cnt
 			FROM good.user_traffic_log
 			WHERE
 			log_content LIKE 'Login'
-			AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
+			AND DATE_FORMAT(log_datetime,
+			"%Y-%m-%d") =
 			CURDATE()
 			GROUP BY 1
 			ORDER BY 1)
@@ -199,25 +202,29 @@
 			FROM login_value;
 		</if>
 		<if test="interval=='week'">
-			SELECT DATE(log_datetime) as log_date, count(log_datetime) as log_cnt
+			SELECT DATE(log_datetime) as log_date, count(log_datetime)
+			as log_cnt
 			FROM good.user_traffic_log
 			WHERE log_content LIKE 'Login'
 			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
+			week) AND
+			NOW()
 			GROUP BY 1
 			ORDER BY 1 ASC;
 		</if>
 		<if test="interval=='month'">
-			SELECT DATE(log_datetime) as log_date, count(log_datetime) as log_cnt
+			SELECT DATE(log_datetime) as log_date, count(log_datetime)
+			as log_cnt
 			FROM good.user_traffic_log
 			WHERE log_content LIKE 'Login'
 			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
+			month) AND
+			NOW()
 			GROUP BY 1
 			ORDER BY 1 ASC;
 		</if>
 	</select>
-	
+
 	<!-- 기간별 회원가입 총 인원수 -->
 	<select id="joincount"
 		parameterType="study.spring.goodspring.model.Member" resultType="int">
@@ -232,47 +239,84 @@
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		<if test="interval=='day'">
-		WITH join_value AS (
-		SELECT hour(create_datetime) as
-		log_hour, count(create_datetime) as log_cnt
-		FROM user_info
-		WHERE
-		DATE_FORMAT(create_datetime, "%Y-%m-%d") = CURDATE()
-		GROUP BY 1
-		ORDER
-		BY
-		1)
-
-		SELECT *
-		FROM join_value;
-		</if>
-		<if test="interval=='week'">
-		WITH join_value AS (
-			SELECT date(create_datetime) as
-			log_date, count(create_datetime) as log_cnt
+			WITH join_value AS (
+			SELECT hour(create_datetime) as
+			log_hour, count(create_datetime) as log_cnt
 			FROM user_info
 			WHERE
-			create_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			DATE_FORMAT(create_datetime, "%Y-%m-%d") = CURDATE()
+			GROUP BY 1
+			ORDER
+			BY
+			1)
+
+			SELECT *
+			FROM join_value;
+		</if>
+		<if test="interval=='week'">
+			WITH join_value AS (
+			SELECT date(create_datetime) as
+			log_date,
+			count(create_datetime) as log_cnt
+			FROM user_info
+			WHERE
+			create_datetime
+			BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
 			week) AND NOW()
 			GROUP BY 1
 			ORDER BY 1 ASC)
 
-		SELECT *
-		FROM join_value;
+			SELECT *
+			FROM join_value;
 		</if>
 		<if test="interval=='month'">
-		WITH join_value AS (
+			WITH join_value AS (
 			SELECT date(create_datetime) as
-			log_date, count(create_datetime) as log_cnt
+			log_date,
+			count(create_datetime) as log_cnt
 			FROM user_info
 			WHERE
-			create_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			create_datetime
+			BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
 			month) AND NOW()
 			GROUP BY 1
 			ORDER BY 1 ASC)
 
-		SELECT *
-		FROM join_value;
+			SELECT *
+			FROM join_value;
 		</if>
+	</select>
+	
+		<!-- 기간별 최다 인기검색어 -->
+	<select id="TopSearchKeyword"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM user_traffic_log
+		WHERE
+		log_content like 'keyword'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
+		CURDATE()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT
+		LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 1;
+	</select>
+
+	<!-- 기간별 TOP10 인기검색어 -->
+	<select id="Top10SearchKeyword"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 10;
 	</select>
 </mapper>

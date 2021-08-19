@@ -19,6 +19,11 @@ h3 {
 	transition: all 0.3s ease;
 	transform: translateY(0);
 }
+
+.canvas {
+	width: 100%;
+	height: 300px;
+}
 </style>
 </head>
 
@@ -54,11 +59,13 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container1">
-							<h2 class="text-primary" >
+						<h2 class="text-primary">
 							<em id="loginCnt"></em>
-							</h2>
-							<h3>접속인원</h3>
+						</h2>
+						<h3>접속인원</h3>
+						<div class="canvas">
 							<canvas id="loginChart" width="10" height="3"></canvas>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -68,36 +75,43 @@ h3 {
 				<h2>기간별 회원가입 현황</h2>
 				<div class="parent clearfix">
 					<div class="form-group pull-right">
-						<select class="form-control"id="join-interval">
+						<select class="form-control" id="join-interval">
 							<option value="day">당일</option>
 							<option value="week">한주</option>
 							<option value="month">한달</option>
-						</select> 
+						</select>
 					</div>
 				</div>
-				<h3>조건별 가입 현황 그래프</h3>
 				<div id="canvas-container2">
 					<h2 class="text-primary">
 						<em id="joinCnt"></em>
-						</h2>
-						<h3>접속인원</h3>
+					</h2>
+					<h3>가입인원</h3>
+					<div class="canvas">
 						<canvas id="joinChart" width="10" height="3"></canvas>
 					</div>
 				</div>
+			</div>
 			<hr />
 			<div class="jumbotron">
 				<h2>기간별 인기검색어</h2>
 				<div class="parent clearfix">
 					<div class="form-group pull-right">
 						<select class="form-control">
-							<option value="">일별</option>
-							<option value="1">주간별</option>
-							<option value="2">월별</option>
+							<option value="today">당일</option>
+							<option value="week">주간</option>
+							<option value="month">한달</option>
 						</select>
 					</div>
 				</div>
-				<h3>조건별 컨텐츠 통계 분석</h3>
-				<canvas id="myChart3" width="10" height="3"></canvas>
+				<h2 class="text-primary">
+					<em>TOP Keyword : ${output_Top_keyword.search_keyword }</em> <br />
+					<em>Total : ${output_Top_keyword.log_cnt} 번</em>
+				</h2>
+				<h3>인기검색어</h3>
+				<div class="canvas">
+					<canvas id="myChart3" width="10" height="3"></canvas>
+				</div>
 			</div>
 			<hr />
 			<div class="jumbotron">
@@ -112,7 +126,9 @@ h3 {
 					</div>
 				</div>
 				<h3>조건별 컨텐츠 통계 분석</h3>
-				<canvas id="myChart4" width="10" height="3"></canvas>
+				<div class="canvas">
+					<canvas id="myChart4" width="10" height="3"></canvas>
+				</div>
 			</div>
 			<hr />
 			<div class="jumbotron">
@@ -127,7 +143,9 @@ h3 {
 					</div>
 				</div>
 				<h3>조건별 컨텐츠 통계 분석</h3>
-				<canvas id="myChart5" width="10" height="3"></canvas>
+				<div class="canvas">
+					<canvas id="myChart5" width="10" height="3"></canvas>
+				</div>
 			</div>
 			<hr />
 			<div class="jumbotron">
@@ -142,7 +160,9 @@ h3 {
 					</div>
 				</div>
 				<h3>조건별 컨텐츠 통계 분석</h3>
-				<canvas id="myChart6" width="10" height="3"></canvas>
+				<div class="canvas">
+					<canvas id="myChart6" width="10" height="3"></canvas>
+				</div>
 			</div>
 		</div>
 		<!-- //컨테이너 -->
@@ -344,29 +364,61 @@ h3 {
 		})
 		/** 회원가입 현황 끝 **/
 
+		/** 인기검색어 **/
+		var keyword = [];
+		var keywordCnt = [];
+		
+		<c:forEach var="KeywordLogItem" items="${output_Top10_keyword}">
+			keyword.push('${KeywordLogItem.search_keyword}');
+			keywordCnt.push(${KeywordLogItem.log_cnt});
+		</c:forEach>
+		
 		const ctx3 = document.getElementById('myChart3').getContext('2d');
-		const myChart3 = new Chart(ctx3,
-				{
-					type : 'bar',
-					data : {
-						labels : [ '거리', '시간', '평균 페이스' ],
-						datasets : [ {
-							axis : 'y',
-							label : '# 내 기록',
-							data : [ 12, 19, 13 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)', ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)', ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						indexAxis : 'y',
-					}
-				});
+		const myChart3 = new Chart(ctx3, {
+			type : 'pie',
+			data : {
+				labels : keyword,
+				datasets : [ {
+					axis : 'x',
+					label : '인기검색어',
+					data : keywordCnt,
+					backgroundColor : [ 
+						'rgba(246, 229, 141, 0.5)',
+						'rgba(255, 190, 118, 0.5)',
+						'rgba(255, 121, 121, 0.5)',
+						'rgba(186, 220, 88, 0.5)',
+						'rgba(56, 173, 169, 0.5)',
+						'rgba(126, 214, 223, 0.5)',
+						'rgba(224, 86, 253, 0.5)',
+						'rgba(104, 109, 224, 0.5)',
+						'rgba(48, 51, 107, 0.5)',
+						'rgba(149, 175, 192, 0.5)'
+						],
+				borderColor : [
+					'rgba(246, 229, 141,1.0)',
+					'rgba(255, 190, 118,1.0)',
+					'rgba(255, 121, 121,1.0)',
+					'rgba(186, 220, 88,1.0)',
+					'rgba(56, 173, 169, 1.0)',
+					'rgba(126, 214, 223,1.0)',
+					'rgba(224, 86, 253,1.0)',
+					'rgba(104, 109, 224,1.0)',
+					'rgba(48, 51, 107,1.0)',
+					'rgba(149, 175, 192,1.0)' ],
+				borderWidth : 1
+				} ]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+			}
+		});
+		/** 인기검색어 끝 **/
+		
+		
+		
+		
+		
 		const ctx4 = document.getElementById('myChart4').getContext('2d');
 		const myChart4 = new Chart(ctx4,
 				{

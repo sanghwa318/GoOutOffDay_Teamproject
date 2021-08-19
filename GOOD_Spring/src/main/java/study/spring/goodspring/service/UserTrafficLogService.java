@@ -39,7 +39,11 @@ public interface UserTrafficLogService {
 	
 	public int join_count(Member input) throws Exception;
 
-
 	public List<UserTrafficLog> joinHourCount(UserTrafficLog input) throws Exception;
+	
+	public UserTrafficLog TopSearchKeyword(UserTrafficLog input) throws Exception;
+	
+	public List<UserTrafficLog> Top10SearchKeyword(UserTrafficLog input) throws Exception;
+
 	
 }

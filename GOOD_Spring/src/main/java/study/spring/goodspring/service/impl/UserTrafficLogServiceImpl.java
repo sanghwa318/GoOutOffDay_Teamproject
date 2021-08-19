@@ -272,4 +272,31 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 		}
 		return result;
 	}
+	
+	@Override
+	public UserTrafficLog TopSearchKeyword(UserTrafficLog input) throws Exception {
+		UserTrafficLog result = null;
+
+		try {
+			result = sqlSession.selectOne("UserTrafficLogMapper.TopSearchKeyword", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<UserTrafficLog> Top10SearchKeyword(UserTrafficLog input) throws Exception {
+		List<UserTrafficLog> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.Top10SearchKeyword", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
 }

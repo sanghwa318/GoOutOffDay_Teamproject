@@ -14,4 +14,5 @@ public class UserTrafficLog {
 	private int log_cnt;
 	private String log_date;
 	private String interval;
+	private String search_keyword;
 }
