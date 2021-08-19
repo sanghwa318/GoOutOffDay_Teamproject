@@ -9,9 +9,9 @@
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style>
-.wk_log {
-	margin-bottom: 30px;
-}
+/* .wk_log { */
+/* 	margin-bottom: 30px; */
+/* } */
 
 p {
 	overflow: hidden;
@@ -152,8 +152,8 @@ carousel-title2 {
 }
 
 .wk_log {
-	margin-top: 20px;
-	height: 10px;
+	margin-bottom: 15px;
+    margin-top: 20px;
 }
 
 /**Modal CSS */
@@ -194,29 +194,29 @@ carousel-title2 {
 		</div>
 		<div id="recording" class="pull-left"
 			style="font-size: 18px; color: #EA80FC"></div>
-		<div class="pull-right">
-			<div class="wk_log" id="wk_log">
-				<button type="button" class="btn btn-primary"
+		<div class="row">
+<!-- 		<div class="pull-right" style="margin-right: 20px;"> -->
+			<div class="wk_log col-sm-offset-6 col-sm-2 col-xs-4" id="wk_log">
+				<a href="${pageContext.request.contextPath}/walkPage/walk_log.do"
+					class="btn btn-info btn-block">걷기 Log</a>
+			</div>
+<!-- 		</div> -->
+<!-- 		<div class="pull-right" style="margin-right: 20px;"> -->
+			<div class="wk_log col-sm-2 col-xs-4" id="wk_log">
+				<button type="button" class="btn btn-primary btn-block" data-toggle="modal"
+					data-target="#myModal">걷기 기록 하기</button>
+
+			</div>
+<!-- 		</div> -->
+<!-- 		<div class="pull-right"> -->
+			<div class="wk_log col-sm-2 col-xs-4" id="wk_log">
+				<button type="button" class="btn btn-primary btn-block"
 					id="endRecord-modal-btn" data-toggle="modal"
 					data-target="#recordEnd-modal">기록 중지</button>
 
 			</div>
+<!-- 		</div> -->
 		</div>
-		<div class="pull-right" style="margin-right: 20px;">
-			<div class="wk_log" id="wk_log">
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#myModal">걷기 기록 하기</button>
-
-			</div>
-		</div>
-
-		<div class="pull-right" style="margin-right: 20px;">
-			<div class="wk_log" id="wk_log">
-				<a href="${pageContext.request.contextPath}/walkPage/walk_log.do"
-					class="btn btn-info">걷기 Log</a>
-			</div>
-		</div>
-
 
 		<div class="map" id="map" style="width: 100%; height: 400px;"></div>
 
