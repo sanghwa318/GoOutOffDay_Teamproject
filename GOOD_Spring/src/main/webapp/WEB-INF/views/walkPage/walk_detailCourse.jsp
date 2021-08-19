@@ -25,6 +25,13 @@
 	margin-bottom: 30px
 }
 
+/* 위치안내 버튼 */
+.btn-blue{
+background-color :#b7dbf0;
+}
+
+
+
 .detail_map {
 	padding-left: 20px;
 }
@@ -205,7 +212,7 @@ ul, li {
 						<div class="btn_container col-xs-12 col-xs-offset-1"
 							style="text-align: center; margin-left:3%; margin-top: 0%;">
 
-							<a class="btn btn-info" type="submit" id="location"
+							<a class="btn btn-blue" type="submit" id="location"
 								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
 								<span style="font-size: 20px;"><i
 									class="glyphicon glyphicon-arrow-right"

@@ -169,7 +169,7 @@ font-size: 2rem;
 @media (max-width : 400px){
 
 .info li p{
-font-size: 1rem;
+font-size: 1.5rem;
 }
 
 }
@@ -203,7 +203,7 @@ font-size: 1rem;
 				<div class="map col-md-4 col-sm-4 col-xs-4 " id="map"
 					style=" height: 450px; width: 450px"></div>
 					
-				<div class="col-md-7 col-sm-7 col-xs-12 main_info clearfix" id="mycourse">
+				<div class="col-md-6 col-sm-6 col-xs-12 main_info clearfix" id="mycourse">
 					<ul class="info" >
 						<li class="infoItem" ><p class="pull-left" ><strong class="infoLabel">코스 이름
 								: </strong></p>
@@ -263,10 +263,10 @@ font-size: 1rem;
 			<a class="btn btn-default pull-left"
 				href="${pageContext.request.contextPath}/commPage/comm_myCourse.do?pageNo=1">목록</a>
 			<c:if test="${output.user_info_user_no==login_info.user_no}">
-				<a class="btn btn-default pull-right"
+				<a class="btn btn-primary pull-right"
 					href="${pageContext.request.contextPath}/commPage/comm_myCourseEdit.do?mycourse_no=${output.mycourse_no}">코스
 					수정</a>
-				<button class="btn btn-default pull-right" id='delete-btn'
+				<button class="btn btn-warning pull-right" id='delete-btn'
 					>코스 삭제</button>
 			</c:if>
 			<br> <br> <br>
