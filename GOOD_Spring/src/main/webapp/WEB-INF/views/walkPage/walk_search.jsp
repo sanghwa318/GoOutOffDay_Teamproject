@@ -29,6 +29,10 @@ div#category_acco .accordian-toggle {
 .main_header>h1:hover {
 	transform: translate(0, -10px);
 }
+@media ( max-width :400px) {
+#dropbox{
+	width: 500%;
+}
 </style>
 </head>
 
@@ -76,8 +80,8 @@ div#category_acco .accordian-toggle {
 									action="${pageContext.request.contextPath }/walkPage/walk_search.do"
 									class="form-group input-group">
 									<input type="search" name="keyword" id="course_search"
-										class="form-control" placeholder="검색하기" value="${keyword }" />
-									<span class="input-group-btn">
+										class="form-control " placeholder="검색하기" value="${keyword }" />
+									<span class="input-group-btn ">
 										<button class="btn btn-blue" type="submit">
 											<span style="color: #0069a6;">검색 </span><i
 												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
@@ -92,7 +96,7 @@ div#category_acco .accordian-toggle {
 									<fieldset>
 										<div class="form-group">
 											<div class="col-xs-4">
-												<select class="form-control" name="category" id="category">
+												<select class="form-control" name="category" id="category dropbox">
 													<option value="">유형별</option>
 													<option value="생태문화길"
 														<c:if test="${category eq '생태문화길'}">selected</c:if>>생태문화길</option>
@@ -107,7 +111,7 @@ div#category_acco .accordian-toggle {
 												</select>
 											</div>
 											<div class="col-xs-4">
-												<select class="form-control" name="area" id="area">
+												<select class="form-control" name="area" id="area dropbox">
 													<option value="">지역</option>
 													<option value="강남구"
 														<c:if test="${area eq '강남구'}">selected</c:if>>강남구</option>
@@ -162,7 +166,7 @@ div#category_acco .accordian-toggle {
 												</select>
 											</div>
 											<div class="col-sm-3 col-xs-4 pull-right">
-												<select class="form-control" name="order" id="order">
+												<select class="form-control" name="order" id="order dropbox">
 													<option value="">정렬</option>
 													<option value="distance"
 														<c:if test="${order eq 'distance'}">selected</c:if>>거리순</option>
@@ -202,11 +206,16 @@ div#category_acco .accordian-toggle {
 								${totalCount } 건의 목록이 있습니다.</button>
 							<table class="table table-hover table-responsive">
 								<thead>
-									<tr align="center">
+									<tr align="center" class="hidden-xs">
 										<th><h3 class="text-center">유형</h3></th>
 										<th><h3 class="text-center">코스이름</h3></th>
 										<th><h3 class="text-center">내용</h3></th>
-										<th><h3 class="text-center hidden-xs">포인트</h3></th>
+										<th><h3 class="text-center ">포인트</h3></th>
+									</tr>
+									<tr align="center" class="visible-xs">
+										<th><h4 class="text-center">유형</h4></th>
+										<th><h4 class="text-center">코스이름</h4></th>
+										<th><h4 class="text-center">내용</h4></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -234,11 +243,16 @@ div#category_acco .accordian-toggle {
 										</c:url>
 
 										<tr onclick="location.href='${viewUrl}'" style="cursor: pointer;">
-											<td align="center" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2>
-											<td align="center" valign="middle"><h2>${COURSE_NAME}</h2>
-												<button class="btn btn-blue btn-lg disabled" style="cursor: pointer; margin-top: 20px;">
+											<td align="center" class="hidden-xs" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2>
+											<td align="center" class="visible-xs col-xs-3" valign="middle"><h4>${COURSE_CATEGORY_NM }</h4>
+											<td align="center" class="hidden-xs" valign="middle"><h2>${COURSE_NAME}</h2>
+											<td align="center" class="visible-xs col-xs-5" valign="middle"><h4>${COURSE_NAME}</h4>
+												<button class="btn btn-blue btn-lg disabled hidden-xs" style="cursor: pointer; margin-top: 20px;">
 													${COUNT_BM } 명의 사용자가 찜한 코스입니다!
-												</button></td>
+												</button>
+												<button class="btn btn-blue btn-lg disabled vislble-xs" style="cursor: pointer; margin-top: 20px; width:130px; height:40px;">
+													<p style="font-size:15px; margin-top:-11px; margin-left:-10px;" >${COUNT_BM } 명의 사용자가 <br>찜한 코스입니다!</p>
+												</button>
 											</td>
 											<td ><table>
 													<!-- 													<tr> -->
@@ -248,19 +262,23 @@ div#category_acco .accordian-toggle {
 														<td class="hidden-xs"><h4>강남/강북 : ${SOUTH_NORTH_DIV_NM }</h4></td>
 													</tr>
 													<tr>
-														<td><h4>지역구 : ${AREA_GU }</h4></td>
+														<td class="hidden-xs"><h4>지역구 : ${AREA_GU }</h4></td>
+														<td class="visible-xs"><p style="font-size:14px;">지역구 : ${AREA_GU }</p></td>
 													</tr>
 													<tr>
-														<td><h4>거리 : ${DISTANCE }</h4></td>
+														<td class="hidden-xs"><h4>거리 : ${DISTANCE }</h4></td>
+														<td class="visible-xs"><p style="font-size:14px;">거리 : ${DISTANCE }</p></td>
 													</tr>
 													<tr>
-														<td><h4>소요시간 : ${LEAD_TIME }</h4></td>
+														<td class="hidden-xs"><h4>소요시간 : ${LEAD_TIME }</h4></td>
+														<td class="visible-xs"><p style="font-size:14px;">소요시간 : ${LEAD_TIME }</p></td>
 													</tr>
 													<tr>
-														<td><h4>난이도 : ${COURSE_LEVEL }</h4></td>
+														<td class="hidden-xs"><h4>난이도 : ${COURSE_LEVEL }</h4></td>
+														<td class="visible-xs"><p style="font-size:14px;">난이도 : ${COURSE_LEVEL }</p></td>
 													</tr>
 													<tr>
-														<td class="hidden-xs">><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
+														<td class="hidden-xs"><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
 													</tr>
 												</table></td>
 											<c:choose>

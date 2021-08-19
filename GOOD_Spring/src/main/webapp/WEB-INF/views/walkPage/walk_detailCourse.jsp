@@ -39,7 +39,8 @@ ul, li {
 
 .info li {
 	border: 1px solid #eee;
-	padding: 17px 20px 20px 10px;
+/* 	padding: 17px 20px 20px 10px; */
+	padding: 2% 2% 2% 2%;
 	border-bottom: 1px solid #ddd;
 }
 
@@ -195,7 +196,7 @@ ul, li {
 					<div class="col-md-6 col-sm-12 col-xs-11" >
 						<!-- 지도 영역 -->
 						<div class="detail_map" style="margin-right:-15px">
-							<div class="map" id="map" style="width: 100%; min-height: 520px;" ></div>
+							<div class="map" id="map" style="min-width: 100%; max-height: 100%; height:420px" ></div>
 						</div>
 						
 						
@@ -231,8 +232,10 @@ ul, li {
 					<!-- 포인트 상세 설명 -->
 					<div class="col-md-6 col-sm-12 col-xs-11 main_info">
 						<ul class="info">
-							<li class="infoItem"><strong class="infoLabel">지역 :</strong>
-								<p class="infoText">${output.AREA_GU }</p></li>
+							<li class="infoItem">
+								<strong class="infoLabel">지역 :</strong>
+								<p class="infoText ">${output.AREA_GU }</p>
+								</li>
 							<li class="infoItem"><strong class="infoLabel">거리 :
 							</strong>
 								<p class="infoText">${output.DISTANCE }</p></li>
@@ -258,7 +261,7 @@ ul, li {
 							<li class="infoItem">
 								<h2 style="text-align: center;">- ${output.COURSE_NAME} -</h2>
 								<p class="infoText">${output.CONTENT }</p>
-								<h3 class="infoText">[추가날짜:${output.REG_DATE }]</h3>
+								<h3 class="infoText">[추가날짜:${output.REG_DATE}]</h3>
 							</li>
 						</ul>
 					</div>
