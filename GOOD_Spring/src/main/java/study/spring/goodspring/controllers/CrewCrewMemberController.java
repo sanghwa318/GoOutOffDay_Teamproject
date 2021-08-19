@@ -46,10 +46,12 @@ public class CrewCrewMemberController {
     */
    @RequestMapping(value = "/commPage/comm_crew_memberJoin.do", method = RequestMethod.GET)
    public ModelAndView crewmemberjoin(Model model, HttpServletResponse response,
-      @RequestParam(value = "crew_crew_no", defaultValue = "0") int crew_no) {
+      @RequestParam(value = "crew_crew_no", defaultValue = "0") int crew_no,
+      @RequestParam(value = "crew_name", defaultValue = "") String crew_name) {
       //1)데이터 저장
       CrewMember input = new CrewMember();
       input.setCrew_crew_no(crew_no);
+      
       
       List<CrewMember> output = null;
       

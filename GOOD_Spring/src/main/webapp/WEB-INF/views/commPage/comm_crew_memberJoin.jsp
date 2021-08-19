@@ -84,6 +84,7 @@
 								<td align="center">${item.user_nick}</td>
 								<td align="center">${item.member_create_datetime}</td>
 								<td align="center">${item.member_visit_datetime}</td>
+								
 							</tr>
 							</c:if>
 							</c:forEach>
@@ -93,7 +94,7 @@
 				<div class="text-center">
 					<button type="button" class="btn btn-danger" id="check-delete">추방하기</button>
 						<button type="button" class="btn btn-info" id="check-back" 	
-					onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_bbs.do?crew_no=${output[0].crew_crew_no}'">뒤로가기</button>
+					onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_bbs.do?crew_no=${output[0].crew_crew_no}&crew_name=${output[0].crew_name}'">뒤로가기</button>
 					
 				</div>
 			</form>
