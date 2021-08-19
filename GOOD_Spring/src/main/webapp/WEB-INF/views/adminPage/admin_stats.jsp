@@ -120,26 +120,36 @@ h3 {
 				</div>
 			</div>
 			<hr />
-			<div class="jumbotron">
-				<h2>기간별 찜추가현황과 외부링크전환률</h2>
-				<div class="parent clearfix">
-					<div class="form-group pull-right">
-						<select class="form-control">
-							<option value="today">당일</option>
-							<option value="week">주간</option>
-							<option value="month">한달</option>
-						</select>
+			<div id="stats_keyword">
+				<div class="jumbotron clearfix">
+					<h2>기간별 찜추가현황과 외부링크전환률</h2>
+					<div class="parent">
+						<div class="form-group pull-right">
+							<select class="form-control" id="bmel-interval">
+								<option value="day">당일</option>
+								<option value="week">주간</option>
+								<option value="month">한달</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<h2 class="text-primary">
-					<em>BookMark Total : ${output_count_bookmark }</em> <br /> <em>ExLink
-						Total : ${output_count_ExLink }</em>
-				</h2>
-				<div class="canvas" style="width: 49%; display: inline-block;">
-					<canvas id="myChart4" width="10" height="3"></canvas>
-				</div>
-				<div class="canvas" style="width: 49%; display: inline-block;">
-					<canvas id="myChart44" width="10" height="3"></canvas>
+					<div id="canvas-container4">
+						<h2 class="text-primary">
+							<em id="bmCnt">BookMark Total : ${output_count_bookmark }</em> <br /> 
+							<em id="elCnt">ExLink Total : ${output_count_ExLink }</em>
+						</h2>
+						<div style="width: 49%; display: inline-block;">
+							<h3>찜 추가 현황</h3>
+							<div class="canvas" id="bmChart_canvas" >
+								<canvas id="bmChart" width="10" height="3"></canvas>
+							</div>
+						</div>
+						<div style="width: 49%; display: inline-block;">
+							<h3>외부링크 전환률</h3>
+							<div class="canvas" id="elChart_canvas">
+								<canvas id="elChart" width="10" height="3"></canvas>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<hr />
@@ -326,6 +336,7 @@ h3 {
 					$("#joinCnt").html("Total : "+data.joinCnt)
 				}
 			})
+			//기간설정
 			$('#join-interval').on('change', function(){
 				$('#joinChart').remove();
 				$('#canvas-container2>.canvas').append('<canvas id="joinChart" width="10" height="3"><canvas>')
@@ -377,8 +388,6 @@ h3 {
 		/** 회원가입 현황 끝 **/
 
 		/** 인기검색어 **/
-		
-		
 		$.ajax({
 			url:getContextPath()+'/adminPage/admin_stats_kw',
 			method:'get',
@@ -436,6 +445,7 @@ h3 {
 				$("#keywordCnt").html("Total : "+data.output_Top_keyword.log_cnt+"번")
 			}
 		})
+		//기간설정
 		$('#keyword-interval').on('change', function(){
 			$('#keywordChart').remove();
 			$('#canvas-container3>.canvas').append('<canvas id="keywordChart" width="10" height="3"><canvas>')
@@ -500,75 +510,182 @@ h3 {
 		})
 		/** 인기검색어 끝 **/
 		
-		
-		
-		
-		
 		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 **/
-		var AddHour = [];
-		var AddCnt = [];
-		
-		<c:forEach var="AddBookMarkLogItem" items="${output_Hour_Count_bookmark}">
-			AddHour.push(${AddBookMarkLogItem.log_hour});
-			AddCnt.push(${AddBookMarkLogItem.log_cnt});
-		</c:forEach>
-		
-		var ExLInkHour = [];
-		var ExLinkCnt = [];
-		
-		<c:forEach var="ExLinkLogItem" items="${output_Hour_Count_ExLink}">
-			ExLInkHour.push(${ExLinkLogItem.log_hour});
-			ExLinkCnt.push(${ExLinkLogItem.log_cnt});
-		</c:forEach>
-		
-		const ctx4 = document.getElementById('myChart4').getContext('2d');
-		const myChart4 = new Chart(ctx4,{
-			data : {
-				labels : AddHour,
-				datasets : [ {
-						axis : 'x',
-						type : 'bar',
-						label : '찜추가 인원',
-						data : AddCnt,
-						backgroundColor : [ 
-							'rgba(255, 99, 132, 0.5)' ],
-					borderColor : [
-						'rgba(255, 99, 132, 1)' ],
-					borderWidth : 1
-					
-				}]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
+		$.ajax({
+			url:getContextPath()+'/adminPage/admin_stats_BMEL',
+			method:'get',
+			data:{},
+			dataType:'json',
+			success:function(data){
+				var AddHour = [];
+				var AddCnt = [];
+				var ExLInkHour = [];
+				var ExLinkCnt = [];
+				
+				for(var i=0; i<data.output_Hour_Count_bookmark.length; i++){
+					if(data.output_Hour_Count_bookmark[i].log_date!=null){
+						AddHour.push(data.output_Hour_Count_bookmark[i].log_date);
+					}else{
+						AddHour.push(data.output_Hour_Count_bookmark[i].log_hour);						
+					}
+					AddCnt.push(data.output_Hour_Count_bookmark[i].log_cnt);
+				}
+				for(var i=0; i<data.output_Hour_Count_ExLink.length; i++){
+					if(data.output_Hour_Count_ExLink[i].log_date!=null){
+						ExLInkHour.push(data.output_Hour_Count_ExLink[i].log_date);
+					}else{
+						ExLInkHour.push(data.output_Hour_Count_ExLink[i].log_hour);						
+					}
+					ExLinkCnt.push(data.output_Hour_Count_ExLink[i].log_cnt);
+				}
+				
+				
+				const ctx4 = document.getElementById('bmChart').getContext('2d');
+				const bmChart = new Chart(ctx4,{
+					data : {
+						labels : AddHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '찜추가 인원',
+								data : AddCnt,
+								backgroundColor : [ 
+									'rgba(255, 99, 132, 0.5)' ],
+							borderColor : [
+								'rgba(255, 99, 132, 1)' ],
+							borderWidth : 1
+							
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+					}
+				});
+				const ctx44 = document.getElementById('elChart').getContext('2d');
+				const elChart = new Chart(ctx44,{
+					data : {
+						labels : ExLInkHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '바로가기이용 인원',
+								data : ExLinkCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.5)' ],
+									borderColor : [ 
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+							
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+						scales: {
+						    xAxes: [{ stacked: true }],
+						    yAxes: [{ stacked: true }]
+						  }
+					}
+				});
+				$("#bmCnt").html("BookMark Total : "+data.output_count_bookmark)
+				$("#elCnt").html("ExLink Total : "+data.output_count_ExLink)
 			}
-		});
-		const ctx44 = document.getElementById('myChart44').getContext('2d');
-		const myChart44 = new Chart(ctx44,{
-			data : {
-				labels : ExLInkHour,
-				datasets : [ {
-						axis : 'x',
-						type : 'bar',
-						label : '바로가기이용 인원',
-						data : ExLinkCnt,
-						backgroundColor : [ 
-							'rgba(54, 162, 235, 0.5)' ],
-							borderColor : [ 
-							'rgba(54, 162, 235, 1)' ],
-					borderWidth : 1
-					
-				}]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
-				scales: {
-				    xAxes: [{ stacked: true }],
-				    yAxes: [{ stacked: true }]
-				  }
+			});
+		//기간 설정
+		$('#bmel-interval').on('change', function(){
+			$('#bmChart').remove();
+			$('#elChart').remove();
+			$('#canvas-container4 #bmChart_canvas').append('<canvas id="bmChart" width="10" height="3"><canvas>')
+			$('#canvas-container4 #elChart_canvas').append('<canvas id="elChart" width="10" height="3"><canvas>')
+			var interval=$('#bmel-interval option:selected').val()
+			$.ajax({
+			url:getContextPath()+'/adminPage/admin_stats_BMEL',
+			method:'get',
+			data:{interval},
+			dataType:'json',
+			success:function(data){
+				var AddHour = [];
+				var AddCnt = [];
+				var ExLInkHour = [];
+				var ExLinkCnt = [];
+				
+				for(var i=0; i<data.output_Hour_Count_bookmark.length; i++){
+					if(data.output_Hour_Count_bookmark[i].log_date!=null){
+						AddHour.push(data.output_Hour_Count_bookmark[i].log_date);
+					}else{
+					AddHour.push(data.output_Hour_Count_bookmark[i].log_hour);						
+					}
+					AddCnt.push(data.output_Hour_Count_bookmark[i].log_cnt);
+				}
+				for(var i=0; i<data.output_Hour_Count_ExLink.length; i++){
+					if(data.output_Hour_Count_ExLink[i].log_date!=null){
+						ExLInkHour.push(data.output_Hour_Count_ExLink[i].log_date);
+					}else{
+						ExLInkHour.push(data.output_Hour_Count_ExLink[i].log_hour);						
+					}
+					ExLinkCnt.push(data.output_Hour_Count_ExLink[i].log_cnt);
+				}
+				
+				const ctx4 = document.getElementById('bmChart').getContext('2d');
+				const bmChart = new Chart(ctx4,{
+					data : {
+						labels : AddHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '찜추가 인원',
+								data : AddCnt,
+								backgroundColor : [ 
+									'rgba(255, 99, 132, 0.5)' ],
+							borderColor : [
+								'rgba(255, 99, 132, 1)' ],
+							borderWidth : 1
+							
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+					}
+				});
+				const ctx44 = document.getElementById('elChart').getContext('2d');
+				const elChart = new Chart(ctx44,{
+					data : {
+						labels : ExLInkHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '바로가기이용 인원',
+								data : ExLinkCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.5)' ],
+									borderColor : [ 
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+							
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+						scales: {
+						    xAxes: [{ stacked: true }],
+						    yAxes: [{ stacked: true }]
+						  }
+					}
+				});
+				$("#bmCnt").html("BookMark Total : "+data.output_count_bookmark)
+				$("#elCnt").html("ExLink Total : "+data.output_count_ExLink)
 			}
-		});
+			});
+		})
+		
+		
+		
+		
+		
+		
 		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 **/
 		
 		

@@ -104,4 +104,37 @@ public class AdminStatsController {
 		return webHelper.getJsonData(map);
 	}
 	
+	/** 찜추가한 회원수와 찜추가한 회원중 외부바로가기를 이용한 회원수 그래프**/
+	@RequestMapping(value="adminPage/admin_stats_BMEL", method=RequestMethod.GET)
+	public Map<String, Object> BMELStats(Model model,
+			@RequestParam(value="interval", defaultValue="day")String interval) {
+		
+		UserTrafficLog input = new UserTrafficLog();
+		input.setInterval(interval);
+		
+		
+		int output_count_bookmark = 0;
+		List<UserTrafficLog> output_Hour_Count_bookmark = null;
+
+		int output_count_ExLink = 0;
+		List<UserTrafficLog> output_Hour_Count_ExLink = null;
+		
+		try {
+			output_count_bookmark = userTrafficLogService.AddBookMarkCount(input);
+			output_Hour_Count_bookmark = userTrafficLogService.AddBookMarkHourCount(input);
+			
+			output_count_ExLink = userTrafficLogService.ExLinkCount(input);
+			output_Hour_Count_ExLink = userTrafficLogService.ExLinkHourCount(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+		Map<String, Object> map =new HashMap<String, Object>();
+		map.put("output_count_bookmark", output_count_bookmark);
+		map.put("output_Hour_Count_bookmark", output_Hour_Count_bookmark);
+		
+		map.put("output_count_ExLink", output_count_ExLink);
+		map.put("output_Hour_Count_ExLink", output_Hour_Count_ExLink);
+		
+		return webHelper.getJsonData(map);
+	}
 }

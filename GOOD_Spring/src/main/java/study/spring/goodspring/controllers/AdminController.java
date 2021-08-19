@@ -246,29 +246,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
 		
-		/** 찜추가한 회원수와 찜추가한 회원중 외부바로가기를 이용한 회원수 **/
-		int output_count_bookmark = 0;
-		List<UserTrafficLog> output_Hour_Count_bookmark = null;
-
-		int output_count_ExLink = 0;
-		List<UserTrafficLog> output_Hour_Count_ExLink = null;
-		
-		try {
-			output_count_bookmark = userTrafficLogService.AddBookMarkCount(input);
-			output_Hour_Count_bookmark = userTrafficLogService.AddBookMarkHourCount(input);
-			
-			output_count_ExLink = userTrafficLogService.ExLinkCount(input);
-			output_Hour_Count_ExLink = userTrafficLogService.ExLinkHourCount(input);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("output_count_bookmark", output_count_bookmark);
-		model.addAttribute("output_Hour_Count_bookmark", output_Hour_Count_bookmark);
-		
-		model.addAttribute("output_count_ExLink", output_count_ExLink);
-		model.addAttribute("output_Hour_Count_ExLink", output_Hour_Count_ExLink);
+	
 		return new ModelAndView("adminPage/admin_stats");
 	}
 
