@@ -163,7 +163,16 @@ public class AdminController {
 	@RequestMapping(value = "/adminPage/admin_inquiryanswerOk.do", method = RequestMethod.POST)
 	public ModelAndView InquiryAnswerOk(Model model, @RequestParam(value = "QnA_no") int QnA_no,
 			@RequestParam(value = "Answer_detail") String Answer_detail) {
-		
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+
+		if (login_info == null) {
+
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 
 		Inquiry input = new Inquiry();
 		input.setQnA_no(QnA_no);
