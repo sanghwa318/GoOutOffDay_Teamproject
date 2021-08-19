@@ -211,7 +211,7 @@ footer .container {
 		padding-top: 90px;
 	}
 	div#header .container {
-	padding: 10px !important;
+	padding: 0 10px !important;
 	}
 }
 

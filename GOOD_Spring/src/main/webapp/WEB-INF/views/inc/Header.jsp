@@ -174,10 +174,6 @@
 											<a class="btn-block"
 												href="${pageContext.request.contextPath}/walkPage/walk_log.do">걷기로그</a>
 										</div>
-										<div class="panel-body">
-											<a class="btn-block"
-												href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.do">명예의전당</a>
-										</div>
 									</div>
 								</div>
 								<div class="panel panel-default">
@@ -275,9 +271,6 @@
 										<li><a
 											href="${pageContext.request.contextPath}/walkPage/walk_log.do"
 											class="cbp-tm-icon-clock">걷기로그</a></li>
-										<li><a
-											href="${pageContext.request.contextPath}/walkPage/walk_hallOfFame.do"
-											class="cbp-tm-icon-earth">명예의전당</a></li>
 									</ul></li>
 								<!--문화체육 메뉴-->
 								<li
