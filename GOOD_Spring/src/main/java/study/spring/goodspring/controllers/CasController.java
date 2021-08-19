@@ -417,17 +417,38 @@ public class CasController {
 			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {
 				bookMarkService.deleteBookMark(input);
 
-				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
-				loginput.setUser_info_user_no(loginInfo.getUser_no());
-				loginput.setLog_category(url2);
-				userTrafficLogService.removeBookmark(loginput);
+				if (URL.lastIndexOf(".do") != -1) {
+					String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+					loginput.setUser_info_user_no(loginInfo.getUser_no());
+					loginput.setLog_category(url2);
+					userTrafficLogService.removeBookmark(loginput);
+				} else {
+					String url2 = URL.substring(URL.indexOf("goodspring") + 11);
+					if (url2 == "" || url2 == "/") {
+						url2 = "index";
+						loginput.setUser_info_user_no(loginInfo.getUser_no());
+						loginput.setLog_category(url2);
+						userTrafficLogService.removeBookmark(loginput);
+					}
+				}
+
 			} else if (bookMarkService.BookMarkUniqueCheck(input) == 0) {
 				bookMarkService.addBookMark(input);
 
-				String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
-				loginput.setUser_info_user_no(loginInfo.getUser_no());
-				loginput.setLog_category(url2);
-				userTrafficLogService.addBookmark(loginput);
+				if (URL.lastIndexOf(".do") != -1) {
+					String url2 = URL.substring(URL.indexOf("goodspring") + 11, URL.lastIndexOf(".do"));
+					loginput.setUser_info_user_no(loginInfo.getUser_no());
+					loginput.setLog_category(url2);
+					userTrafficLogService.addBookmark(loginput);
+				} else {
+					String url2 = URL.substring(URL.indexOf("goodspring") + 11);
+					if (url2 == "" || url2 == "/") {
+						url2 = "index";
+						loginput.setUser_info_user_no(loginInfo.getUser_no());
+						loginput.setLog_category(url2);
+						userTrafficLogService.addBookmark(loginput);
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

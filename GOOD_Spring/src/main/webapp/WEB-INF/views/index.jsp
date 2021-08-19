@@ -223,19 +223,15 @@ h4 {
 	box-shadow: 0 3px 10px rgba(102, 109, 117, 0.32);
 }
 
+
 /*찜하기 버튼*/
-.wishlist {
-	position: absolute;
-	top: 2px;
-	right: 3px;
+.heart {
 	z-index: 1000;
 	cursor: pointer;
-	width: 30px;
-	height: 30px;
-}
-
-.heart i {
-	margin-left: 8px;
+	width: 20px;
+	background-color: rgb(255, 255, 255);
+	outline: none;
+	border: 0;
 }
 
 .fa-heart-o {
@@ -420,21 +416,20 @@ h4 {
 				<div class="header">
 					<h2>서울 두드림길</h2>
 					<ul class="nav nav-pills" role="navigation">
-					<li class="tabmenu active" id="doolrea"><a data-toggle="tab"
-						role="button">서울둘레길</a></li>
-					<li class="tabmenu" id="moonhwa"><a data-toggle="tab"
-						role="button">생태문화길</a></li>
-					<li class="tabmenu" id="jichun"><a data-toggle="tab"
-						role="button">한강지천길/계절길</a></li>
-					<li class="tabmenu" id="jarak"><a data-toggle="tab"
-					role="button">근교산자락길</a></li>
-					<li class="tabmenu" id="hanyang"><a data-toggle="tab"
-					role="button">한양도성길</a></li>
+						<li class="tabmenu active" id="doolrea"><a data-toggle="tab"
+							role="button">서울둘레길</a></li>
+						<li class="tabmenu" id="moonhwa"><a data-toggle="tab"
+							role="button">생태문화길</a></li>
+						<li class="tabmenu" id="jichun"><a data-toggle="tab"
+							role="button">한강지천길/계절길</a></li>
+						<li class="tabmenu" id="jarak"><a data-toggle="tab"
+							role="button">근교산자락길</a></li>
+						<li class="tabmenu" id="hanyang"><a data-toggle="tab"
+							role="button">한양도성길</a></li>
 					</ul>
 				</div>
 				<!-- 걷기 캐러셀 영역 -->
-				<div class="row walking_item" id="map_container">
-				</div>
+				<div class="row walking_item" id="map_container"></div>
 			</div>
 			<!-- // 걷기코드 영역 끝 -->
 			<!-- 영역 구분선 모바일에서만 표시 -->
@@ -459,9 +454,22 @@ h4 {
 									style="max-height: 100%; max-width: 100%; cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
-										${item_exp.MAXCLASSNM }<span class="middel_dot"></span>${item_exp.MINCLASSNM}<span
-											class="heart pull-right"><i class="fa fa-heart-o"
-											aria-hidden="true" role="button"></i></span>
+										${item_exp.MAXCLASSNM }<span class="middel_dot"></span>${item_exp.MINCLASSNM}<c:set
+											var="book_Unique" value="${outputUnique}" />
+										<c:choose>
+											<c:when test="${fn:contains(book_Unique, item_exp.SVCID)}">
+												<button class="heart pull-right liked" type="button"
+													value="${item_exp.DIV_COL}" data-value="${item_exp.SVCID}">
+													<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="heart pull-right" type="button"
+													value="${item_exp.DIV_COL}" data-value="${item_exp.SVCID}">
+													<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+												</button>
+											</c:otherwise>
+										</c:choose>
 									</p>
 									<h4 class="explan">${item_exp.SVCNM }</h4>
 									<p class="pull-left" style="max-width: 70%;">${item_exp.PLACENM}</p>
@@ -495,9 +503,22 @@ h4 {
 									style="max-height: 100%; max-width: 100%; cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
-										${item_imp.MAXCLASSNM }<span class="middel_dot"></span>${item_imp.MINCLASSNM}<span
-											class="heart pull-right"><i class="fa fa-heart-o"
-											aria-hidden="true" role="button"></i></span>
+										${item_imp.MAXCLASSNM }<span class="middel_dot"></span>${item_imp.MINCLASSNM}<c:set
+											var="book_Unique" value="${outputUnique}" />
+										<c:choose>
+											<c:when test="${fn:contains(book_Unique, item_imp.SVCID)}">
+												<button class="heart pull-right liked" type="button"
+													value="${item_imp.DIV_COL}" data-value="${item_imp.SVCID}">
+													<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="heart pull-right" type="button"
+													value="${item_imp.DIV_COL}" data-value="${item_imp.SVCID}">
+													<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+												</button>
+											</c:otherwise>
+										</c:choose>
 									</p>
 									<h4 class="explan">${item_imp.SVCNM }</h4>
 									<p class="pull-left" style="max-width: 70%;">${item_imp.PLACENM}</p>
@@ -531,9 +552,24 @@ h4 {
 									style="max-height: 100%; max-width: 100%; cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
-										${item_borrow.MAXCLASSNM }<span class="middel_dot"></span>${item_borrow.MINCLASSNM}<span
-											class="heart pull-right"><i class="fa fa-heart-o"
-											aria-hidden="true" role="button"></i></span>
+										${item_borrow.MAXCLASSNM }<span class="middel_dot"></span>${item_borrow.MINCLASSNM}<c:set
+											var="book_Unique" value="${outputUnique}" />
+										<c:choose>
+											<c:when test="${fn:contains(book_Unique, item_borrow.SVCID)}">
+												<button class="heart pull-right liked" type="button"
+													value="${item_borrow.DIV_COL}"
+													data-value="${item_borrow.SVCID}">
+													<i class="fa fa-heart" aria-hidden="true" role="button"></i>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="heart pull-right" type="button"
+													value="${item_borrow.DIV_COL}"
+													data-value="${item_borrow.SVCID}">
+													<i class="fa fa-heart-o" aria-hidden="true" role="button"></i>
+												</button>
+											</c:otherwise>
+										</c:choose>
 									</p>
 									<h4 class="explan">${item_borrow.SVCNM }</h4>
 									<p class="pull-left" style="max-width: 70%;">${item_borrow.PLACENM}</p>
@@ -569,7 +605,8 @@ h4 {
 									<p>${item.crew_name}크루</p>
 									<h4 class="explan">${item.crew_sinto}</h4>
 									<p class="pull-left" style="max-width: 70%;">${item.crew_area}</p>
-									<p class="pull-right" style="max-width: 30%;">회원수 ${item.crew_member}명</p>
+									<p class="pull-right" style="max-width: 30%;">회원수
+										${item.crew_member}명</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -690,25 +727,171 @@ h4 {
 							}
 						});
 	</script>
-	<!-- 찜하기 버튼 기능 -->
-	<script>
-		$(".heart")
-				.on(
-						"click",
-						function() {
-							if ($(this).hasClass("liked")) {
-								$(this)
+	<!-- 찜버튼 스크립트 -->
+	<script type="text/javascript">
+	/**
+	 * 찜목록 추가제거 (김도운)
+	 */
+	// 하트
+	$(".heart")
+		.on(
+			"click",
+			function() {
+				if ($(this).hasClass("liked")) {
+					var catid = $(this).attr('value');
+					var svcid = $(this).data('value');
+					var heart = $(this);
+					var URL = window.location.href;
+					swal({
+						title: '확인',
+						text: "찜목록에서 제거할까요?",
+						type: 'question',
+						confirmButtonText: '네',
+						showCancelButton: true,
+						cancelButtonText: '아니요',
+					})
+						.then(
+							function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+								if (result.value) { // 확인 버튼이 눌러진 경우
+									$.ajax({
+										cache: false,
+										url: getContextPath() + '/casPage/BookMark',
+										type: 'POST',
+										dataType: 'json',
+										data: { catid, svcid, URL},
+										timeout: 10000,
+										success: function(req) {
+
+											console.log("삭제 성공 >> " + req);
+											heart
+												.html(
+														'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+											heart.removeClass("liked");
+											swal(
+												'성공',
+												'찜목록에서 제거되었습니다.',
+												'success'), {
+												buttons: {
+													confirm: {
+														text: '닫기',
+														value: true,
+														className: 'btn btn-outline-primary'
+													}
+												}
+											}
+											setTimeout(function() {
+											}, 1000);
+										},
+										error: function(error) {
+											console.log("에러 >> " + error.status);
+											swal('주의', '찜목록에 제거하기가 실패했습니다.', 'warning'), {
+												closeOnClickOutside: false,
+												closeOnEsc: false,
+												buttons: {
+													confirm: {
+														text: '닫기',
+														value: true,
+														className: 'btn btn-outline-primary'
+													}
+												}
+											}
+											heart
+												.html(
+														'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+											heart
+												.removeClass(
+													"liked");
+										}
+									})
+
+								} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+									heart
 										.html(
 												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
-								$(this).removeClass("liked");
-							} else {
-								$(this)
+									heart
+										.removeClass(
+											"liked");
+									swal(
+										'취소',
+										'제거가 취소되었습니다.',
+										'error');
+								}
+							});
+				} else {
+					var catid = $(this).attr('value');
+					var svcid = $(this).data('value');
+					var heart = $(this);
+					var URL = window.location.href;
+					swal({
+						title: '확인',
+						text: "찜목록에 추가할까요?",
+						type: 'question',
+						confirmButtonText: '네',
+						showCancelButton: true,
+						cancelButtonText: '아니요',
+					})
+						.then(
+							function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+								if (result.value) { // 확인 버튼이 눌러진 경우
+									$.ajax({
+										cache: false,
+										url: getContextPath() + '/casPage/BookMark',
+										type: 'POST',
+										dataType: 'json',
+										data: { catid, svcid, URL},
+										timeout: 10000,
+										success: function(req) {
+
+											console.log("성공 >> " + req);
+											heart
+											.html(
+													'<i class="fa fa-heart" aria-hidden="true"></i>');
+											heart.addClass("liked");
+											swal(
+												'성공',
+												'찜목록에 추가되었습니다.',
+												'success');
+											setTimeout(function() {
+											}, 1000);
+										},
+										error: function(error) {
+											console.log("에러 >> " + error.status);
+											swal('주의', '찜추가에 실패했습니다.', 'warning'), {
+												closeOnClickOutside: false,
+												closeOnEsc: false,
+												buttons: {
+													confirm: {
+														text: '닫기',
+														value: true,
+														className: 'btn btn-outline-primary'
+													}
+												}
+											}
+											heart
+											.html(
+													'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+											heart.removeClass("liked");
+										}
+									})
+
+								} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+									heart
 										.html(
-												'<i class="fa fa-heart" aria-hidden="true"></i>');
-								$(this).addClass("liked");
-							}
-						});
+												'<i class="fa fa-heart-o" aria-hidden="true"></i>');
+									heart
+										.removeClass(
+											"liked");
+									swal(
+										'취소',
+										'취소되었습니다.',
+										'error');
+								}
+							});
+				}
+
+			});
 	</script>
+	<!-- 찜버튼 스크립트 끝 -->
 	<!-- // 본문 JS 끝 -->
 	<!-- 이젠 팝업 -->
 	<%@ include file="/WEB-INF/views/mainPage/cookie.jsp"%>
