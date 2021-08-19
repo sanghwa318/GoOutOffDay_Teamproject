@@ -342,8 +342,7 @@ ul, li {
 	<%@ include file="../inc/Footer.jsp"%>
 
 	<%@ include file="../inc/plugin.jsp"%>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+
 	<!-- 길안내 바로가기 클릭이벤트 로그 -->
 	<script>
 		$('#location').on("click", function () {

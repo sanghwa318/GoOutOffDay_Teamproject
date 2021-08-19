@@ -387,8 +387,6 @@ carousel-title2 {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js"></script>
 	<!-- // 명예의전당 관련 소스코드 끝 -->
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<script>
 	//카카오맵 지도 정보
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div

@@ -183,25 +183,35 @@ h3 {
 				</div>
 			</div>
 			<hr />
-			<div class="jumbotron">
-				<h2>기간별 크루생성현황과 생성된 크루의 종류</h2>
-				<div class="parent clearfix">
-					<div class="form-group pull-right">
-						<select class="form-control">
-							<option value="day">당일</option>
-							<option value="week">주간</option>
-							<option value="month">한달</option>
-						</select>
+			<div id="stats_crew">
+				<div class="jumbotron clearfix">
+					<h2>기간별 크루생성현황과 생성된 크루의 종류</h2>
+					<div class="parent">
+						<div class="form-group pull-right"  id="crew-interval">
+							<select class="form-control">
+								<option value="day">당일</option>
+								<option value="week">주간</option>
+								<option value="month">한달</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<h2 class="text-primary">
-					<em>Create Total : ${output_count_MakeCrew }</em> <br />
-				</h2>
-				<div class="canvas" style="width: 49%; display: inline-block;">
-					<canvas id="myChart6" width="10" height="3"></canvas>
-				</div>
-				<div class="canvas" style="width: 49%; display: inline-block;">
-					<canvas id="myChart66" width="10" height="3"></canvas>
+					<div id="canvas-container6">
+						<h2 class="text-primary">
+							<em id="crewCnt">Create Total : ${output_count_MakeCrew }</em> <br />
+						</h2>
+						<div style="width: 49%; display: inline-block;">
+							<h3>크루 생성 현황</h3>
+							<div class="canvas" id="crChart_canvas">
+								<canvas id="crChart" width="10" height="3"></canvas>
+							</div>
+						</div>
+						<div style="width: 49%; display: inline-block;">
+							<h3>크루 종류</h3>
+							<div class="canvas" id="caChart_canvas">
+								<canvas id="caChart" width="10" height="3"></canvas>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -402,7 +412,7 @@ h3 {
 				}
 			})
 			})
-		})
+
 		/** 회원가입 현황 끝 **/
 
 		/** 인기검색어 **/
@@ -863,82 +873,178 @@ h3 {
 					}
 				})
 		})
-
-		
-		
-		
 		/** 걷기기록을 이용한 시간별 인원과 그중 나만의코스를 생성한 사람의 시간별인원  끝 **/
 		
 		
 		/** 생성된 된 크루현황 통계와 생성된 크루의 종류 현황 **/
-		var CrewHour = [];
-		var CrewCnt = [];
-		
-		<c:forEach var="MakeCrewLogItem" items="${output_Hour_Count_MakrCrew}">
-			CrewHour.push(${MakeCrewLogItem.log_hour});
-			CrewCnt.push(${MakeCrewLogItem.log_cnt});
-		</c:forEach>
-		
-		var CrewCategory = [];
-		var CrewCategoryCnt = [];
-		
-		<c:forEach var="MakeMapLogItem" items="${output_CrewCategory}">
-			CrewCategory.push('${MakeMapLogItem.crew_category}');
-			CrewCategoryCnt.push(${MakeMapLogItem.log_cnt});
-		</c:forEach>
-		
-		const ctx6 = document.getElementById('myChart6').getContext('2d');
-		const myChart6 = new Chart(ctx6,{
-			data : {
-				labels : CrewHour,
-				datasets : [ {
-						axis : 'x',
-						type : 'bar',
-						label : '걷기기록이용 인원',
-						data : CrewCnt,
-						backgroundColor : [ 
-							'rgba(255, 99, 132, 0.5)' ],
-					borderColor : [
-						'rgba(255, 99, 132, 1)' ],
-					borderWidth : 1
+		$.ajax({
+			url:getContextPath()+'/adminPage/admin_stats_crew',
+			method:'get',
+			data:{},
+			dataType:'json',
+			success:function(data){
+				var CrewHour = [];
+				var CrewCnt = [];
+				var CrewCategory = [];
+				var CrewCategoryCnt = [];
+				
+				for(var i=0; i<data.output_Hour_Count_MakeCrew.length; i++){
+					if(data.output_Hour_Count_MakeCrew[i].log_date!=null){
+						CrewHour.push(data.output_Hour_Count_MakeCrew[i].log_date);
+					}else{
+						CrewHour.push(data.output_Hour_Count_MakeCrew[i].log_hour);					
+					}
+					CrewCnt.push(data.output_Hour_Count_MakeCrew[i].log_cnt);
+				}
+				
+				for(var i=0; i<data.output_CrewCategory.length; i++){
+					CrewCategory.push(data.output_CrewCategory[i].crew_category);
+					CrewCategoryCnt.push(data.output_CrewCategory[i].log_cnt);
+				}
+				
+				const ctx6 = document.getElementById('crChart').getContext('2d');
+				const crChart = new Chart(ctx6,{
+					data : {
+						labels : CrewHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '걷기기록이용 인원',
+								data : CrewCnt,
+								backgroundColor : [ 
+									'rgba(255, 99, 132, 0.5)' ],
+							borderColor : [
+								'rgba(255, 99, 132, 1)' ],
+							borderWidth : 1
+							
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+					}
+				});
+				const ctx66 = document.getElementById('caChart').getContext('2d');
+				const caChart = new Chart(ctx66,{
+					type : 'pie',
+					data : {
+						labels : CrewCategory,
+						datasets : [ {
+							axis : 'x',
+							label : '크루종류',
+							data : CrewCategoryCnt,
+							backgroundColor : [ 
+								'rgba(246, 229, 141, 0.5)',
+								'rgba(255, 190, 118, 0.5)',
+								'rgba(255, 121, 121, 0.5)',
+								'rgba(186, 220, 88, 0.5)',
+								'rgba(56, 173, 169, 0.5)'
+								],
+						borderColor : [
+							'rgba(246, 229, 141, 1)',
+							'rgba(255, 190, 118, 1)',
+							'rgba(255, 121, 121, 1)',
+							'rgba(186, 220, 88, 1)',
+							'rgba(56, 173, 169, 1)'],
+						borderWidth : 1
+						} ]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+					}
+				});			
+			}
+		})
+		//기간설정
+		$('#crew-interval').on('change', function(){
+			$('#crChart').remove();
+			$('#caChart').remove();
+			$('#canvas-container6 #crChart_canvas').append('<canvas id="crChart" width="10" height="3"><canvas>')
+			$('#canvas-container6 #caChart_canvas').append('<canvas id="caChart" width="10" height="3"><canvas>')
+			var interval=$('#crew-interval option:selected').val();
+			
+			$.ajax({
+				url:getContextPath()+'/adminPage/admin_stats_crew',
+				method:'get',
+				data:{interval},
+				dataType:'json',
+				success:function(data){
+					var CrewHour = [];
+					var CrewCnt = [];
+					var CrewCategory = [];
+					var CrewCategoryCnt = [];
 					
-				}]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
-			}
-		});
-		const ctx66 = document.getElementById('myChart66').getContext('2d');
-		const myChart66 = new Chart(ctx66,{
-			type : 'pie',
-			data : {
-				labels : CrewCategory,
-				datasets : [ {
-					axis : 'x',
-					label : '크루종류',
-					data : CrewCategoryCnt,
-					backgroundColor : [ 
-						'rgba(246, 229, 141, 0.5)',
-						'rgba(255, 190, 118, 0.5)',
-						'rgba(255, 121, 121, 0.5)',
-						'rgba(186, 220, 88, 0.5)',
-						'rgba(56, 173, 169, 0.5)'
-						],
-				borderColor : [
-					'rgba(246, 229, 141, 1)',
-					'rgba(255, 190, 118, 1)',
-					'rgba(255, 121, 121, 1)',
-					'rgba(186, 220, 88, 1)',
-					'rgba(56, 173, 169, 1)'],
-				borderWidth : 1
-				} ]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
-			}
-		});
+					for(var i=0; i<data.output_Hour_Count_MakeCrew.length; i++){
+						if(data.output_Hour_Count_MakeCrew[i].log_date!=null){
+							CrewHour.push(data.output_Hour_Count_MakeCrew[i].log_date);
+						}else{
+							CrewHour.push(data.output_Hour_Count_MakeCrew[i].log_hour);					
+						}
+						CrewCnt.push(data.output_Hour_Count_MakeCrew[i].log_cnt);
+					}
+					
+					for(var i=0; i<data.output_CrewCategory.length; i++){
+						CrewCategory.push(data.output_CrewCategory[i].crew_category);
+						CrewCategoryCnt.push(data.output_CrewCategory[i].log_cnt);
+					}
+					
+					const ctx6 = document.getElementById('crChart').getContext('2d');
+					const crChart = new Chart(ctx6,{
+						data : {
+							labels : CrewHour,
+							datasets : [ {
+									axis : 'x',
+									type : 'bar',
+									label : '걷기기록이용 인원',
+									data : CrewCnt,
+									backgroundColor : [ 
+										'rgba(255, 99, 132, 0.5)' ],
+								borderColor : [
+									'rgba(255, 99, 132, 1)' ],
+								borderWidth : 1
+								
+							}]
+						},
+						options : {
+							indexAxis : 'x',
+							maintainAspectRatio: false,
+						}
+					});
+					const ctx66 = document.getElementById('caChart').getContext('2d');
+					const caChart = new Chart(ctx66,{
+						type : 'pie',
+						data : {
+							labels : CrewCategory,
+							datasets : [ {
+								axis : 'x',
+								label : '크루종류',
+								data : CrewCategoryCnt,
+								backgroundColor : [ 
+									'rgba(246, 229, 141, 0.5)',
+									'rgba(255, 190, 118, 0.5)',
+									'rgba(255, 121, 121, 0.5)',
+									'rgba(186, 220, 88, 0.5)',
+									'rgba(56, 173, 169, 0.5)'
+									],
+							borderColor : [
+								'rgba(246, 229, 141, 1)',
+								'rgba(255, 190, 118, 1)',
+								'rgba(255, 121, 121, 1)',
+								'rgba(186, 220, 88, 1)',
+								'rgba(56, 173, 169, 1)'],
+							borderWidth : 1
+							} ]
+						},
+						options : {
+							indexAxis : 'x',
+							maintainAspectRatio: false,
+						}
+					});			
+				}
+			})
+		})
+	})
 		/** 생성된 된 크루현황 통계와 생성된 크루의 종류 현황 끝 **/
 	</script>
 </body>

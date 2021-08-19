@@ -558,6 +558,162 @@
 		ORDER BY 1;
 		</if>
 	</select>
+		<!-- 기간별 걷기 기록이용한 사람의 인원 -->
+	<select id="RecordCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultType="int">
+		<if test="interval=='day'">
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE log_content LIKE
+		"walkRecordStart"
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
+		CURDATE();
+		</if>
+		<if test="interval=='week'">
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE log_content LIKE
+		"walkRecordStart"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			week) AND NOW()
+		</if>
+		<if test="interval=='month'">
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE log_content LIKE
+		"walkRecordStart"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			month) AND NOW()
+		</if>
+		
+	</select>
+
+	<!-- 기간별 걷기 기록이용한 사람의 시간별(날짜별)인원 -->
+	<select id="RecordHourCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		<if test="interval=='day'">
+		SELECT hour(log_datetime) as log_hour, count(*) as log_cnt
+		FROM user_traffic_log
+		WHERE log_content LIKE "walkRecordStart"
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1;
+		</if>
+		<if test="interval=='week'">
+		SELECT date(log_datetime) as log_date, count(*) as log_cnt
+		FROM user_traffic_log
+		WHERE log_content LIKE "walkRecordStart"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			week) AND NOW()
+		GROUP BY 1
+		ORDER BY 1;
+		</if>
+		<if test="interval=='month'">
+		SELECT date(log_datetime) as log_date, count(*) as log_cnt
+		FROM user_traffic_log
+		WHERE log_content LIKE "walkRecordStart"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			month) AND NOW()
+		GROUP BY 1
+		ORDER BY 1;
+		</if>
+		
+	</select>
+	<!-- 기간별 걷기 기록이용자 중 나만의코스 생성한 사람의 인원 -->
+	<select id="MakeLogMapCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultType="int">
+		WITH user_no AS (SELECT distinct(user_info_user_no)
+		FROM
+		user_traffic_log
+		WHERE log_content LIKE "walkRecordStart"
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE())
+		<if test="interval=='day'">
+		SELECT count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_category LIKE "%myCourseWriteOk"
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
+		</if>
+		<if test="interval=='week'">
+		 SELECT count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_category LIKE "%myCourseWriteOk"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			week) AND NOW()
+		</if>
+		<if test="interval=='month'">
+		SELECT count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_category LIKE "%myCourseWriteOk"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			month) AND NOW()
+		</if>
+		
+	</select>
+
+	<!-- 기간별 걷기 기록이용자 중 나만의코스 생성한 사람의 시간별(날짜별)인원 -->
+	<select id="MakeLogMapHourCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		WITH user_no AS (SELECT distinct(user_info_user_no)
+		FROM
+		user_traffic_log
+		WHERE log_content LIKE "walkRecordStart"
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE())
+		<if test="interval=='day'">
+		SELECT
+		hour(log_datetime) as log_hour, count(*) as log_cnt
+		FROM user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_category LIKE "%myCourseWriteOk"
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1;
+		</if>
+		<if test="interval=='week'">
+		SELECT
+		DATE(log_datetime) as log_date, count(*) as log_cnt
+		FROM user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_category LIKE "%myCourseWriteOk"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			week) AND NOW()
+		GROUP BY 1
+		ORDER BY 1;
+		</if>
+		<if test="interval=='month'">
+		SELECT
+		DATE(log_datetime) as log_date, count(*) as log_cnt
+		FROM user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_category LIKE "%myCourseWriteOk"
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			month) AND NOW()
+		GROUP BY 1
+		ORDER BY 1;
+		</if>
+	</select>
+	
+	
 	<!-- 기간별 크루생성현황 총숫자 -->
 	<select id="MakeCrewCount"
 		parameterType="study.spring.goodspring.model.Crew" resultType="int">
@@ -565,31 +721,60 @@
 		count(*)
 		FROM crew
 		WHERE user_info_user_out LIKE 'N'
-		AND
-		DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE();
+		<if test="interval=='day'">
+		AND	DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE();
+		</if>
+		<if test="interval=='week'">
+		AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 week) AND NOW()
+		</if>
+		<if test="interval=='month'">
+		AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 month) AND NOW()
+		</if>
 	</select>
 
 	<!-- 기간별 크루생성현황 시간별인원 -->
 	<select id="MakeCrewHourCount"
 		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
 		SELECT
-		hour(crew_createtime) as log_hour, count(*) as log_cnt
+		<if test="interval=='day'">
+		hour(crew_createtime) as log_hour
+		</if>
+		<if test="interval=='week'">
+		date(crew_createtime) as log_date
+		</if>
+		<if test="interval=='month'">
+		date(crew_createtime) as log_date
+		</if>
+		, count(*) as log_cnt
 		FROM crew
-		WHERE
-		user_info_user_out LIKE 'N'
-		AND DATE_FORMAT(crew_createtime,
-		"%Y-%m-%d") = CURDATE()
+		WHERE user_info_user_out LIKE 'N'
+		<if test="interval=='day'">
+		AND	DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE()
+		</if>
+		<if test="interval=='week'">
+		AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 week) AND NOW()
+		</if>
+		<if test="interval=='month'">
+		AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 month) AND NOW()
+		</if>
 		GROUP BY 1
 		ORDER BY 1;
 	</select>
 
 	<!-- 기간별 크루생성된 크루의 종류 현황 -->
-	<select id="CrewCategoryCount"
-		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
+	<select id="CrewCategoryCount" parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
 		SELECT crew_category, count(*) as log_cnt
 		FROM crew
 		WHERE user_info_user_out LIKE 'N'
-		AND DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE()
+		<if test="interval=='day'">
+		AND	DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE()
+		</if>
+		<if test="interval=='week'">
+		AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 week) AND NOW()
+		</if>
+		<if test="interval=='month'">
+		AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 month) AND NOW()
+		</if>
 		GROUP BY 1
 		ORDER BY 2 DESC;
 	</select>

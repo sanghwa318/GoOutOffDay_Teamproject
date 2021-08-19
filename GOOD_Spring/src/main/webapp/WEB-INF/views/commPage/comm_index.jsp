@@ -332,10 +332,6 @@ h4 {
 						});
 	</script>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing">
-		
-	</script>
-	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/js/myCourseList-js.js">
 		
 	</script>

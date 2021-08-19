@@ -388,10 +388,6 @@ p {
    <%@ include file="../inc/plugin.jsp"%>
 
 </body>
-<script type="text/javascript"
-   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9870eef7f02b830927d5cdc63a809fa0&libraries=clusterer"></script>
-<script
-   src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
 
 <script>
    function getContextPath() {
