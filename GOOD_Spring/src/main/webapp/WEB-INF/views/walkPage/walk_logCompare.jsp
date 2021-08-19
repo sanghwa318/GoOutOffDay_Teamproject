@@ -1,31 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<!doctype html>
-<html>
-<head>
 
-</head>
-<style>
-
-@media (max-width: 380px){
-#myChart4,
-#myChart5,
-#myChart6 {
-	width : 80vw;
-	height : 40vh;
-}
-}
-@media (min-width: 400px) and (max-width: 1200px){
-#myChart4,
-#myChart5,
-#myChart6 {
-	width : 200vw;
-	height : 200vh;
-}
-}
-
-</style>
 <!-- logCompaer -->
 <div class="jumbotron" style="background-color: #fefbfe">
 	<div class="tab-content">
@@ -34,7 +10,7 @@
 	</div>
 	<h2>회원들과의 비교</h2>
 	<div style="width: 100%; height: 300px; display: inline-block;">
-		<canvas id="myChart4"></canvas>
+		<canvas id="myChart4" ></canvas>
 	</div>
 	<div style="width: 100%; height: 300px; display: inline-block;">
 		<canvas id="myChart5"></canvas>
@@ -65,7 +41,8 @@ var option1 = {
                 
             }
         },
-	  responsive: false,
+      maintainAspectRatio: false,
+	  responsive: true,
 	  scales: {
 	    yAxes: [{
 	      stacked: true,
@@ -101,7 +78,8 @@ var option2 = {
             }
         }
     },
-  responsive: false,
+  maintainAspectRatio: false,
+  responsive: true,
   scales: {
     yAxes: [{
       stacked: true,
@@ -136,7 +114,8 @@ var option3 = {
             }
         }
     },
-  responsive: false,
+  maintainAspectRatio: false,
+  responsive: true,
   scales: {
     yAxes: [{
       stacked: true,

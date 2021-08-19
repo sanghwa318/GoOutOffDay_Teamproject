@@ -156,7 +156,8 @@ var confirm = function(setgoal_day, setgoal_distance, setgoal_time){
 	                }
 	            }
 	        },
-		  responsive: false,
+	        maintainAspectRatio: false,
+		  responsive: true,
 	        layout: {
 	            padding: 20
 	        }
@@ -175,7 +176,8 @@ var confirm = function(setgoal_day, setgoal_distance, setgoal_time){
 	                }
 	            }
 	        },
-		  responsive: false,
+	        maintainAspectRatio: false,
+		  responsive: true,
 	        layout: {
 	            padding: 20
 	        }
