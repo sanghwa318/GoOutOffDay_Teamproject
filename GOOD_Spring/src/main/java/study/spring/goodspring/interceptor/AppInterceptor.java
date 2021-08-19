@@ -103,12 +103,12 @@ public class AppInterceptor implements HandlerInterceptor {
 					//파싱된 keyword와 kewword_Url을 합쳐서 addKeyword 메서드에 전달.
 					String keyword= keyword_url+"?keyword="+keyword_str;
 					
+					if(keyword_str!=null && keyword_str!="") {
 					UserTrafficLog input = new UserTrafficLog();
 					input.setUser_info_user_no(loginInfo.getUser_no());
-					
-
 					input.setLog_category(keyword);
 					userTrafficLogService.addKeyword(input);
+					}
 					isKeyword=true;
 				}
 			}
