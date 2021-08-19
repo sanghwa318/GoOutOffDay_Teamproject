@@ -262,8 +262,9 @@ html, body {
 			</ul>
 		</div>
 	</div>
-	<%@ include file="../inc/Footer.jsp"%>
+	
 	<%@ include file="../inc/plugin.jsp"%>
+	<%@ include file="../inc/Footer.jsp"%>
 	<script type="text/javascript">
 	/**
 	 * 찜목록 추가제거 (김도운)
