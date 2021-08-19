@@ -314,7 +314,7 @@
 							<form method="get"
 								action="${pageContext.request.contextPath }/mainPage/search.do"
 								class="navbar-form navbar-right" role="search"
-								style="border-bottom: 0 !important;">
+								style="border-bottom: 0 !important; border-left: 1px solid #ccc;">
 								<div class="form-group input-group">
 									<input type="search" name="keyword" class="form-control"
 										placeholder="검색"> <span class="input-group-btn">
