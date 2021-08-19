@@ -90,7 +90,7 @@ p {
 }
 
 .map_menu #map1 {
-   width: 77%;
+   width: 80%;
    float: left;
 }
 
@@ -98,7 +98,7 @@ p {
    width: 20%;
    height: 100%;
    float: left;
-   margin-left: 1px;
+/*    margin-left: 1px; */
    margin-bottom: 8px;
 }
 
