@@ -278,13 +278,9 @@ div#category_acco .accordian-toggle {
 													<!-- 														<td></td> -->
 													<!-- 													</tr> -->
 													<tr>
-														<td class="hidden-xs"><h4>강남/강북 :
-																${SOUTH_NORTH_DIV_NM }</h4></td>
-													</tr>
-													<tr>
-														<td class="hidden-xs"><h4>지역구 : ${AREA_GU }</h4></td>
-														<td class="visible-xs"><p style="font-size: 14px;">지역구
-																: ${AREA_GU }</p></td>
+														<td class="hidden-xs"><h4>지역 : ${SOUTH_NORTH_DIV_NM } | ${AREA_GU }</h4></td>
+														<td class="visible-xs"><p style="font-size: 14px;">지역
+																: ${SOUTH_NORTH_DIV_NM } | ${AREA_GU }</p></td>
 													</tr>
 													<tr>
 														<td class="hidden-xs"><h4>거리 : ${DISTANCE }</h4></td>
