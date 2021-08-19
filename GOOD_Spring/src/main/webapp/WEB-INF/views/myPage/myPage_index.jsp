@@ -28,7 +28,7 @@
 		<div class="container">
 			<h1 class="page-header">마이페이지</h1>
 			<div class="row">
-				<div class="col-md-3 col-md-offset-1 profileimage"
+				<div class="col-md-3 col-md-offset-1 col-xs-3  profileimage"
 					style="width: 230px">
 					<form id="uploadForm">
 						<div class="form-group">
@@ -48,7 +48,7 @@
 							value="${sessionScope.principal.id}" />
 					</form>
 				</div>
-				<div class="col-md-7 col-md-offset-1 profile_info">
+				<div class="col-md-7 col-md-offset-1 col-xs-6 col-xs-offset-1 profile_info">
 					<h4>ID: ${login_info.getUser_id()}</h4>
 					<h4>닉네임: ${login_info.getUser_nick()}</h4>
 					<h4>
@@ -67,7 +67,7 @@
 			</div>
 			<hr>
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
+				<div class="col-md-11 col-md-offset-1">
 					<div class="pull-left">
 						<a href="${pageContext.request.contextPath}/myPage/myPage_inquiry.do" class="btn btn-default">1:1 문의</a>
 					</div>
