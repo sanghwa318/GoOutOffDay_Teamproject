@@ -85,8 +85,6 @@
 
 
 <!-- // 본문 JS시작 -->
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
 	<!-- 카카오 맵 -->
 	<script type="text/javascript">
 	function getContextPath() {

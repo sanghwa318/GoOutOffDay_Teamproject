@@ -77,7 +77,7 @@
 		FROM bookmark b
 		LEFT JOIN
 		unique_course u ON b.service_id = u.COURSE_NAME
-		LEFT JOIN cas c ON
+		LEFT JOIN CAS c ON
 		b.service_id = c.SVCID
 		<where>
 			user_info_user_no =
