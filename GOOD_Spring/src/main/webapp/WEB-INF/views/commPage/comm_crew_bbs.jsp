@@ -179,7 +179,7 @@ float:left;
             </div>
             </c:if>
             <div class="form-group" >
-            <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" method="GET">
+            <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" id="bbs_id" method="GET">
                <div class="col-md-7 col-sm-4 col-xs-3 col-md-offset-2 col-sm-offset-3 col-xs-offset-2" role="search">
                   <div class="form-group input-group">
                         <input type="text" class="form-control" name="keyword"
@@ -316,7 +316,23 @@ float:left;
                      cancelButtonText : '아니오', // 취소버튼 표시 문구
                   }).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
                      if (result.value) { // 확인 버튼이 눌러진 경우
-                    window.location.href = getContextPath()+ "/commPage/comm_crew_bbs_delete_ok?crew_no="+ ${output.crew_no};
+                    	 $.ajax({
+                    		 url: getContextPath()+ "/commPage/comm_crew_bbs_delete_ok?crew_no=" + crew_no,
+                    		dataType: 'json',
+                    		data:{},
+                    		success: function(data){
+                    			
+                    		    swal("성공", "탈퇴되었습니다.", "success").then(function(){
+                    		    	location.href= getContextPath()+ "/commPage/comm_crew_myCrew.do"
+                    		    })
+                    		},error:function(request,status,error){
+                    			swal("에러","탈퇴에 실패했습니다.","error").then(function(result){
+                    				location.href=getContextPath()+"/commPage/comm_crew_myCrew.do"
+                    			});
+                    		}
+                    	
+                    	  })
+                     
                    } else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
                      swal('취소', '탈퇴가 취소되었습니다.','error');
                      }

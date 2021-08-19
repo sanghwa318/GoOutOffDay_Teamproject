@@ -1,6 +1,7 @@
 package study.spring.goodspring.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.RegexHelper;
@@ -70,14 +72,15 @@ public class CrewCrewMemberController {
    /**
     * 크루멤버 추방 처리
     */
+   @ResponseBody
    @RequestMapping(value = "/commPage/comm_crew_memberJoin_delete", method = RequestMethod. GET)
-   public ModelAndView delete(Model model,
+   public Map<String, Object> delete(Model model,
          @RequestParam(value="member_no", defaultValue="0") int member_no,
          @RequestParam(value="crew_crew_no", defaultValue="0") int crew_crew_no) {
       
       /** 1) 파라미터 유효성 검사 */
       if(member_no == 0 || crew_crew_no == 0) {
-         return webHelper.redirect(null, "멤버번호 또는 크루번호가 없습니다.");
+         return webHelper.getJsonError("멤버번호 또는 크루번호가 없습니다.");
       }
          
       /** 조회삭제를 위한 select */
@@ -88,23 +91,24 @@ public class CrewCrewMemberController {
       
       try {
          if(crewMemberService.getCrewMemberItem(input)) {
-            return webHelper.redirect(null, "본인은 추방할 수 없습니다.");
+            return webHelper.getJsonError("본인은 추방할 수 없습니다.");
          }
          else {
-         crewMemberService.deleteCrewMember(input); // 데아터 삭제
+         crewMemberService.deleteCrewMember(input); // 데이터 삭제
          }
       } catch (Exception e) {
-         return webHelper.redirect(null, e.getLocalizedMessage());
+         return webHelper.getJsonError(e.getLocalizedMessage());
       }
       
       
       /** 3) 페이지 이동 */
-      return webHelper.redirect(contextPath + "/commPage/comm_crew_memberJoin.do?crew_crew_no=" + input.getCrew_crew_no(), "추방되었습니다.");
+      return webHelper.getJsonData();
    }
    
    /** 크루탈퇴 */
+   @ResponseBody
    @RequestMapping(value = "/commPage/comm_crew_bbs_delete_ok", method = RequestMethod.GET)
-   public ModelAndView delete_ok(Model model, HttpServletResponse response,
+   public Map<String, Object> delete_ok(Model model, HttpServletResponse response,
          @RequestParam(value="crew_no", defaultValue = "0") int crew_crew_no)
          {
       
@@ -118,17 +122,17 @@ public class CrewCrewMemberController {
       
       try { 
          if(crewMemberService.getCrewno(input)) {
-            return webHelper.redirect(null, "크루장은 탈퇴 할 수 없습니다.");
+            return webHelper.getJsonError("크루장은 탈퇴 할 수 없습니다.");
          }
          else {
          crewMemberService.deleteMyCrew(input);  // 데이터 삭제
          }
       } catch (Exception e) {
-         return webHelper.redirect(null, e.getLocalizedMessage());
+         return webHelper.getJsonError(e.getLocalizedMessage());
       }
       
       /** 3) 페이지 이동 */
       // 확인할 대상이 삭제된 상태이므로 크루 페이지로 이동
-      return webHelper.redirect(contextPath + "/commPage/comm_crew_myCrew.do", "탈퇴되었습니다.");
+      return webHelper.getJsonData();
    }
 }

@@ -113,6 +113,7 @@
 	<!-- // js -->
 	
 	<script>
+	
 	 function getContextPath() {
 	      var hostIndex = location.href.indexOf(location.host)
 	            + location.host.length;
@@ -123,7 +124,7 @@
 		$("#check-delete").click(function() {
 			const delcrew = [];
 			const obj = $(".member_id:checked");
-
+			
 			if (obj.length < 1) {
 				swal('알림', '선택된 멤버가 없습니다.');
 				setTimeout(function(){
@@ -140,16 +141,30 @@
 				showCancelButton : true, // 취소버튼 표시 여부
 				cancelButtonText : '아니오', // 취소버튼 표시 문구
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-				if (result.value) { // 확인 버튼이 눌러진 경우
-					var mn = $("#member_id:checked").data("memberno");
-					var cn = $("#member_id:checked").data("crewno");
-					window.location.href=getContextPath() +"/commPage/comm_crew_memberJoin_delete?member_no=" + mn +"&crew_crew_no=" + cn ;
+					if (result.value) { // 확인 버튼이 눌러진 경우
+						var mn = $("#member_id:checked").data("memberno");
+					    var cn = $("#member_id:checked").data("crewno");
+                   	 $.ajax({	
+                   		url: getContextPath()+ "/commPage/comm_crew_memberJoin_delete?member_no=" + mn +"&crew_crew_no=" + cn,
+                   		dataType: 'json',
+                   		data:{},
+                   		success: function(data){
+                   			
+                   		    swal("성공", "추방되었습니다.", "success").then(function(){
+                   		    	location.href= getContextPath()+ "/commPage/comm_crew_memberJoin.do?crew_crew_no=" + cn
+                   		    })
+                   		}, error:function(request,status,error){
+                			swal("에러","본인은 추방할 수 없습니다.","error").then(function(result){
+                				location.href=getContextPath()+"/commPage/comm_crew_memberJoin.do?crew_crew_no=" + cn
+                			});
+                		}
 
-				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+				}) 
+					}else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 					swal('취소', '추방이 취소되었습니다.', 'error');
 				}
-
-			});
+				});
+			
 		});
 	</script>
 </body>
