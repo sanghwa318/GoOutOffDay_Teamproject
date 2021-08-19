@@ -5,7 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
-
+<head>
+</head>
+<style>
+@media(max-width: 375px){
+#c_div{
+ width: 100%;
+}
+}
+@media(min-width: 500px){
+#c_div{
+width: 45%;
+}
+}
+</style>
 <div class="tab-content">
 	<form class="form-inline" role="form" id="goalAdd" >
 		<fieldset style="margin-top: 30px; text-align: center;">
@@ -48,10 +61,10 @@
 		</div>
 		<br>
 		<h2>목표 달성률</h2>
-		<div style="width: 45%; display: inline-block">
+		<div id="c_div" style=" display: inline-block">
 			<canvas id="myChart7"></canvas>
 		</div>
-		<div style="width: 45%; display: inline-block">
+		<div id="c_div" style=" display: inline-block">
 			<canvas id="myChart8"></canvas>
 		</div>
 	</div>
