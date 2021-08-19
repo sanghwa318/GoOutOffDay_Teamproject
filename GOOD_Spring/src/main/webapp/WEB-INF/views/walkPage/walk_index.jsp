@@ -288,17 +288,18 @@ carousel-title2 {
 
 		</div>
 
-		<!-- 캐러셀 영역 -->
+		<!-- 코스목록 캐러셀 영역 -->
 		<div class="row good_item wk_row">
 			<!--  캐러셀 시작 -->
-			<div class="owl-carousel owl-theme" id="owl-GOOD">
+			<div class="owl-carousel owl-theme" id="owl-GOOD item-box" data-length="${fn:length(output) }">
 				<c:forEach var="item" items="${output }" varStatus="status">
 					<c:url value="/walkPage/walk_detailCourse.do" var="detailUrl">
-						<c:param name="CPI_IDX" value="${item.CPI_IDX }" />
+						<c:param name="COURSE_NAME" value="${item.COURSE_NAME }" />
 					</c:url>
 					<div class="thumbnail item" onclick="location.href='${detailUrl}'"
-						style="cursor: pointer;">
-						<img src="#" alt="테스트이미지1" height="200" width="250">
+						style="cursor: pointer;" >
+						<div class="map" id="cmap${status.index}" style="height: 180px" 
+						data-dept1="${item.COURSE_CATEGORY_NM}" data-dept2="${item.COURSE_NAME}"></div>
 						<div class="caption">
 							<h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.COURSE_NAME}>${item.CPI_NAME }</h4>
 							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.CPI_CONTENT }</p>
@@ -633,7 +634,202 @@ carousel-title2 {
 								$(this).addClass("liked");
 							}
 						});
-	</script>
 	<!-- //하트 -->
+	</script>
+	<script type="text/javascript">
+    var length = $('#item-box').data('length');
+
+	//지도에서 사용될 변수들의 초기 선언.
+    var container = [];
+
+	//리스트 하나당 반복문 한번.
+    for (var j = 0; j < length; j++) {
+	//반복문이 한번 실행될때마다 지도와 선, 마커 등의 객체를 초기화해준다.
+		var polyline=null;
+		var marker=null;
+        let courseCategoryNM = $('#cmap' + j).data('dept1');
+        let courseName = $('#cmap' + j).data('dept2');
+        
+
+        console.log(courseCategoryNM + '/' + courseName + ' map = ' + j);
+        
+        if(courseName != null && courseName != 'undefined') {
+        	courseName=courseName.replace(" ","")
+        	 // 카카오 지도
+	        container = document.getElementById('cmap'+ j); //지도를 담을 영역의 DOM 레퍼런스
+	        var options = { 
+	           //지도를 생성할 때 필요한 기본 옵션
+	           center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표 
+	           level : 5,  // 지도의 확대 레벨 
+	           scrollwheel : false,
+	           draggable : false,
+	           tileAnimation : false
+	        };
+	        let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	        let bounds = new kakao.maps.LatLngBounds();  
+	        
+	        courseName=courseName.replace(" ","").replace(" ","").replace("ㆍ","").replace(" ","")
+	        if(courseName.indexOf("(")>-1){
+	        courseName=courseName.substring(0, courseName.indexOf("(")-1)
+	        }
+	        if(courseName=='1코스-수락·불암산코스'){courseName='수락·불암산 코스';}
+	        if(courseName=='2코스-용마·아차산코스'){courseName='용마·아차산 코스';}
+	        if(courseName=='3코스-고덕·일자산코스'){courseName='고덕·일자산 코스';}
+	        if(courseName=='4코스-대모·우면산코스'){courseName='대모·우면산 코스';}
+	        if(courseName=='5코스-관악산코스'){courseName='관악산 코스';}
+	        if(courseName=='6코스-안양천코스'){courseName='안양천 코스';}
+	        if(courseName=='7코스-봉산·앵봉산코스'){courseName='봉산·앵봉산 코스';}
+	        if(courseName=='8코스-북한산코스'){courseName='북한산 코스';}
+	        if(courseName=="인왕산구간"){courseName="인왕구간";}
+	        if(courseName=="불광천길"){courseName="불광천긴";}
+	        if(courseName=="성동광진구한강길"){courseName="성동광진한강길";}
+	        
+
+	        
+	         
+
+	           <!-- geoJson 파일 불러와서 카카오 맵에 표시 -->
+	           if(courseCategoryNM=='한강지천길/계절길'){
+	           /* 지천길 선형정보 */
+	           $.getJSON(getContextPath()+"/assets/map/jichun_line.geojson", function(geojson){
+	            
+	            
+	            var data = geojson.features;
+	            var coordinates = [];    //좌표 저장할 배열
+	            var name = '';            //코스 이름
+	            $.each(data, function(index, val) {
+	         
+	                coordinates = val.geometry.coordinates;
+	                name_trim = (val.properties.NAME).replace(" ","");
+	                name = val.properties.NAME
+	                   if(name_trim.indexOf(courseName)!=-1){
+	                	   console.log("displayLine함수 map?"+ map)
+		                      displayLine(coordinates, data[index], map);
+	                      }            
+	               })
+	           })
+	           
+	           }
+	           if(courseCategoryNM=='근교산자락길'){
+	           /* 자락길 선형정보 */
+	           $.getJSON(getContextPath()+"/assets/map/jarak_line.geojson", function(geojson){
+	            var data = geojson.features;
+	            var coordinates = [];    //좌표 저장할 배열
+	            var name = '';            //코스 이름
+	            $.each(data, function(index, val) {
+	                coordinates = val.geometry.coordinates;
+	                name_trim = (val.properties.CONTS_NAME).replace(" ","");
+	                name = val.properties.CONTS_NAME
+	                   if(name_trim.indexOf(courseName)!=-1){
+	                	   console.log("displayLine함수 map?"+ map)
+	                      displayLine(coordinates, data[index], map);
+	                      } 
+	               })
+	           })
+	              
+	          }
+	           
+	           /* 서울둘레길 선형정보 */
+	           if(courseCategoryNM=='서울둘레길'){
+	           $.getJSON(getContextPath()+"/assets/map/doolrea_line.geojson", function(geojson){
+	              
+	            var data = geojson.features;
+	            var coordinates = [];    //좌표 저장할 배열
+	            var name = '';            //코스 이름
+	            
+	            $.each(data, function(index, val) {
+	         
+	                coordinates = val.geometry.coordinates;
+	                name_trim = (val.properties.CONTS_NAME).replace(" ","");
+	                name = val.properties.CONTS_NAME
+	                if(name_trim.indexOf(courseName)!=-1){
+	                	 console.log("displayLine함수 map?"+ map)
+	                      displayLine(coordinates, data[index], map);
+	                   }     
+	               })
+	           })
+	           
+	           }
+	           
+	           if(courseCategoryNM=='한양도성길'){
+	           /* 한양도성길 선형정보 */
+	           $.getJSON(getContextPath()+"/assets/map/hanyang_line.geojson", function(geojson){
+	            var data = geojson.features;
+	            var coordinates = [];    //좌표 저장할 배열
+	            var name = '';            //코스 이름
+	            
+	            $.each(data, function(index, val) {
+	         
+	                coordinates = val.geometry.coordinates;
+	                name_trim = (val.properties.NAME).replace(" ","");
+	                name=val.properties.NAME;
+	                   if(name_trim.indexOf(courseName)!=-1){
+	                	   console.log("displayLine함수 map?"+ map)
+		                      displayLine(coordinates, data[index], map);
+	                   } 
+	               })
+	           })
+	           
+	           }
+	           
+	           if(courseCategoryNM=='생태문화길'){
+	           /* 생태문화길 선형정보 */
+	           $.getJSON(getContextPath()+"/assets/map/moonhwa_line.geojson", function(geojson){
+	              
+	            var data = geojson.features;
+	            var coordinates = [];    //좌표 저장할 배열
+	            var name = '';            //코스 이름
+
+	            $.each(data, function(index, val) {
+	         
+	                coordinates = val.geometry.coordinates;
+	                name_trim = (val.properties.NAME).replace(" ","").replace(" ","");
+	                name = val.properties.NAME;
+	                folderpath_trim = (val.properties.FOLDERPATH).replace(" ","").replace(" ","");
+	                   if(name_trim==courseName||folderpath_trim.indexOf(courseName)!=-1){
+		                      displayLine(coordinates, data[index], map);
+	                   } 
+	               })
+	           })
+	           
+	         }
+	        
+	           var polylines=[];
+	           
+		        
+	           function displayLine(coordinates, data, map){
+	             var name = data.properties.CONTS_NAME;
+	             if(data.properties.CONTS_NAME == null || data.properties.CONTS_NAME == ''){
+	                name = data.properties.NAME;
+	             }
+	              var path = []; 
+			         
+	           $.each(coordinates[0], function(index, coordinate){
+	              //라인 그려줄 path
+	              path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
+	              bounds.extend(path[index]);
+	           })
+	              // 지도에 선을 표시한다 
+	              var polyline  = new kakao.maps.Polyline({
+	                 map: map, // 선을 표시할 지도 객체 
+	                 path: path,
+	                 strokeWeight: 3, // 선의 두께
+	                 strokeColor: '#FF685F', // 선 색
+	                 strokeOpacity: 0.9, // 선 투명도
+	              });
+	              var length=Math.ceil(polyline.getLength());
+	             length = (length / 1000).toFixed(1);
+	             if(length < 2){
+	                polyline.setOptions({
+	                   strokeOpacity: 0.9
+	                });
+	             }
+	           
+	               map.setBounds(bounds);   
+	        }
+	      }
+       }
+	
+	</script>
 </body>
 </html>

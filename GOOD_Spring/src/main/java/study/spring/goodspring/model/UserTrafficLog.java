@@ -12,4 +12,6 @@ public class UserTrafficLog {
 	private int user_info_user_no; //사용자 유저No
 	private int log_hour;
 	private int log_cnt;
+	private String log_date;
+	private String interval;
 }

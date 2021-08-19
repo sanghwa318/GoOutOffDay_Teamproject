@@ -6,15 +6,6 @@
 <div class="jumbotron" style="background-color: #fefbfe">
 	<div class="tab-content">
 		<div class="parent clearfix">
-			<div class="form-group pull-right">
-				<select class="form-control">
-					<option value="">--- 기간을 선택하세요 ---</option>
-					<option value="1">일별</option>
-					<option value="2">주간별</option>
-					<option value="3">월별</option>
-					<option value="4">총합</option>
-				</select>
-			</div>
 		</div>
 	</div>
 	<h2>회원들과의 비교</h2>

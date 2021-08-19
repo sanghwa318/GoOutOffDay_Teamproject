@@ -41,22 +41,20 @@ h3 {
 			<div class="page-header">
 				<h1>통계</h1>
 			</div>
-			<div class="jumbotron clearfix">
-				<h2>기간별 로그인 현황</h2>
-				<div class="parent">
-					<div class="form-group pull-right">
-						<select class="form-control">
-							<option value="today">당일</option>
-							<option value="week">주간</option>
-							<option value="month">한달</option>
-						</select>
+			<div id="stats_login">
+				<div class="jumbotron clearfix">
+					<h2>기간별 로그인 현황</h2>
+					<div class="parent">
+						<div class="form-group pull-right">
+							<select class="form-control" id="login-interval">
+								<option value="day">당일</option>
+								<option value="week">주간</option>
+								<option value="month">한달</option>
+							</select>
+						</div>
 					</div>
+					<div id="canvas-container1"></div>
 				</div>
-				<h2 class="text-primary">
-					<em>Total : ${output_count }</em>
-				</h2>
-				<h3>접속인원</h3>
-				<canvas id="myChart1" width="10" height="3"></canvas>
 			</div>
 			<hr />
 
@@ -157,26 +155,31 @@ h3 {
 			loginCnt.push(${LoginLogItem.log_cnt});
 		</c:forEach>
 		
-		const ctx1 = document.getElementById('myChart1').getContext('2d');
-		const myChart1 = new Chart(ctx1, {
-			type : 'line',
-			data : {
-				labels : loginHour,
-				datasets : [ {
-					axis : 'x',
-					label : '접속인원',
-					data : loginCnt,
-					backgroundColor : [ 
-						'rgba(54, 162, 235, 0.2)' ],
-				borderColor : [
-						'rgba(54, 162, 235, 1)' ],
-				borderWidth : 1
-				} ]
-			},
-			options : {
-				indexAxis : 'x',
-			}
-		});
+		$(function(){
+			$.ajax({
+				url:getContextPath()+'/adminPage/admin_stats_login',
+				method:'get',
+				data:{},
+				dataType:'html',
+				success:function(req){
+					$('#canvas-container1').html(req);
+				}
+			})
+			$('#login-interval').on('change', function(){
+				var interval=$('#login-interval option:selected').val()
+				$.ajax({
+					url:getContextPath()+'/adminPage/admin_stats_login',
+					method:'get',
+					data:{interval},
+					dataType:'html',
+					success:function(req){
+						$('#canvas-container1').html(req);
+					}
+				})
+			})
+		})
+		
+		
 
 		const ctx2 = document.getElementById('myChart2').getContext('2d');
 		const myChart2 = new Chart(ctx2,

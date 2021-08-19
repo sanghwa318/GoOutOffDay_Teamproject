@@ -33,4 +33,8 @@ public interface UserTrafficLogService {
 	public int login_count(UserTrafficLog input) throws Exception;
 
 	public List<UserTrafficLog> loginHourCount(UserTrafficLog input) throws Exception;
+
+	public List<UserTrafficLog> loginCountInterval(UserTrafficLog input) throws Exception;
+	
+	
 }
