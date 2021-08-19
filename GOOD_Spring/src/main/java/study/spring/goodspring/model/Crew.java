@@ -80,5 +80,9 @@ public class Crew {
 	public static void setOrder(int order) {
 		Crew.order = order;
 	}
-	
+	// 관리자페이지에서 사용하는 객체
+	private int log_hour;
+	private int log_cnt;
+	private String log_date;
+	private String interval;
 }

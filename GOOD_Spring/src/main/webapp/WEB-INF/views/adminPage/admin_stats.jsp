@@ -108,11 +108,10 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container3">
-					<h2 class="text-primary">
-						<em id="TOP_Keyword"></em> <br />
-						<em id="keywordCnt"></em>
-					</h2>
-					<h3>인기검색어</h3>
+						<h2 class="text-primary">
+							<em id="TOP_Keyword"></em> <br /> <em id="keywordCnt"></em>
+						</h2>
+						<h3>인기검색어</h3>
 						<div class="canvas">
 							<canvas id="keywordChart" width="10" height="3"></canvas>
 						</div>
@@ -134,12 +133,11 @@ h3 {
 					</div>
 					<div id="canvas-container4">
 						<h2 class="text-primary">
-							<em id="bmCnt"></em> <br /> 
-							<em id="elCnt"></em>
+							<em id="bmCnt"></em> <br /> <em id="elCnt"></em>
 						</h2>
 						<div style="width: 49%; display: inline-block;">
 							<h3>찜 추가 현황</h3>
-							<div class="canvas" id="bmChart_canvas" >
+							<div class="canvas" id="bmChart_canvas">
 								<canvas id="bmChart" width="10" height="3"></canvas>
 							</div>
 						</div>
@@ -166,10 +164,9 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container5">
-					<h2 class="text-primary">
-						<em id="wrCnt"></em> <br /> 
-						<em id="mmCnt"></em>
-					</h2>
+						<h2 class="text-primary">
+							<em id="wrCnt"></em> <br /> <em id="mmCnt"></em>
+						</h2>
 						<div style="width: 49%; display: inline-block;">
 							<h3>걷기기록 이용현황</h3>
 							<div class="canvas" id="wrChart_canvas">
@@ -191,15 +188,20 @@ h3 {
 				<div class="parent clearfix">
 					<div class="form-group pull-right">
 						<select class="form-control">
-							<option value="">일별</option>
-							<option value="1">주간별</option>
-							<option value="2">월별</option>
+							<option value="day">당일</option>
+							<option value="week">주간</option>
+							<option value="month">한달</option>
 						</select>
 					</div>
 				</div>
-				<h3>조건별 컨텐츠 통계 분석</h3>
-				<div class="canvas">
+				<h2 class="text-primary">
+					<em>Create Total : ${output_count_MakeCrew }</em> <br />
+				</h2>
+				<div class="canvas" style="width: 49%; display: inline-block;">
 					<canvas id="myChart6" width="10" height="3"></canvas>
+				</div>
+				<div class="canvas" style="width: 49%; display: inline-block;">
+					<canvas id="myChart66" width="10" height="3"></canvas>
 				</div>
 			</div>
 		</div>
@@ -868,29 +870,76 @@ h3 {
 		/** 걷기기록을 이용한 시간별 인원과 그중 나만의코스를 생성한 사람의 시간별인원  끝 **/
 		
 		
+		/** 생성된 된 크루현황 통계와 생성된 크루의 종류 현황 **/
+		var CrewHour = [];
+		var CrewCnt = [];
+		
+		<c:forEach var="MakeCrewLogItem" items="${output_Hour_Count_MakrCrew}">
+			CrewHour.push(${MakeCrewLogItem.log_hour});
+			CrewCnt.push(${MakeCrewLogItem.log_cnt});
+		</c:forEach>
+		
+		var CrewCategory = [];
+		var CrewCategoryCnt = [];
+		
+		<c:forEach var="MakeMapLogItem" items="${output_CrewCategory}">
+			CrewCategory.push('${MakeMapLogItem.crew_category}');
+			CrewCategoryCnt.push(${MakeMapLogItem.log_cnt});
+		</c:forEach>
+		
 		const ctx6 = document.getElementById('myChart6').getContext('2d');
-		const myChart6 = new Chart(ctx6,
-				{
-					type : 'bar',
-					data : {
-						labels : [ '거리', '시간', '평균 페이스' ],
-						datasets : [ {
-							axis : 'y',
-							label : '# 내 기록',
-							data : [ 12, 19, 13 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)', ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)', ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						indexAxis : 'y',
-					}
-				});
+		const myChart6 = new Chart(ctx6,{
+			data : {
+				labels : CrewHour,
+				datasets : [ {
+						axis : 'x',
+						type : 'bar',
+						label : '걷기기록이용 인원',
+						data : CrewCnt,
+						backgroundColor : [ 
+							'rgba(255, 99, 132, 0.5)' ],
+					borderColor : [
+						'rgba(255, 99, 132, 1)' ],
+					borderWidth : 1
+					
+				}]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+			}
+		});
+		const ctx66 = document.getElementById('myChart66').getContext('2d');
+		const myChart66 = new Chart(ctx66,{
+			type : 'pie',
+			data : {
+				labels : CrewCategory,
+				datasets : [ {
+					axis : 'x',
+					label : '크루종류',
+					data : CrewCategoryCnt,
+					backgroundColor : [ 
+						'rgba(246, 229, 141, 0.5)',
+						'rgba(255, 190, 118, 0.5)',
+						'rgba(255, 121, 121, 0.5)',
+						'rgba(186, 220, 88, 0.5)',
+						'rgba(56, 173, 169, 0.5)'
+						],
+				borderColor : [
+					'rgba(246, 229, 141, 1)',
+					'rgba(255, 190, 118, 1)',
+					'rgba(255, 121, 121, 1)',
+					'rgba(186, 220, 88, 1)',
+					'rgba(56, 173, 169, 1)'],
+				borderWidth : 1
+				} ]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+			}
+		});
+		/** 생성된 된 크루현황 통계와 생성된 크루의 종류 현황 끝 **/
 	</script>
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.UserTrafficLogService;
@@ -395,6 +396,44 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 
 		try {
 			result = sqlSession.selectList("UserTrafficLogMapper.MakeLogMapHourCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+	@Override
+	public int MakeCrewCount(Crew input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("UserTrafficLogMapper.MakeCrewCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<Crew> MakeCrewHourCount(Crew input) throws Exception {
+		List<Crew> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.MakeCrewHourCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<Crew> CrewCategoryCount(Crew input) throws Exception {
+		List<Crew> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.CrewCategoryCount", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

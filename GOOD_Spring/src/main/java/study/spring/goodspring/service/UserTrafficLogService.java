@@ -2,6 +2,7 @@ package study.spring.goodspring.service;
 
 import java.util.List;
 
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.UserTrafficLog;
 
@@ -60,5 +61,10 @@ public interface UserTrafficLogService {
 	public int MakeLogMapCount(UserTrafficLog input) throws Exception;
 	
 	public List<UserTrafficLog> MakeLogMapHourCount(UserTrafficLog input) throws Exception;
+	
+	public int MakeCrewCount(Crew input) throws Exception;
+	
+	public List<Crew> MakeCrewHourCount(Crew input) throws Exception;
 
+	public List<Crew> CrewCategoryCount(Crew input) throws Exception;
 }

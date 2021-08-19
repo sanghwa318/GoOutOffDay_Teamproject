@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserTrafficLogMapper">
+	<!-- Crew Beans 클래스의 객체이름과 클래스이름 명시 -->
+	<resultMap type="study.spring.goodspring.model.Crew"
+		id="crewMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컴럼을 연결 -->
+		<result property="crew_no" column="crew_no" />
+		<result property="crew_name" column="crew_name" />
+		<result property="crew_area" column="crew_area" />
+		<result property="crew_sinto" column="crew_sinto" />
+		<result property="crew_createtime" column="crew_createtime" />
+		<result property="crew_category" column="crew_category" />
+		<result property="photoJson" column="crew_photo" />
+		<result property="crew_dinto" column="crew_dinto" />
+		<result property="crew_member" column="crew_member" />
+		<result property="user_info_user_no" column="user_info_user_no" />
+		<result property="user_info_user_out"
+			column="user_info_user_out" />
+		<result property="log_hour" column="log_hour" />
+		<result property="log_cnt" column="log_cnt" />
+		<result property="log_date" column="log_date" />
+		<result property="interval" column="interval" />
+	</resultMap>
 	<!--Member Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다 -->
 	<resultMap type="study.spring.goodspring.model.Member"
 		id="MemberMap">
@@ -278,8 +299,7 @@
 			WHERE
 			create_datetime
 			BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND
-			NOW()
+			month) AND NOW()
 			GROUP BY 1
 			ORDER BY 1 ASC)
 
@@ -287,47 +307,47 @@
 			FROM join_value;
 		</if>
 	</select>
-
-	<!-- 기간별 최다 인기검색어 -->
+	
+		<!-- 기간별 최다 인기검색어 -->
 	<select id="TopSearchKeyword"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		<if test="interval=='day'">
-			SELECT substr(log_category, (instr(log_category, '=') +1) )
-			as search_keyword, count(*) as log_cnt
-			FROM user_traffic_log
-			WHERE
-			log_content like 'keyword'
-			AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =CURDATE()
-			AND substr(log_category, (instr(log_category, '=') +1)) NOT
-			LIKE ""
-			GROUP BY 1
-			ORDER BY 2 DESC
-			LIMIT 1;
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM user_traffic_log
+		WHERE
+		log_content like 'keyword'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =CURDATE()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT
+		LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 1;
 		</if>
 		<if test="interval=='week'">
-			SELECT substr(log_category, (instr(log_category, '=') +1) )
-			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
-			WHERE log_content like 'keyword'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-			AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
-			GROUP BY 1
-			ORDER BY 2 DESC
-			LIMIT 1;
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 1;
 		</if>
 		<if test="interval=='month'">
-			SELECT substr(log_category, (instr(log_category, '=') +1) )
-			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
-			WHERE log_content like 'keyword'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-			AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
-			GROUP BY 1
-			ORDER BY 2 DESC
-			LIMIT 1;
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 1;
 		</if>
 	</select>
 
@@ -336,72 +356,72 @@
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		<if test="interval=='day'">
-			SELECT substr(log_category, (instr(log_category, '=') +1) )
-			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
-			WHERE log_content like 'keyword'
-			AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
-			AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
-			GROUP BY 1
-			ORDER BY 2 DESC
-			LIMIT 10;
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 10;
 		</if>
 		<if test="interval=='week'">
-			SELECT substr(log_category, (instr(log_category, '=') +1) )
-			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
-			WHERE log_content like 'keyword'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-			AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
-			GROUP BY 1
-			ORDER BY 2 DESC
-			LIMIT 10;
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 10;
 		</if>
 		<if test="interval=='month'">
-			SELECT substr(log_category, (instr(log_category, '=') +1) )
-			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
-			WHERE log_content like 'keyword'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-			AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
-			GROUP BY 1
-			ORDER BY 2 DESC
-			LIMIT 10;
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 10;
 		</if>
-
+		
 	</select>
-	<!-- 당일(주/월) 찜추가를 한 인원 -->
+		<!-- 당일(주/월) 찜추가를 한 인원 -->
 	<select id="AddBookMarkCount"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultType="int">
 		<if test="interval=='day'">
-			SELECT count(*)
-			FROM user_traffic_log
-			WHERE
-			log_content like
-			'addBookmark'
-			AND DATE_FORMAT(log_datetime,
-			"%Y-%m-%d") = CURDATE();
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE
+		log_content like
+		'addBookmark'
+		AND DATE_FORMAT(log_datetime,
+		"%Y-%m-%d") = CURDATE();
 		</if>
 		<if test="interval=='week'">
-			SELECT count(*)
-			FROM user_traffic_log
-			WHERE
-			log_content like
-			'addBookmark'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE
+		log_content like
+		'addBookmark'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
 		</if>
 		<if test="interval=='month'">
-			SELECT count(*)
-			FROM user_traffic_log
-			WHERE
-			log_content like
-			'addBookmark'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE
+		log_content like
+		'addBookmark'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
 		</if>
 	</select>
 
@@ -410,76 +430,76 @@
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		<if test="interval=='day'">
-			SELECT hour(log_datetime) as log_hour, count(*) as
-			log_cnt
-			FROM user_traffic_log
-			WHERE log_content like 'addBookmark'
-			AND
-			DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
-			GROUP BY 1
-			ORDER BY 1;
+		SELECT hour(log_datetime) as log_hour, count(*) as
+		log_cnt
+		FROM user_traffic_log
+		WHERE log_content like 'addBookmark'
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1;
 		</if>
 		<if test="interval=='week'">
-			SELECT date(log_datetime) as log_date, count(*) as
-			log_cnt
-			FROM user_traffic_log
-			WHERE log_content like 'addBookmark'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-			GROUP BY 1
-			ORDER BY 1;
+		SELECT date(log_datetime) as log_date, count(*) as
+		log_cnt
+		FROM user_traffic_log
+		WHERE log_content like 'addBookmark'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
+		GROUP BY 1
+		ORDER BY 1;
 		</if>
 		<if test="interval=='month'">
-			SELECT date(log_datetime) as log_date, count(*) as
-			log_cnt
-			FROM user_traffic_log
-			WHERE log_content like 'addBookmark'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-			GROUP BY 1
-			ORDER BY 1;
+		SELECT date(log_datetime) as log_date, count(*) as
+		log_cnt
+		FROM user_traffic_log
+		WHERE log_content like 'addBookmark'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
+		GROUP BY 1
+		ORDER BY 1;
 		</if>
 	</select>
 
 	<!-- 당일(주/월)기간동안 찜추가를 한 인원 중 외부사이트로 이동한사람의 인원 -->
 	<select id="ExLinkCount"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
-		resultType="int">
-		WITH user_no AS (SELECT distinct(user_info_user_no)
+		resultType="int">		
+		WITH user_no AS (SELECT count(user_info_user_no), user_info_user_no
 		FROM
 		user_traffic_log
 		WHERE log_content like 'addBookmark'
 		AND
 		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
-		GROUP BY user_info_user_no)
+        GROUP BY user_info_user_no)
 		<if test="interval=='day'">
-			SELECT
-			count(*)
-			FROM
-			user_no n
-			INNER JOIN user_traffic_log u on u.user_info_user_no =n.user_info_user_no
-			WHERE log_content like '%ExLink'
-			AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
+		SELECT
+		count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =n.user_info_user_no
+		WHERE log_content like '%ExLink'
+		AND	DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
 		</if>
 		<if test="interval=='week'">
-			SELECT
-			count(*)
-			FROM
-			user_no n
-			INNER JOIN user_traffic_log u on u.user_info_user_no =n.user_info_user_no
-			WHERE log_content like '%ExLink'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
+		SELECT
+		count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =n.user_info_user_no
+		WHERE log_content like '%ExLink'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
 		</if>
 		<if test="interval=='month'">
-			SELECT
-			count(*)
-			FROM
-			user_no n
-			INNER JOIN user_traffic_log u on u.user_info_user_no =n.user_info_user_no
-			WHERE log_content like '%ExLink'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
+		SELECT
+		count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on u.user_info_user_no =n.user_info_user_no
+		WHERE log_content like '%ExLink'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
 		</if>
 	</select>
 
@@ -487,209 +507,90 @@
 	<select id="ExLinkHourCount"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
-		WITH user_no AS (SELECT distinct(user_info_user_no)
+		WITH user_no AS (SELECT count(user_info_user_no), user_info_user_no
 		FROM
 		user_traffic_log
 		WHERE log_content like 'addBookmark'
 		AND
 		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
-		GROUP BY user_info_user_no)
-		<if test="interval=='day'">
-			SELECT
-			hour(log_datetime) as log_hour, count(*) as log_cnt
-			FROM
-			user_no n
-			INNER
-			JOIN user_traffic_log u on u.user_info_user_no =
-			n.user_info_user_no
-			WHERE log_content like '%ExLink'
-			AND
-			DATE_FORMAT(log_datetime,
-			"%Y-%m-%d") = CURDATE()
-			GROUP BY 1
-			ORDER BY 1;
-		</if>
-		<if test="interval=='week'">
-			SELECT
-			date(log_datetime) as log_date, count(*) as log_cnt
-			FROM
-			user_no n
-			INNER
-			JOIN user_traffic_log u on u.user_info_user_no =
-			n.user_info_user_no
-			WHERE log_content like '%ExLink'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-			GROUP BY 1
-			ORDER BY 1;
-		</if>
-		<if test="interval=='month'">
-			SELECT
-			date(log_datetime) as log_date, count(*) as log_cnt
-			FROM
-			user_no n
-			INNER
-			JOIN user_traffic_log u on u.user_info_user_no =
-			n.user_info_user_no
-			WHERE log_content like '%ExLink'
-			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-			GROUP BY 1
-			ORDER BY 1;
-		</if>
-	</select>
-	<!-- 기간별 걷기 기록이용한 사람의 인원 -->
-	<select id="RecordCount"
-		parameterType="study.spring.goodspring.model.UserTrafficLog"
-		resultType="int">
-		<if test="interval=='day'">
-		SELECT count(*)
-		FROM user_traffic_log
-		WHERE log_content LIKE
-		"walkRecordStart"
-		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
-		CURDATE();
-		</if>
-		<if test="interval=='week'">
-		SELECT count(*)
-		FROM user_traffic_log
-		WHERE log_content LIKE
-		"walkRecordStart"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-		</if>
-		<if test="interval=='month'">
-		SELECT count(*)
-		FROM user_traffic_log
-		WHERE log_content LIKE
-		"walkRecordStart"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-		</if>
-		
-	</select>
-
-	<!-- 기간별 걷기 기록이용한 사람의 시간별(날짜별)인원 -->
-	<select id="RecordHourCount"
-		parameterType="study.spring.goodspring.model.UserTrafficLog"
-		resultMap="UserTrafficLogMap">
-		<if test="interval=='day'">
-		SELECT hour(log_datetime) as log_hour, count(*) as log_cnt
-		FROM user_traffic_log
-		WHERE log_content LIKE "walkRecordStart"
-		AND
-		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
-		GROUP BY 1
-		ORDER BY 1;
-		</if>
-		<if test="interval=='week'">
-		SELECT date(log_datetime) as log_date, count(*) as log_cnt
-		FROM user_traffic_log
-		WHERE log_content LIKE "walkRecordStart"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-		GROUP BY 1
-		ORDER BY 1;
-		</if>
-		<if test="interval=='month'">
-		SELECT date(log_datetime) as log_date, count(*) as log_cnt
-		FROM user_traffic_log
-		WHERE log_content LIKE "walkRecordStart"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-		GROUP BY 1
-		ORDER BY 1;
-		</if>
-		
-	</select>
-	<!-- 기간별 걷기 기록이용자 중 나만의코스 생성한 사람의 인원 -->
-	<select id="MakeLogMapCount"
-		parameterType="study.spring.goodspring.model.UserTrafficLog"
-		resultType="int">
-		WITH user_no AS (SELECT distinct(user_info_user_no)
-		FROM
-		user_traffic_log
-		WHERE log_content LIKE "walkRecordStart"
-		AND
-		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE())
-		<if test="interval=='day'">
-		SELECT count(*)
-		FROM
-		user_no n
-		INNER JOIN user_traffic_log u on u.user_info_user_no =
-		n.user_info_user_no
-		WHERE log_category LIKE "%myCourseWriteOk"
-		AND
-		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
-		</if>
-		<if test="interval=='week'">
-		 SELECT count(*)
-		FROM
-		user_no n
-		INNER JOIN user_traffic_log u on u.user_info_user_no =
-		n.user_info_user_no
-		WHERE log_category LIKE "%myCourseWriteOk"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
-		</if>
-		<if test="interval=='month'">
-		SELECT count(*)
-		FROM
-		user_no n
-		INNER JOIN user_traffic_log u on u.user_info_user_no =
-		n.user_info_user_no
-		WHERE log_category LIKE "%myCourseWriteOk"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
-		</if>
-		
-	</select>
-
-	<!-- 기간별 걷기 기록이용자 중 나만의코스 생성한 사람의 시간별(날짜별)인원 -->
-	<select id="MakeLogMapHourCount"
-		parameterType="study.spring.goodspring.model.UserTrafficLog"
-		resultMap="UserTrafficLogMap">
-		WITH user_no AS (SELECT distinct(user_info_user_no)
-		FROM
-		user_traffic_log
-		WHERE log_content LIKE "walkRecordStart"
-		AND
-		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE())
+        GROUP BY user_info_user_no)
 		<if test="interval=='day'">
 		SELECT
 		hour(log_datetime) as log_hour, count(*) as log_cnt
-		FROM user_no n
-		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		FROM
+		user_no n
+		INNER
+		JOIN user_traffic_log u on u.user_info_user_no =
 		n.user_info_user_no
-		WHERE log_category LIKE "%myCourseWriteOk"
+		WHERE log_content like '%ExLink'
 		AND
-		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		DATE_FORMAT(log_datetime,
+		"%Y-%m-%d") = CURDATE()
 		GROUP BY 1
 		ORDER BY 1;
 		</if>
 		<if test="interval=='week'">
 		SELECT
-		DATE(log_datetime) as log_date, count(*) as log_cnt
-		FROM user_no n
-		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		date(log_datetime) as log_date, count(*) as log_cnt
+		FROM
+		user_no n
+		INNER
+		JOIN user_traffic_log u on u.user_info_user_no =
 		n.user_info_user_no
-		WHERE log_category LIKE "%myCourseWriteOk"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			week) AND NOW()
+		WHERE log_content like '%ExLink'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
 		GROUP BY 1
 		ORDER BY 1;
 		</if>
 		<if test="interval=='month'">
 		SELECT
-		DATE(log_datetime) as log_date, count(*) as log_cnt
-		FROM user_no n
-		INNER JOIN user_traffic_log u on u.user_info_user_no =
+		date(log_datetime) as log_date, count(*) as log_cnt
+		FROM
+		user_no n
+		INNER
+		JOIN user_traffic_log u on u.user_info_user_no =
 		n.user_info_user_no
-		WHERE log_category LIKE "%myCourseWriteOk"
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
-			month) AND NOW()
+		WHERE log_content like '%ExLink'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
 		GROUP BY 1
 		ORDER BY 1;
 		</if>
+	</select>
+	<!-- 기간별 크루생성현황 총숫자 -->
+	<select id="MakeCrewCount"
+		parameterType="study.spring.goodspring.model.Crew" resultType="int">
+		SELECT
+		count(*)
+		FROM crew
+		WHERE user_info_user_out LIKE 'N'
+		AND
+		DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE();
+	</select>
+
+	<!-- 기간별 크루생성현황 시간별인원 -->
+	<select id="MakeCrewHourCount"
+		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
+		SELECT
+		hour(crew_createtime) as log_hour, count(*) as log_cnt
+		FROM crew
+		WHERE
+		user_info_user_out LIKE 'N'
+		AND DATE_FORMAT(crew_createtime,
+		"%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1;
+	</select>
+
+	<!-- 기간별 크루생성된 크루의 종류 현황 -->
+	<select id="CrewCategoryCount"
+		parameterType="study.spring.goodspring.model.Crew" resultMap="crewMap">
+		SELECT crew_category, count(*) as log_cnt
+		FROM crew
+		WHERE user_info_user_out LIKE 'N'
+		AND DATE_FORMAT(crew_createtime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 2 DESC;
 	</select>
 </mapper>
