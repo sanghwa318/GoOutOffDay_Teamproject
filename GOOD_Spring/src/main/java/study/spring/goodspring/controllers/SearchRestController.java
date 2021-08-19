@@ -59,11 +59,8 @@ public class SearchRestController {
 		input_w.setTRAFFIC_INFO(keyword);
 		input_w.setCONTENT(keyword);
 		input_w.setCOURSE_NAME(keyword);
-
 		input_w.setREG_DATE(keyword);
-		input_w.setDETAIL_COURSE(keyword);
 		input_w.setCPI_NAME(keyword);
-		input_w.setCPI_CONTENT(keyword);
 
 		// 조회 결과가 저장될 객체
 		List<WalkCourse> output_w = null;
