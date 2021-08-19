@@ -15,7 +15,8 @@
 					<a href="<%=request.getContextPath()%>/"
 						style="position: relative; z-index: 999999;"> <img
 						id="logo_img"
-						src="${pageContext.request.contextPath }/assets/icon_img/logo.png" />
+						src="${pageContext.request.contextPath }/assets/icon_img/logo.png"
+						style="width: 250px; height: 53px;" />
 					</a>
 				</div>
 				<div class="col-md-9">
@@ -25,7 +26,7 @@
 							<div class="row clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
 									<button class="btn btn-link"
-										style="color: #0098ed; font-size: 1em; padding-top: 0; padding-bottom: 0; margin-right: 15px; text-decoration: none; border: 0; outline: 0;"
+										style="color: #0098ed; font-size: 1em; margin-top: 5px; padding-top: 0; padding-bottom: 0; margin-right: 15px; text-decoration: none; border: 0; outline: 0;"
 										onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
 										<i class="glyphicon glyphicon-thumbs-up"></i> <strong>
 											로그인</strong>
@@ -100,7 +101,7 @@
 							<div class="row clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
 									<button class="btn btn-link"
-										style="color: #0098ed; font-size: 1em; margin-right: 12px; padding-top: 0; padding-bottom: 0; text-decoration: none; border: 0; outline: 0;"
+										style="color: #0098ed; font-size: 1em; margin-right: 12px; margin-top: 5px; padding-top: 0; padding-bottom: 0; text-decoration: none; border: 0; outline: 0;"
 										onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'">
 										<i class="glyphicon glyphicon-cog"></i> <strong> 관리자</strong>
 									</button>

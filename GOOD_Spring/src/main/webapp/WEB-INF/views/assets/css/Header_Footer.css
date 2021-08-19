@@ -54,14 +54,73 @@ html, body {
 }
 
 /* 헤더 */
+/* background: linear-gradient(137deg, #fff6b7, #f77c99, #6578f2, #c2ffd8); */
+/* background-size: 800% 800%; */
+
+/* -webkit-animation: AnimationName 16s ease infinite; */
+/* -moz-animation: AnimationName 16s ease infinite; */
+/* -o-animation: AnimationName 16s ease infinite; */
+/* animation: AnimationName 16s ease infinite; */
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+div#header .container {
+/* 	color: #fff; */
+/* 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+	background: linear-gradient(-45deg, #eeeeff, #cffaff, #eeffff, #ffeaff);
+	background-size: 400% 400%;
+	animation: AnimationName 8s ease infinite;
+	width: 100%;
+	/* 	height: 100vh; */
+/* 	display: flex; */
+/* 	flex-direction: column; */
+	/*     align-items: center; */
+	justify-content: center;
+	top: 35%;
+	text-align: center;
+}
+
+footer .container {
+/* 	color: #fff; */
+	background: linear-gradient(-45deg, #eeeeff, #cffaff, #eeffff, #ffeaff);
+	background-size: 400% 400%;
+	animation: AnimationName 8s ease infinite;
+	width: 100%;
+	/* height: 100vh; */
+/* 	display: flex; */
+/* 	flex-direction: column; */
+	/* align-items: center; */
+	justify-content: center;
+	top: 35%;
+	text-align: center;
+}
+
 @media ( max-width : 767px) {
 	div#header #h_logo img {
 		position: absolute;
 		margin-top: 25px !important;
 		margin-right: auto !important;
 		margin-left: auto !important;
-		width: 150px;
-		height: 33px;
+		width: 150px !important;
+		height: 33px !important;
 		left: 51%;
 		transform: translate(-50%, -50%);
 	}
@@ -91,13 +150,22 @@ html, body {
 	}
 	div#header #h_logo>a {
 		display: block;
-		
 	}
 	div#header #login_join {
 		margin-top: 5px;
 	}
 	div#header #nav_search {
-	padding: 0 22px;
+		padding: 0 22px;
+	}
+	footer #logo_box {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		margin-top: 0 !important;
+	}
+	footer #p_box {
+		min-height: 150px;
+		padding-top: 80px;
 	}
 }
 
@@ -106,18 +174,19 @@ html, body {
 		margin-left: 30px;
 	}
 }
+
 @media ( min-width :992px) {
 	div#header #login_join_box {
-	padding-top:0;
-	padding-bottom: 5px;
+		padding-top: 0;
+		padding-bottom: 5px;
 	}
 }
 
 @media ( min-width :767px) {
 	div#header #h_logo img {
 		margin-left: 25px;
-		width: 250px;
-		height: 53px;
+		width: 250px !important;
+		height: 53px !important;
 	}
 	div#header #h_logo {
 		float: left;
@@ -130,6 +199,19 @@ html, body {
 	}
 	div#header #cbp-tm-menu>li>a {
 		padding-bottom: 0 !important;
+	}
+	footer #logo_box {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		margin-top: 6px !important;
+	}
+	footer #p_box {
+		min-height: 150px;
+		padding-top: 90px;
+	}
+	div#header .container {
+	padding: 10px !important;
 	}
 }
 
@@ -147,20 +229,17 @@ html, body {
 
 /* 푸터 */
 .footer {
-	height: 132px;
+	height: 150px;
 	position: relative !important;
 	transform: translateY(-100%);
 }
 
 #logo_box {
-	margin: 15px 100px;
+	margin: 13px 0;
 	padding: 15px;
 }
 
 @media ( max-width :991px) {
-	div#logo_box {
-		margin: 0 !important;
-	}
 	div#p_box address {
 		margin: 0 !important;
 	}
@@ -170,12 +249,11 @@ html, body {
 	padding: 15px;
 }
 
-#p_box address strong {
-	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, navy, purple);
-	-webkit-background-clip: text;
-	color: transparent;
-}
-
+/* #p_box address strong { */
+/* 	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, navy, purple); */
+/* 	-webkit-background-clip: text; */
+/* 	color: transparent; */
+/* } */
 .gray_layer {
 	position: fixed;
 	left: 0;
@@ -194,8 +272,8 @@ html, body {
 		background-color: #ccc;
 	}
 	div#header #login_join_box {
-	padding-top:15px;
-	padding-bottom: 5px;
+		padding-top: 15px;
+		padding-bottom: 5px;
 	}
 }
 
