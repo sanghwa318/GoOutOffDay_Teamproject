@@ -13,6 +13,13 @@
 	transition: all 0.3s ease;
 	transform: translateY(0);
 }
+/* Zebra striping */
+thead tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+# table_list {
+	margin-left: 30px;
+}
 </style>
 </head>
 <body>
@@ -35,25 +42,12 @@
 			
 			
 			<!-- 리스트영역-->
-			<form id="member-form" class="form-horizontal">
-				<table class='table'>
-					<colgroup>
-						<col width="50" />
-						<col width="50" />
-						<col width="100" />
-						<col width="100" />
-						<col width="100" />
-						<col width="50" />
-						<col width="120" />
-						<col width="150" />
-						<col width="150" />
-						<col width="100" />
-						<col width="100" />
-					</colgroup>
+			<div class="col-md-12 table-responsive" id="table_list">
+				<table class='table table-bordered table-hover'>
 					<thead>
-						<tr>
+						<tr class="active">
 							<th class='text-center'>선택</th>
-							<th class='text-center'>회원번호</th>
+							<th class='text-center'>번호</th>
 							<th class='text-center'>아이디</th>
 							<th class='text-center'>닉네임</th>
 							<th class='text-center'>이름</th>
@@ -65,7 +59,7 @@
 							<th class='text-center'>가입일시</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="list">
 						<%-- 조회결과에 따른 반복 처리 --%>
 						<c:choose>
 							<%-- 조회 결과가 없는 경우 --%>
@@ -113,12 +107,12 @@
 					<button type="button" class="btn btn-warning" id="check-delete">회원
 						탈퇴</button>
 				</div>
-				</form>
+				</div>
 				<!-- 검색영역 -->
 			         <form method="get"
 			            action="${pageContext.request.contextPath}/adminPage/admin_member.do"
 			            class="form-group pull-right">
-			            <div class="form-group input-group col-md-2 pull-right">
+			            <div class="form-group input-group col-md-3 col-sm-3 col-xs-4 pull-right">
 			            <input type="search" name="keyword" id="keyword" class="form-control"
 			               placeholder="이름으로 검색" value="${keyword}" /> <span
 			               class="input-group-btn">

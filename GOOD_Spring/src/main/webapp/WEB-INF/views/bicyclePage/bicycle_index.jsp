@@ -6,6 +6,11 @@
 <head>
 <%@ include file="../inc/head.jsp"%>
 <style>
+@media (min-width: 500px){
+	.rental {
+		margin-left: 10px;
+	}
+}
 .footer {
    margin-top: 50px;
 }
@@ -138,6 +143,10 @@ p {
    margin-top: 11px;
 }
 
+.search {
+	margin-top: -3px;
+}
+
 .detail_header {
    padding-top: 20px;
 }
@@ -193,7 +202,7 @@ p {
                      <div class="menu_header clear-fix" style="height:40px; ">
                         <form id="mapSearch"
                            action="${pageContext.request.contextPath }/bicyclePage/bicycle_index_search.do">
-                           <label for="keyword" class="pull-left" style="margin-left:10px;" >대여소 : </label> <input type="search" class="serch col-md-9 col-sm-8 col-xs-6 pull-right" 
+                           <label for="keyword" class="rental pull-left" >대여소 : </label> <input type="search" class="search col-md-9 col-sm-8 col-xs-6 pull-right" 
                               name="keyword" id="keyword" />
                            <button type="submit" class="col-xs-12"
                               id="mapSearch-btn">검색</button>
