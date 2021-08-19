@@ -48,6 +48,29 @@
 	margin-top: -100px;
 }
 
+.btn_se {
+ padding-top: 0;
+}
+#btn1 {
+	margin-left: 2px;
+}
+
+@media ( min-width :400px) {
+#dropbox{
+	width: 20%;
+	padding-top: 0;
+
+}
+}
+@media ( max-width :400px) {
+#dropbox{
+	width: 100%;
+}
+#search {
+	width: 92%;
+	margin-left: 15px;
+}
+}
 
 </style>
 </head>
@@ -84,7 +107,7 @@
 				action="${pageContext.request.contextPath}/commPage/comm_crew.do">
 				<div class="form-group">
 
-					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2 col-md-offset-1 col-xs-offset-1 " role="search"  style="width:20% !important;">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-md-offset-1 col-xs-offset-1 " role="search" id="search" >
 						<div class="form-group input-group">
 							<input type="text" class="form-control" placeholder="크루를 검색해보세요." style="white-space:nowrap; text-overflow: ellipsis; overflow: hidden;"
 								id="keyword" name="keyword" value=""><span 
@@ -95,7 +118,8 @@
 							</span>
 						</div>
 					</div>
-					<div class="col-lg-2 col-xl-3 col-md-2 col-sm-3 col-xs-2 "  style="width:15% !important; margin-left:5%;">
+			
+					<div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 " id="dropbox">
 						<select class="form-control" id="crew_area" name="crew_area">
 							<option value="">지역</option>
 							<option value="강남구">강남구</option>
@@ -125,14 +149,14 @@
 							<option value="중랑구">중랑구</option>
 						</select>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 "style="width:15% !important;">
+					<div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 " id="dropbox">
 						<select class="form-control" id="crew_condition" name="order">
 							<option value="">조건</option>
 							<option value=1>최신순</option>
 							<option value=2>오래된순</option>
 						</select>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"style="width:15% !important;">
+					<div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2" id="dropbox" >
 						<select class="form-control" id="crew_category" name="crew_category">
 							<option value="">종류</option>
 							<option value="걷기/체육">걷기/체육</option>
@@ -140,13 +164,17 @@
 							<option value="문화/창작/예술">문화/창작/예술</option>
 						</select>
 					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2 pull-right btn_se" style="margin-left:-5%">
-						<button type='reset' class="btn btn-primary" id="btn"
-							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
-						<button type="reset" class="btn btn-primary" id="btn"
-							onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.do'">마이크루</button>
-					</div>
+				
 				</div>
+				<div class="form-group">
+				<div class="col-md-12 col-sm-12 col-xs-12 btn_se">
+				<button type='reset' class="btn btn-primary pull-right" id="btn1"
+					onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_est.do'">크루개설</button>
+				
+				<button type="reset" class="btn btn-primary pull-right" id="btn2"
+					onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_myCrew.do'">마이크루</button>
+				</div>
+			</div>
 			</form>
 			<!-- 본문상단 끝 -->
 			
@@ -184,7 +212,7 @@
 							<c:param name="crew_name" value="${item.crew_name}" />
 						</c:url>
 						
-						<div class="col-xs-4 col-sm-4 col-md-3">
+						<div class="col-xs-6 col-sm-6 col-md-3">
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
@@ -208,7 +236,7 @@
 						</c:url>
 					<c:if test="${login_info.user_admin =='true'}">
 						<%-- 관리자 권한으로 들어갔을땐, bbs상세페이지로 이동하기위한 URL --%>
-						<div class="col-xs-4 col-sm-4 col-md-3">
+						<div class="col-xs-6 col-sm-6 col-md-3">
 							<div class="thumbnail item" onclick="location.href='${bbsUrl}'"
 								style="cursor: pointer;">
 								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
@@ -229,8 +257,12 @@
 			</c:choose>
 			</div>
 		</div>
-
+			
+			
+			
 		</div>
+		
+		
 	</div>
 	<br>
 	<!-- 페이지네이션 -->

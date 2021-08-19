@@ -54,7 +54,7 @@
 				<table class='table'>
 					<colgroup>
 						<col width="100" />
-						<col width="100" />
+						<col width="150" />
 						<col width="200" />
 						<col width="200" />
 						<col width="250" />
@@ -63,7 +63,7 @@
 					<thead>
 						<tr>
 							<th class='text-center'>선택</th>
-							<th class='text-center'>회원번호</th>
+							<th class='text-center'>번호</th>
 							<th class='text-center'>아이디</th>
 							<th class='text-center'>닉네임</th>
 							<th class='text-center'>가입일시</th>
