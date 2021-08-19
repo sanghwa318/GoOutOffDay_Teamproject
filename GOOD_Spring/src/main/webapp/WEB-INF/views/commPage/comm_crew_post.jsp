@@ -103,7 +103,7 @@
 			<h1 class="page-header">크루게시판</h1>
 
 			<!-- 본문 사이드 영역 -->
-			<div class="sidebar col-md-2 col-xs-2 col-sm-2">
+		<!--  	<div class="sidebar col-md-2 col-xs-2 col-sm-2">
 				<div class="form-group">
 					<span class="title-img"><img
 						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
@@ -114,27 +114,27 @@
 					<input type="hidden" name=crew_post_post_no id="post_no"
 						value="${postout.post_no}">
 				</div>
-			</div>
+			</div> -->
 			<!-- //사이드 영역 -->
 
 
-<div class="article header col-xl-8 col-sm-8 col-xs-8 " style="margin-left:2%;" >
-			<h1 style="margin:-5px 0 20px 0;">${postout.post_title}</h1>
+<div class="article header col-xl-12 col-sm-12 col-xs-12 " style="margin-left: 2%;" >
+			<h1 style="margin:-5px 0 10px 0;">${postout.post_title}</h1>
 			<div class="pull-left writer_profile">
 					<img style="border-radius: 25px; margin-right:0.5%;" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="50px" height="50px">
 				</div>
 				
-					<h4 style="margin-left:12%;">${postout.getUser_name()}</h4>
-					<p class="pull-left" style="color:#979797; font-size:12px; margin-left:1%;" >작성일자: ${postout.getPost_createdate()}</p>
-					<p class="pull-left " style="margin-left: 15px; color:#979797; font-size:12px;">조회수 :
+					<h4 style="margin-left:5%;">${postout.getUser_name()}</h4>
+					<p class="pull-left" style="color:#979797; font-size:12px; margin-left:1%;" >${postout.getPost_createdate()}</p>
+					<p class="pull-left " style="margin-left: 5px; color:#979797; font-size:12px;">조회수 :
 						${postout.post_hits}</p>
 						
-				<div class="row pull-right " style="margin-left:0.5%; font-size:13px;">
+<!-- 				<div class="row pull-right " style="margin-left:0.5%; font-size:13px;">
 						<span class="" id="likeCount" style="margin-top:1%"></span>
 						<span class="heart pull-left" style="margin-top:1px; margin-left: -5px; margin-right:5px;  pointer-events: none;"></span>
 						<span class="comment"style="margin-top:1px; margin-left: 5px; padding-right:0px">댓글<i class="fa fa-comment-o"></i></span>
 						 <span class="" id="CommentCount" ></span>
-				</div>
+				</div> -->
 				
 						<br>
 						<hr>
@@ -148,7 +148,7 @@
 			<hr />
 
 			<!-- 댓글 영역 -->
-			<div class="container" style="margin-top:-30px"><h3 style="margin-left:15%">댓글<span class="comment"><i
+			<div class="container" style="margin-top:-30px" style="margin-left:5%;"><h3 style="margin-left:3%">댓글<span class="comment"><i
 						class="fa fa-comment-o"></i></span>
 						<span class="heart pull-right" style="margin-top:1px"></span>
 						<span class="pull-right" id="likeCount2" style="margin-top:1%"></span>
@@ -160,17 +160,21 @@
 
 
 				<form>
-				<div class="row" style="margin-left:18%;">
-				<img class="pull-left" style="border-radius: 60px" src="<c:if test='${login_info.getUser_photo().getFileUrl()==null || login_info.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${login_info.getUser_photo().getFileUrl()}" width="50px" height="50px">
-					<h4 style="padding-top:6px; margin-left:60px;">${login_info.user_nick}</h4>
-					<br>
+				<div class="row" style="margin-left:2%; margin-right:1%;">
+				<div class="form-group col-md-1">
+				<img class="pull-left" style="border-radius: 60px; margin-top:3%" src="<c:if test='${login_info.getUser_photo().getFileUrl()==null || login_info.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${login_info.getUser_photo().getFileUrl()}" width="50px" height="50px">
+				<!-- 	<h4 id="nick">${login_info.user_nick}</h4> -->
+					</div>
+					<!--  <br> -->
+					<div class="form-group col-md-11">
 					<div class="form-group input-group">
 						<textarea class="form-control" id="comment_text"
-							style="height: 60px; resize: none;"
+							style="height: 60px; resize: none; margin-left:2%;"
 							placeholder="내용을 입력해주세요."></textarea>
 						<span class="input-group-btn"><button type="button"
 								class="btn btn-default" style="height: 60px;"
 								onclick="cmt_add()">댓글 등록</button></span>
+					</div>
 					</div>
 					</div>
 				</form>

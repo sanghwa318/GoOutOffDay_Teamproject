@@ -160,7 +160,7 @@ $(function(){
 								}else{
 							photo=data.cmtList[i].user_photo.fileUrl;									
 								}
-						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin: 15px 30px 0 18%;">'
+						 str[i]='<div id="cmt-item-'+i+'"><div class="row" style="margin-left: 3.5%; margin-right: 0;">'
 							str[i]+='<div class="pull-left writer_profile">'
 							str[i]+='<a href="#"><img style="border-radius: 25px"'
 							str[i]+='src=\''+photo+'\' width="50px"'
@@ -168,9 +168,9 @@ $(function(){
 							str[i]+='<div class="pull-left writer_info" style="margin-left: 10px; margin-top:-8px;">'
 							str[i]+='<h4>'+data.cmtList[i].comment_usernick+'</h4>'
 							str[i]+='<p style="color:#979797;">'+data.cmtList[i].comment_create_datetime+'</p></div>'
-							str[i]+='<div class="pull-right">'
+							str[i]+='<div class="pull-right" style="margin-right:2%;">'
 							str[i]+='<button type="button" class="btn btn-link" style="padding: 0; margin-right: 0" onclick="cmt_delete('+data.cmtList[i].comment_no+')">댓글 삭제</button></div></div><div class="row">'
-							str[i]+='<div class="col-md-11 col-sm-11 col-xs-11" style="margin-left:18%; font-size:20px; margin-bottom:-20px;">'+data.cmtList[i].comment_text+'</div>'
+							str[i]+='<div class="col-md-11 col-sm-11 col-xs-11" style="margin-left:12%; font-size:20px; margin-bottom:-20px;">'+data.cmtList[i].comment_text+'</div>'
 							str[i]+='</div></div><hr width="85%" align="right">'
 						}
 					$('#cmt-list').html(str);
