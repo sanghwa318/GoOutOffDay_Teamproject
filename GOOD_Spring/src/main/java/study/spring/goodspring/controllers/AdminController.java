@@ -248,6 +248,7 @@ public class AdminController {
 	public ModelAndView adminStats(Model model) {
 		UserTrafficLog input = new UserTrafficLog();
 		
+		/** 로그인 통계 코드 **/
 		int output_count = 0;
 		
 		List<UserTrafficLog> output_Hour_Count = null;
@@ -262,6 +263,24 @@ public class AdminController {
 		
 		model.addAttribute("output_count", output_count);
 		model.addAttribute("output_Hour_Count", output_Hour_Count);
+		
+		/** 회원가입 통계 코드 **/
+		Member input_join = new Member();
+		
+		int output_count_join = 0;
+		
+		List<Member> output_Hour_Count_join = null;
+		
+		try {
+			output_count_join = userTrafficLogService.join_count(input_join);
+			output_Hour_Count_join = userTrafficLogService.joinHourCount(input_join);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("output_count_join", output_count_join);
+		model.addAttribute("output_Hour_Count_join", output_Hour_Count_join);
 		
 		return new ModelAndView("adminPage/admin_stats");
 	}

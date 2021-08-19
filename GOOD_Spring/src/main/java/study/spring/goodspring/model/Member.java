@@ -24,6 +24,13 @@ public class Member {
 	private String edit_datetime;// (수정일자)
 	private boolean user_out; //(회원탈퇴 여부)
 	
+	// 관리자페이지에서 사용하는 객체
+	private int log_hour;
+	private int log_cnt;
+	private String log_date;
+	private String interval;
+	
+	
     /** 프로필사진 정보{json=UploadItem}, IS NULL */
     public void setPhotoJson(String user_photo) {
         this.user_photo = new Gson().fromJson(user_photo, UploadItem.class);

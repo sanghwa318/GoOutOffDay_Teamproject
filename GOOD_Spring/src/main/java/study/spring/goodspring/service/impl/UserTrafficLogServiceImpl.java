@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.UserTrafficLogService;
 
@@ -245,4 +246,30 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 		return result;
 	}
 
+	
+	@Override
+	public int join_count(Member input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("UserTrafficLogMapper.joincount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<Member> joinHourCount(Member input) throws Exception {
+		List<Member> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.joinHourCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
 }

@@ -147,6 +147,7 @@ h3 {
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
 	<script>
+	/** 로그인 현황 **/
 		var loginHour = [];
 		var loginCnt = [];
 		
@@ -178,32 +179,37 @@ h3 {
 				})
 			})
 		})
+	/**로그인 현황 끝 **/
 		
+	/** 회원가입 현황 **/		
+		var joinHour = [];
+		var joinCnt = [];
 		
-
+		<c:forEach var="joinLogItem" items="${output_Hour_Count_join}" >
+			joinHour.push(${joinLogItem.log_hour});
+			joinCnt.push(${joinLogItem.log_cnt});
+		</c:forEach>
 		const ctx2 = document.getElementById('myChart2').getContext('2d');
-		const myChart2 = new Chart(ctx2,
-				{
-					type : 'bar',
-					data : {
-						labels : [ '거리', '시간', '평균 페이스' ],
-						datasets : [ {
-							axis : 'y',
-							label : '# 내 기록',
-							data : [ 12, 19, 13 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)', ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)', ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						indexAxis : 'y',
-					}
-				});
+		const myChart2 = new Chart(ctx2, {
+			type : 'line',
+			data : {
+				labels : joinHour,
+				datasets : [ {
+					axis : 'x',
+					label : '접속인원',
+					data : joinCnt,
+					backgroundColor : [ 
+						'rgba(255, 99, 132, 0.2)' ],
+				borderColor : [
+					'rgba(255, 99, 132, 1)' ],
+				borderWidth : 1
+				} ]
+			},
+			options : {
+				indexAxis : 'x',
+			}
+		});
+		/** 회원가입 현황 끝 **/
 
 		const ctx3 = document.getElementById('myChart3').getContext('2d');
 		const myChart3 = new Chart(ctx3,

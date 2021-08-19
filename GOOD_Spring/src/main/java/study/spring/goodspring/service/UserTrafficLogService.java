@@ -2,6 +2,7 @@ package study.spring.goodspring.service;
 
 import java.util.List;
 
+import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.UserTrafficLog;
 
 public interface UserTrafficLogService {
@@ -36,5 +37,9 @@ public interface UserTrafficLogService {
 
 	public List<UserTrafficLog> loginCountInterval(UserTrafficLog input) throws Exception;
 	
+	public int join_count(Member input) throws Exception;
+
+
+	public List<Member> joinHourCount(Member input) throws Exception;
 	
 }

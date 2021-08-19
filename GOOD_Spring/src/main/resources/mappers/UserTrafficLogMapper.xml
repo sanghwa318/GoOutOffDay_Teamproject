@@ -2,8 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserTrafficLogMapper">
+	<!--Member Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다 -->
+	<resultMap type="study.spring.goodspring.model.Member"
+		id="MemberMap">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼을 연결한다. -->
+		<result property="user_no" column="user_no" />
+		<result property="user_id" column="user_id" />
+		<result property="user_name" column="user_name" />
+		<result property="user_nick" column="user_nick" />
+		<result property="user_pw" column="user_pw" />
+		<result property="gender" column="gender" />
+		<result property="address1" column="address1" />
+		<result property="address2" column="address2" />
+		<result property="post" column="post" />
+		<result property="tel" column="tel" />
+		<result property="email" column="email" />
+		<result property="photoJson" column="user_photo" />
+		<result property="user_admin" column="user_admin" />
+		<result property="create_datetime" column="create_datetime" />
+		<result property="edit_datetime" column="edit_datetime" />
+		<result property="user_out" column="user_out" />
+		<result property="log_hour" column="log_hour" />
+		<result property="log_cnt" column="log_cnt" />
+		<result property="log_date" column="log_date" />
+		<result property="interval" column="interval" />
+	</resultMap>
 
-	<!-- Beans 클래스의 객체이름과 클래스이름 명시 -->
+
+	<!--LogTrafficLogMap Beans 클래스의 객체이름과 클래스이름 명시 -->
 	<resultMap
 		type="study.spring.goodspring.model.UserTrafficLog"
 		id="UserTrafficLogMap">
@@ -140,54 +166,84 @@
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		WITH login_value AS (
-		SELECT hour(log_datetime) as log_hour, count(log_datetime) as log_cnt
+		SELECT hour(log_datetime) as log_hour,
+		count(log_datetime) as log_cnt
 		FROM good.user_traffic_log
-		WHERE log_content LIKE 'Login'
-		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		WHERE
+		log_content LIKE 'Login'
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
+		CURDATE()
 		GROUP BY 1
 		ORDER BY 1)
 
 		SELECT *
 		FROM login_value;
 	</select>
-	<!-- 기간별 로그인 카운트 조회 -->
+		<!-- 기간별 로그인 카운트 조회 -->
 	<select id="loginCountInterval"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
 		<if test="interval=='day'">
-		  WITH login_value AS (
-		      SELECT hour(log_datetime) as log_hour,
-		      count(log_datetime) as log_cnt
-		      FROM good.user_traffic_log
-		      WHERE
-		      log_content LIKE 'Login'
-		      AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
-		      CURDATE()
-		      GROUP BY 1
-		      ORDER BY 1)
-	
-	      SELECT *
-	      FROM login_value;
+			WITH login_value AS (
+			SELECT hour(log_datetime) as log_hour,
+			count(log_datetime) as log_cnt
+			FROM good.user_traffic_log
+			WHERE
+			log_content LIKE 'Login'
+			AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
+			CURDATE()
+			GROUP BY 1
+			ORDER BY 1)
+
+			SELECT *
+			FROM login_value;
 		</if>
 		<if test="interval=='week'">
-		SELECT DATE(log_datetime) as log_date, count(log_datetime) as log_cnt
-		FROM good.user_traffic_log 
-		WHERE log_content LIKE 'Login'
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
-		week) AND NOW()
-		GROUP BY 1
-		ORDER BY 1 ASC;
+			SELECT DATE(log_datetime) as log_date, count(log_datetime) as log_cnt
+			FROM good.user_traffic_log
+			WHERE log_content LIKE 'Login'
+			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			week) AND NOW()
+			GROUP BY 1
+			ORDER BY 1 ASC;
 		</if>
 		<if test="interval=='month'">
-		SELECT DATE(log_datetime) as log_date, count(log_datetime) as log_cnt
-		FROM good.user_traffic_log 
-		WHERE log_content LIKE 'Login'
-		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
-		month) AND NOW()
-		GROUP BY 1
-		ORDER BY 1 ASC;
+			SELECT DATE(log_datetime) as log_date, count(log_datetime) as log_cnt
+			FROM good.user_traffic_log
+			WHERE log_content LIKE 'Login'
+			AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1
+			month) AND NOW()
+			GROUP BY 1
+			ORDER BY 1 ASC;
 		</if>
-		
-		
+
+
+	</select>
+	<!-- 기간별 회원가입 총 인원수 -->
+	<select id="joincount"
+		parameterType="study.spring.goodspring.model.Member" resultType="int">
+		SELECT COUNT(*)
+		FROM user_info
+		WHERE DATE_FORMAT(create_datetime,
+		"%Y-%m-%d") = CURDATE();
+	</select>
+
+	<!-- 기간별 회원가입 기간과 인원수 -->
+	<select id="joinHourCount"
+		parameterType="study.spring.goodspring.model.Member"
+		resultMap="MemberMap">
+		WITH join_value AS (
+		SELECT hour(create_datetime) as
+		log_hour, count(create_datetime) as log_cnt
+		FROM user_info
+		WHERE
+		DATE_FORMAT(create_datetime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER
+		BY
+		1)
+
+		SELECT *
+		FROM join_value;
 	</select>
 </mapper>
