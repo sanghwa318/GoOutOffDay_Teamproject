@@ -238,29 +238,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
-		/** 기간별 걷기 기록이용과 나만의코스 생성현황 회원수 **/
-		int output_count_WalkRecord = 0;
-		List<UserTrafficLog> output_Hour_Count_WalkRecord = null;
-
-		int output_count_MakMap = 0;
-		List<UserTrafficLog> output_Hour_Count_MakMap = null;
-
-		try {
-			output_count_WalkRecord = userTrafficLogService.RecordCount(input);
-			output_Hour_Count_WalkRecord = userTrafficLogService.RecordHourCount(input);
-
-			output_count_MakMap = userTrafficLogService.MakeLogMapCount(input);
-			output_Hour_Count_MakMap = userTrafficLogService.MakeLogMapHourCount(input);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		model.addAttribute("output_count_WalkRecord", output_count_WalkRecord);
-		model.addAttribute("output_Hour_Count_WalkRecord", output_Hour_Count_WalkRecord);
-
-		model.addAttribute("output_count_MakMap", output_count_MakMap);
-		model.addAttribute("output_Hour_Count_MakMap", output_Hour_Count_MakMap);
+		
 
 		return new ModelAndView("adminPage/admin_stats");
 	}

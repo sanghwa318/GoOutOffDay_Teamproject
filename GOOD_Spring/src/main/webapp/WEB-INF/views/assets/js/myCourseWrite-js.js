@@ -83,7 +83,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		e.preventDefault();
 		console.log(mycourse_name, mycourse_area, mycourse_content)
 			$.ajax({
-					url: getContextPath()+"/commPage/comm_myCourseWriteOk",
+					url: getContextPath()+"/commPage/comm_myCourseWriteOk.do",
 					dataType: 'json',
 					method:'post',
 					data: {mycourse_name, mycourse_area, mycourse_content},

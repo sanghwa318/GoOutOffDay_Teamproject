@@ -109,8 +109,8 @@ h3 {
 					</div>
 					<div id="canvas-container3">
 					<h2 class="text-primary">
-						<em id="TOP_Keyword">TOP Keyword : ${output_Top_keyword.search_keyword }</em> <br />
-						<em id="keywordCnt">Total : ${output_Top_keyword.log_cnt} 번</em>
+						<em id="TOP_Keyword"></em> <br />
+						<em id="keywordCnt"></em>
 					</h2>
 					<h3>인기검색어</h3>
 						<div class="canvas">
@@ -120,7 +120,7 @@ h3 {
 				</div>
 			</div>
 			<hr />
-			<div id="stats_keyword">
+			<div id="stats_BMEL">
 				<div class="jumbotron clearfix">
 					<h2>기간별 찜추가현황과 외부링크전환률</h2>
 					<div class="parent">
@@ -134,8 +134,8 @@ h3 {
 					</div>
 					<div id="canvas-container4">
 						<h2 class="text-primary">
-							<em id="bmCnt">BookMark Total : ${output_count_bookmark }</em> <br /> 
-							<em id="elCnt">ExLink Total : ${output_count_ExLink }</em>
+							<em id="bmCnt"></em> <br /> 
+							<em id="elCnt"></em>
 						</h2>
 						<div style="width: 49%; display: inline-block;">
 							<h3>찜 추가 현황</h3>
@@ -153,26 +153,36 @@ h3 {
 				</div>
 			</div>
 			<hr />
-			<div class="jumbotron">
-				<h2>기간별 걷기기록이용현황과 나만의코스생성 전환률</h2>
-				<div class="parent clearfix">
-					<div class="form-group pull-right">
-						<select class="form-control">
-							<option value="today">당일</option>
-							<option value="week">주간</option>
-							<option value="month">한달</option>
-						</select>
+			<div id="stats_WRMM">
+				<div class="jumbotron clearfix">
+					<h2>기간별 걷기기록 이용현황과 나만의 코스 생성 전환율</h2>
+					<div class="parent">
+						<div class="form-group pull-right">
+							<select class="form-control" id="wrmm-interval">
+								<option value="day">당일</option>
+								<option value="week">주간</option>
+								<option value="month">한달</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<h2 class="text-primary">
-					<em>WalkRecord Total : ${output_count_WalkRecord }</em> <br /> 
-					<em>MakMap Total : ${output_count_MakMap }</em>
-				</h2>
-				<div class="canvas" style="width: 49%; display: inline-block;">
-					<canvas id="myChart5" width="10" height="3"></canvas>
-				</div>
-				<div class="canvas" style="width: 49%; display: inline-block;">
-					<canvas id="myChart55" width="10" height="3"></canvas>
+					<div id="canvas-container5">
+					<h2 class="text-primary">
+						<em id="wrCnt"></em> <br /> 
+						<em id="mmCnt"></em>
+					</h2>
+						<div style="width: 49%; display: inline-block;">
+							<h3>걷기기록 이용현황</h3>
+							<div class="canvas" id="wrChart_canvas">
+								<canvas id="wrChart" width="10" height="3"></canvas>
+							</div>
+						</div>
+						<div style="width: 49%; display: inline-block;">
+							<h3>나만의 코스 생성 전환율</h3>
+							<div class="canvas" id="mmChart_canvas">
+								<canvas id="mmChart" width="10" height="3"></canvas>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<hr />
@@ -688,72 +698,172 @@ h3 {
 		})
 		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 끝 **/
 		
-		
 		/** 걷기기록을 이용한 시간별 인원과 그중 나만의코스를 생성한 사람의 시간별인원 **/
-		var RecordHour = [];
-		var RecordCnt = [];
-		
-		<c:forEach var="RecordLogItem" items="${output_Hour_Count_WalkRecord}">
-			RecordHour.push(${RecordLogItem.log_hour});
-			RecordCnt.push(${RecordLogItem.log_cnt});
-		</c:forEach>
-		
-		var MakeMapHour = [];
-		var MakeMapCnt = [];
-		
-		<c:forEach var="MakeMapLogItem" items="${output_Hour_Count_MakMap}">
-			MakeMapHour.push(${MakeMapLogItem.log_hour});
-			MakeMapCnt.push(${MakeMapLogItem.log_cnt});
-		</c:forEach>
-		
-		const ctx5 = document.getElementById('myChart5').getContext('2d');
-		const myChart5 = new Chart(ctx5,{
-			data : {
-				labels : RecordHour,
-				datasets : [ {
-						axis : 'x',
-						type : 'bar',
-						label : '걷기기록이용 인원',
-						data : RecordCnt,
-						backgroundColor : [ 
-							'rgba(255, 99, 132, 0.5)' ],
-					borderColor : [
-						'rgba(255, 99, 132, 1)' ],
-					borderWidth : 1
-					
-				}]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
+		$.ajax({
+			url:getContextPath()+'/adminPage/admin_stats_WRMM',
+			method:'get',
+			data:{},
+			dataType:'json',
+			success:function(data){
+				var RecordHour = [];
+				var RecordCnt = [];
+				var MakeMapHour = [];
+				var MakeMapCnt = [];
+				
+				for(var i=0; i<data.output_Hour_Count_WalkRecord.length; i++){
+					if(data.output_Hour_Count_WalkRecord[i].log_date!=null){
+						RecordHour.push(data.output_Hour_Count_WalkRecord[i].log_date);
+					}else{
+						RecordHour.push(data.output_Hour_Count_WalkRecord[i].log_hour);					
+					}
+					RecordCnt.push(data.output_Hour_Count_WalkRecord[i].log_cnt);
+				}
+				for(var i=0; i<data.output_Hour_Count_MakMap.length; i++){
+					if(data.output_Hour_Count_MakMap[i].log_date!=null){
+						MakeMapHour.push(data.output_Hour_Count_MakMap[i].log_date);
+					}else{
+						MakeMapHour.push(data.output_Hour_Count_MakMap[i].log_hour);						
+					}
+					MakeMapCnt.push(data.output_Hour_Count_MakMap[i].log_cnt);
+				}
+				const ctx5 = document.getElementById('wrChart').getContext('2d');
+				const wrChart = new Chart(ctx5,{
+					data : {
+						labels : RecordHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '걷기기록이용 인원',
+								data : RecordCnt,
+								backgroundColor : [ 
+									'rgba(255, 99, 132, 0.5)' ],
+							borderColor : [
+								'rgba(255, 99, 132, 1)' ],
+							borderWidth : 1
+							
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+					}
+				});
+				const ctx55 = document.getElementById('mmChart').getContext('2d');
+				const mmChart = new Chart(ctx55,{
+					data : {
+						labels : MakeMapHour,
+						datasets : [ {
+								axis : 'x',
+								type : 'bar',
+								label : '나만의코스생성 인원',
+								data : MakeMapCnt,
+								backgroundColor : [ 
+									'rgba(54, 162, 235, 0.5)' ],
+									borderColor : [ 
+									'rgba(54, 162, 235, 1)' ],
+							borderWidth : 1
+						}]
+					},
+					options : {
+						indexAxis : 'x',
+						maintainAspectRatio: false,
+						scales: {
+						    xAxes: [{ stacked: true }],
+						    yAxes: [{ stacked: true }]
+						  }
+					}
+				});
+				$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord)
+				$("#mmCnt").html("MakMap Total : "+data.output_count_MakMap)
 			}
-		});
-		const ctx55 = document.getElementById('myChart55').getContext('2d');
-		const myChart55 = new Chart(ctx55,{
-			data : {
-				labels : MakeMapHour,
-				datasets : [ {
-						axis : 'x',
-						type : 'bar',
-						label : '나만의코스생성 인원',
-						data : MakeMapCnt,
-						backgroundColor : [ 
-							'rgba(54, 162, 235, 0.5)' ],
-							borderColor : [ 
-							'rgba(54, 162, 235, 1)' ],
-					borderWidth : 1
-					
-				}]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
-				scales: {
-				    xAxes: [{ stacked: true }],
-				    yAxes: [{ stacked: true }]
-				  }
-			}
-		});
+		})
+		//기간설정
+		$('#wrmm-interval').on('change', function(){
+			$('#wrChart').remove();
+			$('#mmChart').remove();
+			$('#canvas-container5 #wrChart_canvas').append('<canvas id="wrChart" width="10" height="3"><canvas>')
+			$('#canvas-container5 #mmChart_canvas').append('<canvas id="mmChart" width="10" height="3"><canvas>')
+			var interval=$('#wrmm-interval option:selected').val()
+			
+				$.ajax({
+					url:getContextPath()+'/adminPage/admin_stats_WRMM',
+					method:'get',
+					data:{interval},
+					dataType:'json',
+					success:function(data){
+						var RecordHour = [];
+						var RecordCnt = [];
+						var MakeMapHour = [];
+						var MakeMapCnt = [];
+						
+						for(var i=0; i<data.output_Hour_Count_WalkRecord.length; i++){
+							if(data.output_Hour_Count_WalkRecord[i].log_date!=null){
+								RecordHour.push(data.output_Hour_Count_WalkRecord[i].log_date);
+							}else{
+								RecordHour.push(data.output_Hour_Count_WalkRecord[i].log_hour);					
+							}
+							RecordCnt.push(data.output_Hour_Count_WalkRecord[i].log_cnt);
+						}
+						for(var i=0; i<data.output_Hour_Count_MakMap.length; i++){
+							if(data.output_Hour_Count_MakMap[i].log_date!=null){
+								MakeMapHour.push(data.output_Hour_Count_MakMap[i].log_date);
+							}else{
+								MakeMapHour.push(data.output_Hour_Count_MakMap[i].log_hour);						
+							}
+							MakeMapCnt.push(data.output_Hour_Count_MakMap[i].log_cnt);
+						}
+						const ctx5 = document.getElementById('wrChart').getContext('2d');
+						const wrChart = new Chart(ctx5,{
+							data : {
+								labels : RecordHour,
+								datasets : [ {
+										axis : 'x',
+										type : 'bar',
+										label : '걷기기록이용 인원',
+										data : RecordCnt,
+										backgroundColor : [ 
+											'rgba(255, 99, 132, 0.5)' ],
+									borderColor : [
+										'rgba(255, 99, 132, 1)' ],
+									borderWidth : 1
+								}]
+							},
+							options : {
+								indexAxis : 'x',
+								maintainAspectRatio: false,
+							}
+						});
+						const ctx55 = document.getElementById('mmChart').getContext('2d');
+						const mmChart = new Chart(ctx55,{
+							data : {
+								labels : MakeMapHour,
+								datasets : [ {
+										axis : 'x',
+										type : 'bar',
+										label : '나만의코스생성 인원',
+										data : MakeMapCnt,
+										backgroundColor : [ 
+											'rgba(54, 162, 235, 0.5)' ],
+											borderColor : [ 
+											'rgba(54, 162, 235, 1)' ],
+									borderWidth : 1
+								}]
+							},
+							options : {
+								indexAxis : 'x',
+								maintainAspectRatio: false,
+								scales: {
+								    xAxes: [{ stacked: true }],
+								    yAxes: [{ stacked: true }]
+								  }
+							}
+						});
+					}
+				})
+		})
+
+		
+		
 		
 		/** 걷기기록을 이용한 시간별 인원과 그중 나만의코스를 생성한 사람의 시간별인원  끝 **/
 		

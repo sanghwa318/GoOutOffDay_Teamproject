@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +58,7 @@ public class AdminStatsController {
 	
 	/** 회원가입 통계 그래프 **/
 	@RequestMapping(value="adminPage/admin_stats_join", method=RequestMethod.GET)
-	public Map<String, Object> joinStats(Model model,
+	public Map<String, Object> joinStats(
 			@RequestParam(value="interval", defaultValue="day")String interval) {
 		
 		UserTrafficLog input_join = new UserTrafficLog();
@@ -82,7 +81,7 @@ public class AdminStatsController {
 	}
 	/** 인기검색어 그래프 **/
 	@RequestMapping(value="adminPage/admin_stats_kw", method=RequestMethod.GET)
-	public Map<String, Object> keywordStats(Model model,
+	public Map<String, Object> keywordStats(
 			@RequestParam(value="interval", defaultValue="day")String interval) {
 
 		UserTrafficLog input = new UserTrafficLog();
@@ -106,7 +105,7 @@ public class AdminStatsController {
 	
 	/** 찜추가한 회원수와 찜추가한 회원중 외부바로가기를 이용한 회원수 그래프**/
 	@RequestMapping(value="adminPage/admin_stats_BMEL", method=RequestMethod.GET)
-	public Map<String, Object> BMELStats(Model model,
+	public Map<String, Object> BMELStats(
 			@RequestParam(value="interval", defaultValue="day")String interval) {
 		
 		UserTrafficLog input = new UserTrafficLog();
@@ -134,6 +133,42 @@ public class AdminStatsController {
 		
 		map.put("output_count_ExLink", output_count_ExLink);
 		map.put("output_Hour_Count_ExLink", output_Hour_Count_ExLink);
+		
+		return webHelper.getJsonData(map);
+	}
+	
+	@RequestMapping(value="adminPage/admin_stats_WRMM", method=RequestMethod.GET)
+	public Map<String, Object> WRMMStats(
+			@RequestParam(value="interval", defaultValue="day")String interval) {
+		
+		UserTrafficLog input = new UserTrafficLog();
+		input.setInterval(interval);
+		
+		
+		/** 기간별 걷기 기록이용과 나만의코스 생성현황 회원수 **/
+		int output_count_WalkRecord = 0;
+		List<UserTrafficLog> output_Hour_Count_WalkRecord = null;
+
+		int output_count_MakMap = 0;
+		List<UserTrafficLog> output_Hour_Count_MakMap = null;
+
+		try {
+			output_count_WalkRecord = userTrafficLogService.RecordCount(input);
+			output_Hour_Count_WalkRecord = userTrafficLogService.RecordHourCount(input);
+
+			output_count_MakMap = userTrafficLogService.MakeLogMapCount(input);
+			output_Hour_Count_MakMap = userTrafficLogService.MakeLogMapHourCount(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+
+		Map<String, Object> map =new HashMap<String, Object>();
+		
+		map.put("output_count_WalkRecord", output_count_WalkRecord);
+		map.put("output_Hour_Count_WalkRecord", output_Hour_Count_WalkRecord);
+
+		map.put("output_count_MakMap", output_count_MakMap);
+		map.put("output_Hour_Count_MakMap", output_Hour_Count_MakMap);
 		
 		return webHelper.getJsonData(map);
 	}

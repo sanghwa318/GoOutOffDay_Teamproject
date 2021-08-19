@@ -366,7 +366,7 @@ public class MyCourseController {
 	 * 나만의코스 작성 action 페이지.
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/commPage/comm_myCourseWriteOk", method = RequestMethod.POST)
+	@RequestMapping(value = "/commPage/comm_myCourseWriteOk.do", method = RequestMethod.POST)
 	public Map<String, Object> mycourseWriteOk(Model model, 
 			@RequestParam(value = "mycourse_name") String mycourse_name,
 			@RequestParam(value = "mycourse_area") String mycourse_area,
