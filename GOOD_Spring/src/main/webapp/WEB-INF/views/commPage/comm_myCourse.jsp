@@ -87,14 +87,14 @@
 								<c:param name="mycourse_no" value="${item.mycourse_no}" />
 							</c:url>
 
-							<div class="col-xs-4 col-sm-4 col-md-3">
+							<div class="col-xs-4 col-sm-4 col-md-4">
 								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}'
 									onclick="location.href='${infoUrl}'"
 									style="cursor: pointer;">
 									<div class="map" id="map${status.index}" style="height:180px"></div>
 									<div class="caption clearfix">
-										<p>작성자: ${item.user_nick}</p>
-										<h4>코스이름: ${item.mycourse_name }</h4>
+										<p style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">작성자: ${item.user_nick}</p>
+										<h4 style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">코스이름: ${item.mycourse_name }</h4>
 										<p class="pull-left">지역: ${item.mycourse_area}</p>
 										<p class="pull-right">좋아요 ${item.like}</p>
 									</div>
