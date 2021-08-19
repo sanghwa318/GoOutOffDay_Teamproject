@@ -245,23 +245,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
-		
-		/** 인기검색어 코드 **/
-		List<UserTrafficLog> output_Top10_keyword = null;
 
-		UserTrafficLog output_Top_keyword = null;
-		
-		try {
-			output_Top_keyword = userTrafficLogService.TopSearchKeyword(input);
-			output_Top10_keyword = userTrafficLogService.Top10SearchKeyword(input);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("output_Top_keyword", output_Top_keyword);
-		model.addAttribute("output_Top10_keyword", output_Top10_keyword);
-		
 		return new ModelAndView("adminPage/admin_stats");
 	}
 

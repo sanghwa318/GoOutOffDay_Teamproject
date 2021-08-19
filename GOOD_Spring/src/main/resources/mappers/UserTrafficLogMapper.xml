@@ -291,24 +291,50 @@
 	<select id="TopSearchKeyword"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
+		<if test="interval=='day'">
 		SELECT substr(log_category, (instr(log_category, '=') +1) )
 		as search_keyword, count(*) as log_cnt
 		FROM user_traffic_log
 		WHERE
 		log_content like 'keyword'
-		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =
-		CURDATE()
+		AND DATE_FORMAT(log_datetime, "%Y-%m-%d") =CURDATE()
 		AND substr(log_category, (instr(log_category, '=') +1)) NOT
 		LIKE ""
 		GROUP BY 1
 		ORDER BY 2 DESC
 		LIMIT 1;
+		</if>
+		<if test="interval=='week'">
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 1;
+		</if>
+		<if test="interval=='month'">
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 1;
+		</if>
 	</select>
 
 	<!-- 기간별 TOP10 인기검색어 -->
 	<select id="Top10SearchKeyword"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
+		<if test="interval=='day'">
 		SELECT substr(log_category, (instr(log_category, '=') +1) )
 		as search_keyword, count(*) as log_cnt
 		FROM good.user_traffic_log
@@ -318,5 +344,31 @@
 		GROUP BY 1
 		ORDER BY 2 DESC
 		LIMIT 10;
+		</if>
+		<if test="interval=='week'">
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		week) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 10;
+		</if>
+		<if test="interval=='month'">
+		SELECT substr(log_category, (instr(log_category, '=') +1) )
+		as search_keyword, count(*) as log_cnt
+		FROM good.user_traffic_log
+		WHERE log_content like 'keyword'
+		AND log_datetime BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 
+		month) AND NOW()
+		AND substr(log_category, (instr(log_category, '=') +1)) NOT LIKE ""
+		GROUP BY 1
+		ORDER BY 2 DESC
+		LIMIT 10;
+		</if>
+		
 	</select>
 </mapper>

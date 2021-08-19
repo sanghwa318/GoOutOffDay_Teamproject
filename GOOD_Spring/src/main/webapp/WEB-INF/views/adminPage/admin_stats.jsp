@@ -71,46 +71,52 @@ h3 {
 			</div>
 			<hr />
 
-			<div class="jumbotron">
-				<h2>기간별 회원가입 현황</h2>
-				<div class="parent clearfix">
-					<div class="form-group pull-right">
-						<select class="form-control" id="join-interval">
-							<option value="day">당일</option>
-							<option value="week">한주</option>
-							<option value="month">한달</option>
-						</select>
+			<div id="stats_join">
+				<div class="jumbotron clearfix">
+					<h2>기간별 회원가입 현황</h2>
+					<div class="parent">
+						<div class="form-group pull-right">
+							<select class="form-control" id="join-interval">
+								<option value="day">당일</option>
+								<option value="week">한주</option>
+								<option value="month">한달</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<div id="canvas-container2">
-					<h2 class="text-primary">
-						<em id="joinCnt"></em>
-					</h2>
-					<h3>가입인원</h3>
-					<div class="canvas">
-						<canvas id="joinChart" width="10" height="3"></canvas>
+					<div id="canvas-container2">
+						<h2 class="text-primary">
+							<em id="joinCnt"></em>
+						</h2>
+						<h3>가입인원</h3>
+						<div class="canvas">
+							<canvas id="joinChart" width="10" height="3"></canvas>
+						</div>
 					</div>
 				</div>
 			</div>
 			<hr />
-			<div class="jumbotron">
-				<h2>기간별 인기검색어</h2>
-				<div class="parent clearfix">
-					<div class="form-group pull-right">
-						<select class="form-control">
-							<option value="today">당일</option>
-							<option value="week">주간</option>
-							<option value="month">한달</option>
-						</select>
+			<div id="stats_keyword">
+				<div class="jumbotron clearfix">
+					<h2>기간별 인기검색어</h2>
+					<div class="parent">
+						<div class="form-group pull-right">
+							<select class="form-control" id="keyword-interval">
+								<option value="day">당일</option>
+								<option value="week">주간</option>
+								<option value="month">한달</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<h2 class="text-primary">
-					<em>TOP Keyword : ${output_Top_keyword.search_keyword }</em> <br />
-					<em>Total : ${output_Top_keyword.log_cnt} 번</em>
-				</h2>
-				<h3>인기검색어</h3>
-				<div class="canvas">
-					<canvas id="myChart3" width="10" height="3"></canvas>
+					<div id="canvas-container3">
+					<h2 class="text-primary">
+						<em id="TOP_Keyword">TOP Keyword : ${output_Top_keyword.search_keyword }</em> <br />
+						<em id="keywordCnt">Total : ${output_Top_keyword.log_cnt} 번</em>
+					</h2>
+					<h3>인기검색어</h3>
+						<div class="canvas">
+							<canvas id="keywordChart" width="10" height="3"></canvas>
+						</div>
+					</div>
 				</div>
 			</div>
 			<hr />
@@ -223,7 +229,7 @@ h3 {
 			})
 			$('#login-interval').on('change', function(){
 				$('#loginChart').remove();
-				$('#canvas-container1').append('<canvas id="loginChart" width="10" height="3"><canvas>')
+				$('#canvas-container1>.canvas').append('<canvas id="loginChart" width="10" height="3"><canvas>')
 				var interval=$('#login-interval option:selected').val()
 				$.ajax({
 				url:getContextPath()+'/adminPage/admin_stats_login',
@@ -316,7 +322,7 @@ h3 {
 			})
 			$('#join-interval').on('change', function(){
 				$('#joinChart').remove();
-				$('#canvas-container2').append('<canvas id="joinChart" width="10" height="3"><canvas>')
+				$('#canvas-container2>.canvas').append('<canvas id="joinChart" width="10" height="3"><canvas>')
 				var interval=$('#join-interval option:selected').val()
 				$.ajax({
 				url:getContextPath()+'/adminPage/admin_stats_join',
@@ -365,54 +371,127 @@ h3 {
 		/** 회원가입 현황 끝 **/
 
 		/** 인기검색어 **/
-		var keyword = [];
-		var keywordCnt = [];
 		
-		<c:forEach var="KeywordLogItem" items="${output_Top10_keyword}">
-			keyword.push('${KeywordLogItem.search_keyword}');
-			keywordCnt.push(${KeywordLogItem.log_cnt});
-		</c:forEach>
 		
-		const ctx3 = document.getElementById('myChart3').getContext('2d');
-		const myChart3 = new Chart(ctx3, {
-			type : 'pie',
-			data : {
-				labels : keyword,
-				datasets : [ {
-					axis : 'x',
-					label : '인기검색어',
-					data : keywordCnt,
-					backgroundColor : [ 
-						'rgba(246, 229, 141, 0.5)',
-						'rgba(255, 190, 118, 0.5)',
-						'rgba(255, 121, 121, 0.5)',
-						'rgba(186, 220, 88, 0.5)',
-						'rgba(56, 173, 169, 0.5)',
-						'rgba(126, 214, 223, 0.5)',
-						'rgba(224, 86, 253, 0.5)',
-						'rgba(104, 109, 224, 0.5)',
-						'rgba(48, 51, 107, 0.5)',
-						'rgba(149, 175, 192, 0.5)'
-						],
-				borderColor : [
-					'rgba(246, 229, 141,1.0)',
-					'rgba(255, 190, 118,1.0)',
-					'rgba(255, 121, 121,1.0)',
-					'rgba(186, 220, 88,1.0)',
-					'rgba(56, 173, 169, 1.0)',
-					'rgba(126, 214, 223,1.0)',
-					'rgba(224, 86, 253,1.0)',
-					'rgba(104, 109, 224,1.0)',
-					'rgba(48, 51, 107,1.0)',
-					'rgba(149, 175, 192,1.0)' ],
-				borderWidth : 1
-				} ]
-			},
-			options : {
-				indexAxis : 'x',
-				maintainAspectRatio: false,
+		$.ajax({
+			url:getContextPath()+'/adminPage/admin_stats_kw',
+			method:'get',
+			data:{},
+			dataType:'json',
+			success:function(data){
+						console.log(data)
+						var keyword = [];
+						var keywordCnt = [];
+						for(var i=0; i<data.output_Top10_keyword.length; i++){
+							keyword.push(data.output_Top10_keyword[i].search_keyword)
+							keywordCnt.push(data.output_Top10_keyword[i].log_cnt);
+						}
+						const ctx3 = document.getElementById('keywordChart').getContext('2d');
+						const keywordChart = new Chart(ctx3, {
+							type : 'pie',
+							data : {
+								labels : keyword,
+								datasets : [ {
+									axis : 'x',
+									label : '인기검색어',
+									data : keywordCnt,
+									backgroundColor : [ 
+										'rgba(246, 229, 141, 0.5)',
+										'rgba(255, 190, 118, 0.5)',
+										'rgba(255, 121, 121, 0.5)',
+										'rgba(186, 220, 88, 0.5)',
+										'rgba(56, 173, 169, 0.5)',
+										'rgba(126, 214, 223, 0.5)',
+										'rgba(224, 86, 253, 0.5)',
+										'rgba(104, 109, 224, 0.5)',
+										'rgba(48, 51, 107, 0.5)',
+										'rgba(149, 175, 192, 0.5)'
+										],
+										borderColor : [
+											'rgba(246, 229, 141,1.0)',
+											'rgba(255, 190, 118,1.0)',
+											'rgba(255, 121, 121,1.0)',
+											'rgba(186, 220, 88,1.0)',
+											'rgba(56, 173, 169, 1.0)',
+											'rgba(126, 214, 223,1.0)',
+											'rgba(224, 86, 253,1.0)',
+											'rgba(104, 109, 224,1.0)',
+											'rgba(48, 51, 107,1.0)',
+											'rgba(149, 175, 192,1.0)' ],
+										borderWidth : 1
+										} ]
+									},
+									options : {
+										indexAxis : 'x',
+										maintainAspectRatio: false,
+									}
+								});
+				$("#TOP_Keyword").html("TOP Keyword: "+data.output_Top_keyword.search_keyword)
+				$("#keywordCnt").html("Total : "+data.output_Top_keyword.log_cnt+"번")
 			}
-		});
+		})
+		$('#keyword-interval').on('change', function(){
+			$('#keywordChart').remove();
+			$('#canvas-container3>.canvas').append('<canvas id="keywordChart" width="10" height="3"><canvas>')
+			var interval=$('#keyword-interval option:selected').val()
+			$.ajax({
+				url:getContextPath()+'/adminPage/admin_stats_kw',
+				method:'get',
+				data:{interval},
+				dataType:'json',
+				success:function(data){
+							console.log(data)
+							var keyword = [];
+							var keywordCnt = [];
+							for(var i=0; i<data.output_Top10_keyword.length; i++){
+								keyword.push(data.output_Top10_keyword[i].search_keyword)
+								keywordCnt.push(data.output_Top10_keyword[i].log_cnt);
+							}
+							const ctx3 = document.getElementById('keywordChart').getContext('2d');
+							const keywordChart = new Chart(ctx3, {
+								type : 'pie',
+								data : {
+									labels : keyword,
+									datasets : [ {
+										axis : 'x',
+										label : '인기검색어',
+										data : keywordCnt,
+										backgroundColor : [ 
+											'rgba(246, 229, 141, 0.5)',
+											'rgba(255, 190, 118, 0.5)',
+											'rgba(255, 121, 121, 0.5)',
+											'rgba(186, 220, 88, 0.5)',
+											'rgba(56, 173, 169, 0.5)',
+											'rgba(126, 214, 223, 0.5)',
+											'rgba(224, 86, 253, 0.5)',
+											'rgba(104, 109, 224, 0.5)',
+											'rgba(48, 51, 107, 0.5)',
+											'rgba(149, 175, 192, 0.5)'
+											],
+											borderColor : [
+												'rgba(246, 229, 141,1.0)',
+												'rgba(255, 190, 118,1.0)',
+												'rgba(255, 121, 121,1.0)',
+												'rgba(186, 220, 88,1.0)',
+												'rgba(56, 173, 169, 1.0)',
+												'rgba(126, 214, 223,1.0)',
+												'rgba(224, 86, 253,1.0)',
+												'rgba(104, 109, 224,1.0)',
+												'rgba(48, 51, 107,1.0)',
+												'rgba(149, 175, 192,1.0)' ],
+											borderWidth : 1
+											} ]
+										},
+										options : {
+											indexAxis : 'x',
+											maintainAspectRatio: false,
+										}
+									});
+					$("#TOP_Keyword").html("TOP Keyword: "+data.output_Top_keyword.search_keyword)
+					$("#keywordCnt").html("Total : "+data.output_Top_keyword.log_cnt+"번")
+				}
+			})
+		})
 		/** 인기검색어 끝 **/
 		
 		

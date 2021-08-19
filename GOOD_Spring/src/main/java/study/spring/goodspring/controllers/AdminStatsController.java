@@ -57,11 +57,11 @@ public class AdminStatsController {
 		
 	}
 	
-	
+	/** 회원가입 통계 그래프 **/
 	@RequestMapping(value="adminPage/admin_stats_join", method=RequestMethod.GET)
 	public Map<String, Object> joinStats(Model model,
 			@RequestParam(value="interval", defaultValue="day")String interval) {
-		/** 회원가입 통계 코드 **/
+		
 		UserTrafficLog input_join = new UserTrafficLog();
 		input_join.setInterval(interval);
 		List<UserTrafficLog> output_Hour_Count_join = null;
@@ -80,4 +80,28 @@ public class AdminStatsController {
 		return webHelper.getJsonData(map);
 		
 	}
+	/** 인기검색어 그래프 **/
+	@RequestMapping(value="adminPage/admin_stats_kw", method=RequestMethod.GET)
+	public Map<String, Object> keywordStats(Model model,
+			@RequestParam(value="interval", defaultValue="day")String interval) {
+
+		UserTrafficLog input = new UserTrafficLog();
+		input.setInterval(interval);
+		
+		List<UserTrafficLog> output_Top10_keyword = null;
+		UserTrafficLog output_Top_keyword=null;
+		
+		try {
+			output_Top_keyword = userTrafficLogService.TopSearchKeyword(input);
+			output_Top10_keyword = userTrafficLogService.Top10SearchKeyword(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+		
+		Map<String, Object> map =new HashMap<String, Object>();
+		map.put("output_Top_keyword", output_Top_keyword);
+		map.put("output_Top10_keyword", output_Top10_keyword);
+		return webHelper.getJsonData(map);
+	}
+	
 }
