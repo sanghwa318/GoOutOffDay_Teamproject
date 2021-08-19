@@ -42,7 +42,16 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_index.do", method = RequestMethod.GET)
 	public ModelAndView home(Model model) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
 
+		if (login_info == null) {
+
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 		return new ModelAndView("adminPage/admin_index");
 	}
 
@@ -60,6 +69,16 @@ public class AdminController {
 			@RequestParam(value = "category", required = false) String category,
 			// [페이지네이션] 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+
+		if (login_info == null) {
+
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 
 		// [페이지네이션] 변수 추가
 		int totalCount = 0; // 전체 게시글 수
@@ -109,6 +128,16 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_inquiryDetail.do", method = RequestMethod.GET)
 	public ModelAndView adminInquiryDetail(Model model, @RequestParam(value = "QnA_no") int QnA_no) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+
+		if (login_info == null) {
+
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 
 		/* 1) 데이터 조회하기 */
 
@@ -134,6 +163,7 @@ public class AdminController {
 	@RequestMapping(value = "/adminPage/admin_inquiryanswerOk.do", method = RequestMethod.POST)
 	public ModelAndView InquiryAnswerOk(Model model, @RequestParam(value = "QnA_no") int QnA_no,
 			@RequestParam(value = "Answer_detail") String Answer_detail) {
+		
 
 		Inquiry input = new Inquiry();
 		input.setQnA_no(QnA_no);
@@ -157,6 +187,16 @@ public class AdminController {
 	@RequestMapping(value = "/adminPage/admin_member.do", method = RequestMethod.GET)
 	public ModelAndView adminMember(Model model, @RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+
+		if (login_info == null) {
+
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 
 		Member input = new Member();
 		input.setUser_name(keyword);
@@ -200,6 +240,16 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_member_delete", method = RequestMethod.GET)
 	public ModelAndView delete(Model model, @RequestParam(value = "user_id", defaultValue = "") String user_id) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+
+		if (login_info == null) {
+
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 
 		/** 조회삭제를 위한 select */
 		Member input = new Member();
@@ -216,7 +266,7 @@ public class AdminController {
 				adminService.deleteMemberadmin(output); // 데아터 삭제
 			}
 		} catch (Exception e) {
-			return webHelper.redirect(null, e.getLocalizedMessage());
+			return webHelper.redirect(redirectUrl, e.getLocalizedMessage());
 		}
 
 		/** 3) 페이지 이동 */
@@ -229,6 +279,16 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_userCourse.do", method = RequestMethod.GET)
 	public ModelAndView adminUserCourse(Model model) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+		if (login_info == null) {
+
+			
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 
 		return new ModelAndView("adminPage/admin_userCourse");
 	}
@@ -238,6 +298,16 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminPage/admin_stats.do", method = RequestMethod.GET)
 	public ModelAndView adminStats(Model model) {
+		Member login_info = (Member) webHelper.getSession("login_info");
+		String redirectUrl = contextPath + "/mainPage/login.do";
+		if (login_info == null) {
+
+			
+			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}
+		if(!login_info.isUser_admin()) {
+			return webHelper.redirect(redirectUrl, "관리자 계정이 아닙니다. 관리자 계정으로 로그인해 주세요.");
+		}
 		
 	
 
