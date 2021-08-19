@@ -371,4 +371,82 @@
 		</if>
 		
 	</select>
+		<!-- 당일 찜추가를 한 인원 -->
+	<select id="AddBookMarkCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultType="int">
+		SELECT count(*)
+		FROM user_traffic_log
+		WHERE
+		log_content like
+		'addBookmark'
+		AND DATE_FORMAT(log_datetime,
+		"%Y-%m-%d") = CURDATE();
+	</select>
+
+	<!-- 당일 찜추가를 한 시간별 인원 -->
+	<select id="AddBookMarkHourCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		SELECT hour(log_datetime) as log_hour, count(*) as
+		log_cnt
+		FROM user_traffic_log
+		WHERE log_content like 'addBookmark'
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1;
+	</select>
+
+	<!-- 당일 찜추가를 한 인원 중 외부사이트로 이동한사람의 인원 -->
+	<select id="ExLinkCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultType="int">
+		WITH user_no AS (SELECT user_info_user_no
+		FROM
+		user_traffic_log
+		WHERE log_content like 'addBookmark'
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		)
+
+		SELECT
+		count(*)
+		FROM
+		user_no n
+		INNER JOIN user_traffic_log u on
+		u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_content like
+		'%ExLink'
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE();
+	</select>
+
+	<!-- 당일 찜추가를 한 시간별 인원 중 외부사이트로 이동한사람의 시간별인원 -->
+	<select id="ExLinkHourCount"
+		parameterType="study.spring.goodspring.model.UserTrafficLog"
+		resultMap="UserTrafficLogMap">
+		WITH user_no AS (SELECT user_info_user_no
+		FROM
+		user_traffic_log
+		WHERE log_content like 'addBookmark'
+		AND
+		DATE_FORMAT(log_datetime, "%Y-%m-%d") = CURDATE()
+		)
+
+		SELECT
+		hour(log_datetime) as log_hour, count(*) as log_cnt
+		FROM
+		user_no n
+		INNER
+		JOIN user_traffic_log u on u.user_info_user_no =
+		n.user_info_user_no
+		WHERE log_content like '%ExLink'
+		AND
+		DATE_FORMAT(log_datetime,
+		"%Y-%m-%d") = CURDATE()
+		GROUP BY 1
+		ORDER BY 1;
+	</select>
 </mapper>

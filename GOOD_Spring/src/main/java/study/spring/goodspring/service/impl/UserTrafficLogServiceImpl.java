@@ -298,5 +298,55 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 		}
 		return result;
 	}
+	@Override
+	public int AddBookMarkCount(UserTrafficLog input) throws Exception {
+		int result = 0;
 
+		try {
+			result = sqlSession.selectOne("UserTrafficLogMapper.AddBookMarkCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<UserTrafficLog> AddBookMarkHourCount(UserTrafficLog input) throws Exception {
+		List<UserTrafficLog> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.AddBookMarkHourCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public int ExLinkCount(UserTrafficLog input) throws Exception {
+		int result = 0;
+
+		try {
+			result = sqlSession.selectOne("UserTrafficLogMapper.ExLinkCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<UserTrafficLog> ExLinkHourCount(UserTrafficLog input) throws Exception {
+		List<UserTrafficLog> result = null;
+
+		try {
+			result = sqlSession.selectList("UserTrafficLogMapper.ExLinkHourCount", input);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			throw new Exception("데이터 조회에 실패했습니다.");
+		}
+		return result;
+	}
 }

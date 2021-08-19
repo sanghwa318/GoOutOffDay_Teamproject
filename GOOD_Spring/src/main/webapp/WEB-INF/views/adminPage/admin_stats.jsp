@@ -121,19 +121,25 @@ h3 {
 			</div>
 			<hr />
 			<div class="jumbotron">
-				<h2>기간별 찜목록현황</h2>
+				<h2>기간별 찜추가현황과 외부링크전환률</h2>
 				<div class="parent clearfix">
 					<div class="form-group pull-right">
 						<select class="form-control">
-							<option value="">일별</option>
-							<option value="1">주간별</option>
-							<option value="2">월별</option>
+							<option value="today">당일</option>
+							<option value="week">주간</option>
+							<option value="month">한달</option>
 						</select>
 					</div>
 				</div>
-				<h3>조건별 컨텐츠 통계 분석</h3>
-				<div class="canvas">
+				<h2 class="text-primary">
+					<em>BookMark Total : ${output_count_bookmark }</em> <br /> <em>ExLink
+						Total : ${output_count_ExLink }</em>
+				</h2>
+				<div class="canvas" style="width: 49%; display: inline-block;">
 					<canvas id="myChart4" width="10" height="3"></canvas>
+				</div>
+				<div class="canvas" style="width: 49%; display: inline-block;">
+					<canvas id="myChart44" width="10" height="3"></canvas>
 				</div>
 			</div>
 			<hr />
@@ -260,7 +266,7 @@ h3 {
 								label : '접속인원',
 								data : loginCnt,
 								backgroundColor : [ 
-									'rgba(54, 162, 235, 0.2)' ],
+									'rgba(54, 162, 235, 0.3)' ],
 							borderColor : [
 									'rgba(54, 162, 235, 1)' ],
 							borderWidth : 1
@@ -306,9 +312,9 @@ h3 {
 								label : '접속인원',
 								data : joinCnt,
 								backgroundColor : [ 
-									'rgba(54, 162, 235, 0.2)' ],
-							borderColor : [
-									'rgba(54, 162, 235, 1)' ],
+									'rgba(255, 99, 132, 0.3)' ],
+									borderColor : [
+										'rgba(255, 99, 132, 1)' ],
 							borderWidth : 1
 							} ]
 						},
@@ -353,9 +359,9 @@ h3 {
 								label : '신규 회원 수',
 								data : joinCnt,
 								backgroundColor : [ 
-									'rgba(54, 162, 235, 0.2)' ],
-							borderColor : [
-									'rgba(54, 162, 235, 1)' ],
+									'rgba(255, 99, 132, 0.3)' ],
+									borderColor : [
+										'rgba(255, 99, 132, 1)' ],
 							borderWidth : 1
 							} ]
 						},
@@ -498,29 +504,74 @@ h3 {
 		
 		
 		
+		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 **/
+		var AddHour = [];
+		var AddCnt = [];
+		
+		<c:forEach var="AddBookMarkLogItem" items="${output_Hour_Count_bookmark}">
+			AddHour.push(${AddBookMarkLogItem.log_hour});
+			AddCnt.push(${AddBookMarkLogItem.log_cnt});
+		</c:forEach>
+		
+		var ExLInkHour = [];
+		var ExLinkCnt = [];
+		
+		<c:forEach var="ExLinkLogItem" items="${output_Hour_Count_ExLink}">
+			ExLInkHour.push(${ExLinkLogItem.log_hour});
+			ExLinkCnt.push(${ExLinkLogItem.log_cnt});
+		</c:forEach>
+		
 		const ctx4 = document.getElementById('myChart4').getContext('2d');
-		const myChart4 = new Chart(ctx4,
-				{
-					type : 'bar',
-					data : {
-						labels : [ '거리', '시간', '평균 페이스' ],
-						datasets : [ {
-							axis : 'y',
-							label : '# 내 기록',
-							data : [ 12, 19, 13 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)', ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)', ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						indexAxis : 'y',
-					}
-				});
+		const myChart4 = new Chart(ctx4,{
+			data : {
+				labels : AddHour,
+				datasets : [ {
+						axis : 'x',
+						type : 'bar',
+						label : '찜추가 인원',
+						data : AddCnt,
+						backgroundColor : [ 
+							'rgba(255, 99, 132, 0.5)' ],
+					borderColor : [
+						'rgba(255, 99, 132, 1)' ],
+					borderWidth : 1
+					
+				}]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+			}
+		});
+		const ctx44 = document.getElementById('myChart44').getContext('2d');
+		const myChart44 = new Chart(ctx44,{
+			data : {
+				labels : ExLInkHour,
+				datasets : [ {
+						axis : 'x',
+						type : 'bar',
+						label : '바로가기이용 인원',
+						data : ExLinkCnt,
+						backgroundColor : [ 
+							'rgba(54, 162, 235, 0.5)' ],
+							borderColor : [ 
+							'rgba(54, 162, 235, 1)' ],
+					borderWidth : 1
+					
+				}]
+			},
+			options : {
+				indexAxis : 'x',
+				maintainAspectRatio: false,
+				scales: {
+				    xAxes: [{ stacked: true }],
+				    yAxes: [{ stacked: true }]
+				  }
+			}
+		});
+		/** 당일 찜추가를 한 시간별 인원과 그중 외부사이트로 이동한사람의 시간별인원 **/
+		
+		
 		const ctx5 = document.getElementById('myChart5').getContext('2d');
 		const myChart5 = new Chart(ctx5,
 				{

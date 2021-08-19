@@ -44,6 +44,13 @@ public interface UserTrafficLogService {
 	public UserTrafficLog TopSearchKeyword(UserTrafficLog input) throws Exception;
 	
 	public List<UserTrafficLog> Top10SearchKeyword(UserTrafficLog input) throws Exception;
-
+	
+	public int AddBookMarkCount(UserTrafficLog input) throws Exception;
+	
+	public List<UserTrafficLog> AddBookMarkHourCount(UserTrafficLog input) throws Exception;
+	
+	public int ExLinkCount(UserTrafficLog input) throws Exception;
+	
+	public List<UserTrafficLog> ExLinkHourCount(UserTrafficLog input) throws Exception;
 	
 }
