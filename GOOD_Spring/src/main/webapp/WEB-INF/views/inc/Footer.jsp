@@ -8,7 +8,7 @@
 		<!--  logo start -->
 		<div class="container clearfix">
 			<div class="" id="logo_box">
-				<a href="<%=request.getContextPath()%>/mainPage/index.jsp"><img src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
+				<a href="${pageContext.request.contextPath}"><img src="<%=request.getContextPath()%>/assets/icon_img/logo.png"
 					style="width: 200px;"></a>
 			</div>
 			<!-- 본문 start -->
