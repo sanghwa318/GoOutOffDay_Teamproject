@@ -8,7 +8,7 @@
 <header>
 	<div class="navbar navbar-default clearfix" role="navigation"
 		id="header"
-		style="background: #ffffff !important; min-height: 50px; border-color: #ffffff !important;">
+		style="min-height: 50px; border-color: #ffffff !important;">
 		<div class="container clearfix" style="padding: 0;">
 			<div class="row clearfix" style="padding-bottom: 0 !important">
 				<div class="col-md-3" id="h_logo">
