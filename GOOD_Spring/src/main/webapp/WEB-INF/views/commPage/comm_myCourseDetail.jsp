@@ -174,6 +174,7 @@ font-size: 1rem;
 
 }
 
+
 </style>
 <body>
 	<!-- 푸터빼고 감싸주세요 -->
