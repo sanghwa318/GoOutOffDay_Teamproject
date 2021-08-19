@@ -28,37 +28,21 @@ function isLike() {
 
 }
 $(".heart").on("click",function() {
-	console.log("좋아요 버튼 클릭");
 	 if($(this).hasClass("liked")) {
 		$.ajax({
 				url: getContextPath() + '/commPage/comm_myCourseDetail/deleteLike',
 				type: 'POST',
 				dataType: 'json',
 				data: { mycourse_no },
-				error: function(error){
+				error: function(request,status,error){
 		        	var error_msg ='';
-		        	var code = parseInt(error.status / 100);
-		        	if (code == 4) 	{
 		                error_msg = "로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.\n";
 							swal({
 								title : "에러",
 								text :error_msg,
 								type : "error"
-							}).then(function(result) {
-								// 창이 닫히는 애니메이션의 시간이 있으므로,
-								// 0.1초의 딜레이 적용 후 포커스 이동
-								setTimeout(function() {
-
-								}, 100);
-							}); // <-- 메시지 표시
-							//window.location = getContextPath()+"/mainPage/login.do";
-		            }
-					/*else if(code == 4){
-						error_msg = "탈퇴된 회원입니다.\n"
-					}*/ 	
-		        },
-		        success: function(json) {
-				console.log("좋아요 취소 완료");
+		            })
+		        },success: function(json) {
 		        isLike();
 		        }
 		})
@@ -71,28 +55,14 @@ $(".heart").on("click",function() {
 				data: { mycourse_no },
 				error: function(error){
 		        	var error_msg ='';
-		        	var code = parseInt(error.status / 100);
-		        	if (code == 4) 	{
 		                error_msg = "로그인이 필요한 서비스입니다. 로그인 후 이용해주세요.\n";
 							swal({
 								title : "에러",
 								text :error_msg,
 								type : "error"
-							}).then(function(result) {
-								// 창이 닫히는 애니메이션의 시간이 있으므로,
-								// 0.1초의 딜레이 적용 후 포커스 이동
-								setTimeout(function() {
-
-								}, 100);
-							}); // <-- 메시지 표시
-							//window.location = getContextPath()+"/mainPage/login.do";
-		            }
-					/*else if(code == 4){
-						error_msg = "탈퇴된 회원입니다.\n"
-					}*/ 
+		            })
 		        },
 		        success: function(json) {
-				console.log("좋아요 추가 완료");
 				isLike();
 		        }
 		})

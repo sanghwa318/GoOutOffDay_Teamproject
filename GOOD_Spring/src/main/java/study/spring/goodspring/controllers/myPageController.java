@@ -1,5 +1,6 @@
 package study.spring.goodspring.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -245,7 +246,8 @@ public class myPageController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/myPage/myPage_inquiryDetail.do", method = RequestMethod.GET)
-	public ModelAndView InquiryDetail(Model model, @RequestParam(value = "QnA_no") int QnA_no) {
+	public ModelAndView InquiryDetail(Model model, 
+			@RequestParam(value = "QnA_no") int QnA_no) {
 		Member loginInfo = ((Member) webHelper.getSession("login_info"));
 		if (loginInfo == null) {
 
@@ -292,18 +294,20 @@ public class myPageController {
 	 * 
 	 * @return ModelAndView
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/myPage/myPage_inquiryWrite_ok", method = RequestMethod.POST)
-	public ModelAndView InquiryWriteOk(Model model, @RequestParam(value = "QnA_title") String QnA_title,
+	public Map<String, Object> InquiryWriteOk(
+			@RequestParam(value = "QnA_title") String QnA_title,
 			@RequestParam(value = "QnA_category") String QnA_category,
 			@RequestParam(value = "QnA_text") String QnA_text) {
 		if (!regexHelper.isValue(QnA_title)) {
-			return webHelper.redirect(null, "제목을 입력하세요");
+			return webHelper.getJsonWarning("제목을 입력하세요");
 		}
 		if (!regexHelper.isValue(QnA_category)) {
-			return webHelper.redirect(null, "카테고리를 선택하세요");
+			return webHelper.getJsonWarning("카테고리를 선택하세요");
 		}
 		if (!regexHelper.isValue(QnA_text)) {
-			return webHelper.redirect(null, "내용을 입력하세요");
+			return webHelper.getJsonWarning("내용을 입력하세요");
 		}
 		Inquiry input = new Inquiry();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
@@ -317,12 +321,11 @@ public class myPageController {
 		try {
 			output = inquiryService.addInquiry(input);
 		} catch (Exception e) {
-			e.printStackTrace();
+			return webHelper.getJsonError(e.getLocalizedMessage());
 		}
-
-		return webHelper.redirect(contextPath + "/myPage/myPage_inquiryDetail.do" + "?QnA_no=" + output.getQnA_no(),
-				"작성되었습니다.");
-
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("output", output);
+		return webHelper.getJsonData(map);
 	}
 
 	/** 나의 찜목록 보기를 위한 컨트롤러 **/

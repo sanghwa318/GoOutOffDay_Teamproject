@@ -204,12 +204,12 @@ public class MyCourseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_myCourseDetail/addLike", method = RequestMethod.POST)
-	public Map<String, Object> addLike(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
-		
-		if(webHelper.getSession("login_info")==null) {
-			webHelper.getJsonWarning("로그인 정보 없음");
-		}else {
-			Member loginInfo=(Member)webHelper.getSession("login_info");
+	public Map<String, Object> addLike(
+			@RequestParam(value = "mycourse_no") int mycourse_no) {
+		Member loginInfo=(Member)webHelper.getSession("login_info");
+			if(loginInfo==null) {
+				return webHelper.getJsonWarning("로그인 정보 없음");
+			}else {
 			MyCourseLike input = new MyCourseLike();
 			input.setMycourse_no(mycourse_no);
 			input.setUser_info_user_no(loginInfo.getUser_no());
@@ -229,11 +229,10 @@ public class MyCourseController {
 	@ResponseBody
 	@RequestMapping(value = "/commPage/comm_myCourseDetail/deleteLike", method = RequestMethod.POST)
 	public Map<String, Object> deleteLike(Model model, @RequestParam(value = "mycourse_no") int mycourse_no) {
-		
-		if(webHelper.getSession("login_info")==null) {
-			webHelper.getJsonWarning("로그인 정보 없음");
+		Member loginInfo=(Member)webHelper.getSession("login_info");
+		if(loginInfo==null) {
+			return webHelper.getJsonWarning("로그인 정보 없음");
 		}else {
-			Member loginInfo=(Member)webHelper.getSession("login_info");
 			MyCourseLike input = new MyCourseLike();
 			input.setMycourse_no(mycourse_no);
 			input.setUser_info_user_no(loginInfo.getUser_no());
