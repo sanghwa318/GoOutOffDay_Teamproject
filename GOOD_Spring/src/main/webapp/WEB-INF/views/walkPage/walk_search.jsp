@@ -30,7 +30,14 @@ div#category_acco .accordian-toggle {
 	transform: translate(0, -10px);
 }
 
-
+@media ( max-width : 767px) {
+	div#wk_category {
+		width: 100%;
+	}
+	div#wk_category>fieldset>div>div {
+		padding: 1.5px 0 !important;
+	}
+}
 </style>
 </head>
 
@@ -72,110 +79,118 @@ div#category_acco .accordian-toggle {
 							</a>
 						</h3>
 						<div id="category_list" class="panel-collapse collapse in">
-							<div class="panel-body">
+							<div class="panel-body" style="padding-bottom: 0;">
 								<!-- 검색 하기 창 -->
 								<form method="get"
 									action="${pageContext.request.contextPath }/walkPage/walk_search.do"
-									class="form-group input-group" id=dropbox>
-									<input type="search" name="keyword" id="course_search"
-										class="form-control" placeholder="검색하기" value="${keyword }" />
-									<span class="input-group-btn">
-										<button class="btn btn-blue" type="submit">
-											<span style="color: #0069a6;">검색 </span><i
-												class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
-										</button>
-									</span>
-									<!-- 								</form> -->
-									<!-- //검색 하기 창 -->
-									<!-- 카테고리영역 -->
-									<!-- 								<form method="get" -->
-									<%-- 									action="${pageContext.request.contextPath }/walkPage/walk_search.do" --%>
-									<!-- 									class="form-horizontal" role="form" id="dropdown"> -->
-									<fieldset>
-										<div class="form-group">
-											<div class="col-xs-4">
-												<select class="form-control" name="category" id="category">
-													<option value="">유형별</option>
-													<option value="생태문화길"
-														<c:if test="${category eq '생태문화길'}">selected</c:if>>생태문화길</option>
-													<option value="서울둘레길"
-														<c:if test="${category eq '서울둘레길'}">selected</c:if>>서울둘레길</option>
-													<option value="근교산자락길"
-														<c:if test="${category eq '근교산자락길'}">selected</c:if>>근교산자락길</option>
-													<option value="한양도성길"
-														<c:if test="${category eq '한양도성길'}">selected</c:if>>한양도성길</option>
-													<option value="한강지천길/계절길"
-														<c:if test="${category eq '한강지천길/계절길'}">selected</c:if>>한강지천길/계절길</option>
-												</select>
-											</div>
-											<div class="col-xs-4">
-												<select class="form-control" name="area" id="area">
-													<option value="">지역</option>
-													<option value="강남구"
-														<c:if test="${area eq '강남구'}">selected</c:if>>강남구</option>
-													<option value="강동구"
-														<c:if test="${area eq '강동구'}">selected</c:if>>강동구</option>
-													<option value="강북구"
-														<c:if test="${area eq '강북구'}">selected</c:if>>강북구</option>
-													<option value="강서구"
-														<c:if test="${area eq '강서구'}">selected</c:if>>강서구</option>
-													<option value="관악구"
-														<c:if test="${area eq '관악구'}">selected</c:if>>관악구</option>
-													<option value="광진구"
-														<c:if test="${area eq '광진구'}">selected</c:if>>광진구</option>
-													<option value="구로구"
-														<c:if test="${area eq '구로구'}">selected</c:if>>구로구</option>
-													<option value="금천구"
-														<c:if test="${area eq '금천구'}">selected</c:if>>금천구</option>
-													<option value="노원구"
-														<c:if test="${area eq '노원구'}">selected</c:if>>노원구</option>
-													<option value="도봉구"
-														<c:if test="${area eq '도봉구'}">selected</c:if>>도봉구</option>
-													<option value="동대문구"
-														<c:if test="${area eq '동대문구'}">selected</c:if>>동대문구</option>
-													<option value="동작구"
-														<c:if test="${area eq '동작구'}">selected</c:if>>동작구</option>
-													<option value="마포구"
-														<c:if test="${area eq '마포구'}">selected</c:if>>마포구</option>
-													<option value="서대문구"
-														<c:if test="${area eq '서대문구'}">selected</c:if>>서대문구</option>
-													<option value="서초구"
-														<c:if test="${area eq '서초구'}">selected</c:if>>서초구</option>
-													<option value="서초구"
-														<c:if test="${area eq '성동구'}">selected</c:if>>성동구</option>
-													<option value="성북구"
-														<c:if test="${area eq '성북구'}">selected</c:if>>성북구</option>
-													<option value="송파구"
-														<c:if test="${area eq '송파구'}">selected</c:if>>송파구</option>
-													<option value="양천구"
-														<c:if test="${area eq '양천구'}">selected</c:if>>양천구</option>
-													<option value="영등포구"
-														<c:if test="${area eq '영등포구'}">selected</c:if>>영등포구</option>
-													<option value="용산구"
-														<c:if test="${area eq '용산구'}">selected</c:if>>용산구</option>
-													<option value="은평구"
-														<c:if test="${area eq '은평구'}">selected</c:if>>은평구</option>
-													<option value="종로구"
-														<c:if test="${area eq '종로구'}">selected</c:if>>종로구</option>
-													<option value="중구"
-														<c:if test="${area eq '중구'}">selected</c:if>>중구</option>
-													<option value="중랑구"
-														<c:if test="${area eq '중랑구'}">selected</c:if>>중랑구</option>
-												</select>
-											</div>
-											<div class="col-sm-3 col-xs-4 pull-right">
-												<select class="form-control" name="order" id="order">
-													<option value="">정렬</option>
-													<option value="distance"
-														<c:if test="${order eq 'distance'}">selected</c:if>>거리순</option>
-													<option value="time"
-														<c:if test="${order eq 'time'}">selected</c:if>>시간순</option>
-													<option value="level"
-														<c:if test="${order eq 'level'}">selected</c:if>>난이도순</option>
-												</select>
-											</div>
+									class="clearfix" id="dropbox">
+									<div class="row">
+										<div class="col-sm-4 form-group input-group"
+											style="float: left;">
+											<input type="search" name="keyword" id="course_search"
+												class="form-control" placeholder="검색하기" value="${keyword }" />
+											<span class="input-group-btn">
+												<button class="btn btn-blue" type="submit">
+													<span style="color: #0069a6;">검색 </span><i
+														class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
+												</button>
+											</span>
 										</div>
-									</fieldset>
+										<!-- 								</form> -->
+										<!-- //검색 하기 창 -->
+										<!-- 카테고리영역 -->
+										<!-- 								<form method="get" -->
+										<%-- 									action="${pageContext.request.contextPath }/walkPage/walk_search.do" --%>
+										<!-- 									class="form-horizontal" role="form" id="dropdown"> -->
+										<div class="col-sm-8 pull-left" style="padding: 0;"
+											id="wk_category">
+											<fieldset>
+												<div class="form-group clearfix" style="margin-bottom: 0;">
+													<div class="col-sm-4 ">
+														<select class="form-control" name="category" id="category">
+															<option value="">유형별</option>
+															<option value="생태문화길"
+																<c:if test="${category eq '생태문화길'}">selected</c:if>>생태문화길</option>
+															<option value="서울둘레길"
+																<c:if test="${category eq '서울둘레길'}">selected</c:if>>서울둘레길</option>
+															<option value="근교산자락길"
+																<c:if test="${category eq '근교산자락길'}">selected</c:if>>근교산자락길</option>
+															<option value="한양도성길"
+																<c:if test="${category eq '한양도성길'}">selected</c:if>>한양도성길</option>
+															<option value="한강지천길/계절길"
+																<c:if test="${category eq '한강지천길/계절길'}">selected</c:if>>한강지천길/계절길</option>
+														</select>
+													</div>
+													<div class="col-sm-4 ">
+														<select class="form-control" name="area" id="area">
+															<option value="">지역</option>
+															<option value="강남구"
+																<c:if test="${area eq '강남구'}">selected</c:if>>강남구</option>
+															<option value="강동구"
+																<c:if test="${area eq '강동구'}">selected</c:if>>강동구</option>
+															<option value="강북구"
+																<c:if test="${area eq '강북구'}">selected</c:if>>강북구</option>
+															<option value="강서구"
+																<c:if test="${area eq '강서구'}">selected</c:if>>강서구</option>
+															<option value="관악구"
+																<c:if test="${area eq '관악구'}">selected</c:if>>관악구</option>
+															<option value="광진구"
+																<c:if test="${area eq '광진구'}">selected</c:if>>광진구</option>
+															<option value="구로구"
+																<c:if test="${area eq '구로구'}">selected</c:if>>구로구</option>
+															<option value="금천구"
+																<c:if test="${area eq '금천구'}">selected</c:if>>금천구</option>
+															<option value="노원구"
+																<c:if test="${area eq '노원구'}">selected</c:if>>노원구</option>
+															<option value="도봉구"
+																<c:if test="${area eq '도봉구'}">selected</c:if>>도봉구</option>
+															<option value="동대문구"
+																<c:if test="${area eq '동대문구'}">selected</c:if>>동대문구</option>
+															<option value="동작구"
+																<c:if test="${area eq '동작구'}">selected</c:if>>동작구</option>
+															<option value="마포구"
+																<c:if test="${area eq '마포구'}">selected</c:if>>마포구</option>
+															<option value="서대문구"
+																<c:if test="${area eq '서대문구'}">selected</c:if>>서대문구</option>
+															<option value="서초구"
+																<c:if test="${area eq '서초구'}">selected</c:if>>서초구</option>
+															<option value="서초구"
+																<c:if test="${area eq '성동구'}">selected</c:if>>성동구</option>
+															<option value="성북구"
+																<c:if test="${area eq '성북구'}">selected</c:if>>성북구</option>
+															<option value="송파구"
+																<c:if test="${area eq '송파구'}">selected</c:if>>송파구</option>
+															<option value="양천구"
+																<c:if test="${area eq '양천구'}">selected</c:if>>양천구</option>
+															<option value="영등포구"
+																<c:if test="${area eq '영등포구'}">selected</c:if>>영등포구</option>
+															<option value="용산구"
+																<c:if test="${area eq '용산구'}">selected</c:if>>용산구</option>
+															<option value="은평구"
+																<c:if test="${area eq '은평구'}">selected</c:if>>은평구</option>
+															<option value="종로구"
+																<c:if test="${area eq '종로구'}">selected</c:if>>종로구</option>
+															<option value="중구"
+																<c:if test="${area eq '중구'}">selected</c:if>>중구</option>
+															<option value="중랑구"
+																<c:if test="${area eq '중랑구'}">selected</c:if>>중랑구</option>
+														</select>
+													</div>
+													<div class="col-sm-4 ">
+														<select class="form-control" name="order" id="order">
+															<option value="">정렬</option>
+															<option value="distance"
+																<c:if test="${order eq 'distance'}">selected</c:if>>거리순</option>
+															<option value="time"
+																<c:if test="${order eq 'time'}">selected</c:if>>시간순</option>
+															<option value="level"
+																<c:if test="${order eq 'level'}">selected</c:if>>난이도순</option>
+														</select>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
 								</form>
 								<!-- //카테고리영역 -->
 							</div>
@@ -240,43 +255,55 @@ div#category_acco .accordian-toggle {
 											<c:param name="COURSE_NAME" value="${item.COURSE_NAME }" />
 										</c:url>
 
-										<tr onclick="location.href='${viewUrl}'" style="cursor: pointer;">
+										<tr onclick="location.href='${viewUrl}'"
+											style="cursor: pointer;">
 											<td align="center" class="hidden-xs" valign="middle"><h2>${COURSE_CATEGORY_NM }</h2>
-											<td align="center" class="visible-xs col-xs-3" valign="middle"><h4>${COURSE_CATEGORY_NM }</h4>
+											<td align="center" class="visible-xs col-xs-3"
+												valign="middle"><h4>${COURSE_CATEGORY_NM }</h4>
 											<td align="center" class="hidden-xs" valign="middle"><h2>${COURSE_NAME}</h2>
-											<td align="center" class="visible-xs col-xs-5" valign="middle"><h4>${COURSE_NAME}</h4>
-												<button class="btn btn-blue btn-lg disabled hidden-xs" style="cursor: pointer; margin-top: 20px;">
-													${COUNT_BM } 명의 사용자가 찜한 코스입니다!
-												</button>
-												<button class="btn btn-blue btn-lg disabled vislble-xs" style="cursor: pointer; margin-top: 20px; width:130px; height:40px;">
-													<p style="font-size:15px; margin-top:-11px; margin-left:-10px;" >${COUNT_BM } 명의 사용자가 <br>찜한 코스입니다!</p>
-												</button>
-											</td>
-											<td ><table>
+											<td align="center" class="visible-xs col-xs-5"
+												valign="middle"><h4>${COURSE_NAME}</h4>
+												<button class="btn btn-blue btn-lg disabled hidden-xs"
+													style="cursor: pointer; margin-top: 20px;">
+													${COUNT_BM } 명의 사용자가 찜한 코스입니다!</button>
+												<button class="btn btn-blue btn-lg disabled vislble-xs"
+													style="cursor: pointer; margin-top: 20px; width: 130px; height: 40px;">
+													<p
+														style="font-size: 15px; margin-top: -11px; margin-left: -10px;">${COUNT_BM }
+														명의 사용자가 <br>찜한 코스입니다!
+													</p>
+												</button></td>
+											<td><table>
 													<!-- 													<tr> -->
 													<!-- 														<td></td> -->
 													<!-- 													</tr> -->
 													<tr>
-														<td class="hidden-xs"><h4>강남/강북 : ${SOUTH_NORTH_DIV_NM }</h4></td>
+														<td class="hidden-xs"><h4>강남/강북 :
+																${SOUTH_NORTH_DIV_NM }</h4></td>
 													</tr>
 													<tr>
 														<td class="hidden-xs"><h4>지역구 : ${AREA_GU }</h4></td>
-														<td class="visible-xs"><p style="font-size:14px;">지역구 : ${AREA_GU }</p></td>
+														<td class="visible-xs"><p style="font-size: 14px;">지역구
+																: ${AREA_GU }</p></td>
 													</tr>
 													<tr>
 														<td class="hidden-xs"><h4>거리 : ${DISTANCE }</h4></td>
-														<td class="visible-xs"><p style="font-size:14px;">거리 : ${DISTANCE }</p></td>
+														<td class="visible-xs"><p style="font-size: 14px;">거리
+																: ${DISTANCE }</p></td>
 													</tr>
 													<tr>
 														<td class="hidden-xs"><h4>소요시간 : ${LEAD_TIME }</h4></td>
-														<td class="visible-xs"><p style="font-size:14px;">소요시간 : ${LEAD_TIME }</p></td>
+														<td class="visible-xs"><p style="font-size: 14px;">소요시간
+																: ${LEAD_TIME }</p></td>
 													</tr>
 													<tr>
 														<td class="hidden-xs"><h4>난이도 : ${COURSE_LEVEL }</h4></td>
-														<td class="visible-xs"><p style="font-size:14px;">난이도 : ${COURSE_LEVEL }</p></td>
+														<td class="visible-xs"><p style="font-size: 14px;">난이도
+																: ${COURSE_LEVEL }</p></td>
 													</tr>
 													<tr>
-														<td class="hidden-xs"><h4>관련지하철 : ${RELATE_SUBWAY }</h4></td>
+														<td class="hidden-xs"><h4>관련지하철 :
+																${RELATE_SUBWAY }</h4></td>
 													</tr>
 												</table></td>
 											<c:choose>
@@ -296,13 +323,10 @@ div#category_acco .accordian-toggle {
 																<%-- 출력을 위해 준비한 변수 --%>
 																<c:set var="CPI_NAME" value="${item2.CPI_NAME }" />
 
-																
+
 
 																<tr>
-																	<td><h4>
-																			${status2.index + 1 }.
-																				${CPI_NAME }
-																		</h4></td>
+																	<td><h4>${status2.index + 1 }.${CPI_NAME }</h4></td>
 																</tr>
 
 															</c:forEach>
@@ -395,6 +419,6 @@ div#category_acco .accordian-toggle {
 	<%@ include file="../inc/plugin.jsp"%>
 	<!-- // js -->
 
-	
+
 </body>
 </html>

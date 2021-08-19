@@ -10,7 +10,8 @@
 		id="header"
 		style="min-height: 50px; border-color: #ffffff !important;">
 		<div class="container clearfix" style="padding: 0;">
-			<div class="row clearfix" style="padding-bottom: 0 !important">
+			<div class="row clearfix"
+				style="padding-bottom: 0 !important; margin-right: 0;">
 				<div class="col-md-3" id="h_logo">
 					<a href="<%=request.getContextPath()%>/"
 						style="position: relative; z-index: 999999;"> <img
@@ -19,14 +20,14 @@
 						style="width: 250px; height: 53px;" />
 					</a>
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-9" style="padding-right: 0;">
 					<%--로그인 회원가입 프로필--%>
 					<c:choose>
 						<c:when test="${login_info == null }">
-							<div class="row clearfix" id="login_join_box">
+							<div class="clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
 									<button class="btn btn-link"
-										style="color: #0098ed; font-size: 1em; margin-top: 5px; padding-top: 0; padding-bottom: 0; margin-right: 15px; text-decoration: none; border: 0; outline: 0;"
+										style="color: #0098ed; font-size: 1em; margin-top: 5px; padding-top: 0; padding-bottom: 0; text-decoration: none; border: 0; outline: 0;"
 										onclick="location.href='${pageContext.request.contextPath}/mainPage/login.do'">
 										<i class="glyphicon glyphicon-thumbs-up"></i> <strong>
 											로그인</strong>
@@ -42,10 +43,9 @@
 						</c:when>
 						<c:when
 							test="${login_info.getUser_id() != null && login_info.isUser_admin()==false}">
-							<div class="row clearfix" style="padding-top: 10px;"
-								id="login_join_box">
+							<div class="clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
-									<div class="pull-right" style="padding: 0 22px 0 10px;">
+									<div class="pull-right" style="padding: 0 10px;">
 										<div>
 											<a id="account" href="#" role="button"><img
 												style="border-radius: 20px"
@@ -98,10 +98,10 @@
 						<%--//로그인 회원가입 프로필--%>
 						<c:when
 							test="${login_info.getUser_id() != null && login_info.isUser_admin()==true}">
-							<div class="row clearfix" id="login_join_box">
+							<div class="clearfix" id="login_join_box">
 								<div class="pull-right" id="login_join">
 									<button class="btn btn-link"
-										style="color: #0098ed; font-size: 1em; margin-right: 12px; margin-top: 5px; padding-top: 0; padding-bottom: 0; text-decoration: none; border: 0; outline: 0;"
+										style="color: #0098ed; font-size: 1em; margin-top: 5px; padding-top: 0; padding-bottom: 0; text-decoration: none; border: 0; outline: 0;"
 										onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'">
 										<i class="glyphicon glyphicon-cog"></i> <strong> 관리자</strong>
 									</button>
@@ -116,8 +116,8 @@
 					</c:choose>
 
 					<!--네비게이션, 검색바-->
-					<div class="row clearfix" style="padding-bottom: 0 !important;"
-						id="navbar">
+					<div class="row clearfix"
+						style="padding-bottom: 0 !important; margin-right: 0;" id="navbar">
 						<!-- 반응형 햄버거 -->
 						<div class="navbar-header ">
 							<button type="button" class="navbar-toggle pull-left"
@@ -130,7 +130,7 @@
 						<!-- //반응형 햄버거 -->
 						<!-- 네비게이션(서브메뉴) -->
 						<div class="collapse navbar-collapse clearfix " id="navi_search"
-							style="padding: 0 22px;">
+							style="padding-left: 29px;">
 							<!-- 반응형 햄버거 아코디언 -->
 							<div class="panel-group visible-xs" id="accodian"
 								style="border-bottom: 0; margin-bottom: 0 !important; margin-top: 10px; font-size: 20px">
