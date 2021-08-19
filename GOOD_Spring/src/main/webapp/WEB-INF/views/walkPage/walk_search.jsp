@@ -91,8 +91,8 @@ div#category_acco .accordian-toggle {
 												class="form-control" placeholder="검색하기" value="${keyword }" />
 											<span class="input-group-btn">
 												<button class="btn btn-blue" type="submit">
-													<span style="color: #0069a6;">검색 </span><i
-														class="glyphicon glyphicon-search" style="color: #0069a6;"></i>
+													<span style="color: #4466aa;">검색 </span><i
+														class="glyphicon glyphicon-search" style="color: #4466aa;"></i>
 												</button>
 											</span>
 										</div>

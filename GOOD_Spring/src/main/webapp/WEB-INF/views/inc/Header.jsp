@@ -318,8 +318,8 @@
 								<div class="form-group input-group">
 									<input type="search" name="keyword" class="form-control"
 										placeholder="검색"> <span class="input-group-btn">
-										<button class="btn btn-blue">
-											<i class="glyphicon glyphicon-search" style="color: #eeffff"></i>
+										<button class="btn btn-blue" style="padding: 3.3px 10px; background-color: #cddfff;">
+											<i class="glyphicon glyphicon-search" style="color: #ffffff; font-size: 20px; top: 3.3px;"></i>
 										</button>
 									</span>
 								</div>
