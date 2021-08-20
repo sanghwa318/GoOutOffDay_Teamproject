@@ -740,7 +740,8 @@
 						indexAxis : 'x',
 						maintainAspectRatio: false,
 					}
-				});			
+				});
+				$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew)			
 			}
 		})
 		//기간설정
