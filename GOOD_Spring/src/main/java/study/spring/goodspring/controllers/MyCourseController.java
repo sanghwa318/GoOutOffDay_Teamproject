@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.helper.PageData;
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.UploadItem;
@@ -28,7 +29,7 @@ import study.spring.goodspring.service.MyCourseLikeService;
 import study.spring.goodspring.service.MyCourseService;
 import study.spring.goodspring.service.MyPostService;
 import study.spring.goodspring.service.WalkLogService;
-
+@Slf4j
 @Controller
 public class MyCourseController {
 
@@ -550,12 +551,31 @@ public class MyCourseController {
 			mycourse = myPostService.getMyCoursePost(user_no);
 			crewpost = myPostService.getCrewPost(user_no);
 			
-			list = myPostService.sortPost(mycourse, crewpost);
+			
+			if(mycourse.size()>0&&crewpost.size()>0) {
+				
+				list = myPostService.sortPost(mycourse, crewpost);
+				model.addAttribute("list", list);
+				log.debug("list>>>>>>>>>"+list.toString());
+			}else if(mycourse.size()<1&&crewpost.size()>0) {
+				
+				for(int i=0; i<crewpost.size(); i++) {
+					crewpost.get(i).setDtype("crewpost");
+				}
+				model.addAttribute("list", crewpost);
+				log.debug("crewpost>>>>>>>>>"+crewpost.toString());
+			}else if(mycourse.size()>0&&crewpost.size()<1) {
+				
+				for(int i=0; i<mycourse.size(); i++) {
+					mycourse.get(i).setDtype("mycourse");
+					}
+				model.addAttribute("list", mycourse);
+				log.debug("crewpost>>>>>>>>>"+crewpost.toString());
+			}
 		} catch (Exception e) {
 			return webHelper.redirect(null, e.getLocalizedMessage());
 		}
 		
-		model.addAttribute("list", list);
 		return new ModelAndView("commPage/comm_myPost");
 	}
 }

@@ -70,9 +70,9 @@
 					<tbody id="list">
 						<c:choose>
 							<%--조회결과가 없는 경우 --%>
-							<c:when test="${(list==null||fn:length(list)==0)}">
+							<c:when test="${list==null||fn:length(list)==0}">
 								<tr>
-									<td class="text-center" colspan="5" style="font-size:20px">조회결과가 없습니다</td>
+									<td class="text-center" colspan="5" style="font-size:20px">조회결과가 없습니다${list}</td>
 								</tr>
 							</c:when>
 							<%--조회결과가 있는 경우 --%>
