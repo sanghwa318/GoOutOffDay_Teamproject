@@ -782,12 +782,12 @@
 		<if test="interval=='week'">
 			AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL
 			-1 week) AND
-			NOW()
+			NOW();
 		</if>
 		<if test="interval=='month'">
 			AND crew_createtime BETWEEN DATE_ADD(CURDATE(), INTERVAL
 			-1 month) AND
-			NOW()
+			NOW();
 		</if>
 	</select>
 

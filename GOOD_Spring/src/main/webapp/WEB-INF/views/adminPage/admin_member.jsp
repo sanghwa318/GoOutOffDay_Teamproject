@@ -13,6 +13,10 @@
 	transition: all 0.3s ease;
 	transform: translateY(0);
 }
+
+.main_header>h1:hover {
+	transform: translate(0, -10px);
+}
 /* Zebra striping */
 thead tr:nth-of-type(odd) { 
   background: #eee; 

@@ -18,6 +18,10 @@
 	transition: all 0.3s ease;
 	transform: translateY(0);
 }
+
+.main_header>h1:hover {
+	transform: translate(0, -10px);
+}
 </style>
 </head>
 

@@ -42,6 +42,8 @@
 						},
 						options : {
 							indexAxis : 'x',
+							maintainAspectRatio: false,
+  							responsive: true,
 						}
 					});
 					
@@ -50,7 +52,7 @@
 			})
 			$('#login-interval').on('change', function(){
 				$('#loginChart').remove();
-				$('#canvas-container1>.canvas').append('<canvas id="loginChart" width="10" height="3"><canvas>')
+				$('#canvas-container1 .canvas').append('<canvas id="loginChart"><canvas>')
 				var interval=$('#login-interval option:selected').val()
 				$.ajax({
 				url:getContextPath()+'/adminPage/admin_stats_login',
@@ -89,6 +91,8 @@
 						},
 						options : {
 							indexAxis : 'x',
+							maintainAspectRatio: false,
+  							responsive: true,
 						}
 					});
 					$("#loginCnt").html("Total : "+data.loginCnt)
@@ -124,7 +128,7 @@
 							labels : joinDateHour,
 							datasets : [ {
 								axis : 'x',
-								label : '접속인원',
+								label : '신규 회원가입',
 								data : joinCnt,
 								backgroundColor : [ 
 									'rgba(255, 99, 132, 0.3)' ],
@@ -135,6 +139,8 @@
 						},
 						options : {
 							indexAxis : 'x',
+							maintainAspectRatio: false,
+  							responsive: true,
 						}
 					});
 					
@@ -144,7 +150,7 @@
 			//기간설정
 			$('#join-interval').on('change', function(){
 				$('#joinChart').remove();
-				$('#canvas-container2>.canvas').append('<canvas id="joinChart" width="10" height="3"><canvas>')
+				$('#canvas-container2 .canvas').append('<canvas id="joinChart"><canvas>')
 				var interval=$('#join-interval option:selected').val()
 				$.ajax({
 				url:getContextPath()+'/adminPage/admin_stats_join',
@@ -172,7 +178,7 @@
 							labels : joinDateHour,
 							datasets : [ {
 								axis : 'x',
-								label : '신규 회원 수',
+								label : '신규 회원가입',
 								data : joinCnt,
 								backgroundColor : [ 
 									'rgba(255, 99, 132, 0.3)' ],
@@ -183,6 +189,8 @@
 						},
 						options : {
 							indexAxis : 'x',
+							maintainAspectRatio: false,
+  							responsive: true,
 						}
 					});
 					$("#joinCnt").html("Total : "+data.joinCnt)
@@ -244,6 +252,7 @@
 									options : {
 										indexAxis : 'x',
 										maintainAspectRatio: false,
+  										responsive: true,
 									}
 								});
 						if(data.output_Top_keyword==null){
@@ -258,7 +267,7 @@
 		//기간설정
 		$('#keyword-interval').on('change', function(){
 			$('#keywordChart').remove();
-			$('#canvas-container3>.canvas').append('<canvas id="keywordChart" width="10" height="3"><canvas>')
+			$('#canvas-container3 .canvas').append('<canvas id="keywordChart"><canvas>')
 			var interval=$('#keyword-interval option:selected').val()
 			$.ajax({
 				url:getContextPath()+'/adminPage/admin_stats_kw',
@@ -311,6 +320,7 @@
 										options : {
 											indexAxis : 'x',
 											maintainAspectRatio: false,
+  											responsive: true,
 										}
 									});
 							if(data.output_Top_keyword==null){
@@ -362,7 +372,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '찜추가 인원',
+								label : '찜추가 현황',
 								data : AddCnt,
 								backgroundColor : [ 
 									'rgba(255, 99, 132, 0.5)' ],
@@ -375,6 +385,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
+  						responsive: true,
 					}
 				});
 				const ctx44 = document.getElementById('elChart').getContext('2d');
@@ -384,7 +395,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '바로가기이용 인원',
+								label : '바로가기 현황',
 								data : ExLinkCnt,
 								backgroundColor : [ 
 									'rgba(54, 162, 235, 0.5)' ],
@@ -397,10 +408,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
-						scales: {
-						    xAxes: [{ stacked: true }],
-						    yAxes: [{ stacked: true }]
-						  }
+  						responsive: true,
 					}
 				});
 				$("#bmCnt").html("BookMark Total : "+data.output_count_bookmark)
@@ -411,8 +419,8 @@
 		$('#bmel-interval').on('change', function(){
 			$('#bmChart').remove();
 			$('#elChart').remove();
-			$('#canvas-container4 #bmChart_canvas').append('<canvas id="bmChart" width="10" height="3"><canvas>')
-			$('#canvas-container4 #elChart_canvas').append('<canvas id="elChart" width="10" height="3"><canvas>')
+			$('#canvas-container4 #bmChart_canvas').append('<canvas id="bmChart"><canvas>')
+			$('#canvas-container4 #elChart_canvas').append('<canvas id="elChart"><canvas>')
 			var interval=$('#bmel-interval option:selected').val()
 			$.ajax({
 			url:getContextPath()+'/adminPage/admin_stats_BMEL',
@@ -449,7 +457,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '찜추가 인원',
+								label : '찜추가 현황',
 								data : AddCnt,
 								backgroundColor : [ 
 									'rgba(255, 99, 132, 0.5)' ],
@@ -462,6 +470,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
+  						responsive: true,
 					}
 				});
 				const ctx44 = document.getElementById('elChart').getContext('2d');
@@ -471,7 +480,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '바로가기이용 인원',
+								label : '바로가기 현황',
 								data : ExLinkCnt,
 								backgroundColor : [ 
 									'rgba(54, 162, 235, 0.5)' ],
@@ -484,10 +493,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
-						scales: {
-						    xAxes: [{ stacked: true }],
-						    yAxes: [{ stacked: true }]
-						  }
+  						responsive: true,
 					}
 				});
 				$("#bmCnt").html("BookMark Total : "+data.output_count_bookmark)
@@ -532,7 +538,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '걷기기록이용 인원',
+								label : '걷기기록이용 현황',
 								data : RecordCnt,
 								backgroundColor : [ 
 									'rgba(255, 99, 132, 0.5)' ],
@@ -545,6 +551,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
+  						responsive: true,
 					}
 				});
 				const ctx55 = document.getElementById('mmChart').getContext('2d');
@@ -554,7 +561,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '나만의코스생성 인원',
+								label : '나만의코스생성 현황',
 								data : MakeMapCnt,
 								backgroundColor : [ 
 									'rgba(54, 162, 235, 0.5)' ],
@@ -566,10 +573,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
-						scales: {
-						    xAxes: [{ stacked: true }],
-						    yAxes: [{ stacked: true }]
-						  }
+  						responsive: true,
 					}
 				});
 				$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord)
@@ -580,8 +584,8 @@
 		$('#wrmm-interval').on('change', function(){
 			$('#wrChart').remove();
 			$('#mmChart').remove();
-			$('#canvas-container5 #wrChart_canvas').append('<canvas id="wrChart" width="10" height="3"><canvas>')
-			$('#canvas-container5 #mmChart_canvas').append('<canvas id="mmChart" width="10" height="3"><canvas>')
+			$('#canvas-container5 #wrChart_canvas').append('<canvas id="wrChart"><canvas>')
+			$('#canvas-container5 #mmChart_canvas').append('<canvas id="mmChart"><canvas>')
 			var interval=$('#wrmm-interval option:selected').val()
 			
 				$.ajax({
@@ -618,7 +622,7 @@
 								datasets : [ {
 										axis : 'x',
 										type : 'bar',
-										label : '걷기기록이용 인원',
+										label : '걷기기록이용 현황',
 										data : RecordCnt,
 										backgroundColor : [ 
 											'rgba(255, 99, 132, 0.5)' ],
@@ -630,6 +634,7 @@
 							options : {
 								indexAxis : 'x',
 								maintainAspectRatio: false,
+ 								responsive: true,
 							}
 						});
 						const ctx55 = document.getElementById('mmChart').getContext('2d');
@@ -639,7 +644,7 @@
 								datasets : [ {
 										axis : 'x',
 										type : 'bar',
-										label : '나만의코스생성 인원',
+										label : '나만의코스생성 현황',
 										data : MakeMapCnt,
 										backgroundColor : [ 
 											'rgba(54, 162, 235, 0.5)' ],
@@ -651,12 +656,11 @@
 							options : {
 								indexAxis : 'x',
 								maintainAspectRatio: false,
-								scales: {
-								    xAxes: [{ stacked: true }],
-								    yAxes: [{ stacked: true }]
-								  }
+  								responsive: true,
 							}
 						});
+						$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord)
+						$("#mmCnt").html("MakMap Total : "+data.output_count_MakMap)
 					}
 				})
 		})
@@ -696,7 +700,7 @@
 						datasets : [ {
 								axis : 'x',
 								type : 'bar',
-								label : '걷기기록이용 인원',
+								label : '크루생성',
 								data : CrewCnt,
 								backgroundColor : [ 
 									'rgba(255, 99, 132, 0.5)' ],
@@ -709,6 +713,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
+  						responsive: true,
 					}
 				});
 				const ctx66 = document.getElementById('caChart').getContext('2d');
@@ -739,6 +744,7 @@
 					options : {
 						indexAxis : 'x',
 						maintainAspectRatio: false,
+  						responsive: true,
 					}
 				});
 				$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew)			
@@ -748,8 +754,8 @@
 		$('#crew-interval').on('change', function(){
 			$('#crChart').remove();
 			$('#caChart').remove();
-			$('#canvas-container6 #crChart_canvas').append('<canvas id="crChart" width="10" height="3"><canvas>')
-			$('#canvas-container6 #caChart_canvas').append('<canvas id="caChart" width="10" height="3"><canvas>')
+			$('#canvas-container6 #crChart_canvas').append('<canvas id="crChart"><canvas>')
+			$('#canvas-container6 #caChart_canvas').append('<canvas id="caChart"><canvas>')
 			var interval=$('#crew-interval option:selected').val();
 			
 			$.ajax({
@@ -784,7 +790,7 @@
 							datasets : [ {
 									axis : 'x',
 									type : 'bar',
-									label : '걷기기록이용 인원',
+									label : '크루생성',
 									data : CrewCnt,
 									backgroundColor : [ 
 										'rgba(255, 99, 132, 0.5)' ],
@@ -797,6 +803,7 @@
 						options : {
 							indexAxis : 'x',
 							maintainAspectRatio: false,
+ 							responsive: true,
 						}
 					});
 					const ctx66 = document.getElementById('caChart').getContext('2d');
@@ -827,8 +834,10 @@
 						options : {
 							indexAxis : 'x',
 							maintainAspectRatio: false,
-						}
-					});			
+  							responsive: true,
+						},
+					});
+					$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew)			
 				}
 			})
 		})

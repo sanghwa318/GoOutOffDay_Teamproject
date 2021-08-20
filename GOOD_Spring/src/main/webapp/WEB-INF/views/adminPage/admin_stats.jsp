@@ -9,7 +9,7 @@
 <head>
 <%@ include file="/WEB-INF/views//inc/head.jsp"%>
 <style>
-h3 {
+h3, h2 {
 	text-align: center;
 }
 
@@ -21,8 +21,63 @@ h3 {
 }
 
 .canvas {
-	width: 100%;
-	height: 300px;
+	width: 99%;
+	height: 230px;
+	min-height: 99%;
+	margin-top: 10px;
+}
+
+.chart {
+	height: 250px;
+	min-height: 100%
+}
+
+.item {
+	padding: 20px;
+}
+
+.thumbnail {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+em {
+	text-decoration: none;
+	color: #343a40;
+	font-style: normal;
+	font-size: 1rem;
+	margin-left: 10px;
+}
+
+.text-primary {
+	text-align: left;
+	height: 30px;
+	min-height: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	margin-right: 20px;
+}
+
+.visible-xs {
+	border-bottom: 1px solid #ddd;
+}
+
+.main_header>h1 {
+	position: relative;
+	text-align: center;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+}
+
+.main_header>h1:hover {
+	transform: translate(0, -10px);
+}
+
+#stats_login, #stats_join {
+	padding-top: 10px;
 }
 </style>
 </head>
@@ -43,12 +98,12 @@ h3 {
 					<span class="test01">관리자페이지 </span>
 				</h1>
 			</div>
-			<div class="page-header">
+			<div class="header">
 				<h1>통계</h1>
 			</div>
-			<div id="stats_login">
-				<div class="jumbotron clearfix">
-					<h2>기간별 로그인 현황</h2>
+			<div id="stats_login" class="col-sm-12 col-md-6 item">
+				<div class="loginstats clearfix thumbnail">
+					<h2>로그인 현황</h2>
 					<div class="parent">
 						<div class="form-group pull-right">
 							<select class="form-control" id="login-interval">
@@ -59,21 +114,21 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container1">
-						<h2 class="text-primary">
+						<h3 class="text-primary">
 							<em id="loginCnt"></em>
-						</h2>
-						<h3>접속인원</h3>
-						<div class="canvas">
-							<canvas id="loginChart" width="10" height="3"></canvas>
+						</h3>
+						<div class="chart">
+							<div class="canvas">
+								<canvas id="loginChart"></canvas>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr />
-
-			<div id="stats_join">
-				<div class="jumbotron clearfix">
-					<h2>기간별 회원가입 현황</h2>
+			<div class="visible-xs"></div>
+			<div id="stats_join" class="col-sm-12 col-md-6 item">
+				<div class="joinstats clearfix thumbnail">
+					<h2>회원가입 현황</h2>
 					<div class="parent">
 						<div class="form-group pull-right">
 							<select class="form-control" id="join-interval">
@@ -84,20 +139,21 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container2">
-						<h2 class="text-primary">
+						<h3 class="text-primary">
 							<em id="joinCnt"></em>
-						</h2>
-						<h3>가입인원</h3>
-						<div class="canvas">
-							<canvas id="joinChart" width="10" height="3"></canvas>
+						</h3>
+						<div class="chart">
+							<div class="canvas">
+								<canvas id="joinChart"></canvas>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr />
-			<div id="stats_keyword">
-				<div class="jumbotron clearfix">
-					<h2>기간별 인기검색어</h2>
+			<div class="visible-xs"></div>
+			<div id="stats_keyword" class="col-sm-12 col-md-6 item">
+				<div class="keywordstats clearfix thumbnail">
+					<h2>인기검색어</h2>
 					<div class="parent">
 						<div class="form-group pull-right">
 							<select class="form-control" id="keyword-interval">
@@ -108,20 +164,21 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container3">
-						<h2 class="text-primary">
+						<h3 class="text-primary">
 							<em id="TOP_Keyword"></em> <br /> <em id="keywordCnt"></em>
-						</h2>
-						<h3>인기검색어</h3>
-						<div class="canvas">
-							<canvas id="keywordChart" width="10" height="3"></canvas>
+						</h3>
+						<div class="chart">
+							<div class="canvas">
+								<canvas id="keywordChart"></canvas>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr />
-			<div id="stats_BMEL">
-				<div class="jumbotron clearfix">
-					<h2>기간별 찜추가현황과 외부링크전환률</h2>
+			<div class="visible-xs"></div>
+			<div id="stats_BMEL" class="col-sm-12 col-md-6 item">
+				<div class="bookmarkstats clearfix thumbnail">
+					<h2>찜추가현황 &amp; 바로가기이용현황</h2>
 					<div class="parent">
 						<div class="form-group pull-right">
 							<select class="form-control" id="bmel-interval">
@@ -132,28 +189,28 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container4">
-						<h2 class="text-primary">
+						<h3 class="text-primary">
 							<em id="bmCnt"></em> <br /> <em id="elCnt"></em>
-						</h2>
-						<div style="width: 49%; display: inline-block;">
-							<h3>찜 추가 현황</h3>
-							<div class="canvas" id="bmChart_canvas">
-								<canvas id="bmChart" width="10" height="3"></canvas>
+						</h3>
+						<div class="chart">
+							<div style="width: 49%; display: inline-block;">
+								<div class="canvas" id="bmChart_canvas">
+									<canvas id="bmChart"></canvas>
+								</div>
 							</div>
-						</div>
-						<div style="width: 49%; display: inline-block;">
-							<h3>외부링크 전환률</h3>
-							<div class="canvas" id="elChart_canvas">
-								<canvas id="elChart" width="10" height="3"></canvas>
+							<div style="width: 49%; display: inline-block;">
+								<div class="canvas" id="elChart_canvas">
+									<canvas id="elChart"></canvas>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr />
-			<div id="stats_WRMM">
-				<div class="jumbotron clearfix">
-					<h2>기간별 걷기기록 이용현황과 나만의 코스 생성 전환율</h2>
+			<div class="visible-xs"></div>
+			<div id="stats_WRMM" class="col-sm-12 col-md-6 item">
+				<div class="walkstats clearfix thumbnail">
+					<h2>걷기기록이용자수 &amp; 코스생성자수</h2>
 					<div class="parent">
 						<div class="form-group pull-right">
 							<select class="form-control" id="wrmm-interval">
@@ -164,30 +221,30 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container5">
-						<h2 class="text-primary">
+						<h3 class="text-primary">
 							<em id="wrCnt"></em> <br /> <em id="mmCnt"></em>
-						</h2>
-						<div style="width: 49%; display: inline-block;">
-							<h3>걷기기록 이용현황</h3>
-							<div class="canvas" id="wrChart_canvas">
-								<canvas id="wrChart" width="10" height="3"></canvas>
+						</h3>
+						<div class="chart">
+							<div style="width: 49%; display: inline-block;">
+								<div class="canvas" id="wrChart_canvas">
+									<canvas id="wrChart"></canvas>
+								</div>
 							</div>
-						</div>
-						<div style="width: 49%; display: inline-block;">
-							<h3>나만의 코스 생성 전환율</h3>
-							<div class="canvas" id="mmChart_canvas">
-								<canvas id="mmChart" width="10" height="3"></canvas>
+							<div style="width: 49%; display: inline-block;">
+								<div class="canvas" id="mmChart_canvas">
+									<canvas id="mmChart"></canvas>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr />
-			<div id="stats_crew">
-				<div class="jumbotron clearfix">
-					<h2>기간별 크루생성현황과 생성된 크루의 종류</h2>
+			<div class="visible-xs"></div>
+			<div id="stats_crew" class="col-sm-12 col-md-6 item">
+				<div class="crewstats clearfix thumbnail">
+					<h2>크루생성현황 &amp; 종류</h2>
 					<div class="parent">
-						<div class="form-group pull-right"  id="crew-interval">
+						<div class="form-group pull-right" id="crew-interval">
 							<select class="form-control">
 								<option value="day">당일</option>
 								<option value="week">주간</option>
@@ -196,19 +253,20 @@ h3 {
 						</div>
 					</div>
 					<div id="canvas-container6">
-						<h2 class="text-primary">
-							<em id="crewCnt"></em> <br />
-						</h2>
-						<div style="width: 49%; display: inline-block;">
-							<h3>크루 생성 현황</h3>
-							<div class="canvas" id="crChart_canvas">
-								<canvas id="crChart" width="10" height="3"></canvas>
+						<h3 class="text-primary">
+							<em id="crewCnt"></em>
+						</h3>
+						<div class="chart clearfix">
+							<div style="width: 48%; display: inline-block;" class="pull-left">
+								<div class="canvas" id="crChart_canvas">
+									<canvas id="crChart"></canvas>
+								</div>
 							</div>
-						</div>
-						<div style="width: 49%; display: inline-block;">
-							<h3>크루 종류</h3>
-							<div class="canvas" id="caChart_canvas">
-								<canvas id="caChart" width="10" height="3"></canvas>
+							<div style="width: 48%; display: inline-block;"
+								class="pull-right">
+								<div class="canvas" id="caChart_canvas">
+									<canvas id="caChart"></canvas>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -224,6 +282,7 @@ h3 {
 	<!-- js -->
 	<%@ include file="/WEB-INF/views//inc/plugin.jsp"%>
 	<!-- // js -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/admin-stats-js.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/admin-stats-js.js"></script>
 </body>
 </html>
