@@ -46,7 +46,7 @@ thead tr:nth-of-type(odd) {
 			
 			
 			<!-- 리스트영역-->
-			<div class="col-md-12 table-responsive" id="table_list">
+			<div class="table-responsive" id="table_list">
 				<table class='table table-bordered table-hover'>
 					<thead>
 						<tr class="active">
@@ -91,7 +91,7 @@ thead tr:nth-of-type(odd) {
 										<td class='text-center'>${item.user_name}</td>
 										<td class='text-center'>
 										<c:if test="${item.gender eq 'M'}">남자</c:if> 
-										<c:if test="${!item.gender eq 'Y'}">여자</c:if></td>
+										<c:if test="${item.gender eq 'F'}">여자</c:if></td>
 										<td class='text-center'>${fn:substring(item.tel, 0 ,3)}-${fn:substring(item.tel, 3 ,7)}-${fn:substring(item.tel, 7, 10)}</td>
 										<td class='text-center'>${item.email}</td>
 										<td class='text-center'>${item.address1}</td>
