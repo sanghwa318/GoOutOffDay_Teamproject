@@ -111,15 +111,33 @@ float:left;
          <!-- 본문 중단2 영역 -->
          <div class="crew_bbs_middle2">
             <h1 class="col-md-12 col-sm-12 col-xs-12">자유게시판</h1>
+            <form class="form-horizontal clearfix" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" id="bbs_id" method="GET">
+               <div class="col-sm-offset-8 col-sm-4" role="search">
+                  <div class="form-group input-group">
+                        <input type="text" class="form-control" name="keyword"
+                           placeholder="게시글 검색"> <span class="input-group-btn">
+                     <input type="hidden" id="crew_no" name="crew_no"
+                     value="${output.crew_no}" />
+                     <input type="hidden" id="crew_name" name="crew_name"
+                     value="${output.crew_name}" />
+                           <button class="btn btn-blue" type="submit" style="padding: 3.3px 10px;">
+                              <i class="glyphicon glyphicon-search" style="color: #4466aa; font-size: 20px; top: 3.3px;"></i>
+                           </button>
+                        </span>
+                     
+                  </div>
+               </div>
+				</form>
             <table
-               class="table table-striped table-bordered table-hover col-md-12 col-sm-12 col-xs-12">
+               class="table table-hover col-xs-12" style="table-layout: fixed; border-bottom:1px solid #ccc;">
                <thead>
-                  <tr class="active">
-                     <th class="text-center">게시글 번호</th>
-                     <th class="text-center">제목</th>
-                     <th class="text-center">작성자</th>
-                     <th class="text-center">작성일</th>
-                     <th class="text-center">조회수</th>
+                  <tr style="background-color:#ffdedd;">
+                     <th class="text-center col-sm-1 col-xs-1">번호</th>
+                     <th class="text-center col-sm-4 col-xs-1">제목</th>
+                     <th class="text-center col-sm-1 col-xs-1"></th>
+                     <th class="text-center col-sm-2 col-xs-1">작성자</th>
+                     <th class="text-center col-sm-3 col-xs-1">작성일</th>
+                     <th class="text-center col-sm-1 col-xs-1">조회수</th>
                   </tr>
                </thead>
                <tbody id="list">
@@ -149,11 +167,13 @@ float:left;
                            
 
                            <tr onclick="location.href='${postUrl}'"  style="cursor: pointer;">
-                              <td class="text-center">${item.post_no}</td>
-                              <td class="text-center">${item.post_title}</td>
-                              <td class="text-center">${item.user_nick}</td>
-                              <td class="text-center">${item.post_createdate}</td>
-                              <td class="text-center">${item.post_hits}</td>
+                              <td class="text-center col-sm-1 col-xs-1">${item.post_no}</td>
+                              <td class="text-center col-sm-4 col-xs-1" style="text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
+                              ${item.post_title}</td>
+                              <td class="text-center col-sm-1 col-xs-1"><i class="glyphicon glyphicon-heart" style="color:#FF685F; top:3px;"></i> 2</td>
+                              <td class="text-center col-sm-2 col-xs-1">${item.user_nick}</td>
+                              <td class="text-center col-sm-3 col-xs-1">${item.post_createdate}</td>
+                              <td class="text-center col-sm-1 col-xs-1">${item.post_hits}</td>
                            </tr>
 
                         </c:forEach>
@@ -175,27 +195,27 @@ float:left;
             <c:if test="${output.user_info_user_no == login_info.getUser_no()}">
             <div class="pull-left">
             <input type="hidden" id="crew-del" name="crew-del" value="${output.crew_no}" />
-            <button type='submit' id="crew_del" class="btn btn-danger pull-left">크루해체</button>
+            <button type='submit' id="crew_del" class="btn btn-danger pull-left" style="background-image: none; border-color: #eee;">크루해체</button>
             </div>
             </c:if>
             <div class="form-group" >
-            <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" id="bbs_id" method="GET">
-               <div class="col-md-7 col-sm-4 col-xs-3 col-md-offset-2 col-sm-offset-3 col-xs-offset-2" role="search">
-                  <div class="form-group input-group">
-                        <input type="text" class="form-control" name="keyword"
-                           placeholder="게시글 검색"> <span class="input-group-btn">
-                     <input type="hidden" id="crew_no" name="crew_no"
-                     value="${output.crew_no}" />
-                     <input type="hidden" id="crew_name" name="crew_name"
-                     value="${output.crew_name}" />
-                           <button class="btn btn-blue" type="submit">
-                              <i class="glyphicon glyphicon-search"></i>
-                           </button>
-                        </span>
+<%--             <form class="form-horizontal" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" id="bbs_id" method="GET"> --%>
+<!--                <div class="col-md-7 col-sm-4 col-xs-3 col-md-offset-2 col-sm-offset-3 col-xs-offset-2" role="search"> -->
+<!--                   <div class="form-group input-group"> -->
+<!--                         <input type="text" class="form-control" name="keyword" -->
+<!--                            placeholder="게시글 검색"> <span class="input-group-btn"> -->
+<!--                      <input type="hidden" id="crew_no" name="crew_no" -->
+<%--                      value="${output.crew_no}" /> --%>
+<!--                      <input type="hidden" id="crew_name" name="crew_name" -->
+<%--                      value="${output.crew_name}" /> --%>
+<!--                            <button class="btn btn-blue" type="submit" style="padding: 3.3px 10px;"> -->
+<!--                               <i class="glyphicon glyphicon-search" style="color: #4466aa; font-size: 20px; top: 3.3px;"></i> -->
+<!--                            </button> -->
+<!--                         </span> -->
                      
-                  </div>
-               </div>
-				</form>
+<!--                   </div> -->
+<!--                </div> -->
+<!-- 				</form> -->
 				
                <form 
                   action="${pageContext.request.contextPath}/commPage/comm_crew_postWrite.do"
@@ -204,14 +224,14 @@ float:left;
                   <input type="hidden" id="crew_no" name="crew_no"
                      value="${output.crew_no}" />
 
-                  <button type="submit" id="btn1" class="btn btn-primary pull-right">글쓰기</button>
+                  <button type="submit" id="btn1" class="btn btn-primary pull-right" style="background-image: none; border-color: #eee;">글쓰기</button>
                </form>
                 <c:if test="${output.user_info_user_no == login_info.getUser_no()}">
                <form 
                   action="${pageContext.request.contextPath}/commPage/comm_crew_memberJoin.do"
                   method="GET">
                   <input type="hidden" name="crew_crew_no" value="${output.crew_no}" />
-                  <button type="submit" id="btn2" class="btn btn-primary pull-right" style="margin-right:0.5%">크루관리</button>
+                  <button type="submit" id="btn2" class="btn btn-primary pull-right" style="margin-right:0.5%; background-image: none; border-color: #eee;" >크루관리</button>
                </form>
                </c:if>
                <!-- 탈퇴버튼 -->
@@ -219,7 +239,7 @@ float:left;
                <div >
                   <input type="hidden" id="crew_no" name="crew_no"
                      value="${output.crew_no}" />
-                  <button type='submit' id="out" class="btn btn-danger pull-right" style="margin-right:0.5%">탈퇴하기</button>
+                  <button type='submit' id="out" class="btn btn-danger pull-right" style="margin-right:0.5%; background-image: none; border-color: #eee;">탈퇴하기</button>
                </div>
                </c:if>
             </div>

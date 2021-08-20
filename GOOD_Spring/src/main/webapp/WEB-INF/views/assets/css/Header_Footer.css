@@ -137,10 +137,6 @@ footer .container {
 	div#header #navbar-toggle {
 		position: relative ! important;
 	}
-	div#header #navbar {
-		/* 		position: relative ! important; */
-		
-	}
 	div#header button.btn-link {
 		padding-left: 4px !important;
 	}

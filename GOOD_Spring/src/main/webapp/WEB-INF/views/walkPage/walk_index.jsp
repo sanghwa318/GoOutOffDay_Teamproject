@@ -305,8 +305,8 @@ carousel-title2 {
 							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.CPI_CONTENT }</p>
 						</div>
 						<div class="wishlist">
-							<span class="heart"><i class="fa fa-heart-o"
-								aria-hidden="true" role="button"></i> </span>
+<!-- 							<span class="heart"><i class="fa fa-heart-o" -->
+<!-- 								aria-hidden="true" role="button"></i> </span> -->
 						</div>
 					</div>
 
