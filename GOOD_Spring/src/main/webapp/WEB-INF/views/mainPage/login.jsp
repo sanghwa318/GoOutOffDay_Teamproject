@@ -114,7 +114,7 @@ body>div.container {
 		        	
 		        },
 		        success: function(json) {
-		            window.location = "/goodspring/";
+		            window.location = getContextPath();
 		        }
 		    }); // end ajaxForm
 		});

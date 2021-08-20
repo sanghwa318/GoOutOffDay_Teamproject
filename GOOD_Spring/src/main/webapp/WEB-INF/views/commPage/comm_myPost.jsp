@@ -56,7 +56,7 @@
 			</div>
 
 			<!-- 리스트영역-->
-			<div class="col-md-12 table-responsive">
+			<div class=" table-responsive">
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr class="active">
