@@ -18,9 +18,9 @@
 	height: 100px;
 }
 
-#crew_middle {
-	padding-left: 40px;
-}
+/* #crew_middle { */
+/* 	padding-left: 40px; */
+/* } */
 
 .col-md-8 {
 	margin-left: 40px;
@@ -48,7 +48,7 @@
 .form-group img{
 	max-hieght: 100%;
 	min-width: 100%;
-	height: 180px;
+	min-height: 200px;
 }
 </style>
 </head>
@@ -74,9 +74,9 @@
 			<div class="crew_info_header "></div>
 			<!-- //본문 상단 영역 -->
 			<!-- 본문 중단 영역 -->
-			<div class="crew_info_middle">
-				<div class="col-md-3 col-xs-4 col-sm-4" id="crew_middle">
-					<div class="form-group">
+			<div class="crew_info_middle clearfix">
+				<div class="col-md-3 col-sm-4" id="crew_middle">
+					<div class="form-group" style="margin-bottom: 40px;">
 						<span class="title-img"><img
 							src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
 						</span>
@@ -86,9 +86,9 @@
 					</div>
 				</div>
 				<!-- 크루 상세 정보  -->
-				<div class="col-md-6 col-sm-4 col-xs-5 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" style="margin-top:-2%">
-					<h2>크루 공지사항(설명)</h2>
-					<div class="col-md-3 col-sm-4" style="border: 4px dotted #eeee; min-height:130px; min-width:130%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
+				<div class="col-md-9 col-sm-8" style="margin-top:-2%">
+					<h2 class=text-center>- 크루 공지사항(설명) -</h2>
+					<div class="" style="border: 4px dotted #eeee; min-height:320px;"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
 				</div>
 				<!-- 크루 상세 정보 끝 -->
 
@@ -99,7 +99,8 @@
 
 
 			<div class="crew_info_footer">
-				<div class="col-md-12 col-sm-12 col-xs-12">
+				<div style="padding-top: 20px;">
+					<hr />
 					<div class="text-center">
 						<form class="form-horizontal" role="form" class="form-crew" id='crew_form'
 							method="post"
@@ -111,7 +112,6 @@
 								onClick="location.href='${pageContext.request.contextPath}/commPage/comm_crew.do'">목록</button>
 						</form>
 					</div>
-					<hr />
 				</div>
 
 			</div>

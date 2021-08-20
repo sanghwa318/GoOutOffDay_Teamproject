@@ -15,9 +15,9 @@
    height: 100px;
 }
 
-#crew_middle {
-   padding-left: 40px;
-}
+/* #crew_middle { */
+/*    padding-left: 40px; */
+/* } */
 
 
 
@@ -47,13 +47,13 @@
 .form-group img{
 	max-hieght: 100%;
 	min-width: 100%;
-	height: 180px;
+	min-height: 200px;
 }
 
 @media (max-width:400px){
 .form-group img{
 min-width: 80%;
-float:left;
+/* float:left; */
 }
 
 }
@@ -86,30 +86,28 @@ float:left;
          <div class="crew_bbs_header "></div>
          <!-- //본문 상단 영역 -->
          <!-- 본문 중단1 영역 -->
-         <div class="crew_ibbs_middle1">
-            <div id="crew_middle" class="col-md-5 col-xs-12 col-sm-5" >
-               <div class="form-group" >
+         <div class="crew_ibbs_middle1 clearfix">
+            <div id="crew_middle" class="col-md-3 col-sm-4" >
+               <div class="form-group"  style="margin-bottom: 40px;">
                   <span class="title-img"><img 
                      src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
                   </span>
-                  <div class="col-xs-12" style="display:block">
-                  <h3 class="col-xs-12">가입된 회원 수 : ${output.crew_member}명</h3>
-                  <h3 class="col-xs-12">간단 소개말</h3>
-                   <h4 class="col-xs-12">${output.crew_sinto}</h4>
-                   </div>
+                  <h3>가입된 회원 수 : ${output.crew_member}명</h3>
+                  <h3 >간단 소개말</h3>
+                   <h4>${output.crew_sinto}</h4>
                </div>
             </div>
             <!-- 크루 상세 정보  -->
-            <div class="col-md-6 col-sm-5 col-xs-12" style="margin-top:-2%">
-					<h2>크루 공지사항(설명)</h2>
-					<div class="col-md-3 col-sm-4 crew_info" style="border: 4px dotted #eeee; min-height:200px; min-width:100%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
+            <div class="col-md-9 col-sm-8" style="margin-top:-2%">
+					<h2 class=text-center>- 크루 공지사항(설명) -</h2>
+					<div class="crew_info" style="border: 4px dotted #eeee; min-height:320px; min-width:100%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
 				</div>
             <!-- 크루 상세 정보 끝 -->
 
          </div>
          <!--// 본문 중단1 영역 -->
          <!-- 본문 중단2 영역 -->
-         <div class="crew_bbs_middle2">
+         <div class="crew_bbs_middle2" style="margin-top: 25px;">
             <h1 class="col-md-12 col-sm-12 col-xs-12">자유게시판</h1>
             <form class="form-horizontal clearfix" action="${pageContext.request.contextPath}/commPage/comm_crew_bbs.do" id="bbs_id" method="GET">
                <div class="col-sm-offset-8 col-sm-4" role="search">
@@ -170,7 +168,7 @@ float:left;
                               <td class="text-center col-sm-1 col-xs-1">${item.post_no}</td>
                               <td class="text-center col-sm-4 col-xs-1" style="text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
                               ${item.post_title}</td>
-                              <td class="text-center col-sm-1 col-xs-1"><i class="glyphicon glyphicon-heart" style="color:#FF685F; top:3px;">${item.post_like}</i></td>
+                              <td class="text-center col-sm-1 col-xs-1"><i class="glyphicon glyphicon-heart" style="color:#FF685F; top:3px;"></i> ${item.post_like}</td>
                               <td class="text-center col-sm-2 col-xs-1">${item.user_nick}</td>
                               <td class="text-center col-sm-3 col-xs-1">${item.post_createdate}</td>
                               <td class="text-center col-sm-1 col-xs-1">${item.post_hits}</td>
