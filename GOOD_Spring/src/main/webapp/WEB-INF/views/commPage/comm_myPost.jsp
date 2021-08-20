@@ -56,15 +56,15 @@
 			</div>
 
 			<!-- 리스트영역-->
-			<div class=" table-responsive">
-				<table class="table table-bordered table-hover">
+			<div class=" " style="">
+				<table class="table table-hover col-xs-12" style="table-layout: fixed; border: 0 0 1px 0 solid #ddd;">
 					<thead>
 						<tr class="active">
-							<th class="text-center">#</th>
-							<th class="text-center">제목</th>
-							<th class="text-center">카테고리</th>
-							<th class="text-center">작성일</th>
-							<th class="text-center">조회수</th>
+							<th class="text-center col-sm-1 col-xs-1">#</th>
+							<th class="text-center col-sm-4 col-xs-1">제목</th>
+							<th class="text-center col-sm-2 col-xs-1">카테고리</th>
+							<th class="text-center col-sm-3 col-xs-1">작성일</th>
+							<th class="text-center col-sm-1 col-xs-1">조회수</th>
 						</tr>
 					</thead>
 					<tbody id="list">
@@ -82,21 +82,21 @@
 									<c:if test="${list.dtype=='mycourse'}">
 										<tr style="cursor: pointer;"
 											onclick="location.href='${pageContext.request.contextPath}/commPage/comm_myCourseDetail.do?mycourse_no=${list.mycourse_no}'">
-											<td class="text-center">${status.index+1}</td>
-											<td class="text-center">${list.mycourse_name }</td>
-											<td class="text-center">나만의 코스</td>
-											<td class="text-center">${list.mycourse_createdate }</td>
-											<td class="text-center">${list.mycourse_hits }</td>
+											<td class="text-center col-sm-1 col-xs-1">${status.index+1}</td>
+											<td class="text-center col-sm-4 col-xs-1" style="text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">${list.mycourse_name }</td>
+											<td class="text-center col-sm-2 col-xs-1">나만의 코스</td>
+											<td class="text-center col-sm-3 col-xs-1">${list.mycourse_createdate }</td>
+											<td class="text-center col-sm-1 col-xs-1">${list.mycourse_hits }</td>
 										</tr>
 									</c:if>
 									<c:if test="${list.dtype=='crewpost'}">
 										<tr style="cursor: pointer;"
 											onclick="location.href='${pageContext.request.contextPath}/commPage/comm_crew_post.do?post_no=${list.post_no}'">
-											<td class="text-center">${status.index+1}</td>
-											<td class="text-center">${list.post_title}</td>
-											<td class="text-center">크루</td>
-											<td class="text-center">${list.post_createdate }</td>
-											<td class="text-center">${list.post_hits}</td>
+											<td class="text-center col-sm-1 col-xs-1">${status.index+1}</td>
+											<td class="text-center col-sm-4 col-xs-1" style="text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">${list.post_title}</td>
+											<td class="text-center col-sm-2 col-xs-1">크루</td>
+											<td class="text-center col-sm-3 col-xs-1">${list.post_createdate }</td>
+											<td class="text-center col-sm-1 col-xs-1">${list.post_hits}</td>
 										</tr>
 									</c:if>
 								</c:forEach>
