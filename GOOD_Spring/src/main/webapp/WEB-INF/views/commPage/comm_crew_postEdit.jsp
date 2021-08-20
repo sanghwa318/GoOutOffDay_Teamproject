@@ -8,9 +8,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css"
-	rel="stylesheet" type="text/css" />
 
 <style type="text/css">
 .main_header>h1 {

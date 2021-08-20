@@ -8,11 +8,52 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css"
-	rel="stylesheet" type="text/css" />
 
 <style type="text/css">
+.main_header>h1 {
+	position: relative;
+	text-align: center;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+}
+
+.main_header>h1:hover {
+	transform: translate(0, -10px);
+}
+
+.main_header>h1>span>img {
+	width: 3rem;
+	height: 3rem;
+	position: relative;
+	left: 5px;
+	bottom: 0px;
+}
+
+.fr-wrapper {
+	min-height: 400px
+}
+
+#editable {
+	margin-top: 30px;
+}
+
+input#title {
+	width: 500px;
+	height: 34px;
+}
+
+#editable, input#title {
+	margin-left: 30px;
+}
+
+input#title {
+	margin-top: 30px;
+}
+
+.btn-group {
+	margin: 30px 0;
+}
+
 .cke_contents {
 	min-height: 500px;
 }
