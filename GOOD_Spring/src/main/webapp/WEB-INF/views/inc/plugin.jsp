@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<!--     <script src="../plugins/lightbox/js/lightbox.min.js"></script> -->
 <script src="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
