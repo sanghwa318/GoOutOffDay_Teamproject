@@ -384,7 +384,7 @@ public class CommController {
 			Crew.setOrder(order);
 
 			// 데이터 조회하기
-			output = crewService.getCrewList(input);
+//			output = crewService.getCrewList(input);
 			
 
 		} catch (Exception e) {

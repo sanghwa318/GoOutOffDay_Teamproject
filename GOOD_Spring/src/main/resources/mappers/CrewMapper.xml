@@ -56,14 +56,14 @@
          </if>
 
          <if test="crew_category != null and crew_category != '' ">
-            OR crew_category LIKE CONCAT('%', #{crew_category}, '%')
+            AND crew_category LIKE CONCAT('%', #{crew_category}, '%')
          </if>
 
          <if test="crew_sinto != null and crew_sinto != '' ">
-            OR crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
+            AND crew_sinto LIKE CONCAT('%', #{crew_sinto}, '%')
          </if>
          <if test="crew_area != null and crew_area != '' ">
-            OR crew_area LIKE CONCAT('%', #{crew_area}, '%')
+            AND crew_area LIKE CONCAT('%', #{crew_area}, '%')
          </if>
          AND   user_info_user_out = "N" 
       </where>

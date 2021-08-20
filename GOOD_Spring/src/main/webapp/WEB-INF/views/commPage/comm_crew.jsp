@@ -223,7 +223,7 @@
 									</h4>
 									<h4 style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">크루 소개: ${item.crew_sinto}</h4>
 									<h4 >지역: ${item.crew_area}</h4>
-									<h4 >종류: ${item.crew_category}</h4>
+									<h4 style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">종류: ${item.crew_category}</h4>
 								</div>
 
 							</div>
