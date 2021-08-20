@@ -527,8 +527,8 @@ div#map1{
                                                    });
 
                                              //띄울 인포윈도우 정의
-                                             var iwContent = '<div style="padding-left:5px; height:60px;">'
-                                                   + '<h5>'+ '<b>' +position.stationName + '</b>' + '</h5>'
+                                             var iwContent = '<div style="padding-left:5px; height:70px;">'
+                                                   + '<h4>'+ '<b>' +position.stationName + '</b>' + '</h4>'
                                                    // + '<br/>'
                                                    + "이용 가능한 자전거 수 : "
                                                    + position.parkingBikeTotCnt + "대"
