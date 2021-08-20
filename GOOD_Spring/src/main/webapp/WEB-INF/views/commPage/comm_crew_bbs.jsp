@@ -170,7 +170,7 @@ float:left;
                               <td class="text-center col-sm-1 col-xs-1">${item.post_no}</td>
                               <td class="text-center col-sm-4 col-xs-1" style="text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
                               ${item.post_title}</td>
-                              <td class="text-center col-sm-1 col-xs-1"><i class="glyphicon glyphicon-heart" style="color:#FF685F; top:3px;"></i> 2</td>
+                              <td class="text-center col-sm-1 col-xs-1"><i class="glyphicon glyphicon-heart" style="color:#FF685F; top:3px;">${item.post_like}</i></td>
                               <td class="text-center col-sm-2 col-xs-1">${item.user_nick}</td>
                               <td class="text-center col-sm-3 col-xs-1">${item.post_createdate}</td>
                               <td class="text-center col-sm-1 col-xs-1">${item.post_hits}</td>
