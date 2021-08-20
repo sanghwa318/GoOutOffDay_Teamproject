@@ -15,9 +15,9 @@
         <!-- 메일발송 서버 비밀번호 -->
         <prop key="smtpPassword">ppub yuyp xvim iqno</prop>
         <!-- 업로드 디렉토리 (server.xml의 docBase값과 일치해야 함) -->
-        <prop key="uploadDir">D:/EZEN08/GOOD/workspace/upload</prop>
+        <prop key="uploadDir">/home/good/upload</prop>
         <!-- 업로드 디렉토리에 대한 WebPath(server.xml의 path값과 일치해야함) -->
-      	<prop key="uploadPath">/upload</prop> 
+      	<prop key="uploadPath">/good/upload</prop> 
     </util:properties>
     <!-- DB연동에 필요한 환경설정 값 -->
     <util:properties id="dbConfig">
@@ -32,7 +32,6 @@
         <prop key="dbCharset">utf8</prop>
         <!-- 데이터베이스 계정명 -->
    	 	<prop key="dbUsername">root</prop>
-    	<!-- <prop key="dbUsername">gooduser</prop> -->
         <!-- 데이터베이스 비밀번호 -->
          <prop key="dbPassword">root</prop>
          <!-- <prop key="dbPassword">123qwe!@#</prop> -->

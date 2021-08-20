@@ -197,7 +197,7 @@ h3 {
 					</div>
 					<div id="canvas-container6">
 						<h2 class="text-primary">
-							<em id="crewCnt">Create Total : ${output_count_MakeCrew }</em> <br />
+							<em id="crewCnt"></em> <br />
 						</h2>
 						<div style="width: 49%; display: inline-block;">
 							<h3>크루 생성 현황</h3>
