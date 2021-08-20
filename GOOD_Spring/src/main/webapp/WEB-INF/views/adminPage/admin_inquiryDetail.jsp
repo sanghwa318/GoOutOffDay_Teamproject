@@ -38,7 +38,7 @@
 					<span class="test01">관리자페이지 </span>
 				</h1>
 			</div>
-			<form class="col-md-10 col-md-offset-1" id="detailform" action="${pageContext.request.contextPath}/adminPage/admin_inquiryanswerOk.do"
+			<form class="col-md-12 col-md-offset-1" id="detailform" action="${pageContext.request.contextPath}/adminPage/admin_inquiryanswerOk.do"
 				method="post">
 			<!-- 본문 상단 영역 -->
 			<div class="admin_inquiryDetail-header">
