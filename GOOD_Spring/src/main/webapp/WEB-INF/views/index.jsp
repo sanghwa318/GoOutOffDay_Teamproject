@@ -47,6 +47,10 @@ h4 {
 }
 
 /** 본문 영역 공통 **/
+.thumbnail {
+	padding: 0;
+}
+
 .good_list .header {
 	margin-bottom: 10px;
 }
@@ -206,11 +210,11 @@ h4 {
 }
 
 .owl-carousel .owl-prev {
-	left: -20px;
+	left: -18px;
 }
 
 .owl-carousel .owl-next {
-	right: -20px;
+	right: -18px;
 }
 
 .owl-theme .owl-nav [class*=owl-] {

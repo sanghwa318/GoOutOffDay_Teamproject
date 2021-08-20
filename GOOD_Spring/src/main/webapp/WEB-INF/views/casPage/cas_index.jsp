@@ -195,7 +195,7 @@ html, body {
 	width: 40px;
 	cursor: pointer;
 	position: absolute;
-	top: 40% !important;
+	top: 43% !important;
 	border: 1px solid rgba(102, 109, 117, 0.32);
 	box-shadow: 0 2px 2px rgba(102, 109, 117, 0.32);
 	transition: all 0.3s ease;
@@ -221,11 +221,11 @@ html, body {
 }
 
 .owl-carousel .owl-prev {
-	left: -20px;
+	left: -18px;
 }
 
 .owl-carousel .owl-next {
-	right: -20px;
+	right: -18px;
 }
 
 .owl-theme .owl-nav [class*=owl-] {

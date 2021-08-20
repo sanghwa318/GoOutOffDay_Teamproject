@@ -399,7 +399,13 @@ public class CasController {
 
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) WebHelper.getSession("login_info");
-
+		
+		
+		if (loginInfo == null) {
+			return WebHelper.getJsonWarning("로그인 정보 없음");
+		} 
+		
+		
 		CAS Info = new CAS();
 		Info.setDIV_COL(catid);
 		Info.setSVCID(svcid);
@@ -411,7 +417,7 @@ public class CasController {
 		/** 로그 저장을 위한 구문 **/
 		// 로그 모델
 		UserTrafficLog loginput = new UserTrafficLog();
-
+		
 		try {
 
 			if (bookMarkService.BookMarkUniqueCheck(input) >= 1) {

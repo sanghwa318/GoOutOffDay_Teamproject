@@ -378,7 +378,10 @@ public class WalkController {
 //		int intset = Integer.parseInt(svcid);
 		BookMark input = new BookMark();
 		Member loginInfo = (Member) webHelper.getSession("login_info");
-
+		if (loginInfo == null) {
+			return webHelper.getJsonWarning("로그인 정보 없음");
+		} 
+		
 		WalkCourse Info = new WalkCourse();
 		Info.setCOURSE_CATEGORY_NM(catid);
 		Info.setCOURSE_NAME(svcid);

@@ -83,7 +83,7 @@ em {
 #stats_login, #stats_join {
 	padding-top: 10px;
 }
-#caChart{
+canvas {
 	margin-right: 10px;
 }
 </style>
