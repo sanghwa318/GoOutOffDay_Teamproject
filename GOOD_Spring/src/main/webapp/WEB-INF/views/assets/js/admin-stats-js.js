@@ -47,7 +47,7 @@
 						}
 					});
 					
-					$("#loginCnt").html("Total : "+data.loginCnt)
+					$("#loginCnt").html("Login Total : "+data.loginCnt+" 명")
 				}
 			})
 			$('#login-interval').on('change', function(){
@@ -95,7 +95,7 @@
   							responsive: true,
 						}
 					});
-					$("#loginCnt").html("Total : "+data.loginCnt)
+					$("#loginCnt").html("Login Total : "+data.loginCnt+" 명")
 				}
 			})
 			})
@@ -144,7 +144,7 @@
 						}
 					});
 					
-					$("#joinCnt").html("Total : "+data.joinCnt)
+					$("#joinCnt").html("Join Total : "+data.joinCnt+" 명")
 				}
 			})
 			//기간설정
@@ -193,7 +193,7 @@
   							responsive: true,
 						}
 					});
-					$("#joinCnt").html("Total : "+data.joinCnt)
+					$("#joinCnt").html("Join Total : "+data.joinCnt+" 명")
 				}
 			})
 			})
@@ -259,8 +259,8 @@
 							$("#TOP_Keyword").html("검색 기록이 없습니다.")
 							$("#keywordCnt").html("Total : 0번")
 						}else{
-							$("#TOP_Keyword").html("TOP Keyword: "+data.output_Top_keyword.search_keyword)
-							$("#keywordCnt").html("Total : "+data.output_Top_keyword.log_cnt+"번")
+							$("#TOP_Keyword").html("TOP Keyword : "+data.output_Top_keyword.search_keyword)
+							$("#keywordCnt").html("Search Total : "+data.output_Top_keyword.log_cnt+" 번")
 						}
 			}
 		})
@@ -327,8 +327,8 @@
 								$("#TOP_Keyword").html("검색 기록이 없습니다.")
 								$("#keywordCnt").html("Total : 0번")
 							}else{
-								$("#TOP_Keyword").html("TOP Keyword: "+data.output_Top_keyword.search_keyword)
-								$("#keywordCnt").html("Total : "+data.output_Top_keyword.log_cnt+"번")
+								$("#TOP_Keyword").html("TOP Keyword : "+data.output_Top_keyword.search_keyword)
+								$("#keywordCnt").html("Search Total : "+data.output_Top_keyword.log_cnt+" 번")
 							}
 				}
 			})
@@ -411,8 +411,8 @@
   						responsive: true,
 					}
 				});
-				$("#bmCnt").html("BookMark Total : "+data.output_count_bookmark)
-				$("#elCnt").html("ExLink Total : "+data.output_count_ExLink)
+				$("#bmCnt").html("Add BookMark Total : "+data.output_count_bookmark+" 번")
+				$("#elCnt").html("Moved ExLink Total : "+data.output_count_ExLink+" 명")
 			}
 			});
 		//기간 설정
@@ -496,8 +496,8 @@
   						responsive: true,
 					}
 				});
-				$("#bmCnt").html("BookMark Total : "+data.output_count_bookmark)
-				$("#elCnt").html("ExLink Total : "+data.output_count_ExLink)
+				$("#bmCnt").html("Add BookMark Total : "+data.output_count_bookmark+" 번")
+				$("#elCnt").html("Moved ExLink Total : "+data.output_count_ExLink+" 명")
 			}
 			});
 		})
@@ -576,8 +576,8 @@
   						responsive: true,
 					}
 				});
-				$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord)
-				$("#mmCnt").html("MakMap Total : "+data.output_count_MakMap)
+				$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord+" 번")
+				$("#mmCnt").html("MakMap Total : "+data.output_count_MakMap+" 명")
 			}
 		})
 		//기간설정
@@ -659,8 +659,8 @@
   								responsive: true,
 							}
 						});
-						$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord)
-						$("#mmCnt").html("MakMap Total : "+data.output_count_MakMap)
+						$("#wrCnt").html("WalkRecord Total : "+data.output_count_WalkRecord+" 번")
+						$("#mmCnt").html("MakMap Total : "+data.output_count_MakMap+" 명")
 					}
 				})
 		})
@@ -747,7 +747,7 @@
   						responsive: true,
 					}
 				});
-				$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew)			
+				$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew+" 개")			
 			}
 		})
 		//기간설정
@@ -837,7 +837,7 @@
   							responsive: true,
 						},
 					});
-					$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew)			
+					$("#crewCnt").html("Create Total : "+data.output_count_MakeCrew+" 개")			
 				}
 			})
 		})

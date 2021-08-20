@@ -13,6 +13,10 @@ h3, h2 {
 	text-align: center;
 }
 
+.item p {
+	text-align: center;
+}
+
 .main_header>h1 {
 	position: relative;
 	text-align: center;
@@ -24,7 +28,7 @@ h3, h2 {
 	width: 99%;
 	height: 230px;
 	min-height: 99%;
-	margin-top: 10px;
+	margin: 10px;
 }
 
 .chart {
@@ -104,16 +108,16 @@ em {
 			<div id="stats_login" class="col-sm-12 col-md-6 item">
 				<div class="loginstats clearfix thumbnail">
 					<h2>로그인 현황</h2>
-					<div class="parent">
-						<div class="form-group pull-right">
-							<select class="form-control" id="login-interval">
-								<option value="day">당일</option>
-								<option value="week">한주</option>
-								<option value="month">한달</option>
-							</select>
-						</div>
-					</div>
 					<div id="canvas-container1">
+						<div class="parent">
+							<div class="form-group pull-right">
+								<select class="form-control" id="login-interval">
+									<option value="day">당일</option>
+									<option value="week">한주</option>
+									<option value="month">한달</option>
+								</select>
+							</div>
+						</div>
 						<h3 class="text-primary">
 							<em id="loginCnt"></em>
 						</h3>
@@ -129,16 +133,16 @@ em {
 			<div id="stats_join" class="col-sm-12 col-md-6 item">
 				<div class="joinstats clearfix thumbnail">
 					<h2>회원가입 현황</h2>
-					<div class="parent">
-						<div class="form-group pull-right">
-							<select class="form-control" id="join-interval">
-								<option value="day">당일</option>
-								<option value="week">한주</option>
-								<option value="month">한달</option>
-							</select>
-						</div>
-					</div>
 					<div id="canvas-container2">
+						<div class="parent">
+							<div class="form-group pull-right">
+								<select class="form-control" id="join-interval">
+									<option value="day">당일</option>
+									<option value="week">한주</option>
+									<option value="month">한달</option>
+								</select>
+							</div>
+						</div>
 						<h3 class="text-primary">
 							<em id="joinCnt"></em>
 						</h3>
@@ -154,16 +158,16 @@ em {
 			<div id="stats_keyword" class="col-sm-12 col-md-6 item">
 				<div class="keywordstats clearfix thumbnail">
 					<h2>인기검색어</h2>
-					<div class="parent">
-						<div class="form-group pull-right">
-							<select class="form-control" id="keyword-interval">
-								<option value="day">당일</option>
-								<option value="week">주간</option>
-								<option value="month">한달</option>
-							</select>
-						</div>
-					</div>
 					<div id="canvas-container3">
+						<div class="parent">
+							<div class="form-group pull-right">
+								<select class="form-control" id="keyword-interval">
+									<option value="day">당일</option>
+									<option value="week">주간</option>
+									<option value="month">한달</option>
+								</select>
+							</div>
+						</div>
 						<h3 class="text-primary">
 							<em id="TOP_Keyword"></em> <br /> <em id="keywordCnt"></em>
 						</h3>
@@ -179,16 +183,16 @@ em {
 			<div id="stats_BMEL" class="col-sm-12 col-md-6 item">
 				<div class="bookmarkstats clearfix thumbnail">
 					<h2>찜추가현황 &amp; 바로가기이용현황</h2>
-					<div class="parent">
-						<div class="form-group pull-right">
-							<select class="form-control" id="bmel-interval">
-								<option value="day">당일</option>
-								<option value="week">주간</option>
-								<option value="month">한달</option>
-							</select>
-						</div>
-					</div>
 					<div id="canvas-container4">
+						<div class="parent">
+							<div class="form-group pull-right">
+								<select class="form-control" id="bmel-interval">
+									<option value="day">당일</option>
+									<option value="week">주간</option>
+									<option value="month">한달</option>
+								</select>
+							</div>
+						</div>
 						<h3 class="text-primary">
 							<em id="bmCnt"></em> <br /> <em id="elCnt"></em>
 						</h3>
@@ -211,16 +215,16 @@ em {
 			<div id="stats_WRMM" class="col-sm-12 col-md-6 item">
 				<div class="walkstats clearfix thumbnail">
 					<h2>걷기기록이용자수 &amp; 코스생성자수</h2>
-					<div class="parent">
-						<div class="form-group pull-right">
-							<select class="form-control" id="wrmm-interval">
-								<option value="day">당일</option>
-								<option value="week">주간</option>
-								<option value="month">한달</option>
-							</select>
-						</div>
-					</div>
 					<div id="canvas-container5">
+						<div class="parent">
+							<div class="form-group pull-right">
+								<select class="form-control" id="wrmm-interval">
+									<option value="day">당일</option>
+									<option value="week">주간</option>
+									<option value="month">한달</option>
+								</select>
+							</div>
+						</div>
 						<h3 class="text-primary">
 							<em id="wrCnt"></em> <br /> <em id="mmCnt"></em>
 						</h3>
@@ -243,16 +247,16 @@ em {
 			<div id="stats_crew" class="col-sm-12 col-md-6 item">
 				<div class="crewstats clearfix thumbnail">
 					<h2>크루생성현황 &amp; 종류</h2>
-					<div class="parent">
-						<div class="form-group pull-right" id="crew-interval">
-							<select class="form-control">
-								<option value="day">당일</option>
-								<option value="week">주간</option>
-								<option value="month">한달</option>
-							</select>
-						</div>
-					</div>
 					<div id="canvas-container6">
+						<div class="parent">
+							<div class="form-group pull-right" id="crew-interval">
+								<select class="form-control">
+									<option value="day">당일</option>
+									<option value="week">주간</option>
+									<option value="month">한달</option>
+								</select>
+							</div>
+						</div>
 						<h3 class="text-primary">
 							<em id="crewCnt"></em>
 						</h3>
