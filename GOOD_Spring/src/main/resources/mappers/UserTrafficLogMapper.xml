@@ -465,7 +465,7 @@
 	<select id="ExLinkCount"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultType="int">		
-		WITH user_no AS (SELECT count(user_info_user_no), user_info_user_no
+		WITH user_no AS (SELECT count(user_info_user_no), distinct(user_info_user_no)
 		FROM
 		user_traffic_log
 		WHERE log_content like 'addBookmark'
@@ -507,7 +507,7 @@
 	<select id="ExLinkHourCount"
 		parameterType="study.spring.goodspring.model.UserTrafficLog"
 		resultMap="UserTrafficLogMap">
-		WITH user_no AS (SELECT count(user_info_user_no), user_info_user_no
+		WITH user_no AS (SELECT count(user_info_user_no), distinct(user_info_user_no)
 		FROM
 		user_traffic_log
 		WHERE log_content like 'addBookmark'

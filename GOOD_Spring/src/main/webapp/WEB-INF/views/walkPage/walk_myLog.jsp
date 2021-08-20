@@ -4,7 +4,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<html>
+<head>
+</head>
+<style>
+@media(max-width: 660px){
+#chart_div{
+ width: 100%;
+}
+}
+@media(min-width: 680px){
+#chart_div{
+width: 33%;
+}
+}
+</style>
 <div class="jumbotron" style="background-color: #fefbfe">
 	<div class="tab-content">
 		<div class="tab-pane fade in active" id="my">
@@ -13,13 +27,13 @@
 
 
 			<h2>내 기록</h2>
-			<div style="width: 30%; display: inline-block;">
+			<div id="chart_div" style=" display: inline-block;">
 				<canvas id="myChart1" height="400"></canvas>
 			</div>
-			<div style="width: 30%; display: inline-block;">
+			<div id="chart_div" style=" display: inline-block;">
 				<canvas id="myChart2"  height="400"></canvas>
 			</div>
-			<div style="width: 30%; display: inline-block;">
+			<div id="chart_div" style=" display: inline-block;">
 				<canvas id="myChart3" height="400"></canvas>
 			</div>
 
