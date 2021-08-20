@@ -274,7 +274,7 @@
 
 	<!-- 문화체육 -->
 	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시 -->
-	<resultMap id="CASMap"
+	<resultMap id="CasOtherMap"
 		type="study.spring.goodspring.model.CAS">
 
 		<result property="SVCID" column="SVCID" />
@@ -293,7 +293,7 @@
 
 	<!-- 다중행 조회를 위한 기능 정의 -->
 	<select id="selectListCAS"
-		parameterType="study.spring.goodspring.model.CAS" resultMap="CASMap">
+		parameterType="study.spring.goodspring.model.CAS" resultMap="CasOtherMap">
 		SELECT SVCID,
 		MAXCLASSNM,
 		MINCLASSNM,
@@ -306,7 +306,7 @@
 		AREANM,
 		TELNO
 		FROM
-		CAS
+		cas
 
 		<where>
 			<if test="MAXCLASSNM != null and MAXCLASSNM != ''">
@@ -347,7 +347,7 @@
 	</select>
 	<select id="selectCASCountAll"
 		parameterType="study.spring.goodspring.model.CAS" resultType="int">
-		SELECT COUNT(*) FROM CAS
+		SELECT COUNT(*) FROM cas
 		<where>
 			<if test="MAXCLASSNM != null and MAXCLASSNM != ''">
 				MAXCLASSNM LIKE concat('%', #{MAXCLASSNM}, '%')
