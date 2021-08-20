@@ -25,7 +25,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/plugins/ajax/ajax_helper.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sweetalert/sweetalert2.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/lightbox/css/lightbox.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
 <link rel="stylesheet"

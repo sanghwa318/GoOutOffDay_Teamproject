@@ -20,4 +20,4 @@
 <script src="${pageContext.request.contextPath}/assets/plugins/ajax/ajax_helper.js"></script>
     
 <script src="${pageContext.request.contextPath}/assets/plugins/ajax-form/jquery.form.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6b1199a25d6406101fb441c0afa0e00&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c504fbbd3f5427b8ac42aa7cf3e0b81&libraries=services,clusterer,drawing"></script>
