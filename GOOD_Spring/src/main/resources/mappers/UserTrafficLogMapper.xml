@@ -248,7 +248,7 @@
 		<if test="interval=='week'">
 			SELECT *
 			FROM (
-			SELECT date(log_datetime) as log_date, count(*) as
+			SELECT date(create_datetime) as log_date, count(*) as
 			log_cnt
 			FROM user_info
 			WHERE
@@ -264,7 +264,7 @@
 		<if test="interval=='month'">
 			SELECT *
 			FROM (
-			SELECT date(log_datetime) as log_date, count(*) as
+			SELECT date(create_datetime) as log_date, count(*) as
 			log_cnt
 			FROM user_info
 			WHERE
