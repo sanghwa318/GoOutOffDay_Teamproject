@@ -15,19 +15,9 @@
         <!-- 메일발송 서버 비밀번호 -->
         <prop key="smtpPassword">ppub yuyp xvim iqno</prop>
         <!-- 업로드 디렉토리 (server.xml의 docBase값과 일치해야 함) -->
-<<<<<<< HEAD
-        <prop key="uploadDir">/home/user/goodspring/upload</prop>
-=======
         <prop key="uploadDir">D:/EZEN08/GOOD/workspace/upload</prop>
- 		<!-- <prop key="uploadDir">/home/student/SpringHelper/upload</prop> -->
->>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
         <!-- 업로드 디렉토리에 대한 WebPath(server.xml의 path값과 일치해야함) -->
-<<<<<<< HEAD
-        <prop key="uploadPath">/goodspring/upload</prop>
-=======
       	<prop key="uploadPath">/upload</prop> 
-     	<!--  <prop key="uploadPath">/SpringHelper/upload</prop> -->
->>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
     </util:properties>
     <!-- DB연동에 필요한 환경설정 값 -->
     <util:properties id="dbConfig">
@@ -36,28 +26,16 @@
         <!-- 데이터베이스 포트번호 -->
         <prop key="dbPort">3306</prop>
         <!-- 데이터베이스 이름 -->
-<<<<<<< HEAD
         <prop key="dbName">good</prop>
-=======
-     	 <prop key="dbName">good</prop>
         <!-- <prop key="dbName">good</prop> -->
->>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
         <!-- 데이터베이스 문자셋 -->
         <prop key="dbCharset">utf8</prop>
         <!-- 데이터베이스 계정명 -->
-<<<<<<< HEAD
-        <prop key="dbUsername">good</prop>
-=======
-   	 <prop key="dbUsername">root</prop>
+   	 	<prop key="dbUsername">root</prop>
     	<!-- <prop key="dbUsername">gooduser</prop> -->
->>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
         <!-- 데이터베이스 비밀번호 -->
-<<<<<<< HEAD
-        <prop key="dbPassword">good</prop>
-=======
          <prop key="dbPassword">root</prop>
          <!-- <prop key="dbPassword">123qwe!@#</prop> -->
->>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
         <!-- Mapper 파일들이 위치할 '/src/main/resources' 하위의 경로 -->
         <prop key="mapperPath">/mappers/**/*Mapper.xml</prop>
     </util:properties>
