@@ -37,7 +37,7 @@ margin-top:-30px;
 		<div class="container">
 			<h1 class="page-header">마이페이지</h1>
 			<div class="row" id="myPage_row">
-				<div class="col-md-3 col-md-offset-1 col-xs-3  profileimage"
+				<div class= "col-sm-3 col-md-3 col-md-offset-1 col-xs-3  profileimage"
 					style="width: 230px">
 					<form id="uploadForm">
 						<div class="form-group">
@@ -57,7 +57,7 @@ margin-top:-30px;
 							value="${sessionScope.principal.id}" />
 					</form>
 				</div>
-				<div class="col-md-7 col-md-offset-1 col-xs-12 col-xs-offset-1 profile_info">
+				<div class="col-sm-6 col-md-7 col-md-offset-1 col-xs-12 col-xs-offset-1 profile_info">
 					<h4>ID: ${login_info.getUser_id()}</h4>
 					<h4>닉네임: ${login_info.getUser_nick()}</h4>
 					<h4>

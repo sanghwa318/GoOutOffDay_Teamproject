@@ -87,9 +87,9 @@ float:left;
          <!-- //본문 상단 영역 -->
          <!-- 본문 중단1 영역 -->
          <div class="crew_ibbs_middle1">
-            <div id="crew_middle" class="col-md-4 col-xs-12 col-sm-5">
-               <div class="form-group">
-                  <span class="title-img"><img
+            <div id="crew_middle" class="col-md-5 col-xs-12 col-sm-5" >
+               <div class="form-group" >
+                  <span class="title-img"><img 
                      src="${output.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
                   </span>
                   <div class="col-xs-12" style="display:block">
@@ -100,9 +100,9 @@ float:left;
                </div>
             </div>
             <!-- 크루 상세 정보  -->
-            <div class="col-md-6 col-sm-5 col-xs-12 col-md-offset-1 col-sm-offset-1" style="margin-top:-2%">
+            <div class="col-md-6 col-sm-5 col-xs-12" style="margin-top:-2%">
 					<h2>크루 공지사항(설명)</h2>
-					<div class="col-md-3 col-sm-4 crew_info" style="border: 4px dotted #eeee; min-height:130px; min-width:100%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
+					<div class="col-md-3 col-sm-4 crew_info" style="border: 4px dotted #eeee; min-height:200px; min-width:100%"><p style="font-size:30px; margin:1% 0 0 1%">${output.crew_dinto}</p></div>
 				</div>
             <!-- 크루 상세 정보 끝 -->
 
