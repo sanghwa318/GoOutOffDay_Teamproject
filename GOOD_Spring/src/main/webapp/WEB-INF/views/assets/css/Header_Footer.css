@@ -146,6 +146,7 @@ footer .container {
 	}
 	div#header form.navbar-form {
 		margin-bottom: 0 !important;
+		border-left: 0 !important;
 	}
 	div#header #h_logo>a {
 		display: block;
