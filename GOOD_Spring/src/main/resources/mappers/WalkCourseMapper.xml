@@ -221,7 +221,13 @@
 			</choose>
 		</where>
 		<if test="order == 'distance'">
-			ORDER BY REGEXP_REPLACE(DISTANCE,'[a-z]','') ASC
+			ORDER BY
+			CASE
+			WHEN INSTR(DISTANCE,"Km") > -1 THEN
+			CAST(REPLACE(DISTANCE,"Km","") AS DECIMAL(7 ,4))
+			WHEN INSTR(DISTANCE,"km") > -1 THEN
+			CAST(REPLACE(DISTANCE,"km","") AS DECIMAL(7 ,4))
+			END ASC
 		</if>
 		<if test="order == 'time'">
 			ORDER BY

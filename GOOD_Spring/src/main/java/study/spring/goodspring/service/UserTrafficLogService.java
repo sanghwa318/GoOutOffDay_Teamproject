@@ -3,7 +3,6 @@ package study.spring.goodspring.service;
 import java.util.List;
 
 import study.spring.goodspring.model.Crew;
-import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.UserTrafficLog;
 
 public interface UserTrafficLogService {
@@ -32,14 +31,8 @@ public interface UserTrafficLogService {
 	
 	public void addKeyword(UserTrafficLog input) throws Exception;
 	
-	public int login_count(UserTrafficLog input) throws Exception;
-
-	public List<UserTrafficLog> loginHourCount(UserTrafficLog input) throws Exception;
-
 	public List<UserTrafficLog> loginCountInterval(UserTrafficLog input) throws Exception;
 	
-	public int join_count(Member input) throws Exception;
-
 	public List<UserTrafficLog> joinHourCount(UserTrafficLog input) throws Exception;
 	
 	public UserTrafficLog TopSearchKeyword(UserTrafficLog input) throws Exception;

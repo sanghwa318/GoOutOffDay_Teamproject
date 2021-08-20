@@ -57,12 +57,12 @@
 	<select id="MyListBookMark"
 		parameterType="study.spring.goodspring.model.BookMark"
 		resultMap="BookMarkMap">
-		WITH unique_course AS (
-		SELECT ANY_VALUE(CPI_IDX) as CPI_IDX,
-		COURSE_NAME, COURSE_CATEGORY_NM, SOUTH_NORTH_DIV_NM, AREA_GU,
-		LEAD_TIME, DISTANCE,
+		SELECT *
+		FROM (SELECT min(CPI_IDX) as CPI_IDX, COURSE_NAME, COURSE_CATEGORY_NM,
+		SOUTH_NORTH_DIV_NM, AREA_GU, LEAD_TIME, DISTANCE,
 		CASE COURSE_LEVEL
 		WHEN "1" THEN "초급"
+<<<<<<< HEAD
 		WHEN "2" THEN
 		"중급"
 		WHEN
@@ -79,6 +79,15 @@
 		unique_course u ON b.service_id = u.COURSE_NAME
 		LEFT JOIN CAS c ON
 		b.service_id = c.SVCID
+=======
+		WHEN "2" THEN "중급"
+		WHEN "3" THEN "고급" END AS COURSE_LEVEL
+		FROM good.seoulgil_walk_course
+		GROUP BY COURSE_NAME, COURSE_CATEGORY_NM, SOUTH_NORTH_DIV_NM, AREA_GU,
+		LEAD_TIME, DISTANCE, COURSE_LEVEL) w
+		RIGHT JOIN good.bookmark b ON w.COURSE_NAME = b.service_id
+		LEFT JOIN good.cas c ON b.service_id = c.SVCID
+>>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
 		<where>
 			user_info_user_no =
 			#{user_info_user_no}

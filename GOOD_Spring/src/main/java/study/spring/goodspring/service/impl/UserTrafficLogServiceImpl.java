@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.Crew;
-import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.UserTrafficLog;
 import study.spring.goodspring.service.UserTrafficLogService;
 
@@ -209,51 +208,11 @@ public class UserTrafficLogServiceImpl implements UserTrafficLogService {
 	}
 
 	@Override
-	public int login_count(UserTrafficLog input) throws Exception {
-		int result = 0;
-
-		try {
-			result = sqlSession.selectOne("UserTrafficLogMapper.logincount", input);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
-		}
-		return result;
-	}
-
-	@Override
-	public List<UserTrafficLog> loginHourCount(UserTrafficLog input) throws Exception {
-		List<UserTrafficLog> result = null;
-
-		try {
-			result = sqlSession.selectList("UserTrafficLogMapper.loginHourCount", input);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
-		}
-		return result;
-	}
-
-	@Override
 	public List<UserTrafficLog> loginCountInterval(UserTrafficLog input) throws Exception {
 		List<UserTrafficLog> result = null;
 
 		try {
 			result = sqlSession.selectList("UserTrafficLogMapper.loginCountInterval", input);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
-		}
-		return result;
-	}
-
-	
-	@Override
-	public int join_count(Member input) throws Exception {
-		int result = 0;
-
-		try {
-			result = sqlSession.selectOne("UserTrafficLogMapper.joincount", input);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");

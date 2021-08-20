@@ -18,7 +18,12 @@
 	<appender name="rollingFile"
 		class="org.apache.log4j.RollingFileAppender">
 		<!-- 로그 파일 생성위치 -->
+<<<<<<< HEAD
 		<param name="file" value="/home/user/goodspring/log/web.log" /> 
+=======
+		<!-- <param name="file" value="/home/student/SpringHelper/log/web.log" />  -->
+		 <param name="file" value="log/web.log" />
+>>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
 		<param name="Append" value="true" />
 		<!-- 로그 파일 하나당 사이즈 100m -->
 		<param name="MaxFileSize" value="100mb" />
@@ -37,7 +42,12 @@
 		<!-- 에러와 관련된 로그만 기록하도록 지정 -->
 		<param name="Threshold" value="ERROR" />
 		<!-- 로그 파일 생성위치 -->
+<<<<<<< HEAD
  		<param name="File" value="/home/user/goodspring/log/error.log" /> 
+=======
+		<param name="File" value="/home/student/SpringHelper/log/error.log" />
+ 		<!-- <param name="File" value="log/error.log" /> --> 
+>>>>>>> branch 'main' of git@github.com:ITPAPER/ezen2021_05.git
 		<!-- 하루에 한 개씩 날짜를 적용하며 파일이름이 생성되도록 함 -->
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyMMdd" />

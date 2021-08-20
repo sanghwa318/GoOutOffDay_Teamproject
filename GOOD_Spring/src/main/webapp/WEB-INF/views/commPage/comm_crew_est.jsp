@@ -93,6 +93,7 @@ label {
 #crewname_unique_check {
 margin-bottom: 5px;
 }
+
 </style>
 
 </head>
@@ -111,7 +112,7 @@ margin-bottom: 5px;
 			<form role="form" class="form-crew" method="post" id='est_form'	enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/commPage/comm_crew_est_ok">
 					<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="col-md-4 col-xs-5 col-sm-4 ">
+					<div class="col-md-4 col-xs-12 col-sm-4 ">
 						<label for="crew_name" style="font-size: 20px;">크루 이름</label> 
 						<input type="text" id="crew_name" class="form-control crew_input pull-left"
 							placeholder="한글로 입력하세요." name="crew_name" value="${crew_name}"
@@ -119,7 +120,7 @@ margin-bottom: 5px;
 							<input type="hidden" name="crewname_unique_check" value="" />
 						<button type="button" id="crewname_unique_check" class="btn btn-default" style="padding:6px; margin:0; margin-top:-1px;">중복확인</button>
 						</div>
-					<div class="col-md-4 col-xs-3 col-sm-4">
+					<div class="col-md-4 col-xs-12 col-sm-4">
 						<label for="crew_category" style="font-size: 20px;">크루 종류</label>
 						<div>
 						<select class="form-control " id="crew_category" name="crew_category"
@@ -131,7 +132,7 @@ margin-bottom: 5px;
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4 col-xs-3 col-sm-4">
+					<div class="col-md-4 col-xs-12 col-sm-4">
 						<label for="crew_area" class=" control-label"
 							style="font-size: 20px;">지역</label>
 							<select class="form-control " id="crew_area" name="crew_area"
@@ -167,16 +168,17 @@ margin-bottom: 5px;
 				</div>
 					
 					<div class="col-xs-12 col-sm-12 col-md-12">
-					<div class="col-sm-4 crew_pp col-md-4 col-xs-5">
+					<div class="col-sm-4 crew_pp col-md-4 col-xs-6 text-center">
 						<input type="image" id="img__wrap" name="crew_photo" id="crew_photo"
 							src='${pageContext.request.contextPath}/assets/img/profile_default.png'
-							 width="50%" height="50%" style="border-radius: 100%; margin-top:30px;" />
+							 width="70%" height="50%" style="border-radius: 100%; margin-top:30px;" />
+							 <br>
 							<label for="img__preview" class=" btn btn-default" id="crew_insert"
 							style="font-size: 20px;">크루 사진 등록</label> <input type="file"
-							name="crew_photo" id="img__preview" class="hidden" />
+							name="crew_photo" id="img__preview" class="hidden"  />
 					</div>
 					
-					<div class="col-md-7 col-sm-8 col-xs-7">
+					<div class="col-md-7 col-sm-8 col-xs-6">
 						<h3 class="header">크루 간단 소개</h3>
 						<textarea class="form-control" rows="5" id="crew_sinto"
 							name="crew_sinto"
