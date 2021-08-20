@@ -24,7 +24,7 @@
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">1:1 문의</h1>
-			<form class="form-group col-md-10 col-md-offset-1">
+			<form class="form-group col-md-12 col-md-offset-1">
 				<div class="row">
 					<div class="col-md-8">
 						<label for="QnA_title">제목</label> <input type="text"
