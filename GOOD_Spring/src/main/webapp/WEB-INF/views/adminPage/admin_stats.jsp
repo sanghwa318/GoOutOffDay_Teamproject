@@ -7,7 +7,7 @@
 <!doctype html>
 <html>
 <head>
-<%@ include file="../inc/head.jsp"%>
+<%@ include file="/WEB-INF/views//inc/head.jsp"%>
 <style>
 h3 {
 	text-align: center;
@@ -31,14 +31,14 @@ h3 {
 	<!-- 푸터빼고 감싸주세요 -->
 	<div class="wrapper">
 		<!-- 공통 헤더 -->
-		<%@ include file="../inc/Header.jsp"%>
+		<%@ include file="/WEB-INF/views//inc/Header.jsp"%>
 		<!-- //공통 헤더 -->
 		<!-- 컨테이너 -->
 		<div class="container">
 			<!-- 대제목 -->
 			<div class="row main_header">
 				<h1 class="page-header page-title" id="cas_header"
-					onclick="location.href='../adminPage/admin_index.jsp'"
+					onclick="location.href='${pageContext.request.contextPath}/adminPage/admin_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">관리자페이지 </span>
 				</h1>
@@ -219,10 +219,10 @@ h3 {
 	</div>
 	<!-- //푸터빼고 감싸주세요 -->
 	<!-- 공통 푸터 -->
-	<%@ include file="../inc/Footer.jsp"%>
+	<%@ include file="/WEB-INF/views//inc/Footer.jsp"%>
 	<!-- //공통 푸터 -->
 	<!-- js -->
-	<%@ include file="../inc/plugin.jsp"%>
+	<%@ include file="/WEB-INF/views//inc/plugin.jsp"%>
 	<!-- // js -->
 	<script>
 		
