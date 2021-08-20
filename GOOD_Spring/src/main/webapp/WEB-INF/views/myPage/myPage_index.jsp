@@ -17,6 +17,15 @@
 .profileimage {
 	padding-top: 30px;
 }
+
+@media (max-width:400px) {
+#myPage_row{
+margin-left:12%;
+}
+#myPage_row .profile_info{
+margin-top:-30px;
+}
+
 </style>
 </head>
 <body>
@@ -27,7 +36,7 @@
 		<!-- 본문영역 -->
 		<div class="container">
 			<h1 class="page-header">마이페이지</h1>
-			<div class="row">
+			<div class="row" id="myPage_row">
 				<div class="col-md-3 col-md-offset-1 col-xs-3  profileimage"
 					style="width: 230px">
 					<form id="uploadForm">
@@ -48,7 +57,7 @@
 							value="${sessionScope.principal.id}" />
 					</form>
 				</div>
-				<div class="col-md-7 col-md-offset-1 col-xs-6 col-xs-offset-1 profile_info">
+				<div class="col-md-7 col-md-offset-1 col-xs-12 col-xs-offset-1 profile_info">
 					<h4>ID: ${login_info.getUser_id()}</h4>
 					<h4>닉네임: ${login_info.getUser_nick()}</h4>
 					<h4>
