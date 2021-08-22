@@ -38,7 +38,7 @@ $(function() {
             type: 'post',
             data: { mycourse_no },
             success: function(data) {
-
+				var bounds = new kakao.maps.LatLngBounds();    
                 for (var i = 0; i < data.courseName.length; i++) {
                     linepathLength = data.courseName.length;
 
@@ -46,13 +46,12 @@ $(function() {
                     lon[i] = parseFloat(data.courseName[i].lon);
 
                     linepath[i] = new kakao.maps.LatLng(parseFloat(data.courseName[i].lat), parseFloat(data.courseName[i].lon));
-            	
+            		bounds.extend(linepath[i]);
 
 				};
 				 mapContainer[j] = document.getElementById('map' + j + ''), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(lat[0], lon[0]), // 지도의 중심좌표
-                level: 5, // 지도의 확대 레벨
                 mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
             };
         		map[j] = new kakao.maps.Map(mapContainer[j], mapOption);
@@ -70,6 +69,10 @@ $(function() {
 					position: new kakao.maps.LatLng(lat[0], lon[0]), // 마커의 좌표
 					map: map[j] // 마커를 표시할 지도 객체
 					})
+				
+				map[j].setBounds(bounds);
+				map[j].setZoomable(false);
+				map[j].setDraggable(false);
         },async:false //반복문을 위한 비동기 처리.
          });
     }

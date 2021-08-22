@@ -68,10 +68,10 @@
          AND   user_info_user_out = "N" 
       </where>
 
-		<if test="order == 1 ">
+		<if test="order == 'new' ">
 			ORDER BY crew_no DESC
 		</if>
-		<if test="order == 2 ">
+		<if test="order == 'old' ">
 			ORDER BY crew_no ASC
 		</if>
 

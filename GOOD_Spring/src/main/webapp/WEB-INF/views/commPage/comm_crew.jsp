@@ -75,9 +75,6 @@
 </style>
 </head>
 <body>
-	<!-- [페이지네이션] -->
-	<c:set var="URL" value="/commPage/comm_crew.do" />
-	<!-- //[페이지네이션] -->
 	<div class="wrapper">
 
 		<!-- 상단 영역 -->
@@ -152,8 +149,8 @@
 					<div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 " id="dropbox">
 						<select class="form-control" id="crew_condition" name="order">
 							<option value="">조건</option>
-							<option value=1>최신순</option>
-							<option value=2>오래된순</option>
+							<option value="new">최신순</option>
+							<option value="old">오래된순</option>
 						</select>
 					</div>
 					<div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2" id="dropbox" >
@@ -211,7 +208,6 @@
 							<c:param name="crew_no" value="${item.crew_no}" />
 							<c:param name="crew_name" value="${item.crew_name}" />
 						</c:url>
-						<c:if test="${login_info.user_admin =='false'}">
 						<div class="col-xs-6 col-sm-6 col-md-3">
 							<div class="thumbnail item" onclick="location.href='${infoUrl}'"
 								style="cursor: pointer;">
@@ -225,34 +221,8 @@
 									<h4 >지역: ${item.crew_area}</h4>
 									<h4 style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">종류: ${item.crew_category}</h4>
 								</div>
-
 							</div>
 						</div>
-						</c:if>
-						
-						<!-- 관리자 권한으로 들어갔을땐, info를 거치지않고 바로 bbs로 들어가기 -->
-						<c:url value="/commPage/comm_crew_bbs.do" var="bbsUrl">
-							<c:param name="crew_no" value="${item.crew_no}" />
-							<c:param name="crew_name" value="${item.crew_name}" />
-						</c:url>
-					<c:if test="${login_info.user_admin =='true'}">
-						<%-- 관리자 권한으로 들어갔을땐, bbs상세페이지로 이동하기위한 URL --%>
-						<div class="col-xs-6 col-sm-6 col-md-3">
-							<div class="thumbnail item" onclick="location.href='${bbsUrl}'"
-								style="cursor: pointer;">
-								<img alt="크루 이미지" src="${item.crew_photo.fileUrl}"
-									onclick="location.href='${bbsUrl}'" style="cursor: pointer;">
-								<div class="caption clearfix">
-									<h4>
-										<a href="${bbsUrl}"> ${item.crew_name}</a>
-									</h4>
-									<h4>크루 소개: ${item.crew_sinto}</h4>
-									<h4 >지역: ${item.crew_area}</h4>
-									<h4 >종류: ${item.crew_category}</h4>
-								</div>
-							</div>
-						</div>
-						</c:if>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>

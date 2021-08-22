@@ -56,14 +56,14 @@ public class MyCourseController {
 	 */
 	@RequestMapping(value = "/commPage/comm_myCourse.do", method = RequestMethod.GET)
 	public ModelAndView mycourse(Model model,
-			// 검색어
-			@RequestParam(value = "keyword", required = false) String keyword,
 			// 페이지 구현에서 사용할 현재 페이지 번호
-			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+			@RequestParam(value = "page", defaultValue = "1") int nowPage,
+			// 검색어
+			@RequestParam(value = "keyword", required = false) String keyword) {
 
 		// 1) 페이지 구현에 필요한 변수값 생성
 		int totalCount = 0; // 전체 게시글 수
-		int listCount = 8; // 한 페이지당 표시할 항목 수
+		int listCount = 6; // 한 페이지당 표시할 항목 수
 		int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
 
 		// 2) 데이터 조회하기
@@ -80,9 +80,6 @@ public class MyCourseController {
 		try {
 			// 전체 게시글 수 조회
 			totalCount = myCourseService.getMyCourseCount(input);
-
-			// 전체 게시글 수 조회
-			output = myCourseService.getMyCourseList(input);
 
 			// 페이지 번호 계산 --> 계산 결과를 로그로 출력
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);

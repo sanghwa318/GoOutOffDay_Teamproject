@@ -410,12 +410,9 @@ ul, li {
    
    
    var courseName='${output.COURSE_NAME}';
-   console.log(courseName)
    courseName=courseName.replace(" ","").replace(" ","").replace("ㆍ","").replace(" ","")
-   console.log(courseName)
    if(courseName.indexOf("(")>-1){
    courseName=courseName.substring(0, courseName.indexOf("(")-1)
-   console.log(courseName)
    }
    if(courseName=='1코스-수락·불암산코스'){courseName='수락·불암산 코스';}
    if(courseName=='2코스-용마·아차산코스'){courseName='용마·아차산 코스';}
@@ -682,18 +679,7 @@ ul, li {
       <!-- //geoJson 파일 불러와서 카카오 맵에 표시 -->
    </script>
 
-	<script type="text/javascript">
-   $(function(){
-      $(".btn-default").click(function(){
-         location.href="${pageContext.request.contextPath}/walkPage/walk_search.jsp";
-
-                     });
-
-      });
-   </script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/assets/js/Book-Mark.js">
-   </script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/Book-Mark.js"></script>
 	<script>
    // 찜 추가
    function addBookMark(){
@@ -748,7 +734,6 @@ ul, li {
       var svcid = '${output.COURSE_NAME}';
 	  var URL = window.location.href;
 
-//       svcid = String(svcid);
 
       $.ajax({
          catch:false,

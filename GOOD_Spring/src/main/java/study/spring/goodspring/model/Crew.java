@@ -21,7 +21,8 @@ public class Crew {
 	private int crew_member;  // 크루 인원
 	private int user_info_user_no; // 크루장 No
 	private boolean user_info_user_out; //회원 탈퇴&추방 여부 
-	
+	//3) 순서 정렬을 위한 변수
+	private String order;
 	
 	/** 프로필사진 정보{json=UploadItem}, IS NULL */
     public void setPhotoJson(String crew_photo) {
@@ -69,17 +70,9 @@ public class Crew {
 		Crew.listCount = listCount;
 	}
 	
-	//3) 순서 정렬을 위한 static 변수
-	private static int order;
 
 
-	public static int getOrder() {
-		return order;
-	}
 
-	public static void setOrder(int order) {
-		Crew.order = order;
-	}
 	// 관리자페이지에서 사용하는 객체
 	private int log_hour;
 	private int log_cnt;

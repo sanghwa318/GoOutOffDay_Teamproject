@@ -182,8 +182,10 @@ public class CommController {
 
 			String redirectUrl = contextPath + "/mainPage/login.do";
 			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+		}else if (login_info.isUser_admin()){
+			return webHelper.redirect(contextPath+"/commPage/comm_crew_bbs.do?crew_no="+crew_no, null);
 		}
-		
+
 		int userNo = login_info.getUser_no();
 		
 		// 1) 유효성 검사
@@ -276,7 +278,7 @@ public class CommController {
 	@RequestMapping(value = "/commPage/comm_crew_myCrew.do", method = RequestMethod.GET)
 	public ModelAndView mycrew(Model model,
 			// 조건
-			@RequestParam(value = "order", defaultValue = "1") int order,
+			@RequestParam(value = "order", required=false) String order,
 			// 페이지 구현에서 사용할 현재 페이지 번호
 			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
@@ -299,7 +301,7 @@ public class CommController {
 		// 조회에 필요한 조건값을 Beans에 담는다
 		Crew input = new Crew();
 		input.setUser_info_user_no(userNo);
-
+		input.setOrder(order);
 		List<Crew> output = null; // 조회결과가 저장될 객체
 		PageData pageData = null; // 페이지 번호를 계산할 결과가 저장될 객체
 
@@ -316,7 +318,7 @@ public class CommController {
 			// SQL의 LIMIT절에서 사용될 값을 BEANS의 static 변수에 저장
 			Crew.setOffset(pageData.getOffset());
 			Crew.setListCount(pageData.getListCount());
-			Crew.setOrder(order);
+
 
 			// 데이터 조회하기
 			output = crewService.selectJoinedCrew(input);
@@ -338,16 +340,16 @@ public class CommController {
 
 	@RequestMapping(value = "/commPage/comm_crew.do", method = RequestMethod.GET)
 	public ModelAndView crew(Model model,
-			// 검색어
-			@RequestParam(value = "keyword", required = false) String keyword,
 			// 지역 버튼
 			@RequestParam(value = "crew_area", required = false) String region,
 			// 조건 버튼
-			@RequestParam(value = "order", defaultValue = "1") int order,
+			@RequestParam(value = "order", required=false) String order,
 			// 크루 종류
 			@RequestParam(value = "crew_category", required = false) String crew_category,
 			// 페이지 구현에서 사용할 현재 페이지 번호
-			@RequestParam(value = "page", defaultValue = "1") int nowPage) {
+			@RequestParam(value = "page", defaultValue = "1") int nowPage,
+			// 검색어
+			@RequestParam(value = "keyword", required = false) String keyword) {
 		
 		// 1) 페이지 구현에 필요한 변수값 생성
 		int totalCount = 0; // 전체 게시글 수
@@ -362,7 +364,7 @@ public class CommController {
 		input.setCrew_sinto(keyword);
 		input.setCrew_area(region);
 		input.setCrew_category(crew_category);
-		
+		input.setOrder(order);
 		Member login_info = (Member) webHelper.getSession("login_info");
 		
 		List<Crew> output = null; // 조회결과가 저장될 객체
@@ -372,19 +374,15 @@ public class CommController {
 			// 전체 게시글 수 조회
 			totalCount = crewService.getCrewCount(input);
 
-			// 전체 게시글 수 조회
-			output = crewService.getCrewList(input);
-
 			// 페이지 번호 계산 --> 계산 결과를 로그로 출력
 			pageData = new PageData(nowPage, totalCount, listCount, pageCount);
 
 			// SQL의 LIMIT절에서 사용될 값을 BEANS의 static 변수에 저장
 			Crew.setOffset(pageData.getOffset());
 			Crew.setListCount(pageData.getListCount());
-			Crew.setOrder(order);
-
+			
 			// 데이터 조회하기
-//			output = crewService.getCrewList(input);
+			output = crewService.getCrewList(input);
 			
 
 		} catch (Exception e) {
