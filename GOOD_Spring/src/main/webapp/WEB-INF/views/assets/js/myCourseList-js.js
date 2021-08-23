@@ -11,7 +11,7 @@
 $(function() {
 	//화면에 표시되는 리스트의 개수를 저장하는 변수
     var length = $('#item-box').data('length');
-
+	
 	//지도에서 사용될 변수들의 초기 선언.
     var map = [];
     var mapContainer = [];
@@ -19,7 +19,7 @@ $(function() {
     var linepath = [];
     var lat = [];
     var lon = [];
-
+	
 	//리스트 하나당 반복문 한번.
     for (var j = 0; j < length; j++) {
 	//반복문이 한번 실행될때마다 지도와 선, 마커 등의 객체를 초기화해준다.

@@ -10,7 +10,7 @@
 	</div>
 	<h2>회원들과의 비교</h2>
 	<div style="width: 100%; height: 300px; display: inline-block;">
-		<canvas id="myChart4" ></canvas>
+		<canvas id="myChart4"></canvas>
 	</div>
 	<div style="width: 100%; height: 300px; display: inline-block;">
 		<canvas id="myChart5"></canvas>

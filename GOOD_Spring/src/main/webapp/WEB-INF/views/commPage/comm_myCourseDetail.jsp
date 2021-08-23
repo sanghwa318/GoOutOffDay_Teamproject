@@ -174,6 +174,11 @@ font-size: 1.5rem;
 
 }
 
+#map,
+#mycourse {
+margin: auto;
+}
+
 
 </style>
 <body>
@@ -199,11 +204,12 @@ font-size: 1.5rem;
 			<div class="header">
 				<h1 style="color: #343a40;">나만의 코스</h1>
 			</div >
-			<div class="row" >
-				<div class="map col-md-4 col-sm-4 col-xs-4 " id="map"
-					style=" height: 450px; width: 450px"></div>
-					
-				<div class="col-md-6 col-sm-6 col-xs-12 main_info clearfix" id="mycourse">
+			<div class="row">
+			
+				<div class="map col-md-4" id="map"
+					style=" height: 375px; width: 375px"></div>
+				
+				<div class="col-md-6 " id="mycourse">
 					<ul class="info" >
 						<li class="infoItem" ><p class="pull-left" ><strong class="infoLabel">코스 이름
 								: </strong></p>

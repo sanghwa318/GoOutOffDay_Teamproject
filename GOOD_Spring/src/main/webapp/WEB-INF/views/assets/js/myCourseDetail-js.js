@@ -200,7 +200,6 @@ $("#delete-btn").on("click",function() {
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center: new kakao.maps.LatLng(37.5160832, 126.9661696), // 지도의 중심좌표
-		level: 4, // 지도의 확대 레벨
 		mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
 	};
 let course_name = $('#mycourse_name').data('mycoursename');
@@ -219,6 +218,7 @@ $(function() {
 		type: 'post',
 		data: { course_name },
 		success: function(data) {
+		var bounds = new kakao.maps.LatLngBounds();
 			var linepath = [];
 			var lat = [];
 			var lon = [];
@@ -227,7 +227,14 @@ $(function() {
 				lat[i] = parseFloat(data.courseName[i].lat);
 				lon[i] = parseFloat(data.courseName[i].lon);
 				linepath[i] = new kakao.maps.LatLng(parseFloat(data.courseName[i].lat), parseFloat(data.courseName[i].lon));
+				bounds.extend(linepath[i]);
 			};
+			 mapOption = {
+                center: new kakao.maps.LatLng(lat[0], lon[0]), // 지도의 중심좌표
+                mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+            };
+        		map = new kakao.maps.Map(mapContainer, mapOption);
+				map.setDraggable(false);
 			// 지도에 선을 표시한다 
 			var polyline = new kakao.maps.Polyline({
 				map: map, // 선을 표시할 지도 객체 
@@ -241,9 +248,10 @@ $(function() {
 			var marker = new kakao.maps.Marker({
 				position: new kakao.maps.LatLng(lat[0], lon[0]), // 마커의 좌표
 				map: map // 마커를 표시할 지도 객체
+				
 			});
-			map.setCenter(new kakao.maps.LatLng(lat[0], lon[0]));
-
+			map.setBounds(bounds);
+			
 		}
 	});
 	/**지도 불러오기 끝*/
