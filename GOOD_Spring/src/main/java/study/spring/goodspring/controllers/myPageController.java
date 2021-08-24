@@ -103,14 +103,6 @@ public class myPageController {
 		/** 1) 유효성 검증 */
 		// POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
 		// REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다.
-		if(userNick!=null) {
-			if (!regexHelper.isEngNum(userNick)) {
-				return webHelper.getJsonWarning("닉네임은 영어,숫자만 입력 가능합니다.");
-			}
-			if (userNick.length() < 4 || userNick.length() > 30) {
-				return webHelper.getJsonWarning("닉네임은 4~30글자로 입력 가능합니다.");
-			}
-		}
 
 		if (regexHelper.isValue(userPw)) {
 			if (userPw.length() < 4 || userPw.length() > 30) {
@@ -121,14 +113,6 @@ public class myPageController {
 			}
 		}
 
-		if (regexHelper.isValue(userName)) {
-			if (!regexHelper.isKor(userName)) {
-				return webHelper.getJsonWarning("이름은 한글만 입력 가능합니다.");
-			}
-			if (userName.length() > 30) {
-				return webHelper.getJsonWarning("이름은 최대 30글자로 입력 가능합니다.");
-			}
-		}
 		if (regexHelper.isValue(email)) {
 			if (!regexHelper.isEmail(email)) {
 				return webHelper.getJsonWarning("이메일 형식이 잘못되었습니다.");

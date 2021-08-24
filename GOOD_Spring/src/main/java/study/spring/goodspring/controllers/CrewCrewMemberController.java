@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import study.spring.goodspring.helper.RegexHelper;
 import study.spring.goodspring.helper.WebHelper;
+import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.service.CrewMemberService;
@@ -88,6 +89,8 @@ public class CrewCrewMemberController {
       input.setMember_no(member_no);
       input.setCrew_crew_no(crew_crew_no);
       
+      Crew crew = new Crew();
+      crew.setCrew_no(crew_crew_no);
       
       try {
          if(crewMemberService.getCrewMemberItem(input)) {
@@ -95,6 +98,7 @@ public class CrewCrewMemberController {
          }
          else {
          crewMemberService.deleteCrewMember(input); // 데이터 삭제
+         crewService.updateCrewMemberCount(crew);//크루 테이블의 crew_member 컬럼 수정
          }
       } catch (Exception e) {
          return webHelper.getJsonError(e.getLocalizedMessage());
@@ -119,13 +123,15 @@ public class CrewCrewMemberController {
       CrewMember input = new CrewMember();
       input.setCrew_crew_no(crew_crew_no);
       input.setUser_info_user_no(loginInfo.getUser_no());
-      
+      Crew crew = new Crew();
+      crew.setCrew_no(crew_crew_no);
       try { 
          if(crewMemberService.getCrewno(input)) {
             return webHelper.getJsonError("크루장은 탈퇴 할 수 없습니다.");
          }
          else {
          crewMemberService.deleteMyCrew(input);  // 데이터 삭제
+         crewService.updateCrewMemberCount(crew);//크루 테이블의 crew_member 컬럼 수정
          }
       } catch (Exception e) {
          return webHelper.getJsonError(e.getLocalizedMessage());

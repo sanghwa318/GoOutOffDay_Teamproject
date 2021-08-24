@@ -65,24 +65,10 @@ $(function(){
 	/** form태그에 부여한 id속성에 대한 유효성 검사 함수 호출 */
 		$("#edit_form").validate({
 			/**입력검사 규칙 */
-				//[닉네임] 필수 + 알파벳, 숫자 조합
-				user_nick: {required: true, nick: true, minlength: 4, maxlength: 30,
-                remote : {
-                    url : getContextPath() + '/mainPage/join/nickname_unique_check',
-                    type : 'post',
-                    data : {
-                        user_nick : function() {
-                            return $("#user_nick").val();
-                        }
-                    }
-                }
-            },
 				//[비밀번호] 필수 + 글자수 길이 제한
 				user_pw: {required: true, minlength: 4, maxlength: 30},
 				//[비밀번호 확인] 필수 + 특정 항목과 일치 (user_pw로 연결)
 				user_pw_re: {required: true, equalTo: "#user_pw"},
-				//[이름] 필수 + 한글만 허용
-				user_name:{required: true, kor: true, maxlength: 30},
 				//[이메일] 필수 + 이메일 형식 일치 필요
 				email: {
                 required: true, email: true, maxlength: 255,
@@ -109,13 +95,6 @@ $(function(){
 			/**규칙이 맞지 않을 경우의 메시지 */
 			messages: {
 				
-				user_nick: {
-					required: "닉네임을 입력하세요.",
-					nick: "닉네임은 한글, 영어, 숫자, 특수문자만 입력 가능합니다.",
-					minlength: "닉네임은 최소 {0}글자 이상 입력하셔야 합니다.",
-                    maxlength: '닉네임은 최대 {0}글자까지 가능합니다.',
-                    remote: '이미 사용중인 닉네임 입니다.'
-				},
 				user_pw: {
 					required: "비밀번호를 입력하세요.",
 					minlength: "비밀번호는 최소 {0}글자 이상 입력하셔야 합니다.",
@@ -125,12 +104,6 @@ $(function(){
               		required: '비밀번호 확인값을 입력하세요.',
                 	equalTo: '비밀번호 확인이 잘못되었습니다.'
          		},
-				user_name: {
-            	    required: '이름을 입력하세요.',
-            	    kor: '이름은 한글만 입력 가능합니다.',
-            	    minlength: '이름은 최소 {0}글자 이상 입력하셔야 합니다.',
-      	            maxlength: '이름은 최대 {0}글자까지 가능합니다.'
-          		},
           		email: {
                     required: '이메일을 입력하세요.',
                     email: '이메일 형식이 잘못되었습니다.',
@@ -178,22 +151,6 @@ $(function(){
 			return false; // <-- 실행 중단
 		}
     }); // end ajaxForm
-
-
-	$("#nickname_unique_check").click(function(e) {
-        const userNick = $("#user_nick").val();
-
-        if (!userNick) {
-            swal('알림', '닉네임을 입력하세요.', 'warning');
-            return;
-        }
-
-        $.post(getContextPath() + '/myPage/myPage_accountEdit/nickname_unique_check_jquery', {
-            user_nick: userNick
-        }, function(json) {
-            swal('확인', '사용가능한 닉네임 입니다.', 'success');
-        });
-    });
 
     $("#email_unique_check").click(function(e) {
         const email = $("#email").val();
