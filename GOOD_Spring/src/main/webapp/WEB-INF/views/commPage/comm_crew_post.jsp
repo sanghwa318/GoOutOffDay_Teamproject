@@ -102,20 +102,6 @@
 			</div>
 			<h1 class="page-header">크루게시판</h1>
 
-			<!-- 본문 사이드 영역 -->
-		<!--  	<div class="sidebar col-md-2 col-xs-2 col-sm-2">
-				<div class="form-group">
-					<span class="title-img"><img
-						src="${crew.crew_photo.fileUrl}"> <span class='sr-only'>이미지</span>
-					</span>
-					<h3>가입된 회원: ${postout.crew_member}명</h3>
-					<h4 class="crew_name">${postout.crew_name} 소개</h4>
-                  <h4 >${postout.crew_sinto}</h4>
-					<input type="hidden" name=crew_post_post_no id="post_no"
-						value="${postout.post_no}">
-				</div>
-			</div> -->
-			<!-- //사이드 영역 -->
 
 
 <div class="article header col-xl-12 col-sm-12 col-xs-12 " style="margin-left: 2%;" >
@@ -129,12 +115,7 @@
 					<p class="pull-left " style="margin-left: 5px; color:#979797; font-size:12px;">조회수 :
 						${postout.post_hits}</p>
 						
-<!-- 				<div class="row pull-right " style="margin-left:0.5%; font-size:13px;">
-						<span class="" id="likeCount" style="margin-top:1%"></span>
-						<span class="heart pull-left" style="margin-top:1px; margin-left: -5px; margin-right:5px;  pointer-events: none;"></span>
-						<span class="comment"style="margin-top:1px; margin-left: 5px; padding-right:0px">댓글<i class="fa fa-comment-o"></i></span>
-						 <span class="" id="CommentCount" ></span>
-				</div> -->
+
 				
 						<br>
 						<hr>

@@ -251,6 +251,7 @@ $(function() {
 				
 			});
 			map.setBounds(bounds);
+			map.setDraggable(true);
 			
 		}
 	});
