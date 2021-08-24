@@ -430,10 +430,13 @@ ul, li {
    
    
    var courseName='${output.COURSE_NAME}';
+   
    courseName=courseName.replace(" ","").replace(" ","").replace("ㆍ","").replace(" ","")
    if(courseName.indexOf("(")>-1){
    courseName=courseName.substring(0, courseName.indexOf("(")-1)
    }
+   
+   console.log(courseName);
    if(courseName=='1코스-수락·불암산코스'){courseName='수락·불암산 코스';}
    if(courseName=='2코스-용마·아차산코스'){courseName='용마·아차산 코스';}
    if(courseName=='3코스-고덕·일자산코스'){courseName='고덕·일자산 코스';}
@@ -445,7 +448,8 @@ ul, li {
    if(courseName=="인왕산구간"){courseName="인왕구간";}
    if(courseName=="불광천길"){courseName="불광천긴";}
    if(courseName=="성동광진구한강길"){courseName="성동광진한강길";}
-   
+   if(courseName=="초안산나들"){courseName="초안산나들길";}
+   console.log(courseName);
    var courseCategoryNM='${output.COURSE_CATEGORY_NM}'.replace(" ","");
    var colors = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
    
