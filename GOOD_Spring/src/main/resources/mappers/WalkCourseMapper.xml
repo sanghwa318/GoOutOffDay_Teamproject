@@ -51,14 +51,14 @@
 		VOTE_CNT,
 		RELATE_SUBWAY,
 		TRAFFIC_INFO,
-		CONTENT,
+		SUBSTRING_INDEX(CONTENT, '※', 2) AS CONTENT,
 		COURSE_NAME,
 		REG_DATE,
 		DETAIL_COURSE,
 		CPI_NAME,
 		X,
 		Y,
-		CPI_CONTENT,
+		SUBSTRING_INDEX(CPI_CONTENT, '※', 1) AS CPI_CONTENT,
 		CPI_IDX,
 		(SELECT COUNT(service_id) FROM bookmark
 		WHERE service_id = COURSE_NAME
@@ -76,7 +76,7 @@
 	<select id="selectPath"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT COURSE_NAME, CPI_IDX, CPI_NAME, CPI_CONTENT
+		SELECT COURSE_NAME, CPI_IDX, CPI_NAME, SUBSTRING_INDEX(CPI_CONTENT, '※', 1) AS CPI_CONTENT
 		FROM
 		seoulgil_walk_course
 		WHERE
@@ -93,7 +93,7 @@
 	<select id="selectCourseName"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT COURSE_NAME, CPI_IDX, CPI_NAME, CPI_CONTENT
+		SELECT COURSE_NAME, CPI_IDX, CPI_NAME, SUBSTRING_INDEX(CPI_CONTENT, '※', 1) AS CPI_CONTENT
 		FROM
 		seoulgil_walk_course
 		<where>
@@ -260,7 +260,7 @@
 		COURSE_NAME,
 		CPI_NAME,
 		CPI_IDX,
-		CPI_CONTENT,
+		SUBSTRING_INDEX(CPI_CONTENT, '※', 1) AS CPI_CONTENT,
 		DISTANCE
 		FROM seoulgil_walk_course
 		ORDER BY rand()

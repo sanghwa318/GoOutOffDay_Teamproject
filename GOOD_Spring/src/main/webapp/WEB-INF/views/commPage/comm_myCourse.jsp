@@ -103,7 +103,7 @@
 								<c:param name="mycourse_no" value="${item.mycourse_no}" />
 							</c:url>
 
-							<div class="col-xs-6 col-sm-4 col-md-4">
+							<div class="col-xs-6 col-sm-4 col-md-3">
 								<div class="thumbnail item" id="item${status.index}" data-mycourseno='${item.mycourse_no}'
 									onclick="location.href='${infoUrl}'"
 									style="cursor: pointer;">

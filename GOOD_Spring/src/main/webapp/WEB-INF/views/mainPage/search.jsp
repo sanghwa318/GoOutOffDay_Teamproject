@@ -107,7 +107,7 @@ body>div.container {
 									코스유형: ${COURSE_CATEGORY_NM } | 지역 : (${SOUTH_NORTH_DIV_NM })
 									${AREA_GU } | 거리 : ${DISTANCE } - 소요시간 : ${LEAD_TIME } <br />
 									세부코스경로 : ${DETAIL_COURSE } | 관련지하철 - ${RELATE_SUBWAY } <br />
-									코스설명 : ${CONTENT } [포인트설명 : ${CPI_CONTENT }]
+									코스설명 : ${CONTENT } 포인트설명 : ${CPI_CONTENT }
 							</div>
 						</c:forEach>
 					</div>
@@ -302,7 +302,7 @@ style="cursor: pointer;'">
 			코스유형: {{COURSE_CATEGORY_NM}} | 지역 : ({{SOUTH_NORTH_DIV_NM}})
 			{{AREA_GU}} | 거리 : {{DISTANCE}} - 소요시간 : {{LEAD_TIME}} <br />
 			세부코스경로 : {{DETAIL_COURSE}} | 관련지하철 - {{RELATE_SUBWAY}} <br />
-			코스설명 : {{{CONTENT}}} [포인트설명 : {{CPI_CONTENT}}]
+			코스설명 : {{{CONTENT}}} 포인트설명 : {{CPI_CONTENT}}
 	</div>
 	{{/each}}
 	</script>
