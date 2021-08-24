@@ -72,7 +72,7 @@
 			 <div class="form-group1">
                     <label for="user_name" class="col-sm-2 control-label">이름</label>
                     <div class="col-sm-10">
-                        <input type="text" name="user_name" class="form-control" id="user_name" value="${login_info.getUser_name()}" />
+                        <input type="text" name="user_name" class="form-control" id="user_name" value="${login_info.getUser_name()}" readonly/>
                     </div>
                 </div><!-- //이름 -->
 			

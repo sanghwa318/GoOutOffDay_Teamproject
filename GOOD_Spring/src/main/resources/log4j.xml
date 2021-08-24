@@ -19,7 +19,7 @@
 		class="org.apache.log4j.RollingFileAppender">
 		<!-- 로그 파일 생성위치 -->
 		 <param name="file" value="log/web.log" />
-		 <!-- <param name="file" value="/home/student/goodspring/logs/web.log" /> -->
+		<!--  <param name="file" value="/home/student/goodspring/logs/web.log" /> -->
 		<param name="Append" value="true" />
 		<!-- 로그 파일 하나당 사이즈 100m -->
 		<param name="MaxFileSize" value="100mb" />
