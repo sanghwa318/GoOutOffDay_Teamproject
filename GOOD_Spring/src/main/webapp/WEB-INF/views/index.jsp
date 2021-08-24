@@ -28,6 +28,7 @@ a {
 	padding-bottom: 20px;
 	width: auto;
 	margin: auto;
+	max-width:1140px;
 }
 
 p {
@@ -431,6 +432,7 @@ h4 {
 							role="button">한양도성길</a></li>
 					</ul>
 				</div>
+				<div id="map_container"></div>
 			</div>
 			<!-- // 걷기코드 영역 끝 -->
 			<!-- 영역 구분선 모바일에서만 표시 -->
