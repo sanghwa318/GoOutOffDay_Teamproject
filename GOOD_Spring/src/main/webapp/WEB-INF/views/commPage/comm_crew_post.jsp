@@ -124,7 +124,7 @@
 					<img style="border-radius: 25px; margin-right:0.5%;" src="<c:if test='${member.getUser_photo().getFileUrl()==null || member.getUser_photo().getFileUrl()==""}'>${pageContext.request.contextPath}/assets/img/profile_default.png</c:if>${member.getUser_photo().getFileUrl()}" width="50px" height="50px">
 				</div>
 				
-					<h4 style="margin-left:5%;">${postout.getUser_name()}</h4>
+					<h4 style="margin-left:5%;">${postout.getUser_nick()}</h4>
 					<p class="pull-left" style="color:#979797; font-size:12px; margin-left:1%;" >${postout.getPost_createdate()}</p>
 					<p class="pull-left " style="margin-left: 5px; color:#979797; font-size:12px;">조회수 :
 						${postout.post_hits}</p>
