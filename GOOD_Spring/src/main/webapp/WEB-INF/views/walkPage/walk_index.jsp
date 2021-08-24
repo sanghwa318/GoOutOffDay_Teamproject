@@ -12,7 +12,6 @@
 /* .wk_log { */
 /* 	margin-bottom: 30px; */
 /* } */
-
 p {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -163,7 +162,7 @@ carousel-title2 {
 
 .wk_log {
 	margin-bottom: 15px;
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 /**Modal CSS */
@@ -182,6 +181,10 @@ carousel-title2 {
 
 .modal-header>p {
 	font-size: 20px;
+}
+
+.row .thumbnail .caption p {
+	color: #848c94;
 }
 </style>
 
@@ -205,27 +208,27 @@ carousel-title2 {
 		<div id="recording" class="pull-left"
 			style="font-size: 18px; color: #EA80FC"></div>
 		<div class="row">
-<!-- 		<div class="pull-right" style="margin-right: 20px;"> -->
+			<!-- 		<div class="pull-right" style="margin-right: 20px;"> -->
 			<div class="wk_log col-sm-offset-6 col-sm-2 col-xs-4" id="wk_log">
 				<a href="${pageContext.request.contextPath}/walkPage/walk_log.do"
 					class="btn btn-info btn-block">걷기 Log</a>
 			</div>
-<!-- 		</div> -->
-<!-- 		<div class="pull-right" style="margin-right: 20px;"> -->
+			<!-- 		</div> -->
+			<!-- 		<div class="pull-right" style="margin-right: 20px;"> -->
 			<div class="wk_log col-sm-2 col-xs-4" id="wk_log">
-				<button type="button" class="btn btn-primary btn-block" data-toggle="modal"
-					data-target="#myModal">걷기 기록 하기</button>
+				<button type="button" class="btn btn-primary btn-block"
+					data-toggle="modal" data-target="#myModal">걷기 기록 하기</button>
 
 			</div>
-<!-- 		</div> -->
-<!-- 		<div class="pull-right"> -->
+			<!-- 		</div> -->
+			<!-- 		<div class="pull-right"> -->
 			<div class="wk_log col-sm-2 col-xs-4" id="wk_log">
 				<button type="button" class="btn btn-primary btn-block"
 					id="endRecord-modal-btn" data-toggle="modal"
 					data-target="#recordEnd-modal">기록 중지</button>
 
 			</div>
-<!-- 		</div> -->
+			<!-- 		</div> -->
 		</div>
 
 		<div class="map" id="map" style="width: 100%; height: 400px;"></div>
@@ -301,22 +304,24 @@ carousel-title2 {
 		<!-- 코스목록 캐러셀 영역 -->
 		<div class="row good_item wk_row">
 			<!--  캐러셀 시작 -->
-			<div class="owl-carousel owl-theme" id="owl-GOOD" data-length="${fn:length(output) }">
+			<div class="owl-carousel owl-theme" id="owl-GOOD"
+				data-length="${fn:length(output) }">
 				<c:forEach var="item" items="${output }" varStatus="status">
 					<c:url value="/walkPage/walk_detailCourse.do" var="detailUrl">
 						<c:param name="COURSE_NAME" value="${item.COURSE_NAME }" />
 					</c:url>
 					<div class="thumbnail item" onclick="location.href='${detailUrl}'"
-						style="cursor: pointer;" >
-						<div class="map" id="cmap${status.index}" style="height: 180px" 
-						data-dept1="${item.COURSE_CATEGORY_NM}" data-dept2="${item.COURSE_NAME}"></div>
-						<div class="caption">
-							<h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.COURSE_NAME}>${item.CPI_NAME }</h4>
-							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.CPI_CONTENT }</p>
-						</div>
-						<div class="wishlist">
-<!-- 							<span class="heart"><i class="fa fa-heart-o" -->
-<!-- 								aria-hidden="true" role="button"></i> </span> -->
+						style="cursor: pointer;">
+						<div class="map" id="cmap${status.index}" style="height: 180px"
+							data-dept1="${item.COURSE_CATEGORY_NM}"
+							data-dept2="${item.COURSE_NAME}"></div>
+						<div class="caption clearfix">
+							<p>카테고리 : ${item.COURSE_CATEGORY_NM}</p>
+							<h4>코스이름 : ${item.COURSE_NAME }</h4>
+							<p class="pull-left" style="max-width: 60%;">지역 :
+								${item.AREA_GU }</p>
+							<p class="pull-right" style="max-width: 40%;">코스거리 :
+								${item.DISTANCE }</p>
 						</div>
 					</div>
 
@@ -340,11 +345,12 @@ carousel-title2 {
 						<strong>걷기 기록</strong>
 					</h3>
 				</div>
-				<div class="modal-body" style="background-color: rgba( 235, 235, 235, 0.4 );">
-				<h3>페이지를 이동하거나 브라우저를 끄지 마세요. 기록이 저장되지 않습니다.</h3>
-				<h3>기록하고 싶은 코스 기록이 끝나면 기록 중지를 눌러 저장하세요.</h3>
-				<h4>* 걷기Log-목표설정에서 미리 목표를 설정하면 목표대비 달성치를 확인할 수 있습니다.</h4>
-				<h4>* 나만의 코스에서 내가 저장한 기록을 글로 남겨 공유할 수 있습니다.</h4>
+				<div class="modal-body"
+					style="background-color: rgba(235, 235, 235, 0.4);">
+					<h3>페이지를 이동하거나 브라우저를 끄지 마세요. 기록이 저장되지 않습니다.</h3>
+					<h3>기록하고 싶은 코스 기록이 끝나면 기록 중지를 눌러 저장하세요.</h3>
+					<h4>* 걷기Log-목표설정에서 미리 목표를 설정하면 목표대비 달성치를 확인할 수 있습니다.</h4>
+					<h4>* 나만의 코스에서 내가 저장한 기록을 글로 남겨 공유할 수 있습니다.</h4>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal"
@@ -367,16 +373,16 @@ carousel-title2 {
 						<strong>기록 중지</strong>
 					</h3>
 				</div>
-				<div class="modal-body" style="background-color: rgba( 235, 235, 235, 0.4 ); text-align:center;">
-				<h3>지금까지의 코스를 저장하시려면, 코스 이름을 입력해주세요.</h3>
+				<div class="modal-body"
+					style="background-color: rgba(235, 235, 235, 0.4); text-align: center;">
+					<h3>지금까지의 코스를 저장하시려면, 코스 이름을 입력해주세요.</h3>
 				</div>
 				<div class="modal-footer">
 					<form>
 						<label for="course-name">코스 이름: </label> <input type="text"
 							name="course_name" id="course_name" placeholder=""
 							style="display: inline-block; height: 30px; width: 80%; margin-bottom: 3px">
-						<br>
-						<br>
+						<br> <br>
 						<button type="button" class="btn btn-warning" data-dismiss="modal"
 							style="width: 150px;">닫기</button>
 						<button id="endRecord-btn" type="submit" class="btn btn-primary"

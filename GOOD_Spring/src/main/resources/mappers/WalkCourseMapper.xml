@@ -260,7 +260,8 @@
 		COURSE_NAME,
 		CPI_NAME,
 		CPI_IDX,
-		CPI_CONTENT
+		CPI_CONTENT,
+		DISTANCE
 		FROM seoulgil_walk_course
 		ORDER BY rand()
 		LIMIT 15;

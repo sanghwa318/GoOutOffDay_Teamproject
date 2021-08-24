@@ -176,7 +176,7 @@ html, body {
 											</button>
 										</p>
 										<h4>코스이름 : ${item.COURSE_NAME }</h4>
-										<p>장소 : ${item.AREA_GU}</p>
+										<p>지역 : ${item.AREA_GU}</p>
 										<p>코스거리 : ${item.DISTANCE }</p>
 										<p class="pull-left" style="max-width: 60%;">소요시간 :
 											${item.LEAD_TIME }</p>

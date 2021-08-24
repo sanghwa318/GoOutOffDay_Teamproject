@@ -10,6 +10,9 @@
 <%@ include file="../inc/head.jsp"%>
 
 <style type="text/css">
+.row .thumbnail .caption p {
+	color: #848c94;
+}
 .main_header>h1 {
 	position: relative;
 	text-align: center;
@@ -40,6 +43,19 @@
 .title-img>img {
 	width: 100px;
 	height: 100px;
+}
+
+/** 호버 CSS **/
+.item {
+	position: relative;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+	padding: 0;
+}
+
+.item:hover {
+	transform: translate(0, -2px);
+	box-shadow: 0 2px 4px rgba(102, 109, 117, 0.4);
 }
 </style>
 </head>

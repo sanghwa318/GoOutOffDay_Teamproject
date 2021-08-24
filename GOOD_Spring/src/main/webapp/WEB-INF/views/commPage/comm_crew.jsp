@@ -11,6 +11,19 @@
 
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style>
+
+/** 호버 CSS **/
+.item {
+	position: relative;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+	padding: 0;
+}
+
+.item:hover {
+	transform: translate(0, -2px);
+	box-shadow: 0 2px 4px rgba(102, 109, 117, 0.4);
+}
 /* 폼 전체 박스 */
 
 .title-img>img {

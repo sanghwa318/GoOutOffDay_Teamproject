@@ -6,6 +6,9 @@
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style type="text/css">
+.row .thumbnail .caption p {
+	color: #848c94;
+}
 /** 공통 영역 **/
 html, body {
 	height: 100%;
@@ -194,6 +197,7 @@ h4 {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 }
+
 .thumbnail img {
 	max-hieght: 100%;
 	min-width: 100%;
@@ -215,7 +219,7 @@ h4 {
 					src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png" />
 			</h1>
 			<!-- 본문영역 시작 -->
-			<div class="comm_index_middle" >
+			<div class="comm_index_middle">
 
 				<!-- 본문 나만의 코스 -->
 				<div class="row show_list">
@@ -243,11 +247,10 @@ h4 {
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									</div>
 									<div class="caption clearfix">
-										<p>나만의 코스</p>
-										<h4 class="explan">${item.mycourse_name}</h4>
-										<p class="pull-left" style="max-width: 70%;">${item.mycourse_area}</p>
-										<p class="pull-right" style="max-width: 30%;">좋아요
-											${item.like}</p>
+										<p>작성자 : ${item.user_nick}</p>
+										<h4 class="explan">코스이름 : ${item.mycourse_name }</h4>
+										<p class="pull-left">지역 : ${item.mycourse_area}</p>
+										<p class="pull-right">좋아요 ${item.like}</p>
 									</div>
 								</div>
 							</c:forEach>
