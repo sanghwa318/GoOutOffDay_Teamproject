@@ -180,6 +180,11 @@ margin: auto;
 }
 
 
+.row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
 </style>
 <body>
 	<!-- 푸터빼고 감싸주세요 -->

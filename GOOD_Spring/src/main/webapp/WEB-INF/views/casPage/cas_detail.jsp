@@ -181,7 +181,7 @@ ul, li {
 				<div class="row detail_item">
 					<div class="col-md-5 col-sm-6 col-xs-12">
 						<div class="detail_img">
-							<img alt="이미지" src="${output.IMGURL }">
+							<img alt="이미지가 없습니다." src="${output.IMGURL }">
 						</div>
 						<!-- 버튼 -->
 						<div class="btn_container" style="text-align: center;">

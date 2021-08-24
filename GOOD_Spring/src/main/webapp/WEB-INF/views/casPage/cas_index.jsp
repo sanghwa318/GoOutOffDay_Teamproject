@@ -319,7 +319,7 @@ html, body {
 									<c:param name="SVCID" value="${item_exp.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_exp.IMGURL }" alt="창의체험 썸네일 이미지"
+									<img src="${item_exp.IMGURL }" alt="창의체험 썸네일 이미지(없는이미지)"
 										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
@@ -375,7 +375,7 @@ html, body {
 									<c:param name="SVCID" value="${item_imp.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_imp.IMGURL }" alt="자기계발 썸네일 이미지"
+									<img src="${item_imp.IMGURL }" alt="자기계발 썸네일 이미지(없는이미지)"
 										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
@@ -431,7 +431,7 @@ html, body {
 									<c:param name="SVCID" value="${item_borrow.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_borrow.IMGURL }" alt="장소대여 썸네일 이미지"
+									<img src="${item_borrow.IMGURL }" alt="장소대여 썸네일 이미지(없는이미지)"
 										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">
@@ -487,7 +487,7 @@ html, body {
 									<c:param name="SVCID" value="${item_sprot.SVCID }"></c:param>
 								</c:url>
 								<div class="thumbnail item">
-									<img src="${item_sprot.IMGURL }" alt="체육시설 썸네일 이미지"
+									<img src="${item_sprot.IMGURL }" alt="체육시설 썸네일 이미지(없는이미지)"
 										onclick="location.href='${detailUrl}'"
 										style="max-height: 100%; max-width: 100%; cursor: pointer;">
 									<div class="caption clearfix">

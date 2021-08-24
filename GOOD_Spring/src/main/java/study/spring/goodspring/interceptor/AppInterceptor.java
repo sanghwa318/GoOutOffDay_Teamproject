@@ -63,6 +63,7 @@ public class AppInterceptor implements HandlerInterceptor {
 		
 		// 사용자의 세션정보를 미리 담아둔다.
 		Member loginInfo = (Member) webHelper.getSession("login_info");
+		
 		boolean isKeyword=false;
 		// 가져온 값이 있다면 URL과 결합하여 완전한 URL을 구성한다.
 		if (queryString != null) {

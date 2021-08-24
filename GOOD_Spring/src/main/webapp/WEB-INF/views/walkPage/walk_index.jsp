@@ -18,6 +18,16 @@ p {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+h4 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	min-height: 38px;
+	margin-top: 0;
+}
 /** 캐러셀 영역 CSS **/
 .item {
 	transition: all 0.3s ease;
@@ -260,7 +270,7 @@ carousel-title2 {
 								<div class="map" id="map${status.index}" style="height: 180px"></div>
 								<div class="caption clearfix">
 									<p>작성자 : ${item.user_nick}</p>
-									<h4>코스이름 : ${item.mycourse_name }</h4>
+									<h4 class="explan">코스이름 : ${item.mycourse_name }</h4>
 									<p class="pull-left">지역 : ${item.mycourse_area}</p>
 									<p class="pull-right">좋아요 ${item.like}</p>
 								</div>

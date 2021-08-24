@@ -185,7 +185,7 @@ html, body {
 									</div>
 								</c:when>
 								<c:otherwise>
-									<img alt="썸네일 이미지" src="${item.IMGURL}"
+									<img alt="문화체육 썸네일 이미지(없는이미지)" src="${item.IMGURL}"
 										onclick="location.href='${CasDetailUrl}'"
 										style="cursor: pointer;">
 									<div class="caption clearfix">

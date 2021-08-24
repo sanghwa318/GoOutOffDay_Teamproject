@@ -10,6 +10,11 @@
 <%@ include file="../inc/head.jsp"%>
 
 <style>
+a {
+	text-decoration: none;
+	color: #343a40;
+	font-style: normal;
+}
 /*찜하기 버튼*/
 .fa-heart-o {
 	color: #FF685F;
@@ -21,16 +26,24 @@
 	cursor: pointer;
 }
 
-#heart_button {
-	margin-bottom: 30px
+.row .btn_container {
+	margin: 20px 0;
+	margin-left: 40px;
 }
-
 /* 위치안내 버튼 */
-.btn-blue{
-background-color :#b7dbf0;
+.row .btn_container .btn  .glyphicon {
+	top: 2.5px;
 }
 
+.row .btn_container .btn {
+	margin-bottom: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
 
+.btn-blue {
+	background-color: #b7dbf0;
+}
 
 .detail_map {
 	padding-left: 20px;
@@ -46,7 +59,7 @@ ul, li {
 
 .info li {
 	border: 1px solid #eee;
-/* 	padding: 17px 20px 20px 10px; */
+	/* 	padding: 17px 20px 20px 10px; */
 	padding: 2% 2% 2% 2%;
 	border-bottom: 1px solid #ddd;
 }
@@ -162,6 +175,12 @@ ul, li {
 .main_header>h1:hover {
 	transform: translate(0, -10px);
 }
+
+.row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
 </style>
 </head>
 <body>
@@ -184,15 +203,18 @@ ul, li {
 				<div class="header clearfix" style="margin-bottom: 50px;">
 					<h1 style="text-align: center;">&lt; ${output.COURSE_NAME}
 						&gt;</h1>
-					<button class="btn btn-blue disabled pull-right col-md-3  hidden-xs hidden-sm" 
+					<button
+						class="btn btn-blue disabled pull-right col-md-3  hidden-xs hidden-sm"
 						style="cursor: default; padding-top: 0; padding-bottom: 0;">
 						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
 					</button>
-					<button class="btn btn-blue disabled  col-xs-8 col-xs-offset-2 visible-xs" 
+					<button
+						class="btn btn-blue disabled  col-xs-8 col-xs-offset-2 visible-xs"
 						style="cursor: default; padding-top: 0; padding-bottom: 0;">
 						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
 					</button>
-					<button class="btn btn-blue disabled  col-sm-6 col-sm-offset-3 visible-sm" 
+					<button
+						class="btn btn-blue disabled  col-sm-6 col-sm-offset-3 visible-sm"
 						style="cursor: default; padding-top: 0; padding-bottom: 0;">
 						<h4>총 ${output.COUNT_BM} 명의 사용자가 찜한 코스입니다!</h4>
 					</button>
@@ -200,23 +222,22 @@ ul, li {
 
 
 				<div class="row">
-					<div class="col-md-6 col-sm-12 col-xs-11" >
+					<div class="col-md-6 col-sm-12 col-xs-11">
 						<!-- 지도 영역 -->
-						<div class="detail_map" style="margin-right:-15px">
-							<div class="map" id="map" style="min-width: 100%; max-height: 100%; height:420px" ></div>
+						<div class="detail_map" style="margin-right: -15px">
+							<div class="map" id="map"
+								style="max-width: 100%; max-height: 100%; height: 420px"></div>
 						</div>
-						
-						
+
+
 
 						<!-- 버튼 -->
-						<div class="btn_container col-xs-12 col-xs-offset-1"
-							style="text-align: center; margin-left:3%; margin-top: 0%;">
+						<div class="btn_container" style="text-align: center">
 
 							<a class="btn btn-blue" type="submit" id="location"
-								style="font-size: 20px; width: 140px; margin-top: 50px; margin-bottom: 80px; border: 0; outline: 0;">
-								<span style="font-size: 20px;"><i
-									class="glyphicon glyphicon-arrow-right"
-									style="padding-right: 5px;"></i> 위치 안내</span>
+								style="font-size: 18px; width: 140px"> <i
+								class="glyphicon glyphicon-arrow-right"
+								style="padding-right: 5px;"></i>위치 안내
 							</a>
 							<c:if test="${outputcount eq 1}">
 								<button class="heart btn btn-bookmark liked" id="heart_button"
@@ -239,10 +260,8 @@ ul, li {
 					<!-- 포인트 상세 설명 -->
 					<div class="col-md-6 col-sm-12 col-xs-11 main_info">
 						<ul class="info">
-							<li class="infoItem">
-								<strong class="infoLabel">지역 :</strong>
-								<p class="infoText ">${output.AREA_GU }</p>
-								</li>
+							<li class="infoItem"><strong class="infoLabel">지역 :</strong>
+								<p class="infoText ">${output.AREA_GU }</p></li>
 							<li class="infoItem"><strong class="infoLabel">거리 :
 							</strong>
 								<p class="infoText">${output.DISTANCE }</p></li>
@@ -274,53 +293,54 @@ ul, li {
 					</div>
 					<!-- // 포인트 상세 설명 -->
 					<!-- 코스 전체 포인트 테이블 -->
-					<div class="col-md-12 col-sm-12 col-xs-11" style="margin:4% 3% 0 3%;">
-					<h2 class="hidden-xs">- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
-					<h3 class="visible-xs">- ${output.COURSE_NAME} 의 세부경로 포인트-</h3>
-					<table class="table table-hover table-condensed table-responsive">
-						<thead>
-							<tr>
-								<th class="col-xs-1"><h4>번호</h4></th>
-								<th class="col-xs-3"><h4>코스포인트</h4></th>
-								<th class="col-xs-8"><h4>포인트 설명</h4></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:choose>
-								<%-- 조회결과가 없는 경우 --%>
-								<c:when
-									test="${output_path==null || fn:length(output_path)==0 }">
-									<tr>
-										<td align="center">경로가 존재하지 않습니다.</td>
-									</tr>
-								</c:when>
-								<%-- 조회결과가 있는 경우 --%>
-								<c:otherwise>
-									<%-- 조회 결과에 따른 반복 처리 --%>
-									<c:forEach var="item" items="${output_path }"
-										varStatus="status">
-										<%-- 출력을 위해 준비한 변수 --%>
-										<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
-
-										<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
-										<c:set var="CPI_CONTENT" value="${item.CPI_CONTENT }" />
-
-										<%--                               상세페이지로 이동하기 위한 URL --%>
-										<%--                               <c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
-										<%--                                  <c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
-										<%--                               </c:url> --%>
-
+					<div class="col-md-12 col-sm-12 col-xs-11"
+						style="margin: 4% 3% 0 3%;">
+						<h2 class="hidden-xs">- ${output.COURSE_NAME} 의 세부경로 포인트-</h2>
+						<h3 class="visible-xs">- ${output.COURSE_NAME} 의 세부경로 포인트-</h3>
+						<table class="table table-hover table-condensed table-responsive">
+							<thead>
+								<tr>
+									<th class="col-xs-1"><h4>번호</h4></th>
+									<th class="col-xs-3"><h4>코스포인트</h4></th>
+									<th class="col-xs-8"><h4>포인트 설명</h4></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:choose>
+									<%-- 조회결과가 없는 경우 --%>
+									<c:when
+										test="${output_path==null || fn:length(output_path)==0 }">
 										<tr>
-											<td><h4>${status.index +1 }</h4></td>
-											<td><h4>${CPI_NAME }</h4></td>
-											<td><h4>${CPI_CONTENT }</h4></td>
+											<td align="center">경로가 존재하지 않습니다.</td>
 										</tr>
+									</c:when>
+									<%-- 조회결과가 있는 경우 --%>
+									<c:otherwise>
+										<%-- 조회 결과에 따른 반복 처리 --%>
+										<c:forEach var="item" items="${output_path }"
+											varStatus="status">
+											<%-- 출력을 위해 준비한 변수 --%>
+											<c:set var="CPI_NAME" value="${item.CPI_NAME }" />
 
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
+											<c:set var="COURSE_NAME" value="${item.COURSE_NAME }" />
+											<c:set var="CPI_CONTENT" value="${item.CPI_CONTENT }" />
+
+											<%--                               상세페이지로 이동하기 위한 URL --%>
+											<%--                               <c:url value="/walkPage/walk_detailCourse.do" var="viewUrl"> --%>
+											<%--                                  <c:param name="CPI_IDX" value="${item.CPI_IDX }" /> --%>
+											<%--                               </c:url> --%>
+
+											<tr>
+												<td><h4>${status.index +1 }</h4></td>
+												<td><h4>${CPI_NAME }</h4></td>
+												<td><h4>${CPI_CONTENT }</h4></td>
+											</tr>
+
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
 					</div>
 					<!-- //코스 전체 포인트 테이블 -->
 
@@ -679,7 +699,8 @@ ul, li {
       <!-- //geoJson 파일 불러와서 카카오 맵에 표시 -->
    </script>
 
-	<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/Book-Mark.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath }/assets/js/Book-Mark.js"></script>
 	<script>
    // 찜 추가
    function addBookMark(){

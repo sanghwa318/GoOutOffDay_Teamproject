@@ -432,6 +432,9 @@ public class WalkController {
 			@RequestParam(value = "URL", required = false) String URL) throws Exception {
 
 		Member loginInfo = (Member) webHelper.getSession("login_info");
+		if (loginInfo == null) {
+			return webHelper.getJsonData();
+		} 
 		/** 로그 저장을 위한 구문 **/
 		// 로그 모델
 		UserTrafficLog loginput = new UserTrafficLog();

@@ -338,7 +338,7 @@ html, body {
 						</c:url>
 						<div class="col-xs-6 col-sm-4 col-md-3 casItem">
 							<div class="thumbnail item">
-								<img alt="테스트이미지 1번" src="${item_theme.IMGURL }"
+								<img alt="문화체육 썸네일 이미지(없는이미지)" src="${item_theme.IMGURL }"
 									onclick="location.href='${detailUrl}'" style="cursor: pointer;">
 								<div class="caption clearfix">
 									<p>
