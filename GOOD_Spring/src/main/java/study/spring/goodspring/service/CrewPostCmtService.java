@@ -2,6 +2,7 @@ package study.spring.goodspring.service;
 
 import java.util.List;
 
+import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.CrewPostCmt;
 
 
@@ -42,5 +43,6 @@ public interface CrewPostCmtService {
 	 * @throws Exception
 	 */
 	CrewPostCmt getCmtWriterImage(CrewPostCmt input) throws Exception;
+
 
 }

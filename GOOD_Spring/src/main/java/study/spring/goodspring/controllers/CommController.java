@@ -23,10 +23,12 @@ import study.spring.goodspring.helper.WebHelper;
 import study.spring.goodspring.model.Crew;
 import study.spring.goodspring.model.CrewMember;
 import study.spring.goodspring.model.CrewPost;
+import study.spring.goodspring.model.CrewPostCmt;
 import study.spring.goodspring.model.CrewPostLike;
 import study.spring.goodspring.model.Member;
 import study.spring.goodspring.model.MyCourses;
 import study.spring.goodspring.service.CrewMemberService;
+import study.spring.goodspring.service.CrewPostCmtService;
 import study.spring.goodspring.service.CrewPostLikeService;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
@@ -44,7 +46,10 @@ public class CommController {
 	
 	@Autowired
 	MemberService memberService;
-
+	
+	@Autowired
+	CrewPostCmtService crewPostCmtService;
+	
 	@Autowired
 	CrewService crewService;
 
@@ -646,8 +651,12 @@ public ModelAndView crewPostDelete(Model model,
 	input.setPost_no(post_no);
 	input.setCrew_no(crew_no);
 	input.setCrew_name(crew_name);
+	input.setCrew_post_post_no(post_no);
 	
 	CrewPost output = null;
+	
+	CrewPostCmt input2 = new CrewPostCmt();
+	input2.setCrew_post_post_no(post_no);
 	
 	try {
 		// 로그인한 사용자와 작성자 정보가 같은 경우 삭제

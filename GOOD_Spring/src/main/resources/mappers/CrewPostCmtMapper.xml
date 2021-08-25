@@ -60,6 +60,7 @@
 		DELETE FROM crew_comment WHERE comment_no = #{comment_no};
 	</delete>
 	
+	
 	<!-- 단일행 조회 (댓글 수정 삭제) -->
  	<select id="selectCrewPostCmtItem" resultMap="CrewPostCmtMap"
 		parameterType="study.spring.goodspring.model.CrewPostCmt">
@@ -81,6 +82,15 @@
 	<update id="unsetcrewpostcmtuserno" parameterType="study.spring.goodspring.model.CrewPostCmt">
 	UPDATE crew_comment SET user_info_user_no=null WHERE user_info_user_no=#{user_info_user_no};
 	</update>
+	
+<!-- 					크루 게시글 삭제위한 댓글 데이터 삭제 기능
+	<delete id="deleteCrewPostCmtTotal"
+		parameterType="study.spring.goodspring.model.CrewPostCmt" >
+		DELETE FROM crew_comment
+		WHERE crew_post_post_no = #{crew_post_post_no};
+	</delete> -->
+
+	
 </mapper>
 
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import study.spring.goodspring.model.CrewPost;
+import study.spring.goodspring.model.CrewPostCmt;
 import study.spring.goodspring.service.CrewPostService;
 import study.spring.goodspring.service.CrewService;
 
@@ -94,7 +95,7 @@ public class CrewPostServiceImpl implements CrewPostService {
 	}
 
 	/*
-	 * 크루 데이터 상세 조회
+	 * 크루 게시글 삭제
 	 * @param Crew 조회할 크루의 일련번호를 담고있는 Beans
 	 * @return 조회된 데이터가 저장된 Beans
 	 * @throws Exception
@@ -104,18 +105,21 @@ public class CrewPostServiceImpl implements CrewPostService {
 		int result= 0;
 		
 		try {
-			result = sqlSession.selectOne("CrewPostMapper.deleteCrewPost", input);
+			result = sqlSession.delete("CrewPostMapper.deleteCrewPost", input);
+			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
-			throw new Exception("데이터 조회에 실패했습니다.");
+			throw new Exception("데이터 삭제에 실패했습니다.");
 		}
 		
 		return result;
 		
 	}
+	
+
 
 	/*
-	 * 크루 데이터 상세 조회
+	 * 크루 게시글 상세 조회
 	 * @param Crew 조회할 크루의 일련번호를 담고있는 Beans
 	 * @return 조회된 데이터가 저장된 Beans
 	 * @throws Exception
@@ -241,8 +245,10 @@ public class CrewPostServiceImpl implements CrewPostService {
 		
 		return result;
 	}
+	
 
 
+	
 
 
 }

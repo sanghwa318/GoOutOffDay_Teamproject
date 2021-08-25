@@ -19,6 +19,9 @@
 		<result property="user_info_user_no" column="user_info_user_no" />
 		<result property="comment" column="comment" />
 
+
+		<result property="crew_post_post_no" column="crew_post_post_no" />
+
 	</resultMap>
 
 
@@ -184,5 +187,14 @@
 	parameterType="study.spring.goodspring.model.CrewPost" resultType="int">
 	SELECT `post_like` FROM crew_post WHERE post_no = #{post_no};
 	</select>
+	
+
+	<!-- 좋아요 수 업데이트 기능 -->
+	<update id="updateCmtTotal"
+	parameterType="study.spring.goodspring.model.CrewPost">
+	UPDATE crew_post 
+	SET `comment`=0
+	WHERE post_no = #{post_no};
+	</update>
 	
 </mapper>

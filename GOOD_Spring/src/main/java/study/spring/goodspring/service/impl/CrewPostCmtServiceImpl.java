@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import study.spring.goodspring.model.CrewPost;
 import study.spring.goodspring.model.CrewPostCmt;
 import study.spring.goodspring.service.CrewPostCmtService;
 
@@ -120,7 +121,7 @@ public class CrewPostCmtServiceImpl implements CrewPostCmtService{
 		}
 		return result;
 	}
-	
+
 	
 
 }

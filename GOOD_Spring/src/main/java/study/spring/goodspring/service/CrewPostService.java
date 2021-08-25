@@ -58,4 +58,8 @@ public interface CrewPostService {
 	 */
 	public int upadateCrewPost(CrewPost input) throws Exception;
 
+
+
+
+
 }
