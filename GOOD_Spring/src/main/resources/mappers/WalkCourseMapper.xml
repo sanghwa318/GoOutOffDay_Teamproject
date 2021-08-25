@@ -389,7 +389,7 @@
 	<select id="selectMapList"
 		parameterType="study.spring.goodspring.model.WalkCourse"
 		resultMap="WalkCourseMap">
-		SELECT * FROM good.seoulgil_walk_course WHERE
+		SELECT * FROM seoulgil_walk_course WHERE
 		COURSE_NAME=#{COURSE_NAME} ORDER BY CPI_IDX ASC
 	</select>
 

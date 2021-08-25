@@ -63,19 +63,19 @@
 		ORDER BY setgoal_create_datetime ASC
 	</select>
 	<update id="updateAchieve" parameterType="study.spring.goodspring.model.WalkSetGoal">
-		UPDATE good.walk_setgoal 
+		UPDATE walk_setgoal 
 		SET time_achieve=#{time_achieve}, distance_achieve=#{distance_achieve}
 		WHERE 
 		user_info_user_no=#{user_info_user_no} 
         AND 
         setgoal_no=
         (SELECT setgoal_no from 
-	        (SELECT setgoal_no FROM good.walk_setgoal 
+	        (SELECT setgoal_no FROM walk_setgoal 
 	        WHERE user_info_user_no=#{user_info_user_no} 
 	        AND 
 	        setgoal_create_datetime=
 		        (SELECT MAX(setgoal_create_datetime) 
-		        FROM good.walk_setgoal 
+		        FROM walk_setgoal 
 		        WHERE user_info_user_no=#{user_info_user_no})
 		    )
 		AS temp)

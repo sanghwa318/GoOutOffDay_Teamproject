@@ -302,7 +302,7 @@
 			SELECT substr(log_category, (instr(log_category, '=') +1)
 			)
 			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
+			FROM user_traffic_log
 			WHERE log_content like 'keyword'
 			AND log_datetime BETWEEN
 			DATE_ADD(CURDATE(), INTERVAL -1
@@ -318,7 +318,7 @@
 			SELECT substr(log_category, (instr(log_category, '=') +1)
 			)
 			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
+			FROM user_traffic_log
 			WHERE log_content like 'keyword'
 			AND log_datetime BETWEEN
 			DATE_ADD(CURDATE(), INTERVAL -1
@@ -340,7 +340,7 @@
 			SELECT substr(log_category, (instr(log_category, '=') +1)
 			)
 			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
+			FROM user_traffic_log
 			WHERE log_content like 'keyword'
 			AND DATE_FORMAT(log_datetime,
 			"%Y-%m-%d") = CURDATE()
@@ -354,7 +354,7 @@
 			SELECT substr(log_category, (instr(log_category, '=') +1)
 			)
 			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
+			FROM user_traffic_log
 			WHERE log_content like 'keyword'
 			AND log_datetime BETWEEN
 			DATE_ADD(CURDATE(), INTERVAL -1
@@ -370,7 +370,7 @@
 			SELECT substr(log_category, (instr(log_category, '=') +1)
 			)
 			as search_keyword, count(*) as log_cnt
-			FROM good.user_traffic_log
+			FROM user_traffic_log
 			WHERE log_content like 'keyword'
 			AND log_datetime BETWEEN
 			DATE_ADD(CURDATE(), INTERVAL -1

@@ -149,11 +149,11 @@
 	<!-- 기록하기 중지 할때 , 현재 기록된 데이터에 코스 이름을 저장한다.-->
 	<update id="updateCourseName"
 		parameterType="study.spring.goodspring.model.WalkLog">
-		update good.walk_log 
+		update walk_log 
 		SET course_name=#{course_name} 
 		WHERE walk_log_datetime
 		in (select walk_log_datetime from (SELECT walk_log_datetime FROM
-		good.walk_log
+		walk_log
 		WHERE (walk_log_datetime BETWEEN (SELECT MAX(walk_log_datetime) FROM
 		walk_log
 		WHERE event_name='시작') AND (SELECT MAX(walk_log_datetime) FROM walk_log
@@ -180,8 +180,8 @@
     </select>
     <!-- 걸은 시간(종료-시작)을 가져오기 -->
     <select id="selectLogTime" parameterType="study.spring.goodspring.model.WalkLog" resultMap="WalkLogMap">
-    SELECT TIMESTAMPDIFF(SECOND,(SELECT walk_log_datetime FROM good.walk_log WHERE course_name=#{course_name} AND event_name='시작'), 
-    (SELECT walk_log_datetime FROM good.walk_log WHERE course_name=#{course_name} AND event_name='종료')) as 'time'
+    SELECT TIMESTAMPDIFF(SECOND,(SELECT walk_log_datetime FROM walk_log WHERE course_name=#{course_name} AND event_name='시작'), 
+    (SELECT walk_log_datetime FROM walk_log WHERE course_name=#{course_name} AND event_name='종료')) as 'time'
     </select>
     
     <!-- DB에 있는 모든 코스 이름을 가져오기 -->
