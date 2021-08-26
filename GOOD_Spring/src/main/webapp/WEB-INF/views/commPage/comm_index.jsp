@@ -6,6 +6,35 @@
 <head>
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 <style type="text/css">
+.header  h2 {
+	position: relative;
+	color: #343a40;
+}
+.show_list .header h2:after {
+	content: "";
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/나만의코스 아이콘.png");
+	background-size: 100% 100%;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	margin-left: 10px;
+	position: absolute;
+	top: -2px;
+}
+.exp_list .header h2:after {
+	content: "";
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png");
+	background-size: 100% 100%;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	margin-left: 10px;
+	position: absolute;
+	top: 1px;
+}
+
 .row .thumbnail .caption p {
 	color: #848c94;
 }
@@ -51,27 +80,7 @@ h4 {
 	position: relative;
 }
 
-.show_list .header h2:after {
-	content: "";
-	background-size: 100% 100%;
-	width: 30px;
-	height: 30px;
-	display: inline-block;
-	margin-left: 10px;
-	position: absolute;
-	top: 2px;
-}
 
-.exp_list .header h2:after {
-	content: "";
-	background-size: 100% 100%;
-	width: 30px;
-	height: 30px;
-	display: inline-block;
-	margin-left: 10px;
-	position: absolute;
-	top: 1px;
-}
 
 .visible-xs {
 	border-bottom: 1px solid #ddd;
@@ -248,8 +257,8 @@ h4 {
 									</div>
 									<div class="caption clearfix">
 										<p>작성자 : ${item.user_nick}</p>
-										<h4 class="explan">코스이름 : ${item.mycourse_name }</h4>
-										<p class="pull-left">지역 : ${item.mycourse_area}</p>
+										<h4 class="explan">${item.mycourse_name }</h4>
+										<p class="pull-left">${item.mycourse_area}</p>
 										<p class="pull-right">좋아요 ${item.like}</p>
 									</div>
 								</div>
@@ -287,8 +296,8 @@ h4 {
 										<p>${item.crew_name}크루</p>
 										<h4 class="explan">${item.crew_sinto}</h4>
 										<p class="pull-left" style="max-width: 70%;">${item.crew_area}</p>
-										<p class="pull-right" style="max-width: 30%;">회원수
-											${item.crew_member}명</p>
+										<p class="pull-right" style="max-width: 30%;">
+											${item.crew_category}</p>
 									</div>
 								</div>
 							</c:forEach>
