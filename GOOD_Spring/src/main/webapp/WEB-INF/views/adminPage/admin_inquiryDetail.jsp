@@ -7,7 +7,11 @@
 <%@ include file="/WEB-INF/views/inc/head.jsp"%>
 
 <style>
-.btn {
+.col-md-offset-1 {
+	margin: 0;
+}
+
+#detailform .form-group .btn {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -42,63 +46,69 @@
 					<span class="test01">관리자페이지 </span>
 				</h1>
 			</div>
-			<form class="col-md-12 col-md-offset-1" id="detailform" action="${pageContext.request.contextPath}/adminPage/admin_inquiryanswerOk.do"
-				method="post">
-			<!-- 본문 상단 영역 -->
-			<div class="admin_inquiryDetail-header">
-				<h1 class="page-header">1:1 문의 관리</h1>
-			</div>
-			<!-- 본문 상단 영역 끝 -->
-			<!-- 본문 중단1 영역 -->
-			<div class="admin_inquiryDetail_middle1">
-				<div class="form-group">
-					<label for='reason' class="col-md-12"><h3>회원 문의</h3> </label>
-					<div class="col-md-12">
-					<div id="inq">
-						<h2>${output.getQnA_title()}</h2>
-						<div class="jumbotron">
-							<p>${output.getQnA_text()}</p>
+			<div class="row">
+				<form class="col-md-12 col-md-offset-1" id="detailform"
+					action="${pageContext.request.contextPath}/adminPage/admin_inquiryanswerOk.do"
+					method="post">
+					<!-- 본문 상단 영역 -->
+					<div class="admin_inquiryDetail-header">
+						<h1 class="page-header">1:1 문의 관리</h1>
+					</div>
+					<!-- 본문 상단 영역 끝 -->
+					<!-- 본문 중단1 영역 -->
+					<div class="admin_inquiryDetail_middle1">
+						<div class="form-group">
+							<label for='reason' class="col-md-12"><h3>회원 문의</h3> </label>
+							<div class="col-md-12">
+								<div id="inq">
+									<h2>${output.getQnA_title()}</h2>
+									<div class="jumbotron">
+										<p>${output.getQnA_text()}</p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+					<!-- 본문 중단1 영역 끝 -->
+					<!-- 본문 중단 영역 -->
+					<div class="admin_inquiryDeta.conteil_middle2">
+						<div class="form-group">
+							<label for='reason' class="col-md-12"><h3>관리자 답변</h3> <input
+								type="hidden" name="QnA_no" value="${output.getQnA_no()}" /></label>
+							<div class="col-md-12">
+								<textarea class="form-control" id="Answer_detail"
+									name="Answer_detail" style="min-height: 300px; resize: none"
+									placeholder="내용을 입력해주세요."><c:if
+										test="${output.answer_detail != null}">${output.answer_detail}</c:if></textarea>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<!-- 본문 중단1 영역 끝 -->
-			<!-- 본문 중단 영역 -->
-			<div class="admin_inquiryDeta.conteil_middle2">
-				<div class="form-group">
-					<label for='reason' class="col-md-12"><h3>관리자 답변</h3> <input type="hidden" name="QnA_no" value="${output.getQnA_no()}" /></label>
-					<div class="col-md-12">
-						<textarea class="form-control" id="Answer_detail" name="Answer_detail"
-							style="min-height: 300px; resize: none" placeholder="내용을 입력해주세요."><c:if test="${output.answer_detail != null}">${output.answer_detail}</c:if></textarea>
+					<!-- 본문 중단2 영역 끝 -->
+					<!-- 본문하단영역 -->
+					<div class="form-group">
+						<div class="btn text-center pull-left">
+							<button type='button' id="list" class="btn btn-info"
+								onClick="location.href='${pageContext.request.contextPath}/adminPage/admin_inquiry.do'">목록</button>
+						</div>
+						<div class="btn text-center pull-right">
+							<button type='submit' id="add" class="btn btn-success">등록</button>
+						</div>
 					</div>
-				</div>
+					<!-- 본문하단영역 끝 -->
+				</form>
 			</div>
-			<!-- 본문 중단2 영역 끝 -->
-			<!-- 본문하단영역 -->
-			<div class="form-group">
-				<div class="btn text-center pull-left">
-					<button type='button' id="list" class="btn btn-info"
-						onClick="location.href='${pageContext.request.contextPath}/adminPage/admin_inquiry.do'">목록</button>
-				</div>
-				<div class="btn text-center pull-right">
-					<button type='submit' id="add" class="btn btn-success">등록</button>
-				</div>
-			</div>
-			<!-- 본문하단영역 끝 -->
-			</form>
 		</div>
 		<!-- //컨테이너 -->
 	</div>
 	<!-- //푸터빼고 감싸주세요 -->
 	<script>
-	 function getContextPath() {
-	      var hostIndex = location.href.indexOf(location.host)
-	            + location.host.length;
-	      var contextPath = location.href.substring(hostIndex, location.href
-	            .indexOf('/', hostIndex + 1));
-	      return contextPath;
-	   }
+		function getContextPath() {
+			var hostIndex = location.href.indexOf(location.host)
+					+ location.host.length;
+			var contextPath = location.href.substring(hostIndex, location.href
+					.indexOf('/', hostIndex + 1));
+			return contextPath;
+		}
 		$("#add").click(function() {
 			event.preventDefault();
 			// 확인, 취소버튼에 따른 후속 처리 구현
@@ -111,10 +121,9 @@
 				cancelButtonText : '아니오', // 취소버튼 표시 문구
 			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 				if (result.value) { // 확인 버튼이 눌러진 경우
-					
-					$("#detailform").submit();					
-					 
-					 
+
+					$("#detailform").submit();
+
 				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 					swal('취소', '등록이 취소되었습니다.', 'error');
 					setTimeout(function() {
@@ -124,7 +133,6 @@
 
 			});
 		});
-
 	</script>
 	<!-- 공통 푸터 -->
 	<%@ include file="/WEB-INF/views/inc/Footer.jsp"%>
