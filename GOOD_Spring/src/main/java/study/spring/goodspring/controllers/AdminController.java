@@ -230,7 +230,7 @@ public class AdminController {
 
 			// SQL의 LIMIT 절에서 사용될 값을 Beans의 static 변수에 저장
 			Member.setOffset(pageData.getOffset());
-			Member.setOffset(pageData.getListCount());
+			Member.setListCount(pageData.getListCount());
 			// 데이터 조회
 			output = memberService.getAdminMemberList(input);
 		} catch (Exception e) {
