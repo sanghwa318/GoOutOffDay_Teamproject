@@ -187,8 +187,6 @@ public class CommController {
 
 			String redirectUrl = contextPath + "/mainPage/login.do";
 			return webHelper.redirect(redirectUrl, "로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
-		}else if (login_info.isUser_admin()){
-			return webHelper.redirect(contextPath+"/commPage/comm_crew_bbs.do?crew_no="+crew_no, null);
 		}
 
 		int userNo = login_info.getUser_no();
@@ -227,6 +225,8 @@ public class CommController {
 		if(isMember) {
 			//가입된 회원이면 bbs페이지로 이동
 			return webHelper.redirect(contextPath + "/commPage/comm_crew_bbs.do?crew_no=" + output.getCrew_no() + "&crew_name=" + output.getCrew_name(), null);
+		}else if (login_info.isUser_admin()){
+			return webHelper.redirect(contextPath+"/commPage/comm_crew_bbs.do?crew_no="+crew_no+"&crew_name=" + output.getCrew_name(), null);
 		}
 
 		
