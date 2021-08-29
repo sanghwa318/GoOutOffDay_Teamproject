@@ -50,7 +50,7 @@
 								<div class="col-sm-8 col-xs-9">
 									<select class="form-control" name="answer" id="answer">
 										<option value="">-- 상태 --</option>
-										<option value="N">답변 중</option>
+										<option value="N">답변 전</option>
 										<option value="Y">답변 완료</option>
 									</select>
 								</div>
@@ -114,7 +114,7 @@
 										<td class="text-center">${status.count}</td>
 										<td class="text-center">
 										<c:if test="${item.answer_yn}">답변 완료</c:if>
-										<c:if test="${!item.answer_yn}">답변 중</c:if></td>
+										<c:if test="${!item.answer_yn}">답변 전</c:if></td>
 										<td class="text-center">${item.getQnA_category()}</td>
 										<td class="text-center">${item.getQnA_title()}</td>
 									</tr>

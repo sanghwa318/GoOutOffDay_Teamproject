@@ -200,4 +200,8 @@
 		LIMIT 10;
 
 	</select>
+	
+	<delete id="deleteCmtList" parameterType="study.spring.goodspring.model.MyCourses">
+	DELETE from mycourse_cmt where mycourse_no=#{mycourse_no}
+	</delete>
 </mapper>

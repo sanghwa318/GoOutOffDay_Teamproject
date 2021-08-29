@@ -179,6 +179,9 @@ font-size: 1.5rem;
 margin: auto;
 }
 
+#btn111{
+z-index: 10000;
+}
 
 
 </style>
@@ -262,7 +265,7 @@ margin: auto;
 					<textarea class="form-control" id="comment_text"
 						style="height: 60px; resize: none;" placeholder="내용을 입력해주세요."></textarea>
 					<span class="input-group-btn"><button type="button"
-							class="btn btn-default" style="height: 60px;" onclick="cmt_add()">댓글
+							class="btn btn-default" id="btn111" style="height: 60px;" onclick="cmt_add()">댓글
 							등록</button></span>
 				</div>
 			</form>

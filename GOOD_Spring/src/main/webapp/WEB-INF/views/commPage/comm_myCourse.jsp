@@ -10,6 +10,37 @@
 <%@ include file="../inc/head.jsp"%>
 
 <style type="text/css">
+.header h1 {
+	position: relative;
+}
+
+.header h1:after {
+	content: "";
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/나만의코스 아이콘.png");
+	background-size: 100% 100%;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	margin-left: 10px;
+	position: absolute;
+	top: 2px;
+}
+p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+h4 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	min-height: 38px;
+	margin-top: 0;
+}
 .row .thumbnail .caption p {
 	color: #848c94;
 }
@@ -109,9 +140,9 @@
 									style="cursor: pointer;">
 									<div class="map" id="map${status.index}" style="height:180px"></div>
 									<div class="caption clearfix">
-										<p style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">작성자: ${item.user_nick}</p>
-										<h4 style="overflow: hidden;	text-overflow: ellipsis; white-space: nowrap;">코스이름: ${item.mycourse_name }</h4>
-										<p class="pull-left">지역: ${item.mycourse_area}</p>
+										<p>작성자 : ${item.user_nick}</p>
+										<h4 class="explan">${item.mycourse_name }</h4>
+										<p class="pull-left">${item.mycourse_area}</p>
 										<p class="pull-right">좋아요 ${item.like}</p>
 									</div>
 								</div>
