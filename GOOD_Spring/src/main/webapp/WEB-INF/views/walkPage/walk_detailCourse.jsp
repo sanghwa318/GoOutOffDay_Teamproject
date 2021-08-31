@@ -195,7 +195,7 @@ ul, li {
 						onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
 						style="cursor: pointer; color: #343a40;">
 						<span class="test01">걷기<img
-							src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png;"
+							src="<%=request.getContextPath()%>/assets/icon_img/walk_icon.png;"
 							style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
 						</span>
 					</h1>

@@ -48,7 +48,7 @@ h2 {
 				<h1 class="page-header page-title" id="cas_header"
 					onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
 					style="cursor: pointer; color: #343a40;">
-					<span class="test01">걷기<img src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png;"
+					<span class="test01">걷기<img src="${pageContext.request.contextPath}/assets/icon_img/walk_icon.png;"
 						style="width: 44px; height: 44px; position: relative; bottom: 5px;"></img>
 					</span>
 				</h1>

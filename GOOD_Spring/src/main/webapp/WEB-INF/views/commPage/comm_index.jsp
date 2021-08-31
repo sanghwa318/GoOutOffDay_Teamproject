@@ -13,7 +13,7 @@
 .show_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/나만의코스 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/makemycourse_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -25,7 +25,7 @@
 .exp_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/crew_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -225,7 +225,7 @@ h4 {
 		<div class="container" id="content">
 			<h1 class="page-header page-title text-center">
 				커뮤니티<img
-					src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png" />
+					src="<%=request.getContextPath()%>/assets/icon_img/comm_icon.png" />
 			</h1>
 			<!-- 본문영역 시작 -->
 			<div class="comm_index_middle">

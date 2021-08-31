@@ -203,7 +203,7 @@ div#map1{
             <div class="main_header">
                <h1 class="page-header page-title">
                   <span>공공자전거<img alt="따릉이 실시간 이용현황"
-                     src="../assets/icon_img/자전거 아이콘 2.png" />
+                     src="../assets/icon_img/bicycle2_icon.png" />
                   </span>
                </h1>
             </div>

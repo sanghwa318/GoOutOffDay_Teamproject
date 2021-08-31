@@ -47,7 +47,7 @@
 					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
+						src="${pageContext.request.contextPath}/assets/icon_img/comm_icon.png;" />
 					</span>
 				</h1>
 			</div>

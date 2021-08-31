@@ -170,7 +170,7 @@ ul, li {
 					onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">문화 체육<img
-						src="${pageContext.request.contextPath }/assets/icon_img/문화체육 아이콘.png;" />
+						src="${pageContext.request.contextPath }/assets/icon_img/cas_icon.png;" />
 					</span>
 				</h1>
 			</div>

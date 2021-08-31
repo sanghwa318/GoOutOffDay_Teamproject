@@ -20,7 +20,7 @@
 			<h3><a href="${pageContext.request.contextPath}/bicyclePage/bicycle_index.do" class="a1">자전거</a></h3>
 			<p>자전거 페이지에서는 현재 서울시에서 운영하고 있는 공공자전거 "따릉이"의 자전거 갯수 현황을 통한 대여가능 여부를 파악 하실 수 있습니다.</p>
 			
-			<h3><a href="${pageContext.request.contextPath}/walkPage/walk_index.jsp" class="a2">걷기</a></h3>
+			<h3><a href="${pageContext.request.contextPath}/walkPage/walk_index.do" class="a2">걷기</a></h3>
 			<p>걷기 기록하기 버튼을 클릭!</p>
 			<p>서울시에서 제공하는 두드림길 코스에 대한 검색을 통해 내가 마음에 드는 코스를 선택 후 시작 버튼을 눌러보세요!. 내가 얼마나 걸었는지 알 수 있습니다.</p>
 			<p>걷기 페이지에서는 들어오시면 메인 페이지는 서울시 두드림길 코스 정보를 지도에 표시하고 있습니다.</p>

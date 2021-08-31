@@ -200,7 +200,7 @@ carousel-title2 {
 		<div class="header wk_header text-center">
 			<h1 class="page-header page-title" id="wk_header">
 				걷기<img
-					src="${pageContext.request.contextPath}/assets/icon_img/걷기 아이콘.png;"
+					src="${pageContext.request.contextPath}/assets/icon_img/walk_icon.png;"
 					style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
 			</h1>
 
@@ -238,7 +238,7 @@ carousel-title2 {
 		<div class="header text-center carousel-title clearfix">
 			<h2>
 				<strong>명예의 전당 코스<img
-					src="${pageContext.request.contextPath}/assets/icon_img/명예의 전당_아이콘.png"
+					src="${pageContext.request.contextPath}/assets/icon_img/course_top10_icon.png"
 					style="width: 44px; height: 44px; position: relative; bottom: 5px;"></img></strong>
 			</h2>
 		</div>
@@ -291,7 +291,7 @@ carousel-title2 {
 		<div class="header text-center carousel-title2 clearfix">
 			<h2>
 				<strong>코스 목록<img
-					src="${pageContext.request.contextPath}/assets/icon_img/코스 목록_아이콘.png;"
+					src="${pageContext.request.contextPath}/assets/icon_img/course_list_icon.png;"
 					style="width: 44px; height: 44px; position: relative; bottom: 5px; margin-left: 5px"></img></strong>
 			</h2>
 			<div class="pull-right">

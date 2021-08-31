@@ -38,6 +38,21 @@ div#category_acco .accordian-toggle {
 		padding: 1.5px 0 !important;
 	}
 }
+.container div .page_header {
+	position: relative;
+}
+.container div .page_header h1:after {
+	content: "";
+	background-image:
+		url("${pageContext.request.contextPath}/assets/icon_img/course_list_icon.png");
+	background-size: 100% 100%;
+	width: 44px;
+	height: 44px;
+	display: inline-block;
+	margin-left: 10px;
+	position: absolute;
+	top: -4px;
+}
 </style>
 </head>
 
@@ -58,7 +73,7 @@ div#category_acco .accordian-toggle {
 					onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">걷기<img
-						src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png;"
+						src="<%=request.getContextPath()%>/assets/icon_img/walk_icon.png;"
 						style="width: 3rem; height: 3rem; position: relative; bottom: 3px; left: 5px;"></img>
 					</span>
 				</h1>

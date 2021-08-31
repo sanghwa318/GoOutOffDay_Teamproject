@@ -83,7 +83,7 @@ html, body {
 .show_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/장소대여 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/rental_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -96,7 +96,7 @@ html, body {
 .exp_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/창의 체험 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/imp_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -109,7 +109,7 @@ html, body {
 .adu_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/자기계발 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/adu_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -122,7 +122,7 @@ html, body {
 .sport_list .header h2:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/체육시설 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/sport_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -296,7 +296,7 @@ html, body {
 					<h1 class="page-header page-title" id="cas_header"
 						style="color: #343a40;">
 						<span class="test01">문화 체육<img
-							src="${pageContext.request.contextPath}/assets/icon_img/문화체육 아이콘.png;" />
+							src="${pageContext.request.contextPath}/assets/icon_img/cas_icon.png;" />
 						</span>
 					</h1>
 				</div>

@@ -37,7 +37,7 @@ h4 {
 .header h1:after {
 	content: "";
 	background-image:
-		url("${pageContext.request.contextPath}/assets/icon_img/크루 아이콘.png");
+		url("${pageContext.request.contextPath}/assets/icon_img/crew_icon.png");
 	background-size: 100% 100%;
 	width: 30px;
 	height: 30px;
@@ -132,7 +132,7 @@ h4 {
 					onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 					style="cursor: pointer; color: #343a40;">
 					<span class="test01">커뮤니티<img
-						src="${pageContext.request.contextPath}/assets/icon_img/커뮤니티 아이콘.png;" />
+						src="${pageContext.request.contextPath}/assets/icon_img/comm_icon.png;" />
 					</span>
 				</h1>
 			</div>

@@ -249,16 +249,16 @@ public class CasController {
 
 		if (cas.equals("문화")) {
 			result = "문화 창의 체험";
-			iconurl = "'../assets/icon_img/창의 체험 아이콘.png'";
+			iconurl = "'../assets/icon_img/imp_icon.png'";
 		} else if (cas.equals("대관")) {
 			result = "장소대여";
-			iconurl = "'../assets/icon_img/장소대여 아이콘.png'";
+			iconurl = "'../assets/icon_img/rental_icon.png'";
 		} else if (cas.equals("교육")) {
 			result = "교육 자기 계발";
-			iconurl = "'../assets/icon_img/자기계발 아이콘.png'";
+			iconurl = "'../assets/icon_img/adu_icon.png'";
 		} else if (cas.equals("체육")) {
 			result = "체육시설";
-			iconurl = "'../assets/icon_img/체육시설 아이콘.png'";
+			iconurl = "'../assets/icon_img/sport_icon.png'";
 		}
 
 		try {

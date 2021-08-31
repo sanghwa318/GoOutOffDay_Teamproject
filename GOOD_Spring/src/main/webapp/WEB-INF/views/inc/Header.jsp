@@ -141,7 +141,7 @@
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;"
 												onclick="location.href='${pageContext.request.contextPath}/bicyclePage/bicycle_index.do'">
 												<img
-													src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/bicycle1_icon.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />자전거
 											</button>
 										</div>
@@ -155,7 +155,7 @@
 												data-target="#collapseOne"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;">
 												<img
-													src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/walk_icon.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />걷기
 											</button>
 										</div>
@@ -184,7 +184,7 @@
 												data-target="#collapseTwo"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;">
 												<img
-													src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/cas_icon.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />문화체육
 											</button>
 										</div>
@@ -223,7 +223,7 @@
 												data-target="#collapseThree"
 												style="border: 0; outline: 0; text-decoration: none; font-size: 20px; text-align: center;">
 												<img
-													src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
+													src="<%=request.getContextPath()%>/assets/icon_img/comm_icon.png"
 													style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티
 											</button>
 										</div>
@@ -256,13 +256,13 @@
 								<!--자전거메뉴-->
 								<li><a
 									href="${pageContext.request.contextPath}/bicyclePage/bicycle_index.do"><img
-										src="<%=request.getContextPath()%>/assets/icon_img/자전거 아이콘 1.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/bicycle1_icon.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />자전거</a></li>
 								<!--걷기메뉴-->
 								<li
 									onclick="location.href='${pageContext.request.contextPath}/walkPage/walk_index.do'"
 									style="cursor: pointer;"><a><img
-										src="<%=request.getContextPath()%>/assets/icon_img/걷기 아이콘.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/walk_icon.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />걷기</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
@@ -276,7 +276,7 @@
 								<li
 									onclick="location.href='${pageContext.request.contextPath}/casPage/cas_index.do'"
 									style="cursor: pointer;"><a><img
-										src="<%=request.getContextPath()%>/assets/icon_img/문화체육 아이콘.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/cas_icon.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />문화 체육</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a
@@ -296,7 +296,7 @@
 								<li
 									onclick="location.href='${pageContext.request.contextPath}/commPage/comm_index.do'"
 									style="cursor: pointer;"><a><img
-										src="<%=request.getContextPath()%>/assets/icon_img/커뮤니티 아이콘.png"
+										src="<%=request.getContextPath()%>/assets/icon_img/comm_icon.png"
 										style="width: 30px; height: 24px; padding: 0 3px;" />커뮤니티</a>
 									<ul class="cbp-tm-submenu" style="z-index: 1000;">
 										<li><a

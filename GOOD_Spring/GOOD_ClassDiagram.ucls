@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="study.spring.goodspring.controllers.AccountRestController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/AccountRestController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="485" x="5407" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="study.spring.goodspring.service.MemberService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/MemberService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="242" x="4592" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="study.spring.goodspring.controllers.AdminController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/AdminController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="275" x="3956" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="study.spring.goodspring.service.UserTrafficLogService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/UserTrafficLogService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="549" width="330" x="3898" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="study.spring.goodspring.service.AdminService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/AdminService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="284" x="4268" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="study.spring.goodspring.controllers.AdminStatsController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/AdminStatsController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="227" x="4271" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="study.spring.goodspring.controllers.BicyleController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/BicyleController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="310" x="2561" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="study.spring.goodspring.uploadservice.BicycleUpload" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/uploadservice/BicycleUpload.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="172" x="2736" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="study.spring.goodspring.controllers.CasController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/CasController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="521" x="1559" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="10" language="java" name="study.spring.goodspring.service.CasService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/CasService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="213" x="2414" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="11" language="java" name="study.spring.goodspring.service.BookMarkService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/BookMarkService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="254" x="2120" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="study.spring.goodspring.controllers.CommController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/CommController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="405" width="539" x="6430" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="study.spring.goodspring.service.CrewPostCmtService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/CrewPostCmtService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="259" x="6131" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="14" language="java" name="study.spring.goodspring.service.CrewService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/CrewService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="218" x="6959" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="15" language="java" name="study.spring.goodspring.service.CrewPostService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/CrewPostService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="256" x="6663" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="16" language="java" name="study.spring.goodspring.service.CrewMemberService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/CrewMemberService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="293" x="7217" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="17" language="java" name="study.spring.goodspring.service.MyCourseService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/MyCourseService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="281" x="1160" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="18" language="java" name="study.spring.goodspring.service.CrewPostLikeService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/CrewPostLikeService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="193" x="6430" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="19" language="java" name="study.spring.goodspring.controllers.CrewController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/CrewController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="384" x="7418" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="study.spring.goodspring.controllers.CrewCrewMemberController" 
+    project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/CrewCrewMemberController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="369" x="7009" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="study.spring.goodspring.controllers.CrewPostCmtRestController" 
+    project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/CrewPostCmtRestController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="209" x="6181" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="study.spring.goodspring.controllers.HomeController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/HomeController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="401" x="2120" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="study.spring.goodspring.controllers.LoginController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/LoginController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="296" x="4538" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="study.spring.goodspring.controllers.MainController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/MainController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="334" x="3381" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="25" language="java" name="study.spring.goodspring.service.SearchService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/SearchService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="307" x="3246" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="26" language="java" name="study.spring.goodspring.controllers.MyCourseCmtRestController" 
+    project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/MyCourseCmtRestController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="209" x="5932" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="27" language="java" name="study.spring.goodspring.service.MyCourseCmtService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/MyCourseCmtService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="250" x="5841" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="study.spring.goodspring.controllers.MyCourseController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/MyCourseController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="405" width="338" x="620" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="29" language="java" name="study.spring.goodspring.service.WalkLogService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/WalkLogService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="278" x="842" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="30" language="java" name="study.spring.goodspring.service.MyPostService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/MyPostService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="301" x="267" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="31" language="java" name="study.spring.goodspring.service.MyCourseLikeService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/MyCourseLikeService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="194" x="608" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="32" language="java" name="study.spring.goodspring.controllers.myPageController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/myPageController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="493" x="4874" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="study.spring.goodspring.service.InquiryService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/InquiryService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="194" x="4874" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="34" language="java" name="study.spring.goodspring.controllers.SearchRestController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/SearchRestController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="229" x="3112" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="study.spring.goodspring.controllers.WalkController" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/controllers/WalkController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="521" x="998" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="study.spring.goodspring.service.WalkCourseService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/WalkCourseService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="317" x="1481" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="37" language="java" name="study.spring.goodspring.service.WalkSetGoalService" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/service/WalkSetGoalService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="242" x="1838" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="38" language="java" name="study.spring.goodspring.scheduler.BicycleScheduler" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/scheduler/BicycleScheduler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="161" x="2911" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="study.spring.goodspring.scheduler.CasAPIScheduler" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/scheduler/CasAPIScheduler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="161" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="40" language="java" name="study.spring.goodspring.uploadservice.CasAPIUploadService" 
+    project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/uploadservice/CasAPIUploadService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="120" y="287"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="41" language="java" name="study.spring.goodspring.scheduler.WalkCourseScheduler" project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/scheduler/WalkCourseScheduler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="161" x="3755" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="42" language="java" name="study.spring.goodspring.uploadservice.WalkCourseUploadService" 
+    project="GOOD_Spring" 
+    file="/GOOD_Spring/src/main/java/study/spring/goodspring/uploadservice/WalkCourseUploadService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="81" width="198" x="3660" y="482"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <association id="43">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="44" name="userTrafficLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="47" name="bookMarkService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="50" name="myPostService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="53" name="crewMemberService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="56" name="crewService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="59" name="myCourseService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="60" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="62" name="bookMarkService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="65" name="walkLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="68" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="71" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="74" name="walkCourseService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="77" name="CasService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="78" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="80" name="crewService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="83" name="myPostService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="86" name="myCourseService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="87" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="89" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="92" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="95" name="userTrafficLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="98" name="crewPostService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="101" name="userTrafficLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="102" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="104" name="crewMemberService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="105" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="107" name="crewPostService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="108" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="110" name="myCourseLikeService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="113" name="crewPostLikeService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="114" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="116" name="userTrafficLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="117" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="119" name="crewPostCmtService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="120" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="122" name="CasAPIUploadService">        
+        <position height="0" width="0" x="-14" y="-235"/>      
+      </attribute>      
+      <multiplicity id="123" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-14" y="-235"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="125" name="searchService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="126" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="128" name="userTrafficLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="129" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="131" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="132" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="134" name="myCourseCmtService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="135" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="137" name="myCourseLikeService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="138" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="140" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="141" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="143" name="crewMemberService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="146" name="bicycleUpload">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="147" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="149" name="myCourseService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="150" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="152" name="crewPostService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="153" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="155" name="bookMarkService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="156" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="158" name="bicycleUpload">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="159" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="161" name="bookmarkService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="162" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="164" name="inquiryService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="165" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="167" name="crewService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="168" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="169">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="170" name="walkLogService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="171" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="173" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="174" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="175">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="176" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="177" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="178">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="179" name="CasService">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </attribute>      
+      <multiplicity id="180" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-8950" y="2996"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="182" name="crewPostCmtService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="183" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="184">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="185" name="walkCourseUploadService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="186" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="188" name="memberService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="189" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="191" name="crewService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="192" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="194" name="adminService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="195" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="197" name="adminService">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </attribute>      
+      <multiplicity id="198" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-6970" y="3000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="200" name="searchService">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </attribute>      
+      <multiplicity id="201" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1004" y="1340"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="203" name="walkSetGoalService">        
+        <position height="0" width="0" x="-3480" y="1510"/>      
+      </attribute>      
+      <multiplicity id="204" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-3480" y="1510"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
