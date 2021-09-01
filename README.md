@@ -1,5 +1,5 @@
 # 김도운 팀프로젝트 git 저장소
-# 프로젝트명 GOOD
+## 프로젝트명 GOOD
 
 ![logo](https://user-images.githubusercontent.com/75535280/131618812-bf16681a-87bb-42e5-86bd-598561800977.png)
 
