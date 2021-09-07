@@ -1,4 +1,4 @@
-# 김도운 팀프로젝트 git 저장소
+# 이상화 팀프로젝트 git 저장소
 ## 프로젝트명 GOOD 
 ### http://itproject.ezenac.co.kr/goodspring/
 
